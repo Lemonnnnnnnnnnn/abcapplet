@@ -1,2 +1,53 @@
 <!--pages/apartment/index/index.wxml-->
-<text>pages/apartment/index/index.wxml</text>
+<view class="page">
+    <view class="page__bd">
+        <view class="clearfix box-1">
+            <view class="wrap">
+                <view class="clearfix">
+                    <view class="map">
+                        <view class="title">地图找房</view>
+                        <view class="desc">观音山公寓</view>
+                        <view class="desc">3000元起</view>
+                        <view class="desc">7套在租</view>
+                    </view>
+                    <view class="commute">
+                        <view class="title">通勤找房</view>
+                        <view class="desc">更好的生活</view>
+                        <view class="desc">从缩短通勤开始</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="box-2">
+            <view class="wrap">
+                <view class="title">柠小萌全程免费帮找房<icon></icon></view>
+                <view class="list">
+                    <view class="item">
+                        <view class="inner">
+                            <view class="item-title">
+                                <text>01</text>
+                                <text>租房需求</text>
+                            </view>
+                            <view class="item-desc">hi～Kevin，告诉我们你的租房需求，省去线上筛选信息 的麻烦，我们的服务团队会直接给您规划看房行程</view>
+                            <view class="btn">
+                                <view class="btn-wrap"></view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="item-title">
+                            <text>02</text>
+                            <text>柠大萌陪看服务</text>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="item-title">
+                            <text>03</text>
+                            <text>服务评价，入住惊喜</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

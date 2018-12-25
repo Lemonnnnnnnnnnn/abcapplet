@@ -1,9 +1,8 @@
 {
     "pages": [
+        "pages/apartment/index/index",
         "pages/user/index/index",
-        "pages/home/index/index",
-        "pages/apartment/index/index"
-        
+        "pages/home/index/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
