@@ -1,0 +1,57 @@
+/* pages/user/index/index.wxss */
+page {
+    background-color: #F1F1F1;
+}
+.wrap {
+    padding: 10px;
+}
+.box-1 {
+    background-color: #fff;
+}
+.box-1 .headimg {
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    float: right;
+}
+.box-1 .headimg image {
+    width: 100%;
+    height: 100%;
+    border-radius: 70px;
+}
+.box-1 .weui-flex__item {
+    width: 50%;
+}
+.box-1 .username {
+    font-size: 26px;
+    line-height: 37px;
+    margin-bottom: 5px;
+}
+.box-1 .mobile {
+    font-size: 16px;
+    line-height: 22px;
+}
+.box-1 .tip {
+    margin-top: 5px;
+    font-size: 14px;
+}
+.box-2 .item {
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 1px;
+}
+.box-2 .item .inner {
+    padding: 12px 8px;
+    position: relative;
+}
+.box-2 .item text {
+    font-size: 14px;
+    text-align: left;
+}
+.box-2 .item .icon-arrow {
+    color: #333;
+    font-size: 14px;
+    position: absolute;
+    right: 8px;
+    top: 5px;
+}
