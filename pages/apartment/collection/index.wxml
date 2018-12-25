@@ -38,6 +38,28 @@
                                     <image src="/images/user/002.jpg"></image>
                                 </view>
                             </scroll-view>
+                            <view class="weui-flex apartment-name">
+                                <view class="weui-flex__item">
+                                    <view class="title">龙湖冠寓·高新店</view>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="tags">
+                                        <text>BRT</text>
+                                        <text>市行政服务中心</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="weui-flex apartment-tip">
+                                <view class="weui-flex__item">
+                                    <view class="title">高颜值社交型公寓</view>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="tags">
+                                        <icon></icon>
+                                        <icon></icon>
+                                    </view>
+                                </view>
+                            </view>
                         </view>
                     </view>
                 </view>
