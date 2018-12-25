@@ -1,0 +1,43 @@
+{
+    "pages": [
+        "pages/user/index/index",
+        "pages/home/index/index",
+        "pages/apartment/index/index"
+        
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "公寓ABC",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/home/index/index",
+                "text": "首页",
+                "iconPath": "",
+                "selectedIconPath": ""
+            },
+            {
+                "pagePath": "pages/apartment/index/index",
+                "text": "找房",
+                "iconPath": "",
+                "selectedIconPath": ""
+            },
+            {
+                "pagePath": "pages/user/index/index",
+                "text": "我的",
+                "iconPath": "",
+                "selectedIconPath": ""
+            }
+        ],
+        "color": "#4A4A4A",
+        "selectedColor": "#4A4A4A",
+        "backgroundColor": "#fff",
+        "borderStyle": "black"
+    },
+    "networkTimeout": {
+        "request": 30000
+    }
+}
