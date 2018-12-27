@@ -1,6 +1,7 @@
 /* pages/apartment/index/index.wxss */
 .box-1 {
-    background-color: #efefef;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/search_bg.png') left top no-repeat;
+    background-size: cover;
 }
 .box-1 .wrap {
     padding: 15px 20px;
@@ -9,15 +10,17 @@
     width: 48%;
     height: 118px;
     float: left;
-    background-color: #fff;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/zuobiao.png') center center no-repeat;
+    background-size: cover;
     border-radius: 2px;
 }
 .box-1 .commute {
     width: 48%;
     height: 118px;
     float: right;
-    background-color: #fff;
     border-radius: 2px;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/tongqin.png') center center no-repeat;
+    background-size: cover;
 }
 .box-1 .map .inner, .box-1 .commute .inner {
     padding: 10px;
@@ -62,7 +65,8 @@
     top: 3px;
 }
 .box-2 .item-desc {
-    padding: 5px 20px 30px 36px;
+    padding: 10px 20px 30px 36px;
     font-size: 11px;
     color: #9B9B9B;
+    line-height: 24px;
 }

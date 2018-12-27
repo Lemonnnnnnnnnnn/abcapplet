@@ -31,9 +31,26 @@ page {
     font-size: 16px;
     line-height: 22px;
 }
+.box-1 .tip-box {
+    margin-top: 25px;
+}
 .box-1 .tip {
     margin-top: 5px;
     font-size: 14px;
+}
+.box-1 .tip icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+.box-1 .tip .view {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/view.png') center center no-repeat;
+    background-size: cover;
+}
+.box-1 .tip .logo {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/logo.png') center center no-repeat;
+    background-size: cover;
 }
 .box-2 .item {
     background-color: #fff;
@@ -41,8 +58,22 @@ page {
     border-radius: 1px;
 }
 .box-2 .item .inner {
-    padding: 12px 8px;
+    padding: 20px 8px;
     position: relative;
+}
+.box-2 .item .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+.box-2 .item .collection {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/collection.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .item .log {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/log.png') center center no-repeat;
+    background-size: cover;
 }
 .box-2 .item text {
     font-size: 14px;
@@ -53,5 +84,5 @@ page {
     font-size: 14px;
     position: absolute;
     right: 8px;
-    top: 5px;
+    top: 11px;
 }

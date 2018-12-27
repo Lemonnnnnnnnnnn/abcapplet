@@ -13,8 +13,10 @@
                         </view>
                     </view>
                 </view>
-                <view class="tip"><icon></icon>浏览了30家公寓</view>
-                <view class="tip"><icon></icon>享受了1次柠小萌服务</view>
+                <view class="tip-box">
+                    <view class="tip"><icon class="view"></icon>浏览了30家公寓</view>
+                    <view class="tip"><icon class="logo"></icon>享受了1次柠小萌服务</view>
+                </view>
             </view>
         </view>
         <view class="box-2">
@@ -22,15 +24,15 @@
                 <view class="list">
                     <view class="item">
                         <view class="inner">
-                            <icon class="icon"></icon>
+                            <icon class="icon collection"></icon>
                             <text class="ui-nowrap">收藏的公寓</text>
                             <icon class="iconfont icon-arrow"></icon>
                         </view>
                     </view>
                     <view class="item">
                         <view class="inner">
-                            <icon class="icon"></icon>
-                            <text class="ui-nowrap">收藏的公寓</text>
+                            <icon class="icon log"></icon>
+                            <text class="ui-nowrap">我的租房需求</text>
                             <icon class="iconfont icon-arrow"></icon>
                         </view>
                     </view>

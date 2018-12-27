@@ -6,7 +6,7 @@
                 <view class="clearfix">
                     <view class="map">
                         <view class="inner">
-                            <view class="ui-nowrap title">地图找房地图找房地图找房地图找房</view>
+                            <view class="ui-nowrap title">地图找房</view>
                             <view class="ui-nowrap desc">观音山公寓</view>
                             <view class="ui-nowrap desc">3000元起</view>
                             <view class="ui-nowrap desc">7套在租</view>
@@ -35,8 +35,9 @@
                                 <text>租房需求</text>
                             </view>
                             <view class="item-desc">hi～Kevin，告诉我们你的租房需求，省去线上筛选信息 的麻烦，我们的服务团队会直接给您规划看房行程</view>
-                            <view class="btn">
-                                <view class="btn-wrap"></view>
+                            <view class="btn-wrap">
+                                <view class="btn">登记需求</view>
+                                <icon></icon>
                             </view>
                         </view>
                     </view>

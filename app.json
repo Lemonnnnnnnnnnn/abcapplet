@@ -1,8 +1,10 @@
 {
     "pages": [
-        "pages/apartment/collection/index", 
         "pages/apartment/index/index",
         "pages/user/index/index",
+        "pages/apartment/collection/index", 
+        
+        
         "pages/home/index/index"
     ],
     "window": {
@@ -16,20 +18,20 @@
             {
                 "pagePath": "pages/home/index/index",
                 "text": "首页",
-                "iconPath": "",
-                "selectedIconPath": ""
+                "iconPath": "images/common/tabbar/index.png",
+                "selectedIconPath": "images/common/tabbar/index_selected.png"
             },
             {
                 "pagePath": "pages/apartment/index/index",
                 "text": "找房",
-                "iconPath": "",
-                "selectedIconPath": ""
+                "iconPath": "images/common/tabbar/search.png",
+                "selectedIconPath": "images/common/tabbar/search_selected.png"
             },
             {
                 "pagePath": "pages/user/index/index",
                 "text": "我的",
-                "iconPath": "",
-                "selectedIconPath": ""
+                "iconPath": "images/common/tabbar/user.png",
+                "selectedIconPath": "images/common/tabbar/user_selected.png"
             }
         ],
         "color": "#4A4A4A",
