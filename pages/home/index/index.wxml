@@ -196,16 +196,22 @@
                                 <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
                                 <text class="want">220人想住</text>
                             </view>
-                            <scroll-view scroll-x="true">
-                                <view class="img-list">
+                            <view class="scroll-view">
+                                <scroll-view scroll-x="true">
                                     <view class="img-item">
                                         <image src="/images/home/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
                                         <image src="/images/home/003.jpeg"></image>
                                     </view>
-                                </view>
-                            </scroll-view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                </scroll-view>
+                            </view>
                             <view class="apartment-name">
                                 <view class="weui-flex">
                                     <view class="weui-flex__item">
