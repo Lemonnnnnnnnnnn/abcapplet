@@ -1,11 +1,9 @@
 {
     "pages": [
+        "pages/home/index/index",
         "pages/apartment/index/index",
         "pages/user/index/index",
-        "pages/apartment/collection/index", 
-        
-        
-        "pages/home/index/index"
+        "pages/apartment/collection/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
