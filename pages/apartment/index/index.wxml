@@ -49,11 +49,11 @@
                                 <text class="number">02</text>
                                 <text>柠大萌陪看服务</text>
                             </view>
-                            <view class="box-3">
+                            <view class="box-4">
                                 <view class="kefu">
                                     <view class="tel-box">
                                         <view class="weui-flex">
-                                            <view class="weui-flex__item">
+                                            <view class="weui-flex__item kefu-info">
                                                 <view class="weui-flex">
                                                     <view class="headimg">
                                                         <view class="headimg-box">
@@ -61,16 +61,16 @@
                                                         </view>
                                                     </view>
                                                     <view class="weui-flex__item">
-                                                        <view class="username">大刘</view>
-                                                        <view class="number">柠大萌编号：007</view>
-                                                        <view class="servers">共服务过120个租房用户</view>
+                                                        <view class="ui-nowrap username">大刘</view>
+                                                        <view class="ui-nowrap number">柠大萌编号：007</view>
+                                                        <view class="ui-nowrap servers">共服务过120个租房用户</view>
                                                     </view>
                                                     <view class="tel-icon">
-                                                        <icon></icon>
+                                                        <icon class="iconfont icon-tel"></icon>
                                                     </view>
                                                 </view>
                                             </view>
-                                            <view class="icon">
+                                            <view class="icon-kefu">
                                                 <icon></icon>
                                             </view>
                                         </view>
@@ -93,18 +93,32 @@
                                 <text class="number">03</text>
                                 <text>服务评价，入住惊喜</text>
                             </view>
-                            <view class="box-3">
+                            <view class="box-5">
                                 <view class="tip">恭禧您找到了新家！请您对我们本次的服务作出评价：</view>
                                 <view class="stars">
                                     <view class="clearfix">
                                         <view class="title">客服服务</view>
-                                        <view class="score"></view>
+                                        <view class="score clearfix">
+                                            <icon class="iconfont icon-star-selected"></icon>
+                                            <icon class="iconfont icon-star-selected"></icon>
+                                            <icon class="iconfont icon-star-selected"></icon>
+                                            <icon class="iconfont icon-star"></icon>
+                                            <icon class="iconfont icon-star"></icon>
+                                        </view>
                                     </view>
                                     <view class="clearfix">
                                         <view class="title">柠大萌服务</view>
-                                        <view class="score"></view>
+                                        <view class="score clearfix">
+                                            <icon class="iconfont icon-star-selected"></icon>
+                                            <icon class="iconfont icon-star-selected"></icon>
+                                            <icon class="iconfont icon-star-selected"></icon>
+                                            <icon class="iconfont icon-star"></icon>
+                                            <icon class="iconfont icon-star"></icon>
+                                        </view>
                                     </view>
                                 </view>
+                            </view>
+                            <view class="box-3">
                                 <view class="btn-wrap">
                                     <view class="btn">提交评价</view>
                                     <icon></icon>

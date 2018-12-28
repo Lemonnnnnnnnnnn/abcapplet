@@ -64,8 +64,11 @@
     position: relative;
     top: 3px;
 }
+.box-3 {
+    margin-top: 10px;
+}
 .box-3 .item-desc {
-    padding: 10px 20px 20px 10px;
+    margin: 0px 20px 20px 40px;
     font-size: 11px;
     color: #9B9B9B;
     line-height: 24px;
@@ -94,4 +97,127 @@
     top: 4px;
     background: url('http://devhhb.images.huihuiba.net/image/icon/kefu.png') center center no-repeat;
     background-size: cover;
+}
+.box-4 {
+    margin-left: 40px;
+}
+.box-4 .kefu {
+    margin: 13px 0;
+}
+.box-4 .headimg-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-right: 8px;
+}
+.box-4 .headimg-box image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+.box-4 .kefu-info {
+    border-radius:25px;
+    border:1px solid rgba(255,207,17,1);
+}
+.box-4 .kefu-info .username {
+    color: #4A4A4A;
+    font-size: 11px;
+}
+.box-4 .kefu-info .number, .box-4 .kefu-info .servers {
+    color: #4A4A4A;
+    font-size: 8px;
+    margin-top: 2px;
+}
+.box-4 .tel-icon .icon-tel {
+    font-size: 30px;
+    color: #FFCF11;
+    position: relative;
+    top: 2px;
+    right: 10px;
+}
+.box-4 .icon-kefu icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/kefu.png') center center no-repeat;
+    background-size: cover;
+    position: relative;
+    right: 5px;
+    top: 6px;
+}
+.box-4 .desc {
+    margin-bottom: 10px;
+}
+.box-4 .desc icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/card.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .desc text {
+    font-size: 8px;
+    color: #4A4A4A;
+}
+.box-4 .tip view {
+    font-size: 8px;
+    color: #4A4A4A;
+    line-height: 16px;
+}
+.box-5 {
+    margin-left: 40px;
+}
+.box-5 .tip {
+    margin: 6px 0 22px;
+    font-size: 11px;
+    color: #9B9B9B;
+}
+.box-5 .stars .title {
+    width: 60px;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 0;
+    text-align: left;
+    color: #4A4A4A;
+    float: left;
+    font-size: 11px;
+}
+.box-5 .btn {
+    width: 177px;
+    height: 46px;
+    margin: 20px auto 10px auto;
+    background:rgba(255,207,17,1);
+    box-shadow: 0px 0px 4px 0px rgba(219,218,218,1);
+    border-radius: 23px;
+    line-height: 46px;
+    text-align: center;
+    color: #000;
+    font-weight: 500;
+}
+.box-5 .btn-wrap {
+    position: relative;
+}
+.box-5 .btn-wrap icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 30px;
+    top: 4px;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/kefu.png') center center no-repeat;
+    background-size: cover;
+}
+.box-5 .score {
+    width: 200px;
+    height: 20px;
+    float: left;
+    margin-left: 10px;
+}
+.box-5 .score icon {
+    font-size: 20px;
+    color: #FFCF11;
+    display: inline-block;
+    margin-right: 8px;
 }

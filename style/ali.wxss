@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 983094 */
-  src: url('//at.alicdn.com/t/font_983094_lniuhhca0yj.eot');
-  src: url('//at.alicdn.com/t/font_983094_lniuhhca0yj.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_983094_lniuhhca0yj.woff') format('woff'),
-  url('//at.alicdn.com/t/font_983094_lniuhhca0yj.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_983094_lniuhhca0yj.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_983094_tm4cqs0ziel.eot');
+  src: url('//at.alicdn.com/t/font_983094_tm4cqs0ziel.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_983094_tm4cqs0ziel.woff') format('woff'),
+  url('//at.alicdn.com/t/font_983094_tm4cqs0ziel.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_983094_tm4cqs0ziel.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family: "iconfont" !important;
@@ -19,4 +19,10 @@
 }
 .icon-tel:before {
     content: '\e600';
+}
+.icon-star-selected:before {
+    content: '\e623';
+}
+.icon-star:before {
+    content: '\e658';
 }
