@@ -2,40 +2,75 @@
 <view class="page">
     <view class="page__bd">
         <!--搜索-->
-        <view class="search">
+        <view class="box-1">
             <view class="wrap">
-                <view class="city">
-                    <text>厦门</text>
-                    <icon></icon>
-                </view>
-                <view class="search-box">
+                <view class="weui-flex search-box">
                     <view>
-                        <icon></icon>
-                        <text>搜索公寓/商圈</text>
+                        <view class="city">
+                            <text>厦门</text>
+                            <icon class="iconfont icon-down"></icon>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="search">
+                            <icon class="iconfont icon-search"></icon>
+                            <text>搜索公寓/商圈</text>
+                        </view>
                     </view>
                 </view>
             </view>
         </view>
         <!-- 轮播 -->
-        <view class="swiper">
-            <swiper indicator-dots="true" indicator-color="#D8D8D8" indicator-active-color="indicator-active-color" autoplay="true" circular="true">
-                <swiper-item>
-                    <navigator class="swiper-item" hover-class="none" url="">
+        <view class="box-2">
+            <view class="scroll-view">
+                <scroll-view class="list" scroll-x>
+                    <view class="item first-item">
                         <view class="img">
-                            <image src="/images/home/001.jpg" class="slide-image" mode='aspectFill' lazy-load="true" width="355" height="150" />
+                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
                         </view>
-                        <view class="title">#城市活动# 与热血同行</view>
-                        <view class="des">高颜值社交型人格</view>
-                    </navigator>
-                </swiper-item>
-            </swiper>
+                        <view class="info">
+                            <view class="title">#城市活动# 与热血同行</view>
+                            <view class="tip">高颜值社交型人格</view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="img">
+                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                        </view>
+                        <view class="info">
+                            <view class="title">#城市活动# 与热血同行</view>
+                            <view class="tip">高颜值社交型人格</view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="img">
+                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                        </view>
+                        <view class="info">
+                            <view class="title">#城市活动# 与热血同行</view>
+                            <view class="tip">高颜值社交型人格</view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="img">
+                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                        </view>
+                        <view class="info">
+                            <view class="title">#城市活动# 与热血同行</view>
+                            <view class="tip">高颜值社交型人格</view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
         </view>
         <!-- 热门租房 -->
-        <view class="box-1">
+        <view class="box-3">
             <view class="wrap">
                 <view class="title">热门租房商圈</view>
-                <view class="list">
-                    <navigator class="item" hover-class="" url="">
+            </view>
+            <view class="scroll-view">
+                <scroll-view class="list" scroll-x>
+                    <navigator class="item first-item" hover-class="" url="">
                         <image src="/images/home/004.png" mode="scaleToFill"></image>
                     </navigator>
                     <navigator class="item" hover-class="" url="">
@@ -44,27 +79,31 @@
                     <navigator class="item" hover-class="" url="">
                         <image src="/images/home/006.png" mode="scaleToFill"></image>
                     </navigator>
-                </view>
+                </scroll-view>
             </view>
         </view>
         <!-- 本周上新公寓 -->
-        <view class="box-2">
+        <view class="box-4">
             <view class="wrap">
                 <view class="title">本周上新公寓</view>
-                <view class="list">
-                    <navigator class="item" hover-class="" url>
+            </view>
+            <view class="scroll-view">
+                <scroll-view class="list" scroll-x>
+                    <navigator class="item first-item" hover-class="" url>
                         <view class="img">
                             <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
-                                <view class="clearfix apartment">
-                                    <view class="title">龙湖冠寓高新店</view>
-                                    <view class="price">￥1650-2000</view>
-                                    <view class="tag">
-                                        <icon class="minus"></icon>
-                                        <icon class="tuan"></icon>
+                                <view class="inner">
+                                    <view class="clearfix apartment">
+                                        <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
+                                        <view class="price">￥1650-2000</view>
+                                        <view class="tag">
+                                            <icon class="minus"></icon>
+                                            <icon class="tuan"></icon>
+                                        </view>
                                     </view>
+                                    <view class="desc">青年优品，城市生活风向标</view>
                                 </view>
-                                <view class="desc">青年优品，城市生活风向标</view>
                             </view>
                         </view>
                     </navigator>
@@ -72,23 +111,43 @@
                         <view class="img">
                             <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
-                                <view class="clearfix name">
-                                    <view class="title">龙湖冠寓高新店</view>
-                                    <view class="price">￥1650-2000</view>
-                                    <view class="tag">
-                                        <icon class="minus"></icon>
-                                        <icon class="tuan"></icon>
+                                <view class="inner">
+                                    <view class="clearfix apartment">
+                                        <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
+                                        <view class="price">￥1650-2000</view>
+                                        <view class="tag">
+                                            <icon class="minus"></icon>
+                                            <icon class="tuan"></icon>
+                                        </view>
                                     </view>
+                                    <view class="desc">青年优品，城市生活风向标</view>
                                 </view>
-                                <view class="desc">青年优品，城市生活风向标</view>
                             </view>
                         </view>
                     </navigator>
-                </view>
+                    <navigator class="item" hover-class="" url>
+                        <view class="img">
+                            <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                            <view class="info">
+                                <view class="inner">
+                                    <view class="clearfix apartment">
+                                        <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
+                                        <view class="price">￥1650-2000</view>
+                                        <view class="tag">
+                                            <icon class="minus"></icon>
+                                            <icon class="tuan"></icon>
+                                        </view>
+                                    </view>
+                                    <view class="desc">青年优品，城市生活风向标</view>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                </scroll-view>
             </view>
         </view>
         <!-- 广告位 -->
-        <view class="box-3">
+        <view class="box-5">
             <view class="wrap">
                 <view class="weui-flex">
                     <view class="weui-flex__item">
@@ -97,7 +156,7 @@
                         </navigator>
                     </view>
                     <view class="weui-flex__item">
-                        <navigator class="ad" hover-class="none" url="">
+                        <navigator class="ad ad-right" hover-class="none" url="">
                             <image src="/images/home/zhekou.png"></image>
                         </navigator>
                     </view>
@@ -105,7 +164,7 @@
             </view>
         </view>
         <!-- 严选公寓 -->
-        <view class="box-4">
+        <view class="box-6">
             <view class="wrap">
                 <view class="title">严选公寓</view>
                 <view class="select">

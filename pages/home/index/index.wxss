@@ -1,1 +1,191 @@
 /* pages/home/index/index.wxss */
+.wrap {
+    padding: 12px 12px 0 12px;
+}
+.box-1 .search-box {
+    height: 37px;
+    background:rgba(243, 242, 243, 1);
+    border-radius: 19px;
+    margin-bottom: 12px;
+}
+.box-1 .city {
+    width: 50px;
+    line-height: 37px;
+    margin-left: 15px;
+}
+.box-1 .city text {
+    font-size: 14px;
+    color: #4A4A4A;
+}
+.box-1 .city icon {
+    color: #4A4A4A;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.box-1 .search {
+    margin-left: 35px;
+    height: 37px;
+    line-height: 37px;
+    color: #9B9B9B;
+}
+.box-1 .search icon {
+    display: inline-block;
+    margin-right: 10px;
+}
+.box-2 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.box-2 .item {
+    width: 313px;
+    height: 230px;
+    margin-right: 10px;
+    display: inline-block;
+}
+.box-2 .first-item {
+    margin-left: 10px;
+}
+.box-2 .item .img {
+    width: 313px;
+    height: 172px;
+    border-radius: 5px;
+}
+.box-2 .img image {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.box-2 .item .info {
+    margin-top: 5px;
+}
+.box-2 .info .title {
+    font-size: 16px;
+    color: #4A4A4A;
+}
+.box-2 .info .tip {
+    font-size: 11px;
+    color: #9B9B9B;
+}
+.box-3 .title {
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    color:#4A4A4A;
+    line-height: 24px;
+}
+.box-3 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.box-3 .item {
+    width: 131px;
+    height: 168px;
+    margin-right: 12px;
+    display: inline-block;
+}
+.box-3 .first-item {
+    margin-left: 12px;
+}
+.box-3 .item image {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.box-4 .title {
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    color:#4A4A4A;
+    line-height: 24px;
+}
+.box-4 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.box-4 .item {
+    width: 306px;
+    height: 175px;
+    margin-right: 12px;
+    display: inline-block;
+}
+.box-4 .first-item {
+    margin-left: 12px;
+}
+.box-4 .item .img {
+    width: 306px;
+    height: 175px;
+    position: relative;
+}
+.box-4 .img image {
+    width: 100%;
+    height: 100%;
+}
+.box-4 .img .info {
+    width: 100%;
+    height: 50px;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/hei-bg.png') center center no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.box-4 .info .inner {
+    padding: 5px;
+}
+.box-4 .info .info-title {
+    max-width: 170px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+    line-height: 16px;
+    float: left;
+}
+.box-4 .info .price {
+    font-size: 11px;
+    color: #4A4A4A;
+    padding: 0 2px;
+    background-color: #FFCF11;
+    float: left;
+    margin-left: 8px;
+}
+.box-4 .info .desc {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #fff;
+}
+.box-4 .info .tag {
+    width: 46px;
+    float: right;
+    margin-right: 10px;
+}
+.box-4 .tag icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-left: 5px;
+    border-radius: 18px;
+}
+.box-4 .tag .minus {
+    background: #fff url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .tag .tuan {
+    background: #fff url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background-size: cover;
+}
+.box-5 .ad {
+    width: 98%;
+    height: 60px;
+}
+.box-5 .ad-right {
+    float: right;
+}
+.box-5 .ad image {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
