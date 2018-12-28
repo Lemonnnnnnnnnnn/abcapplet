@@ -172,19 +172,19 @@
                         <view class="weui-flex__item">
                             <view class="item">
                                 <text>商圈</text>
-                                <icon></icon>
+                                <icon class="iconfont icon-down-arrow"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item">
                             <view class="item">
                                 <text>价格</text>
-                                <icon></icon>
+                                <icon class="iconfont icon-down-arrow"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item">
                             <view class="item">
                                 <text>户型</text>
-                                <icon></icon>
+                                <icon class="iconfont icon-down-arrow"></icon>
                             </view>
                         </view>
                     </view>
