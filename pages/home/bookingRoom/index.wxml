@@ -1,0 +1,122 @@
+<!--pages/home/bookingRoom/index.wxml-->
+<view class="page">
+    <view class="page__bd">
+        <view class="box-1">
+            <view class="wrap">
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="img">
+                            <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                            <view class="price-wrap">
+                                <view class="price">¥1600-¥2100</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="info">
+                            <view class="ui-nowrap title">龙湖冠寓高新店</view>
+                            <view class="multi-line-fold address">蔡塘广场软件园复式loft全新品牌精装公寓</view>
+                            <view class="tags clearfix">
+                                <view class="yellow">BRT沿线</view>
+                                <view class="green">市政高新区</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="box-2">
+            <view class="title">预约信息</view>
+            <view class="container">
+                <view class="wrap">
+                    <view class="weui-flex userinfo">
+                        <view>
+                            <view class="img">
+                                <image src="/images/user/001.jpg"></image>
+                            </view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <view class="username">Kevin 先生</view>
+                            <view class="mobile">18030098225</view>
+                        </view>
+                        <view>
+                            <view class="change">更改</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex time">
+                        <view class="weui-flex__item">
+                            <view class="item-title">看房时间</view>
+                        </view>
+                        <view>
+                            <icon class="iconfont icon-arrow"></icon>
+                        </view>
+                    </view>
+                    <view class="weui-flex type">
+                        <view class="weui-flex__item">
+                            <view class="item-title">想看的房型</view>
+                        </view>
+                        <view>
+                            <icon class="iconfont icon-arrow"></icon>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="box-3">
+            <view class="title">租房需求（选题）</view>
+            <view class="container">
+                <view class="wrap">
+                    <view class="select">
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="item">
+                                    <text>租房预算</text>
+                                    <icon class="iconfont icon-down-arrow"></icon>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="item">
+                                    <text>目标区域</text>
+                                    <icon class="iconfont icon-down-arrow"></icon>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="check" style="margin-bottom: 10px;">
+                        <view class="weui-flex">
+                            <view>
+                                <view class="check-title">入住时间</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="list clearfix">
+                                    <view class="item">马上</view>
+                                    <view class="item">7天</view>
+                                    <view class="item">15天</view>
+                                    <view class="item">一个月后</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="check">
+                        <view class="weui-flex">
+                            <view>
+                                <view class="check-title">入住时间</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="list clearfix">
+                                    <view class="item">马上</view>
+                                    <view class="item">7天</view>
+                                    <view class="item">15天</view>
+                                    <view class="item">一个月后</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="box-4">
+            <view class="btn">马上预约</view>
+        </view>
+    </view>
+</view>
