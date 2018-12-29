@@ -40,5 +40,162 @@
                 </view>
             </view>
         </view>
+        <view class="box-2">
+            <view class="wrap">
+                <view class="tip">共5条搜索为“高新园区”的结果</view>
+                <view class="list">
+                    <view class="item">
+                        <view class="inner">
+                            <view class="img">
+                                <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                                <text class="want">220人想住</text>
+                            </view>
+                            <view class="scroll-view">
+                                <scroll-view scroll-x="true">
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                </scroll-view>
+                            </view>
+                            <view class="apartment-name">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                    </view>
+                                    <view class="weui-flex__item">
+                                        <view class="tag clearfix">
+                                            <view class="tag-item">BRT</view>
+                                            <view class="tag-item">市行政服务中心</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="desc">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                                    </view>
+                                    <view>
+                                        <view class="tag clearfix">
+                                            <icon class="minus"></icon>
+                                            <icon class="tuan"></icon>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="inner">
+                            <view class="img">
+                                <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                                <text class="want">220人想住</text>
+                            </view>
+                            <view class="scroll-view">
+                                <scroll-view scroll-x="true">
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                </scroll-view>
+                            </view>
+                            <view class="apartment-name">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                    </view>
+                                    <view class="weui-flex__item">
+                                        <view class="tag clearfix">
+                                            <view class="tag-item">BRT</view>
+                                            <view class="tag-item">市行政服务中心</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="desc">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                                    </view>
+                                    <view>
+                                        <view class="tag clearfix">
+                                            <icon class="minus"></icon>
+                                            <icon class="tuan"></icon>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="inner">
+                            <view class="img">
+                                <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                                <text class="want">220人想住</text>
+                            </view>
+                            <view class="scroll-view">
+                                <scroll-view scroll-x="true">
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                    <view class="img-item">
+                                        <image src="/images/home/003.jpeg"></image>
+                                    </view>
+                                </scroll-view>
+                            </view>
+                            <view class="apartment-name">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                    </view>
+                                    <view class="weui-flex__item">
+                                        <view class="tag clearfix">
+                                            <view class="tag-item">BRT</view>
+                                            <view class="tag-item">市行政服务中心</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="desc">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                                    </view>
+                                    <view>
+                                        <view class="tag clearfix">
+                                            <icon class="minus"></icon>
+                                            <icon class="tuan"></icon>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
 </view>
