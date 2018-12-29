@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/home/detail/index",
         "pages/home/bookingRoom/index",
         "pages/home/search/index",
         "pages/home/collection/index",
