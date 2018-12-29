@@ -1,0 +1,39 @@
+/* pages/home/search/index.wxss */
+.wrap {
+    padding: 12px;
+}
+.search .search-btn {
+    width: 34px;
+    line-height: 37px;
+    font-size: 16px;
+    color: #4A4A4A;
+    margin-left: 18px;
+}
+.search .search-box {
+    background-color: #F3F2F3;
+    border-radius: 19px;
+}
+.search .search-box icon {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 15px;
+    margin-right: 12px;
+    line-height: 37px;
+}
+.search .search-box input {
+    line-height: 37px;
+    height: 37px;
+    margin-right: 12px;
+}
+.box-1 .history, .box-1 .hot {
+    margin-bottom: 20px;
+}
+.box-1 .title {
+    font-size: 16px;
+    color: #4A4A4A;
+}
+.box-1 .item {
+    font-size: 14px;
+    color: #9B9B9B;
+    line-height: 24px;
+}

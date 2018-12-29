@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/home/search/index",
         "pages/home/collection/index",
         "pages/home/index/index",
         "pages/apartment/index/index",

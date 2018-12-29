@@ -1,0 +1,44 @@
+<!--pages/home/search/index.wxml-->
+<view class="page">
+    <view class="page__bd">
+        <view class="search">
+            <view class="wrap">
+                <view class="weui-flex">
+                    <view class="weui-flex__item search-box">
+                        <view class="weui-flex">
+                            <view>
+                                <icon class="iconfont icon-search"></icon>
+                            </view>
+                            <view class="weui-flex__item">
+                                <input type="text" placeholder="搜索公寓/商圈" />
+                            </view>
+                        </view>
+                    </view>
+                    <view>
+                        <view class="search-btn">搜索</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="box-1">
+            <view class="wrap">
+                <view class="history">
+                    <view class="title">历史</view>
+                    <view class="list">
+                        <view class="item">冠寓</view>
+                        <view class="item">泊捷</view>
+                        <view class="item">融寓</view>
+                    </view>
+                </view>
+                <view class="hot">
+                    <view class="title">热门搜索</view>
+                    <view class="list">
+                        <view class="item">冠寓</view>
+                        <view class="item">泊捷</view>
+                        <view class="item">融寓</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
