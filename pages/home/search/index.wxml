@@ -42,7 +42,7 @@
         </view>
         <view class="box-2">
             <view class="wrap">
-                <view class="tip">共5条搜索为“高新园区”的结果</view>
+                <view class="result">共5条搜索为“高新园区”的结果</view>
                 <view class="list">
                     <view class="item">
                         <view class="inner">

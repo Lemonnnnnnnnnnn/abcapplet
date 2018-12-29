@@ -37,7 +37,7 @@
     color: #9B9B9B;
     line-height: 24px;
 }
-.box-2 .tip {
+.box-2 .result {
     font-size: 11px;
     color: #BBB9BC;
     text-align: center;
