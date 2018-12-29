@@ -1,1 +1,70 @@
 /* pages/home/detail/index.wxss */
+.wrap {
+    padding: 12px 12px 0 12px;
+}
+.box-2 {
+    margin-bottom: 12px;
+}
+.box-2 .apartment-name {
+    color: #000;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 24px;
+    max-width: 300px;
+}
+.box-2 .address {
+    color: #4A4A4A;
+    font-size: 13px;
+    max-width: 300px;
+    line-height: 18px;
+    margin-top: 3px;
+}
+.box-2 .position {
+    float: right;
+}
+.box-2 .position icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('http://devhhb.images.huihuiba.net/image/icon/location.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .position text {
+    font-size: 11px;
+    color: #4A4A4A;
+}
+.box-2 .tags {
+    margin: 12px 0;
+}
+.box-2 .tags .tag {
+    font-size: 11px;
+    color: #000;
+    float: left;
+    margin-right: 8px;
+    border-radius: 10px;
+    padding: 2px 8px;
+}
+.box-2 .tags .yellow {
+    background-color: #F7DD77;
+}
+.box-2 .tags .green {
+    background-color: #93FAA4;
+}
+.box-2 .minus, .box-2 .tuan {
+    font-size: 11px;
+    color: #4A4A4A;
+}
+.box-2 .minus icon, .box-2 .tuan icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+.box-2 .minus icon {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .tuan icon {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background-size: cover;
+}

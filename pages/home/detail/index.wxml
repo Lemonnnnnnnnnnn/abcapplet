@@ -4,9 +4,9 @@
         <view class="box-2">
             <view class="wrap">
                 <view class="weui-flex">
-                    <view class="weuif-flex__item">
-                        <view class="apartment-name">龙湖冠寓高新店</view>
-                        <view class="address">蔡塘广场软件园复式loft全新品牌精装公寓</view>
+                    <view class="weui-flex__item">
+                        <view class="ui-nowrap apartment-name">龙湖冠寓高新店</view>
+                        <view class="ui-nowrap address">蔡塘广场软件园复式loft全新品牌精装公寓</view>
                     </view>
                     <view>
                         <view class="position">
@@ -17,14 +17,16 @@
                         </view>
                     </view>
                 </view>
-                <view class="tags">
-                    <view class="tag">BRT沿线</view>
-                    <view class="tag">市政高新区</view>
+                <view class="tags clearfix">
+                    <view class="tag yellow">BRT沿线</view>
+                    <view class="tag green">市政高新区</view>
                 </view>
-                <view class="minus">
-                    <icon></icon>双十二签约立减300元</view>
-                <view class="tuan">
-                    <icon></icon>两人起团租，立减200-600元</view>
+                <view class="ui-nowrap minus">
+                    <icon></icon>双十二签约立减300元
+                </view>
+                <view class="ui-nowrap tuan">
+                    <icon></icon>两人起团租，立减200-600元
+                </view>
             </view>
         </view>
         <view class="box-3">
