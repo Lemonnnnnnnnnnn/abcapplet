@@ -1,4 +1,4 @@
-// pages/apartment/collection/index.js
+// pages/home/collection/index.js
 Page({
 
     /**
