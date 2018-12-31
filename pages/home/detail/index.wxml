@@ -33,7 +33,7 @@
             <view class="title">房型</view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view class="item">
+                    <view class="item first-item">
                         <view class="img">
                             <image src="/images/home/003.jpeg"></image>
                         </view>

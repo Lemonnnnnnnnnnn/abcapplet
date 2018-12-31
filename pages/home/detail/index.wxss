@@ -68,3 +68,19 @@
     background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }
+.box-3 .title {
+    padding: 6px 12px 9px 12px;
+    font-size: 16px;
+    color: #4A4A4A;
+}
+.box-3 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.box-3 .item {
+    width: 131px;
+    height: 168px;
+    margin-right: 12px;
+    display: inline-block;
+}
