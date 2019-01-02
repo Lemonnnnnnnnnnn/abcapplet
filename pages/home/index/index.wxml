@@ -12,10 +12,10 @@
                         </view>
                     </view>
                     <view class="weui-flex__item">
-                        <view class="search">
+                        <navigator class="search" hover-class="none" url="/pages/home/search/index">
                             <icon class="iconfont icon-search"></icon>
                             <text>搜索公寓/商圈</text>
-                        </view>
+                        </navigator>
                     </view>
                 </view>
             </view>
@@ -24,7 +24,7 @@
         <view class="box-2">
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view class="item first-item">
+                    <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                         </view>
@@ -32,7 +32,7 @@
                             <view class="title">#城市活动# 与热血同行</view>
                             <view class="tip">高颜值社交型人格</view>
                         </view>
-                    </view>
+                    </navigator>
                     <view class="item">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
@@ -70,13 +70,13 @@
             </view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <navigator class="item first-item" hover-class="" url="">
+                    <navigator class="item first-item" hover-class="none" url="/pages/home/collection/index">
                         <image src="http://devhhb.images.huihuiba.net/image/icon/004.png" mode="scaleToFill"></image>
                     </navigator>
-                    <navigator class="item" hover-class="" url="">
+                    <navigator class="item" hover-class="none" url="">
                         <image src="http://devhhb.images.huihuiba.net/image/icon/005.png" mode="scaleToFill"></image>
                     </navigator>
-                    <navigator class="item" hover-class="" url="">
+                    <navigator class="item" hover-class="none" url="">
                         <image src="http://devhhb.images.huihuiba.net/image/icon/006.png" mode="scaleToFill"></image>
                     </navigator>
                 </scroll-view>
@@ -89,7 +89,7 @@
             </view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <navigator class="item first-item" hover-class="" url>
+                    <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
@@ -107,7 +107,7 @@
                             </view>
                         </view>
                     </navigator>
-                    <navigator class="item" hover-class="" url>
+                    <navigator class="item" hover-class="none" url="/pages/home/detail/index">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
@@ -190,7 +190,7 @@
                     </view>
                 </view>
                 <view class="list">
-                    <view class="item">
+                    <navigator class="item" hover-class="none" url="/pages/home/detail/index">
                         <view class="inner">
                             <view class="img">
                                 <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
@@ -239,7 +239,7 @@
                                 </view>
                             </view>
                         </view>
-                    </view>
+                    </navigator>
                     <view class="item">
                         <view class="inner">
                             <view class="img">

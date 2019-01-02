@@ -23,7 +23,7 @@
         <view class="box-2">
             <view class="wrap">
                 <view class="list">
-                    <view class="item">
+                    <navigator class="item" hover-class="none" url="/pages/home/detail/index">
                         <view class="inner">
                             <view class="img">
                                 <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
@@ -72,7 +72,7 @@
                                 </view>
                             </view>
                         </view>
-                    </view>
+                    </navigator>
                     <view class="item">
                         <view class="inner">
                             <view class="img">
