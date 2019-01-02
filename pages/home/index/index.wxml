@@ -4,7 +4,7 @@
         <scroll-view scroll-y="true" style="height: 100vh;" bindscroll="scrollTopFun">
             <!--搜索-->
             <view class="box-1">
-                <view class="wrap">
+                <view class="search-inner">
                     <view class="weui-flex search-box">
                         <view>
                             <view class="city">

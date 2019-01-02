@@ -2,11 +2,13 @@
 .wrap {
     padding: 12px 12px 0 12px;
 }
+.box-1 .search-inner {
+    padding: 12px;
+}
 .box-1 .search-box {
     height: 37px;
     background:rgba(243, 242, 243, 1);
     border-radius: 19px;
-    margin-bottom: 12px;
 }
 .box-1 .city {
     width: 50px;
