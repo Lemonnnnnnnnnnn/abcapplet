@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-       
+        top: 0
     },
 
     /**
@@ -62,5 +62,13 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    scrollTopFun(e) {
+        let self = this;
+
+        self.setData({
+            top: e.detail.scrollTop
+        });
     }
 })

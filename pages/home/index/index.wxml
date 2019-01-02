@@ -1,339 +1,343 @@
 <!--pages/home/index/index.wxml-->
 <view class="page">
     <view class="page__bd">
-        <!--搜索-->
-        <view class="box-1">
-            <view class="wrap">
-                <view class="weui-flex search-box">
-                    <view>
-                        <view class="city">
-                            <text>厦门</text>
-                            <icon class="iconfont icon-down"></icon>
+        <scroll-view scroll-y="true" style="height: 100vh;" bindscroll="scrollTopFun">
+            <!--搜索-->
+            <view class="box-1">
+                <view class="wrap">
+                    <view class="weui-flex search-box">
+                        <view>
+                            <view class="city">
+                                <text>厦门</text>
+                                <icon class="iconfont icon-down"></icon>
+                            </view>
                         </view>
-                    </view>
-                    <view class="weui-flex__item">
-                        <navigator class="search" hover-class="none" url="/pages/home/search/index">
-                            <icon class="iconfont icon-search"></icon>
-                            <text>搜索公寓/商圈</text>
-                        </navigator>
+                        <view class="weui-flex__item">
+                            <navigator class="search" hover-class="none" url="/pages/home/search/index">
+                                <icon class="iconfont icon-search"></icon>
+                                <text>搜索公寓/商圈</text>
+                            </navigator>
+                        </view>
                     </view>
                 </view>
             </view>
-        </view>
-        <!-- 轮播 -->
-        <view class="box-2">
-            <view class="scroll-view">
-                <scroll-view class="list" scroll-x>
-                    <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                        </view>
-                        <view class="info">
-                            <view class="title">#城市活动# 与热血同行</view>
-                            <view class="tip">高颜值社交型人格</view>
-                        </view>
-                    </navigator>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                        </view>
-                        <view class="info">
-                            <view class="title">#城市活动# 与热血同行</view>
-                            <view class="tip">高颜值社交型人格</view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                        </view>
-                        <view class="info">
-                            <view class="title">#城市活动# 与热血同行</view>
-                            <view class="tip">高颜值社交型人格</view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                        </view>
-                        <view class="info">
-                            <view class="title">#城市活动# 与热血同行</view>
-                            <view class="tip">高颜值社交型人格</view>
-                        </view>
-                    </view>
-                </scroll-view>
-            </view>
-        </view>
-        <!-- 热门租房 -->
-        <view class="box-3">
-            <view class="wrap">
-                <view class="title">热门租房商圈</view>
-            </view>
-            <view class="scroll-view">
-                <scroll-view class="list" scroll-x>
-                    <navigator class="item first-item" hover-class="none" url="/pages/home/collection/index">
-                        <image src="http://devhhb.images.huihuiba.net/image/icon/004.png" mode="scaleToFill"></image>
-                    </navigator>
-                    <navigator class="item" hover-class="none" url="">
-                        <image src="http://devhhb.images.huihuiba.net/image/icon/005.png" mode="scaleToFill"></image>
-                    </navigator>
-                    <navigator class="item" hover-class="none" url="">
-                        <image src="http://devhhb.images.huihuiba.net/image/icon/006.png" mode="scaleToFill"></image>
-                    </navigator>
-                </scroll-view>
-            </view>
-        </view>
-        <!-- 本周上新公寓 -->
-        <view class="box-4">
-            <view class="wrap">
-                <view class="title">本周上新公寓</view>
-            </view>
-            <view class="scroll-view">
-                <scroll-view class="list" scroll-x>
-                    <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                            <view class="info">
-                                <view class="inner">
-                                    <view class="clearfix apartment">
-                                        <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
-                                        <view class="price">￥1650-2000</view>
-                                        <view class="tag">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
-                                        </view>
-                                    </view>
-                                    <view class="desc">青年优品，城市生活风向标</view>
-                                </view>
+            <!-- 轮播 -->
+            <view class="box-2">
+                <view class="scroll-view">
+                    <scroll-view class="list" scroll-x>
+                        <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                             </view>
-                        </view>
-                    </navigator>
-                    <navigator class="item" hover-class="none" url="/pages/home/detail/index">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
-                                <view class="inner">
-                                    <view class="clearfix apartment">
-                                        <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
-                                        <view class="price">￥1650-2000</view>
-                                        <view class="tag">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
-                                        </view>
-                                    </view>
-                                    <view class="desc">青年优品，城市生活风向标</view>
-                                </view>
+                                <view class="title">#城市活动# 与热血同行</view>
+                                <view class="tip">高颜值社交型人格</view>
                             </view>
-                        </view>
-                    </navigator>
-                    <navigator class="item" hover-class="" url>
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                            <view class="info">
-                                <view class="inner">
-                                    <view class="clearfix apartment">
-                                        <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
-                                        <view class="price">￥1650-2000</view>
-                                        <view class="tag">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
-                                        </view>
-                                    </view>
-                                    <view class="desc">青年优品，城市生活风向标</view>
-                                </view>
-                            </view>
-                        </view>
-                    </navigator>
-                </scroll-view>
-            </view>
-        </view>
-        <!-- 广告位 -->
-        <view class="box-5">
-            <view class="wrap">
-                <view class="weui-flex">
-                    <view class="weui-flex__item">
-                        <navigator class="ad" hover-class="none" url="">
-                            <image src="/images/home/mianzu.png"></image>
                         </navigator>
-                    </view>
-                    <view class="weui-flex__item">
-                        <navigator class="ad ad-right" hover-class="none" url="">
-                            <image src="/images/home/zhekou.png"></image>
-                        </navigator>
-                    </view>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                            </view>
+                            <view class="info">
+                                <view class="title">#城市活动# 与热血同行</view>
+                                <view class="tip">高颜值社交型人格</view>
+                            </view>
+                        </view>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                            </view>
+                            <view class="info">
+                                <view class="title">#城市活动# 与热血同行</view>
+                                <view class="tip">高颜值社交型人格</view>
+                            </view>
+                        </view>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                            </view>
+                            <view class="info">
+                                <view class="title">#城市活动# 与热血同行</view>
+                                <view class="tip">高颜值社交型人格</view>
+                            </view>
+                        </view>
+                    </scroll-view>
                 </view>
             </view>
-        </view>
-        <!-- 严选公寓 -->
-        <view class="box-6">
-            <view class="wrap">
-                <view class="title">严选公寓</view>
-                <view class="select">
+            <!-- 热门租房 -->
+            <view class="box-3">
+                <view class="wrap">
+                    <view class="title">热门租房商圈</view>
+                </view>
+                <view class="scroll-view">
+                    <scroll-view class="list" scroll-x>
+                        <navigator class="item first-item" hover-class="none" url="/pages/home/collection/index">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/004.png" mode="scaleToFill"></image>
+                        </navigator>
+                        <navigator class="item" hover-class="none" url="">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/005.png" mode="scaleToFill"></image>
+                        </navigator>
+                        <navigator class="item" hover-class="none" url="">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/006.png" mode="scaleToFill"></image>
+                        </navigator>
+                    </scroll-view>
+                </view>
+            </view>
+            <!-- 本周上新公寓 -->
+            <view class="box-4">
+                <view class="wrap">
+                    <view class="title">本周上新公寓</view>
+                </view>
+                <view class="scroll-view">
+                    <scroll-view class="list" scroll-x>
+                        <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                <view class="info">
+                                    <view class="inner">
+                                        <view class="clearfix apartment">
+                                            <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
+                                            <view class="price">￥1650-2000</view>
+                                            <view class="tag">
+                                                <icon class="minus"></icon>
+                                                <icon class="tuan"></icon>
+                                            </view>
+                                        </view>
+                                        <view class="desc">青年优品，城市生活风向标</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                        <navigator class="item" hover-class="none" url="/pages/home/detail/index">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                <view class="info">
+                                    <view class="inner">
+                                        <view class="clearfix apartment">
+                                            <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
+                                            <view class="price">￥1650-2000</view>
+                                            <view class="tag">
+                                                <icon class="minus"></icon>
+                                                <icon class="tuan"></icon>
+                                            </view>
+                                        </view>
+                                        <view class="desc">青年优品，城市生活风向标</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                        <navigator class="item" hover-class="" url>
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                <view class="info">
+                                    <view class="inner">
+                                        <view class="clearfix apartment">
+                                            <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
+                                            <view class="price">￥1650-2000</view>
+                                            <view class="tag">
+                                                <icon class="minus"></icon>
+                                                <icon class="tuan"></icon>
+                                            </view>
+                                        </view>
+                                        <view class="desc">青年优品，城市生活风向标</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                    </scroll-view>
+                </view>
+            </view>
+            <!-- 广告位 -->
+            <view class="box-5">
+                <view class="wrap">
                     <view class="weui-flex">
                         <view class="weui-flex__item">
-                            <view class="item">
-                                <text>商圈</text>
-                                <icon class="iconfont icon-down-arrow"></icon>
-                            </view>
+                            <navigator class="ad" hover-class="none" url="">
+                                <image src="/images/home/mianzu.png"></image>
+                            </navigator>
                         </view>
                         <view class="weui-flex__item">
-                            <view class="item" style="text-align: center;">
-                                <text>价格</text>
-                                <icon class="iconfont icon-down-arrow"></icon>
-                            </view>
+                            <navigator class="ad ad-right" hover-class="none" url="">
+                                <image src="/images/home/zhekou.png"></image>
+                            </navigator>
                         </view>
-                        <view class="weui-flex__item">
-                            <view class="item" style="text-align: right;">
-                                <text>户型</text>
-                                <icon class="iconfont icon-down-arrow"></icon>
+                    </view>
+                </view>
+            </view>
+            <!-- 严选公寓 -->
+            <view class="box-6">
+                <view class="title">严选公寓</view>
+                <view class="select {{top >= 838 ? 'topnav' : ''}}">
+                    <view class="select-inner">
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="item">
+                                    <text>商圈</text>
+                                    <icon class="iconfont icon-down-arrow"></icon>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="item" style="text-align: center;">
+                                    <text>价格</text>
+                                    <icon class="iconfont icon-down-arrow"></icon>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="item" style="text-align: right;">
+                                    <text>户型</text>
+                                    <icon class="iconfont icon-down-arrow"></icon>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </view>
-                <view class="list">
-                    <navigator class="item" hover-class="none" url="/pages/home/detail/index">
-                        <view class="inner">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                <text class="want">220人想住</text>
-                            </view>
-                            <view class="scroll-view">
-                                <scroll-view scroll-x="true">
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                <view class="inner">
+                    <view class="list">
+                        <navigator class="item" hover-class="none" url="/pages/home/detail/index">
+                            <view class="inner">
+                                <view class="img">
+                                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                    <text class="want">220人想住</text>
+                                </view>
+                                <view class="scroll-view">
+                                    <scroll-view scroll-x="true">
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                    </scroll-view>
+                                </view>
+                                <view class="apartment-name">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <view class="tag clearfix">
+                                                <view class="tag-item">BRT</view>
+                                                <view class="tag-item">市行政服务中心</view>
+                                            </view>
+                                        </view>
                                     </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                </scroll-view>
-                            </view>
-                            <view class="apartment-name">
-                                <view class="weui-flex">
-                                    <view class="weui-flex__item">
-                                        <view class="ui-nowrap name">龙湖冠寓·高新店</view>
-                                    </view>
-                                    <view class="weui-flex__item">
-                                        <view class="tag clearfix">
-                                            <view class="tag-item">BRT</view>
-                                            <view class="tag-item">市行政服务中心</view>
+                                </view>
+                                <view class="desc">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                                        </view>
+                                        <view>
+                                            <view class="tag clearfix">
+                                                <icon class="minus"></icon>
+                                                <icon class="tuan"></icon>
+                                            </view>
                                         </view>
                                     </view>
                                 </view>
                             </view>
-                            <view class="desc">
-                                <view class="weui-flex">
-                                    <view class="weui-flex__item">
-                                        <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                        </navigator>
+                        <view class="item">
+                            <view class="inner">
+                                <view class="img">
+                                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                    <text class="want">220人想住</text>
+                                </view>
+                                <view class="scroll-view">
+                                    <scroll-view scroll-x="true">
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                    </scroll-view>
+                                </view>
+                                <view class="apartment-name">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <view class="tag clearfix">
+                                                <view class="tag-item">BRT</view>
+                                                <view class="tag-item">市行政服务中心</view>
+                                            </view>
+                                        </view>
                                     </view>
-                                    <view>
-                                        <view class="tag clearfix">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                </view>
+                                <view class="desc">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                                        </view>
+                                        <view>
+                                            <view class="tag clearfix">
+                                                <icon class="minus"></icon>
+                                                <icon class="tuan"></icon>
+                                            </view>
                                         </view>
                                     </view>
                                 </view>
                             </view>
                         </view>
-                    </navigator>
-                    <view class="item">
-                        <view class="inner">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                <text class="want">220人想住</text>
-                            </view>
-                            <view class="scroll-view">
-                                <scroll-view scroll-x="true">
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                </scroll-view>
-                            </view>
-                            <view class="apartment-name">
-                                <view class="weui-flex">
-                                    <view class="weui-flex__item">
-                                        <view class="ui-nowrap name">龙湖冠寓·高新店</view>
-                                    </view>
-                                    <view class="weui-flex__item">
-                                        <view class="tag clearfix">
-                                            <view class="tag-item">BRT</view>
-                                            <view class="tag-item">市行政服务中心</view>
+                        <view class="item">
+                            <view class="inner">
+                                <view class="img">
+                                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                    <text class="want">220人想住</text>
+                                </view>
+                                <view class="scroll-view">
+                                    <scroll-view scroll-x="true">
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                        <view class="img-item">
+                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                                        </view>
+                                    </scroll-view>
+                                </view>
+                                <view class="apartment-name">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <view class="tag clearfix">
+                                                <view class="tag-item">BRT</view>
+                                                <view class="tag-item">市行政服务中心</view>
+                                            </view>
                                         </view>
                                     </view>
                                 </view>
-                            </view>
-                            <view class="desc">
-                                <view class="weui-flex">
-                                    <view class="weui-flex__item">
-                                        <view class="ui-nowrap tip">高颜值社交型公寓</view>
-                                    </view>
-                                    <view>
-                                        <view class="tag clearfix">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                <view class="desc">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <view class="ui-nowrap tip">高颜值社交型公寓</view>
                                         </view>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="inner">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                <text class="want">220人想住</text>
-                            </view>
-                            <view class="scroll-view">
-                                <scroll-view scroll-x="true">
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                    <view class="img-item">
-                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                    </view>
-                                </scroll-view>
-                            </view>
-                            <view class="apartment-name">
-                                <view class="weui-flex">
-                                    <view class="weui-flex__item">
-                                        <view class="ui-nowrap name">龙湖冠寓·高新店</view>
-                                    </view>
-                                    <view class="weui-flex__item">
-                                        <view class="tag clearfix">
-                                            <view class="tag-item">BRT</view>
-                                            <view class="tag-item">市行政服务中心</view>
-                                        </view>
-                                    </view>
-                                </view>
-                            </view>
-                            <view class="desc">
-                                <view class="weui-flex">
-                                    <view class="weui-flex__item">
-                                        <view class="ui-nowrap tip">高颜值社交型公寓</view>
-                                    </view>
-                                    <view>
-                                        <view class="tag clearfix">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                        <view>
+                                            <view class="tag clearfix">
+                                                <icon class="minus"></icon>
+                                                <icon class="tuan"></icon>
+                                            </view>
                                         </view>
                                     </view>
                                 </view>
@@ -342,6 +346,6 @@
                     </view>
                 </view>
             </view>
-        </view>
+        </scroll-view>
     </view>
 </view>
