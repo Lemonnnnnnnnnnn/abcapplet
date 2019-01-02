@@ -152,42 +152,52 @@
                 <view class="description">
                     <view class="apartment">
                         <view class="inner">
-                            <view class="apartment-name">白领精选型公寓</view>
-                            <view class="tip">装修精致，配套丰富，适合城市白领</view>
+                            <view class="ui-nowrap apartment-name">白领精选型公寓</view>
+                            <view class="ui-nowrap tip">装修精致，配套丰富，适合城市白领</view>
                         </view>
                     </view>
                     <view class="multi-line-fold desc">取繁华之边界，居一处安心，这便是冠寓金尚店的初衷，这里 可以供养150个有趣的灵魂，只有住得舒适才能独领风骚...</view>
                     <view class="more">查看更多</view>
-                    <view class="icon-list">
-                        <view class="icon-item">
-                            <view class="icon">
-                                <icon class="wash"></icon>
+                    <view class="weui-flex icon-list">
+                        <view class="weui-flex__item">
+                            <view class="icon-item">
+                                <view class="icon">
+                                    <icon class="wash"></icon>
+                                </view>
+                                <view class="name">洗衣机</view>
                             </view>
-                            <view class="name">洗衣机</view>
                         </view>
-                        <view class="icon-item">
-                            <view class="icon">
-                                <icon class="dry"></icon>
+                        <view class="weui-flex__item">
+                            <view class="icon-item">
+                                <view class="icon">
+                                    <icon class="dry"></icon>
+                                </view>
+                                <view class="name">烘干机</view>
                             </view>
-                            <view class="name">烘干机</view>
                         </view>
-                        <view class="icon-item">
-                            <view class="icon">
-                                <icon class="leisure"></icon>
+                        <view class="weui-flex__item">
+                            <view class="icon-item">
+                                <view class="icon">
+                                    <icon class="leisure"></icon>
+                                </view>
+                                <view class="name">休闲区</view>
                             </view>
-                            <view class="name">休闲区</view>
                         </view>
-                        <view class="icon-item">
-                            <view class="icon">
-                                <icon class="gym"></icon>
+                        <view class="weui-flex__item">
+                            <view class="icon-item">
+                                <view class="icon">
+                                    <icon class="gym"></icon>
+                                </view>
+                                <view class="name">健身房</view>
                             </view>
-                            <view class="name">健身房</view>
                         </view>
-                        <view class="icon-item">
-                            <view class="icon">
-                                <icon class="film"></icon>
+                        <view class="weui-flex__item">
+                            <view class="icon-item">
+                                <view class="icon">
+                                    <icon class="film"></icon>
+                                </view>
+                                <view class="name">影音区</view>
                             </view>
-                            <view class="name">影音区</view>
                         </view>
                     </view>
                 </view>
@@ -197,7 +207,7 @@
             <view class="wrap">
                 <view class="title">公寓位置</view>
                 <view class="map">
-                    <image src="/images/user/001.jpg"></image>
+                    <map></map>
                 </view>
             </view>
         </view>
@@ -212,13 +222,13 @@
                                 <view>
                                     <view class="service-icon">
                                         <view class="icon">
-                                            <icon></icon>
+                                            <icon class="require"></icon>
                                         </view>
                                         <view class="text">租客要求</view>
                                     </view>
                                 </view>
                                 <view class="weui-flex__item">
-                                    <view class="list">
+                                    <view class="list clearfix">
                                         <view class="item">
                                             <icon class="iconfont icon-gou"></icon>
                                             <text>35岁以下</text>
@@ -240,7 +250,7 @@
                                 <view>
                                     <view class="service-icon">
                                         <view class="icon">
-                                            <icon></icon>
+                                            <icon class="cost"></icon>
                                         </view>
                                         <view class="text">费用说明</view>
                                     </view>
@@ -267,12 +277,12 @@
                                 </view>
                             </view>
                         </view>
-                        <view class="service-item">
+                        <view class="service-item last-item">
                             <view class="weui-flex">
                                 <view>
                                     <view class="service-icon">
                                         <view class="icon">
-                                            <icon></icon>
+                                            <icon class="service"></icon>
                                         </view>
                                         <view class="text">服务配套</view>
                                     </view>

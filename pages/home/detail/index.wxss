@@ -185,3 +185,158 @@
     width: 100%;
     height: 50px;
 }
+.box-4 .title {
+    font-size: 16px;
+    color: #4A4A4A;
+    margin-bottom: 10px;
+}
+.box-4 .apartment {
+    width: 100%;
+    height: 71px;
+    background-color: #FCF3EA;
+    border-radius: 5px;
+}
+.box-4 .apartment .inner {
+    padding: 8px 9px;
+}
+.box-4 .apartment .apartment-name {
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-bottom: 5px;
+}
+.box-4 .apartment .tip {
+    font-size: 12px;
+    color: #9B9B9B;
+}
+.box-4 .desc {
+    font-size: 12px;
+    line-height: 18px;
+    color: #4A4A4A;
+    padding: 13px 0;
+}
+.box-4 .more {
+    color: #FF9600;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+.box-4 .icon-list {
+    width: 100%;
+    height: 72px;
+    background: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(238,238,238,1);
+    border-radius: 8px;
+}
+.box-4 .icon-item {
+    padding: 10px;
+    text-align: center;
+}
+.box-4 .icon-item icon {
+    display: inline-block;
+    width: 31px;
+    height: 30px;
+    margin-bottom: 2px;
+}
+.box-4 .icon-item .wash {
+    background: url('http://devhhb.images.huihuiba.net/wash.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .icon-item .dry {
+    background: url('http://devhhb.images.huihuiba.net/dry.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .icon-item .leisure {
+    background: url('http://devhhb.images.huihuiba.net/leisure.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .icon-item .gym {
+    background: url('http://devhhb.images.huihuiba.net/gym.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .icon-item .film {
+    background: url('http://devhhb.images.huihuiba.net/film.png') center center no-repeat;
+    background-size: cover;
+}
+.box-4 .icon-item .name {
+    font-size: 12px;
+    color: #4A4A4A;
+    text-align: center;
+}
+.box-5 .title {
+    font-size: 16px;
+    color: #4A4A4A;
+    margin-bottom: 10px;
+}
+.box-5 .map {
+    width: 100%;
+    height: 216px;
+}
+.box-5 .map map {
+    width: 100%;
+    height: 100%;
+}
+.box-6 .title {
+    font-size: 16px;
+    color: #4A4A4A;
+}
+.box-6 .tip {
+    font-size: 12px;
+    color: #9B9B9B;
+}
+.box-6 .service-box {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 0px rgba(219,218,219,1);
+    border-radius: 3px;
+    margin: 20px 0 15px 0;
+}
+.box-6 .service-box .inner {
+    padding: 5px 20px;
+}
+.box-6 .service-box .service-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #F3F1F1;
+}
+.box-6 .service-box .service-icon {
+    width: 60px;
+    margin-right: 50px;
+    text-align: center;
+}
+.box-6 .service-icon icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+.box-6 .service-icon .text {
+    font-size: 12px;
+    color: #4A4A4A;
+}
+.box-6 .service-icon .require {
+    background: url('http://devhhb.images.huihuiba.net/require.png') center center no-repeat;
+    background-size: cover;
+}
+.box-6 .service-icon .cost {
+    background: url('http://devhhb.images.huihuiba.net/cost.png') center center no-repeat;
+    background-size: cover;
+}
+.box-6 .service-icon .service {
+    background: url('http://devhhb.images.huihuiba.net/service.png') center center no-repeat;
+    background-size: cover;
+}
+.box-6 .list .item {
+    float: left;
+    margin-right: 20px;
+}
+.box-6 .item text {
+    color: #4A4A4A;
+    font-size: 12px;
+}
+.box-6 .item .icon-gou {
+    font-size: 12px;
+    margin-right: 3px;
+    position: relative;
+    top: -5px;
+}
+.box-6 .service-box .last-item {
+    border-bottom: none;
+}
