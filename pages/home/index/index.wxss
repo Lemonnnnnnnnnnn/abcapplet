@@ -2,8 +2,16 @@
 .wrap {
     padding: 12px 12px 0 12px;
 }
+.box-1 {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background-color: #fff;
+}
 .box-1 .search-inner {
-    padding: 12px;
+    padding: 0 12px 12px 12px;
 }
 .box-1 .search-box {
     height: 37px;
@@ -33,6 +41,9 @@
 .box-1 .search icon {
     display: inline-block;
     margin-right: 10px;
+}
+.box-2 {
+    margin-top: 49px;
 }
 .box-2 .scroll-view {
     width: 100%;
@@ -202,7 +213,7 @@
 .box-6 .topnav {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 49px;
     z-index: 100;
 }
 .box-6 .select {
