@@ -2,6 +2,46 @@
 .wrap {
     padding: 12px 12px 0 12px;
 }
+.box-1 {
+    width: 100%;
+    height: 261px;
+    position: relative;
+}
+.box-1 swiper, .box-1 .slide-image {
+    width: 100%;
+    height: 100%;
+}
+.box-1 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    height:25px;
+    /* background: linear-gradient(180deg,rgba(251,248,248,1) 0%,rgba(4,3,3,1) 100%); */
+    /* filter: blur(5px); */
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+.box-1 .item {
+    font-size: 12px;
+    color: #DBDADB;
+    line-height: 25px;
+    padding: 0 20px;
+    display: inline-block;
+    position: relative;
+}
+.box-1 .list .selected {
+    color: #fff;
+}
+.box-1 .list .selected:before {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #fff;
+    content: "";
+    position: absolute;    
+    left: 40%;
+    bottom: 0px;
+}
 .box-2 {
     margin-bottom: 12px;
 }
@@ -77,10 +117,71 @@
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
+    margin-bottom: 4px;
 }
 .box-3 .item {
-    width: 131px;
-    height: 168px;
-    margin-right: 12px;
+    width: 126px;
+    height: 144px;
+    margin-right: 14px;
     display: inline-block;
+    box-shadow:0px 0px 5px 0px rgba(237,236,236,0.5);
+}
+.box-3 .first-item {
+    margin-left: 12px;
+}
+.box-3 .item .img, .box-3 .img image {
+    width: 126px;
+    height: 80px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.box-3 .item .inner {
+    padding: 4px;
+}
+.box-3 .apartment-name {
+    font-size: 12px;
+    color: #717172;
+    margin-bottom: 4px;
+}
+.box-3 .item-tag {
+    color: #4A4A4A;
+    font-size: 9px;
+    padding: 0 5px;
+    line-height: 15px;
+    float: left;
+    margin-right: 10px;
+}
+.box-3 .tags {
+    margin-bottom: 8px;
+}
+.box-3 .tags .green {
+    background-color: #EDFAE0;
+}
+.box-3 .tags .yellow {
+    background-color: #FAF3DE;
+}
+.box-3 .price-box .status {
+    width: 26px;
+    height: 11px;
+    line-height: 11px;
+    text-align: center;
+    font-size: 8px;
+    color: #9B9B9B;
+    border: 1px solid #9B9B9B;
+    margin-left: 10px;
+}
+.box-3 .price-box .has {
+    color: #FFC000;
+    border: 1px solid #FFC000;
+}
+.box-3 .price-box .price {
+    color: #4A4A4A;
+    font-size: 11px;
+}
+.box-3 .ad .ad-inner {
+    padding: 12px 12px 4px 12px;
+}
+.box-3 .ad image {
+    width: 100%;
+    height: 50px;
 }

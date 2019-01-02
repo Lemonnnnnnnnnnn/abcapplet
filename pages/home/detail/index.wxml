@@ -1,6 +1,31 @@
 <!--pages/home/detail/index.wxml-->
 <view class="page">
     <view class="page__bd">
+        <view class="box-1">
+            <swiper circular="true">
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
+                </swiper-item>
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
+                </swiper-item>
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
+                </swiper-item>
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
+                </swiper-item>
+            </swiper>
+            <view class="scroll-view">
+                <scroll-view class="list" scroll-x>
+                    <view class="item selected">前台</view>
+                    <view class="item">公区</view>
+                    <view class="item">前台</view>
+                    <view class="item">前台</view>
+                    <view class="item">前台</view>
+                </scroll-view>
+            </view>
+        </view>
         <view class="box-2">
             <view class="wrap">
                 <view class="weui-flex">
@@ -37,24 +62,88 @@
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                         </view>
-                        <view class="apartment-name">单身公寓・回归自然</view>
-                        <view class="tags">
-                            <view class="item-tag">部分带阳台</view>
-                            <view class="item-tag">独卫</view>
-                        </view>
-                        <view class="weui-flex price-box">
-                            <view class="weui-flex__item">
-                                <view class="price">¥1600-¥2100</view>
+                        <view class="inner">
+                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
+                            <view class="tags clearfix">
+                                <view class="item-tag green">部分带阳台</view>
+                                <view class="item-tag yellow">独卫</view>
                             </view>
-                            <view>
-                                <view class="has">有房</view>
+                            <view class="weui-flex price-box">
+                                <view class="weui-flex__item">
+                                    <view class="price">¥1600-¥2100</view>
+                                </view>
+                                <view>
+                                    <view class="status has">有房</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item first-item">
+                        <view class="img">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                        </view>
+                        <view class="inner">
+                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
+                            <view class="tags clearfix">
+                                <view class="item-tag green">部分带阳台</view>
+                                <view class="item-tag yellow">独卫</view>
+                            </view>
+                            <view class="weui-flex price-box">
+                                <view class="weui-flex__item">
+                                    <view class="price">¥1600-¥2100</view>
+                                </view>
+                                <view>
+                                    <view class="status has">有房</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item first-item">
+                        <view class="img">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                        </view>
+                        <view class="inner">
+                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
+                            <view class="tags clearfix">
+                                <view class="item-tag green">部分带阳台</view>
+                                <view class="item-tag yellow">独卫</view>
+                            </view>
+                            <view class="weui-flex price-box">
+                                <view class="weui-flex__item">
+                                    <view class="price">¥1600-¥2100</view>
+                                </view>
+                                <view>
+                                    <view class="status has">有房</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item first-item">
+                        <view class="img">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                        </view>
+                        <view class="inner">
+                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
+                            <view class="tags clearfix">
+                                <view class="item-tag green">部分带阳台</view>
+                                <view class="item-tag yellow">独卫</view>
+                            </view>
+                            <view class="weui-flex price-box">
+                                <view class="weui-flex__item">
+                                    <view class="price">¥1600-¥2100</view>
+                                </view>
+                                <view>
+                                    <view class="status has">有房</view>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </scroll-view>
             </view>
             <view class="ad">
-                <image src="/images/user/002.jpg" mode="scaleToFill"></image>
+                <view class="ad-inner">
+                    <image src="/images/user/002.jpg" mode="scaleToFill"></image>
+                </view>
             </view>
         </view>
         <view class="box-4">
