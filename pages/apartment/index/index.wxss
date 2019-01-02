@@ -221,3 +221,73 @@
     display: inline-block;
     margin-right: 8px;
 }
+.box-6 {
+    width: 92%;
+    position: fixed;
+    left: 4%;
+    top: 100px;
+    z-index: 600;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.box-6 .inner {
+    padding: 15px;
+}
+.box-6 .title {
+    font-size: 17px;
+    color: #4A4A4A;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.box-6 .title icon {
+    display: inline-block;
+    width: 22px;
+    height: 20px;
+    margin-right: 8px;
+    background: url('http://devhhb.images.huihuiba.net/select.png') center center no-repeat;
+    background-size: cover;
+}
+.box-6 .select {
+    margin-bottom: 6px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.box-6 .select text {
+    font-size: 13px;
+    color: #4A4A4A;
+}
+.box-6 .select .icon-down-arrow {
+    font-size: 14px;
+    color: #4A4A4A;
+    position: relative;
+    top: -4px;
+    left: 3px;
+}
+.box-6 .check {
+    padding: 4px 0;
+}
+.box-6 .check-title {
+    font-size: 14px;
+    color: #000;
+    margin-right: 25px;
+}
+.box-6 .check .item {
+    font-size: 12px;
+    color: #4A4A4A;
+    padding: 2px 8px;
+    float: left;
+    margin-right: 8px;
+    background-color: #EEEEEE;
+    border-radius: 11px;
+}
+.box-6 .btn {
+    width: 291px;
+    height: 46px;
+    background: #FFCF11;
+    box-shadow: 0px 0px 4px 0px rgba(219,218,218,1);
+    border-radius: 23px;
+    margin: 50px auto 5px auto;
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+    line-height: 46px;
+}

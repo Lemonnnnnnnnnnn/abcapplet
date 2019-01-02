@@ -192,7 +192,7 @@
                     </view>
                     <view class="select-box">
                         <view class="inner">
-                            <view class="business">
+                            <view class="business hide">
                                 <view class="weui-flex">
                                     <view>
                                         <view class="scroll-view left">
