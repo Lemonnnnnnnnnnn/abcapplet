@@ -35,7 +35,7 @@
                 <scroll-view class="list" scroll-x>
                     <view class="item first-item">
                         <view class="img">
-                            <image src="/images/home/003.jpeg"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                         </view>
                         <view class="apartment-name">单身公寓・回归自然</view>
                         <view class="tags">
@@ -242,7 +242,7 @@
                 <view class="list">
                     <view class="item">
                         <view class="img">
-                            <image src="/images/home/001.jpeg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                             <text>30人想住</text>
                         </view>
                         <view class="info">

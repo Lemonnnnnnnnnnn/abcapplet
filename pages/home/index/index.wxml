@@ -26,7 +26,7 @@
                 <scroll-view class="list" scroll-x>
                     <view class="item first-item">
                         <view class="img">
-                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                         </view>
                         <view class="info">
                             <view class="title">#城市活动# 与热血同行</view>
@@ -35,7 +35,7 @@
                     </view>
                     <view class="item">
                         <view class="img">
-                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                         </view>
                         <view class="info">
                             <view class="title">#城市活动# 与热血同行</view>
@@ -44,7 +44,7 @@
                     </view>
                     <view class="item">
                         <view class="img">
-                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                         </view>
                         <view class="info">
                             <view class="title">#城市活动# 与热血同行</view>
@@ -53,7 +53,7 @@
                     </view>
                     <view class="item">
                         <view class="img">
-                            <image src="/images/home/001.jpg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                         </view>
                         <view class="info">
                             <view class="title">#城市活动# 与热血同行</view>
@@ -71,13 +71,13 @@
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
                     <navigator class="item first-item" hover-class="" url="">
-                        <image src="/images/home/004.png" mode="scaleToFill"></image>
+                        <image src="http://devhhb.images.huihuiba.net/image/icon/004.png" mode="scaleToFill"></image>
                     </navigator>
                     <navigator class="item" hover-class="" url="">
-                        <image src="/images/home/005.png" mode="scaleToFill"></image>
+                        <image src="http://devhhb.images.huihuiba.net/image/icon/005.png" mode="scaleToFill"></image>
                     </navigator>
                     <navigator class="item" hover-class="" url="">
-                        <image src="/images/home/006.png" mode="scaleToFill"></image>
+                        <image src="http://devhhb.images.huihuiba.net/image/icon/006.png" mode="scaleToFill"></image>
                     </navigator>
                 </scroll-view>
             </view>
@@ -91,7 +91,7 @@
                 <scroll-view class="list" scroll-x>
                     <navigator class="item first-item" hover-class="" url>
                         <view class="img">
-                            <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
                                 <view class="inner">
                                     <view class="clearfix apartment">
@@ -109,7 +109,7 @@
                     </navigator>
                     <navigator class="item" hover-class="" url>
                         <view class="img">
-                            <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
                                 <view class="inner">
                                     <view class="clearfix apartment">
@@ -127,7 +127,7 @@
                     </navigator>
                     <navigator class="item" hover-class="" url>
                         <view class="img">
-                            <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                             <view class="info">
                                 <view class="inner">
                                     <view class="clearfix apartment">
@@ -193,22 +193,22 @@
                     <view class="item">
                         <view class="inner">
                             <view class="img">
-                                <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                                 <text class="want">220人想住</text>
                             </view>
                             <view class="scroll-view">
                                 <scroll-view scroll-x="true">
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                 </scroll-view>
                             </view>
@@ -243,22 +243,22 @@
                     <view class="item">
                         <view class="inner">
                             <view class="img">
-                                <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                                 <text class="want">220人想住</text>
                             </view>
                             <view class="scroll-view">
                                 <scroll-view scroll-x="true">
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                 </scroll-view>
                             </view>
@@ -293,22 +293,22 @@
                     <view class="item">
                         <view class="inner">
                             <view class="img">
-                                <image src="/images/home/002.jpeg" mode="scaleToFill"></image>
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
                                 <text class="want">220人想住</text>
                             </view>
                             <view class="scroll-view">
                                 <scroll-view scroll-x="true">
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                     <view class="img-item">
-                                        <image src="/images/home/003.jpeg"></image>
+                                        <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                                     </view>
                                 </scroll-view>
                             </view>
