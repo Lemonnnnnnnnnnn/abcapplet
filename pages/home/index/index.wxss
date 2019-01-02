@@ -236,6 +236,39 @@
     top: -4px;
     left: 3px;
 }
+.box-6 .select-box {
+    background-color: #fff;
+}
+.box-6 .select-box .inner {
+    padding: 15px;
+}
+.box-6 .type .type-item {
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.box-6 .price .price-item {
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.box-6 .business .left {
+    width: 130px;
+    margin-right: 10px;
+}
+.box-6 .business .left-item {
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-bottom: 8px;
+    text-align: left;
+}
+.box-6 .business .right-item {
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-bottom: 8px;
+}
 .box-6 .inner {
     padding: 0 12px;
 }
