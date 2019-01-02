@@ -122,7 +122,7 @@
 }
 .box-3 .item {
     width: 126px;
-    height: 144px;
+    height: 150px;
     margin-right: 14px;
     display: inline-block;
     box-shadow:0px 0px 5px 0px rgba(237,236,236,0.5);
@@ -356,9 +356,121 @@
     color: #4A4A4A;
     font-size: 14px;
 }
+.box-7 {
+    margin-bottom: 68px;
+}
 .box-7 .title {
     font-size: 16px;
     color: #4A4A4A;
     font-weight: 500;
     margin-bottom: 3px;
+}
+.box-7 .list {
+    margin: 10px 0;
+}
+.box-7 .item {
+    width: 48%;
+    float: left;
+    margin: 0 1%;
+    box-shadow:0px 0px 5px 0px rgba(237,236,236,0.5);
+    border-radius:5px;
+}
+.box-7 .item .img {
+    width: 100%;
+    height: 108px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+}
+.box-7 .img image {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.box-7 .img text {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: inline-block;
+    width: 63px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 11px;
+    color: #4A4A4A;
+    background-color: #ffcf11;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.box-7 .info .inner {
+    padding: 5px;
+}
+.box-7 .info .title {
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-bottom: 0px;
+}
+.box-7 .info .desc {
+    font-size: 11px;
+    color: #9B9B9B;
+}
+.box-8 {
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    z-index: 10;
+    background-color: #fff;
+    border-top: 1px solid #efefef;
+}
+.box-8 .inner {
+    padding: 8px 10px;
+}
+.box-8 .icons {
+    margin-right: 15px;
+}
+.box-8 .icons icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 18px;
+    position: relative;
+    top: 5px;
+}
+.box-8 .icons .share {
+    background: url('http://devhhb.images.huihuiba.net/share.png') center center no-repeat;
+    background-size: cover;
+}
+.box-8 .icons .mobile {
+    background: url('http://devhhb.images.huihuiba.net/mobile.png') center center no-repeat;
+    background-size: cover;
+}
+.box-8 .btn {
+    width: 105px;
+    height: 35px;
+    border-radius: 35px;
+    background-color: #ffcf11;
+}
+.box-8 .btn text {
+    line-height: 35px;
+    color: #000;
+    font-size: 14px;
+}
+.box-8 .btn icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 18px;
+    position: relative;
+    left: 10px;
+    top: -2px;
+}
+.box-8 .btn .kefu {
+    background: url('http://devhhb.images.huihuiba.net/kefu.png') center center no-repeat;
+    background-size: cover;
+}
+.box-8 .btn .book {
+    background: url('http://devhhb.images.huihuiba.net/book.png') center center no-repeat;
+    background-size: cover;
 }

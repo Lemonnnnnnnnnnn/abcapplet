@@ -78,7 +78,7 @@
                             </view>
                         </view>
                     </view>
-                    <view class="item first-item">
+                    <view class="item">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                         </view>
@@ -98,7 +98,7 @@
                             </view>
                         </view>
                     </view>
-                    <view class="item first-item">
+                    <view class="item">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                         </view>
@@ -118,7 +118,7 @@
                             </view>
                         </view>
                     </view>
-                    <view class="item first-item">
+                    <view class="item">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                         </view>
@@ -338,7 +338,7 @@
         <view class="box-7">
             <view class="wrap">
                 <view class="title">附近公寓推荐</view>
-                <view class="list">
+                <view class="list clearfix">
                     <view class="item">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
@@ -346,8 +346,20 @@
                         </view>
                         <view class="info">
                             <view class="inner">
-                                <view class="title">趣喔公寓</view>
-                                <view class="desc">公交车直达公交车直达</view>
+                                <view class="ui-nowrap title">趣喔公寓</view>
+                                <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="img">
+                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                            <text>30人想住</text>
+                        </view>
+                        <view class="info">
+                            <view class="inner">
+                                <view class="ui-nowrap title">趣喔公寓</view>
+                                <view class="ui-nowrap desc">公交车直达公交车直达</view>
                             </view>
                         </view>
                     </view>
@@ -355,20 +367,34 @@
             </view>
         </view>
         <view class="box-8">
-            <view class="inner clearfix">
-                <view class="icon-1">
-                    <icon></icon>
-                </view>
-                <view class="icon-2">
-                    <icon></icon>
-                </view>
-                <view class="kefu">
-                    <icon></icon>
-                    <text>在线客服</text>
-                </view>
-                <view class="book">
-                    <icon></icon>
-                    <text>预约看房</text>
+            <view class="inner">
+                <view class="weui-flex">
+                    <view class="icons">
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <icon class="share"></icon>
+                            </view>
+                            <view class="weui-flex__item">
+                                <icon class="mobile"></icon>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="btn">
+                                    <icon class="kefu"></icon>
+                                    <text>在线客服</text>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="btn">
+                                    <icon class="book"></icon>
+                                    <text>预约看房</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
             </view>
         </view>
