@@ -312,7 +312,7 @@
                     </view>
                 </view>
                 <view class="defense">
-                    <view class="weui-flex tip">
+                    <view class="weui-flex tip border-b">
                         <view class="weui-flex__item">
                             <view class="defense-title">看房要注意什么？</view>
                         </view>

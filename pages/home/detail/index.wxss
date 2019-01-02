@@ -112,6 +112,7 @@
     padding: 6px 12px 9px 12px;
     font-size: 16px;
     color: #4A4A4A;
+    font-weight: 500;
 }
 .box-3 .scroll-view {
     width: 100%;
@@ -189,6 +190,7 @@
     font-size: 16px;
     color: #4A4A4A;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 .box-4 .apartment {
     width: 100%;
@@ -265,6 +267,7 @@
     font-size: 16px;
     color: #4A4A4A;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 .box-5 .map {
     width: 100%;
@@ -277,6 +280,7 @@
 .box-6 .title {
     font-size: 16px;
     color: #4A4A4A;
+    font-weight: 500;
 }
 .box-6 .tip {
     font-size: 12px;
@@ -339,4 +343,22 @@
 }
 .box-6 .service-box .last-item {
     border-bottom: none;
+}
+.box-6 .defense .tip {
+    padding: 6px 0;
+    font-size: 14px;
+    color: #4A4A4A;
+}
+.box-6 .defense .border-b {
+    border-bottom: 1px solid #F1F1F1;
+}
+.box-6 .defense .icon-arrow {
+    color: #4A4A4A;
+    font-size: 14px;
+}
+.box-7 .title {
+    font-size: 16px;
+    color: #4A4A4A;
+    font-weight: 500;
+    margin-bottom: 3px;
 }
