@@ -191,8 +191,8 @@
                         </view>
                     </view>
                     <view class="select-box">
-                        <view class="inner">
-                            <view class="business hide">
+                        <view class="business hide">
+                            <view class="inner">
                                 <view class="weui-flex">
                                     <view>
                                         <view class="scroll-view left">
@@ -218,7 +218,9 @@
                                     </view>
                                 </view>
                             </view>
-                            <view class="price hide">
+                        </view>
+                        <view class="price hide">
+                            <view class="inner">
                                 <view class="price-list">
                                     <view class="price-item">1000元以下</view>
                                     <view class="price-item">1000元-1500元</view>
@@ -227,7 +229,9 @@
                                     <view class="price-item">2500元以上</view>
                                 </view>
                             </view>
-                            <view class="type hide">
+                        </view>
+                        <view class="type hide">
+                            <view class="inner">
                                 <view class="type-list">
                                     <view class="type-item">一居室</view>
                                     <view class="type-item">两居室</view>
