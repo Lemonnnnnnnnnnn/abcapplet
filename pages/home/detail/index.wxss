@@ -7,6 +7,30 @@
     height: 261px;
     position: relative;
 }
+.box-1 .back {
+    width: 16px;
+    height: 30px;
+    position: fixed;
+    left: 10px;
+    top: 23px;
+    z-index: 9999;
+}
+.box-1 .back icon-back {
+    font-size: 16px;
+    color: #000;
+}
+.box-1 .collection {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 12px;
+    top: 60px;
+    z-index: 10;
+}
+.box-1 .collection icon-heart {
+    font-size: 18px;
+    color: #000;
+}
 .box-1 swiper, .box-1 .slide-image {
     width: 100%;
     height: 100%;
@@ -473,4 +497,154 @@
 .box-8 .btn .book {
     background: url('http://devhhb.images.huihuiba.net/book.png') center center no-repeat;
     background-size: cover;
+}
+.box-9 {
+    background-color: #fff;
+    width: 94%;
+    position: fixed;
+    left: 3%;
+    top: 96px;
+    z-index: 700;
+}
+.box-9 swiper {
+    width: 100%;
+    height: 234px;
+}
+.box-9 swiper-item, .box-9 image {
+    width: 100%;
+    height: 100%;
+}
+.box-9 .info .inner {
+    padding: 5px 10px 10px 10px;
+}
+.box-9 .house-info .title {
+    font-size: 14px;
+    color: #000;
+    max-width: 248px;
+}
+.box-9 .house-info .price {
+    font-size: 14px;
+    color: #4A4A4A;
+    font-weight: 600;
+    margin-left: 5px;
+}
+.box-9 .house-info .tags {
+    margin-top: 3px;
+}
+.box-9 .house-info .house-tag {
+    float: left;
+}
+.box-9 .house-info .house-status {
+    width: 26px;
+    height: 13px;
+    float: right;
+    margin-left: 10px;
+    font-size: 9px;
+    line-height: 13px;
+    text-align: center;
+    border: 1px solid #9B9B9B;
+    color: #9B9B9B;
+}
+.box-9 .house-info .tag {
+    font-size: 9px;
+    color: #4A4A4A;
+    float: left;
+    margin-right: 7px;
+    height: 15px;
+    line-height: 15px;
+    padding: 0 5px;
+}
+.box-9 .house-info .green {
+    background-color: #EDFAE0;
+}
+.box-9 .house-info .yellow {
+    background-color: #FAF3DE;
+}
+.box-9 .house-info .has {
+    color: #ffcf11;
+    border: 1px solid #FFCF11;
+}
+.box-9 .house-info .desc {
+    font-size: 11px;
+    color: #717172;
+    line-height: 18px;
+    padding: 10px 0;
+}
+.box-9 .house-info {
+    border-bottom: 1px solid #F1F1F1;
+}
+.box-9 .matching {
+    margin-bottom: 25px;
+}
+.box-9 .matching .title {
+    padding: 4px 0 8px 0;
+    font-size: 11px;
+    color: #000;
+}
+.box-9 .matching .item {
+    width: 23%;
+    float: left;
+    margin: 0px 1% 10px 1%;
+    text-align: left;
+}
+.box-9 .matching text {
+    font-size: 11px;
+    color: #9B9B9B;
+}
+.box-9 .matching icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+}
+.box-9 .matching .xyj {
+    background: url('http://devhhb.images.huihuiba.net/wash.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .kt {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/kt.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .rsq {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/rsq.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .yyj {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/yyj.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .sz {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/sz.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .sf {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/sf.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .yg {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/yg.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .matching .wifi {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/wifi.png') center center no-repeat;
+    background-size: cover;
+}
+.box-9 .btns .btn {
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+    border-radius: 23px;
+    background-color: #BBB9BC;
+}
+.box-9 .btns .close {
+    float: right;
+    margin-right: 15px;
+}
+.box-9 .btns .book {
+    float: left;
+    margin-left: 15px;
+    background-color: #FFCF11;
 }

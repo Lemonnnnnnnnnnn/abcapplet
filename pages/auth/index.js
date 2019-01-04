@@ -1,11 +1,11 @@
-// pages/home/detail/index.js
+// pages/auth/index.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        show_dialog: false,
+
     },
 
     /**
@@ -13,25 +13,6 @@ Page({
      */
     onLoad: function (options) {
 
-    },
-
-    //打开户型弹框
-    openDialog: function() {
-        this.setData({
-            show_dialog: true
-        });
-    },
-
-    //关闭户型弹框
-    closeDialog: function() {
-        this.setData({
-            show_dialog: false
-        });
-    },
-
-    //自定义返回
-    back: function() {
-        wx.navigateBack();
     },
 
     /**

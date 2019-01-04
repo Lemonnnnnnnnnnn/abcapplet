@@ -2,6 +2,9 @@
 <view class="page">
     <view class="page__bd">
         <view class="box-1">
+            <view class="back" bindtap="back">
+                <icon class="iconfont icon-back"></icon>
+            </view>
             <swiper circular="true">
                 <swiper-item>
                     <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
@@ -24,6 +27,9 @@
                     <view class="item">前台</view>
                     <view class="item">前台</view>
                 </scroll-view>
+            </view>
+            <view class="collection">
+                <icon class="iconfont icon-heart"></icon>
             </view>
         </view>
         <view class="box-2">
@@ -58,7 +64,7 @@
             <view class="title">房型</view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view class="item first-item">
+                    <view class="item first-item" bindtap="openDialog">
                         <view class="img">
                             <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
                         </view>
@@ -398,5 +404,89 @@
                 </view>
             </view>
         </view>
+        <view class="box-9 {{show_dialog ? '' : 'hide'}}">
+            <swiper circular="true" indicator-dots="true" indicator-color="#fff" indicator-active-color="#FFCF11">
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
+                </swiper-item>
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
+                </swiper-item>
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
+                </swiper-item>
+                <swiper-item>
+                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
+                </swiper-item>
+            </swiper>
+            <view class="info">
+                <view class="inner">
+                    <view class="house-info">
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="ui-nowrap title">单身公寓・回归自然</view>
+                            </view>
+                            <view>
+                                <view class="price">¥1600-¥2100</view>
+                            </view>
+                        </view>
+                        <view class="clearfix tags">
+                            <view class="clearfix house-tag">
+                                <view class="tag green">部分带阳台</view>
+                                <view class="tag yellow">独卫</view>
+                            </view>
+                            <view class="house-status has">有房</view>
+                        </view>
+                        <view class="desc">户型描述户型描述户型描述户型描述户型描述户型描述</view>
+                    </view>
+                    <view class="matching">
+                        <view class="title">房间配套</view>
+                        <view class="list clearfix">
+                            <view class="item">
+                                <icon class="xyj"></icon>
+                                <text>洗衣机</text>
+                            </view>
+                            <view class="item">
+                                <icon class="kt"></icon>
+                                <text>空调</text>
+                            </view>
+                            <view class="item">
+                                <icon class="rsq"></icon>
+                                <text>热水器</text>
+                            </view>
+                            <view class="item">
+                                <icon class="yyj"></icon>
+                                <text>油烟机</text>
+                            </view>
+                            <view class="item">
+                                <icon class="sz"></icon>
+                                <text>书桌</text>
+                            </view>
+                            <view class="item">
+                                <icon class="sf"></icon>
+                                <text>沙发</text>
+                            </view>
+                            <view class="item">
+                                <icon class="yg"></icon>
+                                <text>衣柜</text>
+                            </view>
+                            <view class="item">
+                                <icon class="wifi"></icon>
+                                <text>WI-FI</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-flex btns">
+                        <view class="weui-flex__item">
+                            <view class="btn close" bindtap="closeDialog">关闭</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <navigator class="btn book" hover-class="none" url="/pages/home/bookingRoom/index">预约看本户型</navigator>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="mask {{show_dialog ? '' : 'hide'}}"></view>
     </view>
 </view>

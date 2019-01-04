@@ -7,10 +7,10 @@
                 <view class="search-inner">
                     <view class="weui-flex search-box">
                         <view>
-                            <view class="city">
+                            <picker class="city" bindchange="cityChange" value="{{city_index}}" range="{{city}}">
                                 <text>厦门</text>
                                 <icon class="iconfont icon-down"></icon>
-                            </view>
+                            </picker>
                         </view>
                         <view class="weui-flex__item">
                             <navigator class="search" hover-class="none" url="/pages/home/search/index">
@@ -24,7 +24,7 @@
             <!-- 轮播 -->
             <view class="box-2">
                 <view class="scroll-view">
-                    <scroll-view class="list" scroll-x>
+                    <scroll-view class="list" scroll-x bindscroll="scrollChange">
                         <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
                             <view class="img">
                                 <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
@@ -63,12 +63,16 @@
                         </view>
                     </scroll-view>
                 </view>
+                <view class="dots">
+                    <icon class="selected"></icon>
+                    <icon></icon>
+                    <icon></icon>
+                    <icon></icon>
+                </view>
             </view>
             <!-- 热门租房 -->
             <view class="box-3">
-                <view class="wrap">
-                    <view class="title">热门租房商圈</view>
-                </view>
+                <view class="title">热门租房商圈</view>
                 <view class="scroll-view">
                     <scroll-view class="list" scroll-x>
                         <navigator class="item first-item" hover-class="none" url="/pages/home/collection/index">

@@ -52,7 +52,6 @@
 }
 .box-2 .item {
     width: 313px;
-    height: 230px;
     margin-right: 10px;
     display: inline-block;
 }
@@ -80,8 +79,26 @@
     font-size: 11px;
     color: #9B9B9B;
 }
+.box-2 .dots {
+    text-align: center;
+    padding: 0 12px;
+}
+.box-2 .dots icon {
+    display: inline-block;
+    width: 12px;
+    height: 2px;
+    background-color: #D8D8D8;
+    margin: 0 3px;
+}
+.box-2 .dots .selected {
+    width:4px;
+    height:4px;
+    border: 1px solid #FFCF11;
+    border-radius: 4px;
+    background-color: #fff;
+}
 .box-3 .title {
-    margin-bottom: 8px;
+    padding: 3px 12px 8px 12px;
     font-size: 17px;
     font-weight: 500;
     color:#4A4A4A;

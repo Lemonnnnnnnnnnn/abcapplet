@@ -5,7 +5,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        top: 0
+        top: 0,
+        city: ['厦门', '福州', '泉州', '苏州'],
+        city_index: 0,
+        scroll_index: 0
     },
 
     /**
@@ -13,6 +16,18 @@ Page({
      */
     onLoad: function (options) {
 
+    },
+
+    //城市切换
+    cityChange: function(e) {
+        this.setData({
+            city_index: e.detail.value
+        })
+    },
+
+    //轮播切换
+    scrollChange: function(e) {
+        console.log(e.detail);
     },
 
     /**

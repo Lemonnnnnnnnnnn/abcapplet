@@ -6,6 +6,7 @@
         "pages/home/bookingRoom/index",
         "pages/home/search/index",
         "pages/user/index/index",
+        "pages/auth/index",
         "pages/apartment/index/index"
     ],
     "window": {
