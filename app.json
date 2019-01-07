@@ -1,13 +1,13 @@
 {
     "pages": [
+        "pages/apartment/index/index",
         "pages/home/index/index",
         "pages/home/detail/index",
         "pages/home/collection/index",
         "pages/home/bookingRoom/index",
         "pages/home/search/index",
         "pages/user/index/index",
-        "pages/auth/index",
-        "pages/apartment/index/index"
+        "pages/auth/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

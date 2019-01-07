@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        show_demand_box: false,
     },
 
     /**
@@ -13,6 +13,20 @@ Page({
      */
     onLoad: function (options) {
 
+    },
+
+    //打开登记需求卡
+    openDemandCard: function() {
+        this.setData({
+            show_demand_box: true
+        });
+    },
+
+    //关闭登记需求卡
+    closeDemandCard: function() {
+        this.setData({
+            show_demand_box: false
+        });
     },
 
     /**

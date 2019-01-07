@@ -57,6 +57,11 @@
     color: #4A4A4A;
     font-size: 14px;
 }
+.box-2 .item-title .demand-card {
+    float: right;
+    color: #FFCF11;
+    line-height: 38px;
+}
 .box-2 .item-title .number {
     font-size: 24px;
     color: #FFCF11;

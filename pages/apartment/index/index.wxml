@@ -33,11 +33,12 @@
                             <view class="item-title">
                                 <text class="number">01</text>
                                 <text>租房需求</text>
+                                <text class="demand-card">我的需求卡</text>
                             </view>
                             <view class="box-3">
                                 <view class="item-desc">hi～Kevin，告诉我们你的租房需求，省去线上筛选信息 的麻烦，我们的服务团队会直接给您规划看房行程</view>
                                 <view class="btn-wrap">
-                                    <view class="btn">登记需求</view>
+                                    <view class="btn" bindtap="openDemandCard">登记需求</view>
                                     <icon></icon>
                                 </view>
                             </view>
@@ -49,7 +50,7 @@
                                 <text class="number">02</text>
                                 <text>柠大萌陪看服务</text>
                             </view>
-                            <view class="box-4">
+                            <view class="box-4 hide">
                                 <view class="kefu">
                                     <view class="tel-box">
                                         <view class="weui-flex">
@@ -93,7 +94,7 @@
                                 <text class="number">03</text>
                                 <text>服务评价，入住惊喜</text>
                             </view>
-                            <view class="box-5">
+                            <view class="box-5 hide">
                                 <view class="tip">恭禧您找到了新家！请您对我们本次的服务作出评价：</view>
                                 <view class="stars">
                                     <view class="clearfix">
@@ -118,7 +119,7 @@
                                     </view>
                                 </view>
                             </view>
-                            <view class="box-3">
+                            <view class="box-3 hide">
                                 <view class="btn-wrap">
                                     <view class="btn">提交评价</view>
                                     <icon></icon>
@@ -129,7 +130,7 @@
                 </view>
             </view>
         </view>
-        <view class="box-6">
+        <view class="box-6 {{show_demand_box ? '' : 'hide'}}">
             <view class="inner">
                 <view class="title">
                     <icon></icon>
@@ -184,6 +185,6 @@
                 <view class="btn">提交需求</view>
             </view>
         </view>
-        <view class="mask"></view>
+        <view class="mask {{show_demand_box ? '' : 'hide'}}" bindtap="closeDemandCard"></view>
     </view>
 </view>
