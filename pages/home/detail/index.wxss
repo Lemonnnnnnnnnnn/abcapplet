@@ -389,15 +389,20 @@
     font-weight: 500;
     margin-bottom: 3px;
 }
+.box-7 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .box-7 .list {
     margin: 10px 0;
 }
 .box-7 .item {
     width: 48%;
-    float: left;
     margin: 0 1%;
-    box-shadow:0px 0px 5px 0px rgba(237,236,236,0.5);
+    box-shadow: 0px 0px 5px 0px rgba(237,236,236,0.5);
     border-radius:5px;
+    display: inline-block;
 }
 .box-7 .item .img {
     width: 100%;

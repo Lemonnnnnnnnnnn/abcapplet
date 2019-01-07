@@ -344,31 +344,57 @@
         <view class="box-7">
             <view class="wrap">
                 <view class="title">附近公寓推荐</view>
-                <view class="list clearfix">
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            <text>30人想住</text>
-                        </view>
-                        <view class="info">
-                            <view class="inner">
-                                <view class="ui-nowrap title">趣喔公寓</view>
-                                <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                <view class="scroll-view">
+                    <scroll-view class="list" scroll-x>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <text>30人想住</text>
+                            </view>
+                            <view class="info">
+                                <view class="inner">
+                                    <view class="ui-nowrap title">趣喔公寓</view>
+                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                                </view>
                             </view>
                         </view>
-                    </view>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            <text>30人想住</text>
-                        </view>
-                        <view class="info">
-                            <view class="inner">
-                                <view class="ui-nowrap title">趣喔公寓</view>
-                                <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <text>30人想住</text>
+                            </view>
+                            <view class="info">
+                                <view class="inner">
+                                    <view class="ui-nowrap title">趣喔公寓</view>
+                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                                </view>
                             </view>
                         </view>
-                    </view>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <text>30人想住</text>
+                            </view>
+                            <view class="info">
+                                <view class="inner">
+                                    <view class="ui-nowrap title">趣喔公寓</view>
+                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="item">
+                            <view class="img">
+                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <text>30人想住</text>
+                            </view>
+                            <view class="info">
+                                <view class="inner">
+                                    <view class="ui-nowrap title">趣喔公寓</view>
+                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
                 </view>
             </view>
         </view>
