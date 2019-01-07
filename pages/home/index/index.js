@@ -8,7 +8,13 @@ Page({
         top: 0,
         city: ['厦门', '福州', '泉州', '苏州'],
         city_index: 0,
-        scroll_index: 0
+        scroll_index: 0,
+        show: {
+            //模块显示
+            business: false,
+            type: false,
+            price: false
+        },
     },
 
     /**
@@ -27,7 +33,48 @@ Page({
 
     //轮播切换
     scrollChange: function(e) {
-        console.log(e.detail);
+        let scroll_index = 0;
+        let scroll_left = e.detail.scrollLeft;
+        console.log(scroll_left);
+
+        //第一块块滑过一半
+        if(scroll_left >= 167) {
+            scroll_index = Math.floor((scroll_left-167) / 333) + 1
+        }
+
+        this.setData({
+            scroll_index: scroll_index
+        });
+    },
+
+    //商圈筛选显示
+    businessClick: function() {
+        let self = this;
+        self.setData({
+            ['show.business']: !self.data.show.business,
+            ['show.price']: false,
+            ['show.type']: false
+        });
+    },
+
+    //价格筛选显示
+    priceClick: function () {
+        let self = this;
+        self.setData({
+            ['show.business']: false,
+            ['show.price']: !self.data.show.price,
+            ['show.type']: false
+        });
+    },
+
+    //户型筛选显示
+    typeClick: function () {
+        let self = this;
+        self.setData({
+            ['show.business']: false,
+            ['show.price']: false,
+            ['show.type']: !self.data.show.type
+        });
     },
 
     /**

@@ -37,7 +37,7 @@ page {
     top: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 501;
+    z-index: 10;
     background: rgba(0, 0, 0, 0.6);
 }
 

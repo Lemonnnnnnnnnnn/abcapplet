@@ -253,6 +253,13 @@
     top: -4px;
     left: 3px;
 }
+.box-6 .select .icon-up-arrow {
+    font-size: 14px;
+    color: #4A4A4A;
+    position: relative;
+    top: -4px;
+    left: 3px;
+}
 .box-6 .select-box {
     background-color: #fff;
 }
