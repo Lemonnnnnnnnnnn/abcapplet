@@ -89,7 +89,7 @@
                             </navigator>
                         </view>
                         <view class="weui-flex__item">
-                            <navigator class="ad ad-right"  wx:if="{{activity_banner.length > 1}}" hover-class="none" url="{{activity_banner[1].url}}">
+                            <navigator class="ad ad-right" wx:if="{{activity_banner.length > 1}}" hover-class="none" url="{{activity_banner[1].url}}">
                                 <image src="{{activity_banner[1].cover + '?imageView2/1/w/344/h/120'}}"></image>
                             </navigator>
                         </view>
@@ -319,6 +319,20 @@
                                     </view>
                                 </view>
                             </view>
+                        </view>
+                    </view>
+                    <view class="load-more">
+                        <view wx:if="{{apartment.total > 0 && apartment.current_page * apartment.page_size >= apartment.total}}">
+                            <view class="hr"></view>
+                            <view class="text-container">
+                                <text class="text">我可是有底线的哦</text>
+                            </view>
+                        </view>
+                        <view wx:if="{{apartment.current_page * apartment.page_size < apartment.total}}">
+                            <view>正在加载...</view>
+                        </view>
+                        <view wx:if="{{apartment.total == 0}}">
+                            <view class="no-data">暂时还没有公寓哦</view>
                         </view>
                     </view>
                 </view>
