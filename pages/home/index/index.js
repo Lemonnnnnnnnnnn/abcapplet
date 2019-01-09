@@ -350,6 +350,8 @@ Page({
             refresh: 1
         });
         this.listApartment(1);
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
     },
 
     /**
