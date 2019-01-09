@@ -24,7 +24,8 @@ Page({
 
         if(options.id) {
             self.setData({
-                id: options.id
+                //id: options.id
+                id: 1
             });    
         }
         //获取公寓详情
