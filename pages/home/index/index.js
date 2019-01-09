@@ -44,8 +44,7 @@ Page({
             price_id: 0,
             house_type_id: 0,
             current_page: 1,
-            page_size: 6,
-            refresh: 0,
+            page_size: 5,
             total: 0,
             list: [],
         }
@@ -292,7 +291,9 @@ Page({
             city: wx.getStorageSync('city_id'),
             cbd: apartment.cbd_id,
             price: apartment.price_id,
-            house_type: apartment.house_type_id
+            house_type: apartment.house_type_id,
+            current_page: apartment.current_page,
+            page_size: apartment.page_size
         };
 
         api.doHttp(apiUrl.listApartmentUrl, postData).then(res => {
