@@ -47,7 +47,13 @@ Page({
             page_size: 5,
             total: 0,
             list: [],
-        }
+        },
+        scrollData: {
+            offetHeight: 78, //px
+            height: 300, //px
+            colunm: 1
+        },
+        showIndex: 0
     },
 
     /**
@@ -343,7 +349,16 @@ Page({
     scrollTopFun(e) {
         let self = this;
 
+        let data = [
+            self.data.scrollData.offetHeight,
+            e.detail.scrollTop,
+            self.data.scrollData.height,
+            self.data.scrollData.colunm
+        ];
+
+        let index = util.countIndex(...data)
         self.setData({
+            showIndex: index,
             top: e.detail.scrollTop
         });
     },
