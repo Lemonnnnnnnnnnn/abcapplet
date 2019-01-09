@@ -1,10 +1,18 @@
 // pages/home/detail/index.js
+const api = require('../../../utils/api.js');
+const util = require('../../../utils/util.js');
+const app = getApp();
+const apiUrl = {
+    getApartmentUrl: 'apartment/getpost',
+};
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        id: 0,   //公寓id
         show_dialog: false,
     },
 
@@ -12,7 +20,33 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let self = this;
 
+        if(options.id) {
+            self.setData({
+                id: options.id
+            });    
+        }
+        //获取公寓详情
+        self.getApartment();
+    },
+
+    //自定义返回
+    back: function () {
+        wx.navigateBack();
+    },
+
+    //获取公寓详情
+    getApartment: function() {
+        let self = this;
+        let postData = {
+            id: self.data.id
+        };
+
+        api.doHttp(apiUrl.getApartmentUrl, postData).then(res => {
+            let data = res.data;
+            console.log(data);
+        });
     },
 
     //打开户型弹框
@@ -27,39 +61,6 @@ Page({
         this.setData({
             show_dialog: false
         });
-    },
-
-    //自定义返回
-    back: function() {
-        wx.navigateBack();
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
     },
 
     /**

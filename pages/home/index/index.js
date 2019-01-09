@@ -19,7 +19,7 @@ Page({
         top: 0,
         city: {
             list: [],
-            title: ['厦门', '福州', '泉州', '苏州'],
+            title: [],
             index: 0
         },
         is_location: 0,  //是否显示城市选择
