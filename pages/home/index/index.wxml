@@ -7,8 +7,8 @@
                 <view class="search-inner">
                     <view class="weui-flex search-box">
                         <view>
-                            <picker class="city" bindchange="cityChange" value="{{city_index}}" range="{{city}}">
-                                <text>厦门</text>
+                            <picker class="city" bindchange="cityChange" value="{{city.index}}" range="{{city.title}}">
+                                <text>{{city.title[city.index]}}</text>
                                 <icon class="iconfont icon-down"></icon>
                             </picker>
                         </view>
@@ -25,79 +25,19 @@
             <view class="box-2">
                 <view class="scroll-view">
                     <scroll-view class="list" scroll-x bindscroll="scrollChange">
-                        <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
+                        <navigator class="item first-item" hover-class="none" wx:for="{{banner_list}}" wx:key="{{index}}" url="{{item.url}}">
                             <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <image src="{{item.cover}}" mode="scaleToFill"></image>
                             </view>
                             <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
+                                <view class="title">{{item.title}}</view>
+                                <view class="tip">{{item.subtitle}}</view>
                             </view>
                         </navigator>
-                        <view class="item">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            </view>
-                            <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            </view>
-                            <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            </view>
-                            <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            </view>
-                            <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            </view>
-                            <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                            </view>
-                            <view class="info">
-                                <view class="title">#城市活动# 与热血同行</view>
-                                <view class="tip">高颜值社交型人格</view>
-                            </view>
-                        </view>
                     </scroll-view>
                 </view>
                 <view class="dots">
-                    <icon class="{{scroll_index == 0 ? 'selected' : ''}}"></icon>
-                    <icon class="{{scroll_index == 1 ? 'selected' : ''}}"></icon>
-                    <icon class="{{scroll_index == 2 ? 'selected' : ''}}"></icon>
-                    <icon class="{{scroll_index == 3 ? 'selected' : ''}}"></icon>
-                    <icon class="{{scroll_index == 4 ? 'selected' : ''}}"></icon>
-                    <icon class="{{scroll_index == 5 ? 'selected' : ''}}"></icon>
-                    <icon class="{{scroll_index == 6 ? 'selected' : ''}}"></icon>
+                    <icon wx:for="{{banner_list}}" wx:key="index" class="{{scroll_index == index ? 'selected' : ''}}"></icon>
                 </view>
             </view>
             <!-- 热门租房 -->
@@ -431,6 +371,19 @@
                         </view>
                     </view>
                 </view>
+            </view>
+            <!-- 初始城市筛选 -->
+            <view class="box-8">
+                <view class="content {{is_location ? '' : 'hide'}}">
+                    <image mode="widthFix" src="/images/home/location_bg.png" />
+                    <view class="city">
+                        <view class="title">请选择租房位置</view>
+                        <view class="list">
+                            <view class="item" wx:for="{{city.list}}" wx:key="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="citySelect">{{item.title}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="mask city-mask {{is_location ? '' : 'hide'}}"></view>
             </view>
         </scroll-view>
     </view>
