@@ -5,6 +5,7 @@ const app = getApp();
 const apiUrl = {
     listSiteUrl: 'dict/listsitepost',
     listBannerUrl: 'article/listbannerpost',
+    listHotcbdUrl: 'dict/listhotcbdpost',
 };
 
 Page({
@@ -27,6 +28,7 @@ Page({
             price: false
         },
         banner_list: [],  //轮播列表
+        cbd_list: [],  //商圈列表
     },
 
     /**
@@ -50,6 +52,7 @@ Page({
         let self = this;
 
         self.listBanner();
+        self.listHotcbd();
     },
 
     //获取开通城市站点
@@ -134,7 +137,6 @@ Page({
             self.setData({
                 banner_list: data.list
             });
-            console.log(self.data.banner_list);
         });
     },
 
@@ -151,6 +153,22 @@ Page({
 
         this.setData({
             scroll_index: scroll_index
+        });
+    },
+
+    //热门商圈列表
+    listHotcbd: function() {
+        let self = this;
+        let postData = {
+            city: wx.getStorageSync('city_id')
+        };
+
+        api.doHttp(apiUrl.listHotcbdUrl, postData).then(res => {
+            let data = res.data;
+        
+            self.setData({
+                cbd_list: data.list
+            });
         });
     },
 
