@@ -1,7 +1,7 @@
 <!--pages/home/index/index.wxml-->
 <view class="page">
     <view class="page__bd">
-        <scroll-view scroll-y="true" style="height: 100vh;" bindscroll="scrollTopFun">
+        <scroll-view scroll-y="true" style="height: 100vh;" bindscroll="scrollTopFun" bindscrolltolower="moreListApartment">
             <!--搜索-->
             <view class="box-1">
                 <view class="search-inner">
@@ -170,11 +170,11 @@
                 <view class="mask {{(show.business || show.price || show.type) ? '' : 'hide'}}"></view>
                 <view class="inner">
                     <view class="list">
-                        <navigator class="item" hover-class="none" url="/pages/home/detail/index">
+                        <navigator class="item" hover-class="none" wx:for="{{apartment.list}}" wx:key="{{index}}" url="/pages/home/detail/index?id={{item.id}}">
                             <view class="inner">
                                 <view class="img">
-                                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                    <text class="want">220人想住</text>
+                                    <image src="{{item.cover + '?imageView2/1/w/670/h/404'}}" mode="scaleToFill"></image>
+                                    <text class="want">{{item.appointment_show_num}}人想住</text>
                                 </view>
                                 <view class="scroll-view">
                                     <scroll-view scroll-x="true">
@@ -195,12 +195,11 @@
                                 <view class="apartment-name">
                                     <view class="weui-flex">
                                         <view class="weui-flex__item">
-                                            <view class="ui-nowrap name">龙湖冠寓·高新店</view>
+                                            <view class="ui-nowrap name">{{item.title}}</view>
                                         </view>
                                         <view class="weui-flex__item">
                                             <view class="tag clearfix">
-                                                <view class="tag-item">BRT</view>
-                                                <view class="tag-item">市行政服务中心</view>
+                                                <view class="tag-item" wx:for="{{item.tags}}" wx:for-index="tagIndex" wx:for-item="tagItem" wx:key="{{tagIndex}}">{{tagItem}}</view>
                                             </view>
                                         </view>
                                     </view>
@@ -208,7 +207,7 @@
                                 <view class="desc">
                                     <view class="weui-flex">
                                         <view class="weui-flex__item">
-                                            <view class="ui-nowrap tip">高颜值社交型公寓</view>
+                                            <view class="ui-nowrap tip">{{item.one_word}}</view>
                                         </view>
                                         <view>
                                             <view class="tag clearfix">
@@ -220,106 +219,6 @@
                                 </view>
                             </view>
                         </navigator>
-                        <view class="item">
-                            <view class="inner">
-                                <view class="img">
-                                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                    <text class="want">220人想住</text>
-                                </view>
-                                <view class="scroll-view">
-                                    <scroll-view scroll-x="true">
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                    </scroll-view>
-                                </view>
-                                <view class="apartment-name">
-                                    <view class="weui-flex">
-                                        <view class="weui-flex__item">
-                                            <view class="ui-nowrap name">龙湖冠寓·高新店</view>
-                                        </view>
-                                        <view class="weui-flex__item">
-                                            <view class="tag clearfix">
-                                                <view class="tag-item">BRT</view>
-                                                <view class="tag-item">市行政服务中心</view>
-                                            </view>
-                                        </view>
-                                    </view>
-                                </view>
-                                <view class="desc">
-                                    <view class="weui-flex">
-                                        <view class="weui-flex__item">
-                                            <view class="ui-nowrap tip">高颜值社交型公寓</view>
-                                        </view>
-                                        <view>
-                                            <view class="tag clearfix">
-                                                <icon class="minus"></icon>
-                                                <icon class="tuan"></icon>
-                                            </view>
-                                        </view>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="inner">
-                                <view class="img">
-                                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                    <text class="want">220人想住</text>
-                                </view>
-                                <view class="scroll-view">
-                                    <scroll-view scroll-x="true">
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                        <view class="img-item">
-                                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                                        </view>
-                                    </scroll-view>
-                                </view>
-                                <view class="apartment-name">
-                                    <view class="weui-flex">
-                                        <view class="weui-flex__item">
-                                            <view class="ui-nowrap name">龙湖冠寓·高新店</view>
-                                        </view>
-                                        <view class="weui-flex__item">
-                                            <view class="tag clearfix">
-                                                <view class="tag-item">BRT</view>
-                                                <view class="tag-item">市行政服务中心</view>
-                                            </view>
-                                        </view>
-                                    </view>
-                                </view>
-                                <view class="desc">
-                                    <view class="weui-flex">
-                                        <view class="weui-flex__item">
-                                            <view class="ui-nowrap tip">高颜值社交型公寓</view>
-                                        </view>
-                                        <view>
-                                            <view class="tag clearfix">
-                                                <icon class="minus"></icon>
-                                                <icon class="tuan"></icon>
-                                            </view>
-                                        </view>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
                     </view>
                     <view class="load-more">
                         <view wx:if="{{apartment.total > 0 && apartment.current_page * apartment.page_size >= apartment.total}}">

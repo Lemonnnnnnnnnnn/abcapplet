@@ -243,7 +243,7 @@ Page({
 
         api.doHttp(apiUrl.listDictUrl, postData).then(res => {
             let data = res.data;
-    
+        
             self.setData({
                 ['dict.cbd_dict']: data.cbd_list,
                 ['dict.price_dict']: data.price_list,
@@ -302,15 +302,22 @@ Page({
             let total = data.total;
             let apartment = self.data.apartment;
             let origin = apartment.list;
+            let format_list = [];
 
+            list.forEach((el, index) => {
+                //字符串转成数组，并截取前3个
+                el.tags = el.tags.split(',').slice(0, 3);
+                format_list.push(el);
+            });
+            
             if (type == 1) {
                 this.setData({
-                    ['apartment.list']: list,
+                    ['apartment.list']: format_list,
                     ['apartment.total']: total
                 });
             } else {
                 this.setData({
-                    ['apartment.list']: [...origin, ...list],
+                    ['apartment.list']: [...origin, ...format_list],
                     ['apartment.total']: total,
                 });
             }
@@ -326,8 +333,7 @@ Page({
         let total = apartment.total;
         if (current_page * page_size < total) {
             this.setData({
-                ['apartment.current_page']: current_page + 1,
-                ['apartment.refresh']: 0
+                ['apartment.current_page']: current_page + 1
             });
             self.listApartment(0);
         }
@@ -353,13 +359,6 @@ Page({
         this.listApartment(1);
         wx.stopPullDownRefresh();
         wx.hideLoading();
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        this.moreListApartment(0);
     },
 
     /**
