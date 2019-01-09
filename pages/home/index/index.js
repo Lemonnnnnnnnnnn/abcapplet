@@ -6,6 +6,9 @@ const apiUrl = {
     listSiteUrl: 'dict/listsitepost',
     listBannerUrl: 'article/listbannerpost',
     listHotcbdUrl: 'dict/listhotcbdpost',
+    listWeekUrl: 'apartment/listweekpost',
+    listDictUrl: 'dict/listpost',
+    listApartmentUrl: 'apartment/listpost',
 };
 
 Page({
@@ -30,6 +33,15 @@ Page({
         banner_list: [],  //轮播列表
         cbd_list: [],  //商圈列表
         activity_banner: [],  //活动广告列表
+        week_list: [], //每周上新
+        dict: {
+            cbd_dict: [], //商圈字典
+            price_dict: [], //价格字典
+            housetype_dict: [], //户型字典
+            cbd_id: 0,
+            price_id: 0,
+            house_type_id: 0
+        }
     },
 
     /**
@@ -55,6 +67,9 @@ Page({
         self.listBanner();
         self.listHotcbd();
         self.listActivityBanner();
+        self.listWeek();
+        self.listDict();
+        self.listApartment();
     },
 
     //获取开通城市站点
@@ -142,6 +157,21 @@ Page({
         });
     },
 
+    //轮播切换
+    scrollChange: function (e) {
+        let scroll_index = 0;
+        let scroll_left = e.detail.scrollLeft;
+
+        //第一块块滑过一半
+        if (scroll_left >= 167) {
+            scroll_index = Math.floor((scroll_left - 167) / 333) + 1
+        }
+
+        this.setData({
+            scroll_index: scroll_index
+        });
+    },
+
     //活动集广告列表
     listActivityBanner: function () {
         let self = this;
@@ -159,22 +189,6 @@ Page({
         });
     },
 
-    //轮播切换
-    scrollChange: function(e) {
-        let scroll_index = 0;
-        let scroll_left = e.detail.scrollLeft;
-        console.log(scroll_left);
-
-        //第一块块滑过一半
-        if(scroll_left >= 167) {
-            scroll_index = Math.floor((scroll_left-167) / 333) + 1
-        }
-
-        this.setData({
-            scroll_index: scroll_index
-        });
-    },
-
     //热门商圈列表
     listHotcbd: function() {
         let self = this;
@@ -184,9 +198,50 @@ Page({
 
         api.doHttp(apiUrl.listHotcbdUrl, postData).then(res => {
             let data = res.data;
-        
+
             self.setData({
-                cbd_list: data.list
+                cbd_list: data.list  
+            });
+        });
+    },
+
+    //每周上新
+    listWeek: function() {
+        let self = this;
+        let postData = {
+            city: wx.getStorageSync('city_id')
+        };
+
+        api.doHttp(apiUrl.listWeekUrl, postData).then(res => {
+            let data = res.data;
+            let list = [];
+
+            //数据格式化
+            data.list.forEach((el, index) => {
+                el.info = JSON.parse(el.info);
+                list.push(el);
+            });
+           
+            self.setData({
+                week_list: data.list
+            });
+        });
+    },
+
+    //公寓严选字典数据列表
+    listDict: function() {
+        let self = this;
+        let postData = {
+            city: wx.getStorageSync('city_id')
+        };
+
+        api.doHttp(apiUrl.listDictUrl, postData).then(res => {
+            let data = res.data;
+    
+            self.setData({
+                ['dict.cbd_dict']: data.cbd_list,
+                ['dict.price_dict']: data.price_list,
+                ['dict.housetype_dict']: data.housetype_list
             });
         });
     },
@@ -218,6 +273,25 @@ Page({
             ['show.business']: false,
             ['show.price']: false,
             ['show.type']: !self.data.show.type
+        });
+    },
+
+    //严选公寓
+    listApartment: function() {
+        let self = this;
+        let dict = self.data.dict;
+        
+        let postData = {
+            city: wx.getStorageSync('city_id'),
+            cbd: dict.cbd_id,
+            price: dict.price_id,
+            house_type: dict.house_type_id
+        };
+
+        api.doHttp(apiUrl.listApartmentUrl, postData).then(res => {
+            let data = res.data;
+
+            console.log(data);
         });
     },
 

@@ -58,56 +58,20 @@
                 </view>
                 <view class="scroll-view">
                     <scroll-view class="list" scroll-x>
-                        <navigator class="item first-item" hover-class="none" url="/pages/home/detail/index">
+                        <navigator wx:for="{{week_list}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" hover-class="none" url="/pages/home/detail/index?id={{item.id}}">
                             <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                                <image src="{{item.info.cover + '?imageView2/1/w/306/h/175'}}" mode="scaleToFill"></image>
                                 <view class="info">
                                     <view class="inner">
                                         <view class="clearfix apartment">
-                                            <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
-                                            <view class="price">￥1650-2000</view>
+                                            <view class="ui-nowrap info-title">{{item.info.title}}</view>
+                                            <view class="price">￥{{item.info.price_low + '-' + item.info.price_high}}</view>
                                             <view class="tag">
                                                 <icon class="minus"></icon>
                                                 <icon class="tuan"></icon>
                                             </view>
                                         </view>
-                                        <view class="desc">青年优品，城市生活风向标</view>
-                                    </view>
-                                </view>
-                            </view>
-                        </navigator>
-                        <navigator class="item" hover-class="none" url="/pages/home/detail/index">
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                <view class="info">
-                                    <view class="inner">
-                                        <view class="clearfix apartment">
-                                            <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
-                                            <view class="price">￥1650-2000</view>
-                                            <view class="tag">
-                                                <icon class="minus"></icon>
-                                                <icon class="tuan"></icon>
-                                            </view>
-                                        </view>
-                                        <view class="desc">青年优品，城市生活风向标</view>
-                                    </view>
-                                </view>
-                            </view>
-                        </navigator>
-                        <navigator class="item" hover-class="" url>
-                            <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
-                                <view class="info">
-                                    <view class="inner">
-                                        <view class="clearfix apartment">
-                                            <view class="ui-nowrap info-title">龙湖冠寓高新店</view>
-                                            <view class="price">￥1650-2000</view>
-                                            <view class="tag">
-                                                <icon class="minus"></icon>
-                                                <icon class="tuan"></icon>
-                                            </view>
-                                        </view>
-                                        <view class="desc">青年优品，城市生活风向标</view>
+                                        <view class="desc">{{item.info.one_word}}</view>
                                     </view>
                                 </view>
                             </view>
@@ -118,7 +82,7 @@
             <!-- 广告位 -->
             <view class="box-5">
                 <view class="wrap">
-                    <view class="weui-flex">
+                    <view class="weui-flex" style="height: 60px;">
                         <view class="weui-flex__item">
                             <navigator class="ad" wx:if="{{activity_banner.length > 0}}" hover-class="none" url="{{activity_banner[0].url}}">
                                 <image src="{{activity_banner[0].cover + '?imageView2/1/w/172/h/60'}}"></image>
@@ -190,21 +154,14 @@
                         <view class="price {{show.price ? '' : 'hide'}}">
                             <view class="inner">
                                 <view class="price-list">
-                                    <view class="price-item">1000元以下</view>
-                                    <view class="price-item">1000元-1500元</view>
-                                    <view class="price-item">1500元-2000元</view>
-                                    <view class="price-item">2000元-2500元</view>
-                                    <view class="price-item">2500元以上</view>
+                                    <view class="price-item" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
                                 </view>
                             </view>
                         </view>
                         <view class="type {{show.type ? '' : 'hide'}}">
                             <view class="inner">
                                 <view class="type-list">
-                                    <view class="type-item">一居室</view>
-                                    <view class="type-item">两居室</view>
-                                    <view class="type-item">三居室</view>
-                                    <view class="type-item">三居室以上</view>
+                                    <view class="type-item" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
                                 </view>
                             </view>
                         </view>
