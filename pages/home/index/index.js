@@ -37,10 +37,17 @@ Page({
         dict: {
             cbd_dict: [], //商圈字典
             price_dict: [], //价格字典
-            housetype_dict: [], //户型字典
+            housetype_dict: [] //户型字典
+        },
+        apartment: {
             cbd_id: 0,
             price_id: 0,
-            house_type_id: 0
+            house_type_id: 0,
+            current_page: 1,
+            page_size: 6,
+            refresh: 0,
+            total: 0,
+            list: [],
         }
     },
 
@@ -134,7 +141,7 @@ Page({
         });
 
         self.setData({
-            city_index: e.detail.value
+            ['city.index']: e.detail.value
         });
         //初始化
         self.initData();
@@ -277,22 +284,52 @@ Page({
     },
 
     //严选公寓
-    listApartment: function() {
+    listApartment: function (type = 1) {
         let self = this;
-        let dict = self.data.dict;
+        let apartment = self.data.apartment;
         
         let postData = {
             city: wx.getStorageSync('city_id'),
-            cbd: dict.cbd_id,
-            price: dict.price_id,
-            house_type: dict.house_type_id
+            cbd: apartment.cbd_id,
+            price: apartment.price_id,
+            house_type: apartment.house_type_id
         };
 
         api.doHttp(apiUrl.listApartmentUrl, postData).then(res => {
             let data = res.data;
+            let list = data.list;
+            let total = data.total;
+            let apartment = self.data.apartment;
+            let origin = apartment.list;
 
-            console.log(data);
+            if (type == 1) {
+                this.setData({
+                    ['apartment.list']: list,
+                    ['apartment.total']: total
+                });
+            } else {
+                this.setData({
+                    ['apartment.list']: [...origin, ...list],
+                    ['apartment.total']: total,
+                });
+            }
         });
+    },
+
+    //更多严选公寓
+    moreListApartment: function () {
+        let self = this;
+        let apartment = self.data.apartment;
+        let current_page = apartment.current_page;
+        let page_size = apartment.page_size;
+        let total = apartment.total;
+        if (current_page * page_size < total) {
+            this.setData({
+                ['apartment.current_page']: current_page + 1,
+                ['apartment.refresh']: 0
+            });
+            self.listApartment(0);
+        }
     },
 
     //滚动
@@ -305,31 +342,21 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        this.setData({
+            current_page: 1,
+            refresh: 1
+        });
+        this.listApartment(1);
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        this.moreListApartment(0);
     },
 
     /**
