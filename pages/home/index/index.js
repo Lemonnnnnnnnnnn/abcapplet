@@ -29,6 +29,7 @@ Page({
         },
         banner_list: [],  //轮播列表
         cbd_list: [],  //商圈列表
+        activity_banner: [],  //活动广告列表
     },
 
     /**
@@ -53,6 +54,7 @@ Page({
 
         self.listBanner();
         self.listHotcbd();
+        self.listActivityBanner();
     },
 
     //获取开通城市站点
@@ -136,6 +138,23 @@ Page({
              
             self.setData({
                 banner_list: data.list
+            });
+        });
+    },
+
+    //活动集广告列表
+    listActivityBanner: function () {
+        let self = this;
+        let postData = {
+            city: wx.getStorageSync('city_id'),
+            type: 'activity'
+        };
+
+        api.doHttp(apiUrl.listBannerUrl, postData).then(res => {
+            let data = res.data;
+
+            self.setData({
+                activity_banner: data.list
             });
         });
     },

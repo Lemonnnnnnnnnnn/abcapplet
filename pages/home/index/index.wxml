@@ -120,13 +120,13 @@
                 <view class="wrap">
                     <view class="weui-flex">
                         <view class="weui-flex__item">
-                            <navigator class="ad" hover-class="none" url="">
-                                <image src="/images/home/mianzu.png"></image>
+                            <navigator class="ad" wx:if="{{activity_banner.length > 0}}" hover-class="none" url="{{activity_banner[0].url}}">
+                                <image src="{{activity_banner[0].cover + '?imageView2/1/w/172/h/60'}}"></image>
                             </navigator>
                         </view>
                         <view class="weui-flex__item">
-                            <navigator class="ad ad-right" hover-class="none" url="">
-                                <image src="/images/home/zhekou.png"></image>
+                            <navigator class="ad ad-right"  wx:if="{{activity_banner.length > 1}}" hover-class="none" url="{{activity_banner[1].url}}">
+                                <image src="{{activity_banner[1].cover + '?imageView2/1/w/172/h/60'}}"></image>
                             </navigator>
                         </view>
                     </view>
