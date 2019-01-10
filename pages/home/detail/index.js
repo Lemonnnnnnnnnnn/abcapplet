@@ -1,9 +1,12 @@
 // pages/home/detail/index.js
 const api = require('../../../utils/api.js');
 const util = require('../../../utils/util.js');
+//引入图片预加载组件
+const ImgLoader = require('../../../plugins/img-loader/img-loader.js');
 const app = getApp();
 const apiUrl = {
     getApartmentUrl: 'apartment/getpost',
+    articleListUrl: 'article/listpost',
 };
 
 Page({
@@ -34,6 +37,7 @@ Page({
         house_types: [], //房型
         notices: [], 
         format_notice: [],
+        article_list: [] //文章列表
     },
 
     /**
@@ -42,6 +46,8 @@ Page({
     onLoad: function (options) {
         let self = this;
 
+        //初始化图片预加载组件，并指定统一的加载完成回调
+        self.imgLoader = new ImgLoader(self, self.imageOnLoad.bind(self));
         if(options.id) {
             self.setData({
                 //id: options.id
@@ -50,6 +56,40 @@ Page({
         }
         //获取公寓详情
         self.getApartment();
+        //文章列表
+        self.articleList();
+    },
+
+    //同时发起全部图片的加载
+    loadImages: function () {
+        let self = this;
+        let pictures = self.data.pictures;
+
+        if (pictures.list.length) {
+            pictures.list.forEach((el, index) => {
+                if (!el.loaded) {
+                    self.imgLoader.load(el.url);
+                }
+            })
+        }
+    },
+
+    //加载完成后的回调
+    imageOnLoad: function (err, data) {
+        let self = this;
+        let pictures = self.data.pictures;
+
+        const list = pictures.list.map((el, index) => {
+            if (el.url == data.src) {
+                el.loaded = true;
+            }
+
+            return el;
+        });
+        
+        self.setData({
+            ['pictures.list']: list
+        });
     },
 
     //自定义返回
@@ -110,7 +150,7 @@ Page({
                     format_notice.push(el);
                 });
             }
-            console.log(format_notice);
+           
             self.setData({
                 ['apartment.title']: apartment.title,
                 ['apartment.one_word']: apartment.one_word,
@@ -127,6 +167,23 @@ Page({
                 ['pictures.picture_tags']: picture_tags,
                 ['pictures.tags_title']: tags_title,
                 ['pictures.current_id']: current_id
+            });
+
+            //图片加载
+            self.loadImages();
+        });
+    },
+
+    //公寓详情里的文章列表
+    articleList: function() {
+        let self = this;
+        let postData = {};
+
+        api.doHttp(apiUrl.articleListUrl, postData).then(res => {
+            let data = res.data;
+            
+            self.setData({
+                article_list: data.list
             });
         });
     },

@@ -29,6 +29,10 @@ page {
     display: none !important;
 }
 
+.fade_in {
+    animation: fadeIn 1s both;
+}
+
 /* 蒙层 */
 
 .mask {

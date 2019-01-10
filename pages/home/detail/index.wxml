@@ -7,7 +7,7 @@
             </view>
             <swiper circular="true" bindchange="swiperChange">
                 <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}">
-                    <image src="{{item.url + '&imageView2/1/w/750/h/522'}}" class="slide-image" />
+                    <image wx:if="{{item.loaded}}" src="{{item.url + '&imageView2/1/w/750/h/522'}}" class="slide-image fade_in"/>
                 </swiper-item>
             </swiper>
             <view class="scroll-view">
@@ -141,19 +141,9 @@
                     </view>
                 </view>
                 <view class="defense">
-                    <view class="weui-flex tip border-b">
+                    <view wx:for="{{article_list}}" wx:key="{{index}}" class="weui-flex tip {{index == 0 ? 'border-b' : ''}}">
                         <view class="weui-flex__item">
-                            <view class="defense-title">看房要注意什么？</view>
-                        </view>
-                        <view>
-                            <view>
-                                <icon class="iconfont icon-arrow"></icon>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="weui-flex tip">
-                        <view class="weui-flex__item">
-                            <view class="defense-title">一份签约与入住防坑指南！</view>
+                            <navigator class="defense-title" hover-class="none" url="">{{item.title}}</navigator>
                         </view>
                         <view>
                             <view>
@@ -337,5 +327,8 @@
             </view>
         </view>
         <view class="mask {{show_dialog ? '' : 'hide'}}"></view>
+        <!-- 引入图片预加载组件 -->
+        <import src="../../../plugins/img-loader/img-loader.wxml" />
+        <template is="img-loader" data="{{imgLoadList}}"></template>
     </view>
 </view>

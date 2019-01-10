@@ -165,7 +165,7 @@
                         <navigator class="item" hover-class="none" wx:for="{{apartment.list}}" wx:key="{{index}}" url="/pages/home/detail/index?id={{item.id}}">
                             <view class="inner">
                                 <view class="img">
-                                    <image class="fade_in" wx:if="{{item.loaded}}" src="{{item.cover + '?imageView2/1/w/670/h/404'}}" mode="scaleToFill"></image>
+                                    <image class="fade_in" wx:if="{{item.loaded && scroll_data.count_index + 24 > index && scroll_data.count_index - 6 < index}}" src="{{item.cover + '?imageView2/1/w/670/h/404'}}" mode="scaleToFill"></image>
                                     <text class="want">{{item.appointment_show_num}}人想住</text>
                                 </view>
                                 <view class="scroll-view">

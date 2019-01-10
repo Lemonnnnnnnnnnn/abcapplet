@@ -53,7 +53,7 @@ Page({
             list: [],
         },
         scroll_data: {     //滑动数据，处理图片过大，内存不足问题
-            offetHeight: 863,  //滚动计算部分到顶部距离
+            offetHeight: 889,  //滚动计算部分到顶部距离
             height: 350,  //每个模块的高度
             colunm: 1,  //列数
             count_index: 0  //计算后的显示下标
@@ -401,17 +401,17 @@ Page({
     //滚动计算
     scrollTopFun(e) {
         let self = this;
-        // let scroll_data = self.data.scroll_data;
-        // let data = [
-        //     scroll_data.offetHeight,
-        //     e.detail.scrollTop,
-        //     scroll_data.height,
-        //     scroll_data.colunm
-        // ];
-        // let count_index = util.countIndex(...data);
-        // console.log(count_index);
+        let scroll_data = self.data.scroll_data;
+        let data = [
+            scroll_data.offetHeight,
+            e.detail.scrollTop,
+            scroll_data.height,
+            scroll_data.colunm
+        ];
+        let count_index = util.countIndex(...data);
+       
         self.setData({
-            //['scroll_data.count_index']: count_index,
+            ['scroll_data.count_index']: count_index,
             top: e.detail.scrollTop
         });
     },
