@@ -5,27 +5,14 @@
             <view class="back" bindtap="back">
                 <icon class="iconfont icon-back"></icon>
             </view>
-            <swiper circular="true">
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
-                </swiper-item>
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
-                </swiper-item>
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
-                </swiper-item>
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
+            <swiper circular="true" bindchange="swiperChange">
+                <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}">
+                    <image src="{{item.url + '&imageView2/1/w/750/h/522'}}" class="slide-image" />
                 </swiper-item>
             </swiper>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view class="item selected">前台</view>
-                    <view class="item">公区</view>
-                    <view class="item">前台</view>
-                    <view class="item">前台</view>
-                    <view class="item">前台</view>
+                    <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}" class="item {{pictures.current_id == item.id ? 'selected' : ''}}">{{item.title}}</view>
                 </scroll-view>
             </view>
             <view class="collection">
@@ -36,11 +23,11 @@
             <view class="wrap">
                 <view class="weui-flex">
                     <view class="weui-flex__item">
-                        <view class="ui-nowrap apartment-name">龙湖冠寓高新店</view>
-                        <view class="ui-nowrap address">蔡塘广场软件园复式loft全新品牌精装公寓</view>
+                        <view class="ui-nowrap apartment-name">{{apartment.title}}</view>
+                        <view class="ui-nowrap address">{{apartment.one_word}}</view>
                     </view>
                     <view>
-                        <view class="position">
+                        <view class="position" data-latitude="{{apartment.latitude}}" data-longitude="{{apartment.longitude}}">
                             <view>
                                 <icon></icon>
                             </view>
@@ -49,14 +36,13 @@
                     </view>
                 </view>
                 <view class="tags clearfix">
-                    <view class="tag yellow">BRT沿线</view>
-                    <view class="tag green">市政高新区</view>
+                    <view wx:for="{{apartment.tags}}" wx:key="{{index}}" class="tag {{(index+1) % 2 == 1 ? 'yellow' : 'green'}} yellow">{{item}}</view>
                 </view>
-                <view class="ui-nowrap minus">
+                <!-- <view class="ui-nowrap minus">
                     <icon></icon>双十二签约立减300元
-                </view>
-                <view class="ui-nowrap tuan">
-                    <icon></icon>两人起团租，立减200-600元
+                </view> -->
+                <view wx:for="{{apartment.rules}}" wx:key="{{index}}" wx:if="{{item.show}}" class="ui-nowrap rules {{item.id}}">
+                    <icon></icon>{{item.word}}
                 </view>
             </view>
         </view>
@@ -64,82 +50,21 @@
             <view class="title">房型</view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view class="item first-item" bindtap="openDialog">
+                    <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" bindtap="openDialog">
                         <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
+                            <image src="{{item.cover + '&imageView2/1/w/256/h/160'}}"></image>
                         </view>
                         <view class="inner">
-                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
+                            <view class="ui-nowrap apartment-name">{{item.title}}</view>
                             <view class="tags clearfix">
-                                <view class="item-tag green">部分带阳台</view>
-                                <view class="item-tag yellow">独卫</view>
+                                <view wx:for="{{item.tags}}" wx:for-index="tindex" wx:for-item="titem" wx:key="{{tindex}}" class="item-tag {{(tindex+1) % 2 == 1 ? 'yellow' : 'green'}}">{{titem}}</view>
                             </view>
                             <view class="weui-flex price-box">
                                 <view class="weui-flex__item">
-                                    <view class="price">¥1600-¥2100</view>
+                                    <view class="price">{{item.price_title}}</view>
                                 </view>
                                 <view>
-                                    <view class="status has">有房</view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                        </view>
-                        <view class="inner">
-                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
-                            <view class="tags clearfix">
-                                <view class="item-tag green">部分带阳台</view>
-                                <view class="item-tag yellow">独卫</view>
-                            </view>
-                            <view class="weui-flex price-box">
-                                <view class="weui-flex__item">
-                                    <view class="price">¥1600-¥2100</view>
-                                </view>
-                                <view>
-                                    <view class="status has">有房</view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                        </view>
-                        <view class="inner">
-                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
-                            <view class="tags clearfix">
-                                <view class="item-tag green">部分带阳台</view>
-                                <view class="item-tag yellow">独卫</view>
-                            </view>
-                            <view class="weui-flex price-box">
-                                <view class="weui-flex__item">
-                                    <view class="price">¥1600-¥2100</view>
-                                </view>
-                                <view>
-                                    <view class="status has">有房</view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg"></image>
-                        </view>
-                        <view class="inner">
-                            <view class="ui-nowrap apartment-name">单身公寓・回归自然</view>
-                            <view class="tags clearfix">
-                                <view class="item-tag green">部分带阳台</view>
-                                <view class="item-tag yellow">独卫</view>
-                            </view>
-                            <view class="weui-flex price-box">
-                                <view class="weui-flex__item">
-                                    <view class="price">¥1600-¥2100</view>
-                                </view>
-                                <view>
-                                    <view class="status has">有房</view>
+                                    <view class="status {{item.has_room ? 'has' : ''}}">{{item.has_room ? '有房' : '无房'}}</view>
                                 </view>
                             </view>
                         </view>
@@ -148,7 +73,7 @@
             </view>
             <view class="ad">
                 <view class="ad-inner">
-                    <image src="/images/user/002.jpg" mode="scaleToFill"></image>
+                    <image src="{{apartment.adv + '?imageView2/1/w/702/h/100'}}" mode="scaleToFill"></image>
                 </view>
             </view>
         </view>
@@ -156,54 +81,20 @@
             <view class="wrap">
                 <view class="title">公寓描述</view>
                 <view class="description">
-                    <view class="apartment">
+                    <!-- <view class="apartment">
                         <view class="inner">
                             <view class="ui-nowrap apartment-name">白领精选型公寓</view>
                             <view class="ui-nowrap tip">装修精致，配套丰富，适合城市白领</view>
                         </view>
-                    </view>
-                    <view class="multi-line-fold desc">取繁华之边界，居一处安心，这便是冠寓金尚店的初衷，这里 可以供养150个有趣的灵魂，只有住得舒适才能独领风骚...</view>
+                    </view> -->
+                    <rich-text class="multi-line-fold desc" nodes="{{apartment.detail}}"></rich-text>
                     <view class="more">查看更多</view>
-                    <view class="weui-flex icon-list">
-                        <view class="weui-flex__item">
-                            <view class="icon-item">
-                                <view class="icon">
-                                    <icon class="wash"></icon>
-                                </view>
-                                <view class="name">洗衣机</view>
+                    <view class="icon-list clearfix">
+                        <view class="icon-item" wx:for="{{facility_list}}" wx:key="{{index}}">
+                            <view class="icon">
+                                <image src="{{item.icon}}"></image>
                             </view>
-                        </view>
-                        <view class="weui-flex__item">
-                            <view class="icon-item">
-                                <view class="icon">
-                                    <icon class="dry"></icon>
-                                </view>
-                                <view class="name">烘干机</view>
-                            </view>
-                        </view>
-                        <view class="weui-flex__item">
-                            <view class="icon-item">
-                                <view class="icon">
-                                    <icon class="leisure"></icon>
-                                </view>
-                                <view class="name">休闲区</view>
-                            </view>
-                        </view>
-                        <view class="weui-flex__item">
-                            <view class="icon-item">
-                                <view class="icon">
-                                    <icon class="gym"></icon>
-                                </view>
-                                <view class="name">健身房</view>
-                            </view>
-                        </view>
-                        <view class="weui-flex__item">
-                            <view class="icon-item">
-                                <view class="icon">
-                                    <icon class="film"></icon>
-                                </view>
-                                <view class="name">影音区</view>
-                            </view>
+                            <view class="name">{{item.title}}</view>
                         </view>
                     </view>
                 </view>
@@ -213,7 +104,7 @@
             <view class="wrap">
                 <view class="title">公寓位置</view>
                 <view class="map">
-                    <map></map>
+                    <map longitude="{{apartment.longitude}}" latitude="{{apartment.latitude}}"></map>
                 </view>
             </view>
         </view>
@@ -223,93 +114,25 @@
                 <view class="tip">入住与服务说明，提前了解更详细的信息。</view>
                 <view class="service-box">
                     <view class="inner">
-                        <view class="service-item">
+                        <view class="service-item" wx:for="{{format_notice}}" wx:key="{{index}}">
                             <view class="weui-flex">
                                 <view>
                                     <view class="service-icon">
                                         <view class="icon">
-                                            <icon class="require"></icon>
+                                            <icon wx:if="{{item.id == 'zkxz'}}" class="require"></icon>
+                                            <icon wx:if="{{item.id == 'fysm'}}" class="cost"></icon>
+                                            <icon wx:if="{{item.id == 'fwpz'}}" class="service"></icon>
                                         </view>
-                                        <view class="text">租客要求</view>
+                                        <view wx:if="{{item.id == 'zkxz'}}" class="text">租客要求</view>
+                                        <view wx:if="{{item.id == 'fysm'}}" class="text">费用说明</view>
+                                        <view wx:if="{{item.id == 'fwpz'}}" class="text">服务配套</view>
                                     </view>
                                 </view>
                                 <view class="weui-flex__item">
                                     <view class="list clearfix">
-                                        <view class="item">
+                                        <view class="item" wx:for="{{item.word}}" wx:for-index="windex" wx:for-item="witem" wx:key="{{windex}}">
                                             <icon class="iconfont icon-gou"></icon>
-                                            <text>35岁以下</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>无大型宠物</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>不携带儿童</text>
-                                        </view>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="service-item">
-                            <view class="weui-flex">
-                                <view>
-                                    <view class="service-icon">
-                                        <view class="icon">
-                                            <icon class="cost"></icon>
-                                        </view>
-                                        <view class="text">费用说明</view>
-                                    </view>
-                                </view>
-                                <view class="weui-flex__item">
-                                    <view class="list">
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>管理费</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>宽带费</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>水电费</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>车位费</text>
-                                        </view>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="service-item last-item">
-                            <view class="weui-flex">
-                                <view>
-                                    <view class="service-icon">
-                                        <view class="icon">
-                                            <icon class="service"></icon>
-                                        </view>
-                                        <view class="text">服务配套</view>
-                                    </view>
-                                </view>
-                                <view class="weui-flex__item">
-                                    <view class="list">
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>门禁系统</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>保安</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>管家服务</text>
-                                        </view>
-                                        <view class="item">
-                                            <icon class="iconfont icon-gou"></icon>
-                                            <text>保洁服务</text>
+                                            <text>{{witem}}</text>
                                         </view>
                                     </view>
                                 </view>
