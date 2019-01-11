@@ -8,16 +8,18 @@
                         <view>
                             <view class="title">公司：</view>
                         </view>
-                        <view class="weui-flex__item">
-                            <view class="weui-flex">
-                                <view>
-                                    <icon class="iconfont icon-location"></icon>
-                                </view>
-                                <view class="weui-flex__item">
-                                    <view class="address">湖里区禾三生路成功电子商务大厦</view>
-                                </view>
-                                <view>
-                                    <icon class="iconfont icon-arrow-right"></icon>
+                        <view class="weui-flex__item company">
+                            <view class="inner">
+                                <view class="weui-flex">
+                                    <view>
+                                        <icon class="iconfont icon-location"></icon>
+                                    </view>
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowwrap address">湖里区禾三生路成功电子商务大厦</view>
+                                    </view>
+                                    <view>
+                                        <icon class="iconfont icon-arrow"></icon>
+                                    </view>
                                 </view>
                             </view>
                         </view>
@@ -52,7 +54,7 @@
                                         </view>
                                     </view>
                                 </view>
-                            </view> 
+                            </view>
                         </view>
                     </view>
                 </view>
