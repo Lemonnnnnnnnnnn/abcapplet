@@ -384,9 +384,6 @@
     background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }
-.box-6 .list .fade_in {
-    animation: fadeIn 1s both;
-}
 .hide {
     display: none;
 }

@@ -1,8 +1,6 @@
 // pages/home/index/index.js
 const api = require('../../../utils/api.js');
 const util = require('../../../utils/util.js');
-//引入图片预加载组件
-const ImgLoader = require('../../../plugins/img-loader/img-loader.js');
 const app = getApp();
 const apiUrl = {
     listSiteUrl: 'dict/listsitepost',
@@ -18,7 +16,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        top: 0,
+        show_select: 0,
         city: {
             list: [],
             title: [],
@@ -66,9 +64,6 @@ Page({
     onLoad: function (options) {
         let self = this;
 
-        //初始化图片预加载组件，并指定统一的加载完成回调
-        self.imgLoader = new ImgLoader(self, self.imageOnLoad.bind(self));
-
         self.listSite();
         if (!wx.getStorageSync("city_id")) {
             self.setData({
@@ -89,38 +84,6 @@ Page({
         self.listWeek();
         self.listDict();
         self.listApartment();
-    },
-
-    //同时发起全部图片的加载
-    loadImages: function() {
-        let self = this;
-        let apartment = self.data.apartment;
-
-        if(apartment.list.length) {
-            apartment.list.forEach((el, index) => {
-                if(! el.loaded) {
-                    self.imgLoader.load(el.cover);
-                }
-            })
-        }
-    },
-
-    //加载完成后的回调
-    imageOnLoad: function(err, data) {
-        let self = this;
-        let apartment = self.data.apartment;
-
-        const list = apartment.list.map((el, index) => {
-            if(el.cover == data.src) {
-                el.loaded = true;
-            }
-
-            return el;
-        });
-
-        self.setData({
-            ['apartment.list']: list
-        });
     },
 
     //获取开通城市站点
@@ -358,28 +321,26 @@ Page({
             let list = data.list;
             let total = data.total;
             let apartment = self.data.apartment;
-            let origin = apartment.list;
             let format_list = [];
 
             list.forEach((el, index) => {
                 //字符串转成数组，并截取前3个
                 el.tags = el.tags.split(',').slice(0, 3);
+                el.cover = el.cover;
                 format_list.push(el);
             });
             
-            if (type == 1) {
-                this.setData({
-                    ['apartment.list']: format_list,
-                    ['apartment.total']: total
-                });
-            } else {
-                this.setData({
-                    ['apartment.list']: [...origin, ...format_list],
-                    ['apartment.total']: total,
+            if(type == 1) {
+                //刷新清空公寓列表数组
+                self.setData({
+                    ['apartment.list']: [],
                 });
             }
 
-            self.loadImages();
+            self.setData({
+                ['apartment.list[' + (apartment.current_page-1) + ']']: format_list,
+                ['apartment.total']: total
+            });
         });
     },
 
@@ -398,24 +359,6 @@ Page({
         }
     },
 
-    //滚动计算
-    scrollTopFun(e) {
-        let self = this;
-        let scroll_data = self.data.scroll_data;
-        let data = [
-            scroll_data.offetHeight,
-            e.detail.scrollTop,
-            scroll_data.height,
-            scroll_data.colunm
-        ];
-        let count_index = util.countIndex(...data);
-       
-        self.setData({
-            ['scroll_data.count_index']: count_index,
-            top: e.detail.scrollTop
-        });
-    },
-
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
@@ -427,6 +370,31 @@ Page({
         this.listApartment(1);
         wx.stopPullDownRefresh();
         wx.hideLoading();
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+        this.moreListApartment();
+    },
+
+    /**
+     * 页面滚动的事件处理函数 
+     */
+    onPageScroll: function(e) {
+        let self = this;
+        let show_select = 0;
+
+        if(e.scrollTop >= 854) {
+            show_select = 1;
+        }else {
+            show_select = 0;
+        }
+        
+        self.setData({
+            show_select: show_select
+        });
     },
 
     /**

@@ -7,7 +7,7 @@
             </view>
             <swiper circular="true" bindchange="swiperChange">
                 <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}">
-                    <image wx:if="{{item.loaded}}" src="{{item.url + '&imageView2/1/w/750/h/522'}}" class="slide-image fade_in"/>
+                    <image src="{{item.url + '&imageView2/1/w/750/h/522'}}" class="slide-image fade-in"/>
                 </swiper-item>
             </swiper>
             <view class="scroll-view">
@@ -52,7 +52,7 @@
                 <scroll-view class="list" scroll-x>
                     <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" bindtap="openDialog">
                         <view class="img">
-                            <image src="{{item.cover + '&imageView2/1/w/256/h/160'}}"></image>
+                            <image class="fade-in" src="{{item.cover + '&imageView2/1/w/256/h/160'}}"></image>
                         </view>
                         <view class="inner">
                             <view class="ui-nowrap apartment-name">{{item.title}}</view>
@@ -161,7 +161,7 @@
                     <scroll-view class="list" scroll-x>
                         <view class="item">
                             <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                                 <text>30人想住</text>
                             </view>
                             <view class="info">
@@ -173,7 +173,7 @@
                         </view>
                         <view class="item">
                             <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                                 <text>30人想住</text>
                             </view>
                             <view class="info">
@@ -185,7 +185,7 @@
                         </view>
                         <view class="item">
                             <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                                 <text>30人想住</text>
                             </view>
                             <view class="info">
@@ -197,7 +197,7 @@
                         </view>
                         <view class="item">
                             <view class="img">
-                                <image src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
+                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
                                 <text>30人想住</text>
                             </view>
                             <view class="info">
@@ -327,8 +327,5 @@
             </view>
         </view>
         <view class="mask {{show_dialog ? '' : 'hide'}}"></view>
-        <!-- 引入图片预加载组件 -->
-        <import src="../../../plugins/img-loader/img-loader.wxml" />
-        <template is="img-loader" data="{{imgLoadList}}"></template>
     </view>
 </view>

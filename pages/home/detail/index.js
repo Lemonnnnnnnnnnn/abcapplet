@@ -1,8 +1,6 @@
 // pages/home/detail/index.js
 const api = require('../../../utils/api.js');
 const util = require('../../../utils/util.js');
-//引入图片预加载组件
-const ImgLoader = require('../../../plugins/img-loader/img-loader.js');
 const app = getApp();
 const apiUrl = {
     getApartmentUrl: 'apartment/getpost',
@@ -46,50 +44,16 @@ Page({
     onLoad: function (options) {
         let self = this;
 
-        //初始化图片预加载组件，并指定统一的加载完成回调
-        self.imgLoader = new ImgLoader(self, self.imageOnLoad.bind(self));
         if(options.id) {
             self.setData({
-                //id: options.id
-                id: 1
+                id: options.id
+                //id: 1
             });    
         }
         //获取公寓详情
         self.getApartment();
         //文章列表
         self.articleList();
-    },
-
-    //同时发起全部图片的加载
-    loadImages: function () {
-        let self = this;
-        let pictures = self.data.pictures;
-
-        if (pictures.list.length) {
-            pictures.list.forEach((el, index) => {
-                if (!el.loaded) {
-                    self.imgLoader.load(el.url);
-                }
-            })
-        }
-    },
-
-    //加载完成后的回调
-    imageOnLoad: function (err, data) {
-        let self = this;
-        let pictures = self.data.pictures;
-
-        const list = pictures.list.map((el, index) => {
-            if (el.url == data.src) {
-                el.loaded = true;
-            }
-
-            return el;
-        });
-        
-        self.setData({
-            ['pictures.list']: list
-        });
     },
 
     //自定义返回
@@ -116,14 +80,26 @@ Page({
             let house_types = [];
             let notices = [];
             let format_notice = [];
+            let detail = ''; //描述
             
             //数据格式化
-            tags = apartment.tags.split(',');
-            rules = JSON.parse(apartment.extend_info.rules);
-            pictures = JSON.parse(apartment.extend_info.pictures);
-            notices = JSON.parse(apartment.extend_info.notices);
+            if (apartment.tags) {
+                tags = apartment.tags.split(',');
+            }
+            if (apartment.extend_info.rules) {
+                rules = JSON.parse(apartment.extend_info.rules);
+            }
+            if (apartment.extend_info.pictures) {
+                pictures = JSON.parse(apartment.extend_info.pictures);
+            }
+            if (apartment.extend_info.notices) {
+                notices = JSON.parse(apartment.extend_info.notices);
+            }
+            if (apartment.extend_info.detail) {
+                detail = apartment.extend_info.detail.replace(/\<img/gi, '<img style="width:100%;height:auto" ')
+            }
 
-            if(pictures.length) {
+            if (pictures.length) {
                 pictures.forEach((el, index) => {
                     if(tags_title.indexOf(el.title) == -1) {
                         tags_title.push(el.title);
@@ -133,18 +109,16 @@ Page({
                 //默认第一id为当前滑动id
                 current_id = pictures[0]['id'];
             }
-
             //房型
-            if(apartment.house_types.length) {
+            if (apartment.house_types.length) {
                 apartment.house_types.forEach((el, index) => {
                     el.pictures = JSON.parse(el.pictures);
                     el.tags = el.tags.split(',').slice(0, 2);
                     house_types.push(el);
                 });
             }
-
             //配套
-            if(notices.length) {
+            if (notices.length) {
                 notices.forEach((el, index) => {
                     el.word = el.word.split(',');
                     format_notice.push(el);
@@ -159,7 +133,7 @@ Page({
                 ['apartment.tags']: tags,
                 ['apartment.rules']: rules,
                 ['apartment.adv']: apartment.extend_info.adv,
-                ['apartment.detail']: apartment.extend_info.detail.replace(/\<img/gi, '<img style="width:100%;height:auto" '),
+                ['apartment.detail']: detail,
                 facility_list: apartment.facility_list,
                 house_types: house_types,
                 format_notice: format_notice,
@@ -168,9 +142,6 @@ Page({
                 ['pictures.tags_title']: tags_title,
                 ['pictures.current_id']: current_id
             });
-
-            //图片加载
-            self.loadImages();
         });
     },
 
