@@ -33,6 +33,7 @@ Page({
         },
         facility_list: [], //配套
         house_types: [], //房型
+        dailog_house: '', //弹框中显示的户型
         notices: [], 
         format_notice: [],
         article_list: [] //文章列表
@@ -142,6 +143,7 @@ Page({
                 ['pictures.tags_title']: tags_title,
                 ['pictures.current_id']: current_id
             });
+            console.log(self.data.house_types); 
         });
     },
 
@@ -172,10 +174,23 @@ Page({
     },
 
     //打开户型弹框
-    openDialog: function() {
-        this.setData({
-            show_dialog: true
+    openDialog: function(e) {
+        let self = this;
+        let house_types = self.data.house_types;
+        let dataset = e.currentTarget.dataset;
+        let dailog_house = '';
+
+        house_types.forEach((el, index) => {
+            if(el.id == dataset.id) {
+                dailog_house = el;
+            }
         });
+
+        self.setData({
+            show_dialog: true,
+            dailog_house: dailog_house
+        });
+        console.log(self.data.dailog_house);
     },
 
     //关闭户型弹框

@@ -388,9 +388,9 @@ Page({
             let format_list = [];
 
             list.forEach((el, index) => {
-                //字符串转成数组，并截取前3个
+                //字符串转成数组，并截取前2个
                 if(el.tags) {
-                    el.tags = el.tags.split(',').slice(0, 3);
+                    el.tags = el.tags.split(',').slice(0, 2);
                 }
                 format_list.push(el);
             });

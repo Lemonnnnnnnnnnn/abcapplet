@@ -50,7 +50,7 @@
             <view class="title">房型</view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" bindtap="openDialog">
+                    <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" data-id="{{item.id}}" bindtap="openDialog">
                         <view class="img">
                             <image class="fade-in" src="{{item.cover + '&imageView2/1/w/256/h/160'}}"></image>
                         </view>
@@ -245,17 +245,8 @@
         </view>
         <view class="box-9 {{show_dialog ? '' : 'hide'}}">
             <swiper circular="true" indicator-dots="true" indicator-color="#fff" indicator-active-color="#FFCF11">
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
-                </swiper-item>
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
-                </swiper-item>
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" class="slide-image" />
-                </swiper-item>
-                <swiper-item>
-                    <image src="http://devhhb.images.huihuiba.net/image/icon/003.jpeg" class="slide-image" />
+                <swiper-item wx:for="{{dailog_house.pictures}}" wx:key="{{index}}">
+                    <image src="{{item + '&imageView2/1/w/704/h/468'}}" class="slide-image fade-in" />
                 </swiper-item>
             </swiper>
             <view class="info">
@@ -263,20 +254,19 @@
                     <view class="house-info">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <view class="ui-nowrap title">单身公寓・回归自然</view>
+                                <view class="ui-nowrap title">{{dailog_house.title}}</view>
                             </view>
                             <view>
-                                <view class="price">¥1600-¥2100</view>
+                                <view class="price">{{dailog_house.price_title}}</view>
                             </view>
                         </view>
                         <view class="clearfix tags">
                             <view class="clearfix house-tag">
-                                <view class="tag green">部分带阳台</view>
-                                <view class="tag yellow">独卫</view>
+                                <view wx:for="{{dailog_house.tags}}" wx:key="{{index}}" class="tag {{index % 2 ? 'green' : 'yellow'}}">{{item}}</view>
                             </view>
-                            <view class="house-status has">有房</view>
+                            <view class="house-status {{dailog_house.has_room ? 'has' : ''}}">{{dailog_house.has_room ? '有房' : '无房'}}</view>
                         </view>
-                        <view class="desc">户型描述户型描述户型描述户型描述户型描述户型描述</view>
+                        <view class="desc">{{dailog_house.desc}}</view>
                     </view>
                     <view class="matching">
                         <view class="title">房间配套</view>
