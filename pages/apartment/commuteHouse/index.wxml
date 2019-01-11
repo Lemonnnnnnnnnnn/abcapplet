@@ -1,7 +1,63 @@
 <!--pages/apartment/commuteHouse/index.wxml-->
 <view class="page">
     <view class="page__bd">
-        <view class="box-1"></view>
+        <view class="box-1">
+            <view class="wrap">
+                <view class="location">
+                    <view class="weui-flex">
+                        <view>
+                            <view class="title">公司：</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <view class="weui-flex">
+                                <view>
+                                    <icon class="iconfont icon-location"></icon>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="address">湖里区禾三生路成功电子商务大厦</view>
+                                </view>
+                                <view>
+                                    <icon class="iconfont icon-arrow-right"></icon>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="trip">
+                    <view class="weui-flex">
+                        <view>
+                            <view class="title">行程：</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <view class="weui-flex">
+                                <view>
+                                    <picker class="distance">
+                                        <text>10千米</text>
+                                        <icon class="iconfont icon-down"></icon>
+                                    </picker>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="weui-flex">
+                                        <view class="weui-flex__item">
+                                            <icon class="bus"></icon>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <icon class="taxi"></icon>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <icon class="bicycle"></icon>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <icon class="walk"></icon>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view> 
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
         <view class="box-2">
             <view class="wrap">
                 <view class="list">
