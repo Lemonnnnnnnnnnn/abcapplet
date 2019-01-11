@@ -84,8 +84,6 @@ Page({
                 ['collection.list[' + (collection.current_page - 1) + ']']: format_list,
                 ['collection.total']: total
             });
-
-            console.log(self.data.collection.list[0]);
         });
     },
 

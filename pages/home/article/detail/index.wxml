@@ -1,0 +1,12 @@
+<!--pages/home/article/detail/index.wxml-->
+<view class="page">
+    <view class="page__bd">
+        <view class="wrap">
+            <view class="box-1">
+                <view class="title">{{title}}</view>
+                <view class="time">{{create_time}}</view>
+                <rich-text nodes="{{content}}"></rich-text>
+            </view>
+        </view>
+    </view>
+</view>
