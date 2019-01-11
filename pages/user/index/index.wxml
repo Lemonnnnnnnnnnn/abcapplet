@@ -29,7 +29,7 @@
                             <icon class="iconfont icon-arrow"></icon>
                         </view>
                     </view>
-                    <view class="item">
+                    <view class="item" bindtap="openDemandCard">
                         <view class="inner">
                             <icon class="icon log"></icon>
                             <text class="ui-nowrap">我的租房需求</text>
@@ -39,5 +39,61 @@
                 </view>
             </view>
         </view>
+        <view class="box-3 {{show_demand_box ? '' : 'hide'}}">
+            <view class="inner">
+                <view class="title">
+                    <icon></icon>
+                    <text>需求卡</text>
+                </view>
+                <view class="select">
+                    <view class="weui-flex">
+                        <view class="weui-flex__item">
+                            <view class="item">
+                                <text>租房预算</text>
+                                <icon class="iconfont icon-down-arrow"></icon>
+                            </view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <view class="item">
+                                <text>目标区域</text>
+                                <icon class="iconfont icon-down-arrow"></icon>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="check" style="margin-bottom: 10px;">
+                    <view class="weui-flex">
+                        <view>
+                            <view class="check-title">入住时间</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <view class="list clearfix">
+                                <view class="item">马上</view>
+                                <view class="item">7天</view>
+                                <view class="item">15天</view>
+                                <view class="item">一个月后</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="check">
+                    <view class="weui-flex">
+                        <view>
+                            <view class="check-title">入住时间</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <view class="list clearfix">
+                                <view class="item">马上</view>
+                                <view class="item">7天</view>
+                                <view class="item">15天</view>
+                                <view class="item">一个月后</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="btn">提交需求</view>
+            </view>
+        </view>
+        <view class="mask {{show_demand_box ? '' : 'hide'}}" bindtap="closeDemandCard"></view>
     </view>
 </view>
