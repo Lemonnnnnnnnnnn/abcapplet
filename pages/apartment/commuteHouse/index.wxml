@@ -34,14 +34,16 @@
                             <view class="weui-flex">
                                 <view>
                                     <picker class="distance">
-                                        <text>10千米</text>
-                                        <icon class="iconfont icon-down"></icon>
+                                        <view class="inner">
+                                            <text>10千米</text>
+                                            <icon class="iconfont icon-down"></icon>
+                                        </view>
                                     </picker>
-                                </view>
+                                </view> 
                                 <view class="weui-flex__item">
-                                    <view class="weui-flex">
+                                    <view class="weui-flex icons">
                                         <view class="weui-flex__item">
-                                            <icon class="bus"></icon>
+                                            <icon class="bus-selected"></icon>
                                         </view>
                                         <view class="weui-flex__item">
                                             <icon class="taxi"></icon>
