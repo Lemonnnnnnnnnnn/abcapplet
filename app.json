@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/apartment/commuteHouse/index",
         "pages/home/index/index",
         "pages/user/collection/index",
         "pages/user/index/index",
-        "pages/apartment/commuteHouse/index",
         "pages/apartment/mapHouse/index",
         "pages/home/article/detail/index",
         "pages/home/detail/index",
