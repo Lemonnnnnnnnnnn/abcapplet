@@ -98,7 +98,7 @@
         <!-- 严选公寓 -->
         <view class="box-6">
             <view class="title">严选公寓</view>
-            <view class="select {{(show_select || show.business || show.price || show.type) ? 'topnav' : ''}}">
+            <view class="select {{(show_select >= 854 || show.business || show.price || show.type) ? 'topnav' : ''}}">
                 <view class="select-inner">
                     <view class="weui-flex">
                         <view class="weui-flex__item">

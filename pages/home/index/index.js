@@ -49,12 +49,6 @@ Page({
             page_size: 5,
             total: 0,
             list: [],
-        },
-        scroll_data: {     //滑动数据，处理图片过大，内存不足问题
-            offetHeight: 889,  //滚动计算部分到顶部距离
-            height: 350,  //每个模块的高度
-            colunm: 1,  //列数
-            count_index: 0  //计算后的显示下标
         }
     },
 
@@ -326,7 +320,6 @@ Page({
             list.forEach((el, index) => {
                 //字符串转成数组，并截取前3个
                 el.tags = el.tags.split(',').slice(0, 3);
-                el.cover = el.cover;
                 format_list.push(el);
             });
             
@@ -363,11 +356,12 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-        this.setData({
-            current_page: 1,
-            refresh: 1
+        let self = this;
+        self.setData({
+            current_page: 1
         });
-        this.listApartment(1);
+        
+        self.initData();
         wx.stopPullDownRefresh();
         wx.hideLoading();
     },
@@ -376,7 +370,8 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        this.moreListApartment();
+        let self = this;
+        self.moreListApartment();
     },
 
     /**
@@ -384,17 +379,13 @@ Page({
      */
     onPageScroll: function(e) {
         let self = this;
-        let show_select = 0;
-
-        if(e.scrollTop >= 854) {
-            show_select = 1;
-        }else {
-            show_select = 0;
-        }
         
-        self.setData({
-            show_select: show_select
-        });
+        //防止频繁刷新数据
+        if(e.scrollTop < 2000 && (e.scrollTop % 2 == 0)) {
+            self.setData({
+                show_select: e.scrollTop
+            });
+        }
     },
 
     /**

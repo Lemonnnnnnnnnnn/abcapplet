@@ -24,11 +24,6 @@ page {
     font-size: 17px;
     color: #000;
 }
-.box-1 .address {
-    font-size: 14px;
-    color: #000;
-    line-height: 14px;
-}
 .box-1 .tip {
     font-size: 11px;
     color: #4A4A4A;
