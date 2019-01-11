@@ -14,6 +14,7 @@ Page({
      */
     data: {
         id: 1,   //公寓id
+        type_id: 0, //户型id
         show_dialog: false,
         apartment: {
             title: '',
@@ -51,6 +52,13 @@ Page({
                 //id: 1
             });    
         }
+        //获取户型id（点击其他页面户型缩略图跳转）
+        if(options.type_id) {
+            self.setData({
+                type_id: options.type_id
+            });
+        }
+        
         //获取公寓详情
         self.getApartment();
         //文章列表
@@ -117,6 +125,21 @@ Page({
                     el.tags = el.tags.split(',').slice(0, 2);
                     house_types.push(el);
                 });
+                
+                //有户型缩略图，则筛选户型数据
+                if(self.data.type_id) {
+                    let dailog_house = '';
+
+                    house_types.forEach((el, index) => {
+                        if (el.id == self.data.type_id) {
+                            dailog_house = el;
+                        }
+                    });
+                    self.setData({
+                        show_dialog: true,
+                        dailog_house: dailog_house
+                    });
+                }
             }
             //配套
             if (notices.length) {
@@ -190,7 +213,6 @@ Page({
             show_dialog: true,
             dailog_house: dailog_house
         });
-        console.log(self.data.dailog_house);
     },
 
     //关闭户型弹框

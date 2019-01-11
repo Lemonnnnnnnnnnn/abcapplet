@@ -169,7 +169,7 @@
                             </view>
                             <view class="scroll-view">
                                 <scroll-view scroll-x="true">
-                                    <view class="img-item" wx:for="{{sitem.house_type}}" wx:for-index="typeindex" wx:for-item="typeitem" wx:key="{{typeindex}}">
+                                    <view class="img-item" wx:for="{{sitem.house_type}}" wx:for-index="typeindex" wx:for-item="typeitem" wx:key="{{typeindex}}" data-id="{{sitem.id}}" data-type-id="{{typeitem.id}}" catchtap="openTypeDailog">
                                         <image class="fade-in" src="{{typeitem.cover + '&imageView2/1/w/192/h/126'}}"></image>
                                     </view>
                                 </scroll-view>
