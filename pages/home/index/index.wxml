@@ -145,14 +145,14 @@
                     <view class="price {{show.price ? '' : 'hide'}}">
                         <view class="inner">
                             <view class="price-list">
-                                <view class="price-item" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
+                                <view class="price-item {{apartment.price_id == item.id ? 'selected' : ''}}" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="priceChange">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
                     <view class="type {{show.type ? '' : 'hide'}}">
                         <view class="inner">
                             <view class="type-list">
-                                <view class="type-item" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
+                                <view class="type-item {{apartment.house_type_id == item.id ? 'selected' : ''}}" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="houseTypeChange">{{item.title}}</view>
                             </view>
                         </view>
                     </view>

@@ -330,8 +330,40 @@ Page({
         let dataset = e.target.dataset;
 
         self.setData({
-            ['apartment.cbd_id']: dataset.id
+            ['apartment.cbd_id']: dataset.id,
+            ['show.business']: !self.data.show.business,
+            ['apartment.current_page']: 1
         });
+        //刷新严选公寓
+        self.listApartment();
+    },
+
+    //改变价格
+    priceChange: function(e) {
+        let self = this;
+        let dataset = e.target.dataset;
+
+        self.setData({
+            ['show.price']: !self.data.show.price,
+            ['apartment.price_id']: dataset.id,
+            ['apartment.current_page']: 1
+        });
+        //刷新严选公寓
+        self.listApartment();
+    },
+
+    //改变房型
+    houseTypeChange: function(e) {
+        let self = this;
+        let dataset = e.target.dataset;
+
+        self.setData({
+            ['show.type']: !self.data.show.type,
+            ['apartment.house_type_id']: dataset.id,
+            ['apartment.current_page']: 1
+        });
+        //刷新严选公寓
+        self.listApartment();
     },
 
     //严选公寓
@@ -384,8 +416,9 @@ Page({
         let current_page = apartment.current_page;
         let page_size = apartment.page_size;
         let total = apartment.total;
+
         if (current_page * page_size < total) {
-            this.setData({
+            self.setData({
                 ['apartment.current_page']: current_page + 1
             });
             self.listApartment(0);
@@ -398,7 +431,10 @@ Page({
     onPullDownRefresh: function () {
         let self = this;
         self.setData({
-            current_page: 1
+            ['apartment.current_page']: 1,
+            ['apartment.cbd_id']: 0,
+            ['apartment.price_id']: 0,
+            ['apartment.house_type_id']: 0
         });
         
         self.initData();
