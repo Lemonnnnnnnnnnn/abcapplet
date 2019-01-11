@@ -1,1 +1,84 @@
 /* pages/user/collection/index.wxss */
+.wrap {
+    padding: 12px;
+}
+.box-1 .list .item {
+    width: 100%;
+    height: 338px;
+    background: rgba(255,255,255,1);
+    box-shadow: 0px 0px 5px 0px rgba(222, 222, 222, 1);
+    margin-bottom: 12px;
+}
+.box-1 .item .inner {
+    padding: 8px;
+}
+.box-1 .item .img {
+    width: 100%;
+    height: 202px;
+    margin-bottom: 8px;
+    position: relative;
+}
+.box-1 .img image {
+    width: 100%;
+    height: 100%;
+}
+.box-1 .img .want {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index: 10;
+    font-size: 8px;
+    color: #4A4A4A;
+    background-color: #FFCF11;
+    padding: 2px 5px;
+    border-radius: 8px;
+}
+.box-1 .scroll-view {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 3px;
+}
+.box-1 .img-item {
+    width: 96px;
+    height: 63px;
+    margin-right: 8px;
+    display: inline-block;
+}
+.box-1 .img-item image {
+    width: 100%;
+    height: 100%;
+}
+.box-1 .apartment-name .name {
+    font-size: 14px;
+    color: #4A4A4A;
+}
+.box-1 .tag .tag-item {
+    color: #4A4A4A;
+    font-size: 8px;
+    border: 1px solid #979797;
+    float: right;
+    margin-left: 5px;
+    padding: 2px 5px;
+    border-radius: 8px;
+}
+.box-1 .desc .tip {
+    color: #9B9B9B;
+    font-size: 11px;
+}
+.box-1 .desc .tag icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-left: 5px;
+    border-radius: 18px;
+}
+.box-1 .desc .tag .minus {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background-size: cover;
+}
+.box-1 .desc .tag .tuan {
+    background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background-size: cover;
+}

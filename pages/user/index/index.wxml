@@ -22,13 +22,13 @@
         <view class="box-2">
             <view class="wrap">
                 <view class="list">
-                    <view class="item">
+                    <navigator class="item" hover-class="none" url="/pages/user/collection/index">
                         <view class="inner">
                             <icon class="icon collection"></icon>
                             <text class="ui-nowrap">收藏的公寓</text>
                             <icon class="iconfont icon-arrow"></icon>
                         </view>
-                    </view>
+                    </navigator>
                     <view class="item" bindtap="openDemandCard">
                         <view class="inner">
                             <icon class="icon log"></icon>
