@@ -384,6 +384,9 @@
     background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }
+.box-6 .select-box .selected {
+    color: #ffcf11 !important;
+}
 .hide {
     display: none;
 }

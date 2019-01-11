@@ -128,14 +128,14 @@
                                 <view>
                                     <view class="scroll-view left">
                                         <scroll-view scroll-y="true" style="height: 200px;">
-                                            <view class="left-item" wx:for="{{dict.parent_cbd_list}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
+                                            <view class="left-item {{apartment.cbd_area_id == item.id ? 'selected' : ''}}" wx:for="{{dict.parent_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdAreaChange">{{item.title}}</view>
                                         </scroll-view>
                                     </view>
                                 </view>
                                 <view class="weui-flex__item">
                                     <view class="scroll-view right">
                                         <scroll-view scroll-y="true" style="height: 200px;">
-                                            <view class="right-item" wx:for="{{dict.sub_cbd_list}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
+                                            <view class="right-item {{apartment.cbd_id == item.id ? 'selected' : ''}}" wx:for="{{dict.sub_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdChange">{{item.title}}</view>
                                         </scroll-view>
                                     </view>
                                 </view>

@@ -37,11 +37,13 @@ Page({
         dict: {
             cbd_dict: [], //商圈字典
             parent_cbd_dict: [], //cbd父字典
-            sub_cdb_dict: [], //cbd子字典
+            sub_cbd_dict: [], //cbd子字典
+            sub_origin_dict: [], //cbd子类原始字典
             price_dict: [], //价格字典
             housetype_dict: [] //户型字典
         },
         apartment: {
+            cbd_area_id: 0,
             cbd_id: 0,
             price_id: 0,
             house_type_id: 0,
@@ -260,8 +262,9 @@ Page({
                 ['dict.cbd_dict']: data.cbd_list,
                 ['dict.price_dict']: data.price_list,
                 ['dict.housetype_dict']: data.housetype_list,
-                ['dict.parent_cbd_list']: parent_cbd_list,
-                ['dict.sub_cbd_list']: sub_cbd_list
+                ['dict.parent_cbd_dict']: parent_cbd_list,
+                ['dict.sub_cbd_dict']: sub_cbd_list,
+                ['dict.sub_origin_dict']: sub_cbd_list
             });
         });
     },
@@ -293,6 +296,41 @@ Page({
             ['show.business']: false,
             ['show.price']: false,
             ['show.type']: !self.data.show.type
+        });
+    },
+
+    //改变商圈区域
+    cbdAreaChange: function(e) {
+        let self = this;
+        let dataset = e.target.dataset;
+        let dict = self.data.dict;
+        let cbd_dict = dict.cbd_dict;
+        let sub_cbd_dict = [];
+        
+        if(dataset.id) {
+            //筛选该区域下的cbd
+            cbd_dict.forEach((el, index) => {
+                if (el.id == dataset.id) {
+                    sub_cbd_dict = el.cbd;
+                }
+            });
+        }else {
+            sub_cbd_dict = dict.sub_origin_dict;
+        }
+        
+        self.setData({
+            ['apartment.cbd_area_id']: dataset.id,
+            ['dict.sub_cbd_dict']: sub_cbd_dict
+        });
+    },
+
+    //改变商圈地址
+    cbdChange: function(e) {
+        let self = this;
+        let dataset = e.target.dataset;
+
+        self.setData({
+            ['apartment.cbd_id']: dataset.id
         });
     },
 
