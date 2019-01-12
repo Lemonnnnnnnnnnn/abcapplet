@@ -100,7 +100,7 @@
         </view>
         <view class="box-3">
             <view class="inner">
-                <view class="ui-nowrap tips">共5条搜索为“高新园区”的结果</view>
+                <view class="ui-nowrap tips">共条搜索为“高新园区”的结果</view>
                 <view class="list" wx:for="{{search.list}}" wx:key="{{index}}">
                     <navigator class="item" hover-class="none" wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" wx:key="{{sindex}}" url="/pages/home/detail/index?id={{sitem.id}}">
                         <view class="inner">

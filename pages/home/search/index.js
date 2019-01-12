@@ -275,7 +275,7 @@ Page({
             if (type == 1) {
                 //刷新清空公寓列表数组
                 self.setData({
-                    ['search.list']: [],
+                    ['search.list']: []
                 });
             }
 
