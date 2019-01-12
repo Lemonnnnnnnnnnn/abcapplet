@@ -166,7 +166,6 @@ Page({
                 ['pictures.tags_title']: tags_title,
                 ['pictures.current_id']: current_id
             });
-            console.log(self.data.house_types); 
         });
     },
 
@@ -213,6 +212,7 @@ Page({
             show_dialog: true,
             dailog_house: dailog_house
         });
+        console.log(self.data.dailog_house); 
     },
 
     //关闭户型弹框

@@ -271,37 +271,10 @@
                     <view class="matching">
                         <view class="title">房间配套</view>
                         <view class="list clearfix">
-                            <view class="item">
-                                <icon class="xyj"></icon>
-                                <text>洗衣机</text>
-                            </view>
-                            <view class="item">
-                                <icon class="kt"></icon>
-                                <text>空调</text>
-                            </view>
-                            <view class="item">
-                                <icon class="rsq"></icon>
-                                <text>热水器</text>
-                            </view>
-                            <view class="item">
-                                <icon class="yyj"></icon>
-                                <text>油烟机</text>
-                            </view>
-                            <view class="item">
-                                <icon class="sz"></icon>
-                                <text>书桌</text>
-                            </view>
-                            <view class="item">
-                                <icon class="sf"></icon>
-                                <text>沙发</text>
-                            </view>
-                            <view class="item">
-                                <icon class="yg"></icon>
-                                <text>衣柜</text>
-                            </view>
-                            <view class="item">
-                                <icon class="wifi"></icon>
-                                <text>WI-FI</text>
+                            <view class="item clearfix" wx:for="{{dailog_house.facility_list}}" wx:key="{{index}}">
+                                <!-- <icon class="xyj"></icon> -->
+                                <image class="fade-in" src="{{item.icon + '?imageView2/1/w/40/h/40'}}"></image>
+                                <text>{{item.title}}</text>
                             </view>
                         </view>
                     </view>

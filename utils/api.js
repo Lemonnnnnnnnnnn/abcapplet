@@ -1,4 +1,4 @@
-const API = 'http://abc.fdj.oudewa.cn/mini/';
+const config = require("config.js");
 
 /**
  * POST网络请求
@@ -30,7 +30,7 @@ function doHttp(path, params, load=true) {
         }
 
         wx.request({
-            url: `${API}/${path}`,
+            url: `${config.api}/${path}`,
             method: 'POST',
             data: data,
             header: {
@@ -102,14 +102,14 @@ function doLogin(path, param) {
                         "code": code,
                         "iv": iv,
                         "encrypt_data": encryptedData
-                    };
+                    }
                     wx.setStorageSync('token', ''); //清除token
                     wx.showLoading({
                         title: '加载中',
                         mask: true
                     });
                     wx.request({
-                        url: `${API}/${path}`,
+                        url: `${config.api}/${path}`,
                         method: 'POST',
                         data: data,
                         header: {
@@ -174,7 +174,7 @@ function doLogin(path, param) {
 function uploadFile(path, filePath) {
     return new Promise((resolve, reject) => {
         wx.uploadFile({
-            url: `${API}/${path}`,
+            url: `${config.api}/${path}`,
             filePath: filePath,
             name: 'file',
             success: resolve,
@@ -197,7 +197,7 @@ function uploadimg(data) {
     for (let i = 0; i < path.length; i++) {
         list[i] = new Promise((resolve, reject) => {
             wx.uploadFile({
-                url: `${API}/${data.url}`,
+                url: `${config.api}/${data.url}`,
                 filePath: path[i],
                 name: 'file',
                 success: resolve,
@@ -212,6 +212,5 @@ module.exports = {
     uploadFile,
     doLogin,
     doHttp,
-    uploadimg,
-    API
+    uploadimg
 }

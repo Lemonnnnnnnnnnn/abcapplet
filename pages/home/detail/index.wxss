@@ -578,48 +578,19 @@
     float: left;
     margin: 0px 1% 10px 1%;
     text-align: left;
+    line-height: 20px;
 }
 .box-9 .matching text {
     font-size: 11px;
     color: #9B9B9B;
+    float: left;
 }
-.box-9 .matching icon {
+.box-9 .matching image {
     display: inline-block;
     width: 20px;
     height: 20px;
     margin-right: 6px;
-}
-.box-9 .matching .xyj {
-    background: url('http://devhhb.images.huihuiba.net/wash.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .kt {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/kt.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .rsq {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/rsq.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .yyj {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/yyj.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .sz {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/sz.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .sf {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/sf.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .yg {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/yg.png') center center no-repeat;
-    background-size: cover;
-}
-.box-9 .matching .wifi {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/wifi.png') center center no-repeat;
-    background-size: cover;
+    float: left;
 }
 .box-9 .btns .btn {
     width: 100px;
