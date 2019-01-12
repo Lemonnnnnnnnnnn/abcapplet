@@ -20,7 +20,7 @@
                 </view>
             </view>
         </view>
-        <view class="box-1 hide">
+        <view class="box-1" wx:if="{{search.search_key == ''}}">
             <view class="wrap">
                 <view class="history" wx:if="{{history_list.length}}">
                     <view class="title">历史</view>
@@ -36,7 +36,7 @@
                 </view>
             </view>
         </view>
-        <view class="box-2">
+        <view class="box-2" wx:if="{{search.search_key != ''}}">
             <view class="select">
                 <view class="select-inner">
                     <view class="weui-flex">
@@ -98,7 +98,7 @@
                 </view>
             </view>
         </view>
-        <view class="box-3">
+        <view class="box-3" wx:if="{{search.search_key != ''}}">
             <view class="inner">
                 <view class="ui-nowrap tips">共条搜索为“高新园区”的结果</view>
                 <view class="list" wx:for="{{search.list}}" wx:key="{{index}}">

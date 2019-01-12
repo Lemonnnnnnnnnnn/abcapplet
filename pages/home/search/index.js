@@ -72,6 +72,8 @@ Page({
                 history_list: data.history_list,
                 hot_list: data.hot_list
             });
+
+            console.log(self.data.history_list);
         });
     },
 
