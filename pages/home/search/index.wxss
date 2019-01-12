@@ -113,6 +113,9 @@
     color: #4A4A4A;
     margin-bottom: 8px;
 }
+.box-3 {
+    margin-top: 96px;
+}
 .box-3 .inner {
     padding: 0 12px;
 }
@@ -204,4 +207,47 @@
 }
 .box-3 .select-box .selected {
     color: #ffcf11 !important;
+}
+/** 加载更多 **/
+.load-more {
+    position: relative;
+    padding: 30px 0 20px;
+    text-align: center;
+    color: #888;
+    height: 22px;
+}
+.load-more .hr {
+    position: absolute;
+    top: 40px;
+    width: 60%;
+    height: 1px;
+    background-color: #888;
+    margin-left: 20%;
+}
+.load-more .text-container {
+    display: inline-block;
+    height: 22px;
+    width: 40%;
+    margin: 0 auto;
+    background-color: #fff;
+    z-index: 1;
+    position: absolute;
+    left: 30%;
+}
+.load-more .text:before, .load-morer .text:after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #888;
+    position: relative;
+    right: 5px;
+    top: -3px;
+}
+.load-more .text:after {
+    left: 5px;
+}
+.load-more .no-data {
+    margin: 20px auto 30px auto;
 }

@@ -37,7 +37,7 @@
             </view>
         </view>
         <view class="box-2">
-            <view class="select {{(show_select >= 854 || show.business || show.price || show.type) ? 'topnav' : ''}}">
+            <view class="select">
                 <view class="select-inner">
                     <view class="weui-flex">
                         <view class="weui-flex__item">
@@ -67,14 +67,14 @@
                                 <view>
                                     <view class="scroll-view left">
                                         <scroll-view scroll-y="true" style="height: 200px;">
-                                            <view class="left-item {{apartment.cbd_area_id == item.id ? 'selected' : ''}}" wx:for="{{dict.parent_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdAreaChange">{{item.title}}</view>
+                                            <view class="left-item {{search.cbd_area_id == item.id ? 'selected' : ''}}" wx:for="{{dict.parent_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdAreaChange">{{item.title}}</view>
                                         </scroll-view>
                                     </view>
                                 </view>
                                 <view class="weui-flex__item">
                                     <view class="scroll-view right">
                                         <scroll-view scroll-y="true" style="height: 200px;">
-                                            <view class="right-item {{apartment.cbd_id == item.id ? 'selected' : ''}}" wx:for="{{dict.sub_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdChange">{{item.title}}</view>
+                                            <view class="right-item {{search.cbd_id == item.id ? 'selected' : ''}}" wx:for="{{dict.sub_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdChange">{{item.title}}</view>
                                         </scroll-view>
                                     </view>
                                 </view>
@@ -84,14 +84,14 @@
                     <view class="price {{show.price ? '' : 'hide'}}">
                         <view class="inner">
                             <view class="price-list">
-                                <view class="price-item {{apartment.price_id == item.id ? 'selected' : ''}}" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="priceChange">{{item.title}}</view>
+                                <view class="price-item {{search.price_id == item.id ? 'selected' : ''}}" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="priceChange">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
                     <view class="type {{show.type ? '' : 'hide'}}">
                         <view class="inner">
                             <view class="type-list">
-                                <view class="type-item {{apartment.house_type_id == item.id ? 'selected' : ''}}" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="houseTypeChange">{{item.title}}</view>
+                                <view class="type-item {{search.house_type_id == item.id ? 'selected' : ''}}" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="houseTypeChange">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
@@ -100,8 +100,8 @@
         </view>
         <view class="box-3">
             <view class="inner">
-                <view class="tips">共5条搜索为“高新园区”的结果</view>
-                <view class="list" wx:for="{{apartment.list}}" wx:key="{{index}}">
+                <view class="ui-nowrap tips">共5条搜索为“高新园区”的结果</view>
+                <view class="list" wx:for="{{search.list}}" wx:key="{{index}}">
                     <navigator class="item" hover-class="none" wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" wx:key="{{sindex}}" url="/pages/home/detail/index?id={{sitem.id}}">
                         <view class="inner">
                             <view class="img">
@@ -144,16 +144,16 @@
                     </navigator>
                 </view>
                 <view class="load-more">
-                    <view wx:if="{{apartment.total > 0 && apartment.current_page * apartment.page_size >= apartment.total}}">
+                    <view wx:if="{{search.total > 0 && search.current_page * search.page_size >= search.total}}">
                         <view class="hr"></view>
                         <view class="text-container">
                             <text class="text">我可是有底线的哦</text>
                         </view>
                     </view>
-                    <view wx:if="{{apartment.current_page * apartment.page_size < apartment.total}}">
+                    <view wx:if="{{search.current_page * search.page_size < search.total}}">
                         <view>正在加载...</view>
                     </view>
-                    <view wx:if="{{apartment.total == 0}}">
+                    <view wx:if="{{search.total == 0}}">
                         <view class="no-data">暂时还没有公寓哦</view>
                     </view>
                 </view>

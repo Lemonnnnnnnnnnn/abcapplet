@@ -243,7 +243,7 @@ Page({
     },
 
     //搜索公寓
-    search: function() {
+    search: function(type = 1) {
         let self = this;
         let search = self.data.search;
 
@@ -259,16 +259,63 @@ Page({
         
         api.doHttp(apiUrl.searchUrl, postData).then(res => {
             let data = res.data;
+            let list = data.list;
+            let total = data.total;
+            let search = self.data.search;
+            let format_list = [];
 
-            console.log(data);
+            list.forEach((el, index) => {
+                //字符串转成数组，并截取前2个
+                if (el.tags) {
+                    el.tags = el.tags.split(',').slice(0, 2);
+                }
+                format_list.push(el);
+            });
+
+            if (type == 1) {
+                //刷新清空公寓列表数组
+                self.setData({
+                    ['search.list']: [],
+                });
+            }
+
+            self.setData({
+                ['search.list[' + (search.current_page - 1) + ']']: format_list,
+                ['search.total']: total
+            });
         });
+    },
+
+    //更多严选公寓
+    moreSearch: function () {
+        let self = this;
+        let search = self.data.search;
+        let current_page = search.current_page;
+        let page_size = search.page_size;
+        let total = search.total;
+
+        if (current_page * page_size < total) {
+            self.setData({
+                ['search.current_page']: current_page + 1
+            });
+            self.search(0);
+        }
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+        let self = this;
+        self.setData({
+            ['search.current_page']: 1,
+            ['search.cbd_id']: 0,
+            ['search.price_id']: 0,
+            ['search.house_type_id']: 0
+        });
 
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
     },
 
     /**
