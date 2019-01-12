@@ -43,6 +43,17 @@ Page({
         self.getCbd();
     },
 
+    //点击公寓户型缩略图跳转至详情对话框
+    openTypeDailog: function (e) {
+        let self = this;
+        let dataset = e.currentTarget.dataset;
+
+        //跳转详情页，并打开对话框
+        wx.navigateTo({
+            url: '/pages/home/detail/index?id=' + dataset.id + '&type_id=' + dataset.typeId
+        });
+    },
+
     //获取公寓合集
     getCbd: function (type = 1) {
         let self = this;
