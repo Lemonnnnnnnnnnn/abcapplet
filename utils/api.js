@@ -49,7 +49,10 @@ function doHttp(path, params, load=true) {
                             wx.showToast({
                                 title: res.data.msg,
                                 duration: 2000,
-                                mask: true
+                                mask: true,
+                                success: res => {
+                                    reject(res);
+                                }
                             })
                             break;
                         case 911:
@@ -57,7 +60,7 @@ function doHttp(path, params, load=true) {
                             wx.setStorageSync('interrupt', 1);
                             wx.setStorageSync('token', '');
                             //重新登录
-                            //login();
+                            doLogin(1);
                             break;
                     }
                 } else {
@@ -66,7 +69,10 @@ function doHttp(path, params, load=true) {
                     wx.showToast({
                         title: '请求失败',
                         duration: 2000,
-                        mask: true
+                        mask: true,
+                        success: res => {
+                            reject(res);
+                        }
                     });
                 }
             },
@@ -76,7 +82,10 @@ function doHttp(path, params, load=true) {
                 wx.showToast({
                     title: '网络异常',
                     duration: 2000,
-                    mask: true
+                    mask: true,
+                    success: res => {
+                        reject(res);
+                    }
                 });
             }
         });
@@ -85,84 +94,97 @@ function doHttp(path, params, load=true) {
 
 /**
  * 用户登录
- * @param {String} path  接口地址
- * @param {number} param  跳转地址参数
+ * @param {number} param  是否返回上一页
  * @author Jason<dcq@kuryun.cn> 
  */
-function doLogin(path, param) {
-    wx.login({
-        success: res => {
-            let code = res.code;
-            //获取用户信息
-            wx.getUserInfo({
-                success: res => {
-                    let encryptedData = res.encryptedData;
-                    let iv = res.iv;
-                    let data = {
-                        "code": code,
-                        "iv": iv,
-                        "encrypt_data": encryptedData
-                    }
-                    wx.setStorageSync('token', ''); //清除token
-                    wx.showLoading({
-                        title: '加载中',
-                        mask: true
-                    });
-                    wx.request({
-                        url: `${config.api}/${path}`,
-                        method: 'POST',
-                        data: data,
-                        header: {
-                            'content-type': 'application/json'
-                        },
-                        success: res => {
-                            wx.hideLoading();
-                            if(res.data.code == 1) {
-                                let data = res.data.data;
-                                let tabs = getCurrentPages();
-                                let last = tabs[tabs.length - 1];
-                                let options = last.options || {};
+function doLogin(param = 0) {
+    return new Promise((resolve, reject) => {
+        wx.login({
+            success: res => {
+                let code = res.code;
+                //获取用户信息
+                wx.getUserInfo({
+                    success: res => {
+                        let encryptedData = res.encryptedData;
+                        let iv = res.iv;
+                        let data = {
+                            "code": code,
+                            "iv": iv,
+                            "encrypt_data": encryptedData
+                        }
+                        wx.setStorageSync('token', ''); //清除token
+                        wx.showLoading({
+                            title: '加载中',
+                            mask: true
+                        });
+                        wx.request({
+                            url: `${config.api}/${config.loginPath}`,
+                            method: 'POST',
+                            data: data,
+                            header: {
+                                'content-type': 'application/json'
+                            },
+                            success: res => {
+                                wx.hideLoading();
+                                if (res.data.code == 1) {
+                                    let data = res.data.data;
 
-                                wx.setStorageSync('token', data.token);
-                                wx.setStorageSync('userInfo', data.userInfo);
-                                wx.setStorageSync('interrupt', 0);
+                                    wx.setStorageSync('token', data.token);
+                                    wx.setStorageSync('userInfo', data.userInfo);
+                                    wx.setStorageSync('interrupt', 0);
 
-                                if (param == 1) {
-                                    last.onLoad(options);
+                                    if (param == 1) {
+                                        let tabs = getCurrentPages();
+                                        let last = tabs[tabs.length - 1];
+                                        let options = last.options || {};
+
+                                        last.onLoad(options);
+                                    }
+                                    //回调
+                                    resolve(res.data);
+                                } else if (res.data.code == 2003) {
+                                    wx.showToast({
+                                        title: res.data.msg,
+                                        duration: 2000,
+                                        mask: true,
+                                        success: res => {
+                                            reject(res);
+                                        }
+                                    });
                                 }
-                            }else if(res.data.code == 2003){
+                            },
+                            fail: err => {
+                                wx.hideLoading();
                                 wx.showToast({
-                                    title: res.data.msg,
+                                    title: '网络异常',
                                     duration: 2000,
-                                    mask: true
+                                    mask: true,
+                                    success: res => {
+                                        reject(res);
+                                    }
                                 });
                             }
-                        },
-                        fail: err => {
-                            wx.hideLoading();
-                            wx.showToast({
-                                title: '网络异常',
-                                duration: 2000,
-                                mask: true
-                            });
-                        }
-                    });
-                },
-                fail: err => {
-                    wx.reLaunch({
-                        url: '/pages/auth/index'
-                    })
-                }
-            });
-        },
-        fail: err => {
-            wx.showToast({
-                title: '微信授权失败',
-                duration: 2000,
-                mask: true
-            });
-        }
-    })
+                        });
+                    },
+                    fail: err => {
+                        wx.reLaunch({
+                            url: '/pages/auth/index'
+                        })
+                    }
+                });
+            },
+            fail: err => {
+                wx.showToast({
+                    title: '微信授权失败',
+                    duration: 2000,
+                    mask: true,
+                    success: res => {
+                        reject(res);
+                    }
+                });
+            }
+        });
+    });
 }
 
 /**
