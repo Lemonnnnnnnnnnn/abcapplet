@@ -48,11 +48,9 @@ function doHttp(path, params, load=true) {
                         case 2003:
                             wx.showToast({
                                 title: res.data.msg,
+                                image: config.closeIcon,
                                 duration: 2000,
-                                mask: true,
-                                success: res => {
-                                    reject(res);
-                                }
+                                mask: true
                             })
                             break;
                         case 911:
@@ -68,11 +66,9 @@ function doHttp(path, params, load=true) {
                     wx.hideLoading();
                     wx.showToast({
                         title: '请求失败',
+                        image: config.closeIcon,
                         duration: 2000,
-                        mask: true,
-                        success: res => {
-                            reject(res);
-                        }
+                        mask: true
                     });
                 }
             },
@@ -81,11 +77,9 @@ function doHttp(path, params, load=true) {
                 wx.hideLoading();
                 wx.showToast({
                     title: '网络异常',
+                    image: config.closeIcon,
                     duration: 2000,
-                    mask: true,
-                    success: res => {
-                        reject(res);
-                    }
+                    mask: true
                 });
             }
         });
@@ -130,7 +124,7 @@ function doLogin(param = 0) {
                                     let data = res.data.data;
 
                                     wx.setStorageSync('token', data.token);
-                                    wx.setStorageSync('userInfo', data.userInfo);
+                                    wx.setStorageSync('user_info', data.user);
                                     wx.setStorageSync('interrupt', 0);
 
                                     if (param == 1) {
@@ -145,11 +139,9 @@ function doLogin(param = 0) {
                                 } else if (res.data.code == 2003) {
                                     wx.showToast({
                                         title: res.data.msg,
+                                        image: config.closeIcon,
                                         duration: 2000,
-                                        mask: true,
-                                        success: res => {
-                                            reject(res);
-                                        }
+                                        mask: true
                                     });
                                 }
                             },
@@ -157,11 +149,9 @@ function doLogin(param = 0) {
                                 wx.hideLoading();
                                 wx.showToast({
                                     title: '网络异常',
+                                    image: config.closeIcon,
                                     duration: 2000,
-                                    mask: true,
-                                    success: res => {
-                                        reject(res);
-                                    }
+                                    mask: true
                                 });
                             }
                         });
@@ -176,11 +166,9 @@ function doLogin(param = 0) {
             fail: err => {
                 wx.showToast({
                     title: '微信授权失败',
+                    image: config.closeIcon,
                     duration: 2000,
-                    mask: true,
-                    success: res => {
-                        reject(res);
-                    }
+                    mask: true
                 });
             }
         });
