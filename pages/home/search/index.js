@@ -53,7 +53,10 @@ Page({
         self.listDict();
         if (!wx.getStorageSync('user_info')) {
             //未登录
-            api.doLogin();
+            api.doLogin().then(res => {
+                //获取热门搜索词
+                self.listHotSearch(); 
+            });;
         }else {
            //获取热门搜索词
            self.listHotSearch(); 
@@ -72,8 +75,6 @@ Page({
                 history_list: data.history_list,
                 hot_list: data.hot_list
             });
-
-            console.log(self.data.history_list);
         });
     },
 
@@ -173,8 +174,8 @@ Page({
             ['show.business']: !self.data.show.business,
             ['search.current_page']: 1
         });
-        //刷新严选公寓
-        self.listApartment();
+        //刷新
+        self.search();
     },
 
     //改变价格
@@ -187,8 +188,8 @@ Page({
             ['search.price_id']: dataset.id,
             ['search.current_page']: 1
         });
-        //刷新严选公寓
-        self.listApartment();
+        //刷新
+        self.search();
     },
 
     //改变房型
@@ -201,8 +202,8 @@ Page({
             ['search.house_type_id']: dataset.id,
             ['search.current_page']: 1
         });
-        //刷新严选公寓
-        self.listApartment();
+        //刷新
+        self.search();
     },
 
     //点击公寓户型缩略图跳转至详情对话框
@@ -214,6 +215,19 @@ Page({
         wx.navigateTo({
             url: '/pages/home/detail/index?id=' + dataset.id + '&type_id=' + dataset.typeId
         });
+    },
+
+    //选择搜索词
+    keyChange: function(e) {
+        let self = this;
+        let dataset = e.target.dataset;
+
+        self.setData({
+            ['search.search_key']: dataset.key,
+            ['search.current_page']: 1
+        });
+        //刷新
+        self.search();
     },
 
     //搜索词绑定
@@ -309,12 +323,14 @@ Page({
      */
     onPullDownRefresh: function () {
         let self = this;
+
         self.setData({
             ['search.current_page']: 1,
             ['search.cbd_id']: 0,
             ['search.price_id']: 0,
             ['search.house_type_id']: 0
         });
+        self.moreSearch();
 
         wx.stopPullDownRefresh();
         wx.hideLoading();

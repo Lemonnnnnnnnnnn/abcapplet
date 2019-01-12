@@ -10,7 +10,7 @@
                                 <icon class="iconfont icon-search"></icon>
                             </view>
                             <view class="weui-flex__item">
-                                <input type="text" placeholder="搜索公寓/商圈" auto-focus bindinput="searchKeyEvent" />
+                                <input type="text" placeholder="搜索公寓/商圈" value="{{search.search_key}}" auto-focus bindinput="searchKeyEvent" />
                             </view>
                         </view>
                     </view>
@@ -25,13 +25,13 @@
                 <view class="history" wx:if="{{history_list.length}}">
                     <view class="title">历史</view>
                     <view class="list">
-                        <view class="item" wx:for="{{history_list}}" wx:key="{{index}}" data-key="{{item.text}}">{{item.text}}</view>
+                        <view class="item" wx:for="{{history_list}}" wx:key="{{index}}" data-key="{{item.text}}" bindtap="keyChange">{{item.text}}</view>
                     </view>
                 </view>
                 <view class="hot">
                     <view class="title">热门搜索</view>
                     <view class="list">
-                        <view class="item" wx:for="{{hot_list}}" wx:key="{{index}}" data-key="{{item.text}}">{{item.text}}</view>
+                        <view class="item" wx:for="{{hot_list}}" wx:key="{{index}}" data-key="{{item.text}}" bindtap="keyChange">{{item.text}}</view>
                     </view>
                 </view>
             </view>
@@ -100,7 +100,8 @@
         </view>
         <view class="box-3" wx:if="{{search.search_key != ''}}">
             <view class="inner">
-                <view class="ui-nowrap tips">共条搜索为“高新园区”的结果</view>
+                <view class="ui-nowrap tips" wx:if="{{search.total}}">共{{search.total}}条搜索为“{{search.search_key}}”的结果</view>
+                <view class="ui-nowrap tips" wx:if="{{!search.total}}">未搜到对应公寓，以下是推荐公寓</view>
                 <view class="list" wx:for="{{search.list}}" wx:key="{{index}}">
                     <navigator class="item" hover-class="none" wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" wx:key="{{sindex}}" url="/pages/home/detail/index?id={{sitem.id}}">
                         <view class="inner">
@@ -152,9 +153,6 @@
                     </view>
                     <view wx:if="{{search.current_page * search.page_size < search.total}}">
                         <view>正在加载...</view>
-                    </view>
-                    <view wx:if="{{search.total == 0}}">
-                        <view class="no-data">暂时还没有公寓哦</view>
                     </view>
                 </view>
             </view>

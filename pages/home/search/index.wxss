@@ -116,6 +116,9 @@
     color: #4A4A4A;
     margin-bottom: 8px;
 }
+.box-2 .select-box .selected {
+    color: #ffcf11 !important;
+}
 .box-3 {
     margin-top: 96px;
 }
@@ -207,9 +210,6 @@
 .box-3 .desc .tag .tuan {
     background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
-}
-.box-3 .select-box .selected {
-    color: #ffcf11 !important;
 }
 /** 加载更多 **/
 .load-more {
