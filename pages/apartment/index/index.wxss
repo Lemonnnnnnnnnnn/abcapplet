@@ -1,6 +1,6 @@
 /* pages/apartment/index/index.wxss */
 .box-1 {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/search_bg.png') left top no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/search_bg.png') left top no-repeat;
     background-size: cover;
 }
 .box-1 .wrap {
@@ -10,7 +10,7 @@
     width: 48%;
     height: 118px;
     float: left;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/zuobiao.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/zuobiao.png') center center no-repeat;
     background-size: cover;
     border-radius: 2px;
 }
@@ -19,7 +19,7 @@
     height: 118px;
     float: right;
     border-radius: 2px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/tongqin.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/tongqin.png') center center no-repeat;
     background-size: cover;
 }
 .box-1 .map .inner, .box-1 .commute .inner {
@@ -100,7 +100,7 @@
     position: absolute;
     right: 30px;
     top: 4px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/kefu.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
     background-size: cover;
 }
 .box-4 {
@@ -145,7 +145,7 @@
     width: 40px;
     height: 40px;
     margin-left: 15px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/kefu.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
     background-size: cover;
     position: relative;
     right: 5px;
@@ -159,7 +159,7 @@
     width: 20px;
     height: 20px;
     margin-right: 7px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/card.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/card.png') center center no-repeat;
     background-size: cover;
 }
 .box-4 .desc text {
@@ -211,7 +211,7 @@
     position: absolute;
     right: 30px;
     top: 4px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/kefu.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
     background-size: cover;
 }
 .box-5 .score {
@@ -249,12 +249,11 @@
     width: 22px;
     height: 20px;
     margin-right: 8px;
-    background: url('http://devhhb.images.huihuiba.net/select.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/select.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .select {
-    margin-bottom: 6px;
-    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 30px;
 }
 .box-6 .select text {
     font-size: 13px;

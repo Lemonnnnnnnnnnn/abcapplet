@@ -112,10 +112,10 @@ page {
     border-radius: 18px;
 }
 .box-2 .desc .tag .minus {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/minus.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .desc .tag .tuan {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }

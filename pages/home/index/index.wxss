@@ -164,7 +164,7 @@
 .box-4 .img .info {
     width: 100%;
     height: 50px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/hei-bg.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/hei-bg.png') center center no-repeat;
     background-size: cover;
     position: absolute;
     left: 0;
@@ -208,11 +208,11 @@
     border-radius: 18px;
 }
 .box-4 .tag .minus {
-    background: #fff url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background: #fff url('https://images.gongyuabc.com/image/icon/minus.png') center center no-repeat;
     background-size: cover;
 }
 .box-4 .tag .tuan {
-    background: #fff url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background: #fff url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }
 .box-5 .ad {
@@ -377,11 +377,11 @@
     border-radius: 18px;
 }
 .box-6 .desc .tag .minus {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/minus.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .desc .tag .tuan {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .select-box .selected {

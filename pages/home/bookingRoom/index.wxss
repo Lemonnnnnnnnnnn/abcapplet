@@ -21,7 +21,7 @@ page {
 .box-1 .img .price-wrap {
     width: 100%;
     height: 26px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/hei-bg.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/hei-bg.png') center center no-repeat;
     background-size: cover;
     position: absolute;
     left: 0;

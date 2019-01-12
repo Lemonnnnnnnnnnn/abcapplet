@@ -90,7 +90,7 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('http://devhhb.images.huihuiba.net/image/icon/location.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/location.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .position text {
@@ -125,11 +125,11 @@
     margin-right: 5px;
 }
 .box-2 .minus icon {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/minus.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/minus.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .tuan icon {
-    background: url('http://devhhb.images.huihuiba.net/image/icon/tuan.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
     background-size: cover;
 }
 .box-3 .title {
@@ -327,15 +327,15 @@
     color: #4A4A4A;
 }
 .box-6 .service-icon .require {
-    background: url('http://devhhb.images.huihuiba.net/require.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/require.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .service-icon .cost {
-    background: url('http://devhhb.images.huihuiba.net/cost.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/cost.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .service-icon .service {
-    background: url('http://devhhb.images.huihuiba.net/service.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/service.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .list .item {
@@ -455,11 +455,11 @@
     top: 5px;
 }
 .box-8 .icons .share {
-    background: url('http://devhhb.images.huihuiba.net/share.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/share.png') center center no-repeat;
     background-size: cover;
 }
 .box-8 .icons .mobile {
-    background: url('http://devhhb.images.huihuiba.net/mobile.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/mobile.png') center center no-repeat;
     background-size: cover;
 }
 .box-8 .btn {
@@ -483,11 +483,11 @@
     top: -2px;
 }
 .box-8 .btn .kefu {
-    background: url('http://devhhb.images.huihuiba.net/kefu.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
     background-size: cover;
 }
 .box-8 .btn .book {
-    background: url('http://devhhb.images.huihuiba.net/book.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/book.png') center center no-repeat;
     background-size: cover;
 }
 .box-9 {
