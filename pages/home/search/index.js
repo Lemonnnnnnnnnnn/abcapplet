@@ -330,8 +330,8 @@ Page({
             ['search.price_id']: 0,
             ['search.house_type_id']: 0
         });
-        self.moreSearch();
 
+        self.search(0);
         wx.stopPullDownRefresh();
         wx.hideLoading();
     },
@@ -340,7 +340,9 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        let self = this;
 
+        self.moreSearch();
     },
 
     /**

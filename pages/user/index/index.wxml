@@ -4,18 +4,18 @@
             <view class="wrap">
                 <view class="weui-flex">
                     <view class="weui-flex__item clearfix">
-                        <view class="ui-nowrap username">Kevinx</view>
-                        <view class="ui-nowrap mobile">13612345678</view>
+                        <view class="ui-nowrap username">{{user_info.username}}</view>
+                        <view class="ui-nowrap mobile">{{user_info.mobile}}</view>
                     </view>
                     <view class="weui-flex__item clearfix">
                         <view class="headimg">
-                            <image src="/images/user/001.jpg"></image>
+                            <image class="fade-in" src="{{user_info.headimgurl + '?imageView2/1/w/140/h/140'}}"></image>
                         </view>
                     </view>
                 </view>
                 <view class="tip-box">
-                    <view class="tip"><icon class="view"></icon>浏览了30家公寓</view>
-                    <view class="tip"><icon class="logo"></icon>享受了1次柠小萌服务</view>
+                    <view class="tip"><icon class="view"></icon>浏览了{{user_info.view_num}}家公寓</view>
+                    <view class="tip"><icon class="logo"></icon>享受了{{user_info.appoint_num}}次柠小萌服务</view>
                 </view>
             </view>
         </view>
