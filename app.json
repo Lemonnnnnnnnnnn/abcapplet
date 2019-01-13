@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/home/bookingRoom/index",
         "pages/home/index/index",
         "pages/apartment/commuteHouse/index",
         "pages/user/collection/index",
@@ -8,7 +9,7 @@
         "pages/home/article/detail/index",
         "pages/home/detail/index",
         "pages/home/collection/index",
-        "pages/home/bookingRoom/index",
+        
         "pages/home/search/index",
         "pages/auth/index",
         "pages/apartment/index/index"

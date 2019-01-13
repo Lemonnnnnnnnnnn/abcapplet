@@ -118,5 +118,36 @@
         <view class="box-4">
             <view class="btn">马上预约</view>
         </view>
+        <view class="box-5">
+            <view class="close">
+                <icon class="iconfont icon-close"></icon>
+            </view>
+            <view class="inner">
+                <view class="mobile">
+                    <view class="weui-flex">
+                        <view>
+                            <view class="title">手机号</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <input type="number" placeholder="请输入手机号码"/>
+                        </view>
+                    </view>
+                </view>
+                <view class="code">
+                    <view class="weui-flex">
+                        <view>
+                            <view class="title">验证码</view>
+                        </view>
+                        <view class="weui-flex__item">
+                            <input type="number" placeholder="请输入验证码"/>
+                        </view>
+                        <view>
+                            <view class="get-code">获取验证码</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="btn">绑定手机号</view>
+            </view>
+        </view>
     </view>
 </view>
