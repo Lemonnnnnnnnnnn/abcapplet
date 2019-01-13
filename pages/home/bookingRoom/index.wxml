@@ -6,19 +6,18 @@
                 <view class="weui-flex">
                     <view class="weui-flex__item">
                         <view class="img">
-                            <image src="http://devhhb.images.huihuiba.net/image/icon/002.jpeg" mode="scaleToFill"></image>
+                            <image class="fade-in" src="{{apartment.cover + '&imageView2/1/w/342/h/214'}}" mode="scaleToFill"></image>
                             <view class="price-wrap">
-                                <view class="price">¥1600-¥2100</view>
+                                <view class="price">{{'￥' + apartment.price_low + '-' + '￥' + apartment.price_high}}</view>
                             </view>
                         </view>
                     </view>
                     <view class="weui-flex__item">
                         <view class="info">
-                            <view class="ui-nowrap title">龙湖冠寓高新店</view>
-                            <view class="multi-line-fold address">蔡塘广场软件园复式loft全新品牌精装公寓</view>
+                            <view class="ui-nowrap title">{{apartment.title}}</view>
+                            <view class="multi-line-fold address">{{apartment.one_word}}</view>
                             <view class="tags clearfix">
-                                <view class="yellow">BRT沿线</view>
-                                <view class="green">市政高新区</view>
+                                <view wx:for="{{apartment.tags}}" wx:key="{{index}}" class="{{index % 2 == 0 ? 'yellow' : 'green'}}">{{item}}</view>
                             </view>
                         </view>
                     </view>

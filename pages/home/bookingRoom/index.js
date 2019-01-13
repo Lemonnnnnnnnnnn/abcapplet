@@ -7,6 +7,7 @@ const apiUrl = {
     bindMobileUrl: 'sms/bindmobilepost',
     setMobileUrl: 'user/setmobilepost',
     getUserUrl: 'user/getpost',
+    getSimpleUrl: 'apartment/getsimplepost',
 };
 
 Page({
@@ -14,6 +15,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        id: 1, //公寓ID
         show_mobile_box: 0, 
         bind_mobile: {
             mobile: '',
@@ -25,6 +27,14 @@ Page({
             username: '',
             mobile: '',
             headimgurl: ''
+        },
+        apartment: {
+            cover: '',
+            price_low: '',
+            price_high: '',
+            tittle: '',
+            one_word: '',
+            tags: []
         }
     },
 
@@ -44,6 +54,12 @@ Page({
             //获取用户信息
             self.initData();
         }
+
+        if(options.id) {
+            self.setData({
+                id: options.id
+            });
+        }
     },
 
     //数据初始化
@@ -52,6 +68,8 @@ Page({
 
         //获取用户
         self.getUser();
+        //获取公寓简单信息
+        self.getSimple();
     },
 
     //获取用户信息
@@ -260,6 +278,30 @@ Page({
             }); 
             //关闭手机绑定弹框
             self.closeMobilBox();   
+        });
+    },
+
+    //获取公寓简单信息
+    getSimple: function () {
+        let self = this;
+        let postData = {
+            id: self.data.id
+        };
+
+        api.doHttp(apiUrl.getSimpleUrl, postData).then(res => {
+            let data = res.data;
+            let apartment = data.apartment;
+
+            //标签格式化
+            apartment.tags = apartment.tags.split(',').slice(0, 2);
+            self.setData({
+                ['apartment.cover']: apartment.cover,
+                ['apartment.price_low']: apartment.price_low,
+                ['apartment.price_high']: apartment.price_high,
+                ['apartment.title']: apartment.title,
+                ['apartment.one_word']: apartment.one_word,
+                ['apartment.tags']: apartment.tags
+            });
         });
     },
 
