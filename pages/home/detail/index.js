@@ -5,6 +5,7 @@ const app = getApp();
 const apiUrl = {
     getApartmentUrl: 'apartment/getpost',
     articleListUrl: 'article/listpost',
+    collectUrl: 'apartment/collectpost',
 };
 
 Page({
@@ -24,7 +25,8 @@ Page({
             tags: [],
             rules: [],  //折扣规则
             adv: '',
-            detail: ''
+            detail: '',
+            collect: 0,  //是否收藏
         },
         pictures: {
             list: [],
@@ -219,6 +221,37 @@ Page({
     closeDialog: function() {
         this.setData({
             show_dialog: false
+        });
+    },
+
+    //点击收藏按钮
+    collectClick: function() {
+        let self = this;
+        if (!wx.getStorageSync('user_info')) {
+            //未登录
+            api.doLogin().then(res => {
+                //收藏操作
+                self.collect();
+            });
+        } else {
+            //收藏操作
+            self.collect();
+        }
+    },
+
+    //收藏操作
+    collect: function() {
+        let self = this;
+        let postData = {
+            id: self.data.id
+        };
+
+        api.doHttp(apiUrl.collectUrl, postData).then(res => {
+            let data = res.data;
+
+            self.setData({
+                ['apartment.collect']: data.collect.status
+            });
         });
     },
 

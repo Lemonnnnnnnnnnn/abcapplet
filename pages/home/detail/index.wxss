@@ -26,10 +26,17 @@
     right: 13px;
     top: 100px;
     z-index: 10;
+    text-align: center;
+    line-height: 30px;
 }
-.box-1 .collection icon-heart {
-    font-size: 28px;
+
+.box-1 .collection .icon-heart {
+    font-size: 24px;
     color: #000;
+}
+.box-1 .collection .icon-heart-selected {
+    font-size: 30px;
+    color: #F7DD77;
 }
 .box-1 swiper, .box-1 .slide-image {
     width: 100%;

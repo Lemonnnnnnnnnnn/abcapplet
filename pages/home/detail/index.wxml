@@ -15,8 +15,8 @@
                     <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}" class="item {{pictures.current_id == item.id ? 'selected' : ''}}">{{item.title}}</view>
                 </scroll-view>
             </view>
-            <view class="collection">
-                <icon class="iconfont icon-heart"></icon>
+            <view class="collection" bindtap="collectClick">
+                <icon class="iconfont {{apartment.collect ? 'icon-heart-selected' : 'icon-heart'}}"></icon>
             </view>
         </view>
         <view class="box-2">
