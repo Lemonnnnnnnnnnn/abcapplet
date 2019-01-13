@@ -8,6 +8,7 @@ const apiUrl = {
     setMobileUrl: 'user/setmobilepost',
     getUserUrl: 'user/getpost',
     getSimpleUrl: 'apartment/getsimplepost',
+    listDictUrl: 'dict/listpost',
 };
 
 Page({
@@ -35,6 +36,24 @@ Page({
             tittle: '',
             one_word: '',
             tags: []
+        },
+        house_type: {
+            list: [],
+            title: [],
+            index: 0,
+            house_type_id: 0
+        },
+        price: {
+            list: [],
+            title: [],
+            index: 0,
+            price_id: 0
+        },
+        cbd: {
+            list: [],
+            title: [],
+            index: 0,
+            cbd_id: 0
         }
     },
 
@@ -70,6 +89,8 @@ Page({
         self.getUser();
         //获取公寓简单信息
         self.getSimple();
+        //获取字典数据
+        self.listDict();
     },
 
     //获取用户信息
@@ -301,6 +322,65 @@ Page({
                 ['apartment.title']: apartment.title,
                 ['apartment.one_word']: apartment.one_word,
                 ['apartment.tags']: apartment.tags
+            });
+        });
+    },
+
+    //公寓严选字典数据列表
+    listDict: function () {
+        let self = this;
+        let postData = {
+            city: wx.getStorageSync('city_id')
+        };
+
+        api.doHttp(apiUrl.listDictUrl, postData).then(res => {
+            let data = res.data;
+            let cbd_list = [];
+            let cbd_title = [];
+            let cbd_id = 0;
+            let price_title = [];
+            let price_id = 0;
+            let house_type_title = [];
+            let house_type_id = 0;
+
+            //cbd格式处理
+            if(data.cbd_list.length) {
+                data.cbd_list.forEach((el, index) => {
+                    el.cbd.forEach((el, index) => {
+                        cbd_list.push({ id: el.id, title: el.title });
+                        cbd_title.push(el.title);
+                    });
+                });
+                //初始cbd值
+                cbd_id = data.cbd_list[0].id;
+            }
+            //价格格式处理
+            if(data.price_list.length) {
+                data.price_list.forEach((el, index) => {
+                    price_title.push(el.title);
+                });
+                //初始价格值
+                price_id = data.price_list[0].id
+            }
+            //户型格式处理
+            if(data.housetype_list.length) {
+                data.housetype_list.forEach((el, index) => {
+                    house_type_title.push(el.title);
+                });
+                //初始户型值
+                house_type_id = data.housetype_list[0].id;
+            }
+
+            self.setData({
+                ['cbd.list']: cbd_list,
+                ['cbd.title']: cbd_title,
+                ['cbd.cbd_id']: cbd_id,
+                ['price.list']: data.price_list,
+                ['price.title']: price_title,
+                ['price.price_id']: price_id,
+                ['house_type.list']: data.housetype_list,
+                ['house_type.title']: house_type_title,
+                ['house_type.house_type_id']: house_type_id
             });
         });
     },

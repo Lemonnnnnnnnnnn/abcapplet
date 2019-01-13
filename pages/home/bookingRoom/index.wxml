@@ -55,14 +55,14 @@
                             </view>
                         </view>
                     </picker>
-                    <picker>
+                    <picker bindchange="houseTypeChange" value="{{house_type.index}}" range="{{house_type.title}}">
                         <view class="weui-flex type">
                             <view class="weui-flex__item">
                                 <view class="item-title">想看的房型</view>
                             </view>
                             <view>
                                 <view class="text">
-                                    <text>户型A</text>
+                                    <text>{{house_type.title[house_type.index]}}</text>
                                     <icon class="iconfont icon-arrow"></icon>
                                 </view>
                             </view>
@@ -72,19 +72,19 @@
             </view>
         </view>
         <view class="box-3">
-            <view class="title">租房需求（选题）</view>
+            <view class="title">租房需求（选填）</view>
             <view class="container">
                 <view class="wrap">
                     <view class="select">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <picker class="item">
+                                <picker class="item" bindchange="priceChange" value="{{price.index}}" range="{{price.title}}">
                                     <text>租房预算</text>
                                     <icon class="iconfont icon-down-arrow"></icon>
                                 </picker>
                             </view>
                             <view class="weui-flex__item">
-                                <picker class="item">
+                                <picker class="item" bindchange="cbdChange" value="{{cbd.index}}" range="{{cbd.title}}">
                                     <text>目标区域</text>
                                     <icon class="iconfont icon-down-arrow"></icon>
                                 </picker>
