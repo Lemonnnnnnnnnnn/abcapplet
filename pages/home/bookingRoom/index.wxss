@@ -106,9 +106,21 @@ page {
     color: #000;
     line-height: 37px;
 }
+.box-2 .text {
+    margin-left: 5px;
+}
+.box-2 .text text {
+    font-size: 13px;
+    color: #666;
+    display: inline-block;
+    line-height: 37px;
+    margin-right: 5px;
+}
 .box-2 .type icon, .box-2 .time icon {
-    font-size: 14px;
-    color: #000;
+    font-size: 12px;
+    color: #666;
+    position: relative;
+    top: -4px;
 }
 .box-3 .title {
     font-size: 14px;
@@ -119,7 +131,8 @@ page {
     background-color: #fff;
 }
 .box-3 .select {
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
     border-bottom: 1px solid #EEEEEE;
 }
 .box-3 .select text {
@@ -161,4 +174,66 @@ page {
     font-size: 14px;
     color: #000;
     line-height: 46px;
+}
+.box-5 {
+    background-color: #fff;
+    width: 80%;
+    position: fixed;
+    left: 10%;
+    top: 150px;
+    z-index: 600;
+    border-radius: 5px;
+    border-top: 2px solid #FFCF11;
+}
+.box-5 .close {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 110px;
+    left: 47%;
+    z-index: 600;
+    text-align: center;
+    line-height: 30px;
+}
+.box-5 .close icon {
+    font-size: 28px;
+    color: #fff;
+}
+.box-5 .inner {
+    padding: 20px;
+}
+.box-5 .mobile .weui-flex, .box-5 .code .weui-flex {
+    padding: 10px 0 0px 0;
+    border-bottom: 1px solid #efefef;
+}
+.box-5 .inner .title {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 30px;
+    margin-right: 6px;
+}
+.box-5 .inner input {
+    display: inline-block;
+    font-size: 13px;
+    color: #666;
+    line-height: 30px;
+    height: 30px;
+}
+.box-5 .inner .get-code {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background-color: #FFCF11;
+    text-align: center;
+    line-height: 26px;
+    color: #666;
+    font-size: 12px;
+}
+.box-5 .btn {
+    font-size: 13px;
+    color: #666;
+    background-color: #FFCF11;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 20px;
+    border-radius: 3px;
 }

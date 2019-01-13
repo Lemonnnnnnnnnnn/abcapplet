@@ -43,22 +43,32 @@
                             <view class="change">更改</view>
                         </view>
                     </view>
-                    <view class="weui-flex time">
-                        <view class="weui-flex__item">
-                            <view class="item-title">看房时间</view>
+                    <picker>
+                        <view class="weui-flex time">
+                            <view class="weui-flex__item">
+                                <view class="item-title">看房时间</view>
+                            </view>
+                            <view>
+                                <view class="text">
+                                    <text>2019-12-12</text>
+                                    <icon class="iconfont icon-arrow"></icon>
+                                </view>
+                            </view>
                         </view>
-                        <view>
-                            <icon class="iconfont icon-arrow"></icon>
+                    </picker>
+                    <picker>
+                        <view class="weui-flex type">
+                            <view class="weui-flex__item">
+                                <view class="item-title">想看的房型</view>
+                            </view>
+                            <view>
+                                <view class="text">
+                                    <text>户型A</text>
+                                    <icon class="iconfont icon-arrow"></icon>
+                                </view>
+                            </view>
                         </view>
-                    </view>
-                    <view class="weui-flex type">
-                        <view class="weui-flex__item">
-                            <view class="item-title">想看的房型</view>
-                        </view>
-                        <view>
-                            <icon class="iconfont icon-arrow"></icon>
-                        </view>
-                    </view>
+                    </picker>
                 </view>
             </view>
         </view>
@@ -69,16 +79,16 @@
                     <view class="select">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <view class="item">
+                                <picker class="item">
                                     <text>租房预算</text>
                                     <icon class="iconfont icon-down-arrow"></icon>
-                                </view>
+                                </picker>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="item">
+                                <picker class="item">
                                     <text>目标区域</text>
                                     <icon class="iconfont icon-down-arrow"></icon>
-                                </view>
+                                </picker>
                             </view>
                         </view>
                     </view>
@@ -129,7 +139,7 @@
                             <view class="title">手机号</view>
                         </view>
                         <view class="weui-flex__item">
-                            <input type="number" placeholder="请输入手机号码"/>
+                            <input type="number" value="{{bind_mobile.mobile}}" bindinput="bindMobile" maxlength="11" placeholder="请输入手机号码" />
                         </view>
                     </view>
                 </view>
@@ -139,15 +149,16 @@
                             <view class="title">验证码</view>
                         </view>
                         <view class="weui-flex__item">
-                            <input type="number" placeholder="请输入验证码"/>
+                            <input type="number" value="{{bind_mobile.code}}" bindinput="bindCode" maxlength="6" placeholder="请输入验证码" />
                         </view>
                         <view>
-                            <view class="get-code">获取验证码</view>
+                            <button disabled="{{bind_mobile.code_flag}}" class="get-code" bindtap="getCode">{{bind_mobile.code_flag ? '重新获取('+bind_mobile.count_down+')' : '获取验证码'}}</button>
                         </view>
                     </view>
                 </view>
                 <view class="btn">绑定手机号</view>
             </view>
         </view>
+        <view class="mask"></view>
     </view>
 </view>
