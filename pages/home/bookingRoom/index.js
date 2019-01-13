@@ -385,6 +385,66 @@ Page({
         });
     },
 
+    //改变房型
+    houseTypeChange: function(e) {
+        let self = this;
+        let house_type = self.data.house_type;
+        let index = e.detail.value;
+        let house_type_id = house_type.house_type_id;
+        
+        //筛选id
+        house_type.list.forEach((el, index) => {
+            if(el.title == house_type.title[index]) {
+                house_type_id = el.id;
+            }
+        });
+        
+        self.setData({
+            ['house_type.house_type_id']: house_type_id,
+            ['house_type.index']: index
+        });
+    },
+
+    //改变租房预算
+    priceChange: function(e) {
+        let self = this;
+        let price = self.data.price;
+        let index = e.detail.value;
+        let price_id = price.price_id;
+
+        //筛选id
+        price.list.forEach((el, index) => {
+            if(el.title == price.title[index]) {
+                price_id = el.id;
+            }
+        });
+
+        self.setData({
+            ['price.price_id']: price_id,
+            ['price.index']: index
+        });
+    },
+
+    //改变目标区域
+    cbdChange: function(e) {
+        let self = this;
+        let cbd = self.data.cbd;
+        let index = cbd.index;
+        let cbd_id = cbd.cbd_id;
+
+        //筛选id
+        cbd.list.forEach((el, index) => {
+            if(el.title == cbd.title[index]) {
+                cbd_id = el.id;
+            }
+        });
+
+        self.setData({
+            ['cbd.cbd_id']: cbd_id,
+            ['cbd_index']: index
+        });
+    },
+
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
