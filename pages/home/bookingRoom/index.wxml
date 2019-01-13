@@ -32,15 +32,15 @@
                     <view class="weui-flex userinfo">
                         <view>
                             <view class="img">
-                                <image src="/images/user/001.jpg"></image>
+                                <image class="fade-in" src="{{user_info.headimgurl + '?imageView2/1/w/140/h/140'}}"></image>
                             </view>
                         </view>
                         <view class="weui-flex__item">
-                            <view class="username">Kevin 先生</view>
-                            <view class="mobile">18030098225</view>
+                            <view class="username">{{user_info.username}}</view>
+                            <view class="mobile">{{user_info.mobile}}</view>
                         </view>
                         <view>
-                            <view class="change">更改</view>
+                            <view class="change" bindtap="openMobileBox">更改</view>
                         </view>
                     </view>
                     <picker>
@@ -128,8 +128,8 @@
         <view class="box-4">
             <view class="btn">马上预约</view>
         </view>
-        <view class="box-5">
-            <view class="close">
+        <view class="box-5 {{show_mobile_box ? '' : 'hide'}}">
+            <view class="close" bindtap="closeMobilBox">
                 <icon class="iconfont icon-close"></icon>
             </view>
             <view class="inner">
@@ -156,9 +156,9 @@
                         </view>
                     </view>
                 </view>
-                <view class="btn">绑定手机号</view>
+                <view class="btn" bindtap="setMobile">绑定手机号</view>
             </view>
         </view>
-        <view class="mask"></view>
+        <view class="mask {{show_mobile_box ? '' : 'hide'}}"></view>
     </view>
 </view>
