@@ -263,6 +263,7 @@ Page({
                 ['price.index']: price_index,
                 ['living_time.id']: demand.time,
                 ['living_num.id']: demand.people,
+                step: demand.step,
                 is_edit: 1, //编辑需求
             });
         });

@@ -33,9 +33,9 @@
                             <view class="item-title">
                                 <text class="number">01</text>
                                 <text>租房需求</text>
-                                <text class="demand-card">我的需求卡</text>
+                                <text wx:if="{{step > 1}}" class="demand-card" bindtap="openDemandCard">我的需求卡</text>
                             </view>
-                            <view class="box-3">
+                            <view class="box-3" wx:if="{{step == 1}}">
                                 <view class="item-desc">hi～Kevin，告诉我们你的租房需求，省去线上筛选信息 的麻烦，我们的服务团队会直接给您规划看房行程</view>
                                 <view class="btn-wrap">
                                     <view class="btn" bindtap="openDemandCard">登记需求</view>
@@ -50,7 +50,7 @@
                                 <text class="number">02</text>
                                 <text>柠大萌陪看服务</text>
                             </view>
-                            <view class="box-4 hide">
+                            <view class="box-4" wx:if="{{step == 2}}">
                                 <view class="kefu">
                                     <view class="tel-box">
                                         <view class="weui-flex">
@@ -94,7 +94,7 @@
                                 <text class="number">03</text>
                                 <text>服务评价，入住惊喜</text>
                             </view>
-                            <view class="box-5 hide">
+                            <view class="box-5" wx:if="{{step == 3}}">
                                 <view class="tip">恭禧您找到了新家！请您对我们本次的服务作出评价：</view>
                                 <view class="stars">
                                     <view class="clearfix">
@@ -139,16 +139,16 @@
                 <view class="select">
                     <view class="weui-flex">
                         <view class="weui-flex__item">
-                            <view class="item">
+                            <picker class="item" bindchange="priceChange" value="{{price.index}}" range="{{price.title}}">
                                 <text>租房预算</text>
                                 <icon class="iconfont icon-down-arrow"></icon>
-                            </view>
+                            </picker>
                         </view>
                         <view class="weui-flex__item">
-                            <view class="item">
+                            <picker class="item" bindchange="cbdChange" value="{{cbd.index}}" range="{{cbd.title}}">
                                 <text>目标区域</text>
                                 <icon class="iconfont icon-down-arrow"></icon>
-                            </view>
+                            </picker>
                         </view>
                     </view>
                 </view>
@@ -158,11 +158,8 @@
                             <view class="check-title">入住时间</view>
                         </view>
                         <view class="weui-flex__item">
-                            <view class="list clearfix">
-                                <view class="item">马上</view>
-                                <view class="item">7天</view>
-                                <view class="item">15天</view>
-                                <view class="item">一个月后</view>
+                             <view class="list clearfix">
+                                <view class="item {{living_time.id == item.id ? 'selected' : ''}}" wx:for="{{living_time.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingTimeSelected">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
@@ -170,19 +167,16 @@
                 <view class="check">
                     <view class="weui-flex">
                         <view>
-                            <view class="check-title">入住时间</view>
+                            <view class="check-title">入住人数</view>
                         </view>
                         <view class="weui-flex__item">
                             <view class="list clearfix">
-                                <view class="item">马上</view>
-                                <view class="item">7天</view>
-                                <view class="item">15天</view>
-                                <view class="item">一个月后</view>
+                                <view class="item {{living_num.id == item.id ? 'selected' : ''}}" wx:for="{{living_num.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingNumSelected">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
                 </view>
-                <view class="btn">提交需求</view>
+                <view class="btn" bindtap="addDemand">{{is_edit ? '编辑需求' : '提交需求'}}</view>
             </view>
         </view>
         <view class="mask {{show_demand_box ? '' : 'hide'}}" bindtap="closeDemandCard"></view>

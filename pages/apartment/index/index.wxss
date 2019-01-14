@@ -283,6 +283,9 @@
     background-color: #EEEEEE;
     border-radius: 11px;
 }
+.box-6 .check .selected {
+    background-color: #FFCF11;
+}
 .box-6 .btn {
     width: 291px;
     height: 46px;
