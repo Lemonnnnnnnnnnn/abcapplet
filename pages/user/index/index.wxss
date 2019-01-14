@@ -109,7 +109,7 @@ page {
     width: 22px;
     height: 20px;
     margin-right: 8px;
-    background: url('https://images.gongyuabc.com/select.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/select.png') center center no-repeat;
     background-size: cover;
 }
 .box-3 .select {
@@ -142,6 +142,9 @@ page {
     margin-right: 8px;
     background-color: #EEEEEE;
     border-radius: 11px;
+}
+.box-3 .check .selected {
+    background-color: #FFCF11;
 }
 .box-3 .btn {
     width: 291px;

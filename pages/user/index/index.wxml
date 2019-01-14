@@ -14,8 +14,10 @@
                     </view>
                 </view>
                 <view class="tip-box">
-                    <view class="tip"><icon class="view"></icon>浏览了{{user_info.view_num}}家公寓</view>
-                    <view class="tip"><icon class="logo"></icon>享受了{{user_info.appoint_num}}次柠小萌服务</view>
+                    <view class="tip">
+                        <icon class="view"></icon>浏览了{{user_info.view_num}}家公寓</view>
+                    <view class="tip">
+                        <icon class="logo"></icon>享受了{{user_info.appoint_num}}次柠小萌服务</view>
                 </view>
             </view>
         </view>
@@ -48,16 +50,16 @@
                 <view class="select">
                     <view class="weui-flex">
                         <view class="weui-flex__item">
-                            <view class="item">
+                            <picker class="item" bindchange="priceChange" value="{{price.index}}" range="{{price.title}}">
                                 <text>租房预算</text>
                                 <icon class="iconfont icon-down-arrow"></icon>
-                            </view>
+                            </picker>
                         </view>
                         <view class="weui-flex__item">
-                            <view class="item">
+                            <picker class="item" bindchange="cbdChange" value="{{cbd.index}}" range="{{cbd.title}}">
                                 <text>目标区域</text>
                                 <icon class="iconfont icon-down-arrow"></icon>
-                            </view>
+                            </picker>
                         </view>
                     </view>
                 </view>
@@ -68,10 +70,7 @@
                         </view>
                         <view class="weui-flex__item">
                             <view class="list clearfix">
-                                <view class="item">马上</view>
-                                <view class="item">7天</view>
-                                <view class="item">15天</view>
-                                <view class="item">一个月后</view>
+                                <view class="item {{living_time.id == item.id ? 'selected' : ''}}" wx:for="{{living_time.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingTimeSelected">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
@@ -79,14 +78,11 @@
                 <view class="check">
                     <view class="weui-flex">
                         <view>
-                            <view class="check-title">入住时间</view>
+                            <view class="check-title">入住人数</view>
                         </view>
                         <view class="weui-flex__item">
                             <view class="list clearfix">
-                                <view class="item">马上</view>
-                                <view class="item">7天</view>
-                                <view class="item">15天</view>
-                                <view class="item">一个月后</view>
+                                <view class="item {{living_num.id == item.id ? 'selected' : ''}}" wx:for="{{living_num.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingNumSelected">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
