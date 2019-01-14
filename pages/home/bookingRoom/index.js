@@ -83,6 +83,12 @@ Page({
     onLoad: function(options) {
         let self = this;
 
+        if (options.id) {
+            self.setData({
+                id: options.id
+            });
+        }
+
         if (!wx.getStorageSync('user_info')) {
             //未登录
             api.doLogin().then(res => {
@@ -92,12 +98,6 @@ Page({
         } else {
             //获取用户信息
             self.initData();
-        }
-
-        if (options.id) {
-            self.setData({
-                id: options.id
-            });
         }
     },
 
@@ -330,10 +330,23 @@ Page({
         let postData = {
             id: self.data.id
         };
-
+        console.log()
         api.doHttp(apiUrl.getSimpleUrl, postData).then(res => {
             let data = res.data;
             let apartment = data.apartment;
+            let house_type_list = [{
+                id: 0,
+                title: '全部'
+            }];
+            let house_type_title = ['全部'];
+
+            //户型格式处理
+            if (apartment.house_types.length) {
+                apartment.house_types.forEach((el, index) => {
+                    house_type_title.push(el.title);
+                    house_type_list.push(el);
+                });
+            }
 
             //标签格式化
             apartment.tags = apartment.tags.split(',').slice(0, 2);
@@ -343,7 +356,9 @@ Page({
                 ['apartment.price_high']: apartment.price_high,
                 ['apartment.title']: apartment.title,
                 ['apartment.one_word']: apartment.one_word,
-                ['apartment.tags']: apartment.tags
+                ['apartment.tags']: apartment.tags,
+                ['house_type.list']: house_type_list,
+                ['house_type.title']: house_type_title
             });
         });
     },
@@ -367,11 +382,6 @@ Page({
                 title: '全部'
             }];
             let price_title = ['全部'];
-            let house_type_list = [{
-                id: 0,
-                title: '全部'
-            }];
-            let house_type_title = ['全部'];
 
             //cbd格式处理
             if (data.cbd_list.length) {
@@ -390,13 +400,6 @@ Page({
                 data.price_list.forEach((el, index) => {
                     price_title.push(el.title);
                     price_list.push(el);
-                });
-            }
-            //户型格式处理
-            if (data.housetype_list.length) {
-                data.housetype_list.forEach((el, index) => {
-                    house_type_title.push(el.title);
-                    house_type_list.push(el);
                 });
             }
 

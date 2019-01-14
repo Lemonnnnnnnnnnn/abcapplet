@@ -216,10 +216,10 @@
                 <view class="weui-flex">
                     <view class="icons">
                         <view class="weui-flex">
-                            <view class="weui-flex__item">
+                            <button class="weui-flex__item" open-type="share">
                                 <icon class="share"></icon>
-                            </view>
-                            <view class="weui-flex__item">
+                            </button>
+                            <view class="weui-flex__item" bindtap="makePhoneCall">
                                 <icon class="mobile"></icon>
                             </view>
                         </view>
@@ -227,13 +227,13 @@
                     <view class="weui-flex__item">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <button class="btn" open-type="contact">
+                                <button class="btn" open-type="contact" bindcontact="handleContact">
                                     <icon class="kefu"></icon>
                                     <text>在线客服</text>
                                 </button>
                             </view>
                             <view class="weui-flex__item">
-                                <navigator class="btn" hover-class="none" url="/pages/home/bookingRoom/index">
+                                <navigator class="btn" hover-class="none" url="/pages/home/bookingRoom/index?id={{id}}">
                                     <icon class="book"></icon>
                                     <text>预约看房</text>
                                 </navigator>

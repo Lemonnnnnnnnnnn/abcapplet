@@ -256,6 +256,20 @@ Page({
         });
     },
 
+    //客服页面点击小程序信息
+    handleContact: function(e) {
+       
+    },
+
+    //拨打电话 
+    makePhoneCall: function () {
+        let self = this;
+
+        wx.makePhoneCall({
+            phoneNumber: '0592-5911297'
+        })
+    },
+
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
@@ -272,7 +286,16 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function (options) {
+        let obj = {};
+        let self = this;
+        let apartment = self.data.apartment;
 
+        obj = {
+            title: apartment.title,
+            path: '/pages/home/detail/index?id=' + self.data.id
+        };
+
+        return obj
     }
 })

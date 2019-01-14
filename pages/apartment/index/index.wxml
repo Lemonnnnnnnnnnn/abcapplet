@@ -67,12 +67,15 @@
                                                         <view class="ui-nowrap servers">共服务过120个租房用户</view>
                                                     </view>
                                                     <view class="tel-icon">
+                                                        
                                                         <icon class="iconfont icon-tel"></icon>
                                                     </view>
                                                 </view>
                                             </view>
                                             <view class="icon-kefu">
-                                                <icon></icon>
+                                                <button class="btn" open-type="contact">
+                                                    <icon></icon>
+                                                </button>
                                             </view>
                                         </view>
                                     </view>

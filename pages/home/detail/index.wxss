@@ -477,6 +477,15 @@
 .box-8 .icons {
     margin-right: 15px;
 }
+.box-8 .icons button {
+    display: inline-block;
+    background-size: cover;
+    height: 35px;
+    background: #fff;
+}
+.box-8 .icons .button-hover {
+    background-color: #fff;
+}
 .box-8 .icons icon {
     display: inline-block;
     width: 20px;
@@ -488,6 +497,7 @@
 .box-8 .icons .share {
     background: url('https://images.gongyuabc.com/image/icon/share.png') center center no-repeat;
     background-size: cover;
+    top: -7px;
 }
 .box-8 .icons .mobile {
     background: url('https://images.gongyuabc.com/image/icon/mobile.png') center center no-repeat;
@@ -499,6 +509,15 @@
     line-height: 35px;
     border-radius: 35px;
     background-color: #ffcf11;
+}
+.box-8 button {
+    padding-left: 0;
+    padding-right: 0;
+}
+.box-8 button text {
+    position: relative;
+    left: -8px;
+    top: -2px;
 }
 .box-8 .btn text {
     line-height: 35px;
@@ -515,8 +534,9 @@
     top: -2px;
 }
 .box-8 .btn .kefu {
-    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/xcx-kefu.png') center center no-repeat;
     background-size: cover;
+    left: 3px;
 }
 .box-8 .btn .book {
     background: url('https://images.gongyuabc.com/image/icon/book.png') center center no-repeat;
