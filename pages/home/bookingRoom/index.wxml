@@ -119,7 +119,7 @@
             </view>
         </view>
         <view class="box-4">
-            <view class="btn">马上预约</view>
+            <view class="btn" bindtap="addAppointment">马上预约</view>
         </view>
         <view class="box-5 {{show_mobile_box ? '' : 'hide'}}">
             <view class="close" bindtap="closeMobilBox">

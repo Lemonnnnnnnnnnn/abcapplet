@@ -9,6 +9,7 @@ const apiUrl = {
     getUserUrl: 'user/getpost',
     getSimpleUrl: 'apartment/getsimplepost',
     listDictUrl: 'dict/listpost',
+    addAppointmentUrl: 'apartment/addappointmentpost'
 };
 
 Page({
@@ -361,7 +362,15 @@ Page({
                 title: '全部'
             }];
             let cbd_title = ['全部'];
+            let price_list = [{
+                id: 0,
+                title: '全部'
+            }];
             let price_title = ['全部'];
+            let house_type_list = [{
+                id: 0,
+                title: '全部'
+            }];
             let house_type_title = ['全部'];
 
             //cbd格式处理
@@ -380,21 +389,23 @@ Page({
             if (data.price_list.length) {
                 data.price_list.forEach((el, index) => {
                     price_title.push(el.title);
+                    price_list.push(el);
                 });
             }
             //户型格式处理
             if (data.housetype_list.length) {
                 data.housetype_list.forEach((el, index) => {
                     house_type_title.push(el.title);
+                    house_type_list.push(el);
                 });
             }
 
             self.setData({
                 ['cbd.list']: cbd_list,
                 ['cbd.title']: cbd_title,
-                ['price.list']: data.price_list,
+                ['price.list']: price_list,
                 ['price.title']: price_title,
-                ['house_type.list']: data.housetype_list,
+                ['house_type.list']: house_type_list,
                 ['house_type.title']: house_type_title
             });
         });
@@ -404,19 +415,19 @@ Page({
     houseTypeChange: function(e) {
         let self = this;
         let house_type = self.data.house_type;
-        let index = e.detail.value;
+        let value = e.detail.value;
         let house_type_id = house_type.house_type_id;
 
         //筛选id
         house_type.list.forEach((el, index) => {
-            if (el.title == house_type.title[index]) {
+            if (el.title == house_type.title[value]) {
                 house_type_id = el.id;
             }
         });
-
+       
         self.setData({
             ['house_type.house_type_id']: house_type_id,
-            ['house_type.index']: index
+            ['house_type.index']: value
         });
     },
 
@@ -424,39 +435,40 @@ Page({
     priceChange: function(e) {
         let self = this;
         let price = self.data.price;
-        let index = e.detail.value;
+        let value = e.detail.value;
         let price_id = price.price_id;
 
         //筛选id
         price.list.forEach((el, index) => {
-            if (el.title == price.title[index]) {
+            if (el.title == price.title[value]) {
                 price_id = el.id;
             }
         });
-
+        
         self.setData({
             ['price.price_id']: price_id,
-            ['price.index']: index
+            ['price.index']: value
         });
+        
     },
 
     //改变目标区域
     cbdChange: function(e) {
         let self = this;
         let cbd = self.data.cbd;
-        let index = cbd.index;
+        let value = e.detail.value;
         let cbd_id = cbd.cbd_id;
 
         //筛选id
         cbd.list.forEach((el, index) => {
-            if (el.title == cbd.title[index]) {
+            if (el.title == cbd.title[value]) {
                 cbd_id = el.id;
             }
         });
 
         self.setData({
             ['cbd.cbd_id']: cbd_id,
-            ['cbd_index']: index
+            ['cbd_index']: value
         });
     },
 
@@ -629,6 +641,54 @@ Page({
 
         self.setData({
             ['living_num.id']: dataset.id
+        });
+    },
+
+    //马上预约
+    addAppointment: function() {
+        let self = this;
+
+        if(!self.data.order_time.date_time) {
+            wx.showToast({
+                title: '请选择看房时间',
+                duration: 2000
+            });
+
+            return false;
+        }
+
+        let postData = {
+            apartment: self.data.id,
+            house_type: self.data.house_type.house_type_id,
+            order_time: self.data.order_time.date_time,
+        };
+
+        if(self.data.cbd.cbd_id) {
+            postData.cbd = self.data.cbd.cbd_id
+        }
+        if (self.data.price.price_id) {
+            postData.budget = self.data.price.price_id;
+        }
+        if(self.data.living_time.id) {
+            postData.living_time = self.data.living_time.id;
+        }
+        if(self.data.living_num.id) {
+            postData.living_num = self.data.living_num.id
+        }
+        
+        api.doHttp(apiUrl.addAppointmentUrl, postData).then(res => {
+            let data = res.data;
+            wx.showToast({
+                title: res.msg,
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: res => {
+                    setTimeout(function () {
+                        wx.navigateBack();
+                    }, 1500);
+                }
+            })
         });
     },
 
