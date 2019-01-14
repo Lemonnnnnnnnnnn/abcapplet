@@ -135,8 +135,7 @@
                                     </view>
                                     <view>
                                         <view class="tag clearfix">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                            <icon wx:for="{{sitem.rules}}" wx:if="{{item.show}}" wx:key="{{index}}" class="{{item.id}}"></icon>
                                         </view>
                                     </view>
                                 </view>

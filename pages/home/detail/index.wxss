@@ -131,12 +131,36 @@
     height: 18px;
     margin-right: 5px;
 }
-.box-2 .minus icon {
-    background: url('https://images.gongyuabc.com/image/icon/minus.png') center center no-repeat;
-    background-size: cover;
-}
 .box-2 .tuan icon {
     background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .lian icon {
+    background: url('https://images.gongyuabc.com/image/icon/lian.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .xiao icon {
+    background: url('https://images.gongyuabc.com/image/icon/xiao.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .cu icon {
+    background: url('https://images.gongyuabc.com/image/icon/cu.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .lao icon {
+    background: url('https://images.gongyuabc.com/image/icon/lao.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .shuidian icon {
+    background: url('https://images.gongyuabc.com/image/icon/shuidian.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .rentTime icon {
+    background: url('https://images.gongyuabc.com/image/icon/rentTime.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .discount icon {
+    background: url('https://images.gongyuabc.com/image/icon/discount.png') center center no-repeat;
     background-size: cover;
 }
 .box-3 .title {
@@ -224,7 +248,7 @@
     margin-bottom: 10px;
     font-weight: 500;
 }
-.box-4 .apartment {
+/* .box-4 .apartment {
     width: 100%;
     height: 71px;
     background-color: #FCF3EA;
@@ -241,7 +265,7 @@
 .box-4 .apartment .tip {
     font-size: 12px;
     color: #9B9B9B;
-}
+} */
 .box-4 .desc {
     font-size: 12px;
     line-height: 18px;

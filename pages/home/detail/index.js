@@ -160,6 +160,7 @@ Page({
                 ['apartment.rules']: rules,
                 ['apartment.adv']: apartment.extend_info.adv,
                 ['apartment.detail']: detail,
+                ['apartment.collect']: apartment.is_collect,
                 facility_list: apartment.facility_list,
                 house_types: house_types,
                 format_notice: format_notice,

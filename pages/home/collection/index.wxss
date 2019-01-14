@@ -111,11 +111,35 @@ page {
     margin-left: 5px;
     border-radius: 18px;
 }
-.box-2 .desc .tag .minus {
-    background: url('https://images.gongyuabc.com/image/icon/minus.png') center center no-repeat;
-    background-size: cover;
-}
 .box-2 .desc .tag .tuan {
     background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .lian {
+    background: url('https://images.gongyuabc.com/image/icon/lian.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .xiao {
+    background: url('https://images.gongyuabc.com/image/icon/xiao.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .cu {
+    background: url('https://images.gongyuabc.com/image/icon/cu.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .lao {
+    background: url('https://images.gongyuabc.com/image/icon/lao.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .shuidian {
+    background: url('https://images.gongyuabc.com/image/icon/shuidian.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .rentTime {
+    background: url('https://images.gongyuabc.com/image/icon/rentTime.png') center center no-repeat;
+    background-size: cover;
+}
+.box-2 .desc .tag .discount {
+    background: url('https://images.gongyuabc.com/image/icon/discount.png') center center no-repeat;
     background-size: cover;
 }

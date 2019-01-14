@@ -66,8 +66,7 @@
                                         <view class="ui-nowrap info-title">{{item.info.title}}</view>
                                         <view class="price">￥{{item.info.price_low + '-' + item.info.price_high}}</view>
                                         <view class="tag">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                            <icon wx:for="{{item.info.rules}}" wx:key="{{index}}" wx:if="{{item.show}}" class="{{item.id}}"></icon>
                                         </view>
                                     </view>
                                     <view class="desc">{{item.info.one_word}}</view>
@@ -193,8 +192,7 @@
                                     </view>
                                     <view>
                                         <view class="tag clearfix">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                            <icon wx:for="{{sitem.rules}}" wx:if="{{item.show}}" wx:key="{{index}}" class="{{item.id}}"></icon>
                                         </view>
                                     </view>
                                 </view>

@@ -87,7 +87,7 @@
                             <view class="ui-nowrap tip">装修精致，配套丰富，适合城市白领</view>
                         </view>
                     </view> -->
-                    <rich-text class="multi-line-fold desc" nodes="{{apartment.detail}}"></rich-text>
+                    <rich-text class="desc" nodes="{{apartment.detail}}"></rich-text>
                     <view class="more">查看更多</view>
                     <view class="icon-list clearfix">
                         <view class="icon-item" wx:for="{{facility_list}}" wx:key="{{index}}">
