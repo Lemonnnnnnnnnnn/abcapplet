@@ -8,6 +8,7 @@ const apiUrl = {
     listCollectUrl: 'user/listcollectpost',
     listDictUrl: 'dict/listpost',
     addDemandUrl: 'user/adddemandpost',
+    getDemandUrl: 'user/getdemandpost',
 };
 
 Page({
@@ -43,6 +44,7 @@ Page({
             list: [{ id: 1, title: '1人' }, { id: 2, title: '2人' }, { id: 3, title: '3人' }, { id: 4, title: '3人以上' }],
             id: 1
         },
+        is_edit: 0, //是否是编辑需求
     },
 
     /**
@@ -73,6 +75,8 @@ Page({
         self.listStatics();
         //公寓严选字典数据列表
         self.listDict();
+        //获取个人需求卡
+        self.getDemand();
     },
 
     //获取用户信息
@@ -215,6 +219,26 @@ Page({
         });
     },
 
+    //选择入住时间
+    livingTimeSelected: function (e) {
+        let self = this;
+        let dataset = e.currentTarget.dataset;
+
+        self.setData({
+            ['living_time.id']: dataset.id
+        });
+    },
+
+    //选择入住人数
+    livingNumSelected: function (e) {
+        let self = this;
+        let dataset = e.currentTarget.dataset;
+
+        self.setData({
+            ['living_num.id']: dataset.id
+        });
+    },
+
     //填写个人需求卡
     addDemand: function () {
         let self = this;
@@ -245,10 +269,50 @@ Page({
                 mask: true,
                 success: res => {
                     setTimeout(function () {
+                        //关闭弹框
                         self.closeDemandCard();
+                        //刷新需求数据
+                        self.getDemand();
                     }, 1500);
                 }
             })
+        });
+    },
+
+    //获取个人需求卡
+    getDemand: function() {
+        let self = this;
+        let postData = {};
+
+        api.doHttp(apiUrl.getDemandUrl, postData).then(res => {
+            let data = res.data;
+            let demand = data.demand;
+            let cbd = self.data.cbd;
+            let price = self.data.price;
+            let cbd_index = 0;
+            let price_index = 0;
+
+            //数据格式化
+            cbd.list.forEach((el, index) => {
+                if(el.id == demand.cbd_id) {
+                    cbd_index = index;
+                }
+            });
+            price.list.forEach((el, index) => {
+                if(el.id == demand.price_id) {
+                    price_index = index;
+                }
+            });
+
+            self.setData({
+                ['cbd.cbd_id']: demand.cbd_id,
+                ['cbd.index']: cbd_index,
+                ['price.price_id']: demand.price_id,
+                ['price.index']: price_index,
+                ['living_time.id']: demand.time,
+                ['living_num.id']: demand.people,
+                is_edit: 1, //编辑需求
+            });
         });
     },
 
