@@ -6,7 +6,7 @@
                 <view class="weui-flex">
                     <view class="weui-flex__item">
                         <view class="img">
-                            <image class="fade-in" src="{{apartment.cover + '&imageView2/1/w/342/h/214'}}" mode="scaleToFill"></image>
+                            <image class="fade-in" src="{{apartment.cover + '?imageView2/1/w/342/h/214'}}" mode="scaleToFill"></image>
                             <view class="price-wrap">
                                 <view class="price">{{'￥' + apartment.price_low + '-' + '￥' + apartment.price_high}}</view>
                             </view>

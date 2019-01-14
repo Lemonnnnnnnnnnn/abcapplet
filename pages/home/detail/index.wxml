@@ -38,9 +38,6 @@
                 <view class="tags clearfix">
                     <view wx:for="{{apartment.tags}}" wx:key="{{index}}" class="tag {{(index+1) % 2 == 1 ? 'yellow' : 'green'}} yellow">{{item}}</view>
                 </view>
-                <!-- <view class="ui-nowrap minus">
-                    <icon></icon>双十二签约立减300元
-                </view> -->
                 <view wx:for="{{apartment.rules}}" wx:key="{{index}}" wx:if="{{item.show}}" class="ui-nowrap rules {{item.id}}">
                     <icon></icon>{{item.word}}
                 </view>
@@ -52,7 +49,7 @@
                 <scroll-view class="list" scroll-x>
                     <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" data-id="{{item.id}}" bindtap="openDialog">
                         <view class="img">
-                            <image class="fade-in" src="{{item.cover + '&imageView2/1/w/256/h/160'}}"></image>
+                            <image class="fade-in" src="{{item.cover + '?imageView2/1/w/256/h/160'}}"></image>
                         </view>
                         <view class="inner">
                             <view class="ui-nowrap apartment-name">{{item.title}}</view>
@@ -246,7 +243,7 @@
         <view class="box-9 {{show_dialog ? '' : 'hide'}}">
             <swiper circular="true" indicator-dots="true" indicator-color="#fff" indicator-active-color="#FFCF11">
                 <swiper-item wx:for="{{dailog_house.pictures}}" wx:key="{{index}}">
-                    <image src="{{item + '&imageView2/1/w/704/h/468'}}" class="slide-image fade-in" />
+                    <image src="{{item + '?imageView2/1/w/704/h/468'}}" class="slide-image fade-in" />
                 </swiper-item>
             </swiper>
             <view class="info">
@@ -282,7 +279,7 @@
                             <view class="btn close" bindtap="closeDialog">关闭</view>
                         </view>
                         <view class="weui-flex__item">
-                            <navigator class="btn book" hover-class="none" url="/pages/home/bookingRoom/index">预约看本户型</navigator>
+                            <navigator class="btn book" hover-class="none" url="/pages/home/bookingRoom/index?id={{id}}">预约看本户型</navigator>
                         </view>
                     </view>
                 </view>

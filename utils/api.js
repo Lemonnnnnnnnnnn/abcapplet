@@ -15,6 +15,7 @@ function doHttp(path, params, load=true) {
             title: '加载中',
             mask: true
         });
+
         //拦截后续请求
         if (wx.getStorageSync('interrupt')) {
             wx.hideLoading();

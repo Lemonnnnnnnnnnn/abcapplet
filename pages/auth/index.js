@@ -17,6 +17,8 @@ Page({
 
     //跳转首页
     onGotUserInfo: function (e) {
+        //允许首页数据可请求
+        wx.setStorageSync('interrupt', 0);
         wx.reLaunch({
             url: '/pages/home/index/index'
         })
