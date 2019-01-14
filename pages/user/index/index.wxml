@@ -87,7 +87,7 @@
                         </view>
                     </view>
                 </view>
-                <view class="btn">提交需求</view>
+                <view class="btn" bindtap="addDemand">提交需求</view>
             </view>
         </view>
         <view class="mask {{show_demand_box ? '' : 'hide'}}" bindtap="closeDemandCard"></view>

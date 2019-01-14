@@ -673,7 +673,7 @@ Page({
             postData.living_time = self.data.living_time.id;
         }
         if(self.data.living_num.id) {
-            postData.living_num = self.data.living_num.id
+            postData.people = self.data.living_num.id
         }
         
         api.doHttp(apiUrl.addAppointmentUrl, postData).then(res => {

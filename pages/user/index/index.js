@@ -7,6 +7,7 @@ const apiUrl = {
     listStaticsUrl: 'user/liststaticspost',
     listCollectUrl: 'user/listcollectpost',
     listDictUrl: 'dict/listpost',
+    addDemandUrl: 'user/adddemandpost',
 };
 
 Page({
@@ -211,6 +212,43 @@ Page({
         self.setData({
             ['cbd.cbd_id']: cbd_id,
             ['cbd_index']: value
+        });
+    },
+
+    //填写个人需求卡
+    addDemand: function () {
+        let self = this;
+
+        let postData = {
+        
+        };
+
+        if (self.data.cbd.cbd_id) {
+            postData.cbd = self.data.cbd.cbd_id
+        }
+        if (self.data.price.price_id) {
+            postData.budget = self.data.price.price_id;
+        }
+        if (self.data.living_time.id) {
+            postData.living_time = self.data.living_time.id;
+        }
+        if (self.data.living_num.id) {
+            postData.people = self.data.living_num.id
+        }
+
+        api.doHttp(apiUrl.addDemandUrl, postData).then(res => {
+            let data = res.data;
+            wx.showToast({
+                title: res.msg,
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: res => {
+                    setTimeout(function () {
+                        self.closeDemandCard();
+                    }, 1500);
+                }
+            })
         });
     },
 
