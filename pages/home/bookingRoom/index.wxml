@@ -42,14 +42,14 @@
                             <view class="change" bindtap="openMobileBox">更改</view>
                         </view>
                     </view>
-                    <picker>
+                    <picker mode="multiSelector" bindchange="orderTimeChange" bindcolumnchange="orderTimeColumnChange" value="{{order_time.index}}" range="{{order_time.list}}">
                         <view class="weui-flex time">
                             <view class="weui-flex__item">
                                 <view class="item-title">看房时间</view>
                             </view>
                             <view>
                                 <view class="text">
-                                    <text>2019-12-12</text>
+                                    <text>{{order_time.date_time_str}}</text>
                                     <icon class="iconfont icon-arrow"></icon>
                                 </view>
                             </view>
@@ -98,10 +98,7 @@
                             </view>
                             <view class="weui-flex__item">
                                 <view class="list clearfix">
-                                    <view class="item">马上</view>
-                                    <view class="item">7天</view>
-                                    <view class="item">15天</view>
-                                    <view class="item">一个月后</view>
+                                    <view class="item {{living_time.id == item.id ? 'selected' : ''}}" wx:for="{{living_time.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingTimeSelected">{{item.title}}</view>
                                 </view>
                             </view>
                         </view>
@@ -109,14 +106,11 @@
                     <view class="check">
                         <view class="weui-flex">
                             <view>
-                                <view class="check-title">入住时间</view>
+                                <view class="check-title">入住人数</view>
                             </view>
                             <view class="weui-flex__item">
                                 <view class="list clearfix">
-                                    <view class="item">马上</view>
-                                    <view class="item">7天</view>
-                                    <view class="item">15天</view>
-                                    <view class="item">一个月后</view>
+                                    <view class="item {{living_num.id == item.id ? 'selected' : ''}}" wx:for="{{living_num.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingNumSelected">{{item.title}}</view>
                                 </view>
                             </view>
                         </view>
