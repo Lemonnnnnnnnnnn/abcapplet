@@ -229,6 +229,8 @@ Page({
             //数据格式化
             data.list.forEach((el, index) => {
                 el.info = JSON.parse(el.info);
+                //显示2个
+                el.info.rules = el.info.rules.slice(0,2);
                 list.push(el);
             });
            

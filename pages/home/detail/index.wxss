@@ -47,8 +47,8 @@
     overflow: hidden;
     white-space: nowrap;
     height:25px;
-    /* background: linear-gradient(180deg,rgba(251,248,248,1) 0%,rgba(4,3,3,1) 100%); */
-    /* filter: blur(5px); */
+    background: url('https://images.gongyuabc.com/image/icon/detail-bg.png') center center repeat-x;
+    background-size: cover;
     position: absolute;
     left: 0px;
     bottom: 0px;
@@ -132,35 +132,35 @@
     margin-right: 5px;
 }
 .box-2 .tuan icon {
-    background: url('https://images.gongyuabc.com/image/icon/tuan.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/tuan.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .lian icon {
-    background: url('https://images.gongyuabc.com/image/icon/lian.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/lian.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .xiao icon {
-    background: url('https://images.gongyuabc.com/image/icon/xiao.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/xiao.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .cu icon {
-    background: url('https://images.gongyuabc.com/image/icon/cu.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/cu.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .lao icon {
-    background: url('https://images.gongyuabc.com/image/icon/lao.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/lao.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .shuidian icon {
-    background: url('https://images.gongyuabc.com/image/icon/shuidian.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/shuidian.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .rentTime icon {
-    background: url('https://images.gongyuabc.com/image/icon/rentTime.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/rentTime.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .discount icon {
-    background: url('https://images.gongyuabc.com/image/icon/discount.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/iconnew/discount.png') center center no-repeat;
     background-size: cover;
 }
 .box-3 .title {

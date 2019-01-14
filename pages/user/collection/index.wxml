@@ -36,8 +36,7 @@
                                     </view>
                                     <view>
                                         <view class="tag clearfix">
-                                            <icon class="minus"></icon>
-                                            <icon class="tuan"></icon>
+                                            <icon wx:for="{{sitem.rules}}" wx:for-item="rule" wx:for-index="ruleindex" wx:key="{{ruleindex}}" wx:if="{{rule.show}}" class="{{rule.id}}"></icon>
                                         </view>
                                     </view>
                                 </view>
