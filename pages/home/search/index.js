@@ -284,6 +284,9 @@ Page({
                 //字符串转成数组，并截取前2个
                 if (el.tags) {
                     el.tags = el.tags.split(',').slice(0, 2);
+                } 
+                if (el.rules) {
+                    el.rules = el.rules.slice(0, 3);
                 }
                 format_list.push(el);
             });

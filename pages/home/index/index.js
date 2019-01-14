@@ -231,6 +231,9 @@ Page({
                 el.info = JSON.parse(el.info);
                 //显示2个
                 el.info.rules = el.info.rules.slice(0,2);
+                //去除小数点
+                el.info.price_low = parseInt(el.info.price_low);
+                el.info.price_high = parseInt(el.info.price_high);
                 list.push(el);
             });
            
@@ -404,6 +407,9 @@ Page({
                 //字符串转成数组，并截取前2个
                 if(el.tags) {
                     el.tags = el.tags.split(',').slice(0, 2);
+                }
+                if(el.rules) {
+                    el.rules = el.rules.slice(0, 3);
                 }
                 format_list.push(el);
             });
