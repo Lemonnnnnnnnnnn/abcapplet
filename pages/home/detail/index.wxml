@@ -227,10 +227,10 @@
                     <view class="weui-flex__item">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <view class="btn">
+                                <button class="btn" open-type="contact">
                                     <icon class="kefu"></icon>
                                     <text>在线客服</text>
-                                </view>
+                                </button>
                             </view>
                             <view class="weui-flex__item">
                                 <navigator class="btn" hover-class="none" url="/pages/home/bookingRoom/index">

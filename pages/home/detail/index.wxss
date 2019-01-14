@@ -496,6 +496,7 @@
 .box-8 .btn {
     width: 105px;
     height: 35px;
+    line-height: 35px;
     border-radius: 35px;
     background-color: #ffcf11;
 }

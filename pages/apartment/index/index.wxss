@@ -249,7 +249,7 @@
     width: 22px;
     height: 20px;
     margin-right: 8px;
-    background: url('https://images.gongyuabc.com/select.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/select.png') center center no-repeat;
     background-size: cover;
 }
 .box-6 .select {
