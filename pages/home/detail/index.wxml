@@ -2,7 +2,7 @@
 <view class="page">
     <view class="page__bd">
         <view class="box-1">
-            <view class="back" bindtap="back">
+            <view wx:if="{{version >= 660}}" class="back" bindtap="back">
                 <icon class="iconfont icon-back"></icon>
             </view>
             <swiper circular="true" bindchange="swiperChange">
@@ -15,7 +15,7 @@
                     <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}" class="item {{pictures.current_id == item.id ? 'selected' : ''}}">{{item.title}}</view>
                 </scroll-view>
             </view>
-            <view class="collection" bindtap="collectClick">
+            <view class="collection {{version >= 660 ? '' : 'low-version'}}" bindtap="collectClick">
                 <icon class="iconfont {{apartment.collect ? 'icon-heart-selected' : 'icon-heart'}}"></icon>
             </view>
         </view>

@@ -29,7 +29,9 @@
     text-align: center;
     line-height: 30px;
 }
-
+.box-1 .low-version {
+    top: 60px;
+}
 .box-1 .collection .icon-heart {
     font-size: 24px;
     color: #000;

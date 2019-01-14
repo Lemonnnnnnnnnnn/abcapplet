@@ -39,7 +39,8 @@ Page({
         dailog_house: '', //弹框中显示的户型
         notices: [], 
         format_notice: [],
-        article_list: [] //文章列表
+        article_list: [], //文章列表,
+        version: '', //微信版本号
     },
 
     /**
@@ -61,10 +62,27 @@ Page({
             });
         }
         
+        //获取系统信息
+        self.getSystemInfo();
         //获取公寓详情
         self.getApartment();
         //文章列表
         self.articleList();
+    },
+
+    //获取系统信息
+    getSystemInfo: function() {
+        let self = this;
+
+        wx.getSystemInfo({
+            success(res) {
+                let version = res.version;
+                version = version.replace(/\./g, "")
+                self.setData({
+                    version: version
+                });
+            }
+        })
     },
 
     //自定义返回
