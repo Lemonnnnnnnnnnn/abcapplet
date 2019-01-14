@@ -49,7 +49,7 @@ page {
     background-size: cover;
 }
 .box-1 .tip .logo {
-    background: url('https://images.gongyuabc.com/image/icon/logo.png') center center no-repeat;
+    background: url('https://images.gongyuabc.com/image/icon/log.png') center center no-repeat;
     background-size: cover;
 }
 .box-2 .item {
