@@ -85,7 +85,6 @@
                         </view>
                     </view> -->
                     <rich-text class="desc" nodes="{{apartment.detail}}"></rich-text>
-                    <view class="more">查看更多</view>
                     <view class="icon-list clearfix">
                         <view class="icon-item" wx:for="{{facility_list}}" wx:key="{{index}}">
                             <view class="icon">

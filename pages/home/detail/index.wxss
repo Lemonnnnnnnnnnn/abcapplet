@@ -273,11 +273,6 @@
     color: #4A4A4A;
     padding: 13px 0;
 }
-.box-4 .more {
-    color: #FF9600;
-    font-size: 12px;
-    margin-bottom: 12px;
-}
 .box-4 .icon-list {
     width: 100%;
     height: 72px;
@@ -400,7 +395,7 @@
     font-size: 14px;
 }
 .box-7 {
-    margin-bottom: 68px;
+    padding-bottom: 68px;
 }
 .box-7 .title {
     font-size: 16px;
