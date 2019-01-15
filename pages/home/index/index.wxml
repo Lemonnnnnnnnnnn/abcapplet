@@ -104,19 +104,19 @@
                     <view class="weui-flex">
                         <view class="weui-flex__item" bindtap="businessClick">
                             <view class="item" style="justify-content: flex-start;">
-                                <text class="ui-nowrap">{{apartment.cbd_title ? apartment.cbd_title : '商圈'}}</text>
+                                <text class="ui-nowrap">{{apartment.cbd_id ? apartment.cbd_title : '商圈'}}</text>
                                 <icon class="iconfont {{show.business ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item" bindtap="priceClick">
                             <view class="item" style="justify-content: center;">
-                                <text class="ui-nowrap">{{apartment.price_title ? apartment.price_title : '价格'}}</text>
+                                <text class="ui-nowrap">{{apartment.price_id ? apartment.price_title : '价格'}}</text>
                                 <icon class="iconfont {{show.price ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item" bindtap="typeClick">
                             <view class="item" style="justify-content: flex-end;">
-                                <text class="ui-nowrap">{{apartment.house_type_title ? apartment.house_type_title : '户型'}}</text>
+                                <text class="ui-nowrap">{{apartment.house_type_id ? apartment.house_type_title : '户型'}}</text>
                                 <icon class="iconfont {{show.type ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
