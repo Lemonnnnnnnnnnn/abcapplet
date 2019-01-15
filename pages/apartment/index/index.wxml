@@ -102,7 +102,7 @@
                                 <text>服务评价，入住惊喜</text>
                             </view>
                             <view class="box-5" wx:if="{{step == 3}}">
-                                <view class="tip">恭禧您找到了新家！请您对我们本次的服务作出评价：</view>
+                                <view class="tip">看房行程结束后，请对我们的服务人员进行评价，成功入住后还有惊喜相送哦。恭禧您找到了新家！请您对我们本次的服务作出评价：</view>
                                 <view class="stars">
                                     <view class="clearfix">
                                         <view class="title">客服服务</view>

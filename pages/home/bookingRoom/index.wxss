@@ -131,29 +131,24 @@ page {
     background-color: #fff;
 }
 .box-3 .select {
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #EEEEEE;
-    height: 29px
+    padding-bottom: 4px;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 8px;
 }
 .box-3 .select .item {
-    display: flex;   
+    display: flex;
 }
 .box-3 .select text {
+    max-width: 120px;
     font-size: 13px;
     color: #4A4A4A;
-    display: inline-block;
-    max-width: 120px;
-    height: 29px;
-    line-height: 29px;
 }
 .box-3 .select .icon-down-arrow {
     font-size: 14px;
     color: #4A4A4A;
     position: relative;
-    top: -13px;
+    top: -4px;
     left: 3px;
-    height: 29px;
 }
 .box-3 .check {
     padding: 4px 0;

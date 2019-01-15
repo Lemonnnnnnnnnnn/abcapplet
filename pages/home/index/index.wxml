@@ -59,7 +59,7 @@
             </view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <navigator wx:for="{{week_list}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" hover-class="none" url="/pages/home/detail/index?id={{item.id}}">
+                    <navigator wx:for="{{week_list}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" hover-class="none" url="/pages/home/detail/index?id={{item.apartment_id}}">
                         <view class="img">
                             <image class="fade-in" src="{{item.info.cover + '?imageView2/1/w/612/h/350'}}" mode="scaleToFill"></image>
                             <view class="info">
