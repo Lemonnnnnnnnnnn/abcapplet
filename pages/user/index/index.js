@@ -215,7 +215,7 @@ Page({
 
         self.setData({
             ['cbd.cbd_id']: cbd_id,
-            ['cbd_index']: value
+            ['cbd.index']: value
         });
     },
 

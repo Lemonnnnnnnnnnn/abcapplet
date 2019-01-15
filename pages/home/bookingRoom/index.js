@@ -85,8 +85,8 @@ Page({
 
         if (options.id) {
             self.setData({
-                //id: options.id
-                id: 1
+                id: options.id
+                //id: 1
             });
         }
 

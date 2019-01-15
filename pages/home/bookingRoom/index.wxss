@@ -136,8 +136,8 @@ page {
     border-bottom: 1px solid #EEEEEE;
     height: 29px
 }
-.box-3 .select .weui-flex, .box-3 .select .item {
-    height: 29px;
+.box-3 .select .item {
+    display: flex;   
 }
 .box-3 .select text {
     font-size: 13px;

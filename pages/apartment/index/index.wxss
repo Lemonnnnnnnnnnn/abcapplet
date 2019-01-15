@@ -242,6 +242,7 @@
     padding: 15px;
 }
 .box-6 .title {
+    max-width: 120px;
     font-size: 17px;
     color: #4A4A4A;
     text-align: center;
@@ -257,6 +258,9 @@
 }
 .box-6 .select {
     margin-bottom: 30px;
+}
+.box-6 .select .item {
+    display: flex;
 }
 .box-6 .select text {
     font-size: 13px;

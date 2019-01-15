@@ -116,7 +116,11 @@ page {
 .box-3 .select {
     margin-bottom: 30px;
 }
+.box-3 .select .item {
+    display: flex;
+}
 .box-3 .select text {
+    max-width: 120px;
     font-size: 13px;
     color: #4A4A4A;
 }
