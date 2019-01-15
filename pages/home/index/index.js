@@ -420,7 +420,7 @@ Page({
                     ['apartment.list']: [],
                 });
             }
-            console.log(format_list);
+           
             self.setData({
                 ['apartment.list[' + (apartment.current_page-1) + ']']: format_list,
                 ['apartment.total']: total
