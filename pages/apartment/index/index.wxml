@@ -4,21 +4,25 @@
         <view class="clearfix box-1">
             <view class="wrap">
                 <view class="clearfix">
-                    <navigator class="map" hover-class="none" url="/pages/apartment/mapHouse/index">
+                    <!-- <navigator class="map" hover-class="none" url="/pages/apartment/mapHouse/index"> -->
+                    <view class="map" bindtap="devClick">
                         <view class="inner">
                             <view class="ui-nowrap title">地图找房</view>
                             <view class="ui-nowrap desc">观音山公寓</view>
                             <view class="ui-nowrap desc">3000元起</view>
                             <view class="ui-nowrap desc">7套在租</view>
                         </view>
-                    </navigator>
-                    <navigator class="commute" hover-class="none" url="/pages/apartment/commuteHouse/index">
+                    </view>
+                    <!-- </navigator>
+                    <navigator class="commute" hover-class="none" url="/pages/apartment/commuteHouse/index"> -->
+                    <view class="commute" bindtap="devClick">
                         <view class="inner">
                             <view class="ui-nowrap title">通勤找房</view>
                             <view class="ui-nowrap desc">更好的生活</view>
                             <view class="ui-nowrap desc">从缩短通勤开始</view>
                         </view>
-                    </navigator>
+                    </view>
+                    <!-- </navigator> -->
                 </view>
             </view>
         </view>

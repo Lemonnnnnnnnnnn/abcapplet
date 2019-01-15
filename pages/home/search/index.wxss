@@ -154,6 +154,7 @@
     height: 202px;
     margin-bottom: 8px;
     position: relative;
+    background-color: #efefef;
 }
 .box-3 .img image {
     width: 100%;

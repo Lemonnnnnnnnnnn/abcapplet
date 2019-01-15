@@ -68,7 +68,7 @@
                     </view>
                 </scroll-view>
             </view>
-            <view class="ad">
+            <view class="ad" wx:if="{{apartment.adv}}">
                 <view class="ad-inner">
                     <image src="{{apartment.adv + '?imageView2/1/w/702/h/100'}}" mode="scaleToFill"></image>
                 </view>

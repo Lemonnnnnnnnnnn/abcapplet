@@ -72,6 +72,7 @@
     width: 313px;
     height: 172px;
     border-radius: 5px;
+    background-color: #efefef;
 }
 .box-2 .img image {
     width: 100%;
@@ -125,6 +126,7 @@
     height: 168px;
     margin-right: 12px;
     display: inline-block;
+    background-color: #efefef;
 }
 .box-3 .first-item {
     margin-left: 12px;
@@ -152,6 +154,7 @@
     height: 175px;
     margin-right: 12px;
     display: inline-block;
+    background-color: #efefef;
 }
 .box-4 .first-item {
     margin-left: 12px;
@@ -246,6 +249,7 @@
 .box-5 .ad {
     width: 98%;
     height: 60px;
+    background-color: #efefef;
 }
 .box-5 .ad-right {
     float: right;
@@ -355,6 +359,7 @@
     height: 202px;
     margin-bottom: 8px;
     position: relative;
+    background-color: #efefef;
 }
 .box-6 .img image {
     width: 100%;
