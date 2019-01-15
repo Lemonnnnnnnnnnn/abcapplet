@@ -54,7 +54,8 @@ Page({
             page_size: 5,
             total: 0,
             list: [],
-        }
+        },
+        show_top: 0
     },
 
     /**
@@ -498,7 +499,19 @@ Page({
         //防止频繁刷新数据
         if(e.scrollTop < 2000 && (e.scrollTop % 2 == 0)) {
             self.setData({
-                show_select: e.scrollTop
+                show_select: e.scrollTop,
+            });
+        }
+        //显示回顶部，防止频繁刷新数据
+        if(e.scrollTop > 500 && e.scrollTop < 5000 && (e.scrollTop % 2 == 0)) {
+            self.setData({
+                show_top: 1
+            });
+        }
+        //隐藏回顶部，防止频繁刷新数据
+        if(e.scrollTop <= 500 && (e.scrollTop % 2 == 0)) {
+            self.setData({
+                show_top: 0
             });
         }
     },

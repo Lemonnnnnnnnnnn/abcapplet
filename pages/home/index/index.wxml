@@ -240,7 +240,7 @@
             <button class="btn" open-type="contact"></button>
         </view>
         <!-- 回到顶部 -->
-        <view class="box-10">
+        <view class="box-10" wx:if="{{show_top > 0}}">
             <view class="go-top" bindtap="goTop"></view>
         </view>
     </view>
