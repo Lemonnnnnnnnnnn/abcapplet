@@ -45,8 +45,11 @@ Page({
         apartment: {
             cbd_area_id: 0,
             cbd_id: 0,
+            cbd_title: '',  //当前选中的商圈
             price_id: 0,
+            price_title: '',  //当前选中的价格
             house_type_id: 0,
+            house_type_title: '',  //当前选中的户型
             current_page: 1,
             page_size: 5,
             total: 0,
@@ -336,6 +339,7 @@ Page({
 
         self.setData({
             ['apartment.cbd_id']: dataset.id,
+            ['apartment.cbd_title']: dataset.title,
             ['show.business']: !self.data.show.business,
             ['apartment.current_page']: 1
         });
@@ -351,6 +355,7 @@ Page({
         self.setData({
             ['show.price']: !self.data.show.price,
             ['apartment.price_id']: dataset.id,
+            ['apartment.price_title']: dataset.title,
             ['apartment.current_page']: 1
         });
         //刷新严选公寓
@@ -365,6 +370,7 @@ Page({
         self.setData({
             ['show.type']: !self.data.show.type,
             ['apartment.house_type_id']: dataset.id,
+            ['apartment.house_type_title']: dataset.title,
             ['apartment.current_page']: 1
         });
         //刷新严选公寓

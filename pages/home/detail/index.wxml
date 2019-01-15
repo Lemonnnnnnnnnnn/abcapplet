@@ -7,7 +7,7 @@
             </view>
             <swiper circular="true" bindchange="swiperChange">
                 <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}">
-                    <image src="{{item.url + '&imageView2/1/w/750/h/522'}}" class="slide-image fade-in"/>
+                    <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" class="slide-image fade-in"/>
                 </swiper-item>
             </swiper>
             <view class="scroll-view">

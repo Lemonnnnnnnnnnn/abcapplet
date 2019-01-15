@@ -28,8 +28,11 @@ Page({
             search_key: '',
             cbd_area_id: 0,
             cbd_id: 0,
+            cbd_title: '',  //当前选中的商圈
             price_id: 0,
+            price_title: '',  //当前选中的价格
             house_type_id: 0,
+            house_type_title: '',  //当前选中的户型
             current_page: 1,
             page_size: 5,
             total: 0,
@@ -171,6 +174,7 @@ Page({
 
         self.setData({
             ['search.cbd_id']: dataset.id,
+            ['search.cbd_title']: dataset.title,
             ['show.business']: !self.data.show.business,
             ['search.current_page']: 1
         });
@@ -186,6 +190,7 @@ Page({
         self.setData({
             ['show.price']: !self.data.show.price,
             ['search.price_id']: dataset.id,
+            ['search.price_title']: dataset.title,
             ['search.current_page']: 1
         });
         //刷新
@@ -200,6 +205,7 @@ Page({
         self.setData({
             ['show.type']: !self.data.show.type,
             ['search.house_type_id']: dataset.id,
+            ['search.house_type_title']: dataset.title,
             ['search.current_page']: 1
         });
         //刷新

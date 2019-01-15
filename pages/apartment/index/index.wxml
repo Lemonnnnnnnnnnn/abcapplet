@@ -51,7 +51,7 @@
                                 <text>柠大萌陪看服务</text>
                             </view>
                             <view class="box-4" wx:if="{{step == 2}}">
-                                <view class="kefu">
+                                <!-- <view class="kefu">
                                     <view class="tel-box">
                                         <view class="weui-flex">
                                             <view class="weui-flex__item kefu-info">
@@ -83,7 +83,7 @@
                                 <view class="desc">
                                     <icon></icon>
                                     <text>恭禧您获得升舱服务卡，优享专车接送看房服务哦</text>
-                                </view>
+                                </view> -->
                                 <view class="tip">
                                     <view>1. 柠大萌会主动和您取得联系，提前帮您规划看房行程，并确定看房时间。</view>
                                     <view>2. 柠大萌会全程带您去规划行程中的各个公寓看房，帮助您分析参谋，并尽可能 帮您争取权益。</view>

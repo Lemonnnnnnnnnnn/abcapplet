@@ -287,32 +287,35 @@ Page({
         api.doHttp(apiUrl.getDemandUrl, postData).then(res => {
             let data = res.data;
             let demand = data.demand;
-            let cbd = self.data.cbd;
-            let price = self.data.price;
-            let cbd_index = 0;
-            let price_index = 0;
 
-            //数据格式化
-            cbd.list.forEach((el, index) => {
-                if(el.id == demand.cbd_id) {
-                    cbd_index = index;
-                }
-            });
-            price.list.forEach((el, index) => {
-                if(el.id == demand.price_id) {
-                    price_index = index;
-                }
-            });
+            if(demand) {
+                let cbd = self.data.cbd;
+                let price = self.data.price;
+                let cbd_index = 0;
+                let price_index = 0;
 
-            self.setData({
-                ['cbd.cbd_id']: demand.cbd_id,
-                ['cbd.index']: cbd_index,
-                ['price.price_id']: demand.price_id,
-                ['price.index']: price_index,
-                ['living_time.id']: demand.time,
-                ['living_num.id']: demand.people,
-                is_edit: 1, //编辑需求
-            });
+                //数据格式化
+                cbd.list.forEach((el, index) => {
+                    if (el.id == demand.cbd_id) {
+                        cbd_index = index;
+                    }
+                });
+                price.list.forEach((el, index) => {
+                    if (el.id == demand.price_id) {
+                        price_index = index;
+                    }
+                });
+
+                self.setData({
+                    ['cbd.cbd_id']: demand.cbd_id,
+                    ['cbd.index']: cbd_index,
+                    ['price.price_id']: demand.price_id,
+                    ['price.index']: price_index,
+                    ['living_time.id']: demand.time,
+                    ['living_num.id']: demand.people,
+                    is_edit: 1, //编辑需求
+                });
+            }
         });
     },
 

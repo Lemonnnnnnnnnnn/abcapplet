@@ -81,6 +81,7 @@ Page({
                 self.setData({
                     version: version
                 });
+                console.log(self.data.version);
             }
         })
     },

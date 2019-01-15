@@ -104,19 +104,19 @@
                     <view class="weui-flex">
                         <view class="weui-flex__item">
                             <view class="item" bindtap="businessClick">
-                                <text>商圈</text>
+                                <text class="ui-nowrap">{{apartment.cbd_title ? apartment.cbd_title : '商圈'}}</text>
                                 <icon class="iconfont {{show.business ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item" bindtap="priceClick">
                             <view class="item" style="text-align: center;">
-                                <text>价格</text>
+                                <text class="ui-nowrap">{{apartment.price_title ? apartment.price_title : '价格'}}</text>
                                 <icon class="iconfont {{show.price ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item" bindtap="typeClick">
                             <view class="item" style="text-align: right;">
-                                <text>户型</text>
+                                <text class="ui-nowrap">{{apartment.house_type_title ? apartment.house_type_title : '户型'}}</text>
                                 <icon class="iconfont {{show.type ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
@@ -136,7 +136,7 @@
                                 <view class="weui-flex__item">
                                     <view class="scroll-view right">
                                         <scroll-view scroll-y="true" style="height: 200px;">
-                                            <view class="right-item {{apartment.cbd_id == item.id ? 'selected' : ''}}" wx:for="{{dict.sub_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="cbdChange">{{item.title}}</view>
+                                            <view class="right-item {{apartment.cbd_id == item.id ? 'selected' : ''}}" wx:for="{{dict.sub_cbd_dict}}" wx:key="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="cbdChange">{{item.title}}</view>
                                         </scroll-view>
                                     </view>
                                 </view>
@@ -146,14 +146,14 @@
                     <view class="price {{show.price ? '' : 'hide'}}">
                         <view class="inner">
                             <view class="price-list">
-                                <view class="price-item {{apartment.price_id == item.id ? 'selected' : ''}}" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="priceChange">{{item.title}}</view>
+                                <view class="price-item {{apartment.price_id == item.id ? 'selected' : ''}}" wx:for="{{dict.price_dict}}" wx:key="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="priceChange">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
                     <view class="type {{show.type ? '' : 'hide'}}">
                         <view class="inner">
                             <view class="type-list">
-                                <view class="type-item {{apartment.house_type_id == item.id ? 'selected' : ''}}" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="houseTypeChange">{{item.title}}</view>
+                                <view class="type-item {{apartment.house_type_id == item.id ? 'selected' : ''}}" wx:for="{{dict.housetype_dict}}" wx:key="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" bindtap="houseTypeChange">{{item.title}}</view>
                             </view>
                         </view>
                     </view>
