@@ -134,17 +134,26 @@ page {
     margin-bottom: 10px;
     padding-bottom: 5px;
     border-bottom: 1px solid #EEEEEE;
+    height: 29px
+}
+.box-3 .select .weui-flex, .box-3 .select .item {
+    height: 29px;
 }
 .box-3 .select text {
     font-size: 13px;
     color: #4A4A4A;
+    display: inline-block;
+    max-width: 120px;
+    height: 29px;
+    line-height: 29px;
 }
 .box-3 .select .icon-down-arrow {
     font-size: 14px;
     color: #4A4A4A;
     position: relative;
-    top: -4px;
+    top: -13px;
     left: 3px;
+    height: 29px;
 }
 .box-3 .check {
     padding: 4px 0;

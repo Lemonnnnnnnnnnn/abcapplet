@@ -85,7 +85,8 @@ Page({
 
         if (options.id) {
             self.setData({
-                id: options.id
+                //id: options.id
+                id: 1
             });
         }
 
@@ -407,9 +408,7 @@ Page({
                 ['cbd.list']: cbd_list,
                 ['cbd.title']: cbd_title,
                 ['price.list']: price_list,
-                ['price.title']: price_title,
-                ['house_type.list']: house_type_list,
-                ['house_type.title']: house_type_title
+                ['price.title']: price_title
             });
         });
     },
@@ -471,7 +470,7 @@ Page({
 
         self.setData({
             ['cbd.cbd_id']: cbd_id,
-            ['cbd_index']: value
+            ['cbd.index']: value
         });
     },
 
