@@ -235,5 +235,13 @@
             </view>
             <view class="mask city-mask {{is_location ? '' : 'hide'}}"></view>
         </view>
+        <!-- 客服 -->
+        <view class="box-9">
+            <button class="btn" open-type="contact"></button>
+        </view>
+        <!-- 回到顶部 -->
+        <view class="box-10">
+            <view class="go-top" bindtap="goTop"></view>
+        </view>
     </view>
 </view>

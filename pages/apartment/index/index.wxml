@@ -187,5 +187,9 @@
             </view>
         </view>
         <view class="mask {{show_demand_box ? '' : 'hide'}}" bindtap="closeDemandCard"></view>
+        <!-- 客服 -->
+        <view class="box-7">
+            <button class="btn" open-type="contact"></button>
+        </view>
     </view>
 </view>

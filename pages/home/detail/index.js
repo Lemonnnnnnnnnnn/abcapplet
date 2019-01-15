@@ -289,6 +289,25 @@ Page({
         })
     },
 
+    //打开地理位置
+    openLocation: function(e) {
+        let self = this;
+        let dataset = e.currentTarget.dataset;
+        let latitude = parseFloat(dataset.latitude);
+        let longitude = parseFloat(dataset.longitude);
+
+        if(latitude && longitude) {
+            wx.openLocation({
+                latitude,
+                longitude,
+                scale: 18
+            })
+        }
+    },
+
+    //防止触摸滚动穿透
+    move: function() {},
+
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */

@@ -27,7 +27,7 @@
                         <view class="ui-nowrap address">{{apartment.one_word}}</view>
                     </view>
                     <view>
-                        <view class="position" data-latitude="{{apartment.latitude}}" data-longitude="{{apartment.longitude}}">
+                        <view class="position" data-latitude="{{apartment.latitude}}" data-longitude="{{apartment.longitude}}" bindtap="openLocation">
                             <view>
                                 <icon></icon>
                             </view>
@@ -100,7 +100,7 @@
             <view class="wrap">
                 <view class="title">公寓位置</view>
                 <view class="map">
-                    <map longitude="{{apartment.longitude}}" latitude="{{apartment.latitude}}"></map>
+                    <map longitude="{{apartment.longitude}}" latitude="{{apartment.latitude}}" show-location="true" data-latitude="{{apartment.latitude}}" data-longitude="{{apartment.longitude}}" bindtap="openLocation"></map>
                 </view>
             </view>
         </view>
@@ -284,6 +284,6 @@
                 </view>
             </view>
         </view>
-        <view class="mask {{show_dialog ? '' : 'hide'}}"></view>
+        <view class="mask {{show_dialog ? '' : 'hide'}}" catchtouchmove="move"></view>
     </view>
 </view>
