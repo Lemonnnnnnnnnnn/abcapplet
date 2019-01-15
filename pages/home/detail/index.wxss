@@ -50,8 +50,7 @@
     overflow: hidden;
     white-space: nowrap;
     height:25px;
-    background: url('https://images.gongyuabc.com/image/icon/detail-bg.png') center center repeat-x;
-    background-size: cover;
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.48) 0%, rgba(55,55,55,0.26) 48%, rgba(255,255,255,0.00) 100%);
     position: absolute;
     left: 0px;
     bottom: 0px;
