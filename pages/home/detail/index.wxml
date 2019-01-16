@@ -7,7 +7,7 @@
             </view>
             <swiper circular="true" bindchange="swiperChange">
                 <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}">
-                    <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" class="slide-image fade-in"/>
+                    <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" lazy-load="true" class="slide-image fade-in"/>
                 </swiper-item>
             </swiper>
             <view class="scroll-view">
@@ -155,51 +155,15 @@
                 <view class="title">附近公寓推荐</view>
                 <view class="scroll-view">
                     <scroll-view class="list" scroll-x>
-                        <view class="item">
+                        <view class="item" wx:for="{{near_list}}">
                             <view class="img">
-                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                                <text>30人想住</text>
+                                <image class="fade-in" lazy-load="true" src="{{item.cover + '?imageView2/1/w/336/h/216'}}" mode="scaleToFill"></image>
+                                <text>{{item.appointment_show_num}}人想住</text>
                             </view>
                             <view class="info">
                                 <view class="inner">
-                                    <view class="ui-nowrap title">趣喔公寓</view>
-                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                                <text>30人想住</text>
-                            </view>
-                            <view class="info">
-                                <view class="inner">
-                                    <view class="ui-nowrap title">趣喔公寓</view>
-                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                                <text>30人想住</text>
-                            </view>
-                            <view class="info">
-                                <view class="inner">
-                                    <view class="ui-nowrap title">趣喔公寓</view>
-                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="item">
-                            <view class="img">
-                                <image class="fade-in" src="http://devhhb.images.huihuiba.net/image/icon/001.jpg" mode="scaleToFill"></image>
-                                <text>30人想住</text>
-                            </view>
-                            <view class="info">
-                                <view class="inner">
-                                    <view class="ui-nowrap title">趣喔公寓</view>
-                                    <view class="ui-nowrap desc">公交车直达公交车直达</view>
+                                    <view class="ui-nowrap title">{{item.title}}</view>
+                                    <view class="ui-nowrap desc">{{item.one_word}}</view>
                                 </view>
                             </view>
                         </view>

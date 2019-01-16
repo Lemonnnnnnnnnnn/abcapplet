@@ -6,6 +6,7 @@ const apiUrl = {
     getApartmentUrl: 'apartment/getpost',
     articleListUrl: 'article/listpost',
     collectUrl: 'apartment/collectpost',
+    nearApartmentUrl: 'apartment/nearbypost'
 };
 
 Page({
@@ -40,6 +41,7 @@ Page({
         notices: [], 
         format_notice: [],
         article_list: [], //文章列表,
+        near_list: [], //附近公寓列表
         version: '', //微信版本号
     },
 
@@ -68,6 +70,8 @@ Page({
         self.getApartment();
         //文章列表
         self.articleList();
+        //附近公寓
+        self.nearApartment();
     },
 
     //获取系统信息
@@ -201,6 +205,22 @@ Page({
             
             self.setData({
                 article_list: data.list
+            });
+        });
+    },
+
+    //获取附件公寓列表
+    nearApartment: function () {
+        let self = this;
+        let postData = {
+            id: self.data.id
+        };
+
+        api.doHttp(apiUrl.nearApartmentUrl, postData).then(res => {
+            let data = res.data;
+
+            self.setData({
+                near_list: data.list
             });
         });
     },

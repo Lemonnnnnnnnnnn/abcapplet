@@ -7,10 +7,10 @@ let env = {
     },
     //线上环境
     online: {
-        api: '',
+        api: 'https://api.gongyuabc.com/mini/',
         loginPath: 'auth/loginpost',
         closeIcon: '/images/common/close.png'
     }
 };
 
-module.exports = env['test'];
+module.exports = env['online'];

@@ -22,7 +22,7 @@
         <view class="box-2">
             <view class="wrap">
                 <view class="list" wx:for="{{collection.list}}" wx:key="{{index}}">
-                    <navigator wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" class="item" hover-class="none" url="/pages/home/detail/index">
+                    <navigator wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" class="item" hover-class="none" url="/pages/home/detail/index?id={{sitem.id}}">
                         <view class="inner">
                             <view class="img">
                                 <image class="fade-in" src="{{sitem.cover + '?imageView2/1/w/670/h/404'}}" mode="scaleToFill"></image>
