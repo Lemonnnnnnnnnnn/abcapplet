@@ -331,18 +331,18 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-        let self = this;
+        // let self = this;
 
-        self.setData({
-            ['search.current_page']: 1,
-            ['search.cbd_id']: 0,
-            ['search.price_id']: 0,
-            ['search.house_type_id']: 0
-        });
+        // self.setData({
+        //     ['search.current_page']: 1,
+        //     ['search.cbd_id']: 0,
+        //     ['search.price_id']: 0,
+        //     ['search.house_type_id']: 0
+        // });
 
-        self.search(0);
-        wx.stopPullDownRefresh();
-        wx.hideLoading();
+        // self.search(0);
+        // wx.stopPullDownRefresh();
+        // wx.hideLoading();
     },
 
     /**
