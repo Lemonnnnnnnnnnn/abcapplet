@@ -155,7 +155,7 @@
                 <view class="title">附近公寓推荐</view>
                 <view class="scroll-view">
                     <scroll-view class="list" scroll-x>
-                        <view class="item" wx:for="{{near_list}}">
+                        <navigator class="item" wx:for="{{near_list}}" url="/pages/home/detail/index?id={{item.id}}">
                             <view class="img">
                                 <image class="fade-in" lazy-load="true" src="{{item.cover + '?imageView2/1/w/336/h/216'}}" mode="scaleToFill"></image>
                                 <text>{{item.appointment_show_num}}人想住</text>
@@ -166,7 +166,7 @@
                                     <view class="ui-nowrap desc">{{item.one_word}}</view>
                                 </view>
                             </view>
-                        </view>
+                        </navigator>
                     </scroll-view>
                 </view>
             </view>
