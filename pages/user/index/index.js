@@ -308,7 +308,6 @@ Page({
         let show_mobile_box = 0;
         let show_demand_box = false;
 
-console.log(self.data.user_info.mobile); return;
         //电话号码为空，默认显示绑定手机弹框
         if (!self.data.user_info.mobile) {
             show_mobile_box = 1
