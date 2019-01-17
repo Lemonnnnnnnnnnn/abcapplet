@@ -42,19 +42,19 @@
                     <view class="weui-flex">
                         <view class="weui-flex__item">
                             <view class="item" bindtap="businessClick">
-                                <text class="ui-nowrap">{{search.cbd_title ? search.cbd_title : '商圈'}}</text>
+                                <text class="ui-nowrap">{{search.cbd_id ? search.cbd_title : '商圈'}}</text>
                                 <icon class="iconfont {{show.business ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item" bindtap="priceClick">
                             <view class="item" style="text-align: center;">
-                                <text class="ui-nowrap">{{search.price_title ? search.price_title : '价格'}}</text>
+                                <text class="ui-nowrap">{{search.price_id ? search.price_title : '价格'}}</text>
                                 <icon class="iconfont {{show.price ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>
                         <view class="weui-flex__item" bindtap="typeClick">
                             <view class="item" style="text-align: right;">
-                                <text class="ui-nowrap">{{search.house_type_title ? search.house_type_title : '户型'}}</text>
+                                <text class="ui-nowrap">{{search.house_type_id ? search.house_type_title : '户型'}}</text>
                                 <icon class="iconfont {{show.type ? 'icon-up-arrow' : 'icon-down-arrow'}}"></icon>
                             </view>
                         </view>

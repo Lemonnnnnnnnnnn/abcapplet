@@ -91,20 +91,33 @@ Page({
         api.doHttp(apiUrl.listDictUrl, postData).then(res => {
             let data = res.data;
             let parent_cbd_list = [{ id: 0, title: '全部' }];
-            let sub_cbd_list = [];
+            let sub_cbd_list = [{ id: 0, title: '全部' }];
+            let price_list = [{ id: 0, title: '全部' }];
+            let house_type_list = [{ id: 0, title: '全部' }];
 
             //cbd格式处理
             data.cbd_list.forEach((el, index) => {
-                parent_cbd_list.push({ id: el.id, title: el.title });
-                el.cbd.forEach((el, index) => {
-                    sub_cbd_list.push({ id: el.id, title: el.title });
-                });
+                //过滤市辖区
+                if (el.title != '市辖区') {
+                    parent_cbd_list.push({ id: el.id, title: el.title });
+                    el.cbd.forEach((el, index) => {
+                        sub_cbd_list.push({ id: el.id, title: el.title });
+                    });
+                }
+            });
+            //价格区间处理
+            data.price_list.forEach((el, index) => {
+                price_list.push({ id: el.id, title: el.title });
+            });
+            //户型处理
+            data.housetype_list.forEach((el, index) => {
+                house_type_list.push({ id: el.id, title: el.title });
             });
 
             self.setData({
                 ['dict.cbd_dict']: data.cbd_list,
-                ['dict.price_dict']: data.price_list,
-                ['dict.housetype_dict']: data.housetype_list,
+                ['dict.price_dict']: price_list,
+                ['dict.housetype_dict']: house_type_list,
                 ['dict.parent_cbd_dict']: parent_cbd_list,
                 ['dict.sub_cbd_dict']: sub_cbd_list,
                 ['dict.sub_origin_dict']: sub_cbd_list
@@ -325,24 +338,6 @@ Page({
             });
             self.search(0);
         }
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-        // let self = this;
-
-        // self.setData({
-        //     ['search.current_page']: 1,
-        //     ['search.cbd_id']: 0,
-        //     ['search.price_id']: 0,
-        //     ['search.house_type_id']: 0
-        // });
-
-        // self.search(0);
-        // wx.stopPullDownRefresh();
-        // wx.hideLoading();
     },
 
     /**
