@@ -2,5 +2,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "通勤找房",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }

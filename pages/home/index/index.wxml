@@ -159,7 +159,7 @@
                     </view>
                 </view>
             </view>
-            <view class="mask {{(show.business || show.price || show.type) ? '' : 'hide'}}"></view>
+            <view class="mask {{(show.business || show.price || show.type) ? '' : 'hide'}}" catchtouchmove="move"></view>
             <view class="inner">
                 <view class="list" wx:for="{{apartment.list}}" wx:key="{{index}}">
                     <navigator class="item" hover-class="none" wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" wx:key="{{sindex}}" url="/pages/home/detail/index?id={{sitem.id}}">
@@ -233,7 +233,7 @@
                     </view>
                 </view>
             </view>
-            <view class="mask city-mask {{is_location ? '' : 'hide'}}"></view>
+            <view class="mask city-mask {{is_location ? '' : 'hide'}}" catchtouchmove="move"></view>
         </view>
         <!-- 客服 -->
         <view class="box-9">

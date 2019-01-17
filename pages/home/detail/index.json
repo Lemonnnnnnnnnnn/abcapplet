@@ -3,5 +3,6 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "公寓详情",
     "navigationStyle": "custom",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }
