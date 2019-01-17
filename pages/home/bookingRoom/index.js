@@ -659,6 +659,18 @@ Page({
             return false;
         }
 
+        if (!self.data.user_info.mobile) {
+            wx.showToast({
+                title: '请绑定手机号',
+                duration: 2000,
+                success: res => {
+                    self.openMobileBox();
+                }
+            });
+
+            return false;
+        }
+
         let postData = {
             apartment: self.data.id,
             house_type: self.data.house_type.house_type_id,
