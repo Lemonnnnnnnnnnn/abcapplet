@@ -28,6 +28,7 @@ Page({
             adv: '',
             detail: '',
             collect: 0,  //是否收藏
+            address: '', //地址
         },
         pictures: {
             list: [],
@@ -184,13 +185,14 @@ Page({
                 ['apartment.adv']: apartment.extend_info.adv,
                 ['apartment.detail']: detail,
                 ['apartment.collect']: apartment.is_collect,
-                facility_list: apartment.facility_list,
-                house_types: house_types,
-                format_notice: format_notice,
+                ['apartment.address']: apartment.address,
                 ['pictures.list']: pictures,
                 ['pictures.picture_tags']: picture_tags,
                 ['pictures.tags_title']: tags_title,
-                ['pictures.current_id']: current_id
+                ['pictures.current_id']: current_id,
+                facility_list: apartment.facility_list,
+                house_types: house_types,
+                format_notice: format_notice
             });
         });
     },
@@ -310,17 +312,18 @@ Page({
     },
 
     //打开地理位置
-    openLocation: function(e) {
+    openLocation: function() {
         let self = this;
-        let dataset = e.currentTarget.dataset;
-        let latitude = parseFloat(dataset.latitude);
-        let longitude = parseFloat(dataset.longitude);
+        let apartment = self.data.apartment;
+        let latitude = parseFloat(apartment.latitude);
+        let longitude = parseFloat(apartment.longitude);
 
         if(latitude && longitude) {
             wx.openLocation({
-                latitude,
-                longitude,
-                scale: 18
+                latitude: latitude,
+                longitude: longitude,
+                scale: 18,
+                address: apartment.address
             })
         }
     },
