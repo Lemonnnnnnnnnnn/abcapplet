@@ -137,7 +137,7 @@
                     </view>
                 </view>
                 <view class="defense">
-                    <view wx:for="{{article_list}}" wx:key="{{index}}" class="weui-flex tip {{index == 0 ? 'border-b' : ''}}">
+                    <view wx:for="{{article_list}}" wx:key="{{index}}" class="weui-flex tip {{(index+1) == article_list.length ? '' : 'border-b'}}">
                         <view class="weui-flex__item">
                             <navigator class="defense-title" hover-class="none" url="/pages/home/article/detail/index?id={{item.id}}">{{item.title}}</navigator>
                         </view>

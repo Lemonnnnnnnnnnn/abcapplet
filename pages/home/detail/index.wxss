@@ -397,6 +397,9 @@
     color: #4A4A4A;
     font-size: 14px;
 }
+.box-6 .defense .defense-title {
+    line-height: 29px;
+}
 .box-7 {
     padding-bottom: 68px;
 }
