@@ -6,7 +6,7 @@
                 <icon class="iconfont icon-back"></icon>
             </view>
             <swiper circular="true" current="{{pictures.current}}" bindchange="swiperChange">
-                <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}" data-src="{{item.url}}" catchtap="previewImage">
+                <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}" data-src="{{item.url}}" catchtap="previewDetailImage">
                     <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" lazy-load="true" class="slide-image fade-in"/>
                 </swiper-item>
             </swiper>

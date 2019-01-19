@@ -370,7 +370,7 @@ Page({
     move: function() {},
 
     //详情页轮播看大图
-    previewImage: function (e) {
+    previewDetailImage: function (e) {
         let self = this;
         let data = e.currentTarget.dataset;
         let src = data.src;
