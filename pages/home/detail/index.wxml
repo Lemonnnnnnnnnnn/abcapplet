@@ -5,14 +5,14 @@
             <view wx:if="{{version >= 700}}" class="back" bindtap="back">
                 <icon class="iconfont icon-back"></icon>
             </view>
-            <swiper circular="true" bindchange="swiperChange">
+            <swiper circular="true" current="{{pictures.current}}" bindchange="swiperChange">
                 <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}">
                     <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" lazy-load="true" class="slide-image fade-in"/>
                 </swiper-item>
             </swiper>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}" class="item {{pictures.current_id == item.id ? 'selected' : ''}}">{{item.title}}</view>
+                    <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}" class="item {{pictures.current_id == item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="tagChange">{{item.title}}</view>
                 </scroll-view>
             </view>
             <view class="collection {{version >= 700 ? '' : 'low-version'}}" bindtap="collectClick">
@@ -96,7 +96,7 @@
                 </view>
             </view>
         </view>
-        <view class="box-5">
+        <view class="box-5" wx:if="{{apartment.longitude && apartment.latitude}}">
             <view class="wrap">
                 <view class="title">公寓位置</view>
                 <view class="map">

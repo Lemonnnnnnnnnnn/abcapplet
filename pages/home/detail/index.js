@@ -34,7 +34,8 @@ Page({
             list: [],
             picture_tags: [],
             tags_title: [],
-            current_id: ''
+            current_id: '',
+            current: 0,  //当前所在滑块的 index
         },
         facility_list: [], //配套
         house_types: [], //房型
@@ -108,7 +109,8 @@ Page({
             let apartment = data.apartment;
             let tags = [];
             let rules = [];
-            let pictures = [];  
+            let pictures = []; 
+            let format_pictures = []; 
             let picture_tags = [];
             let tags_title = [];
             let current_id = ''; //当前滑块id
@@ -143,6 +145,15 @@ Page({
                 });
                 //默认第一id为当前滑动id
                 current_id = pictures[0]['id'];
+
+                //数据结构调整，根据id分组排列，防止后台错乱顺序上传，导致前端标签跳动
+                picture_tags.forEach((e1, index1) => {
+                    pictures.forEach((e2, index2) => {
+                        if(e2.id == e1.id) {
+                            format_pictures.push(e2);
+                        }
+                    });
+                });
             }
             //房型
             if (apartment.house_types.length) {
@@ -178,15 +189,15 @@ Page({
             self.setData({
                 ['apartment.title']: apartment.title,
                 ['apartment.one_word']: apartment.one_word,
-                ['apartment.latitude']: apartment.latitude,
-                ['apartment.longitude']: apartment.longitude,
+                ['apartment.latitude']: parseFloat(apartment.latitude),
+                ['apartment.longitude']: parseFloat(apartment.longitude),
                 ['apartment.tags']: tags,
                 ['apartment.rules']: rules,
                 ['apartment.adv']: apartment.extend_info.adv,
                 ['apartment.detail']: detail,
                 ['apartment.collect']: apartment.is_collect,
                 ['apartment.address']: apartment.address,
-                ['pictures.list']: pictures,
+                ['pictures.list']: format_pictures,
                 ['pictures.picture_tags']: picture_tags,
                 ['pictures.tags_title']: tags_title,
                 ['pictures.current_id']: current_id,
@@ -194,6 +205,9 @@ Page({
                 house_types: house_types,
                 format_notice: format_notice
             });
+
+            console.log(self.data.pictures.list);
+            console.log(self.data.pictures.picture_tags);
         });
     },
 
@@ -236,6 +250,26 @@ Page({
         //设置当前current_id
         self.setData({
             ['pictures.current_id']: list[current]['id']
+        });
+    },
+
+    //点击标签
+    tagChange: function(e) {
+        let self = this;
+        let dataset = e.currentTarget.dataset;
+        let list = self.data.pictures.list;
+        let current_index = 0;  //当前滑动图片下标index
+        let len = list.length; //图片数组长度
+
+        for(let index=0; index<len; index++) {
+            if(list[index]['id'] == dataset.id) {
+                current_index = index;
+                break;   //foreach不支持break；改用for
+            }
+        }
+
+        self.setData({
+            ['pictures.current']: current_index
         });
     },
 
@@ -324,7 +358,7 @@ Page({
                 longitude: longitude,
                 scale: 18,
                 address: apartment.address
-            })
+            });
         }
     },
 
