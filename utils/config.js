@@ -13,4 +13,4 @@ let env = {
     }
 };
 
-module.exports = env['online'];
+module.exports = env['test'];

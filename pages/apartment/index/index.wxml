@@ -26,7 +26,7 @@
                 </view>
             </view>
         </view>
-        <view class="box-2">
+        <!-- <view class="box-2">
             <view class="wrap">
                 <view class="title">柠小萌全程免费帮找房
                     <icon></icon>
@@ -55,7 +55,7 @@
                                 <text>柠大萌陪看服务</text>
                             </view>
                             <view class="box-4" wx:if="{{step == 2}}">
-                                <!-- <view class="kefu">
+                                <view class="kefu">
                                     <view class="tel-box">
                                         <view class="weui-flex">
                                             <view class="weui-flex__item kefu-info">
@@ -87,7 +87,7 @@
                                 <view class="desc">
                                     <icon></icon>
                                     <text>恭禧您获得升舱服务卡，优享专车接送看房服务哦</text>
-                                </view> -->
+                                </view>
                                 <view class="tip">
                                     <view>1. 柠大萌会主动和您取得联系，提前帮您规划看房行程，并确定看房时间。</view>
                                     <view>2. 柠大萌会全程带您去规划行程中的各个公寓看房，帮助您分析参谋，并尽可能 帮您争取权益。</view>
@@ -136,6 +136,119 @@
                     </view>
                 </view>
             </view>
+        </view> -->
+        <view class="box-9">
+            <view class="wrap">
+                <view class="title">柠小萌找房</view>
+                <view class="container">
+                    <view class="inner">
+                        <view class="box-title">
+                            <icon class="icon-book"></icon>
+                            <text>预约行程</text>
+                        </view>
+                        <view class="no-trip">
+                            <view class="img">
+                                <image src="https://images.gongyuabc.com/image/iconnew/no-trip.png"></image>
+                            </view>
+                            <view class="tip">暂无预约行程，去找房吧~</view>
+                        </view>
+                        <view class="list hide">
+                            <view class="weui-flex item">
+                                <view>
+                                    <view class="icon">
+                                        <icon class="iconfont icon-dot selected"></icon>
+                                    </view>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="weui-flex">
+                                        <view>
+                                            <view class="headimg">
+                                                <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL6M0TzAYoQd2DRR1k1ia75xCfq7bvHIlshRIoAC8Cicvgmwfsib4Iialj3OKKkEEChbxJhejVibbeWFCA/132"></image>
+                                            </view>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <view class="info-box">
+                                                <view class="ui-nowrap house-type">融寓县后店</view>
+                                                <view class="ui-nowrap date">2019年01月19日</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="status-box">
+                                        <view class="time selected">10:10</view>
+                                        <view class="status">待看房</view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="weui-flex item">
+                                <view>
+                                    <view class="icon">
+                                        <icon class="iconfont icon-dot selected"></icon>
+                                    </view>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="weui-flex">
+                                        <view>
+                                            <view class="headimg">
+                                                <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL6M0TzAYoQd2DRR1k1ia75xCfq7bvHIlshRIoAC8Cicvgmwfsib4Iialj3OKKkEEChbxJhejVibbeWFCA/132"></image>
+                                            </view>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <view class="info-box">
+                                                <view class="ui-nowrap house-type">融寓县后店</view>
+                                                <view class="ui-nowrap date">2019年01月19日</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="status-box">
+                                        <view class="time selected">10:10</view>
+                                        <view class="status">待看房</view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="weui-flex item">
+                                <view>
+                                    <view class="icon">
+                                        <icon class="iconfont icon-dot selected"></icon>
+                                    </view>
+                                </view>
+                                <view class="weui-flex__item">
+                                    <view class="weui-flex">
+                                        <view>
+                                            <view class="headimg">
+                                                <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL6M0TzAYoQd2DRR1k1ia75xCfq7bvHIlshRIoAC8Cicvgmwfsib4Iialj3OKKkEEChbxJhejVibbeWFCA/132"></image>
+                                            </view>
+                                        </view>
+                                        <view class="weui-flex__item">
+                                            <view class="info-box">
+                                                <view class="ui-nowrap house-type">融寓县后店</view>
+                                                <view class="ui-nowrap date">2019年01月19日</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="status-box">
+                                        <view class="time selected">10:10</view>
+                                        <view class="status">待看房</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="btn-box">
+                            <view class="group">
+                                <view class="word">字</view>
+                                <view class="btn">登记需求</view>
+                            </view>
+                            <view class="ui-nowrap need hide">查看我的租房需求卡</view>
+                            <view class="ui-nowrap tip">客服柠小萌会根据您的需求帮您匹配看房行程哦</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
         </view>
         <!-- 需求卡 -->
         <view class="box-6 {{show_demand_box ? '' : 'hide'}}">
@@ -166,7 +279,7 @@
                             <view class="check-title">入住时间</view>
                         </view>
                         <view class="weui-flex__item">
-                             <view class="list clearfix">
+                            <view class="list clearfix">
                                 <view class="item {{living_time.id == item.id ? 'selected' : ''}}" wx:for="{{living_time.list}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="livingTimeSelected">{{item.title}}</view>
                             </view>
                         </view>
