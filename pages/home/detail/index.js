@@ -36,6 +36,7 @@ Page({
             tags_title: [],
             current_id: '',
             current: 0,  //当前所在滑块的 index
+            image_list: [],  //图片url地址
         },
         facility_list: [], //配套
         house_types: [], //房型
@@ -111,6 +112,7 @@ Page({
             let rules = [];
             let pictures = []; 
             let format_pictures = []; 
+            let image_list = [];
             let picture_tags = [];
             let tags_title = [];
             let current_id = ''; //当前滑块id
@@ -142,6 +144,7 @@ Page({
                         tags_title.push(el.title);
                         picture_tags.push({id: el.id, title: el.title });
                     }
+                    image_list.push(el.url);
                 });
                 //默认第一id为当前滑动id
                 current_id = pictures[0]['id'];
@@ -201,6 +204,7 @@ Page({
                 ['pictures.picture_tags']: picture_tags,
                 ['pictures.tags_title']: tags_title,
                 ['pictures.current_id']: current_id,
+                ['pictures.image_list']: image_list,
                 facility_list: apartment.facility_list,
                 house_types: house_types,
                 format_notice: format_notice
@@ -364,6 +368,19 @@ Page({
 
     //防止触摸滚动穿透
     move: function() {},
+
+    //详情页轮播看大图
+    previewImage: function (e) {
+        let self = this;
+        let data = e.currentTarget.dataset;
+        let src = data.src;
+        let pictures = self.data.pictures;
+
+        wx.previewImage({
+            current: src,
+            urls: pictures.image_list
+        });
+    },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
