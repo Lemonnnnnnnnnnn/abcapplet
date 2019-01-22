@@ -10,6 +10,7 @@ const apiUrl = {
     bindMobileUrl: 'sms/bindmobilepost',
     setMobileUrl: 'user/setmobilepost',
     getUserUrl: 'user/getpost',
+    listAppointmentUrl: 'user/listappointmentpost',
 };
 
 Page({
@@ -481,6 +482,17 @@ Page({
             }
         });
     },
+
+    //获取个人预约看房记录
+    listAppointment: function () {
+        let self = this;
+        let postData = {};
+
+        api.doHttp(apiUrl.listAppointmentUrl, postData).then(res => {
+            console.log(res);
+        });
+    },
+
 
     //开发中
     devClick: function() {

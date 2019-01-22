@@ -241,9 +241,9 @@
                         <view class="btn-box">
                             <view class="group">
                                 <view class="word">字</view>
-                                <view class="btn">登记需求</view>
+                                <view class="btn" bindtap="openDemandCard">登记需求</view>
                             </view>
-                            <view class="ui-nowrap need hide">查看我的租房需求卡</view>
+                            <view class="ui-nowrap need hide" bindtap="openDemandCard">查看我的租房需求卡</view>
                             <view class="ui-nowrap tip">客服柠小萌会根据您的需求帮您匹配看房行程哦</view>
                         </view>
                     </view>
