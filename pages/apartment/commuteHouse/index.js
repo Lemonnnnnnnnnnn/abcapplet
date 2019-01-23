@@ -48,6 +48,7 @@ Page({
         apartment: {
             current_page: 1,
             page_size: 5,
+            refresh: 0,
             total: 0,
             list: [],
         },
@@ -121,30 +122,40 @@ Page({
         });
 
         self.setData({
-            ['time.id']: id
+            ['time.id']: id,
+            ['time.index']: e.detail.value,
+            ['apartment.current_page']: 1  //重置第一页
         });
+        //刷新通勤找房
+        self.commute();
     },
 
     //交通工具选择
     vehicleChange: function(e) {
         let self = this;
         let dataset = e.currentTarget.dataset;
-        console.log(dataset);
         
         self.setData({
-            vehicle: dataset.vehicle
+            vehicle: dataset.vehicle,
+            ['apartment.current_page']: 1  //重置第一页
         });
+        //刷新通勤找房
+        self.commute();
     },
 
     //通勤找房
     commute: function (type = 1) {
         let self = this;
+        let apartment = self.data.apartment;
 
         let postData = {
             latitude: self.data.location.latitude,
             longitude: self.data.location.longitude,
             time: self.data.time.id,
-            vehicle: self.data.vehicle
+            vehicle: self.data.vehicle,
+            current_page: apartment.current_page,
+            page_size: apartment.page_size,
+            refresh: apartment.refresh
         };
 
         api.doHttp(apiUrl.commuteUrl, postData).then(res => {
@@ -179,18 +190,43 @@ Page({
         });
     },
 
+    //更多通勤找房
+    moreCommutet: function () {
+        let self = this;
+        let apartment = self.data.apartment;
+        let current_page = apartment.current_page;
+        let page_size = apartment.page_size;
+        let total = apartment.total;
+
+        if (current_page * page_size < total) {
+            self.setData({
+                ['apartment.current_page']: current_page + 1
+            });
+            self.commute(0);
+        }
+    },
+
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+        let self = this;
+        self.setData({
+            ['apartment.current_page']: 1,
+            ['apartment.refresh']: 1
+        });
 
+        self.commute();
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let self = this;
+        self.moreCommutet();
     },
 
     /**

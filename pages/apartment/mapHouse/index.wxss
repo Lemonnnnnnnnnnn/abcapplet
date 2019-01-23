@@ -1,1 +1,227 @@
 /* pages/apartment/mapHouse/index.wxss */
+
+/*查询*/
+
+.search {
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.input {
+    display: inline-block;
+    width: 90%;
+    overflow: hidden;
+    position: relative;
+    height: 30px;
+    margin-left: 5%;
+    line-height: 30px;
+    background: rgba(243, 242, 243, 1);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.input text {
+    font-size: 14px;
+    color: #ccc;
+    margin-left: 35px;
+}
+
+.input >image {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 10px;
+    top: 6px;
+}
+
+/*地图*/
+
+.map {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+}
+
+.map map {
+    flex: 1;
+    height: 100%;
+}
+
+.searchResult {
+    position: absolute;
+    left: 0;
+    bottom: -500px;
+    width: 90%;
+    padding: 0 5%;
+}
+
+.apartment {
+    display: flex;
+    margin-top: 15px;
+}
+
+.apartment .img {
+    width: 148rpx;
+    height: 148rpx;
+    background: #eee;
+    margin-right: 10px;
+}
+
+.apartment >cover-view {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.apartment .name {
+    font-size: 34rpx;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.apartment .oneWord {
+    font-size: 24rpx;
+    color: #3a3a3a;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.activityIcon {
+    font-size: 22rpx;
+    margin-top: 10px;
+}
+
+.activityIcon cover-view {
+    color: #ffcf11;
+    height: 14px;
+    line-height: 14px;
+    display: inline-block;
+}
+
+.activityIcon .icon {
+    width: 14px;
+    background: #ffcf11;
+    text-align: center;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.tags {
+    border-bottom: 1rpx solid #dfdfdf;
+    padding-bottom: 30rpx;
+    margin-top: 10px;
+}
+
+.feature {
+    float: left;
+}
+
+.feature cover-view {
+    height: 40rpx;
+    border: 1rpx solid #80d6fd;
+    color: #80d6fd;
+    font-size: 20rpx;
+    line-height: 40rpx;
+    border-radius: 6rpx;
+    padding: 0 6rpx;
+    display: inline-block;
+}
+
+.feature cover-view:first-child {
+    margin-right: 5px;
+}
+
+.tradeAreas {
+    float: right;
+}
+
+.tradeAreas cover-view {
+    height: 40rpx;
+    line-height: 40rpx;
+    border: 1rpx solid #666;
+    color: #666;
+    font-size: 20rpx;
+    border-radius: 6rpx;
+    padding: 0 6rpx;
+    display: inline-block;
+}
+
+.tradeAreas cover-view:first-child {
+    margin-right: 5px;
+}
+
+.title {
+    margin-top: 15px;
+    font-size: 30rpx;
+    color: #3a3a3a;
+    position: relative;
+    padding-left: 40rpx;
+}
+
+.title cover-image {
+    width: 30rpx;
+    height: 30rpx;
+    display: inline-block;
+    margin-right: 25px;
+    vertical-align: middle;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.houseType {
+    height: 168rpx;
+    margin-top: 15rpx;
+    margin-right: 3.3%;
+    padding-bottom: 20rpx;
+    float: left;
+    width: 30%;
+    position: relative;
+}
+
+.houseType .img {
+    width: 100%;
+    height: 100%;
+}
+
+.houseType .content {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 20rpx;
+    text-align: center;
+}
+
+.houseType .typeName {
+    font-size: 30rpx;
+    color: #fff;
+    margin-top: 20%;
+    margin-bottom: 10px;
+}
+
+.houseType .price {
+    font-size: 25rpx;
+    color: #fff;
+}
+
+/*新手指引*/
+
+.zhiyin {
+    position: fixed;
+    bottom: 30rpx;
+    width: 80%;
+    left: 10%;
+    height: 66rpx;
+}
