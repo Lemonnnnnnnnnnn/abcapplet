@@ -6,7 +6,7 @@
     </view>
 </view>
 <view class="map">
-    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" markers="{{markers}}" bindcallouttap="openResult" bindregionchange="changeLocation" show-location>
+    <map id="map" longitude="{{location.longitude}}" latitude="{{location.latitude}}" scale="{{scale}}" controls="{{controls}}" markers="{{markers}}" bindcallouttap="openResult" bindregionchange="changeLocation" show-location>
         <cover-image class="zhiyin" src="https://images.gongyuabc.com/image/iconnew/zhiyin.png"></cover-image>
     </map>
 </view>
