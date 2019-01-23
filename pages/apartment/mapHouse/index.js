@@ -17,6 +17,9 @@ Page({
             latitude: '',
             longitude: ''
         },
+        scale: 15,
+        markers: [],
+        list: []
     },
 
     /**
@@ -66,7 +69,86 @@ Page({
 
         api.doHttp(apiUrl.findInMapUrl, postData).then(res => {
             let data = res.data;
-            
+            let list = data.list;
+            let marker_list = [];
+
+            list.forEach((el, index) => {
+                let marker = {
+                    id: el.id,
+                    latitude: el.latitude,
+                    longitude: el.longitude,
+                    callout: {
+                        //content: el.title + "|" + list[i].houseTypeList.length + "种户型",
+                        display: 'ALWAYS',
+                        bgColor: "#3a3a3a",
+                        color: "#fff",
+                        borderRadius: 50,
+                        fontSize: 13,
+                        padding: 5
+                    },
+                };
+                marker_list.push(marker);
+            });
+
+            self.setData({
+                markers: marker_list,
+                list: list
+            })
+        });
+    },
+
+    //地图视野发生变化
+    changeLocation: function (e) {
+        let self = this;
+        let location = self.data.location;
+
+        if(e.type == "begin") {
+            return
+        }else if (e.type == "end") {
+            let latitude = location.latitude;
+
+            let mapCtx = wx.createMapContext('map');
+            mapCtx.getCenterLocation({
+                success: res => {
+                    if (latitude == res.latitude) {
+                        return
+                    }else {
+                        self.setData({
+                            ['location.longitude']: res.longitude,
+                            ['location.latitude']: res.latitude
+                        })
+                        self.findInMap();
+                    }
+                }
+            })
+        }
+    },
+    //详情
+    openResult: function (e) {
+        var self = this;
+        var id = e.markerId
+        var list = self.data.list
+        for (var i = 0; i < list.length; i++) {
+            if (id == list[i].id) {
+                self.setData({
+                    latitude: list[i].location[1],
+                    longitude: list[i].location[0],
+                });
+            }
+        }
+        var mapCtx = wx.createMapContext('map');
+        mapCtx.getScale({
+            success: function (res) {
+                if (res.scale >= 17) {
+                    wx.navigateTo({
+                        url: '../detail/detail?id=' + id,
+                    });
+                } else {
+                    self.setData({
+                        scale: 17,
+                    });
+                }
+            }
         });
     },
 
