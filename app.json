@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/apartment/commuteHouse/index",
         "pages/apartment/index/index",
         "pages/home/index/index",
         "pages/home/bookingRoom/index",
-        "pages/apartment/commuteHouse/index",
         "pages/user/collection/index",
         "pages/user/index/index",
         "pages/apartment/mapHouse/index",
@@ -47,5 +47,10 @@
     },
     "networkTimeout": {
         "request": 30000
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
     }
 }
