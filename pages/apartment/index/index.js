@@ -22,6 +22,7 @@ Page({
         show_demand_box: false,
         show_mobile_box: 0,
         mobile: '', //用户手机号
+        appoint_list: [], //我的预约列表
         bind_mobile: {
             mobile: '',
             code: '',
@@ -80,6 +81,8 @@ Page({
         self.listDict();
         //获取个人需求卡
         self.getDemand();
+        //获取个人预约看房记录
+        self.listAppointment();
     },
 
     //获取用户信息
@@ -489,7 +492,18 @@ Page({
         let postData = {};
 
         api.doHttp(apiUrl.listAppointmentUrl, postData).then(res => {
-            console.log(res);
+            let data = res.data;
+            let list = data.list;
+
+            //时间格式化
+            list.forEach((el, index) => {
+                el.create_time = util.timeChange(el.create_time, 'timestamp', 'Y-m-d');
+                el.date_time = util.timeChange(el.create_time, 'timestamp', 'H:i');
+            });
+
+            self.setData({
+                appoint_list: data.list
+            });
         });
     },
 

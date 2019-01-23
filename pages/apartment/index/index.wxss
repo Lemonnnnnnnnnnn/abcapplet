@@ -36,373 +36,28 @@
     font-size: 14px;
 }
 .box-2 .wrap {
-    padding: 10px;
+    padding: 15px;
 }
 .box-2 .title {
-    color: #4A4A4A;
-    font-size: 17px;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
-.box-2 .item {
-    background:rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 5px 0px rgba(223, 222, 222, 0.5);
-    border-radius: 3px;
-    margin-bottom: 10px;
-}
-.box-2 .item .inner {
-    padding: 10px 8px;
-}
-.box-2 .item-title text {
-    color: #4A4A4A;
-    font-size: 14px;
-}
-.box-2 .item-title .demand-card {
-    float: right;
-    color: #FFCF11;
-    line-height: 38px;
-}
-.box-2 .item-title .number {
-    font-size: 24px;
-    color: #FFCF11;
-    margin-right: 10px;
-    position: relative;
-    top: 3px;
-}
-.box-3 {
-    margin-top: 10px;
-}
-.box-3 .item-desc {
-    margin: 0px 20px 20px 40px;
-    font-size: 11px;
-    color: #9B9B9B;
-    line-height: 24px;
-}
-.box-3 .btn {
-    width: 177px;
-    height: 46px;
-    margin: 20px auto 10px auto;
-    background:rgba(255,207,17,1);
-    box-shadow: 0px 0px 4px 0px rgba(219,218,218,1);
-    border-radius: 23px;
-    line-height: 46px;
-    text-align: center;
-    color: #000;
-    font-weight: 500;
-}
-.box-3 .btn-wrap {
-    position: relative;
-}
-.box-3 .btn-wrap icon {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 30px;
-    top: 4px;
-    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
-    background-size: cover;
-}
-.box-4 {
-    margin-left: 40px;
-}
-.box-4 .kefu {
-    margin: 13px 0;
-}
-.box-4 .headimg-box {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    margin-right: 8px;
-}
-.box-4 .headimg-box image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-}
-.box-4 .kefu-info {
-    border-radius:25px;
-    border:1px solid rgba(255,207,17,1);
-}
-.box-4 .kefu-info .username {
-    color: #4A4A4A;
-    font-size: 11px;
-}
-.box-4 .kefu-info .number, .box-4 .kefu-info .servers {
-    color: #4A4A4A;
-    font-size: 8px;
-    margin-top: 2px;
-}
-.box-4 .tel-icon .icon-tel {
-    font-size: 30px;
-    color: #FFCF11;
-    position: relative;
-    top: 2px;
-    right: 10px;
-}
-.box-4 .icon-kefu icon {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin-left: 15px;
-    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
-    background-size: cover;
-    position: relative;
-    right: 5px;
-    top: 6px;
-}
-.box-4 .button-hover, .box-4 button {
-    background-color: #fff;
-}
-.box-4 .desc {
-    margin-bottom: 10px;
-}
-.box-4 .desc icon {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 7px;
-    background: url('https://images.gongyuabc.com/image/icon/card.png') center center no-repeat;
-    background-size: cover;
-}
-.box-4 .desc text {
-    font-size: 8px;
-    color: #4A4A4A;
-}
-.box-4 .tip view {
-    font-size: 8px;
-    color: #4A4A4A;
-    line-height: 16px;
-}
-.box-5 {
-    margin-left: 40px;
-}
-.box-5 .tip {
-    margin: 6px 0 22px;
-    font-size: 11px;
-    color: #9B9B9B;
-}
-.box-5 .stars .title {
-    width: 60px;
-    height: 32px;
-    line-height: 32px;
-    margin-bottom: 0;
-    text-align: left;
-    color: #4A4A4A;
-    float: left;
-    font-size: 11px;
-}
-.box-5 .btn {
-    width: 177px;
-    height: 46px;
-    margin: 20px auto 10px auto;
-    background:rgba(255,207,17,1);
-    box-shadow: 0px 0px 4px 0px rgba(219,218,218,1);
-    border-radius: 23px;
-    line-height: 46px;
-    text-align: center;
-    color: #000;
-    font-weight: 500;
-}
-.box-5 .btn-wrap {
-    position: relative;
-}
-.box-5 .btn-wrap icon {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 30px;
-    top: 4px;
-    background: url('https://images.gongyuabc.com/image/icon/kefu.png') center center no-repeat;
-    background-size: cover;
-}
-.box-5 .score {
-    width: 200px;
-    height: 20px;
-    float: left;
-    margin-left: 10px;
-}
-.box-5 .score icon {
-    font-size: 20px;
-    color: #FFCF11;
-    display: inline-block;
-    margin-right: 8px;
-}
-.box-6 {
-    width: 92%;
-    position: fixed;
-    left: 4%;
-    top: 100px;
-    z-index: 600;
-    background-color: #fff;
-    border-radius: 5px;
-}
-.box-6 .inner {
-    padding: 15px;
-}
-.box-6 .title {
-    font-size: 17px;
-    color: #4A4A4A;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.box-6 .title icon {
-    display: inline-block;
-    width: 22px;
-    height: 20px;
-    margin-right: 8px;
-    background: url('https://images.gongyuabc.com/image/icon/select.png') center center no-repeat;
-    background-size: cover;
-}
-.box-6 .select {
-    margin-bottom: 30px;
-}
-.box-6 .select .item {
-    display: flex;
-}
-.box-6 .select text {
-    font-size: 13px;
-    color: #4A4A4A;
-}
-.box-6 .select .icon-down-arrow {
-    font-size: 14px;
-    color: #4A4A4A;
-    position: relative;
-    top: -4px;
-    left: 3px;
-}
-.box-6 .check {
-    padding: 4px 0;
-}
-.box-6 .check-title {
-    font-size: 14px;
-    color: #000;
-    margin-right: 25px;
-}
-.box-6 .check .item {
-    font-size: 12px;
-    color: #4A4A4A;
-    padding: 2px 8px;
-    float: left;
-    margin-right: 8px;
-    background-color: #EEEEEE;
-    border-radius: 11px;
-}
-.box-6 .check .selected {
-    background-color: #FFCF11;
-}
-.box-6 .btn {
-    width: 291px;
-    height: 46px;
-    background: #FFCF11;
-    box-shadow: 0px 0px 4px 0px rgba(219,218,218,1);
-    border-radius: 23px;
-    margin: 50px auto 5px auto;
-    text-align: center;
-    font-size: 14px;
-    color: #000;
-    line-height: 46px;
-}
-.box-7 {
-    position: fixed;
-    right: 6px;
-    bottom: 120px;
-    z-index: 9;
-    width: 50px;
-    height: 50px;
-}
-.box-7 button {
-    width: 50px;
-    height: 50px;
-    background: url('https://images.gongyuabc.com/image/iconnew/liaokefu.png') center center no-repeat;
-    background-size: cover;
-}
-.box-8 {
-    background-color: #fff;
-    width: 80%;
-    position: fixed;
-    left: 10%;
-    top: 150px;
-    z-index: 600;
-    border-radius: 5px;
-    border-top: 2px solid #FFCF11;
-}
-.box-8 .close {
-    width: 30px;
-    height: 30px;
-    position: fixed;
-    top: 110px;
-    left: 47%;
-    z-index: 600;
-    text-align: center;
-    line-height: 30px;
-}
-.box-8 .close icon {
-    font-size: 28px;
-    color: #fff;
-}
-.box-8 .inner {
-    padding: 20px;
-}
-.box-8 .mobile .weui-flex, .box-8 .code .weui-flex {
-    padding: 10px 0 0px 0;
-    border-bottom: 1px solid #efefef;
-}
-.box-8 .inner .title {
-    font-size: 14px;
-    color: #ccc;
-    line-height: 30px;
-    margin-right: 6px;
-}
-.box-8 .inner input {
-    display: inline-block;
-    font-size: 13px;
-    color: #666;
-    line-height: 30px;
-    height: 30px;
-}
-.box-8 .inner .get-code {
-    padding: 2px 5px;
-    border-radius: 5px;
-    background-color: #FFCF11;
-    text-align: center;
-    line-height: 26px;
-    color: #666;
-    font-size: 12px;
-}
-.box-8 .btn {
-    font-size: 13px;
-    color: #666;
-    background-color: #FFCF11;
-    text-align: center;
-    line-height: 30px;
-    margin-top: 20px;
-    border-radius: 3px;
-}
-.box-9 .wrap {
-    padding: 15px;
-}
-.box-9 .title {
     margin-bottom: 10px;
     font-size: 17px;
     color: #4A4A4A
 }
-.box-9 .container {
+.box-2 .container {
     background:rgba(255,255,255,1);
     box-shadow:0px 0px 5px 0px rgba(223,222,222,0.5);
     border-radius:3px;
 }
-.box-9 .container .inner {
+.box-2 .container .inner {
     padding: 10px;
 }
-.box-9 .container .box-title {
+.box-2 .container .box-title {
     margin-bottom: 30px;
     font-size: 14px;
     color: #4A4A4A;
     line-height: 30px;
 }
-.box-9 .box-title .icon-book {
+.box-2 .box-title .icon-book {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -410,82 +65,82 @@
     background: url('https://images.gongyuabc.com/image/iconnew/book.png') center center no-repeat;
     background-size: cover;
 }
-.box-9 .item {
+.box-2 .item {
     margin-bottom: 20px;
 }
-.box-9 .item .selected {
+.box-2 .item .selected {
     color: #FFCF11 !important;
 }
-.box-9 .item .icon {
+.box-2 .item .icon {
     margin-right: 30px;
     text-align: left;
     line-height: 60px;
 }
-.box-9 .item icon {
+.box-2 .item icon {
     font-size: 20px;
     color: #9B9B9B;
 }
-.box-9 .item .headimg {
+.box-2 .item .headimg {
     width: 60px;
     height: 60px;
     border-radius: 60px;
     margin-right: 15px;
 }
-.box-9 .item .headimg image {
+.box-2 .item .headimg image {
     width: 100%;
     height: 100%;
     border-radius: 60px;
 }
-.box-9 .item .info-box {
+.box-2 .item .info-box {
     margin-top: 8px;
 }
-.box-9 .item .house-type {
+.box-2 .item .house-type {
     font-size: 14px;
     color: #4A4A4A;
     margin-bottom: 2px;
     max-width: 120px;
 }
-.box-9 .item .date {
+.box-2 .item .date {
     max-width: 120px;
     font-size: 11px;
     color: #8C8B8C;
 }
-.box-9 .item .status-box {
+.box-2 .item .status-box {
     margin-top: 8px;
     margin-left: 10px;
 }
-.box-9 .item .status-box .time {
+.box-2 .item .status-box .time {
     font-size: 14px;
     color: #9B9B9B
 }
-.box-9 .item .status-box .status {
+.box-2 .item .status-box .status {
     font-size: 11px;
     color: #9B9B9B;
 }
-.box-9 .btn-box {
+.box-2 .btn-box {
     margin-top: 50px;
 }
-.box-9 .btn-box .need {
+.box-2 .btn-box .need {
     font-size: 14px;
     color: #FFC000;
     margin-bottom: 8px;
     text-align: center;
 }
-.box-9 .btn-box .tip {
+.box-2 .btn-box .tip {
     font-size: 11px;
     text-align: center;
     color: #DFDEDE;
 }
-.box-9 .btn-box .group {
+.box-2 .btn-box .group {
     margin-bottom: 8px;
 }
-.box-9 .group .word {
+.box-2 .group .word {
     font-size: 14px;
     color: #9B9B9B;
     margin-bottom: 2px;
     text-align: center
 }
-.box-9 .group .btn {
+.box-2 .group .btn {
     width: 177px;
     height: 46px;
     line-height: 46px;
@@ -497,16 +152,16 @@
     box-shadow: 0px 0px 4px 0px rgba(219,218,218,1);
     border-radius: 23px;
 }
-.box-9 .no-trip .img {
+.box-2 .no-trip .img {
     width: 100px;
     height: 64px;
     margin: 0 auto;
 }
-.box-9 .no-trip image {
+.box-2 .no-trip image {
     width: 100%;
     height: 100%;
 }
-.box-9 .no-trip .tip {
+.box-2 .no-trip .tip {
     font-size: 11px;
     margin-top: 12px;
     color: #BBB9BC;
