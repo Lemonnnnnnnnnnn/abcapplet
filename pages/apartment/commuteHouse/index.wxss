@@ -45,7 +45,7 @@
     top: -3px;
 }
 .box-1 .location .address {
-    max-width: 250px;
+    max-width: 210px;
     line-height: 30px;
     color: #ccc;
     font-size: 14px;
