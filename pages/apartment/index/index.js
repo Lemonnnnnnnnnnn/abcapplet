@@ -517,8 +517,8 @@ Page({
 
             //时间格式化
             list.forEach((el, index) => {
-                el.create_time = util.timeChange(el.create_time, 'timestamp', 'Y-m-d');
-                el.date_time = util.timeChange(el.create_time, 'timestamp', 'H:i');
+                el.create_time = util.timeChange(el.order_time, 'timestamp', 'Y-m-d');
+                el.date_time = util.timeChange(el.order_time, 'timestamp', 'H:i');
             });
 
             self.setData({
