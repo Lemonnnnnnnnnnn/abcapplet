@@ -1,12 +1,12 @@
 <!--pages/apartment/mapHouse/index.wxml-->
-<view class="search">
-    <view class="input" bindtap="goToSearch">
+<view class="box-1">
+    <navigator class="search" hover-class="none" url="/pages/home/search/index">
         <image src="/images/apartment/search_icon.png" />
         <text>搜索</text>
-    </view>
+    </navigator>
 </view>
-<view class="map">
-    <map id="map" longitude="{{location.longitude}}" latitude="{{location.latitude}}" scale="{{scale}}" controls="{{controls}}" markers="{{markers}}" bindcallouttap="openResult" bindregionchange="changeLocation" show-location>
+<view class="box-2">
+    <map id="map" longitude="{{location.longitude}}" latitude="{{location.latitude}}" scale="{{scale}}" markers="{{markers}}" bindcallouttap="openApartmentDetail" bindregionchange="changeLocation" show-location>
         <cover-image class="zhiyin" src="https://images.gongyuabc.com/image/iconnew/zhiyin.png"></cover-image>
     </map>
 </view>

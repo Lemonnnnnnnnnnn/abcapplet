@@ -507,16 +507,6 @@ Page({
         });
     },
 
-
-    //开发中
-    devClick: function() {
-        wx.showToast({
-            title: '开发中...',
-            icon: 'none',
-            duration: 2000
-        });
-    },
-
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */

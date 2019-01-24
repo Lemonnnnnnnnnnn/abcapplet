@@ -78,7 +78,7 @@ Page({
                     latitude: el.latitude,
                     longitude: el.longitude,
                     callout: {
-                        //content: el.title + "|" + list[i].houseTypeList.length + "种户型",
+                        content: el.title,
                         display: 'ALWAYS',
                         bgColor: "#3a3a3a",
                         color: "#fff",
@@ -123,47 +123,42 @@ Page({
             })
         }
     },
-    //详情
-    openResult: function (e) {
-        var self = this;
-        var id = e.markerId
-        var list = self.data.list
-        for (var i = 0; i < list.length; i++) {
-            if (id == list[i].id) {
-                self.setData({
-                    latitude: list[i].location[1],
-                    longitude: list[i].location[0],
-                });
+
+    //点击标签打开公寓详情
+    openApartmentDetail: function (e) {
+        let self = this;
+        let list = self.data.list;
+        let location = self.data.location;
+        let latitude = location.latitude;
+        let longitude = location.longitude;
+        let marker_id = e.markerId;
+
+        list.forEach((el, index) => {
+            if(marker_id == el.id) {
+                latitude = el.latitude;
+                longitude = el.longitude;
             }
-        }
-        var mapCtx = wx.createMapContext('map');
+        });
+
+        self.setData({
+            ['location.latitude']: latitude,
+            ['location.longitude']: longitude
+        });
+        
+        let mapCtx = wx.createMapContext('map');
         mapCtx.getScale({
-            success: function (res) {
-                if (res.scale >= 17) {
+            success: res => {
+                if(res.scale >= 17) {
                     wx.navigateTo({
-                        url: '../detail/detail?id=' + id,
+                        url: '/pages/home/detail/index?id=' + marker_id
                     });
-                } else {
+                }else {
                     self.setData({
                         scale: 17,
                     });
                 }
             }
         });
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
     },
 
     /**
