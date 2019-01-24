@@ -341,14 +341,14 @@ Page({
             let data = res.data;
             let cbd_list = [{
                 id: 0,
-                title: '全部'
+                title: '请选择区域'
             }];
-            let cbd_title = ['全部'];
+            let cbd_title = ['请选择区域'];
             let price_list = [{
                 id: 0,
-                title: '全部'
+                title: '请选择预算'
             }];
-            let price_title = ['全部'];
+            let price_title = ['请选择预算'];
 
             //cbd格式处理
             if (data.cbd_list.length) {
@@ -443,6 +443,26 @@ Page({
     //填写个人需求卡
     addDemand: function () {
         let self = this;
+
+        if (!self.data.price.price_id) {
+            wx.showToast({
+                title: '请选择租房预算',
+                duration: 2000,
+                mask: true
+            });
+
+            return false;
+        }
+
+        if (!self.data.cbd.cbd_id) {
+            wx.showToast({
+                title: '请选择目标区域',
+                duration: 2000,
+                mask: true
+            });
+
+            return false;
+        }
 
         let postData = {
             cbd: self.data.cbd.cbd_id,
