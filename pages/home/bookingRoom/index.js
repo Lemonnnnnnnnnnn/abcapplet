@@ -375,14 +375,14 @@ Page({
             let data = res.data;
             let cbd_list = [{
                 id: 0,
-                title: '全部'
+                title: '请选择区域'
             }];
-            let cbd_title = ['全部'];
+            let cbd_title = ['请选择区域'];
             let price_list = [{
                 id: 0,
-                title: '全部'
+                title: '请选择预算'
             }];
-            let price_title = ['全部'];
+            let price_title = ['请选择预算'];
 
             //cbd格式处理
             if (data.cbd_list.length) {
@@ -650,10 +650,11 @@ Page({
     addAppointment: function() {
         let self = this;
 
-        if(!self.data.order_time.date_time) {
+        if (!self.data.order_time.date_time) {
             wx.showToast({
                 title: '请选择看房时间',
-                duration: 2000
+                duration: 2000,
+                mask: true
             });
 
             return false;
@@ -663,9 +664,30 @@ Page({
             wx.showToast({
                 title: '请绑定手机号',
                 duration: 2000,
+                mask: true,
                 success: res => {
                     self.openMobileBox();
                 }
+            });
+
+            return false;
+        }
+
+        if (!self.data.price.price_id) {
+            wx.showToast({
+                title: '请选择租房预算',
+                duration: 2000,
+                mask: true
+            });
+
+            return false;
+        }
+
+        if (!self.data.cbd.cbd_id) {
+            wx.showToast({
+                title: '请选择目标区域',
+                duration: 2000,
+                mask: true
             });
 
             return false;
@@ -675,20 +697,11 @@ Page({
             apartment: self.data.id,
             house_type: self.data.house_type.house_type_id,
             order_time: self.data.order_time.date_time,
+            cbd: self.data.cbd.cbd_id,
+            budget: self.data.price.price_id,
+            living_time: self.data.living_time.id,
+            people: self.data.living_num.id
         };
-
-        if(self.data.cbd.cbd_id) {
-            postData.cbd = self.data.cbd.cbd_id
-        }
-        if (self.data.price.price_id) {
-            postData.budget = self.data.price.price_id;
-        }
-        if(self.data.living_time.id) {
-            postData.living_time = self.data.living_time.id;
-        }
-        if(self.data.living_num.id) {
-            postData.people = self.data.living_num.id
-        }
         
         api.doHttp(apiUrl.addAppointmentUrl, postData).then(res => {
             let data = res.data;
