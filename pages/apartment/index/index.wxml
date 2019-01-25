@@ -7,9 +7,8 @@
                     <navigator class="map" hover-class="none" url="/pages/apartment/mapHouse/index">
                         <view class="inner">
                             <view class="ui-nowrap title">地图找房</view>
-                            <view class="ui-nowrap desc">观音山公寓</view>
-                            <view class="ui-nowrap desc">3000元起</view>
-                            <view class="ui-nowrap desc">7套在租</view>
+                            <view class="ui-nowrap desc">在地图上描绘</view>
+                            <view class="ui-nowrap desc">家的位置</view>
                         </view>
                     </navigator>
                     <navigator class="commute" hover-class="none" url="/pages/apartment/commuteHouse/index">
