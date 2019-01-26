@@ -1,0 +1,72 @@
+<!--pages/home/promotion/index.wxml-->
+<view class="page">
+    <view class="page__bd">
+        <view class="box-1">
+            <view class="wrap">
+                <view class="weui-flex">
+                    <view>
+                        <view class="img">
+                            <image class="fade-in" src="{{cbd.cover + '?imageView2/1/w/140/h/140'}}"></image>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="title">{{cbd.title}}</view>
+                        <view class="tip">{{cbd.desc}}</view>
+                    </view>
+                    <view>
+                        <view class="number">{{cbd.apartment_num}}家公寓</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="box-2">
+            <view class="wrap">
+                <view class="list" wx:for="{{collection.list}}" wx:key="{{index}}">
+                    <navigator wx:for="{{item}}" wx:for-index="sindex" wx:for-item="sitem" class="item" hover-class="none" url="/pages/home/detail/index?id={{sitem.id}}">
+                        <view class="inner">
+                            <view class="img">
+                                <image class="fade-in" src="{{sitem.cover + '?imageView2/1/w/670/h/404'}}" mode="scaleToFill"></image>
+                                <text class="want">{{sitem.appointment_show_num}}人想住</text>
+                            </view>
+                            <view class="scroll-view">
+                                <scroll-view scroll-x="true">
+                                    <view class="img-item" wx:for="{{sitem.house_type}}" wx:for-item="type" wx:for-index="typeindex" wx:key="{{typeindex}}" data-id="{{sitem.id}}" data-type-id="{{type.id}}" catchtap="openTypeDailog">
+                                        <image class="fade-in" data-id="{{type.id}}" src="{{type.cover + '?imageView2/1/w/192/h/126'}}"></image>
+                                        <view class="img-item-mask">
+                                            <view class="ui-nowrap house-title">{{type.title}}</view>
+                                            <view class="ui-nowrap price">{{type.price_title}}</view>
+                                        </view>
+                                    </view>
+                                </scroll-view>
+                            </view>
+                            <view class="apartment-name">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap name">{{sitem.title}}</view>
+                                    </view>
+                                    <view class="weui-flex__item">
+                                        <view class="tag clearfix">
+                                            <view class="tag-item" wx:for="{{sitem.tags}}" wx:for-item="tag" wx:for-index="tagindex" wx:key="{{tagindex}}">{{tag}}</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="desc">
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item">
+                                        <view class="ui-nowrap tip">{{sitem.one_word}}</view>
+                                    </view>
+                                    <view>
+                                        <view class="tag clearfix">
+                                            <icon wx:for="{{sitem.rules}}" wx:for-item="rule" wx:for-index="ruleindex" wx:key="{{ruleindex}}" wx:if="{{rule.show}}" class="{{rule.id}}"></icon>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
