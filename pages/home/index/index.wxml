@@ -84,12 +84,12 @@
             <view class="wrap">
                 <view class="weui-flex" style="height: 60px;">
                     <view class="weui-flex__item">
-                        <navigator class="ad" wx:if="{{activity_banner.length > 0}}" hover-class="none" url="{{activity_banner[0].url}}">
+                        <navigator class="ad" wx:if="{{activity_banner.length > 0}}" hover-class="none" url="/pages/home/promotion/index?id={{activity_banner[0].id}}">
                             <image class="fade-in" src="{{activity_banner[0].cover + '?imageView2/1/w/344/h/120'}}"></image>
                         </navigator>
                     </view>
                     <view class="weui-flex__item">
-                        <navigator class="ad ad-right" wx:if="{{activity_banner.length > 1}}" hover-class="none" url="{{activity_banner[1].url}}">
+                        <navigator class="ad ad-right" wx:if="{{activity_banner.length > 1}}" hover-class="none" url="/pages/home/promotion/index?id={{activity_banner[1].id}}">
                             <image src="{{activity_banner[1].cover + '?imageView2/1/w/344/h/120'}}"></image>
                         </navigator>
                     </view>

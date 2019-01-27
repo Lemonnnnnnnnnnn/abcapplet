@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/home/promotion/index",
         "pages/home/index/index",
+        "pages/home/promotion/index",
+        
         "pages/apartment/index/index",
         "pages/home/bookingRoom/index",
         "pages/user/collection/index",

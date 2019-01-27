@@ -9,6 +9,7 @@ const apiUrl = {
     listWeekUrl: 'apartment/listweekpost',
     listDictUrl: 'dict/listpost',
     listApartmentUrl: 'apartment/listpost',
+    listHotActivityUrl: 'article/listhotactivitypost'
 };
 
 Page({
@@ -32,7 +33,7 @@ Page({
         },
         banner_list: [],  //轮播列表
         cbd_list: [],  //商圈列表
-        activity_banner: [],  //活动广告列表
+        activity_banner: [],  //促销活动广告列表
         week_list: [], //每周上新
         dict: {
             cbd_dict: [], //商圈字典
@@ -80,10 +81,11 @@ Page({
 
         self.listBanner();
         self.listHotcbd();
-        self.listActivityBanner();
+        //self.listActivityBanner();
         self.listWeek();
         self.listDict();
         self.listApartment();
+        self.listHotActivityUrl();
     },
 
     //获取开通城市站点
@@ -187,14 +189,30 @@ Page({
     },
 
     //活动集广告列表
-    listActivityBanner: function () {
+    // listActivityBanner: function () {
+    //     let self = this;
+    //     let postData = {
+    //         city: wx.getStorageSync('city_id'),
+    //         type: 'activity'
+    //     };
+
+    //     api.doHttp(apiUrl.listBannerUrl, postData).then(res => {
+    //         let data = res.data;
+
+    //         self.setData({
+    //             activity_banner: data.list
+    //         });
+    //     });
+    // },
+
+    //促销活动列表
+    listHotActivityUrl: function() {
         let self = this;
         let postData = {
-            city: wx.getStorageSync('city_id'),
-            type: 'activity'
+            city: wx.getStorageSync('city_id')
         };
 
-        api.doHttp(apiUrl.listBannerUrl, postData).then(res => {
+        api.doHttp(apiUrl.listHotActivityUrl, postData).then(res => {
             let data = res.data;
 
             self.setData({

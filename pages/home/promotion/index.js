@@ -3,7 +3,7 @@ const api = require('../../../utils/api.js');
 const util = require('../../../utils/util.js');
 const app = getApp();
 const apiUrl = {
-    getCbdUrl: 'cbd/getpost'
+    getByRuleUrl: 'apartment/getbyrulepost'
 };
 
 Page({
@@ -13,7 +13,7 @@ Page({
      */
     data: {
         id: 1,   //公寓合集id
-        cbd: {
+        rule: {
             cover: '',
             title: '',
             desc: '',
@@ -22,6 +22,7 @@ Page({
         collection: {
             current_page: 1,
             page_size: 5,
+            refresh: 0,
             total: 0,
             list: []
         }
@@ -40,7 +41,7 @@ Page({
             });
         }
         //获取公寓合集
-        self.getCbd();
+        self.getByRule();
     },
 
     //点击公寓户型缩略图跳转至详情对话框
@@ -55,20 +56,21 @@ Page({
     },
 
     //获取公寓合集
-    getCbd: function (type = 1) {
+    getByRule: function (type = 1) {
         let self = this;
         let collection = self.data.collection;
         let postData = {
-            cbd_id: self.data.id,
+            rule_id: self.data.id,
             current_page: collection.current_page,
-            page_size: collection.page_size
+            page_size: collection.page_size,
+            refresh: collection.refresh
         };
 
-        api.doHttp(apiUrl.getCbdUrl, postData).then(res => {
+        api.doHttp(apiUrl.getByRuleUrl, postData).then(res => {
             let data = res.data;
             let list = data.list;
             let total = data.total;
-            let cbd = data.cbd;
+            let rule = data.rule;
             let collection = self.data.collection;
             let format_list = [];
 
@@ -91,10 +93,10 @@ Page({
             }
 
             self.setData({
-                ['cbd.cover']: cbd.cover,
-                ['cbd.title']: cbd.title,
-                ['cbd.desc']: cbd.desc,
-                ['cbd.apartment_num']: cbd.apartment_num,
+                ['rule.cover']: rule.cover,
+                ['rule.title']: rule.title,
+                ['rule.desc']: rule.desc,
+                ['rule.apartment_num']: total,
                 ['collection.list[' + (collection.current_page - 1) + ']']: format_list,
                 ['collection.total']: total
             });
@@ -112,7 +114,7 @@ Page({
             this.setData({
                 ['collection.current_page']: current_page + 1
             });
-            self.getCbd(0);
+            self.getByRule(0);
         }
     },
 
