@@ -134,12 +134,6 @@
 .box-2 .btn-box .group {
     margin-bottom: 8px;
 }
-.box-2 .group .word {
-    font-size: 14px;
-    color: #9B9B9B;
-    margin-bottom: 2px;
-    text-align: center
-}
 .box-2 .group .btn {
     width: 177px;
     height: 46px;

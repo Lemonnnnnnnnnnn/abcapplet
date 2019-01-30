@@ -68,7 +68,6 @@
                         </view>
                         <view class="btn-box">
                             <view class="group" wx:if="{{step == 1}}">
-                                <view class="word">字</view>
                                 <view class="btn" bindtap="openDemandCard">登记需求</view>
                             </view>
                             <view wx:if="{{step > 1}}" class="ui-nowrap need" bindtap="openDemandCard">查看我的租房需求卡</view>
