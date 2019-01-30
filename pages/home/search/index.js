@@ -30,7 +30,7 @@ Page({
             cbd_id: 0,
             cbd_title: '',  //当前选中的商圈
             price_id: 0,
-            price_title: '',  //当前选中的价格
+            price_title: '',  //当前选中的价格 
             house_type_id: 0,
             house_type_title: '',  //当前选中的户型
             current_page: 1,
@@ -249,18 +249,14 @@ Page({
         self.search();
     },
 
-    //搜索词绑定
-    searchKeyEvent: function (e) {
+    //搜索确认
+    searchClick: function (e) {
         let self = this;
 
+        //设置搜索词
         self.setData({
             ['search.search_key']: e.detail.value
         });
-    },
-
-    //搜索确认
-    searchClick: function () {
-        let self = this;
         let search_key = self.data.search.search_key;
 
         if (search_key == '') {
@@ -338,6 +334,15 @@ Page({
             });
             self.search(0);
         }
+    },
+
+    //取消搜索
+    cancelClick: function () {
+        let self = this;
+
+        self.setData({
+            ['search.search_key']: ''
+        });
     },
 
     /**
