@@ -129,11 +129,11 @@
         </view>
         <view class="mask {{show_demand_box ? '' : 'hide'}}" bindtap="closeDemandCard"></view>
         <!-- 客服 -->
-        <view class="box-7">
+        <view class="box-4">
             <button class="btn" open-type="contact"></button>
         </view>
         <!-- 手机弹框 -->
-        <view class="box-8 {{show_mobile_box ? '' : 'hide'}}">
+        <view class="box-5 {{show_mobile_box ? '' : 'hide'}}">
             <view class="close" bindtap="closeMobilBox">
                 <icon class="iconfont icon-close"></icon>
             </view>

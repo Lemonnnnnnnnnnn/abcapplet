@@ -237,3 +237,79 @@
     color: #000;
     line-height: 46px;
 }
+.box-4 {
+    position: fixed;
+    right: 6px;
+    bottom: 10px;
+    z-index: 9;
+    width: 50px;
+    height: 50px;
+}
+.box-4 button {
+    width: 50px;
+    height: 50px;
+    background: url('https://images.gongyuabc.com/image/iconnew/liaokefu.png') center center no-repeat;
+    background-size: cover;
+}
+.box-5 {
+    background-color: #fff;
+    width: 80%;
+    position: fixed;
+    left: 10%;
+    top: 150px;
+    z-index: 600;
+    border-radius: 5px;
+    border-top: 2px solid #FFCF11;
+}
+.box-5 .close {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 110px;
+    left: 47%;
+    z-index: 600;
+    text-align: center;
+    line-height: 30px;
+}
+.box-5 .close icon {
+    font-size: 28px;
+    color: #fff;
+}
+.box-5 .inner {
+    padding: 20px;
+}
+.box-5 .mobile .weui-flex, .box-5 .code .weui-flex {
+    padding: 10px 0 0px 0;
+    border-bottom: 1px solid #efefef;
+}
+.box-5 .inner .title {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 30px;
+    margin-right: 6px;
+}
+.box-5 .inner input {
+    display: inline-block;
+    font-size: 13px;
+    color: #666;
+    line-height: 30px;
+    height: 30px;
+}
+.box-5 .inner .get-code {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background-color: #FFCF11;
+    text-align: center;
+    line-height: 26px;
+    color: #666;
+    font-size: 12px;
+}
+.box-5 .btn {
+    font-size: 13px;
+    color: #666;
+    background-color: #FFCF11;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 20px;
+    border-radius: 3px;
+}
