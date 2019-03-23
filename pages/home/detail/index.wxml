@@ -187,7 +187,7 @@
                     <view class="weui-flex__item">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <button class="btn" open-type="contact" bindcontact="handleContact">
+                                <button class="btn btn-kefu" open-type="contact" bindcontact="handleContact">
                                     <icon class="kefu"></icon>
                                     <text>在线客服</text>
                                 </button>
