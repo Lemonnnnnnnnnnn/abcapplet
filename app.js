@@ -2,6 +2,7 @@
 var gio = require("./utils/gio-minp.js").default;
 // version 是你的小程序的版本号, 发版时请调整
 gio('init', '89062984e90c6acd', 'wxea1feb6f65ce3414', { version: 'gy1.0.1.4' });
+gio('init', '89062984e90c6acd', 'wxea1feb6f65ce3414', { followShare: true });
 
 App({
   onLaunch: function () {
