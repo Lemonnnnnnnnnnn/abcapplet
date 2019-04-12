@@ -1,0 +1,9 @@
+/* pages/youxuan/index/index.wxss */
+page {
+    background: url('https://images.gongyuabc.com/bg.jpg') center center no-repeat;
+    background-size: cover;
+}
+.page {
+    width: 100vw;
+    height: 100vh;
+}

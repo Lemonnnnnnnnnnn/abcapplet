@@ -6,6 +6,7 @@
         "pages/home/bookingRoom/index",
         "pages/user/collection/index",
         "pages/user/index/index",
+        "pages/youxuan/index/index",
         "pages/apartment/mapHouse/index",
         "pages/apartment/commuteHouse/index",
         "pages/home/article/detail/index",
@@ -35,6 +36,12 @@
                 "selectedIconPath": "images/common/tabbar/search_selected.png"
             },
             {
+                "pagePath": "pages/youxuan/index/index",
+                "text": "优选",
+                "iconPath": "images/common/tabbar/youxuan.png",
+                "selectedIconPath": "images/common/tabbar/youxuan_selected.png"
+            },
+            {
                 "pagePath": "pages/user/index/index",
                 "text": "我的",
                 "iconPath": "images/common/tabbar/user.png",
@@ -53,5 +60,8 @@
         "scope.userLocation": {
             "desc": "你的位置信息将用于小程序位置接口的效果展示"
         }
-    }
+    },
+    "navigateToMiniProgramAppIdList": [
+        "wxd3537ccb429de3b4"
+    ]
 }
