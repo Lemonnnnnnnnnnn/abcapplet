@@ -1,6 +1,7 @@
+/* eslint-disable import/no-commonjs */
 const config = {
-  projectName: 'abc-applet',
-  date: '2019-5-27',
+  projectName: 'w-store-app',
+  date: '2019-2-27',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
@@ -94,7 +95,7 @@ const config = {
   }
 }
 
-export default function (merge) {
+module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'))
   }
