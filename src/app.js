@@ -17,14 +17,49 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      "pages/apartment/home",
+      "pages/apartment/services",
+      "pages/apartment/recommend",
+      "pages/user/profile",
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '公寓ABC',
       navigationBarTextStyle: 'black'
-    }
+    },
+    tabBar: {
+      color: "#4A4A4A",
+      selectedColor: "#4A4A4A",
+      backgroundColor: "#fff",
+      borderStyle: "black",
+      list: [
+        {
+          pagePath: "pages/apartment/home",
+          text: "首页",
+          iconPath: "assets/icons/home.png",
+          selectedIconPath: "assets/icons/home_active.png"
+        },
+        {
+          pagePath: "pages/apartment/services",
+          text: "找房",
+          iconPath: "assets/icons/services.png",
+          selectedIconPath: "assets/icons/services_active.png"
+        },
+        {
+          pagePath: "pages/apartment/recommend",
+          text: "优选",
+          iconPath: "assets/icons/recommend.png",
+          selectedIconPath: "assets/icons/recommend_active.png"
+        },
+        {
+          pagePath: "pages/user/profile",
+          text: "我的",
+          iconPath: "assets/icons/profile.png",
+          selectedIconPath: "assets/icons/profile_active.png"
+        }
+      ],
+    },
   }
 
   componentDidMount() { }
