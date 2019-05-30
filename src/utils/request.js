@@ -76,7 +76,9 @@ export default async function fetch({
       await updateStorage({ token: newToken, user })
     }
 
-    return setTimeout(() => success(response), IS_DEV ? DEV_REQUEST_DELAY : 0)
+    success(response)
+    handleComplete()
+    return response
   }
 
   /**
@@ -115,7 +117,9 @@ export default async function fetch({
       })
     }
 
-    return fail(error)
+    fail(error)
+    handleComplete()
+    return error
   }
 
   /**
@@ -139,5 +143,4 @@ export default async function fetch({
     .then(handleStatus)
     .then(handleSuccess)
     .catch(handleError)
-    .then(handleComplete)
 }
