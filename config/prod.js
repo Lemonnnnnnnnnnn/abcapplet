@@ -2,10 +2,8 @@
 module.exports = {
   env: {
     NODE_ENV: '"production"',
-    HOST: '"https://api.gongyuabc.com/mini/"',
   },
-  defineConstants: {
-  },
+  defineConstants: {},
   weapp: {},
   h5: {}
 }
