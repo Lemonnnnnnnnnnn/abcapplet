@@ -1,15 +1,23 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 
 class ApartmentRecommend extends Component {
   config = {
     navigationBarTitleText: '优选',
   }
 
+  openMiniProgram() {
+    Taro.navigateToMiniProgram({
+      appId: 'wxd3537ccb429de3b4'
+    });
+  }
+
   render() {
     return (
-      <View className='page-demo'>
-        <Text>优选</Text>
+      <View
+        className='page-recommend'
+        onClick={this.openMiniProgram}
+      >
       </View>
     )
   }
