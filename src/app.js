@@ -3,7 +3,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import Index from './pages/index'
 import configStore from './store'
-import './app.scss'
+import './styles/app.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -17,10 +17,11 @@ class App extends Component {
 
   config = {
     pages: [
+      "pages/user/profile",
+      "pages/user/auth",
+      "pages/apartment/recommend",
       "pages/apartment/home",
       "pages/apartment/services",
-      "pages/apartment/recommend",
-      "pages/user/profile",
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -60,6 +61,9 @@ class App extends Component {
         }
       ],
     },
+    navigateToMiniProgramAppIdList: [
+      "wxd3537ccb429de3b4"
+    ],
   }
 
   componentDidMount() { }
