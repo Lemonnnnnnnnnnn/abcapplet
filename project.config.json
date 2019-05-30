@@ -1,15 +1,19 @@
 {
-  "miniprogramRoot": "dist/",
-  "projectname": "abc-applet",
-  "description": "abc 公寓",
-  "appid": "wxcdc6d26b741fc082",
-  "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false,
-    "newFeature": true
-  },
-  "compileType": "miniprogram",
-  "condition": {}
+	"miniprogramRoot": "dist/",
+	"projectname": "abc-applet",
+	"description": "abc 公寓",
+	"appid": "wxea1feb6f65ce3414",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"libVersion": "2.0.4",
+	"condition": {}
 }
