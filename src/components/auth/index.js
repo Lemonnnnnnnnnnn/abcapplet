@@ -30,7 +30,7 @@ class Auth extends Component {
 
         {/* 授权说明 */}
         <View className='text-center m-3'>
-          <Text className='text-muted text-small'>{message}</Text>
+          <Text className='text-muted text-normal'>{message}</Text>
         </View>
 
         {/* 确认按钮 */}
