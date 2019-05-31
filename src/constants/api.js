@@ -9,5 +9,6 @@ export const DEAFULT_HOME_PAGE = '/pages/apartment/home'
 export const API_USER_LOGIN = `${HOST}/auth/loginpost`
 
 // 首页
+export const API_CITY_LIST = `${HOST}/dict/listsitepost`
 export const API_BANNER_LIST = `${HOST}/article/listbannerpost`
 export const API_HOT_CDB_LIST = `${HOST}/dict/listHotCbdPost`
