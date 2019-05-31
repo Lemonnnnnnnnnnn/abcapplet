@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { API_USER_LOGIN } from '@constants/api'
+import { clearUserStorage, getUserStorage } from '@actions/user'
 import { MESSAGE_ERROR } from '@constants/message'
 
 /**
@@ -14,29 +14,6 @@ const CODE_AUTH_EXPIRED = 911
  */
 const DEV_REQUEST_DELAY = 2000
 const IS_DEV = process.env.NODE_ENV === 'development'
-
-/**
- * 封装 storage
- * 当无数据时返回空字符
- * @param {*} key
- */
-function getStorage(key) {
-  return Taro.getStorage({ key })
-    .then(res => res.data)
-    .catch(() => '')
-}
-
-/**
- * 封装 storage
- * 更新用户数据
- * @param {*} key
- */
-function updateStorage(data = {}) {
-  return Promise.all([
-    Taro.setStorageSync('token', data.token || ''),
-    Taro.setStorageSync('user_info', data.user || ''),
-  ])
-}
 
 /**
  * 网络请求封装
@@ -55,7 +32,7 @@ export default async function fetch({
 }) {
   // 初始化头部数据
   const header = {}
-  const token = await getStorage('token')
+  const { token } = getUserStorage()
   const data = { ...payload, token }
 
   /**
@@ -71,11 +48,6 @@ export default async function fetch({
    * @param {*} response
    */
   async function handleSuccess(response) {
-    if (url === API_USER_LOGIN) {
-      let { token: newToken, user } = response.data.data
-      await updateStorage({ token: newToken, user })
-    }
-
     success(response)
     handleComplete()
     return response
@@ -93,7 +65,7 @@ export default async function fetch({
     switch (response.data.code) {
       case CODE_SUCCESS: return response;
       case CODE_ERROR: throw new Error(response.data)
-      case CODE_AUTH_EXPIRED: updateStorage(); break;
+      case CODE_AUTH_EXPIRED: clearUserStorage(); break;
       default: throw new Error(MESSAGE_ERROR)
     }
   }
