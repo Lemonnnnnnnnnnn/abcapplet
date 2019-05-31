@@ -19,14 +19,13 @@ class UserAuth extends Component {
    * @param {*} event 默认事件
    */
   async onLogin(event) {
-    // fetch()
     const { code } = await Taro.login()
     const { encryptedData: encrypt_data, iv } = event.currentTarget
 
-    this.props.dispatchLogin({
-      payload: { iv, code, encrypt_data, },
-      fetchOptions: { success: this.onLoginSuccess },
-    })
+    this.props.dispatchLogin(
+      { iv, code, encrypt_data, },
+      { success: this.onLoginSuccess },
+    )
   }
 
   /**
