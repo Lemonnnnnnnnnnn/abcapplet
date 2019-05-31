@@ -1,9 +1,9 @@
-// taro-ui 默认样式
-@import "~taro-ui/dist/style/index.scss";
-
 // 自定义变量
 @import "overrides";
 @import "variables";
+
+// taro-ui 默认样式
+@import "~taro-ui/dist/style/index.scss";
 
 // 自定义辅助类
 @import "position";
@@ -12,4 +12,8 @@
 
 // 组件样式
 @import "page";
+@import "board";
+@import "avatar";
+@import "list";
 @import "button";
+@import "modal";

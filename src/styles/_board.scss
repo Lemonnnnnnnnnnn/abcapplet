@@ -1,0 +1,11 @@
+.board {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+
+  height: 350px;
+  width: 100%;
+  border-radius: 100% 100% 100% 100% / 0% 0% 50% 50%;
+  background: linear-gradient(to right top,#ffc919,#ffd757, #ffffff);
+}

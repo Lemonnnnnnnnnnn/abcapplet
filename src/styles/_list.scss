@@ -1,0 +1,18 @@
+.user-list {
+
+}
+.user-list-item {
+  background: $color-white;
+  border-bottom:1px solid #f8f8f8;
+
+  &:first-child {
+    border-radius: 20px 20px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 20px 20px;
+    border-bottom: none;
+  }
+}
+
+

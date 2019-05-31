@@ -1,0 +1,54 @@
+.city-modal {
+  .at-modal__container {
+    width: 80%;
+  }
+
+  .at-modal__header {
+    padding: 0;
+    height: 147px * $hd;
+  }
+
+  &-content {
+    padding: 0;
+    height: 37px * $hd;
+    min-height: 37px * $hd;
+    max-height: 37px * $hd;
+    border-bottom: 1px solid $color-grey-4;
+
+    &-box {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-title, &-title:before, &-title:after { display: flex; }
+
+    &-title:before, &-title:after {
+      width: 16px * $hd;
+      height: 3px * $hd;
+      border-radius: 6px;
+
+      content: '';
+      background: #ffcf11;
+      margin: 8px * $hd;
+    }
+  }
+
+  &-action {
+    padding: 0;
+    height: auto;
+    min-height: auto;
+    max-height: auto;
+
+    .city-modal-item {
+      height: 33px * $hd;
+      line-height: 33px * $hd;
+
+      padding: 0;
+      border: none;
+      border-bottom: 1px solid $color-grey-4;
+    }
+  }
+}
+
