@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import cityModelBackground from '@assets/images/home/city-modal.png'
 import { AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
+import { COLOR_YELLOW } from '@constants/styles'
 
 class CityModal extends Component {
   static options = {
@@ -19,7 +20,7 @@ class CityModal extends Component {
     const style = {
       width: '100%',
       height: '100%',
-      background: "#FFC919",
+      background: COLOR_YELLOW,
     }
 
     return (citycode === 0 &&
