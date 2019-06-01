@@ -3,6 +3,7 @@ import Taro, { Component } from '@tarojs/taro'
 import classNames from 'classnames'
 import { Image, Swiper, SwiperItem, View, ScrollView, Text } from '@tarojs/components'
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
+import { PAGE_EXTERNAL_INDEX, PAGE_ARTICLE_SHOW } from '@constants/page'
 
 class Carousel extends Component {
   static options = {
@@ -19,9 +20,21 @@ class Carousel extends Component {
     displayMultipleItems: 1,
   }
 
-  onNavigation(url) {
-    // TODO Taro.reLaunch({ url })
-    console.log(url)
+  onNavigation({ url, title }) {
+    let newUrl = url
+
+    // 判断是否为外链
+    const externalLink = /(http|https):\/\/([\w.]+\/?)\S*/
+    const isExternal = url.search(externalLink) !== -1
+    if (isExternal) newUrl = `${PAGE_EXTERNAL_INDEX}?src=${url}&title=${title}`
+
+    // 判断是否为文章
+    const artileLink = '/pages/home/article/detail/index'
+    const isArtile = url.search(artileLink) !== -1
+    if (isArtile) newUrl = `${url.replace(artileLink, PAGE_ARTICLE_SHOW)}&title=${title}`
+
+    // console.log(newUrl)
+    return Taro.navigateTo({ url: newUrl })
   }
 
   render() {
@@ -62,7 +75,7 @@ class Carousel extends Component {
             displayMultipleItems={displayMultipleItems}
           >
             {carousel.map((item, index) =>
-              <SwiperItem key={index} onClick={this.onNavigation.bind(this, item.url)}>
+              <SwiperItem key={index} onClick={this.onNavigation.bind(this, item)}>
                 <Image
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
@@ -83,7 +96,7 @@ class Carousel extends Component {
               <View
                 key={index}
                 style={imageStyle}
-                onClick={this.onNavigation.bind(this, item.url)}
+                onClick={this.onNavigation.bind(this, item)}
                 className='mr-2 carousel-normal-item'
               >
                 <Image
