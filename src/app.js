@@ -17,10 +17,10 @@ class App extends Component {
 
   config = {
     pages: [
+      "pages/apartment/home",
       "pages/user/profile",
       "pages/user/auth",
       "pages/apartment/recommend",
-      "pages/apartment/home",
       "pages/apartment/services",
     ],
     window: {
