@@ -7,7 +7,7 @@ import Avatar from '@components/avatar'
 import Board from '@components/board'
 import Lists from '@components/lists'
 
-@connect(state => state.user, actions)
+@connect(state => state, actions)
 class UserProfile extends Component {
   config = {
     navigationBarTitleText: '个人中心',
@@ -41,7 +41,7 @@ class UserProfile extends Component {
 
   render() {
     const { lists } = this.state
-    const { userInfo: { username, mobile } } = this.props
+    const { user: { username, mobile } } = this.props
 
     return (
       <View className='page mx-3'>

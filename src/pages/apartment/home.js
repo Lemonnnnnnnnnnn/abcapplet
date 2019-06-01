@@ -23,17 +23,18 @@ class ApartmentHome extends Component {
   }
 
   componentDidShow() {
-    const { user: { userInfo } } = this.props
+    // 获取用户数据 和 刷新页面数据
+    const { payload: user } = this.props.dispatchUser()
+    this.onSelectCity(user.citycode)
 
-    this.props.dispatchUser()
+    // 拉取城市列表
     this.props.dispatchCityList()
-    this.onSelectCity(userInfo.citycode)
     this.setState({ selector: this.props.home.city.map(i => i.title) })
   }
 
   onSelectCity(citycode) {
     // 当城市 id 不存在的时候不读取数据
-    if (citycode === 0) return;
+    if (citycode === 0 || !citycode) return;
 
     this.props.dispatchUserCity(citycode)
     this.props.dispatchCarousel(citycode)
@@ -59,7 +60,6 @@ class ApartmentHome extends Component {
   render() {
     const { selector, selectorChecked } = this.state
     const { user, home, ad } = this.props
-    const { userInfo = {} } = user
     const { city = [], carousel = [], cbd = [] } = home
 
     return (
@@ -113,7 +113,7 @@ class ApartmentHome extends Component {
         {/* 城市模态框 */}
         <CityModal
           city={city}
-          citycode={userInfo.citycode}
+          citycode={user.citycode}
           onSelectCity={this.onSelectCity}
         />
         {/* </View> */}
