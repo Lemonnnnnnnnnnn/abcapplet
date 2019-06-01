@@ -10,7 +10,7 @@ export const API_CITY_LIST = `${HOST}/dict/listsitepost`
 // 用户
 export const API_USER_LOGIN = `${HOST}/auth/loginpost`
 
-// 文章
+// 轮播
 export const API_BANNER_LIST = `${HOST}/article/listbannerpost`
 
 // 商圈
@@ -19,4 +19,5 @@ export const API_HOT_CBD_LIST = `${HOST}/dict/listHotCbdPost`
 // 广告
 export const API_AD_LIST = `${HOST}/ad/adPost`
 
-
+// 文章
+export const API_ARTICLE_SHOW = `${HOST}/article/getpost`

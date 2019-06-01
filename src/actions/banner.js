@@ -6,7 +6,7 @@ import { createAction } from '@utils/redux'
  * 获取轮播列表
  * @param {*} payload
  */
-export const dispatchBanner = payload => createAction({
+export const dispatchBannerList = payload => createAction({
   payload: { city: payload, type: 'basic' },
   method: 'POST',
   type: SET_BANNER_LIST,

@@ -18,10 +18,12 @@ class App extends Component {
   config = {
     pages: [
       "pages/apartment/home",
+      "pages/article/show",
       "pages/user/profile",
       "pages/user/auth",
       "pages/apartment/recommend",
       "pages/apartment/services",
+      "pages/external/index",
     ],
     window: {
       backgroundTextStyle: 'light',

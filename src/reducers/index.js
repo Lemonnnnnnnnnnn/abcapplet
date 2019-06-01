@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux'
-import ad from './ad'
-import cbd from './cbd'
-import city from './city'
+import ads from './ads'
 import user from './user'
-import home from './home'
-import banner from './banner'
+import cbds from './cbds'
+import citys from './citys'
+import banners from './banners'
+import articles from './articles'
 
 export default combineReducers({
-  ad,
-  cbd,
-  city,
+  ads,
   user,
-  home,
-  banner,
+  cbds,
+  citys,
+  banners,
+  articles,
 })
