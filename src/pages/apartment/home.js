@@ -8,7 +8,7 @@ import Header from '@components/header'
 import * as homeActions from '@actions/home'
 import * as userActions from '@actions/user'
 import * as adActions from '@actions/ad'
-import { PAGE_CBD_INDEX } from '@constants/api'
+import { PAGE_CBD_INDEX } from '@constants/page'
 import { MESSAGE_HOT_CBD } from '@constants/message'
 
 @connect(state => state, { ...homeActions, ...userActions, ...adActions })

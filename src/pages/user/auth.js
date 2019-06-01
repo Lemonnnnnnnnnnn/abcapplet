@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { MESSAGE_AUTH } from '@constants/message'
-import { PAGE_HOME } from '@constants/api'
+import { PAGE_HOME } from '@constants/page'
 import { connect } from '@tarojs/redux'
 import Auth from '@components/auth'
 import logo from '@assets/icons/logo.png'

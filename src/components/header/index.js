@@ -3,7 +3,7 @@ import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import { COLOR_GREY_2 } from '@constants/styles'
 import { MESSAGE_MORE } from '@constants/message'
-import { PAGE_HOME } from '@constants/api'
+import { PAGE_HOME } from '@constants/page'
 import classNames from 'classnames'
 
 class Header extends Component {

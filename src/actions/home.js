@@ -1,5 +1,6 @@
 import { HOME_CITY_LIST, HOME_CAROUSEL_LIST, HOME_CBD_LIST } from '@constants/home'
-import { API_CITY_LIST, API_BANNER_LIST, API_HOT_CBD_LIST, PAGE_ARTICLE_SHOW, PAGE_CBD_SHOW } from '@constants/api'
+import { API_CITY_LIST, API_BANNER_LIST, API_HOT_CBD_LIST } from '@constants/api'
+import { PAGE_ARTICLE_SHOW, PAGE_CBD_SHOW } from '@constants/page'
 import { createAction } from '@utils/redux'
 
 /**
