@@ -42,9 +42,9 @@ class ApartmentHome extends Component {
     if (citycode === 0 || !citycode) return;
 
     this.props.dispatchUserCity(citycode)
-    this.props.dispatchBanner(citycode)
+    this.props.dispatchBannerList(citycode)
     this.props.dispatchAdList(citycode)
-    this.props.dispatchCBD(citycode)
+    this.props.dispatchCBDList(citycode)
   }
 
   /**
@@ -52,22 +52,22 @@ class ApartmentHome extends Component {
    * @param {*} param0
    */
   onChangeSelector(e) {
-    const { city } = this.props
+    const { citys } = this.props
     const value = e.currentTarget.value
 
-    const selector = city.map(i => i.title)
+    const selector = citys.map(i => i.title)
     const selectorChecked = selector[value]
 
-    const newCity = city.filter(i => i.title === selectorChecked)[0]
+    const newCity = citys.filter(i => i.title === selectorChecked)[0]
     this.onSelectCity(newCity.id)
   }
 
   render() {
-    const { user, cbd, ad, city, banner } = this.props
+    const { user, cbds, ads, citys, banners } = this.props
 
     // 设置城市选择器
-    const selector = city.map(i => i.title)
-    const selectorCity = city.filter(i => i.id === user.citycode)[0]
+    const selector = citys.map(i => i.title)
+    const selectorCity = citys.filter(i => i.id === user.citycode)[0]
     const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
 
     return (
@@ -82,16 +82,16 @@ class ApartmentHome extends Component {
         />
 
         {/* 轮播 */}
-        {banner.length > 0 &&
+        {banners.length > 0 &&
           <Carousel
             className='mt-2'
             type='banner'
-            carousel={banner}
+            carousel={banners}
           />
         }
 
         {/* 热门租房商圈 */}
-        {cbd.length > 0 &&
+        {cbds.length > 0 &&
           <View>
             <Header
               className='my-2'
@@ -102,7 +102,7 @@ class ApartmentHome extends Component {
               type='normal'
               imageHeight='176'
               imageWidth='312'
-              carousel={cbd}
+              carousel={cbds}
               hasContent={false}
             />
           </View>
@@ -114,13 +114,13 @@ class ApartmentHome extends Component {
           type='normal'
           imageHeight='126'
           imageWidth='686'
-          carousel={ad}
+          carousel={ads}
           hasContent={false}
         />
 
         {/* 城市模态框 */}
         <CityModal
-          city={city}
+          city={citys}
           citycode={user.citycode}
           onSelectCity={this.onSelectCity}
         />
