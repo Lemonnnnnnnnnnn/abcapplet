@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
-import { COLOR_YELLOW, COLOR_GREY } from '@constants/styles'
+import { COLOR_YELLOW, COLOR_GREY_0 } from '@constants/styles'
 
 class Lists extends Component {
   static options = {
@@ -9,8 +9,7 @@ class Lists extends Component {
   }
 
   static defaultProps = {
-    citycode: 0,
-    cityList: [],
+    lists: [],
     size: 17,
   }
 
@@ -43,7 +42,7 @@ class Lists extends Component {
                 </View>
 
                 {/* 右侧图片 */}
-                <AtIcon value='chevron-right' color={COLOR_GREY} size={size} />
+                <AtIcon value='chevron-right' color={COLOR_GREY_0} size={size} />
               </View>
 
             </View>

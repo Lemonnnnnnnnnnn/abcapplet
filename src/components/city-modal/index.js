@@ -11,11 +11,11 @@ class CityModal extends Component {
 
   static defaultProps = {
     citycode: 0,
-    cityList: [],
+    city: [],
   }
 
   render() {
-    const { citycode, cityList, onSelectCity } = this.props
+    const { citycode, city, onSelectCity } = this.props
 
     const style = {
       width: '100%',
@@ -40,11 +40,11 @@ class CityModal extends Component {
 
         {/* 模态框操作 */}
         <AtModalContent className='city-modal-action'>
-          {cityList.map(item =>
+          {city.map(item =>
             <View
               className='city-modal-item'
               key={item.id}
-              onClick={onSelectCity.bind(this, item)}
+              onClick={onSelectCity.bind(this, item.id)}
             >{item.title}</View>
           )}
         </AtModalContent>
