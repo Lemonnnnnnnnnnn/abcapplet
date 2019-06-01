@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { MESSAGE_AUTH } from '@constants/message'
-import { DEAFULT_HOME_PAGE } from '@constants/api'
+import { PAGE_HOME } from '@constants/api'
 import { connect } from '@tarojs/redux'
 import Auth from '@components/auth'
 import logo from '@assets/icons/logo.png'
@@ -34,7 +34,7 @@ class UserAuth extends Component {
   onLoginSuccess() {
     Taro.getCurrentPages().length > 1
       ? Taro.navigateBack({ delta: 2 })
-      : Taro.reLaunch({ url: DEAFULT_HOME_PAGE })
+      : Taro.reLaunch({ url: PAGE_HOME })
   }
 
   render() {
