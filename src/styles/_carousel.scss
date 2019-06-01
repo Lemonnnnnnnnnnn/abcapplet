@@ -1,0 +1,33 @@
+.carousel {
+  image {
+    border-radius: 5px * $hd;
+  }
+
+  &-normal {
+    white-space: nowrap;
+
+    &-item {
+      position: relative;
+      display: inline-block;
+      .title {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+
+      .count {
+        position: absolute;
+        left: 9px * $hd;
+        top: 6px * $hd;
+        border-radius: 8px * $hd;
+        height:16px * $hd;
+        min-width: 48px * $hd;
+        background: $color-white;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

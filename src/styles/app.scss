@@ -3,6 +3,7 @@
 @import "variables";
 
 // taro-ui 默认样式
+@import "icon";
 @import "~taro-ui/dist/style/index.scss";
 
 // 自定义辅助类
@@ -17,3 +18,5 @@
 @import "list";
 @import "button";
 @import "modal";
+@import "search";
+@import "carousel";

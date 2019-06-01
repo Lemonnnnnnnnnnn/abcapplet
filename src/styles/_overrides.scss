@@ -18,6 +18,8 @@
 //  $color-info: #78A4FA !default;
 
 //  /* Color Palette */
+$color-yellow: #FFC919 !default;
+
 //  $color-black-0: #000 !default;
 //  $color-black-1: #333 !default;
 //  $color-black-2: #7F7F7F !default;
@@ -82,7 +84,7 @@
 //  $font-size-sm: 12px * $hd !default; // 用于辅助信息
 //  $font-size-base: 14px * $hd !default; // 常用字号
 //  $font-size-lg: 16px * $hd !default; // 常规标题
-//  $font-size-xl: 18px * $hd !default; // 大标题
+$font-size-xl: 20px * $hd !default; // 大标题
 $font-size-xxl: 30px * $hd !default; // 用于大号的数字
 
 //  /* Line Height */
