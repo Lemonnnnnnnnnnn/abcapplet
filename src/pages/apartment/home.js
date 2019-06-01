@@ -27,13 +27,14 @@ class ApartmentHome extends Component {
 
     this.props.dispatchUser()
     this.props.dispatchCityList()
-
-
     this.onSelectCity(userInfo.citycode)
     this.setState({ selector: this.props.home.city.map(i => i.title) })
   }
 
   onSelectCity(citycode) {
+    // 当城市 id 不存在的时候不读取数据
+    if (citycode === 0) return;
+
     this.props.dispatchUserCity(citycode)
     this.props.dispatchCarousel(citycode)
     this.props.dispatchAdList(citycode)

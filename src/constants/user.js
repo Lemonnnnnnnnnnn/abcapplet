@@ -6,7 +6,7 @@ export const USER_DEFAULT = {
     city: "",
     country: "中国",
     province: "",
-    citycode: 350200,
+    citycode: 0,
 
     // 用户数据
     id: 0,

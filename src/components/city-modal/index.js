@@ -24,7 +24,11 @@ class CityModal extends Component {
     }
 
     return (citycode === 0 &&
-      <AtModal className='city-modal' isOpened>
+      <AtModal
+        isOpened
+        className='city-modal'
+        closeOnClickOverlay={false}
+      >
 
         {/* 模态框头部 */}
         <AtModalHeader>
@@ -42,8 +46,8 @@ class CityModal extends Component {
         <AtModalContent className='city-modal-action'>
           {city.map(item =>
             <View
-              className='city-modal-item'
               key={item.id}
+              className='city-modal-item text-center'
               onClick={onSelectCity.bind(this, item.id)}
             >{item.title}</View>
           )}
