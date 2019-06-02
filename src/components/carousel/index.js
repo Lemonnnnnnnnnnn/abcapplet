@@ -23,17 +23,22 @@ class Carousel extends Component {
   onNavigation({ url, title }) {
     let newUrl = url
 
+    if (url === '') return;
+
     // 判断是否为外链
     const externalLink = /(http|https):\/\/([\w.]+\/?)\S*/
     const isExternal = url.search(externalLink) !== -1
     if (isExternal) newUrl = `${PAGE_EXTERNAL_INDEX}?src=${url}&title=${title}`
 
-    // 判断是否为文章
+    // 判断是否为 后端传递的文章链接
     const artileLink = '/pages/home/article/detail/index'
-    const isArtile = url.search(artileLink) !== -1
-    if (isArtile) newUrl = `${url.replace(artileLink, PAGE_ARTICLE_SHOW)}&title=${title}`
+    const isBackendArtile = url.search(artileLink) !== -1
+    if (isBackendArtile) newUrl = `${url.replace(artileLink, PAGE_ARTICLE_SHOW)}&title=${title}`
 
-    // console.log(newUrl)
+    // 判断是否 本身就是文章链接
+    const isArtile = url.search(PAGE_ARTICLE_SHOW) !== -1
+    if (isArtile) newUrl = `${url}&title=${title}`
+
     return Taro.navigateTo({ url: newUrl })
   }
 
