@@ -34,12 +34,12 @@ class ArticleShow extends Component {
     return (
       <View>
         {article &&
-          <View>
-            <View className='m-2'>
+          <View className='m-2'>
+            <View>
               <View className='text-huge text-bold'>{article.title}</View>
               <View className='text-muted text-small'>{day.unix(article.create_time).format('YYYY-MM-DD')}</View>
             </View>
-            <RichTextWxParse content={article.content} />
+            <RichTextWxParse className='mt-2' content={article.content} />
           </View>
         }
       </View>

@@ -12,9 +12,11 @@ import * as cbdActions from '@actions/cbd'
 import * as cityActions from '@actions/city'
 import * as userActions from '@actions/user'
 import * as bannerActions from '@actions/banner'
+import * as activityActions from '@actions/activity'
+import * as recommendActions from '@actions/recommend'
 
 import { PAGE_CBD_INDEX } from '@constants/page'
-import { MESSAGE_HOT_CBD } from '@constants/message'
+import { MESSAGE_HOT_CBD, MESSAGE_RECOMMEND_APARTMENT, MESSAGE_ACTIVITY } from '@constants/message'
 
 @connect(state => state, {
   ...adActions,
@@ -22,13 +24,15 @@ import { MESSAGE_HOT_CBD } from '@constants/message'
   ...cityActions,
   ...userActions,
   ...bannerActions,
+  ...activityActions,
+  ...recommendActions,
 })
 class ApartmentHome extends Component {
   config = {
     navigationBarTitleText: '公寓ABC',
   }
 
-  componentDidShow() {
+  componentWillMount() {
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = this.props.dispatchUser()
     this.onSelectCity(user.citycode)
@@ -42,9 +46,11 @@ class ApartmentHome extends Component {
     if (citycode === 0 || !citycode) return;
 
     this.props.dispatchUserCity(citycode)
-    this.props.dispatchBannerList(citycode)
     this.props.dispatchAdList(citycode)
     this.props.dispatchCBDList(citycode)
+    this.props.dispatchBannerList(citycode)
+    this.props.dispatchActivityList(citycode)
+    this.props.dispatchRecommendList(citycode)
   }
 
   /**
@@ -63,7 +69,7 @@ class ApartmentHome extends Component {
   }
 
   render() {
-    const { user, cbds, ads, citys, banners } = this.props
+    const { user, cbds, ads, citys, banners, recommends, activities } = this.props
 
     // 设置城市选择器
     const selector = citys.map(i => i.title)
@@ -71,7 +77,7 @@ class ApartmentHome extends Component {
     const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
 
     return (
-      <View className='page-white m-2'>
+      <View className='page-white m-2 mb-3'>
         {/* <View className='page-home'> */}
 
         {/* 搜索框 & 城市选择器 */}
@@ -117,6 +123,44 @@ class ApartmentHome extends Component {
           carousel={ads}
           hasContent={false}
         />
+
+        {/* 推荐品牌公寓 */}
+        {recommends.length > 0 &&
+          <View>
+            <Header
+              className='my-2'
+              title={MESSAGE_RECOMMEND_APARTMENT}
+              url={PAGE_CBD_INDEX} hasExtra
+            />
+            <Carousel
+              className='mt-2'
+              type='normal'
+              imageHeight='275'
+              imageWidth='642'
+              carousel={recommends}
+              hasContent={false}
+            />
+          </View>
+        }
+
+        {/* 推荐品牌公寓 */}
+        {activities.length > 0 &&
+          <View>
+            <Header
+              className='my-2'
+              title={MESSAGE_ACTIVITY}
+              hasExtra={false}
+            />
+            <Carousel
+              className='mt-2'
+              type='normal'
+              imageHeight='240'
+              imageWidth='414'
+              carousel={activities}
+              hasContent={false}
+            />
+          </View>
+        }
 
         {/* 城市模态框 */}
         <CityModal
