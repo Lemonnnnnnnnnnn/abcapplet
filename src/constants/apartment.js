@@ -1,0 +1,2 @@
+export const APARTMENT_DEFAULT = []
+export const SET_APARTMENT_LIST = 'SET_APARTMENT_LIST'

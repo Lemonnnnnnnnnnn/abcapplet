@@ -5,6 +5,9 @@ import cbds from './cbds'
 import citys from './citys'
 import banners from './banners'
 import articles from './articles'
+import activities from './activities'
+import recommends from './recommends'
+import apartments from './apartments'
 
 export default combineReducers({
   ads,
@@ -13,4 +16,7 @@ export default combineReducers({
   citys,
   banners,
   articles,
+  activities,
+  recommends,
+  apartments,
 })
