@@ -1,14 +1,15 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components'
-import { Atbutton, AtIcon, AtTabs, AtTabsPane } from 'taro-ui'
+import { View, Text } from '@tarojs/components'
+import { AtIcon, AtTabs, AtTabsPane, AtTag } from 'taro-ui'
 
 import { COLOR_YELLOW, COLOR_GREY_2 } from '@constants/styles'
 import { MESSAGE_RENT, MESSAGE_LOCATION, MESSAGE_HOUSE_TYPE, MESSAGE_AUTO_SORT } from '@constants/message'
 import { PAYLOAD_APARTMENT_LIST } from '@constants/api'
+import AutoSlider from '@components/slider'
 
 class Select extends Component {
   static options = {
-    addGlobalClass: true
+    addGlobalClass: true,
   }
 
   static defaultProps = {
@@ -40,6 +41,10 @@ class Select extends Component {
     // price 相关
     priceIndex: -1,
     priceMessage: '',
+    priceLow: 1000,
+    priceHigh: 10000,
+    priceDefaultLow: 1000,
+    priceDefaultHigh: 10000,
   }
 
   setCBDFirstIndex(index) {
@@ -73,8 +78,10 @@ class Select extends Component {
     const { priceDist } = this.props
 
     const price = priceDist[priceIndex]
-    console.log(price)
+
     this.setState({
+      priceLow: price.low,
+      priceHigh: price.high,
       priceIndex,
       priceMessage: price.title,
       payload: { ...payload, price_low: price.low, price_high: price.high },
@@ -100,8 +107,25 @@ class Select extends Component {
     this.setState({ selectIndex: this.state.selectIndex !== index ? index : '' })
   }
 
+  onPriceValueChange({ minValue, maxValue }) {
+    const { payload } = this.state
+
+    this.setState({
+      priceIndex: -1,
+      priceLow: minValue,
+      priceHigh: maxValue,
+      priceMessage: `${minValue}元~${maxValue}元`,
+      payload: { ...payload, price_low: minValue, price_high: maxValue },
+    })
+  }
+
   render() {
-    const { selectIndex, cbdFirstIndex, cbdSecondIndex, cbdThirdIndex, cbdMessage, houseTypeIndex, houseMessage, priceIndex, priceMessage } = this.state
+    const {
+      selectIndex,
+      houseTypeIndex, houseMessage,
+      cbdFirstIndex, cbdSecondIndex, cbdThirdIndex, cbdMessage,
+      priceIndex, priceMessage, priceDefaultLow, priceDefaultHigh, priceLow, priceHigh,
+    } = this.state
     const { size, cbdDist, houseTypeDist, priceDist, specialSelectDist, autoSortDist, baseItemHeight, isFixed, className, top } = this.props
 
     const dists = [
@@ -169,21 +193,46 @@ class Select extends Component {
               }
 
               {/* 价格 */}
-              {selectIndex == 'price' && <View className='at-row at-row__justify--center'>
-                <AtTabs
-                  scroll height={Taro.pxTransform(baseItemHeight * priceDist.length)} tabDirection='vertical'
-                  tabList={priceDist} current={priceIndex} onClick={this.setPriceIndex}
-                />
+              {selectIndex == 'price' && <View>
+                <View className='at-row at-row__justify--center'>
+                  <AtTabs
+                    scroll height={Taro.pxTransform(baseItemHeight * priceDist.length)} tabDirection='vertical'
+                    tabList={priceDist} current={priceIndex} onClick={this.setPriceIndex}
+                  />
+                </View>
+                <View className='mt-2 pb-2 at-row at-row__justify--around text-small'>
+                  <View>￥租金</View>
+                  <View class='text-yellow'>
+                    ￥{priceLow}-{priceHigh === priceDefaultHigh ? `不限` : `￥${priceHigh}`}
+                  </View>
+                  <View>￥不限</View>
+                </View>
+                <View className='mt-3'>
+                  <AutoSlider
+                    step='100'
+                    min={priceDefaultLow}
+                    max={priceDefaultHigh}
+                    minValue={priceLow}
+                    maxValue={priceHigh}
+                    onChangeValue={this.onPriceValueChange}
+                  />
+                </View>
               </View>
               }
             </View>
           }
         </View>
-        {/* <View class='select-bottom'>
-        <ScrollView scrollX>
-          {specialSelectDist.map((item, index) => <Atbutton key={index}>{item.id}</Atbutton>)}
-        </ScrollView>
-      </View> */}
+
+        {selectIndex == '' &&
+          <View className='mt-2 at-row at-row__justify--around'>
+            {specialSelectDist.map((item, index) =>
+              <AtTag className='mr-1 p-1 text-mini'
+                type='primary'
+                key={index} size='small' circle active
+              >{item.title}</AtTag>
+            )}
+          </View>
+        }
       </View>
 
       {/* 遮罩层 */}
