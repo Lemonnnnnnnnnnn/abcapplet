@@ -87,7 +87,7 @@ class Carousel extends Component {
                 />
                 <View style={contentStyle}>
                   <View className='mt-1 text-large'>{item.title}</View>
-                  <View className='mt-1 text-small text-muted'>{item.subtitle ? item.subtitle : ' '}</View>
+                  <View className='mt-2 text-small text-muted'>{item.subtitle ? item.subtitle : ' '}</View>
                 </View>
               </SwiperItem>
             )}
