@@ -29,7 +29,7 @@ class Header extends Component {
     const { title, hasExtra, extraText, url, size, className } = this.props
 
     return (
-      <View className={classNames(className, 'at-row at-row__justify--between')}>
+      <View className={classNames(className, 'at-row at-row__justify--between at-row__align--end')}>
         <View className='text-bold text-huge'>{title}</View>
         {hasExtra && <View onClick={this.onNavigation.bind(this, url)}>
           <Text className='text-small text-muted'>{extraText}</Text>
