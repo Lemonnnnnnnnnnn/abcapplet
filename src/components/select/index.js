@@ -73,6 +73,7 @@ class Select extends Component {
     const { priceDist } = this.props
 
     const price = priceDist[priceIndex]
+    console.log(price)
     this.setState({
       priceIndex,
       priceMessage: price.title,
@@ -106,7 +107,7 @@ class Select extends Component {
     const dists = [
       { message: cbdMessage === '' ? MESSAGE_LOCATION : cbdMessage, items: cbdDist, index: 'cbd' },
       { message: houseMessage === '' ? MESSAGE_HOUSE_TYPE : houseMessage, items: houseTypeDist, index: 'houseType' },
-      { message: MESSAGE_RENT, items: priceDist, index: 'price' },
+      { message: priceMessage === '' ? MESSAGE_RENT : priceMessage, items: priceDist, index: 'price' },
       { message: MESSAGE_AUTO_SORT, items: autoSortDist, index: 'autoSort' },
     ]
 

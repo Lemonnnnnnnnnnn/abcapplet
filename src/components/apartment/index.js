@@ -45,7 +45,7 @@ class Apartment extends Component {
           <View className='apartment-header-type'>{title}</View>
         </View>
         <View className='apartment-content mx-3 py-3'>
-          <View>{rules.map((item, index) => <AtTag className='mr-1 px-1 text-mini' key={index} size='small' circle>{item}</AtTag>)}</View>
+          <View>{rules.map((item, index) => <AtTag className='mr-1 p-1 text-mini' key={index} size='small' circle>{item}</AtTag>)}</View>
           <View className='at-row at-row__justify--between at-row__align--end'>
             <View className='apartment-content-main'>
               <View className='text-bold mt-2'>{apartmentTitle}</View>
