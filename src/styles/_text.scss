@@ -26,26 +26,32 @@
 
   // 字体大小
   &-super {
+    line-height: $font-size-xxl;
     font-size: $font-size-xxl;
   }
 
   &-huge {
+    line-height: $font-size-xl;
     font-size: $font-size-xl;
   }
 
   &-large {
+    line-height: $font-size-lg;
     font-size: $font-size-lg;
   }
 
   &-normal {
+    line-height: $font-size-base;
     font-size: $font-size-base;
   }
 
   &-small {
+    line-height: $font-size-sm;
     font-size: $font-size-sm;
   }
 
   &-mini {
+    line-height: $font-size-xs;
     font-size: $font-size-xs;
   }
 }

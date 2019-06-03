@@ -8,7 +8,7 @@
 
 //  /* The Color of O2Team Brand */
 // $color-brand: #000000 !default;
-//  $color-brand-light: #78A4F4 !default;
+ $color-brand-light: #FFC919 !default;
 //  $color-brand-dark: #346FC2 !default;
 
 //  /* Color */
@@ -18,7 +18,7 @@
 //  $color-info: #78A4FA !default;
 
 //  /* Color Palette */
-$color-yellow: #FFC919 !default;
+$color-yellow: $color-brand-light !default;
 
 //  $color-black-0: #000 !default;
 //  $color-black-1: #333 !default;

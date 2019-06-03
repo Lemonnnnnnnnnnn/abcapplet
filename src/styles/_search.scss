@@ -1,7 +1,19 @@
 .search {
-  background: #F2F2F2 !important;
-  height: 37px * $hd;
+  left: 0;
+  top: 0;
+  z-index: 100;
   width: 100%;
-  border-radius: 19px * $hd;
-  &-box { height: 100%; }
+  background: $color-white !important;
+
+  &-content { height: 100%; }
+  &-box {
+    background: #F2F2F2 !important;
+    height: 37px * $hd;
+    width: 100%;
+    border-radius: 19px * $hd;
+  }
+
+  &-fixed {
+    position: fixed;
+  }
 }

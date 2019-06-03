@@ -1,0 +1,34 @@
+.select {
+  left: 0;
+  // top: 0;
+  z-index: 100;
+  background: #fff;
+  width: 100%;
+
+  &-fixed {
+    position: fixed;
+  }
+
+  &-header {
+    width: 100%;
+  }
+
+  .at-tabs__item--active {
+    color: $color-yellow;
+  }
+
+  .at-tabs__header,
+  .at-tabs__underline,
+  .at-tabs__item-underline {
+    background-color: transparent;
+  }
+
+  .at-tabs__header {
+    width: 100px * $hd;
+  }
+
+  .at-tabs__item {
+    padding: 5px * $hd 0;
+    font-size: $font-size-sm;
+  }
+}

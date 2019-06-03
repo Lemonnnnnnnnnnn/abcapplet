@@ -21,7 +21,8 @@
         left: 9px * $hd;
         top: 6px * $hd;
         border-radius: 8px * $hd;
-        height:16px * $hd;
+        padding: 8px * $hd 0;
+        // height:16px * $hd;
         min-width: 48px * $hd;
         background: $color-white;
         text-align: center;
