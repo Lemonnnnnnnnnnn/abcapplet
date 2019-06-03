@@ -103,7 +103,7 @@ class Slider extends Component {
   }
 
   render() {
-    let { step, className, height } = this.props
+    let { className, height } = this.props
     let { maxValue, minValue, min, max } = this.getSilderRect()
 
     // 计算比例
