@@ -279,7 +279,7 @@ class ApartmentHome extends Component {
 
           {
             !apartmentLoading && !apartmentHasMore &&
-            <View className='text-center'>
+            <View className='text-center text-small'>
               <Text className='text-muted'>我可是有底线的哦</Text>
             </View>
           }
