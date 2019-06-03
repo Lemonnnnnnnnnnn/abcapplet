@@ -1,0 +1,41 @@
+.slider {
+  height: 26px * $hd;
+
+  &-content {
+    position: relative;
+    background: $color-white;
+  }
+
+  &-min, &-max {
+    border-radius: 50%;
+    width: 26px * $hd;
+    height: 26px  * $hd;
+
+    z-index:2;
+    display:flex;
+    position:absolute;
+    top:50%;
+    border-radius:50%;
+
+    box-shadow:0 2px 6px rgba(0, 0, 0, 0.15);
+    background:$color-white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    .inner {
+      background: $color-white;
+      width: 8px * $hd;
+      height: 8px * $hd;
+      border-radius: 50%;
+      border: 2px solid $color-yellow;
+    }
+  }
+
+  &-min {
+    transform:translate(-50%, -50%);
+  }
+  &-max {
+    transform:translate(50%, -50%);
+  }
+}
