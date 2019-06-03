@@ -5,3 +5,11 @@ export const MESSAGE_MORE = '更多'
 export const MESSAGE_HOT_CBD = '热门租房商圈'
 export const MESSAGE_RECOMMEND_APARTMENT = '推荐品牌公寓'
 export const MESSAGE_ACTIVITY = '活动专区'
+export const MESSAGE_APARTMENT = '严选公寓'
+
+export const MESSAGE_RENT = '租金'
+export const MESSAGE_LOCATION = '位置'
+export const MESSAGE_HOUSE_TYPE = '户型'
+export const MESSAGE_AUTO_SORT = '智能排序'
+
+

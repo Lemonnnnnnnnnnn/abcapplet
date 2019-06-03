@@ -1,6 +1,6 @@
 import { createAction } from '@utils/redux'
-import { API_DIST_LIST } from '@constants/api'
 import { SET_DIST_LIST } from '@constants/dist'
+import { API_DIST_LIST } from '@constants/api'
 
 /**
  * 获取推荐公寓
