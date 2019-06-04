@@ -55,11 +55,12 @@ class Slider extends Component {
 
     const range = max - min
     const radio = (newPos - oldPos) / windowWidth
+
     const result = parseInt(target + range * radio)
     return Math.ceil(result / step) * step
   }
 
-  componentDidShow() {
+  componentWillMount() {
     Taro.getSystemInfo()
       .then(({ windowWidth }) => this.setState({ windowWidth }))
   }
