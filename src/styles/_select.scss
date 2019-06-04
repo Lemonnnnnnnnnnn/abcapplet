@@ -13,6 +13,13 @@
     width: 100%;
   }
 
+  &-button {
+    .at-button {
+      height: 39px * $hd;
+      line-height: 39px * $hd;
+    }
+  }
+
   .at-tabs__item--active {
     color: $color-yellow-0;
   }
