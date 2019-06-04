@@ -51,6 +51,7 @@ class Select extends BaseComponent {
     autoSortDist: [],
     houseTypeDist: [],
     specialSelectDist: [],
+    onApartmentPayloadChange: console.log
   }
 
   state = {
@@ -67,15 +68,28 @@ class Select extends BaseComponent {
     this.selectPrice.onResetState()
     this.selectSpecial.onResetState()
     this.selectHouseType.onResetState()
+    this.onPayloadChange({ payload: PAYLOAD_APARTMENT_LIST })
   }
 
-  onPayloadChange(payload) {
-    this.setState({
-      payload: {
-        ...payload,
-        ...this.state.payload,
-      }
-    })
+  onPayloadChange({ payload }) {
+    payload = {
+      ...this.state.payload,
+      ...payload,
+    }
+
+    this.setState({ payload })
+  }
+
+  onPayloadChangeAndRefresh({ payload }) {
+    // 不要直接用 onPayloadChange
+    // 因为是异步 ！！！
+    payload = {
+      ...this.state.payload,
+      ...payload,
+    }
+
+    this.setState({ payload, headerIndex: '' })
+    this.props.onApartmentPayloadChange({ payload })
   }
 
   onHeaderClick(headerIndex) {
@@ -148,7 +162,7 @@ class Select extends BaseComponent {
         <SelectButton
           show={headerIndex !== ''}
           onResetClick={this.onPayloadRest}
-          onConfirmClick={this.onPayloadConfirm}
+          onConfirmClick={this.onPayloadChangeAndRefresh}
         />
 
         {/* 特殊需求 */}
@@ -156,7 +170,7 @@ class Select extends BaseComponent {
           show={headerIndex === ''}
           ref={this.refSelectSpecial}
           items={specialSelectDist}
-          onChange={this.onPayloadChange}
+          onChange={this.onPayloadChangeAndRefresh}
         />
 
         {/* 遮罩层 */}

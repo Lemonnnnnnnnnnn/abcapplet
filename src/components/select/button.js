@@ -23,7 +23,7 @@ class SelectButton extends BaseComponent {
   render() {
     const { onResetClick, onConfirmClick, show } = this.props
 
-    return (show && <View className='my-2 at-row at-row__justify--between'>
+    return (show && <View className='select-button my-2 at-row at-row__justify--between'>
       <View className='at-col at-col-4'>
         <AtButton
           circle

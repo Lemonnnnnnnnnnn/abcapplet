@@ -22,7 +22,15 @@ import * as recommendActions from '@actions/recommend'
 import * as apartmentActions from '@actions/apartment'
 
 import { PAGE_CBD_INDEX } from '@constants/page'
-import { MESSAGE_HOT_CBD, MESSAGE_RECOMMEND_APARTMENT, MESSAGE_ACTIVITY, MESSAGE_APARTMENT } from '@constants/message'
+import { PAYLOAD_APARTMENT_LIST } from '@constants/api'
+import {
+  MESSAGE_HOT_CBD,
+  MESSAGE_ACTIVITY,
+  MESSAGE_APARTMENT,
+  MESSAGE_NO_MORE,
+  MEESAGE_NO_APARTMENT_DATA,
+  MESSAGE_RECOMMEND_APARTMENT,
+} from '@constants/message'
 
 @connect(state => state, {
   ...adActions,
@@ -49,8 +57,12 @@ class ApartmentHome extends Component {
     apartmentPage: 1,
     apartmentLoading: false,
     apartmentHasMore: true,
-    apartmentIsFixed: false,
-    apartmentScrollTop: null,
+    apratmentPayload: PAYLOAD_APARTMENT_LIST,
+
+    // 选择器相关
+    selectIsFixed: false,
+    selectScrollTop: null,
+    selectHeight: 40,
   }
 
   componentWillMount() {
@@ -75,12 +87,7 @@ class ApartmentHome extends Component {
     this.props.dispatchRecommendList(citycode)
 
     // 初始化公寓相关数据
-    this.setState({
-      apartmentPage: 1,
-      apartmentHasMore: true,
-      apartmentScrollTop: null
-    })
-    this.loadingApartment()
+    this.onApartmentResetState()
   }
 
   /**
@@ -99,7 +106,13 @@ class ApartmentHome extends Component {
   }
 
   onPageScroll({ scrollTop }) {
-    const { apartmentIsFixed, apartmentScrollTop, searchScrollTop, searchIsFixed } = this.state
+    const {
+      selectIsFixed,
+      selectScrollTop,
+      searchScrollTop,
+      searchIsFixed,
+      apartmentScrollTop,
+    } = this.state
 
     // 搜索相关
     !searchScrollTop
@@ -118,46 +131,88 @@ class ApartmentHome extends Component {
       && this.setState({ searchIsFixed: false })
 
     // 公寓相关
-    !apartmentScrollTop
+    !selectScrollTop
       && Taro.createSelectorQuery()
         .in(this.$scope)
         .select('.home-select')
         .boundingClientRect()
+        .exec(res => this.setState({ selectScrollTop: res[0].top, }))
+
+    scrollTop > selectScrollTop
+      && !selectIsFixed
+      && this.setState({ selectIsFixed: true })
+
+    scrollTop < selectScrollTop
+      && selectIsFixed
+      && this.setState({ selectIsFixed: false })
+
+    // 公寓相关
+    !apartmentScrollTop
+      && Taro.createSelectorQuery()
+        .in(this.$scope)
+        .select('.home-apartment')
+        .boundingClientRect()
         .exec(res => this.setState({ apartmentScrollTop: res[0].top }))
-
-    scrollTop > apartmentScrollTop
-      && !apartmentIsFixed
-      && this.setState({ apartmentIsFixed: true })
-
-    scrollTop < apartmentScrollTop
-      && apartmentIsFixed
-      && this.setState({ apartmentIsFixed: false })
   }
 
   onReachBottom() {
-    this.loadingApartment()
+    if (this.props.apartments.length !== 0) {
+      this.dispatchApartmentList()
+    }
   }
 
-  loadingApartment() {
-    let { apartmentPage, apartmentHasMore } = this.state
+  dispatchApartmentList() {
     const { user: { citycode } } = this.props
+    let {
+      apartmentPage,
+      apartmentHasMore,
+      apratmentPayload,
+      apartmentLoading,
+      apartmentScrollTop,
+      selectHeight
+    } = this.state
 
-    if (!apartmentHasMore) return;
+    if (!apartmentHasMore || apartmentLoading) return;
     this.setState({ apartmentLoading: true })
 
-    this.props
-      .dispatchApartmentList({
-        city: citycode,
-        current_page: apartmentPage
-      }).then(res => this.setState({
-        apartmentPage: ++apartmentPage,
-        apartmentLoading: false,
-        apartmentHasMore: res.data.data.list.length > 0
-      }))
+    const payload = { ...apratmentPayload, city: citycode, current_page: apartmentPage, }
+
+    const onSuccess = res => this.setState({
+      apartmentPage: apartmentPage + 1,
+      apartmentLoading: false,
+      apartmentHasMore: res.data.data.list.length > 0
+    })
+
+    const onFail = () => this.setState({
+      apartmentLoading: false,
+      apartmentHasMore: false,
+    })
+
+    apartmentPage === 1
+      && apartmentScrollTop
+      && Taro.pageScrollTo({ scrollTop: apartmentScrollTop - selectHeight })
+
+    apartmentPage === 1
+      ? this.props.dispatchApartmentList(payload).then(onSuccess).catch(onFail)
+      : this.props.dispatchNextPageApartmentList(payload).then(onSuccess).catch(onFail)
+  }
+
+  onApartmentResetState(payload) {
+    payload = payload || PAYLOAD_APARTMENT_LIST
+
+    this.setState({
+      apartmentPage: 1,
+      apartmentHasMore: true,
+      apratmentPayload: { ...PAYLOAD_APARTMENT_LIST, ...payload },
+    }, () => this.dispatchApartmentList())
+  }
+
+  onApartmentPayloadChange({ payload }) {
+    this.onApartmentResetState(payload)
   }
 
   render() {
-    const { apartmentLoading, apartmentIsFixed, apartmentHasMore, searchIsFixed, searchScrollTop } = this.state
+    const { apartmentLoading, selectIsFixed, apartmentHasMore, searchIsFixed, searchScrollTop } = this.state
     const { user, cbds, ads, citys, banners, recommends, activities, dists, apartments } = this.props
 
     // 设置城市选择器
@@ -262,25 +317,29 @@ class ApartmentHome extends Component {
           <View className='home-select'>
             <Select
               top={searchScrollTop}
-              isFixed={apartmentIsFixed}
+              isFixed={selectIsFixed}
 
               autoSortDist={[]}
               cbdDist={dists.cbd_list}
               priceDist={dists.price_list}
               houseTypeDist={dists.housetype_list}
               specialSelectDist={dists.special_select}
+              onApartmentPayloadChange={this.onApartmentPayloadChange}
             />
           </View>
 
-          {apartments.length > 0 && apartments.map(i =>
-            <Apartment key={i.id} apartment={i} className='mt-3' />
-          )}
+          <View className='home-apartment'>
+            {apartments.length > 0 ? apartments.map(i =>
+              <Apartment key={i.id} apartment={i} className='mb-3' />
+            ) : <View className='page-demo'>{MEESAGE_NO_APARTMENT_DATA}</View>}
+          </View>
+
           <Placeholder className='mt-2' show={apartmentLoading} quantity={5} />
 
           {
-            !apartmentLoading && !apartmentHasMore &&
+            apartments.length !== 0 && !apartmentLoading && !apartmentHasMore &&
             <View className='text-center text-small mt-3'>
-              <Text className='text-muted'>我可是有底线的哦</Text>
+              <Text className='text-muted'>{MESSAGE_NO_MORE}</Text>
             </View>
           }
         </View>
