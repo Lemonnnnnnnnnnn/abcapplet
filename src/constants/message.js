@@ -11,5 +11,5 @@ export const MESSAGE_RENT = '租金'
 export const MESSAGE_LOCATION = '位置'
 export const MESSAGE_HOUSE_TYPE = '户型'
 export const MESSAGE_AUTO_SORT = '智能排序'
-
-
+export const MESSAGE_CONFIRM = '确定'
+export const MESSAGE_RESET = '重置'
