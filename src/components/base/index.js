@@ -14,7 +14,7 @@ const objectToString = style => {
   return ''
 }
 
-export default class ABCComponent extends Component {
+export default class BaseComponent extends Component {
   static options = {
     addGlobalClass: true
   }
