@@ -31,12 +31,12 @@ class SelectSpecial extends BaseComponent {
     this.setState({ ...SelectSpecial.defaultState })
   }
 
-  onSelectedItemsChange({ name }) {
+  onSelectedItemsChange({ name: id }) {
     let { selectedItems } = this.state
 
-    selectedItems = selectedItems.includes(name)
-      ? selectedItems.filter(i => i !== name)
-      : [...selectedItems, name]
+    selectedItems = selectedItems.includes(id)
+      ? selectedItems.filter(i => i !== id)
+      : [...selectedItems, id]
 
     this.setState({ selectedItems })
     this.props.onChange({ payload: { tags: selectedItems.toString() } })
@@ -54,13 +54,13 @@ class SelectSpecial extends BaseComponent {
         style={style}
         className='my-2 ml-2 carousel-normal'
       >
-        {items.map((item, key) =>
+        {items.map((item) =>
           <Tag
-            key={key}
+            key={item.id}
             type='special'
+            name={item.id}
             className='carousel-normal-item'
-            name={item.title}
-            active={selectedItems.includes(item.title)}
+            active={selectedItems.includes(item.id)}
             onClick={this.onSelectedItemsChange}
           >{item.title}</Tag>
         )}
