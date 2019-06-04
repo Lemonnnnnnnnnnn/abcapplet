@@ -3,3 +3,16 @@
   background: #06bb08;
   color: #ffffff;
 }
+
+.btn-yellow {
+  border-color: $color-yellow-0;
+  background: $color-white;
+  color: $color-yellow-0;
+
+  &.active {
+    border-color: $color-yellow-0;
+    background: $color-yellow-0;
+    color: $color-white;
+  }
+}
+

@@ -1,7 +1,7 @@
 .select {
   left: 0;
-  // top: 0;
-  z-index: 100;
+  top: 0;
+  z-index: 200;
   background: #fff;
   width: 100%;
 
@@ -14,7 +14,7 @@
   }
 
   .at-tabs__item--active {
-    color: $color-yellow;
+    color: $color-yellow-0;
   }
 
   .at-tabs__header,

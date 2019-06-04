@@ -1,0 +1,15 @@
+.tag {
+  border-radius: 6px * $hd;
+
+  &--special {
+    color: $color-yellow-0;
+    background: $color-yellow-1;
+
+    &.tag--active {
+      color: $color-white;
+      background: $color-yellow-0;
+    }
+  }
+}
+
+
