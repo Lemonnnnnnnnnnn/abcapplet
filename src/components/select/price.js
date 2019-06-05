@@ -44,8 +44,7 @@ class SelectPrice extends BaseComponent {
 
   onTabChange(tabIndex) {
     const { items } = this.props
-    const { price_low, price_high } = items[tabIndex]
-
+    const { low: price_low, high: price_high } = items[tabIndex]
     this.setState({ minValue: price_low, maxValue: price_high, tabIndex })
     this.props.onChange({ payload: { price_low, price_high } })
   }
