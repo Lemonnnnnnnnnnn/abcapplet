@@ -54,8 +54,12 @@ class SelectCbd extends BaseComponent {
     const id = items[cbdIndex].list[areaIndex].id
 
     areaIndexs[cbdIndex] = areaIndex
-    this.setState({ areaIndexs, areaSelected: id })
-    item.keyword === KEYWORD_FJ && this.onPropsOnChange({ areaSelected: id })
+    this.setState({ areaIndexs })
+
+    if (item.keyword === KEYWORD_FJ) {
+      this.setState({ areaSelected: id })
+      this.onPropsOnChange({ areaSelected: id })
+    }
   }
 
   onPropsOnChange({ areaSelected = null, placeSelected = null }) {

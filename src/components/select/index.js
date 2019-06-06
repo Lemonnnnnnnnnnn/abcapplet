@@ -47,6 +47,7 @@ class Select extends BaseComponent {
   static defaultProps = {
     top: 0,
     isFixed: false,
+
     cbdDist: [],
     priceDist: [],
     autoSortDist: [],
@@ -56,6 +57,8 @@ class Select extends BaseComponent {
   }
 
   state = {
+    latitude: 0,
+    longitude: 0,
     headerIndex: '',
     payload: PAYLOAD_APARTMENT_LIST,
   }
@@ -75,12 +78,15 @@ class Select extends BaseComponent {
   }
 
   onPayloadChange({ payload }) {
-    payload = {
-      ...this.state.payload,
-      ...payload,
-    }
-
-    this.setState({ payload })
+    const { latitude, longitude } = this.state
+    this.setState({
+      payload: {
+        ...this.state.payload,
+        ...payload,
+        latitude,
+        longitude,
+      }
+    })
   }
 
   onPayloadChangeAndRefresh({ payload }) {
@@ -95,9 +101,9 @@ class Select extends BaseComponent {
     this.props.onApartmentPayloadChange({ payload })
   }
 
-  async componentDidShow() {
+  async componentWillMount() {
     const { latitude, longitude } = await Taro.getLocation()
-    this.onPayloadChange({ payload: { latitude, longitude } })
+    this.setState({ latitude, longitude })
   }
 
   onHeaderClick(headerIndex) {
