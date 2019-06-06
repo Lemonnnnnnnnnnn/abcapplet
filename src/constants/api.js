@@ -29,8 +29,9 @@ export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
 export const PAYLOAD_APARTMENT_LIST = {
   city: 350200,
-  cbd: 0,
+  cbd: "",
   tags: "",
+  distance: 0,
   price_low: 0,
   price_high: 0,
   house_type: 0,

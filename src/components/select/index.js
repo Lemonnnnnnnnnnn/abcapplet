@@ -7,6 +7,7 @@ import SelectHeader from '@components/select/header'
 import SelectPrice from '@components/select/price'
 import SelectButton from '@components/select/button'
 import SelectHouseType from '@components/select/house-type'
+import SelectCbd from '@components/select/cbd'
 import SelectSpecial from '@components/select/special'
 import BaseComponent from '@components/base'
 import Masks from '@components/masks'
@@ -60,11 +61,13 @@ class Select extends BaseComponent {
   }
 
   // 创建子组件关联，用于重置数据
+  refSelectCbd = (node) => this.selectCbd = node
   refSelectPrice = (node) => this.selectPrice = node
   refSelectSpecial = (node) => this.selectSpecial = node
   refSelectHouseType = (node) => this.selectHouseType = node
 
   onPayloadRest() {
+    this.selectCbd.onResetState()
     this.selectPrice.onResetState()
     this.selectSpecial.onResetState()
     this.selectHouseType.onResetState()
@@ -90,6 +93,11 @@ class Select extends BaseComponent {
 
     this.setState({ payload, headerIndex: '' })
     this.props.onApartmentPayloadChange({ payload })
+  }
+
+  async componentDidShow() {
+    const { latitude, longitude } = await Taro.getLocation()
+    this.onPayloadChange({ payload: { latitude, longitude } })
   }
 
   onHeaderClick(headerIndex) {
@@ -140,6 +148,14 @@ class Select extends BaseComponent {
           items={header}
           index={headerIndex}
           onClick={this.onHeaderClick}
+        />
+
+        {/* 对应内容 */}
+        <SelectCbd
+          ref={this.refSelectCbd}
+          items={cbdDist}
+          show={headerIndex === 'cbd'}
+          onChange={this.onPayloadChange}
         />
 
         {/* 对应内容 */}

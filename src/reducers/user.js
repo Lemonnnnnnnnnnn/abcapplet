@@ -11,6 +11,7 @@ export default function user(state = USER_DEFAULT, action) {
     case USER_CITY_CODE: {
       return { ...state, citycode: action.payload }
     }
+
     case USER_INFO: {
       return { ...action.payload }
     }
