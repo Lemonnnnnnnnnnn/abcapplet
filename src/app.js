@@ -41,25 +41,25 @@ class App extends Component {
           pagePath: "pages/apartment/home",
           text: "首页",
           iconPath: "assets/icons/home.png",
-          selectedIconPath: "assets/icons/home_active.png"
+          selectedIconPath: "assets/icons/home-active.png"
         },
         {
           pagePath: "pages/apartment/services",
           text: "找房",
           iconPath: "assets/icons/services.png",
-          selectedIconPath: "assets/icons/services_active.png"
+          selectedIconPath: "assets/icons/services-active.png"
         },
         {
           pagePath: "pages/apartment/recommend",
           text: "优选",
           iconPath: "assets/icons/recommend.png",
-          selectedIconPath: "assets/icons/recommend_active.png"
+          selectedIconPath: "assets/icons/recommend-active.png"
         },
         {
           pagePath: "pages/user/profile",
           text: "我的",
           iconPath: "assets/icons/profile.png",
-          selectedIconPath: "assets/icons/profile_active.png"
+          selectedIconPath: "assets/icons/profile-active.png"
         }
       ],
     },
