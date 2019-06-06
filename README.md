@@ -6,18 +6,51 @@
 | --- | --- |
 | 框架 | [taro](https://taro.aotu.io/) |
 | 基础 UI | [taro-ui](https://taro-ui.aotu.io/) |
-## 版本相关
-
-| 名称 | 原型 | 设计稿 | 接口文档 |
-| --- | --- | --- | --- |
-| v1.5.0 | [原型](https://lanhuapp.com/web/#/item/project/board?pid=7e6a33f5-4c50-4c7b-82f3-5a03a89dc231) | [设计稿](https://lanhuapp.com/web/#/item/project/board?pid=7e6a33f5-4c50-4c7b-82f3-5a03a89dc231) | [showdoc](https://www.showdoc.cc/369994834935035) |
 
 ## 项目结构
+
+### 概览
 
 | 路径 | 说明 |
 | --- | --- |
 | src/app.js | 项目入口文件 |
+| src/config | 全局基本配置 |
+| src/components | 全局组件目录 |
+| src/pages | 小程序页面目录 |
+| src/assets | 图片资源目录 |
+| src/constants | redux 和 项目常量目录 |
 | src/styles | 样式文件目录 |
-| src/styles/app.scss | 样式入口文件 |
-| src/config/dev.js | 用于存储 `开发环境` 基础配置 |
-| src/config/prod.js | 用于存储 `生成环境` 基础配置 |
+
+### Redex 相关
+
+| 路径 | 说明 |
+| --- | --- |
+| src/store | redux store |
+| src/actions | redux actions |
+| src/reducers | redux reducers |
+| src/constants | redux constants |
+
+### Constants 相关
+
+| 路径 | 说明 |
+| --- | --- |
+| src/constants/api.js | 接口相关配置 |
+| src/constants/styles.js | 内嵌样式相关配置 |
+| src/constants/message.js | 文本配置（多语言预备方案） |
+
+### Utils 相关
+
+| 路径 | 说明 |
+| --- | --- |
+| request | 封装了基础的网络请求 |
+| redux | 封装了 request 中的请求为 actions |
+
+## 版本相关
+
+### v1.5.0
+
+| 所属项目 | 原型 | 设计稿 | 接口文档 |
+| --- | --- | --- | --- | --- |
+| 客户端 | [原型](https://org.modao.cc/app/4a1e4adbf1c09a643a36bd33e405bf0b#screen=s917C0C19BC1553657488628) | [设计稿](https://lanhuapp.com/web/#/item/project/board?pid=7e6a33f5-4c50-4c7b-82f3-5a03a89dc231) | [接口](https://www.showdoc.cc/369994834935035) |
+| 管家端 | [原型](https://org.modao.cc/app/460f7b2ae4ebb69e1cb7ee6977dd57c954ef1176#screen=s01DBA570101557387662643) | [设计稿](https://lanhuapp.com/web/#/item/project/board?pid=6765f128-a6c5-42d3-953e-6fa36ccfb66d) | [接口](https://www.showdoc.cc/376825715417871) |
+| 销售端 | [原型](https://org.modao.cc/app/629649b0096af0a4b811e64d18818580#screen=s05215505CE1554347900670) | [设计稿](https://lanhuapp.com/web/#/item/project/board?pid=a0dbfaec-c745-4ac2-89b9-d96ce1609b4c) | [接口](https://www.showdoc.cc/379431691870580) |
