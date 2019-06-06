@@ -49,7 +49,7 @@
 
 ### v1.5.0
 
-| 所属项目 | 原型 | 设计稿 | 接口文档 |
+| 所属项目 | 原型 | 设计稿 | 接口 |
 | --- | --- | --- | --- |
 | 客户端 | [原型](https://org.modao.cc/app/4a1e4adbf1c09a643a36bd33e405bf0b#screen=s917C0C19BC1553657488628) | [设计稿](https://lanhuapp.com/web/#/item/project/board?pid=7e6a33f5-4c50-4c7b-82f3-5a03a89dc231) | [接口](https://www.showdoc.cc/369994834935035) |
 | 管家端 | [原型](https://org.modao.cc/app/460f7b2ae4ebb69e1cb7ee6977dd57c954ef1176#screen=s01DBA570101557387662643) | [设计稿](https://lanhuapp.com/web/#/item/project/board?pid=6765f128-a6c5-42d3-953e-6fa36ccfb66d) | [接口](https://www.showdoc.cc/376825715417871) |
