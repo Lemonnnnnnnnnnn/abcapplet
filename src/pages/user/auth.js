@@ -11,7 +11,6 @@ import * as actions from '@actions/user'
 class UserAuth extends Component {
   config = {
     navigationBarTitleText: '授权登录',
-    enablePullDownRefresh: true,
   }
 
   /**

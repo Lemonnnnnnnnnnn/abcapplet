@@ -1,8 +1,11 @@
+@import "overrides";
+
 page {
-  background: #ffffff;
+  background: #F8F8F8;
 }
 
 .page {
+
   &-demo {
     font-weight: 200;
     font-size: 16px * $hd;
