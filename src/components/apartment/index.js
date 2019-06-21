@@ -1,10 +1,16 @@
-import Taro, { Component } from '@tarojs/taro'
+// Taro 组件
+import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import classNames from 'classnames'
 import { AtTag } from 'taro-ui'
+
+// 自定义组件
+import BaseComponent from '@components/base'
+
+// NPM 包
+import classNames from 'classnames'
 import ImagePlaceholder from '@components/image-placeholder'
 
-class Apartment extends Component {
+class Apartment extends BaseComponent {
   static options = {
     addGlobalClass: true
   }

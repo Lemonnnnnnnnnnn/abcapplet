@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import { COLOR_GREY_2 } from '@constants/styles'
-import { MESSAGE_MORE } from '@constants/message'
+import { LOCALE_MORE } from '@constants/locale'
 import { PAGE_HOME } from '@constants/page'
 import classNames from 'classnames'
 
@@ -16,7 +16,7 @@ class Header extends Component {
     title: [],
     hasExtra: false,
     url: PAGE_HOME,
-    extraText: MESSAGE_MORE,
+    extraText: LOCALE_MORE,
   }
 
   onNavigation(url) {

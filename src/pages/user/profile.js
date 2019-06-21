@@ -1,11 +1,22 @@
+// Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+
+// Redux 相关
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/user'
 
-import Avatar from '@components/avatar'
-import Board from '@components/board'
-import Lists from '@components/lists'
+// 自定义组件
+import Decorate from '@components/decorate'
+import UserHeader from '@components/user-header'
+import UserOptions from '@components/user-options'
+import UserOrderOptions from '@components/user-order-options'
+// 常量
+import {
+  USER_OPTIONS_LISTS,
+  USER_ORDER_OPTIONS_LISTS,
+} from '@constants/user'
+import { PAGE_USER_AUTH } from '@constants/page'
 
 @connect(state => state, actions)
 class UserProfile extends Component {
@@ -15,20 +26,8 @@ class UserProfile extends Component {
   }
 
   state = {
-    lists: [
-      {
-        title: '我的小黄卡',
-        icon: 'credit-card',
-        extraText: '指定公寓享受折扣价',
-        url: '/pages/user/card',
-      },
-      {
-        title: '我的心愿卡',
-        icon: 'heart-2',
-        extraText: '66个房源',
-        url: '/pages/user/collection',
-      },
-    ]
+    optionLists: USER_OPTIONS_LISTS,
+    orderOptionLists: USER_ORDER_OPTIONS_LISTS,
   }
 
   componentDidShow() {
@@ -36,29 +35,41 @@ class UserProfile extends Component {
   }
 
   onLogin() {
-    Taro.reLaunch({ url: '/pages/user/auth' })
+    Taro.reLaunch({ url: PAGE_USER_AUTH })
   }
 
   render() {
-    const { lists } = this.state
+    const { optionLists, orderOptionLists } = this.state
     const { user: { username, mobile } } = this.props
 
     return (
-      <View className='page mx-3'>
-        {/* 背景底色 */}
-        <Board height='400' />
+      <View className='page-grey'>
+        <View className='page mx-3'>
+          {/* 背景底色 */}
+          <Decorate height='400' />
 
-        {/* 用户头像信息 */}
-        <Avatar
-          className='mt-4'
-          mobile={mobile}
-          username={username}
-          onLogin={this.onLogin}
-        />
+          {/* 用户头像信息 */}
+          <UserHeader
+            className='mt-4'
+            mobile={mobile}
+            username={username}
+            onLogin={this.onLogin}
+          />
 
-        {/* 用户可选信息 */}
-        <Lists lists={lists} />
-      </View >
+          {/* 用户可选信息 */}
+          <UserOptions
+            className='mt-4'
+            lists={optionLists}
+          />
+
+          {/* 我的订单 */}
+          <UserOrderOptions
+            className='mt-4'
+            lists={orderOptionLists}
+          />
+
+        </View >
+      </View>
     )
   }
 }

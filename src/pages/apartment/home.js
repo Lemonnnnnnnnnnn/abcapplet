@@ -24,13 +24,13 @@ import * as apartmentActions from '@actions/apartment'
 import { PAGE_CBD_INDEX } from '@constants/page'
 import { PAYLOAD_APARTMENT_LIST } from '@constants/api'
 import {
-  MESSAGE_HOT_CBD,
-  MESSAGE_ACTIVITY,
-  MESSAGE_APARTMENT,
-  MESSAGE_NO_MORE,
-  MEESAGE_NO_APARTMENT_DATA,
-  MESSAGE_RECOMMEND_APARTMENT,
-} from '@constants/message'
+  LOCALE_HOT_CBD,
+  LOCALE_ACTIVITY,
+  LOCALE_APARTMENT,
+  LOCALE_NO_MORE,
+  LOCALE_NO_APARTMENT_DATA,
+  LOCALE_RECOMMEND_APARTMENT,
+} from '@constants/locale'
 
 @connect(state => state, {
   ...adActions,
@@ -247,7 +247,7 @@ class ApartmentHome extends Component {
           <View>
             <Header
               className='my-2'
-              title={MESSAGE_HOT_CBD} url={PAGE_CBD_INDEX} hasExtra
+              title={LOCALE_HOT_CBD} url={PAGE_CBD_INDEX} hasExtra
             />
             <Carousel
               type='normal'
@@ -276,7 +276,7 @@ class ApartmentHome extends Component {
           <View>
             <Header
               className='my-2'
-              title={MESSAGE_RECOMMEND_APARTMENT}
+              title={LOCALE_RECOMMEND_APARTMENT}
               url={PAGE_CBD_INDEX} hasExtra
             />
             <Carousel
@@ -294,7 +294,7 @@ class ApartmentHome extends Component {
           <View>
             <Header
               className='my-2'
-              title={MESSAGE_ACTIVITY}
+              title={LOCALE_ACTIVITY}
               hasExtra={false}
             />
             <Carousel
@@ -311,7 +311,7 @@ class ApartmentHome extends Component {
         <View>
           <Header
             className='my-2'
-            title={MESSAGE_APARTMENT}
+            title={LOCALE_APARTMENT}
             hasExtra={false}
           />
           <View className='home-select'>
@@ -331,7 +331,7 @@ class ApartmentHome extends Component {
           <View className='home-apartment'>
             {apartments.length > 0 ? apartments.map(i =>
               <Apartment key={i.id} apartment={i} className='mb-3' />
-            ) : <View className='page-demo'>{MEESAGE_NO_APARTMENT_DATA}</View>}
+            ) : <View className='page-demo'>{LOCALE_NO_APARTMENT_DATA}</View>}
           </View>
 
           <Placeholder className='mt-2' show={apartmentLoading} quantity={5} />
@@ -339,7 +339,7 @@ class ApartmentHome extends Component {
           {
             apartments.length !== 0 && !apartmentLoading && !apartmentHasMore &&
             <View className='text-center text-small mt-3'>
-              <Text className='text-muted'>{MESSAGE_NO_MORE}</Text>
+              <Text className='text-muted'>{LOCALE_NO_MORE}</Text>
             </View>
           }
         </View>

@@ -3,7 +3,7 @@ import { AtButton } from 'taro-ui'
 
 import { View } from '@tarojs/components'
 import BaseComponent from '@components/base'
-import { MESSAGE_CONFIRM, MESSAGE_RESET } from '@constants/message'
+import { LOCALE_CONFIRM, LOCALE_RESET } from '@constants/locale'
 
 /**
  * Select 中的按钮部分
@@ -30,7 +30,7 @@ class SelectButton extends BaseComponent {
           onClick={onResetClick}
           className='ml-2 btn-yellow'
         >
-          {MESSAGE_RESET}
+          {LOCALE_RESET}
         </AtButton>
       </View>
       <View className='at-col at-col-8'>
@@ -39,7 +39,7 @@ class SelectButton extends BaseComponent {
           onClick={onConfirmClick}
           className='mx-2 btn-yellow active'
         >
-          {MESSAGE_CONFIRM}
+          {LOCALE_CONFIRM}
         </AtButton>
       </View>
     </View>)

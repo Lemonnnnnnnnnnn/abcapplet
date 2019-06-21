@@ -1,24 +1,44 @@
-import Taro, { Component } from '@tarojs/taro'
+// Taro 相关
+import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-class Board extends Component {
-  static options = {
-    addGlobalClass: true
-  }
+// NPM 相关
+import classNames from 'classnames'
+
+// 自定义组件
+import BaseComponent from '@components/base'
+
+class Board extends BaseComponent {
 
   static defaultProps = {
-    height: 100,
+    border: 'all', // 可选值 all, top, bottom, none
+    fixed: false,
+    title: false,
+    fixedTop: false,
+    color: '',
   }
 
   render() {
-    const { height } = this.props
+    const {
+      fixed,
+      border,
+      className,
+    } = this.props
 
-    const style = {
-      height: `${Taro.pxTransform(parseInt(height))}`,
+    const rootClassName = [
+      'board',
+      `board--${border}`,
+    ]
+
+    const classObject = {
+      'board--fixed': fixed === 'top',
+      'board--fixed-top': fixed === 'bottom',
     }
 
     return (
-      <View className='board' style={style}></View>
+      <View className={classNames(rootClassName, classObject, className)}>
+        {this.props.children}
+      </View>
     )
   }
 }

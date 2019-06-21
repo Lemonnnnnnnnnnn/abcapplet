@@ -1,35 +1,34 @@
-import Taro, { Component } from '@tarojs/taro'
+// Taro 相关
+import Taro from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
+
+// 自定义组件
+import Board from '@components/board'
+import BaseComponent from '@components/base'
 import { COLOR_YELLOW, COLOR_GREY_0 } from '@constants/styles'
 
-class Lists extends Component {
-  static options = {
-    addGlobalClass: true
-  }
-
+class UserOptions extends BaseComponent {
   static defaultProps = {
     lists: [],
     size: 17,
   }
 
-  onNavigation(item) {
-    // TODO Taro.reLaunch({ url: item.url })
-    console.log(item.url)
+  onNavigation({ url }) {
+    Taro.navigateTo({ url })
   }
 
   render() {
-    const { lists, size } = this.props
+    const { lists, size, className } = this.props
 
     return (
-      <View className='mt-4'>
+      <Board className={className}>
         {
           lists.map((item, index) =>
-            <View className='user-list-item p-3'
+            <View className='user-list-item py-3 mx-3'
               key={index}
               onClick={this.onNavigation.bind(this, item)}
             >
-
               <View className='at-row at-row__justify--around'>
                 {/* 左侧内容 */}
                 <View className='at-col'>
@@ -48,9 +47,9 @@ class Lists extends Component {
             </View>
           )}
 
-      </View>
+      </Board>
     )
   }
 }
 
-export default Lists
+export default UserOptions

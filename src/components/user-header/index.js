@@ -1,13 +1,16 @@
-import Taro, { Component } from '@tarojs/taro'
-import classNames from 'classnames'
+// Taro 组件
+import Taro from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { AtAvatar } from 'taro-ui'
 
-class Avatar extends Component {
-  static options = {
-    addGlobalClass: true
-  }
+// NPM 包
+import classNames from 'classnames'
 
+// 自定义组件
+import BaseComponent from '@components/base'
+
+
+class UserHeader extends BaseComponent {
   static defaultProps = {
     username: '',
     mobile: '',
@@ -46,4 +49,4 @@ class Avatar extends Component {
   }
 }
 
-export default Avatar
+export default UserHeader

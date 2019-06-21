@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { MESSAGE_AUTH } from '@constants/message'
+import { LOCALE_AUTH } from '@constants/locale'
 import { PAGE_HOME } from '@constants/page'
 import { connect } from '@tarojs/redux'
 import Auth from '@components/auth'
@@ -40,7 +40,7 @@ class UserAuth extends Component {
     return (
       <Auth
         logo={logo}
-        message={MESSAGE_AUTH}
+        message={LOCALE_AUTH}
         onLogin={this.onLogin}
       />
     )

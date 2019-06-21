@@ -13,11 +13,11 @@ import BaseComponent from '@components/base'
 import Masks from '@components/masks'
 
 import {
-  MESSAGE_RENT,
-  MESSAGE_LOCATION,
-  MESSAGE_HOUSE_TYPE,
-  // MESSAGE_AUTO_SORT
-} from '@constants/message'
+  LOCALE_RENT,
+  LOCALE_LOCATION,
+  LOCALE_HOUSE_TYPE,
+  // LOCALE_AUTO_SORT
+} from '@constants/locale'
 
 /**
  * 公寓选择器
@@ -139,11 +139,11 @@ class Select extends BaseComponent {
 
     // Header 相关
     const header = [
-      { message: MESSAGE_LOCATION, show: cbdDist.length > 0, index: 'cbd' },
-      { message: MESSAGE_HOUSE_TYPE, show: houseTypeDist.length > 0, index: 'house-type' },
-      { message: MESSAGE_RENT, show: houseTypeDist.length > 0, index: 'price' },
+      { message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' },
+      { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.length > 0, index: 'house-type' },
+      { message: LOCALE_RENT, show: houseTypeDist.length > 0, index: 'price' },
       // TODO 接口未提供
-      // { message: MESSAGE_AUTO_SORT, index: 'auto-sort' },
+      // { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
     ]
 
     return (

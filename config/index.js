@@ -1,22 +1,22 @@
 /* eslint-disable import/no-commonjs */
 const path = require('path')
 
-const sassImporter = function (url) {
-  if (url[0] === '~' && url[1] !== '/') {
-    return {
-      file: path.resolve(__dirname, '..', 'node_modules', url.substr(1))
-    }
-  }
+// const sassImporter = function (url) {
+//   if (url[0] === '~' && url[1] !== '/') {
+//     return {
+//       file: path.resolve(__dirname, '..', 'node_modules', url.substr(1))
+//     }
+//   }
 
-  const reg = /^@styles\/(.*)/
-  return {
-    file: reg.test(url) ? path.resolve(__dirname, '..', 'src/styles', url.match(reg)[1]) : url
-  }
-}
+//   const reg = /^@styles\/(.*)/
+//   return {
+//     file: reg.test(url) ? path.resolve(__dirname, '..', 'src/styles', url.match(reg)[1]) : url
+//   }
+// }
 
 const config = {
-  projectName: 'w-store-app',
-  date: '2019-2-27',
+  projectName: 'test',
+  date: '2019-6-20',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
@@ -38,9 +38,6 @@ const config = {
         'transform-class-properties',
         'transform-object-rest-spread'
       ]
-    },
-    sass: {
-      importer: sassImporter
     }
   },
   defineConstants: {
@@ -83,7 +80,7 @@ const config = {
         url: {
           enable: true,
           config: {
-            limit: 102400 // 设定转换尺寸上限
+            limit: 10240 // 设定转换尺寸上限
           }
         },
         cssModules: {

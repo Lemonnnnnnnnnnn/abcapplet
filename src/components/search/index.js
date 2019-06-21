@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Picker, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import classNames from 'classnames'
-import { MESSAGE_SEARCH_PLACEHOLDER } from "@constants/message"
+import { LOCALE_SEARCH_PLACEHOLDER } from "@constants/locale"
 import { COLOR_GREY_0, COLOR_BLACK } from '@constants/styles'
 
 class Search extends Component {
@@ -36,7 +36,7 @@ class Search extends Component {
             <View className='at-col'>
               <View className='text-normal text-center text-muted'>
                 <AtIcon value='search' size={size} color={COLOR_GREY_0} />
-                <Text className='ml-2'>{MESSAGE_SEARCH_PLACEHOLDER}</Text>
+                <Text className='ml-2'>{LOCALE_SEARCH_PLACEHOLDER}</Text>
               </View>
             </View>
           </View>

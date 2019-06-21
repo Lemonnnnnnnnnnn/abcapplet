@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { clearUserStorage, getUserStorage } from '@actions/user'
-import { MESSAGE_ERROR } from '@constants/message'
+import { LOCALE_ERROR } from '@constants/locale'
 
 /**
  * 响应状态码
@@ -59,14 +59,14 @@ export default async function fetch({
    */
   function handleStatus(response) {
     if (!response || !response.data) {
-      throw new Error(MESSAGE_ERROR);
+      throw new Error(LOCALE_ERROR);
     }
 
     switch (response.data.code) {
       case CODE_SUCCESS: return response;
       case CODE_ERROR: throw new Error(response.data)
       case CODE_AUTH_EXPIRED: clearUserStorage(); break;
-      default: throw new Error(MESSAGE_ERROR)
+      default: throw new Error(LOCALE_ERROR)
     }
   }
 
@@ -81,7 +81,7 @@ export default async function fetch({
         url: '/pages/user-login/user-login'
       })
     } else {
-      error.message = error.message || MESSAGE_ERROR
+      error.message = error.message || LOCALE_ERROR
 
       showToast && Taro.showToast({
         icon: 'none',
