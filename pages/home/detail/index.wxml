@@ -1,18 +1,23 @@
 <!--pages/home/detail/index.wxml-->
 <view class="page">
     <view class="page__bd">
+
         <view class="box-1">
             <view wx:if="{{version >= 700}}" class="back" bindtap="back">
                 <icon class="iconfont icon-back"></icon>
             </view>
             <swiper circular="true" current="{{pictures.current}}" bindchange="swiperChange">
-                <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}" data-src="{{item.url}}" catchtap="previewDetailImage">
-                    <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" lazy-load="true" class="slide-image fade-in"/>
+                <swiper-item wx:for="{{pictures.list}}" wx:key="{{index}}" data-src="{{item.url}}"
+                    catchtap="previewDetailImage">
+                    <image src="{{item.url + '?imageView2/1/w/750/h/522'}}" lazy-load="true"
+                        class="slide-image fade-in" />
                 </swiper-item>
             </swiper>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}" class="item {{pictures.current_id == item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="tagChange">{{item.title}}</view>
+                    <view wx:for="{{pictures.picture_tags}}" wx:key="{{index}}"
+                        class="item {{pictures.current_id == item.id ? 'selected' : ''}}" data-id="{{item.id}}"
+                        bindtap="tagChange">{{item.title}}</view>
                 </scroll-view>
             </view>
             <view class="collection {{version >= 700 ? '' : 'low-version'}}" bindtap="collectClick">
@@ -36,9 +41,11 @@
                     </view>
                 </view>
                 <view class="tags clearfix">
-                    <view wx:for="{{apartment.tags}}" wx:key="{{index}}" class="tag {{(index+1) % 2 == 1 ? 'yellow' : 'green'}} yellow">{{item}}</view>
+                    <view wx:for="{{apartment.tags}}" wx:key="{{index}}"
+                        class="tag {{(index+1) % 2 == 1 ? 'yellow' : 'green'}} yellow">{{item}}</view>
                 </view>
-                <view wx:for="{{apartment.rules}}" wx:key="{{index}}" wx:if="{{item.show}}" class="ui-nowrap rules {{item.id}}">
+                <view wx:for="{{apartment.rules}}" wx:key="{{index}}" wx:if="{{item.show}}"
+                    class="ui-nowrap rules {{item.id}}">
                     <icon></icon>{{item.word}}
                 </view>
             </view>
@@ -47,21 +54,25 @@
             <view class="title">房型</view>
             <view class="scroll-view">
                 <scroll-view class="list" scroll-x>
-                    <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}" data-id="{{item.id}}" bindtap="openDialog">
+                    <view wx:for="{{house_types}}" wx:key="{{index}}" class="item {{index == 0 ? 'first-item' : ''}}"
+                        data-id="{{item.id}}" bindtap="openDialog">
                         <view class="img">
                             <image class="fade-in" src="{{item.cover + '?imageView2/1/w/256/h/160'}}"></image>
                         </view>
                         <view class="inner">
                             <view class="ui-nowrap apartment-name">{{item.title}}</view>
                             <view class="tags clearfix">
-                                <view wx:for="{{item.tags}}" wx:for-index="tindex" wx:for-item="titem" wx:key="{{tindex}}" class="item-tag {{(tindex+1) % 2 == 1 ? 'yellow' : 'green'}}">{{titem}}</view>
+                                <view wx:for="{{item.tags}}" wx:for-index="tindex" wx:for-item="titem"
+                                    wx:key="{{tindex}}" class="item-tag {{(tindex+1) % 2 == 1 ? 'yellow' : 'green'}}">
+                                    {{titem}}</view>
                             </view>
                             <view class="weui-flex price-box">
                                 <view class="weui-flex__item">
                                     <view class="price">{{item.price_title}}</view>
                                 </view>
                                 <view>
-                                    <view class="status {{item.has_room ? 'has' : ''}}">{{item.has_room ? '有房' : '无房'}}</view>
+                                    <view class="status {{item.has_room ? 'has' : ''}}">{{item.has_room ? '有房' : '无房'}}
+                                    </view>
                                 </view>
                             </view>
                         </view>
@@ -100,7 +111,8 @@
             <view class="wrap">
                 <view class="title">公寓位置</view>
                 <view class="map">
-                    <map longitude="{{apartment.longitude}}" latitude="{{apartment.latitude}}" show-location="true" bindtap="openLocation"></map>
+                    <map longitude="{{apartment.longitude}}" latitude="{{apartment.latitude}}" show-location="true"
+                        bindtap="openLocation"></map>
                 </view>
             </view>
         </view>
@@ -126,7 +138,8 @@
                                 </view>
                                 <view class="weui-flex__item">
                                     <view class="list clearfix">
-                                        <view class="item" wx:for="{{item.word}}" wx:for-index="windex" wx:for-item="witem" wx:key="{{windex}}">
+                                        <view class="item" wx:for="{{item.word}}" wx:for-index="windex"
+                                            wx:for-item="witem" wx:key="{{windex}}">
                                             <icon class="iconfont icon-gou"></icon>
                                             <text>{{witem}}</text>
                                         </view>
@@ -137,9 +150,11 @@
                     </view>
                 </view>
                 <view class="defense">
-                    <view wx:for="{{article_list}}" wx:key="{{index}}" class="weui-flex tip {{(index+1) == article_list.length ? '' : 'border-b'}}">
+                    <view wx:for="{{article_list}}" wx:key="{{index}}"
+                        class="weui-flex tip {{(index+1) == article_list.length ? '' : 'border-b'}}">
                         <view class="weui-flex__item">
-                            <navigator class="defense-title" hover-class="none" url="/pages/home/article/detail/index?id={{item.id}}">{{item.title}}</navigator>
+                            <navigator class="defense-title" hover-class="none"
+                                url="/pages/home/article/detail/index?id={{item.id}}">{{item.title}}</navigator>
                         </view>
                         <view>
                             <view>
@@ -157,7 +172,8 @@
                     <scroll-view class="list" scroll-x>
                         <navigator class="item" wx:for="{{near_list}}" url="/pages/home/detail/index?id={{item.id}}">
                             <view class="img">
-                                <image class="fade-in" lazy-load="true" src="{{item.cover + '?imageView2/1/w/336/h/216'}}" mode="scaleToFill"></image>
+                                <image class="fade-in" lazy-load="true"
+                                    src="{{item.cover + '?imageView2/1/w/336/h/216'}}" mode="scaleToFill"></image>
                                 <text>{{item.appointment_show_num}}人想住</text>
                             </view>
                             <view class="info">
@@ -222,9 +238,11 @@
                         </view>
                         <view class="clearfix tags">
                             <view class="clearfix house-tag">
-                                <view wx:for="{{dailog_house.tags}}" wx:key="{{index}}" class="tag {{index % 2 ? 'green' : 'yellow'}}">{{item}}</view>
+                                <view wx:for="{{dailog_house.tags}}" wx:key="{{index}}"
+                                    class="tag {{index % 2 ? 'green' : 'yellow'}}">{{item}}</view>
                             </view>
-                            <view class="house-status {{dailog_house.has_room ? 'has' : ''}}">{{dailog_house.has_room ? '有房' : '无房'}}</view>
+                            <view class="house-status {{dailog_house.has_room ? 'has' : ''}}">
+                                {{dailog_house.has_room ? '有房' : '无房'}}</view>
                         </view>
                         <view class="desc">{{dailog_house.desc}}</view>
                     </view>
@@ -242,12 +260,17 @@
                             <view class="btn close" bindtap="closeDialog">关闭</view>
                         </view>
                         <view class="weui-flex__item">
-                            <navigator class="btn book" hover-class="none" url="/pages/home/bookingRoom/index?id={{id}}">预约看本户型</navigator>
+                            <navigator class="btn book" hover-class="none"
+                                url="/pages/home/bookingRoom/index?id={{id}}">预约看本户型</navigator>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
         <view class="mask {{show_dialog ? '' : 'hide'}}" catchtouchmove="move"></view>
+
+        <navigator open-type='switchTab' url='/pages/home/index/index' class='home-button'>
+            <image src="/images/home/home_button.png" mode="scaleToFill" />
+        </navigator>
     </view>
 </view>

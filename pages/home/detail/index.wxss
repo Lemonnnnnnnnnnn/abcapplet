@@ -668,3 +668,25 @@
     margin-left: 15px;
     background-color: #FFCF11;
 }
+
+.home-button {
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    right: 20px;
+    bottom: 70px;
+    z-index: 10000;
+    background-size: cover;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.home-button > image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
