@@ -31,6 +31,12 @@
       border-radius: 6px * $hd;
       background: #ffc919;
     }
+
+    &-favorite {
+      position: absolute;
+      top: 10px * $hd;
+      right: 18px * $hd;
+    }
   }
 
   &-content {

@@ -1,13 +1,18 @@
-import { API_USER_LOGIN } from '@constants/api'
-import { createAction } from '@utils/redux'
 import Taro from '@tarojs/taro'
+import { createAction } from '@utils/redux'
 
 import {
-  USER_CITY_CODE,
+  API_USER_LOGIN,
+  API_USER_FAVORITE_DELETE
+} from '@constants/api'
+
+import {
   USER_INFO,
   USER_LOGIN,
   USER_LOGOUT,
-  USER_DEFAULT
+  USER_DEFAULT,
+  USER_CITY_CODE,
+  DELETE_USER_FAVORITE,
 } from '@constants/user'
 
 /**
@@ -79,4 +84,16 @@ export const dispatchLogin = (payload, fetchOptions = {}) => createAction({
 export const dispatchLogout = () => ({
   type: USER_LOGOUT,
   payload: USER_DEFAULT.userInfo
+})
+
+
+/**
+ * 删除心愿
+ */
+export const dispatchFavoriteDelete = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type: DELETE_USER_FAVORITE,
+  url: API_USER_FAVORITE_DELETE,
+  cb: console.log
 })

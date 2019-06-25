@@ -3,6 +3,7 @@ const isDev = process.env.NODE_ENV === 'development'
 export const DEV_HOST = "http://test.abc.411er.cn/mini"
 export const PROD_HOST = "http://test.abc.411er.cn/mini"
 export const HOST = isDev ? DEV_HOST : PROD_HOST
+export const PAGE_SIZE = 10
 
 // 用户
 export const API_USER_LOGIN = `${HOST}/auth/loginpost`
@@ -27,16 +28,15 @@ export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
 
 // 公寓列表
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
-export const PAYLOAD_APARTMENT_LIST = {
-  city: 350200,
-  cbd: "",
-  tags: "",
-  distance: 0,
-  price_low: 0,
-  price_high: 0,
-  house_type: 0,
-  latitude: 0,
-  longitude: 0,
-  current_page: 1,
-  page_size: 10,
-}
+export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, house_type: 0, latitude: 0, longitude: 0, current_page: 1, page_size: 10 }
+
+// 心愿单公寓列表
+export const API_FAVORITE_APARTMENT_LIST = `${HOST}/user/listCollectPost`
+export const PAYLOAD_FAVORITE_APARTMENT_LIST = { current_page: 1, page_size: PAGE_SIZE, refresh: 1 }
+
+// 心愿单户型列表
+export const API_FAVORITE_HOUSE_TYPE_LIST = `${HOST}/user/listCollectHouseTypePost`
+export const PAYLOAD_FAVORITE_HOUSE_TYPE_LIST = { current_page: 1, page_size: PAGE_SIZE, refresh: 1 }
+
+// 心愿单取消
+export const API_USER_FAVORITE_DELETE = `${HOST}/user/deleteCollectPost`

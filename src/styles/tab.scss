@@ -1,0 +1,25 @@
+@import "overrides";
+
+.at-tabs__item--active .at-tabs__item-underline {
+  position: absolute;
+  left: 50%;
+  bottom:0;
+  width: 20%;
+  border-radius: 20px * $hd;
+  height: 5px * $hd;
+  background-color: $color-yellow-0;
+  transform: translate(-50%, -50%);
+  transition: all 0;
+}
+
+.at-tabs__item-underline {
+  position: absolute;
+  left: 50%;
+  bottom:0;
+  width: 0;
+  border-radius: 20px * $hd;
+  height: 1px * $hd;
+  background-color: $color-yellow-0;
+  transform: translate(-100%, -100%);
+  transition: all 0;
+}
