@@ -5,9 +5,6 @@ export const PROD_HOST = "http://test.abc.411er.cn/mini"
 export const HOST = isDev ? DEV_HOST : PROD_HOST
 export const PAGE_SIZE = 10
 
-// 用户
-export const API_USER_LOGIN = `${HOST}/auth/loginpost`
-
 // 广告
 export const API_AD_LIST = `${HOST}/ad/adPost`
 
@@ -26,6 +23,11 @@ export const API_ARTICLE_SHOW = `${HOST}/article/getpost`
 export const API_BANNER_LIST = `${HOST}/article/listbannerpost`
 export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
 
+/**
+ ************************
+ * 公寓相关
+ ************************
+ */
 // 公寓列表
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
 export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, house_type: 0, latitude: 0, longitude: 0, current_page: 1, page_size: 10 }
@@ -38,5 +40,24 @@ export const PAYLOAD_FAVORITE_APARTMENT_LIST = { current_page: 1, page_size: PAG
 export const API_FAVORITE_HOUSE_TYPE_LIST = `${HOST}/user/listCollectHouseTypePost`
 export const PAYLOAD_FAVORITE_HOUSE_TYPE_LIST = { current_page: 1, page_size: PAGE_SIZE, refresh: 1 }
 
+/**
+ ************************
+ * 用户相关
+ ************************
+ */
+
+// 用户登录
+export const API_USER_LOGIN = `${HOST}/auth/loginpost`
+
 // 心愿单取消
 export const API_USER_FAVORITE_DELETE = `${HOST}/user/deleteCollectPost`
+
+/**
+ ************************
+ * 房间相关
+ ************************
+ */
+
+// 心愿单房间列表
+export const API_FAVORITE_ROOM_LIST = `${HOST}/user/listCollectRoomPost`
+export const PAYLOAD_FAVORITE_ROOM_LIST = { current_page: 1, page_size: PAGE_SIZE }

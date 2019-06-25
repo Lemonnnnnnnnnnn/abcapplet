@@ -11,12 +11,16 @@ import Decorate from '@components/decorate'
 import UserHeader from '@components/user-header'
 import UserOptions from '@components/user-options'
 import UserOrderOptions from '@components/user-order-options'
+
 // 常量
 import {
   USER_OPTIONS_LISTS,
   USER_ORDER_OPTIONS_LISTS,
 } from '@constants/user'
-import { PAGE_USER_AUTH } from '@constants/page'
+
+import {
+  PAGE_USER_AUTH
+} from '@constants/page'
 
 @connect(state => state, actions)
 class UserProfile extends Component {

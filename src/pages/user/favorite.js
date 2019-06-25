@@ -5,19 +5,23 @@ import { AtTabs, AtTabsPane } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
+import * as roomActions from '@actions/room'
 import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
 
 // 自定义组件
+import RoomList from '@components/room-list'
 import ApartmentList from '@components/apartment-list'
 
 // 常量
 import {
   PAYLOAD_FAVORITE_APARTMENT_LIST,
   PAYLOAD_FAVORITE_HOUSE_TYPE_LIST,
+  PAYLOAD_FAVORITE_ROOM_LIST,
 } from '@constants/api'
 
 @connect(state => state, {
+  ...roomActions,
   ...userActions,
   ...apartmentActions,
 })
@@ -27,7 +31,7 @@ class UserFavorite extends Component {
   }
 
   state = {
-    current: 0,
+    current: 2,
     tabList: [
       { title: '户型', ref: 'houseTypeList' },
       { title: '公寓', ref: 'apartmentList' },
@@ -72,7 +76,7 @@ class UserFavorite extends Component {
   }
 
   render() {
-    const { apartments } = this.props
+    const { apartments, rooms } = this.props
 
     return (
       <View>
@@ -112,7 +116,16 @@ class UserFavorite extends Component {
 
           {/* 房间 */}
           <AtTabsPane current={this.state.current} index={2} >
+            <RoomList className='mx-2'
+              type={rooms.type}
+              items={rooms.list}
+              ref={this.refRoomList}
+              defaultPayload={PAYLOAD_FAVORITE_ROOM_LIST}
 
+              onDeleteFavorite={this.onDeleteFavorite}
+              dispatchList={this.props.dispatchFavoriteRoomList}
+              dispatchNextPageList={this.props.dispatchNextPageFavoriteRoomList}
+            />
           </AtTabsPane>
         </AtTabs>
       </View>

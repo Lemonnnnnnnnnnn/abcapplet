@@ -1,18 +1,23 @@
-import Taro, { Component } from '@tarojs/taro'
+// Taro 相关
+import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
+
+// 自定义组件
+import BaseComponent from '@components/base'
+
+// NPM 包
 import classNames from 'classnames'
 
 const TYPE_CLASS = { special: 'special' }
 
 
-export default class AtTag extends Component {
-  static options = {
-    addGlobalClass: true,
-  }
+export default class Tag extends BaseComponent {
 
   static defaultProps = {
     type: '',
     name: '',
+    small: false,
+    circle: false,
     active: false,
     circle: false,
     disabled: false,
@@ -26,12 +31,14 @@ export default class AtTag extends Component {
   }
 
   render() {
-    const { type, className, active } = this.props
-    const rootClassName = ['tag p-2 mr-1', `tag--${type}`, `text-small`]
+    const { type, className, active, circle, small } = this.props
+    const rootClassName = ['tag', `tag--${type}`, `text-small`]
 
     const classObject = {
       [`tag--${type}`]: TYPE_CLASS[type],
       'tag--active': active,
+      'tag-circle': circle,
+      'tag-small': small,
     }
 
     return (

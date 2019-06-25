@@ -26,3 +26,8 @@ export const LOCALE_DOWN_PAYMENT = '定金协议'
 export const LOCALE_RISK_FUND = '风险金'
 export const LOCALE_MY_ORDER = '我的订单'
 export const LOCALE_NO_DATA = '暂无数据'
+
+// components/room-item
+export const LOCALE_NO_AWARD_AND_SPACE = '无朝向和空间信息'
+export const LOCALE_ABC_SIGN = '平台代订'
+export const LOCALE_MONTH = '月'

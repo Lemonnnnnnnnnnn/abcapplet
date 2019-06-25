@@ -5,15 +5,14 @@ import { AtIcon, AtTag } from 'taro-ui'
 
 // 自定义组件
 import BaseComponent from '@components/base'
+import ImagePlaceholder from '@components/image-placeholder'
 
 // NPM 包
 import classNames from 'classnames'
-import ImagePlaceholder from '@components/image-placeholder'
 
 // 自定义常量
-import { TYPE_NORMAL_APARTMENT } from '@constants/apartment'
+import { TYPE_NORMAL_APARTMENT, TYPE_FAVORITE_HOUSE_TYPE, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { COLOR_YELLOW } from '@constants/styles'
-import { TYPE_FAVORITE_HOUSE_TYPE, TYPE_FAVORITE_APARTMENT } from '../../../dist/constants/apartment';
 
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
@@ -60,7 +59,7 @@ class ApartmentItem extends BaseComponent {
 
     const headerStyle = {
       width: '100%',
-      height: `${Taro.pxTransform(height)}`,
+      height: Taro.pxTransform(height),
     }
 
     // 格式化价格

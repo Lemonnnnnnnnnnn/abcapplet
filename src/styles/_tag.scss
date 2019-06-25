@@ -1,6 +1,8 @@
 @import "overrides";
 .tag {
   border-radius: 6px * $hd;
+  padding: 8px * $hd;
+  margin-right: 4px * $hd;
 
   &--special {
     color: $color-yellow-0;
@@ -10,5 +12,24 @@
       color: $color-white;
       background: $color-yellow-0;
     }
+  }
+
+  &--primary {
+    color: $color-white;
+    background: $color-yellow-0;
+  }
+
+  &--grey {
+    color: $color-white;
+    background: #888888;
+  }
+
+  &-small {
+    padding: 4px * $hd 8px * $hd;
+    margin-right: 2px * $hd;
+  }
+
+  &-circle {
+    border-radius: 20px * $hd;
   }
 }
