@@ -30,7 +30,7 @@ export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
  */
 // 公寓列表
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
-export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, house_type: 0, latitude: 0, longitude: 0, current_page: 1, page_size: 10 }
+export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, house_type: 0, latitude: 0, longitude: 0, current_page: 1, page_size: PAGE_SIZE }
 
 // 心愿单公寓列表
 export const API_FAVORITE_APARTMENT_LIST = `${HOST}/user/listCollectPost`
@@ -39,6 +39,14 @@ export const PAYLOAD_FAVORITE_APARTMENT_LIST = { current_page: 1, page_size: PAG
 // 心愿单户型列表
 export const API_FAVORITE_HOUSE_TYPE_LIST = `${HOST}/user/listCollectHouseTypePost`
 export const PAYLOAD_FAVORITE_HOUSE_TYPE_LIST = { current_page: 1, page_size: PAGE_SIZE, refresh: 1 }
+
+// 商圈合集公寓
+export const API_CBD_APARTMENT_LIST = `${HOST}/cbd/getPost`
+export const PAYLOAD_CBD_APARTMENT_LIST = { cbd_id: 0, type_id: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0 }
+
+// 活动合集公寓
+export const API_ACTIVITY_APARTMENT_LIST = `${HOST}/article/getHotActivityPost`
+export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0 }
 
 /**
  ************************

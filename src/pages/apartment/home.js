@@ -22,10 +22,6 @@ import * as apartmentActions from '@actions/apartment'
 
 // 自定义常量
 import {
-  PAGE_CBD_INDEX
-} from '@constants/page'
-
-import {
   PAYLOAD_APARTMENT_LIST
 } from '@constants/api'
 
@@ -223,8 +219,8 @@ class ApartmentHome extends Component {
           {cbds.length > 0 &&
             <View>
               <Header
-                className='my-2'
-                title={LOCALE_HOT_CBD} url={PAGE_CBD_INDEX} hasExtra
+                className='mb-3'
+                title={LOCALE_HOT_CBD}
               />
               <Carousel
                 type='normal'
@@ -252,9 +248,8 @@ class ApartmentHome extends Component {
           {recommends.length > 0 &&
             <View>
               <Header
-                className='my-2'
+                className='my-3'
                 title={LOCALE_RECOMMEND_APARTMENT}
-                url={PAGE_CBD_INDEX} hasExtra
               />
               <Carousel
                 type='normal'
@@ -270,7 +265,7 @@ class ApartmentHome extends Component {
           {activities.length > 0 &&
             <View>
               <Header
-                className='my-2'
+                className='my-3'
                 title={LOCALE_ACTIVITY}
                 hasExtra={false}
               />

@@ -9,6 +9,7 @@ class BaseList extends BaseComponent {
     dispatchList: null,
     pageSize: PAGE_SIZE,
     dispatchNextPageList: null,
+    initReset: true,
   }
 
   state = {
@@ -19,7 +20,7 @@ class BaseList extends BaseComponent {
   }
 
   componentDidShow() {
-    this.onReset()
+    this.props.initReset && this.onReset()
   }
 
   onReset(payload) {

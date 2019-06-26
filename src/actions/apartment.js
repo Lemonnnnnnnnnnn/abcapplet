@@ -5,6 +5,8 @@ import {
   PAYLOAD_APARTMENT_LIST,
   API_FAVORITE_APARTMENT_LIST,
   API_FAVORITE_HOUSE_TYPE_LIST,
+  API_CBD_APARTMENT_LIST,
+  API_ACTIVITY_APARTMENT_LIST,
 } from '@constants/api'
 
 import {
@@ -13,6 +15,8 @@ import {
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_FAVORITE_HOUSE_TYPE,
+  TYPE_CBD_APARTMENT,
+  TYPE_ACTIVITY_APARTMENT,
 } from '@constants/apartment'
 
 /**
@@ -81,4 +85,49 @@ export const dispatchNextPageFavoriteHouseTypeList = payload => createAction({
   type: SET_NEXT_PAGE_APARTMENT_LIST,
   url: API_FAVORITE_HOUSE_TYPE_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_FAVORITE_HOUSE_TYPE })
+})
+
+
+/**
+ * 获取商圈集合信息下一页
+ */
+export const dispatchCbdApartmentList = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_APARTMENT_LIST,
+  url: API_CBD_APARTMENT_LIST,
+  cb: ({ data: { data } }) => ({ ...data, type: TYPE_CBD_APARTMENT })
+})
+
+/**
+ * 获取商圈集合信息下一页
+ */
+export const dispatchNextPageCbdApartmentList = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  url: API_CBD_APARTMENT_LIST,
+  cb: ({ data: { data } }) => ({ ...data, type: TYPE_CBD_APARTMENT })
+})
+
+/**
+ * 活动合集
+ */
+export const dispatchActivityApartmentList = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_APARTMENT_LIST,
+  url: API_ACTIVITY_APARTMENT_LIST,
+  cb: ({ data: { data } }) => ({ ...data, type: TYPE_ACTIVITY_APARTMENT })
+})
+
+/**
+ * 活动合集下一页
+ */
+export const dispatchNextPageActivityApartmentList = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  url: API_ACTIVITY_APARTMENT_LIST,
+  cb: ({ data: { data } }) => ({ ...data, type: TYPE_ACTIVITY_APARTMENT })
 })
