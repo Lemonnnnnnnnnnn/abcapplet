@@ -13,7 +13,6 @@ export const API_AD_LIST = `${HOST}/ad/adPost`
  */
 export const API_DIST_LIST = `${HOST}/dict/listPost`
 export const API_CITY_LIST = `${HOST}/dict/listsitepost`
-export const API_HOT_CBD_LIST = `${HOST}/dict/listHotCbdPost`
 
 // 推荐品牌公寓
 export const API_RECOMMEND_LIST = `${HOST}/recommend/recommendPost`
@@ -21,7 +20,31 @@ export const API_RECOMMEND_LIST = `${HOST}/recommend/recommendPost`
 // 文章
 export const API_ARTICLE_SHOW = `${HOST}/article/getpost`
 export const API_BANNER_LIST = `${HOST}/article/listbannerpost`
+
+
+/**
+ ************************
+ * 商圈相关
+ ************************
+ */
+// 商圈列表
+export const API_HOT_CBD_LIST = `${HOST}/dict/listHotCbdPost`
+
+// 商圈详情
+export const API_CBD_SHOW = `${HOST}/cbd/getPost`
+export const PAYLOAD_CBD_SHOW = { cbd: 0, type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+
+/**
+ ************************
+ * 活动相关
+ ************************
+ */
+// 活动列表
 export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
+
+// 活动详情
+export const API_ACTIVITY_SHOW = `${HOST}/article/getHotActivityPost`
+export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************
@@ -72,3 +95,4 @@ export const API_USER_FAVORITE_CREATE = `${HOST}/apartment/collectPost`
 // 心愿单房间列表
 export const API_FAVORITE_ROOM_LIST = `${HOST}/user/listCollectRoomPost`
 export const PAYLOAD_FAVORITE_ROOM_LIST = { current_page: 1, page_size: PAGE_SIZE }
+

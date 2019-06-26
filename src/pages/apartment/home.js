@@ -78,7 +78,7 @@ class ApartmentHome extends Component {
 
     this.props.dispatchUserCity(citycode)
     this.props.dispatchAdList(citycode)
-    this.props.dispatchCBDList(citycode)
+    this.props.dispatchCbdList(citycode)
     this.props.dispatchDistList(citycode)
     this.props.dispatchBannerList(citycode)
     this.props.dispatchActivityList(citycode)
@@ -167,7 +167,6 @@ class ApartmentHome extends Component {
   onApartmentPayloadChange({ payload }) {
     this.apartmentList.onReset(payload)
   }
-
 
   /**
    * 添加心愿单

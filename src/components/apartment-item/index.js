@@ -15,6 +15,8 @@ import {
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_FAVORITE_HOUSE_TYPE,
+  TYPE_CBD_APARTMENT,
+  TYPE_ACTIVITY_APARTMENT,
 } from '@constants/apartment'
 
 import {
@@ -45,8 +47,10 @@ class ApartmentItem extends BaseComponent {
     const { id } = apartment
 
     switch (type) {
+      case TYPE_CBD_APARTMENT:
+      case TYPE_ACTIVITY_APARTMENT:
+      case TYPE_FAVORITE_HOUSE_TYPE:
       case TYPE_NORMAL_APARTMENT: return { type_id: id }
-      case TYPE_FAVORITE_HOUSE_TYPE: return { type_id: id }
       case TYPE_FAVORITE_APARTMENT: return { id: id }
     }
   }

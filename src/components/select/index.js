@@ -123,7 +123,7 @@ class Select extends BaseComponent {
       houseTypeDist,
       specialSelectDist,
     } = this.props
-    console.log(showCbd)
+
     // 吸附相关样式
     const rootClassName = ['select']
     const selectStyle = { top: `${top - 1}px` }
@@ -131,14 +131,15 @@ class Select extends BaseComponent {
     const classObject = { 'select-fixed': selectIsFixed }
 
     // Header 相关
-    let header = [
-      { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.length > 0, index: 'house-type' },
-      { message: LOCALE_RENT, show: houseTypeDist.length > 0, index: 'price' },
-      // TODO 接口未提供
-      // { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
-    ]
+    let header = []
 
     showCbd && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
+    header = [
+      ...header,
+      { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.length > 0, index: 'house-type' },
+      { message: LOCALE_RENT, show: houseTypeDist.length > 0, index: 'price' },
+      // TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
+    ]
 
     return (
       <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>

@@ -18,8 +18,8 @@ class App extends Component {
   config = {
     pages: [
       "pages/apartment/home",
-      "pages/apartment/activity",
       "pages/apartment/cbd",
+      "pages/apartment/activity",
       "pages/apartment/services",
       "pages/apartment/recommend",
 
