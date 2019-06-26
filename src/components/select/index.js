@@ -46,6 +46,7 @@ class Select extends BaseComponent {
 
   static defaultProps = {
     top: 0,
+    showCbd: true,
     isFixed: false,
 
     cbdDist: [],
@@ -83,9 +84,8 @@ class Select extends BaseComponent {
   }
 
   onPayloadChangeAndRefresh({ payload = {} }) {
-    // 不要直接用 onPayloadChange
-    // 因为是异步 ！！！
-    payload = { ...payload, ...this.state.payload }
+    // 因为是异步，不要直接用 onPayloadChange ！！！
+    payload = { ...this.state.payload, ...payload }
 
     this.setState({ payload, headerIndex: '' })
     this.props.onApartmentPayloadChange({ payload })
@@ -108,6 +108,9 @@ class Select extends BaseComponent {
   render() {
     const { headerIndex } = this.state
     const {
+      // 选项控制
+      showCbd,
+
       // 吸附相关
       top,
       isFixed,
@@ -120,7 +123,7 @@ class Select extends BaseComponent {
       houseTypeDist,
       specialSelectDist,
     } = this.props
-
+    console.log(showCbd)
     // 吸附相关样式
     const rootClassName = ['select']
     const selectStyle = { top: `${top - 1}px` }
@@ -128,13 +131,14 @@ class Select extends BaseComponent {
     const classObject = { 'select-fixed': selectIsFixed }
 
     // Header 相关
-    const header = [
-      { message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' },
+    let header = [
       { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.length > 0, index: 'house-type' },
       { message: LOCALE_RENT, show: houseTypeDist.length > 0, index: 'price' },
       // TODO 接口未提供
       // { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
     ]
+
+    showCbd && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
 
     return (
       <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
@@ -146,7 +150,6 @@ class Select extends BaseComponent {
           onClick={this.onHeaderClick}
         />
 
-        {/* 对应内容 */}
         <SelectCbd
           ref={this.refSelectCbd}
           items={cbdDist}

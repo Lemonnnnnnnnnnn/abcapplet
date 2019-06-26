@@ -34,14 +34,15 @@ class ApartmentCbd extends Component {
   componentWillMount() {
     const { id = 3 } = this.$router.params
     const { payload: user } = this.props.dispatchUser()
+
     this.props.dispatchDistList(user.citycode)
 
-    const defaultPayload = {
-      ...PAYLOAD_ACTIVITY_APARTMENT_LIST,
-      id,
-      city: user.citycode,
-    }
-    this.setState({ defaultPayload })
+    this.setState({
+      defaultPayload: {
+        ...PAYLOAD_ACTIVITY_APARTMENT_LIST,
+        id, city: user.citycode,
+      }
+    })
   }
 
   /**
@@ -54,7 +55,6 @@ class ApartmentCbd extends Component {
 
 
   render() {
-
     const { apartments, dists } = this.props
     const { defaultPayload } = this.state
     return <View className='page-white'>
@@ -72,18 +72,20 @@ class ApartmentCbd extends Component {
         />
 
         {/* 公寓列表 */}
-        <ApartmentList
-          key={apartments.type}
-          type={apartments.type}
-          items={apartments.list}
-          ref={this.refApartmentList}
-          defaultPayload={defaultPayload}
+        <View className='mx-2'>
+          <ApartmentList
+            key={apartments.type}
+            type={apartments.type}
+            items={apartments.list}
+            ref={this.refApartmentList}
+            defaultPayload={defaultPayload}
 
-          // onCreateFavorite={this.onCreateFavorite}
-          // onDeleteFavorite={this.onDeleteFavorite}
-          dispatchList={this.props.dispatchActivityApartmentList}
-          dispatchNextPageList={this.props.dispatchNextPageActivityApartmentList}
-        />
+            // onCreateFavorite={this.onCreateFavorite}
+            // onDeleteFavorite={this.onDeleteFavorite}
+            dispatchList={this.props.dispatchActivityApartmentList}
+            dispatchNextPageList={this.props.dispatchNextPageActivityApartmentList}
+          />
+        </View>
       </View>
     </View>
   }
