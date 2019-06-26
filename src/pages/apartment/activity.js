@@ -130,8 +130,8 @@ class ApartmentCbd extends Component {
           ref={this.refApartmentList}
           defaultPayload={defaultPayload}
 
-          // onCreateFavorite={this.onCreateFavorite}
-          // onDeleteFavorite={this.onDeleteFavorite}
+          onCreateFavorite={this.onCreateFavorite}
+          onDeleteFavorite={this.onDeleteFavorite}
           dispatchList={this.props.dispatchActivityApartmentList}
           dispatchNextPageList={this.props.dispatchNextPageActivityApartmentList}
         />
