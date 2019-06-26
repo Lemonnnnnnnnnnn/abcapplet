@@ -3,7 +3,8 @@ import { createAction } from '@utils/redux'
 
 import {
   API_USER_LOGIN,
-  API_USER_FAVORITE_DELETE
+  API_USER_FAVORITE_DELETE,
+  API_USER_FAVORITE_CREATE,
 } from '@constants/api'
 
 import {
@@ -12,8 +13,15 @@ import {
   USER_LOGOUT,
   USER_DEFAULT,
   USER_CITY_CODE,
-  DELETE_USER_FAVORITE,
 } from '@constants/user'
+
+import {
+  UPDATE_APARTMENT_FAVORITE,
+} from '@constants/apartment'
+
+import {
+  UPDATE_ROOM_FAVORITE
+} from '@constants/room'
 
 /**
  * 更新用户 Storage
@@ -90,10 +98,59 @@ export const dispatchLogout = () => ({
 /**
  * 删除心愿
  */
-export const dispatchFavoriteDelete = (payload) => createAction({
-  payload,
-  method: 'POST',
-  type: DELETE_USER_FAVORITE,
-  url: API_USER_FAVORITE_DELETE,
-  cb: console.log
-})
+export const dispatchFavoriteDelete = (payload) => {
+  let type, cb
+
+  if (payload.id) {
+    type = UPDATE_APARTMENT_FAVORITE
+    cb = () => ({ id: payload.id })
+  }
+
+  if (payload.type_id) {
+    type = UPDATE_APARTMENT_FAVORITE
+    cb = () => ({ id: payload.type_id })
+  }
+
+  if (payload.room_id) {
+    type = UPDATE_ROOM_FAVORITE
+    cb = () => ({ id: payload.room_id })
+  }
+
+  return createAction({
+    cb,
+    type,
+    payload,
+    method: 'POST',
+    url: API_USER_FAVORITE_DELETE,
+  })
+}
+
+/**
+ * 增加心愿单
+ */
+export const dispatchFavoriteCreate = (payload) => {
+  let type, cb
+
+  if (payload.id) {
+    type = UPDATE_APARTMENT_FAVORITE
+    cb = () => ({ id: payload.id })
+  }
+
+  if (payload.type_id) {
+    type = UPDATE_APARTMENT_FAVORITE
+    cb = () => ({ id: payload.type_id })
+  }
+
+  if (payload.room_id) {
+    type = UPDATE_ROOM_FAVORITE
+    cb = () => ({ id: payload.room_id })
+  }
+
+  return createAction({
+    cb,
+    type,
+    payload,
+    method: 'POST',
+    url: API_USER_FAVORITE_CREATE,
+  })
+}

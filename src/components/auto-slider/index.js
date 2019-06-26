@@ -4,7 +4,7 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { COLOR_YELLOW, COLOR_GREY_2 } from '@constants/styles'
 
-class Slider extends Component {
+class AutoSlider extends Component {
   static options = {
     addGlobalClass: true,
   }
@@ -157,4 +157,4 @@ class Slider extends Component {
   }
 }
 
-export default Slider
+export default AutoSlider

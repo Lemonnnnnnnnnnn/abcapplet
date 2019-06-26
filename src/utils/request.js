@@ -64,7 +64,7 @@ export default async function fetch({
 
     switch (response.data.code) {
       case CODE_SUCCESS: return response;
-      case CODE_ERROR: throw new Error(response.data)
+      case CODE_ERROR: throw new Error(response.data.msg)
       case CODE_AUTH_EXPIRED: clearUserStorage(); break;
       default: throw new Error(LOCALE_ERROR)
     }
@@ -82,7 +82,6 @@ export default async function fetch({
       })
     } else {
       error.message = error.message || LOCALE_ERROR
-
       showToast && Taro.showToast({
         icon: 'none',
         title: error.message,

@@ -11,8 +11,15 @@ import ImagePlaceholder from '@components/image-placeholder'
 import classNames from 'classnames'
 
 // 自定义常量
-import { TYPE_NORMAL_APARTMENT, TYPE_FAVORITE_HOUSE_TYPE, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
-import { COLOR_YELLOW } from '@constants/styles'
+import {
+  TYPE_NORMAL_APARTMENT,
+  TYPE_FAVORITE_APARTMENT,
+  TYPE_FAVORITE_HOUSE_TYPE,
+} from '@constants/apartment'
+
+import {
+  COLOR_YELLOW,
+} from '@constants/styles'
 
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
@@ -23,17 +30,25 @@ class ApartmentItem extends BaseComponent {
     className: '',
   }
 
+  onCreateFavorite() {
+    const payload = this.getFavoritePayload()
+    this.props.onCreateFavorite({ payload })
+  }
+
   onDeleteFavorite() {
+    const payload = this.getFavoritePayload()
+    this.props.onDeleteFavorite({ payload })
+  }
+
+  getFavoritePayload() {
     const { type, apartment } = this.props
     const { id } = apartment
 
-    let payload = {}
     switch (type) {
-      case TYPE_FAVORITE_HOUSE_TYPE: payload = { type_id: id }; break;
-      case TYPE_FAVORITE_APARTMENT: payload = { id: id }; break;
+      case TYPE_NORMAL_APARTMENT: return { type_id: id }
+      case TYPE_FAVORITE_HOUSE_TYPE: return { type_id: id }
+      case TYPE_FAVORITE_APARTMENT: return { id: id }
     }
-
-    this.props.onDeleteFavorite({ payload })
   }
 
   render() {
@@ -48,6 +63,7 @@ class ApartmentItem extends BaseComponent {
     const {
       cbd, desc,
       cover, rules, title,
+      is_collect: isCollect,
       price_title: priceTitle,
       apartment_title: apartmentTitle
     } = apartment
@@ -87,13 +103,21 @@ class ApartmentItem extends BaseComponent {
           {/* 户型种类，公寓类型是没有这个字段的 */}
           {title && <View className='apartment-header-type'>{title}</View>}
 
-          {/* 爱心按钮，当 type 为 favorite-house-type、favorite-apartment 时显示 */}
-          {type !== TYPE_NORMAL_APARTMENT && <View
-            onClick={this.onDeleteFavorite}
-            className='apartment-header-favorite'
-          >
-            <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
-          </View>}
+          {/* 爱心按钮，当 type 为 favorite-house-type、favorite-apartment 时显示，isCollect为ture时显示 */}
+          {(type !== TYPE_NORMAL_APARTMENT || isCollect)
+            ?
+            <View className='apartment-header-favorite'
+              onClick={this.onDeleteFavorite}
+            >
+              <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
+            </View>
+            :
+            <View
+              className='apartment-header-favorite'
+              onClick={this.onCreateFavorite}
+            >
+              <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
+            </View>}
         </View>
         <View className='apartment-content mx-3 py-3'>
           {/* 优惠活动 */}

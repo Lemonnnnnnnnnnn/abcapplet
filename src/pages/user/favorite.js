@@ -31,7 +31,7 @@ class UserFavorite extends Component {
   }
 
   state = {
-    current: 2,
+    current: 0,
     tabList: [
       { title: '户型', ref: 'houseTypeList' },
       { title: '公寓', ref: 'apartmentList' },
@@ -39,6 +39,7 @@ class UserFavorite extends Component {
     ]
   }
 
+  refRoomList = (node) => this.roomList = node
   refHouseTypeList = (node) => this.houseTypeList = node
   refApartmentList = (node) => this.apartmentList = node
 
@@ -50,6 +51,9 @@ class UserFavorite extends Component {
     this.setState({ current: value })
   }
 
+  /**
+   * 触底加载数据
+   */
   onReachBottom() {
     const { tabList, current } = this.state
     const { ref } = tabList[current]
@@ -58,12 +62,11 @@ class UserFavorite extends Component {
 
   /**
    * 删除心愿单
+   * 使用异步，防止删除请求没发出去就刷新页面数据了
    */
-  async onDeleteFavorite({ payload }) {
-    await this.props.dispatchFavoriteDelete(payload)
-
-    // 使用异步，防止删除请求没发出去就刷新页面数据了
-    this.onReset()
+  onDeleteFavorite({ payload }) {
+    this.props.dispatchFavoriteDelete(payload)
+      .then(() => this.onReset())
   }
 
   /**
@@ -79,7 +82,7 @@ class UserFavorite extends Component {
     const { apartments, rooms } = this.props
 
     return (
-      <View>
+      <View class='favorite'>
         <AtTabs
           animated
           current={this.state.current}
@@ -88,7 +91,9 @@ class UserFavorite extends Component {
         >
           {/* 户型 */}
           <AtTabsPane current={this.state.current} index={0} >
-            <ApartmentList className='mx-2'
+            <ApartmentList
+              className='mx-2'
+              key={apartments.type}
               type={apartments.type}
               items={apartments.list}
               ref={this.refHouseTypeList}
@@ -103,6 +108,7 @@ class UserFavorite extends Component {
           {/* 公寓 */}
           <AtTabsPane current={this.state.current} index={1} >
             <ApartmentList className='mx-2'
+              key={apartments.type}
               type={apartments.type}
               items={apartments.list}
               ref={this.refApartmentList}

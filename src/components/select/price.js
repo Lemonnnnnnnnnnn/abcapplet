@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { AtTabs } from 'taro-ui'
 
 import { View } from '@tarojs/components'
-import AutoSlider from '@components/slider'
+import AutoSlider from '@components/auto-slider'
 import BaseComponent from '@components/base'
 import { TABS_SELECT_ITEM_HEIGHT } from '@constants/styles'
 

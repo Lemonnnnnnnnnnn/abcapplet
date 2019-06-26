@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import CityModal from '@components/city-modal'
@@ -7,8 +7,7 @@ import Carousel from '@components/carousel'
 import Search from '@components/search'
 import Header from '@components/header'
 import Select from '@components/select'
-import Apartment from '@components/apartment'
-import Placeholder from '@components/placeholder'
+import ApartmentList from '@components/apartment-list'
 
 
 import * as adActions from '@actions/ad'
@@ -21,14 +20,19 @@ import * as activityActions from '@actions/activity'
 import * as recommendActions from '@actions/recommend'
 import * as apartmentActions from '@actions/apartment'
 
-import { PAGE_CBD_INDEX } from '@constants/page'
-import { PAYLOAD_APARTMENT_LIST } from '@constants/api'
+// 自定义常量
+import {
+  PAGE_CBD_INDEX
+} from '@constants/page'
+
+import {
+  PAYLOAD_APARTMENT_LIST
+} from '@constants/api'
+
 import {
   LOCALE_HOT_CBD,
   LOCALE_ACTIVITY,
   LOCALE_APARTMENT,
-  LOCALE_NO_MORE,
-  LOCALE_NO_APARTMENT_DATA,
   LOCALE_RECOMMEND_APARTMENT,
 } from '@constants/locale'
 
@@ -53,17 +57,12 @@ class ApartmentHome extends Component {
     searchScrollTop: null,
     searchIsFixed: false,
 
-    // 公寓相关
-    apartmentPage: 1,
-    apartmentLoading: false,
-    apartmentHasMore: true,
-    apratmentPayload: PAYLOAD_APARTMENT_LIST,
-
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
-    selectHeight: 40,
   }
+
+  refApartmentList = (node) => this.apartmentList = node
 
   componentWillMount() {
     // 获取用户数据 和 刷新页面数据
@@ -74,6 +73,9 @@ class ApartmentHome extends Component {
     this.props.dispatchCityList()
   }
 
+  /**
+   * 选择城市
+   */
   onSelectCity(citycode) {
     // 当城市 id 不存在的时候不读取数据
     if (citycode === 0 || !citycode) return;
@@ -85,13 +87,10 @@ class ApartmentHome extends Component {
     this.props.dispatchBannerList(citycode)
     this.props.dispatchActivityList(citycode)
     this.props.dispatchRecommendList(citycode)
-
-    // 初始化公寓相关数据
-    this.onApartmentResetState()
   }
 
   /**
-   * 选择城市
+   * 城市相关选择器数据
    * @param {*} param0
    */
   onChangeSelector(e) {
@@ -105,6 +104,10 @@ class ApartmentHome extends Component {
     this.onSelectCity(newCity.id)
   }
 
+  /**
+   * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
+   * @param {*} param0
+   */
   onPageScroll({ scrollTop }) {
     const {
       selectIsFixed,
@@ -155,64 +158,37 @@ class ApartmentHome extends Component {
         .exec(res => this.setState({ apartmentScrollTop: res[0].top }))
   }
 
+  /**
+   * 到底部加载公寓下一页
+   */
   onReachBottom() {
-    if (this.props.apartments.length !== 0) {
-      this.dispatchApartmentList()
-    }
+    this.apartmentList.onNextPage()
   }
 
-  dispatchApartmentList() {
-    const { user: { citycode } } = this.props
-    let {
-      apartmentPage,
-      apartmentHasMore,
-      apratmentPayload,
-      apartmentLoading,
-      apartmentScrollTop,
-      selectHeight
-    } = this.state
-
-    if (!apartmentHasMore || apartmentLoading) return;
-    this.setState({ apartmentLoading: true })
-
-    const payload = { ...apratmentPayload, city: citycode, current_page: apartmentPage, }
-
-    const onSuccess = res => this.setState({
-      apartmentPage: apartmentPage + 1,
-      apartmentLoading: false,
-      apartmentHasMore: res.data.data.list.length > 0
-    })
-
-    const onFail = () => this.setState({
-      apartmentLoading: false,
-      apartmentHasMore: false,
-    })
-
-    apartmentPage === 1
-      && apartmentScrollTop
-      && Taro.pageScrollTo({ scrollTop: apartmentScrollTop - selectHeight })
-
-    apartmentPage === 1
-      ? this.props.dispatchApartmentList(payload).then(onSuccess).catch(onFail)
-      : this.props.dispatchNextPageApartmentList(payload).then(onSuccess).catch(onFail)
-  }
-
-  onApartmentResetState(payload) {
-    payload = payload || PAYLOAD_APARTMENT_LIST
-
-    this.setState({
-      apartmentPage: 1,
-      apartmentHasMore: true,
-      apratmentPayload: { ...PAYLOAD_APARTMENT_LIST, ...payload },
-    }, () => this.dispatchApartmentList())
-  }
-
+  /**
+   * 当选择栏变化时更新公寓数据
+   */
   onApartmentPayloadChange({ payload }) {
-    this.onApartmentResetState(payload)
+    this.apartmentList.onReset(payload)
+  }
+
+
+  /**
+   * 添加心愿单
+   */
+  onCreateFavorite({ payload }) {
+    this.props.dispatchFavoriteCreate(payload)
+  }
+
+  /**
+   * 删除心愿单
+   */
+  onDeleteFavorite({ payload }) {
+    this.props.dispatchFavoriteDelete(payload)
   }
 
   render() {
-    const { apartmentLoading, selectIsFixed, apartmentHasMore, searchIsFixed, searchScrollTop } = this.state
+    const { selectIsFixed, searchIsFixed, searchScrollTop } = this.state
     const { user, cbds, ads, citys, banners, recommends, activities, dists, apartments } = this.props
 
     // 设置城市选择器
@@ -221,135 +197,133 @@ class ApartmentHome extends Component {
     const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
 
     return (
-      <View className='page-white m-2 mb-3'>
-        {/* 搜索框 & 城市选择器 */}
-        <View className='home-search'>
-          <Search
-            className='mb-2'
-            isFixed={searchIsFixed}
-            selector={selector}
-            selectorChecked={selectorChecked}
-            onChangeSelector={this.onChangeSelector}
-          />
-        </View>
-
-        {/* 轮播 */}
-        {banners.length > 0 &&
-          <Carousel
-            className='mt-2'
-            type='banner'
-            carousel={banners}
-          />
-        }
-
-        {/* 热门租房商圈 */}
-        {cbds.length > 0 &&
-          <View>
-            <Header
-              className='my-2'
-              title={LOCALE_HOT_CBD} url={PAGE_CBD_INDEX} hasExtra
-            />
-            <Carousel
-              type='normal'
-              imageHeight='176'
-              imageWidth='312'
-              carousel={cbds}
-              hasContent={false}
-            />
-          </View>
-        }
-
-        {/* 广告 */}
-        {ads.length > 0 &&
-          <Carousel
-            className='mt-2'
-            type='normal'
-            imageHeight='126'
-            imageWidth='686'
-            carousel={ads}
-            hasContent={false}
-          />
-        }
-
-        {/* 推荐品牌公寓 */}
-        {recommends.length > 0 &&
-          <View>
-            <Header
-              className='my-2'
-              title={LOCALE_RECOMMEND_APARTMENT}
-              url={PAGE_CBD_INDEX} hasExtra
-            />
-            <Carousel
-              type='normal'
-              imageHeight='275'
-              imageWidth='642'
-              carousel={recommends}
-              hasContent={false}
-            />
-          </View>
-        }
-
-        {/* 活动专区 */}
-        {activities.length > 0 &&
-          <View>
-            <Header
-              className='my-2'
-              title={LOCALE_ACTIVITY}
-              hasExtra={false}
-            />
-            <Carousel
-              type='normal'
-              imageHeight='240'
-              imageWidth='414'
-              carousel={activities}
-              hasContent={false}
-            />
-          </View>
-        }
-
-        {/* 严选公寓 */}
+      <View className='page-white p-2'>
         <View>
-          <Header
-            className='my-2'
-            title={LOCALE_APARTMENT}
-            hasExtra={false}
-          />
-          <View className='home-select'>
-            <Select
-              top={searchScrollTop}
-              isFixed={selectIsFixed}
-
-              autoSortDist={[]}
-              cbdDist={dists.cbd_list}
-              priceDist={dists.price_list}
-              houseTypeDist={dists.housetype_list}
-              specialSelectDist={dists.special_select}
-              onApartmentPayloadChange={this.onApartmentPayloadChange}
+          {/* 搜索框 & 城市选择器 */}
+          <View className='home-search'>
+            <Search
+              className='mb-2'
+              isFixed={searchIsFixed}
+              selector={selector}
+              selectorChecked={selectorChecked}
+              onChangeSelector={this.onChangeSelector}
             />
           </View>
 
-          <View className='home-apartment'>
-            {apartments.length > 0 ? apartments.map(i =>
-              <Apartment key={i.id} apartment={i} className='mb-3' />
-            ) : <View className='page-demo'>{LOCALE_NO_APARTMENT_DATA}</View>}
-          </View>
+          {/* 轮播 */}
+          {banners.length > 0 &&
+            <Carousel
+              className='mt-2'
+              type='banner'
+              carousel={banners}
+            />
+          }
 
-          <Placeholder className='mt-2' show={apartmentLoading} quantity={5} />
-
-          {
-            apartments.length !== 0 && !apartmentLoading && !apartmentHasMore &&
-            <View className='text-center text-small mt-3'>
-              <Text className='text-muted'>{LOCALE_NO_MORE}</Text>
+          {/* 热门租房商圈 */}
+          {cbds.length > 0 &&
+            <View>
+              <Header
+                className='my-2'
+                title={LOCALE_HOT_CBD} url={PAGE_CBD_INDEX} hasExtra
+              />
+              <Carousel
+                type='normal'
+                imageHeight='176'
+                imageWidth='312'
+                carousel={cbds}
+                hasContent={false}
+              />
             </View>
           }
-        </View>
 
-        {/* 城市模态框 */}
-        <CityModal
-          city={citys}
-          citycode={user.citycode}
-          onSelectCity={this.onSelectCity}
-        />
+          {/* 广告 */}
+          {ads.length > 0 &&
+            <Carousel
+              className='mt-2'
+              type='normal'
+              imageHeight='126'
+              imageWidth='686'
+              carousel={ads}
+              hasContent={false}
+            />
+          }
+
+          {/* 推荐品牌公寓 */}
+          {recommends.length > 0 &&
+            <View>
+              <Header
+                className='my-2'
+                title={LOCALE_RECOMMEND_APARTMENT}
+                url={PAGE_CBD_INDEX} hasExtra
+              />
+              <Carousel
+                type='normal'
+                imageHeight='275'
+                imageWidth='642'
+                carousel={recommends}
+                hasContent={false}
+              />
+            </View>
+          }
+
+          {/* 活动专区 */}
+          {activities.length > 0 &&
+            <View>
+              <Header
+                className='my-2'
+                title={LOCALE_ACTIVITY}
+                hasExtra={false}
+              />
+              <Carousel
+                type='normal'
+                imageHeight='240'
+                imageWidth='414'
+                carousel={activities}
+                hasContent={false}
+              />
+            </View>
+          }
+
+          {/* 严选公寓 */}
+          <View>
+            <Header className='my-2' title={LOCALE_APARTMENT} hasExtra={false} />
+            <View className='home-select'>
+              <Select
+                top={searchScrollTop}
+                isFixed={selectIsFixed}
+
+                autoSortDist={[]}
+                cbdDist={dists.cbd_list}
+                priceDist={dists.price_list}
+                houseTypeDist={dists.housetype_list}
+                specialSelectDist={dists.special_select}
+                onApartmentPayloadChange={this.onApartmentPayloadChange}
+              />
+            </View>
+
+            <View className='home-apartment'>
+              <ApartmentList
+                key={apartments.type}
+                type={apartments.type}
+                items={apartments.list}
+                ref={this.refApartmentList}
+                defaultPayload={PAYLOAD_APARTMENT_LIST}
+
+                onCreateFavorite={this.onCreateFavorite}
+                onDeleteFavorite={this.onDeleteFavorite}
+                dispatchList={this.props.dispatchApartmentList}
+                dispatchNextPageList={this.props.dispatchNextPageApartmentList}
+              />
+            </View>
+          </View>
+
+          {/* 城市模态框 */}
+          <CityModal
+            city={citys}
+            citycode={user.citycode}
+            onSelectCity={this.onSelectCity}
+          />
+        </View>
       </View>
     )
   }

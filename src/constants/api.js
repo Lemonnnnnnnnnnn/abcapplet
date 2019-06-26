@@ -52,6 +52,9 @@ export const API_USER_LOGIN = `${HOST}/auth/loginpost`
 // 心愿单取消
 export const API_USER_FAVORITE_DELETE = `${HOST}/user/deleteCollectPost`
 
+// 心愿单添加
+export const API_USER_FAVORITE_CREATE = `${HOST}/apartment/collectPost`
+
 /**
  ************************
  * 房间相关

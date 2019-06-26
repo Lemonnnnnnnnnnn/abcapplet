@@ -79,8 +79,8 @@ class Carousel extends Component {
             indicatorColor={COLOR_DOATS_CAROUSEL}
             displayMultipleItems={displayMultipleItems}
           >
-            {carousel.map((item, index) =>
-              <SwiperItem key={index} onClick={this.onNavigation.bind(this, item)}>
+            {carousel.map(item =>
+              <SwiperItem key={item.id} onClick={this.onNavigation.bind(this, item)}>
                 <Image
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
@@ -97,9 +97,9 @@ class Carousel extends Component {
 
         {type === 'normal' &&
           <ScrollView scrollX className='carousel-normal' style={swiperStyle}>
-            {carousel.map((item, index) =>
+            {carousel.map(item =>
               <View
-                key={index}
+                key={item.id}
                 style={imageStyle}
                 onClick={this.onNavigation.bind(this, item)}
                 className='mr-2 carousel-normal-item'

@@ -54,6 +54,7 @@ export const TABS_SELECT_ITEM_HEIGHT = 60
 export const COLOR_BLACK = "#000000"  // 黑色
 export const COLOR_WHITE = "#FFFFFF"  // 白色
 export const COLOR_YELLOW = "#FFC919" // 黄色 & 主题色
+export const COLOR_BLUE = "#177eff" // 蓝色
 
 export const COLOR_GREY_0 = "#333333" // 灰色
 export const COLOR_GREY_1 = "#666666" // 灰色

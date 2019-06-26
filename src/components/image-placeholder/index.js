@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { COLOR_YELLOW, COLOR_WHITE } from '@constants/styles'
+import { COLOR_BLUE, COLOR_WHITE } from '@constants/styles'
 
 class ImagePlaceholder extends Component {
   static options = {
@@ -17,7 +17,7 @@ class ImagePlaceholder extends Component {
     const style = {
       width: '100%',
       height: `${Taro.pxTransform(height)}`,
-      background: COLOR_YELLOW,
+      background: COLOR_BLUE,
       color: COLOR_WHITE,
     }
 
