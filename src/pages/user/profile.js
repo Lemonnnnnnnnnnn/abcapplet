@@ -50,7 +50,7 @@ class UserProfile extends Component {
       <View className='page-grey'>
         <View className='page mx-3'>
           {/* 背景底色 */}
-          <Decorate height='400' />
+          <Decorate height='300' />
 
           {/* 用户头像信息 */}
           <UserHeader
@@ -68,7 +68,7 @@ class UserProfile extends Component {
 
           {/* 我的订单 */}
           <UserOrderOptions
-            className='mt-4'
+            className='mt-2'
             lists={orderOptionLists}
           />
 

@@ -46,20 +46,23 @@ export const USER_CITY_CODE = 'USER_CITY_CODE'
 export const CREATE_USER_FAVORITE = 'CREATE_USER_FAVORITE'
 export const DELETE_USER_FAVORITE = 'DELETE_USER_FAVORITE'
 
-export const USER_OPTIONS_LISTS = [{
-  id: 1,
-  icon: 'credit-card',
-  url: PAGE_USER_CARD,
-  title: LOCALE_USER_CARD,
-  extraText: LOCALE_USER_CARD_EXTRA_TEXT,
-},
-{
-  id: 2,
-  icon: 'heart-2',
-  url: PAGE_USER_FAVORITE,
-  title: LOCALE_USER_FAVORITE,
-  extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
-}]
+export const USER_OPTIONS_LISTS = [
+  // TODO 小黄卡先不做
+  //   {
+  //   id: 1,
+  //   icon: 'credit-card',
+  //   url: PAGE_USER_CARD,
+  //   title: LOCALE_USER_CARD,
+  //   extraText: LOCALE_USER_CARD_EXTRA_TEXT,
+  // },
+  {
+    id: 2,
+    icon: 'heart-2',
+    url: PAGE_USER_FAVORITE,
+    title: LOCALE_USER_FAVORITE,
+    extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
+  }
+]
 
 export const USER_ORDER_OPTIONS_LISTS = [
   {
