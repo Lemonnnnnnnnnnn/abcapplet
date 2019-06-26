@@ -118,7 +118,11 @@ export const dispatchActivityApartmentList = payload => createAction({
   method: 'POST',
   type: SET_APARTMENT_LIST,
   url: API_ACTIVITY_APARTMENT_LIST,
-  cb: ({ data: { data } }) => ({ ...data, type: TYPE_ACTIVITY_APARTMENT })
+  cb: ({ data: { data } }) => ({
+    list: data.list.list,
+    total: data.list.total,
+    type: TYPE_ACTIVITY_APARTMENT
+  })
 })
 
 /**

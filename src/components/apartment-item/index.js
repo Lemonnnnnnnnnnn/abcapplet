@@ -62,8 +62,8 @@ class ApartmentItem extends BaseComponent {
 
     const {
       cbd, desc,
+      is_collect,
       cover, rules, title,
-      is_collect: isCollect,
       price_title: priceTitle,
       apartment_title: apartmentTitle
     } = apartment
@@ -84,6 +84,12 @@ class ApartmentItem extends BaseComponent {
     // 设置图片宽高，方便七牛云格式化图片
     const src = `${cover}?imageView2/1/w/${width}/h/${height}`
 
+    // 是否已收藏
+    // 当 type 为 favorite-house-type、favorite-apartment 时显示，isCollect为ture时显示
+    const isCollect = type === TYPE_FAVORITE_APARTMENT
+      || type === TYPE_FAVORITE_HOUSE_TYPE
+      || is_collect
+
     return (
       <View className={classNames('apartment', className)}>
         {/* 户型头部 */}
@@ -103,21 +109,15 @@ class ApartmentItem extends BaseComponent {
           {/* 户型种类，公寓类型是没有这个字段的 */}
           {title && <View className='apartment-header-type'>{title}</View>}
 
-          {/* 爱心按钮，当 type 为 favorite-house-type、favorite-apartment 时显示，isCollect为ture时显示 */}
-          {(type !== TYPE_NORMAL_APARTMENT || isCollect)
-            ?
-            <View className='apartment-header-favorite'
-              onClick={this.onDeleteFavorite}
-            >
+          {/* 爱心按钮*/}
+          {isCollect
+            ? <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
               <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
             </View>
-            :
-            <View
-              className='apartment-header-favorite'
-              onClick={this.onCreateFavorite}
-            >
+            : <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
               <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
-            </View>}
+            </View>
+          }
         </View>
         <View className='apartment-content mx-3 py-3'>
           {/* 优惠活动 */}

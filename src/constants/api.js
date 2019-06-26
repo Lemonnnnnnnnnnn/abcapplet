@@ -42,11 +42,11 @@ export const PAYLOAD_FAVORITE_HOUSE_TYPE_LIST = { current_page: 1, page_size: PA
 
 // 商圈合集公寓
 export const API_CBD_APARTMENT_LIST = `${HOST}/cbd/getPost`
-export const PAYLOAD_CBD_APARTMENT_LIST = { cbd_id: 0, type_id: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0 }
+export const PAYLOAD_CBD_APARTMENT_LIST = { cbd: 0, type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 // 活动合集公寓
 export const API_ACTIVITY_APARTMENT_LIST = `${HOST}/article/getHotActivityPost`
-export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0 }
+export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************

@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
@@ -8,7 +8,7 @@ import Placeholder from '@components/placeholder'
 import ApartmentItem from '@components/apartment-item'
 
 // 常量
-import { LOCALE_NO_DATA, LOCALE_NO_MORE } from '@constants/locale'
+import { LOCALE_NO_DATA } from '@constants/locale'
 
 class ApartmentList extends BaseList {
 
@@ -41,15 +41,6 @@ class ApartmentList extends BaseList {
         && hasMore === false
         && loading === false
         && <View class='page-demo'>{LOCALE_NO_DATA}</View>}
-
-      {/* 无更多数据 */}
-      {items.length !== 0
-        && !loading
-        && !hasMore
-        && <View className='text-center text-small my-3'>
-          <Text className='text-muted'>{LOCALE_NO_MORE}</Text>
-        </View>
-      }
     </View>)
   }
 }

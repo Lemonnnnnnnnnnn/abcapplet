@@ -57,10 +57,10 @@ class Select extends BaseComponent {
   }
 
   state = {
+    payload: {},
     latitude: 0,
     longitude: 0,
     headerIndex: '',
-    payload: PAYLOAD_APARTMENT_LIST,
   }
 
   // 创建子组件关联，用于重置数据
@@ -69,33 +69,23 @@ class Select extends BaseComponent {
   refSelectSpecial = (node) => this.selectSpecial = node
   refSelectHouseType = (node) => this.selectHouseType = node
 
-  onPayloadRest() {
+  onPayloadReset() {
     this.selectCbd.onResetState()
     this.selectPrice.onResetState()
     this.selectSpecial.onResetState()
     this.selectHouseType.onResetState()
-    this.onPayloadChange({ payload: PAYLOAD_APARTMENT_LIST })
+    this.onPayloadChange({ payload: {} })
   }
 
   onPayloadChange({ payload }) {
     const { latitude, longitude } = this.state
-    this.setState({
-      payload: {
-        ...this.state.payload,
-        ...payload,
-        latitude,
-        longitude,
-      }
-    })
+    this.setState({ payload: { ...payload, latitude, longitude } })
   }
 
-  onPayloadChangeAndRefresh({ payload }) {
+  onPayloadChangeAndRefresh({ payload = {} }) {
     // 不要直接用 onPayloadChange
     // 因为是异步 ！！！
-    payload = {
-      ...this.state.payload,
-      ...payload,
-    }
+    payload = { ...payload, ...this.state.payload }
 
     this.setState({ payload, headerIndex: '' })
     this.props.onApartmentPayloadChange({ payload })
@@ -183,7 +173,7 @@ class Select extends BaseComponent {
         {/* 按钮 */}
         <SelectButton
           show={headerIndex !== ''}
-          onResetClick={this.onPayloadRest}
+          onResetClick={this.onPayloadReset}
           onConfirmClick={this.onPayloadChangeAndRefresh}
         />
 

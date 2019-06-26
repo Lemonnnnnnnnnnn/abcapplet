@@ -24,9 +24,21 @@ class ApartmentCbd extends Component {
     defaultPayload: {},
   }
 
+  refApartmentList = (node) => this.apartmentList = node
+
   componentWillMount() {
     const { id = 49 } = this.$router.params
-    this.setState({ defaultPayload: { ...PAYLOAD_CBD_APARTMENT_LIST, cbd_id: id } })
+
+    Taro.getLocation().then(res => {
+      const defaultPayload = {
+        ...PAYLOAD_CBD_APARTMENT_LIST,
+        cbd: id,
+        latitude: res.latitude,
+        longitude: res.longitude,
+      }
+      this.setState({ defaultPayload })
+      this.apartmentList.onReset(defaultPayload)
+    })
   }
 
   render() {
