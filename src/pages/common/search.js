@@ -181,7 +181,7 @@ class CommonSearch extends Component {
 
         {/* 热门搜索 */}
         {showPreview && hotList.length > 0 &&
-          <View className='py-2'>
+          <View className='py-2 pl-3'>
             <View>{LOCALE_HOT_SEARCH}</View>
             <View className='at-row text-normal text-secondary mt-2'>
               {hotList.map(i =>
@@ -197,7 +197,7 @@ class CommonSearch extends Component {
 
         {/* 历史搜索 */}
         {showPreview && historyList.length > 0 &&
-          <View className='py-2'>
+          <View className='py-2 pl-3'>
             <View>{LOCALE_HISTORY_SEARCH}</View>
             <View className='at-row text-normal text-secondary mt-2'>
               {historyList.map(i =>
@@ -212,10 +212,10 @@ class CommonSearch extends Component {
         }
 
         {/* 看了又看 */}
-        {showPreview && <View className='py-2'>{LOCALE_RECOMMEND_SEARCH}</View>}
+        {showPreview && <View className='mt-3 mb-2'>{LOCALE_RECOMMEND_SEARCH}</View>}
         <ApartmentList
-          show={showPreview === true}
           mini
+          show={showPreview === true}
           key={apartments.type}
           type={apartments.type}
           items={apartments.list}

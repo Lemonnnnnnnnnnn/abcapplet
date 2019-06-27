@@ -24,5 +24,5 @@ export const dispatchCbdShow = payload => createAction({
   type: SHOW_CBD,
   url: API_CBD_SHOW,
   // TODO 这里后端单词打错了
-  cb: ({ data: { data } }) => ({ ...data.cdb, id: payload.cbd, url: `${PAGE_CBD_APARTMENT}?id=${payload.cbd}` })
+  cb: ({ data: { data } }) => ({ ...data.cbd, id: payload.cbd, url: `${PAGE_CBD_APARTMENT}?id=${payload.cbd}` })
 })
