@@ -108,6 +108,7 @@ class UserFavorite extends Component {
           {/* 公寓 */}
           <AtTabsPane current={this.state.current} index={1} >
             <ApartmentList className='mx-2'
+              initReset={false}
               key={apartments.type}
               type={apartments.type}
               items={apartments.list}
@@ -123,6 +124,7 @@ class UserFavorite extends Component {
           {/* 房间 */}
           <AtTabsPane current={this.state.current} index={2} >
             <RoomList className='mx-2'
+              initReset={false}
               type={rooms.type}
               items={rooms.list}
               ref={this.refRoomList}
