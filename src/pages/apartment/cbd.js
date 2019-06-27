@@ -93,7 +93,7 @@ class ApartmentCbd extends Component {
       total: 0,
     }
 
-    Taro.setNavigationBarTitle({ title: cbd.title })
+    cbd.title !== '' && Taro.setNavigationBarTitle({ title: cbd.title })
 
     return <View className='page-white'>
       {/* 头部 */}

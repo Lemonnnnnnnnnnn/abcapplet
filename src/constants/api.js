@@ -32,7 +32,7 @@ export const API_HOT_CBD_LIST = `${HOST}/dict/listHotCbdPost`
 
 // 商圈详情
 export const API_CBD_SHOW = `${HOST}/cbd/getPost`
-export const PAYLOAD_CBD_SHOW = { cbd: 0, type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_CBD_SHOW = { cbd: '', type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************
@@ -44,13 +44,22 @@ export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
 
 // 活动详情
 export const API_ACTIVITY_SHOW = `${HOST}/article/getHotActivityPost`
-export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: '', house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************
  * 公寓相关
  ************************
  */
+
+// 搜索相关
+export const API_HOT_SEARCH = `${HOST}/apartment/listHotSearchPost`
+export const API_RECOMMEND_APARTMENT = `${HOST}/apartment/lookPost`
+
+// 搜索列表
+export const API_SEARCH_APARTMENT = `${HOST}/apartment/searchPost`
+export const PAYLOAD_SEARCH_APARTMENT = { id: 0, city: 350200, search_key: '', cbd: '', type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+
 // 公寓列表
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
 export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, house_type: 0, latitude: 0, longitude: 0, current_page: 1, page_size: PAGE_SIZE }
@@ -65,11 +74,11 @@ export const PAYLOAD_FAVORITE_HOUSE_TYPE_LIST = { current_page: 1, page_size: PA
 
 // 商圈合集公寓
 export const API_CBD_APARTMENT_LIST = `${HOST}/cbd/getPost`
-export const PAYLOAD_CBD_APARTMENT_LIST = { cbd: 0, type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_CBD_APARTMENT_LIST = { cbd: '', type_id: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 // 活动合集公寓
 export const API_ACTIVITY_APARTMENT_LIST = `${HOST}/article/getHotActivityPost`
-export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: 0, house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: '', house_type: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************

@@ -28,6 +28,9 @@ class ApartmentItem extends BaseComponent {
     type: '',
     width: 573,
     height: 346,
+    minWidth: 330,
+    minHeight: 222,
+    mini: false,
     apartment: {},
     className: '',
   }
@@ -56,13 +59,12 @@ class ApartmentItem extends BaseComponent {
   }
 
   render() {
-    const {
-      width,
-      height,
-      className,
-      apartment,
-      type,
-    } = this.props
+    let { width, height, minWidth, minHeight, mini } = this.props
+    const { className, apartment, type, } = this.props
+
+    // 重置宽高
+    width = mini ? minWidth : width
+    height = mini ? minHeight : height
 
     const {
       cbd, desc,
@@ -114,16 +116,18 @@ class ApartmentItem extends BaseComponent {
           {title && <View className='apartment-header-type'>{title}</View>}
 
           {/* 爱心按钮*/}
-          {isCollect
+          {!mini && (isCollect
             ? <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
               <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
             </View>
             : <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
               <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
-            </View>
+            </View>)
           }
         </View>
-        <View className='apartment-content mx-3 py-3'>
+
+        {/* 正常内容 */}
+        {!mini && <View className='apartment-content mx-3 py-3'>
           {/* 优惠活动 */}
           <View>{rules.map(i =>
             <AtTag className='mr-1 p-1 text-mini' key={i.id} size='small' circle>{i.title}</AtTag>
@@ -139,6 +143,15 @@ class ApartmentItem extends BaseComponent {
             <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
           </View>
         </View>
+        }
+
+        {/* 迷你内容 */}
+        {mini && <View className='apartment-content mx-2 py-2'>
+          {/* 价格和公寓名称 */}
+          <View className='mb-2 text-large'>{apartmentTitle}</View>
+          <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
+        </View>
+        }
       </View>
     )
   }

@@ -46,6 +46,7 @@ class Select extends BaseComponent {
 
   static defaultProps = {
     top: 0,
+    show: true,
     showCbd: true,
     isFixed: false,
 
@@ -71,10 +72,10 @@ class Select extends BaseComponent {
   refSelectHouseType = (node) => this.selectHouseType = node
 
   onPayloadReset() {
-    this.selectCbd.onResetState()
-    this.selectPrice.onResetState()
-    this.selectSpecial.onResetState()
-    this.selectHouseType.onResetState()
+    this.selectCbd && this.selectCbd.onResetState()
+    this.selectPrice && this.selectPrice.onResetState()
+    this.selectSpecial && this.selectSpecial.onResetState()
+    this.selectHouseType && this.selectHouseType.onResetState()
     this.onPayloadChange({ payload: {} })
   }
 
@@ -109,6 +110,7 @@ class Select extends BaseComponent {
     const { headerIndex } = this.state
     const {
       // 选项控制
+      show,
       showCbd,
 
       // 吸附相关
@@ -141,7 +143,7 @@ class Select extends BaseComponent {
       // TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
     ]
 
-    return (
+    return (show &&
       <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
         {/* 头部 */}
         <SelectHeader

@@ -95,7 +95,7 @@ class ApartmentCbd extends Component {
       desc: '',
     }
 
-    Taro.setNavigationBarTitle({ title: activity.title })
+    activity.title !== '' && Taro.setNavigationBarTitle({ title: activity.title })
 
     return <View className='page-white'>
 

@@ -7,16 +7,24 @@ import {
   API_FAVORITE_HOUSE_TYPE_LIST,
   API_CBD_APARTMENT_LIST,
   API_ACTIVITY_APARTMENT_LIST,
+
+  API_SEARCH_APARTMENT,
+  API_HOT_SEARCH,
+  API_RECOMMEND_APARTMENT,
 } from '@constants/api'
 
 import {
+  SET_HOT_SEARCH,
   SET_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
+
+  TYPE_CBD_APARTMENT,
+  TYPE_SEARCH_APARTMENT,
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
-  TYPE_FAVORITE_HOUSE_TYPE,
-  TYPE_CBD_APARTMENT,
   TYPE_ACTIVITY_APARTMENT,
+  TYPE_RECOMMEND_APARTMENT,
+  TYPE_FAVORITE_HOUSE_TYPE,
 } from '@constants/apartment'
 
 /**
@@ -137,5 +145,61 @@ export const dispatchNextPageActivityApartmentList = payload => createAction({
     list: data.list.list,
     total: data.list.total,
     type: TYPE_ACTIVITY_APARTMENT
+  })
+})
+
+
+/**
+ * 搜索合集
+ */
+export const dispatchSearchApartmentList = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_APARTMENT_LIST,
+  url: API_SEARCH_APARTMENT,
+  cb: ({ data: { data } }) => ({
+    list: data.list,
+    total: data.total,
+    type: TYPE_SEARCH_APARTMENT
+  })
+})
+
+/**
+ * 搜索合集下一页
+ */
+export const dispatchNextPageSearchApartmentList = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  url: API_SEARCH_APARTMENT,
+  cb: ({ data: { data } }) => ({
+    list: data.list,
+    total: data.total,
+    type: TYPE_SEARCH_APARTMENT
+  })
+})
+
+/**
+ * 搜索关键词
+ */
+export const dispatchHotSearch = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_HOT_SEARCH,
+  url: API_HOT_SEARCH,
+})
+
+/**
+ * 推荐公寓列表
+ */
+export const dispatchRecommendApartment = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SET_APARTMENT_LIST,
+  url: API_RECOMMEND_APARTMENT,
+  cb: ({ data: { data } }) => ({
+    list: data.list,
+    total: data.list.length,
+    type: TYPE_RECOMMEND_APARTMENT,
   })
 })

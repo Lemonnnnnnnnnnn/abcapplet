@@ -4,6 +4,7 @@ import { PAGE_SIZE } from '@constants/api'
 class BaseList extends BaseComponent {
   static defaultProps = {
     items: [],
+    show: true,
     message: '暂无数据',
     defaultPayload: {},
     dispatchList: null,
@@ -38,7 +39,7 @@ class BaseList extends BaseComponent {
     let { page, payload, loading, hasMore } = this.state
     let { pageSize } = this.props
 
-    if (!hasMore || loading || !this.props.dispatchList || !this.props.dispatchNextPageList) return;
+    if (!hasMore || loading || !this.props.dispatchList) return;
 
     this.setState({ loading: true })
 

@@ -58,6 +58,10 @@ class CommonHome extends Component {
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
+
+    // 城市相关
+    selector: ['厦门市'],
+    selectorChecked: '厦门市',
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -68,7 +72,15 @@ class CommonHome extends Component {
     this.onSelectCity(user.citycode)
 
     // 拉取城市列表
-    this.props.dispatchCityList()
+    this.props.dispatchCityList().then((res) => {
+      const citys = res.data.data.list
+      // 设置城市选择器
+      const selector = citys.map(i => i.title)
+      const selectorCity = citys.filter(i => i.id === user.citycode)[0]
+      const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
+
+      this.setState({ selector, selectorChecked })
+    })
   }
 
   /**
@@ -91,14 +103,14 @@ class CommonHome extends Component {
    * 城市相关选择器数据
    * @param {*} param0
    */
-  onChangeSelector(e) {
+  onChangeSelector({ currentTarget: { value } }) {
     const { citys } = this.props
-    const value = e.currentTarget.value
+    const { selector } = this.state
 
-    const selector = citys.map(i => i.title)
     const selectorChecked = selector[value]
-
     const newCity = citys.filter(i => i.title === selectorChecked)[0]
+
+    this.setState({ selectorChecked })
     this.onSelectCity(newCity.id)
   }
 
@@ -185,13 +197,19 @@ class CommonHome extends Component {
   }
 
   render() {
-    const { selectIsFixed, searchIsFixed, searchScrollTop } = this.state
-    const { user, cbds, ads, citys, banners, recommends, activities, dists, apartments } = this.props
+    const {
+      selectIsFixed,
+      searchIsFixed,
+      searchScrollTop,
+      selector,
+      selectorChecked,
+    } = this.state
 
-    // 设置城市选择器
-    const selector = citys.map(i => i.title)
-    const selectorCity = citys.filter(i => i.id === user.citycode)[0]
-    const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
+    const {
+      ads, user, cbds, dists,
+      citys, banners, recommends,
+      activities, apartments
+    } = this.props
 
     return (
       <View className='page-white p-2'>

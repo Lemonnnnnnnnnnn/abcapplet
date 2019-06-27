@@ -36,3 +36,8 @@ export const LOCALE_MONTH = '月'
 export const LOCALE_HAVE_APARTMENT_TOTAL = '%s家公寓'
 export const LOCALE_SHOW_MORE_DESC = '查看更多'
 export const LOCALE_HIDE_MORE_DESC = '隐藏详情'
+
+// common/search
+export const LOCALE_HOT_SEARCH = '热门搜索'
+export const LOCALE_HISTORY_SEARCH = '历史搜索'
+export const LOCALE_RECOMMEND_SEARCH = '看了又看'

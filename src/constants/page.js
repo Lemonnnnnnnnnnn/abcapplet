@@ -1,12 +1,13 @@
-// 文章
-export const PAGE_ARTICLE_SHOW = '/pages/article/show'
+// 通用页面
+export const PAGE_HOME = '/pages/common/home'
+export const PAGE_SEARCH = '/pages/common/search'
 
 // 公寓列表相关
-export const PAGE_HOME = '/pages/common/home'
 export const PAGE_CBD_APARTMENT = '/pages/apartment/cbd'
 export const PAGE_ACTIVITY_APARTMENT = '/pages/apartment/activity'
 
-// 外链
+// 文章和外链
+export const PAGE_ARTICLE_SHOW = '/pages/article/show'
 export const PAGE_EXTERNAL_INDEX = '/pages/external/index'
 
 // 用户相关
