@@ -17,7 +17,7 @@ class App extends Component {
 
   config = {
     pages: [
-      "pages/apartment/home",
+      "pages/common/home",
       "pages/apartment/cbd",
       "pages/apartment/activity",
       "pages/apartment/services",
@@ -43,7 +43,7 @@ class App extends Component {
       borderStyle: "black",
       list: [
         {
-          pagePath: "pages/apartment/home",
+          pagePath: "pages/common/home",
           text: "首页",
           iconPath: "assets/icons/home.png",
           selectedIconPath: "assets/icons/home-active.png"

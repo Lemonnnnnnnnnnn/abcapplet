@@ -2,7 +2,7 @@
 export const PAGE_ARTICLE_SHOW = '/pages/article/show'
 
 // 公寓列表相关
-export const PAGE_HOME = '/pages/apartment/home'
+export const PAGE_HOME = '/pages/common/home'
 export const PAGE_CBD_APARTMENT = '/pages/apartment/cbd'
 export const PAGE_ACTIVITY_APARTMENT = '/pages/apartment/activity'
 
