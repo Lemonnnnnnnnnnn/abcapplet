@@ -12,11 +12,12 @@ import classNames from 'classnames'
 
 // 自定义常量
 import {
+  TYPE_CBD_APARTMENT,
+  TYPE_SEARCH_APARTMENT,
   TYPE_NORMAL_APARTMENT,
+  TYPE_ACTIVITY_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_FAVORITE_HOUSE_TYPE,
-  TYPE_CBD_APARTMENT,
-  TYPE_ACTIVITY_APARTMENT,
 } from '@constants/apartment'
 
 import {
@@ -37,6 +38,7 @@ class ApartmentItem extends BaseComponent {
 
   onCreateFavorite() {
     const payload = this.getFavoritePayload()
+    console.log(payload)
     this.props.onCreateFavorite({ payload })
   }
 
@@ -48,9 +50,10 @@ class ApartmentItem extends BaseComponent {
   getFavoritePayload() {
     const { type, apartment } = this.props
     const { id } = apartment
-
+    console.log(type)
     switch (type) {
       case TYPE_CBD_APARTMENT:
+      case TYPE_SEARCH_APARTMENT:
       case TYPE_ACTIVITY_APARTMENT:
       case TYPE_FAVORITE_HOUSE_TYPE:
       case TYPE_NORMAL_APARTMENT: return { type_id: id }

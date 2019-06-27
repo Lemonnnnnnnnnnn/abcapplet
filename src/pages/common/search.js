@@ -147,6 +147,20 @@ class CommonSearch extends Component {
     !showPreview && this.searchApartmentList.onNextPage()
   }
 
+  /**
+   * 添加心愿单
+   */
+  onCreateFavorite({ payload }) {
+    this.props.dispatchFavoriteCreate(payload)
+  }
+
+  /**
+   * 删除心愿单
+   */
+  onDeleteFavorite({ payload }) {
+    this.props.dispatchFavoriteDelete(payload)
+  }
+
   render() {
     const {
       selector,
@@ -249,6 +263,8 @@ class CommonSearch extends Component {
           ref={this.refSearchApartmentList}
 
           defaultPayload={defaultPayload}
+          onCreateFavorite={this.onCreateFavorite}
+          onDeleteFavorite={this.onDeleteFavorite}
           dispatchList={this.props.dispatchSearchApartmentList}
           dispatchNextPageList={this.props.dispatchNextPageSearchApartmentList}
         />
