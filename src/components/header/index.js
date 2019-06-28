@@ -20,8 +20,7 @@ class Header extends Component {
   }
 
   onNavigation(url) {
-    // TODO Taro.reLaunch({ url })
-    console.log(url)
+    Taro.navigateTo({ url })
   }
 
   render() {

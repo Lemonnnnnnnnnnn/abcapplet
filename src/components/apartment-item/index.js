@@ -38,7 +38,7 @@ class ApartmentItem extends BaseComponent {
 
   onCreateFavorite() {
     const payload = this.getFavoritePayload()
-    console.log(payload)
+
     this.props.onCreateFavorite({ payload })
   }
 
@@ -50,7 +50,7 @@ class ApartmentItem extends BaseComponent {
   getFavoritePayload() {
     const { type, apartment } = this.props
     const { id } = apartment
-    console.log(type)
+
     switch (type) {
       case TYPE_CBD_APARTMENT:
       case TYPE_SEARCH_APARTMENT:

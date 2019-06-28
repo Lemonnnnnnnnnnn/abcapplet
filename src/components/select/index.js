@@ -55,7 +55,7 @@ class Select extends BaseComponent {
     autoSortDist: [],
     houseTypeDist: [],
     specialSelectDist: [],
-    onApartmentPayloadChange: console.log
+    onApartmentPayloadChange: () => { }
   }
 
   state = {
