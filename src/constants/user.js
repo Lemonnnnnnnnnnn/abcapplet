@@ -2,20 +2,24 @@ import logo from '@assets/icons/logo.png'
 
 import {
   PAGE_USER_FAVORITE,
-  PAGE_USER_CARD,
   PAGE_ORDER_INDEX,
   PAGE_ORDER_DOWN_PAYMENT,
   PAGE_ORDER_RISK_FUND,
+
+  // TODO 小黄卡先不做
+  // PAGE_USER_CARD,
 } from '@constants/page'
 
 import {
-  LOCALE_USER_CARD,
-  LOCALE_USER_CARD_EXTRA_TEXT,
   LOCALE_USER_FAVORITE,
   LOCALE_USER_FAVORITE_EXTRA_TEXT,
   LOCALE_ORDER_LIST,
   LOCALE_DOWN_PAYMENT,
   LOCALE_RISK_FUND,
+
+  // TODO 小黄卡先不做
+  // LOCALE_USER_CARD,
+  // LOCALE_USER_CARD_EXTRA_TEXT,
 } from '@constants/locale'
 
 export const USER_DEFAULT = {

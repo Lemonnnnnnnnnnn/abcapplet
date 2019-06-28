@@ -67,6 +67,11 @@ class CommonHome extends Component {
   refApartmentList = (node) => this.apartmentList = node
 
   componentWillMount() {
+    // 如果是分享页面进来的进行跳转
+    const { page, id } = this.$router.params
+
+    page && id && Taro.navigateTo({ url: `${page}?id=${id}` })
+
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = this.props.dispatchUser()
     this.onSelectCity(user.citycode)

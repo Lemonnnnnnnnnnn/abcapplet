@@ -25,6 +25,7 @@ import {
   TYPE_ACTIVITY_APARTMENT,
   TYPE_RECOMMEND_APARTMENT,
   TYPE_FAVORITE_HOUSE_TYPE,
+  TYPE_ARTICLE_APARTMENT,
 } from '@constants/apartment'
 
 /**
@@ -202,4 +203,16 @@ export const dispatchRecommendApartment = payload => createAction({
     total: data.list.length,
     type: TYPE_RECOMMEND_APARTMENT,
   })
+})
+
+/**
+ * 设置文章公寓
+ */
+export const dispatchArticleApartment = (apartments) => ({
+  type: SET_APARTMENT_LIST,
+  payload: {
+    list: apartments,
+    total: apartments.length,
+    type: TYPE_ARTICLE_APARTMENT,
+  }
 })

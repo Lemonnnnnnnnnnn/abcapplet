@@ -34,6 +34,7 @@ export const LOCALE_MONTH = '月'
 
 // components/apartment-header
 export const LOCALE_HAVE_APARTMENT_TOTAL = '%s家公寓'
+export const LOCALE_SHOW_DESC = '查看详情'
 export const LOCALE_SHOW_MORE_DESC = '查看更多'
 export const LOCALE_HIDE_MORE_DESC = '隐藏详情'
 

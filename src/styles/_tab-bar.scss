@@ -1,0 +1,28 @@
+@import "overrides";
+
+.tab-bar {
+  box-sizing: border-box;
+  background-color: #FFF;
+  box-shadow: 0px -2px 4px rgba(0,0,0,0.05);
+
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  padding-bottom:constant(safe-area-inset-bottom);
+  padding-bottom:env(safe-area-inset-bottom);
+  z-index:800;
+
+  .tab-bar__item--icon {
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    width: 44px * $hd;
+    height: 44px * $hd;
+    background-color: #F2F2F2;
+    border-radius:22px * $hd;
+    border: none;
+  }
+}
+
+

@@ -27,4 +27,21 @@
     box-shadow: 0px 3px * $hd 6px * $hd rgba(37,91,255,0.08);
     border-radius:  0 0 12px * $hd 12px * $hd;
   }
+
+  &--fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  &--fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+  }
 }

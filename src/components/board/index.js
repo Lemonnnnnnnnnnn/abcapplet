@@ -33,8 +33,8 @@ class Board extends BaseComponent {
     ]
 
     const classObject = {
-      'board--fixed': fixed === 'top',
-      'board--fixed-top': fixed === 'bottom',
+      'board--fixed': fixed === 'bottom',
+      'board--fixed-top': fixed === 'top',
     }
 
     return (

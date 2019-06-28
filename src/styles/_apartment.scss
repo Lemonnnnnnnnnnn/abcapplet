@@ -61,3 +61,17 @@
     border-top-right-radius: 6px * $hd;
   }
 }
+
+.apartment-mask {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 200;
+  position: fixed;
+  background: #fff;
+}
+
+.apartment-item-mask {
+  background: #F8F8F8;
+  border-radius: 12px * $hd;
+}
