@@ -20,7 +20,6 @@ class OrderIndex extends Component {
   config = {
     navigationBarTitleText: '我的订单',
     navigationBarBackgroundColor: '#FFC919',
-    navigationBarTextStyle: 'white',
   }
 
   refOrderList = node => this.orderList = node

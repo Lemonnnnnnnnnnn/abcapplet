@@ -51,7 +51,7 @@ class OrderItem extends BaseComponent {
         >
           {/* 左边 */}
           <View>
-            <View className='at-row'>
+            <View className='at-row at-row__align--center'>
               <View className={`border-decorate ${borderColor}`} style={{ height: '30px' }}></View>
               <View className='ml-3'>
                 <View className='text-bold text-normal'>{apartmentTitle}{roomNo}</View>
