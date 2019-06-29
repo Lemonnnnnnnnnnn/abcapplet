@@ -105,3 +105,12 @@ export const API_USER_FAVORITE_CREATE = `${HOST}/apartment/collectPost`
 export const API_FAVORITE_ROOM_LIST = `${HOST}/user/listCollectRoomPost`
 export const PAYLOAD_FAVORITE_ROOM_LIST = { current_page: 1, page_size: PAGE_SIZE }
 
+/**
+ ************************
+ * 订单相关
+ ************************
+ */
+
+// 订单列表
+export const API_ORDER_LIST = `${HOST}/order/listPost`
+export const PAYLOAD_ORDER_LIST = { current_page: 0, page_size: PAGE_SIZE }

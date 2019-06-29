@@ -15,7 +15,7 @@ class UserOrderOptions extends BaseComponent {
     size: 30,
   }
 
-  onNavigation({ url }) {
+  onNavigation(url) {
     Taro.navigateTo({ url })
   }
 
@@ -29,7 +29,7 @@ class UserOrderOptions extends BaseComponent {
         </View>
         <View className='at-row at-row__justify--between pt-3'>
           {lists.map(i =>
-            <View key={i.id} className='mx-2'>
+            <View key={i.id} className='mx-2' onClick={this.onNavigation.bind(this, i.url)}>
               <View className='button-order at-row at-row__justify--center at-row__align--center'>
                 <AtIcon
                   value={i.icon}

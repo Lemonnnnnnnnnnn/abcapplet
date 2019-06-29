@@ -5,11 +5,12 @@
   z-index: -1;
   left: 0;
   top: 0;
+  right:0;
 
   height: 350px;
   width: 100%;
   border-radius: 100% 100% 100% 100% / 0% 0% 50% 50%;
-  background: linear-gradient(to right top,#ffc919,#ffd757, #ffffff);
+  background: #FFC919;
 }
 
 .board {
@@ -26,6 +27,14 @@
   &--bottom {
     box-shadow: 0px 3px * $hd 6px * $hd rgba(37,91,255,0.08);
     border-radius:  0 0 12px * $hd 12px * $hd;
+  }
+
+  &--white {
+    background: #ffffff;
+  }
+
+  &--grey {
+    background: #F2F2F2;
   }
 
   &--fixed {

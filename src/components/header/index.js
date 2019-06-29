@@ -13,7 +13,7 @@ class Header extends Component {
 
   static defaultProps = {
     size: 17,
-    title: [],
+    title: '',
     hasExtra: false,
     url: PAGE_HOME,
     extraText: LOCALE_MORE,

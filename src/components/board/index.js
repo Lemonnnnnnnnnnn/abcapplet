@@ -15,13 +15,14 @@ class Board extends BaseComponent {
     fixed: false,
     title: false,
     fixedTop: false,
-    color: '',
+    color: 'white',
     style: {},
   }
 
   render() {
     const {
       fixed,
+      color,
       border,
       className,
       styleName,
@@ -30,6 +31,7 @@ class Board extends BaseComponent {
     const rootClassName = [
       'board',
       `board--${border}`,
+      `board--${color}`
     ]
 
     const classObject = {

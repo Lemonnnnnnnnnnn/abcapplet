@@ -7,3 +7,16 @@ $borders: left, right, top, bottom !default;
     border-#{$border}: 1px solid #F8F8F8;
   }
 }
+
+.border-decorate {
+  width: 4px * $hd;
+  border-radius: 10px;
+
+  &-yellow {
+    background: $color-yellow-0;
+  }
+
+  &-grey {
+    background: #888888;
+  }
+}

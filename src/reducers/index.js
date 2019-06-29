@@ -5,6 +5,7 @@ import cbds from './cbds'
 import dists from './dists'
 import citys from './citys'
 import rooms from './rooms'
+import orders from './orders'
 import banners from './banners'
 import articles from './articles'
 import activities from './activities'
@@ -18,6 +19,7 @@ export default combineReducers({
   dists,
   citys,
   rooms,
+  orders,
   banners,
   articles,
   activities,

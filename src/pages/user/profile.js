@@ -27,6 +27,7 @@ class UserProfile extends Component {
   config = {
     navigationBarTitleText: '个人中心',
     enablePullDownRefresh: true,
+    navigationBarBackgroundColor: '#FFC919',
   }
 
   state = {

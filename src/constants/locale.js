@@ -42,3 +42,10 @@ export const LOCALE_HIDE_MORE_DESC = '隐藏详情'
 export const LOCALE_HOT_SEARCH = '热门搜索'
 export const LOCALE_HISTORY_SEARCH = '历史搜索'
 export const LOCALE_RECOMMEND_SEARCH = '看了又看'
+
+// order
+export const LOCALE_ORDER_STATUS_CANCEL = '取消'
+export const LOCALE_ORDER_STATUS_LOCK_WAITING = '待锁定'
+export const LOCALE_ORDER_STATUS_LOCK_SUCCESS = '锁定成功'
+export const LOCALE_ORDER_STATUS_LOCK_FAIL = '锁定失败'
+export const LOCALE_ORDER_STATUS_FAIL = '签约成功'

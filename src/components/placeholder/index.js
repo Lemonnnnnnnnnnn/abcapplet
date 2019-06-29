@@ -35,20 +35,6 @@ class Placeholder extends Component {
                 <View className='line'></View>
                 <View className='very short line'></View>
               </View>
-              {type == 'product' &&
-                <View>
-                  <View className={`${classValue} mb-5`}>
-                    <View className='full line'></View>
-                    <View className='long line'></View>
-                  </View>
-                  <View className={`${classValue} mb-5`}>
-                    <View className='very short line'></View>
-                    <View className='full line'></View>
-                    <View className='full line'></View>
-                    <View className='medium line'></View>
-                  </View>
-                </View>
-              }
             </View>
           )
         }

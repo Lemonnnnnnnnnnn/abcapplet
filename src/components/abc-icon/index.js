@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { Text } from '@tarojs/components'
+import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import BaseComponent from '@components/base'
@@ -22,12 +22,14 @@ class ABCIcon extends BaseComponent {
     }
 
     return (
-      <Text
-        className={classNames(className, 'material-icons')}
-        style={this.mergeStyle(rootStyle, customStyle)}
-      >
-        {icon}
-      </Text>
+      <View className='at-row at-row__align--center '>
+        <Text
+          className={classNames(className, 'material-icons')}
+          style={this.mergeStyle(rootStyle, customStyle)}
+        >
+          {icon}
+        </Text>
+      </View>
     )
   }
 }
