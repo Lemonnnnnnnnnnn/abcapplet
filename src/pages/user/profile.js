@@ -72,7 +72,6 @@ class UserProfile extends Component {
             className='mt-2'
             lists={orderOptionLists}
           />
-
         </View >
       </View>
     )

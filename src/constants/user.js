@@ -71,21 +71,21 @@ export const USER_OPTIONS_LISTS = [
 export const USER_ORDER_OPTIONS_LISTS = [
   {
     id: 1,
-    icon: 'bullet-list',
+    icon: 'event_available',
     url: PAGE_ORDER_INDEX,
     title: LOCALE_ORDER_LIST,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
   },
   {
     id: 2,
-    icon: 'shopping-bag',
+    icon: 'event_note',
     url: PAGE_ORDER_DOWN_PAYMENT,
     title: LOCALE_DOWN_PAYMENT_RULE,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
   },
   {
     id: 3,
-    icon: 'money',
+    icon: 'local_hospital',
     url: PAGE_ORDER_RISK_FUND,
     title: LOCALE_RISK_FUND,
   }

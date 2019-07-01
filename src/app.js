@@ -29,8 +29,9 @@ class App extends Component {
       "pages/user/profile",
       "pages/user/auth",
 
-      'pages/order/index',
       'pages/order/show',
+      'pages/order/index',
+      'pages/order/down-payment',
 
       "pages/article/show",
       "pages/external/index",
