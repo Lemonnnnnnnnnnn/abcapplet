@@ -55,6 +55,8 @@ export const COLOR_BLACK = "#000000"  // 黑色
 export const COLOR_WHITE = "#FFFFFF"  // 白色
 export const COLOR_YELLOW = "#FFC919" // 黄色 & 主题色
 export const COLOR_BLUE = "#177eff" // 蓝色
+export const COLOR_LIGHT_YELLOW = '#FFDA61' // 浅黄
+export const COLOR_RED = '#FF6161' // 红色
 
 export const COLOR_GREY_0 = "#333333" // 灰色
 export const COLOR_GREY_1 = "#666666" // 灰色

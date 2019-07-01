@@ -25,6 +25,10 @@
     color: #888888 !important;
   }
 
+  &-red {
+    color: #FF6161 !important;
+  }
+
   // 字体粗细
   &-bold {
     font-weight: bold;
@@ -52,12 +56,12 @@
   }
 
   &-small {
-    line-height: $font-size-sm * 1.2;
+    line-height: $font-size-sm * 1.5;
     font-size: $font-size-sm;
   }
 
   &-mini {
-    line-height: $font-size-xs * 1.2;
+    line-height: $font-size-xs * 1.5;
     font-size: $font-size-xs;
   }
 }

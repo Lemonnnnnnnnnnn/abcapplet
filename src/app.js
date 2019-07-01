@@ -30,6 +30,7 @@ class App extends Component {
       "pages/user/auth",
 
       'pages/order/index',
+      'pages/order/show',
 
       "pages/article/show",
       "pages/external/index",

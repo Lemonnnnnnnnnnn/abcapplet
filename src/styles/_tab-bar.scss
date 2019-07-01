@@ -23,6 +23,14 @@
     border-radius:22px * $hd;
     border: none;
   }
+
+  &-height {
+    height: 64px * $hd;
+  }
+
+  &-padding {
+    padding-bottom: 64px * $hd;
+  }
 }
 
 

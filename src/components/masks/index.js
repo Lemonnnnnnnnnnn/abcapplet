@@ -36,7 +36,9 @@ class Mask extends BaseComponent {
       onClick={onClick}
       onTouchMove={this.onMaskTouchMove}
       className={classNames(rootClassName, classObject, className)}
-    />)
+    >
+      {this.props.children}
+    </View>)
   }
 }
 

@@ -114,3 +114,13 @@ export const PAYLOAD_FAVORITE_ROOM_LIST = { current_page: 1, page_size: PAGE_SIZ
 // 订单列表
 export const API_ORDER_LIST = `${HOST}/order/listPost`
 export const PAYLOAD_ORDER_LIST = { current_page: 0, page_size: PAGE_SIZE }
+
+// 订单详情
+export const API_ORDER_SHOW = `${HOST}/order/detailPost`
+
+// 订单取消
+export const API_ORDER_DELETE = `${HOST}/order/cancelOrderPost`
+
+// 订单创建
+export const API_ORDER_CREATE = `${HOST}/order/createOrderPost`
+export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', sign_time: '', appointment_id: 0 }

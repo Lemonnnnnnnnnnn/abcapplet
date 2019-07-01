@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { Text, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import BaseComponent from '@components/base'
@@ -18,17 +18,21 @@ class ABCIcon extends BaseComponent {
 
     const rootStyle = {
       fontSize: `${Taro.pxTransform(parseInt(size) * 2)}`,
-      color
+      width: `${Taro.pxTransform(parseInt(size) * 2)}`,
+      height: `${Taro.pxTransform(parseInt(size) * 2)}`,
+      color,
     }
 
     return (
-      <View className='at-row at-row__align--center '>
-        <Text
-          className={classNames(className, 'material-icons')}
+      <View className={classNames(className)}
+        style={this.mergeStyle(rootStyle, customStyle)}
+      >
+        <View
+          className='material-icons'
           style={this.mergeStyle(rootStyle, customStyle)}
         >
           {icon}
-        </Text>
+        </View>
       </View>
     )
   }
