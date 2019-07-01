@@ -1,0 +1,47 @@
+import {
+  LOCALE_HEADER_RETURN_TITLE,
+  LOCALE_HEADER_RETURN_DESC,
+  LOCALE_HEADER_LIMIT_TITLE,
+  LOCALE_HEADER_LIMIT_DESC,
+  LOCALE_RISK_STATUS_CAN_APPLY,
+  LOCALE_RISK_STATUS_WAIT_APPLY,
+  LOCALE_RISK_STATUS_WAITING_APPLY,
+  LOCALE_RISK_STATUS_APPLY_SUCCESS,
+  LOCALE_RISK_STATUS_APPLY_FAIL,
+} from '@constants/locale'
+
+// Redux 相关
+export const RISK_DEFAULT = { list: [], total: 0 }
+export const CREATE_RISK = 'CREATE_RISK'
+export const SET_RISK_LIST = 'SET_RISK_LIST'
+export const SET_NEXT_PAGE_RISK_LIST = 'SET_NEXT_PAGE_RISK_LIST'
+
+// 头部列表
+export const RISK_HEADERS = [
+  {
+    id: 1,
+    icon: 'local_atm',
+    title: LOCALE_HEADER_RETURN_TITLE,
+    desc: LOCALE_HEADER_RETURN_DESC,
+  },
+  {
+    id: 2,
+    icon: 'all_inclusive',
+    title: LOCALE_HEADER_LIMIT_TITLE,
+    desc: LOCALE_HEADER_LIMIT_DESC,
+  }
+]
+
+export const RISK_SUCCESS_STATUS_STEP = [
+  { title: LOCALE_RISK_STATUS_CAN_APPLY },
+  { title: LOCALE_RISK_STATUS_WAIT_APPLY },
+  { title: LOCALE_RISK_STATUS_WAITING_APPLY },
+  { title: LOCALE_RISK_STATUS_APPLY_SUCCESS },
+]
+
+export const RISK_FAIL_STATUS_STEP = [
+  { title: LOCALE_RISK_STATUS_CAN_APPLY },
+  { title: LOCALE_RISK_STATUS_WAIT_APPLY },
+  { title: LOCALE_RISK_STATUS_WAITING_APPLY },
+  { title: LOCALE_RISK_STATUS_APPLY_FAIL, error: true },
+]

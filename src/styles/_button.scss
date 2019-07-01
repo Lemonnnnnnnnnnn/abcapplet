@@ -49,3 +49,22 @@
 .btn-none::after {
   border: none;
 }
+
+.btn-risk-header-item {
+  color: #000000;
+  background:linear-gradient(180deg,rgba(255,237,178,1) 0%,rgba(255,201,25,1) 100%);
+  border-radius: 50%;
+  height: 50px * $hd;
+  width: 50px * $hd;
+}
+
+
+.at-steps__left-line--active,
+.at-steps__right-line--active {
+  background: $color-yellow-0;
+}
+
+.at-steps__item--error .at-steps__circular {
+  color:#FFF;
+  background: $color-error;
+}

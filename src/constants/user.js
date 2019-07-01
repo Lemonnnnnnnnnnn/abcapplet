@@ -4,7 +4,7 @@ import {
   PAGE_USER_FAVORITE,
   PAGE_ORDER_INDEX,
   PAGE_ORDER_DOWN_PAYMENT,
-  PAGE_ORDER_RISK_FUND,
+  PAGE_RISK_INDEX,
 
   // TODO 小黄卡先不做
   // PAGE_USER_CARD,
@@ -86,7 +86,7 @@ export const USER_ORDER_OPTIONS_LISTS = [
   {
     id: 3,
     icon: 'local_hospital',
-    url: PAGE_ORDER_RISK_FUND,
+    url: PAGE_RISK_INDEX,
     title: LOCALE_RISK_FUND,
   }
 ]
