@@ -151,7 +151,7 @@ class ApartmentItem extends BaseComponent {
         {/* 迷你内容 */}
         {mini && <View className='apartment-content mx-2 py-2'>
           {/* 价格和公寓名称 */}
-          <View className='mb-2 text-large'>{apartmentTitle}</View>
+          <View className='my-2 text-large'>{apartmentTitle}</View>
           <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
         </View>
         }
