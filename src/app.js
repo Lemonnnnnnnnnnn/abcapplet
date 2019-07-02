@@ -17,6 +17,7 @@ class App extends Component {
 
   config = {
     pages: [
+
       'pages/common/home',
       'pages/common/search',
 
@@ -30,6 +31,7 @@ class App extends Component {
       'pages/user/auth',
 
       'pages/risk/index',
+      'pages/risk/create',
 
       'pages/order/show',
       'pages/order/index',

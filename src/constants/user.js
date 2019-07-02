@@ -85,7 +85,7 @@ export const USER_ORDER_OPTIONS_LISTS = [
   },
   {
     id: 3,
-    icon: 'local_hospital',
+    icon: 'local_atm',
     url: PAGE_RISK_INDEX,
     title: LOCALE_RISK_FUND,
   }

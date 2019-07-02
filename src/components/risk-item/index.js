@@ -61,7 +61,7 @@ class RiskItem extends BaseComponent {
     const steps = (status != 4 ? RISK_SUCCESS_STATUS_STEP : RISK_FAIL_STATUS_STEP) || []
 
     return (
-      <Board className={classNames('px-3 py-2', className)}>
+      <Board className={classNames('px-3 pt-3 pb-2', className)}>
         {/* 头部 */}
         <View className='at-row at-row__align--start'>
           <View class='border-decorate border-decorate-yellow' style={{ height: '18px' }} />
@@ -83,7 +83,7 @@ class RiskItem extends BaseComponent {
           <View className='text-yellow text-small my-2'>{LOCALE_WILL_COST_RISK}{riskPrice}</View>
         </View>
 
-        <View className='at-row at-row__justify--center'>
+        <View className='at-row at-row__justify--center  at-row__align--center'>
           <AtButton
             circle
             size='small'
