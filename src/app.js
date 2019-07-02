@@ -17,7 +17,6 @@ class App extends Component {
 
   config = {
     pages: [
-
       'pages/common/home',
       'pages/common/search',
 

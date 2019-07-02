@@ -14,13 +14,11 @@ import RiskSteps from '@components/risk-steps'
 // 自定变量
 import {
   LOCALE_CAN_APPLY,
-  LOCALE_APPLY_RISK,
-  LOCALE_WILL_COST_RISK,
 } from '@constants/locale'
 
 import {
-  RISK_SUCCESS_STATUS_STEP,
-  RISK_FAIL_STATUS_STEP,
+  RISK_STEP,
+  RISK_STATUS_DIST,
 } from '@constants/risk'
 
 import {
@@ -57,8 +55,6 @@ class RiskItem extends BaseComponent {
     } = risk
 
     const status = parseInt(risk.status)
-    const current = status != 4 ? status : status - 1
-    const steps = (status != 4 ? RISK_SUCCESS_STATUS_STEP : RISK_FAIL_STATUS_STEP) || []
 
     return (
       <Board className={classNames('px-3 pt-3 pb-2', className)}>
@@ -74,22 +70,25 @@ class RiskItem extends BaseComponent {
         {/* 进度条 */}
         <RiskSteps
           className='mt-3'
-          items={steps}
-          current={current}
+          items={RISK_STEP}
+          current={RISK_STATUS_DIST[status].current}
         />
 
         {/* 说明 */}
         <View className='at-row at-row__justify--center'>
-          <View className='text-yellow text-small my-2'>{LOCALE_WILL_COST_RISK}{riskPrice}</View>
+          <View className={`${RISK_STATUS_DIST[status].textColor} text-small my-2`}>
+            {RISK_STATUS_DIST[status].desc}{riskPrice}
+          </View>
         </View>
 
         <View className='at-row at-row__justify--center  at-row__align--center'>
           <AtButton
             circle
             size='small'
-            className='btn-yellow active px-4'
+            disabled={RISK_STATUS_DIST[status].disabled}
             onClick={this.onNavigation}
-          >{LOCALE_APPLY_RISK}</AtButton>
+            className={`${RISK_STATUS_DIST[status].color} active px-4`}
+          >{RISK_STATUS_DIST[status].message}</AtButton>
         </View>
       </Board >
     )

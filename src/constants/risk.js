@@ -3,11 +3,15 @@ import {
   LOCALE_HEADER_RETURN_DESC,
   LOCALE_HEADER_LIMIT_TITLE,
   LOCALE_HEADER_LIMIT_DESC,
-  LOCALE_RISK_STATUS_CAN_APPLY,
-  LOCALE_RISK_STATUS_WAIT_APPLY,
-  LOCALE_RISK_STATUS_WAITING_APPLY,
+  LOCALE_SUBMIT,
+  LOCALE_APPLYING,
+  LOCALE_APPLYED,
+
+  LOCALE_APPLY_RISK,
+  LOCALE_COSTED_RISK,
+  LOCALE_APPLYING_RISK,
+  LOCALE_WILL_COST_RISK,
   LOCALE_RISK_STATUS_APPLY_SUCCESS,
-  LOCALE_RISK_STATUS_APPLY_FAIL,
 } from '@constants/locale'
 
 // Redux 相关
@@ -32,16 +36,16 @@ export const RISK_HEADERS = [
   }
 ]
 
-export const RISK_SUCCESS_STATUS_STEP = [
-  { title: LOCALE_RISK_STATUS_CAN_APPLY },
-  { title: LOCALE_RISK_STATUS_WAIT_APPLY },
-  { title: LOCALE_RISK_STATUS_WAITING_APPLY },
-  { title: LOCALE_RISK_STATUS_APPLY_SUCCESS },
+export const RISK_STEP = [
+  { title: LOCALE_SUBMIT },
+  { title: LOCALE_APPLYING },
+  { title: LOCALE_APPLYED },
 ]
 
-export const RISK_FAIL_STATUS_STEP = [
-  { title: LOCALE_RISK_STATUS_CAN_APPLY },
-  { title: LOCALE_RISK_STATUS_WAIT_APPLY },
-  { title: LOCALE_RISK_STATUS_WAITING_APPLY },
-  { title: LOCALE_RISK_STATUS_APPLY_FAIL, error: true },
-]
+export const RISK_STATUS_DIST = {
+  0: { message: LOCALE_APPLY_RISK, textColor: 'text-yellow', color: 'btn-yellow', disable: false, current: 0, desc: LOCALE_WILL_COST_RISK },
+  1: { message: LOCALE_APPLYING_RISK, textColor: 'text-secondary', color: 'btn-light-grey', disable: true, current: 1, desc: LOCALE_COSTED_RISK },
+  2: { message: LOCALE_APPLYING_RISK, textColor: 'text-secondary', color: 'btn-light-grey', disable: true, current: 1, desc: LOCALE_COSTED_RISK },
+  3: { message: LOCALE_RISK_STATUS_APPLY_SUCCESS, textColor: 'text-secondary', color: 'btn-yellow', disable: true, current: 2, desc: LOCALE_COSTED_RISK },
+  4: { message: LOCALE_APPLY_RISK, textColor: 'text-secondary', color: 'btn-yellow', disable: false, current: 1, desc: LOCALE_COSTED_RISK },
+}
