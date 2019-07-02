@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 
 // NPM 包
 import classNames from 'classnames'
@@ -13,7 +13,9 @@ import RiskSteps from '@components/risk-steps'
 
 // 自定变量
 import {
+  LOCALE_CALLBACK,
   LOCALE_CAN_APPLY,
+  LOCALE_SEMICOLON,
 } from '@constants/locale'
 
 import {
@@ -49,6 +51,7 @@ class RiskItem extends BaseComponent {
     const { risk, className } = this.props
     const {
       time,
+      reason,
       room_no: roomNo,
       risk_price: riskPrice,
       apartment_title: apartmentTitle,
@@ -90,6 +93,12 @@ class RiskItem extends BaseComponent {
             className={`${RISK_STATUS_DIST[status].color} active px-4`}
           >{RISK_STATUS_DIST[status].message}</AtButton>
         </View>
+
+        {/* 客服回复 */}
+        {reason && <View className='border-top pt-2'>
+          <Text className='text-secondary text-small'>{LOCALE_CALLBACK}{LOCALE_SEMICOLON}</Text>
+          <Text className='text-normal ml-2'>{reason}</Text>
+        </View>}
       </Board >
     )
   }

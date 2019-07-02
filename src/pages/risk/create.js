@@ -102,7 +102,12 @@ class RiskCreate extends Component {
 
   render() {
     const { risk, payload } = this.state
-    const { apartment_title: apartmentTitle, sign_time: signTime, room_no: roomNo } = risk
+    const {
+      room_no: roomNo,
+      sign_time: signTime,
+      risk_price: riskPrice,
+      apartment_title: apartmentTitle,
+    } = risk
     const { name, mobile } = payload
 
     return (
@@ -169,7 +174,7 @@ class RiskCreate extends Component {
           <View className='at-row'>
             <View className='at-col-6 text-normal at-row at-row__align--center at-row__justify--center'>
               <View>
-                风险金赔付金额 255
+                风险金赔付金额 {riskPrice}
               </View>
             </View>
             <View className='at-col-6'>
