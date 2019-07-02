@@ -124,3 +124,14 @@ export const API_ORDER_DELETE = `${HOST}/order/cancelOrderPost`
 // 订单创建
 export const API_ORDER_CREATE = `${HOST}/order/createOrderPost`
 export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', sign_time: '', appointment_id: 0 }
+
+// 风险金
+export const API_RISK_LIST = `${HOST}/risk/listPost`
+export const PAYLOAD_RISK_LIST = { current_page: 0, page_size: PAGE_SIZE }
+
+// 风险金创建
+export const API_RISK_CREATE = `${HOST}/risk/createPost`
+export const PAYLOAD_RISK_CREATE = { order_id: 0, name: '', mobile: '', img: '[]' }
+
+// 图片上传
+export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`

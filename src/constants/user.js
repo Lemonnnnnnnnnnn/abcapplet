@@ -4,7 +4,7 @@ import {
   PAGE_USER_FAVORITE,
   PAGE_ORDER_INDEX,
   PAGE_ORDER_DOWN_PAYMENT,
-  PAGE_ORDER_RISK_FUND,
+  PAGE_RISK_INDEX,
 
   // TODO 小黄卡先不做
   // PAGE_USER_CARD,
@@ -71,22 +71,22 @@ export const USER_OPTIONS_LISTS = [
 export const USER_ORDER_OPTIONS_LISTS = [
   {
     id: 1,
-    icon: 'bullet-list',
+    icon: 'event_available',
     url: PAGE_ORDER_INDEX,
     title: LOCALE_ORDER_LIST,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
   },
   {
     id: 2,
-    icon: 'shopping-bag',
+    icon: 'event_note',
     url: PAGE_ORDER_DOWN_PAYMENT,
     title: LOCALE_DOWN_PAYMENT_RULE,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
   },
   {
     id: 3,
-    icon: 'money',
-    url: PAGE_ORDER_RISK_FUND,
+    icon: 'local_atm',
+    url: PAGE_RISK_INDEX,
     title: LOCALE_RISK_FUND,
   }
 ]

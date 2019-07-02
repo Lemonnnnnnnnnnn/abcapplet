@@ -17,23 +17,28 @@ class App extends Component {
 
   config = {
     pages: [
-      "pages/common/home",
-      "pages/common/search",
+      'pages/common/home',
+      'pages/common/search',
 
-      "pages/apartment/cbd",
-      "pages/apartment/activity",
-      "pages/apartment/services",
-      "pages/apartment/recommend",
+      'pages/apartment/cbd',
+      'pages/apartment/activity',
+      'pages/apartment/services',
+      'pages/apartment/recommend',
 
-      "pages/user/favorite",
-      "pages/user/profile",
-      "pages/user/auth",
+      'pages/user/favorite',
+      'pages/user/profile',
+      'pages/user/auth',
 
-      'pages/order/index',
+      'pages/risk/index',
+      'pages/risk/create',
+
       'pages/order/show',
+      'pages/order/index',
+      'pages/order/down-payment',
 
-      "pages/article/show",
-      "pages/external/index",
+      'pages/article/show',
+      'pages/external/index',
+
     ],
     window: {
       backgroundTextStyle: 'light',

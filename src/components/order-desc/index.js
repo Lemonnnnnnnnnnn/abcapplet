@@ -12,7 +12,7 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ORDER_SHOW } from '@constants/page'
+import { PAGE_ORDER_DOWN_PAYMENT } from '@constants/page'
 import { ORDER_STATUS_DIST } from '@constants/order'
 
 import {
@@ -37,8 +37,7 @@ class OrderDesc extends BaseComponent {
   }
 
   onNavigation() {
-    const { order: { id } } = this.props
-    Taro.navigateTo({ url: `${PAGE_ORDER_SHOW}?id=${id}` })
+    Taro.navigateTo({ url: PAGE_ORDER_DOWN_PAYMENT })
   }
 
   render() {
@@ -118,7 +117,7 @@ class OrderDesc extends BaseComponent {
                 <View>{amountTotal}</View>
               </View>
 
-              <View className='at-row at-row__justify--center at-row__align--center'>
+              <View className='at-row at-row__justify--center at-row__align--center' onClick={this.onNavigation}>
                 <View className='text-small text-secondary'>{LOCALE_SHOW_DOWN_PAYMENT_RULE}</View>
                 <ABCIcon icon='chevron_right' size='20' color={COLOR_GREY_2} />
               </View>

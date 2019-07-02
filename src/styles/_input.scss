@@ -1,0 +1,20 @@
+@import "overrides";
+
+.risk-input {
+  background: #F8F8F8;
+  border-radius: 12px * $hd;
+  height: 38px * $hd;
+  line-height: 38px * $hd;
+  padding: 0 10px * $hd;
+}
+
+.upload-image {
+  &-item {
+    width:100px * $hd;
+    height:100px * $hd;
+    border:1px dashed #D2D2D2;
+    border-radius: 12px * $hd;
+    box-sizing: border-box;
+    margin: 10px;
+  }
+}

@@ -7,7 +7,7 @@
 $hd: 2 !default; // 基本单位
 
 //  /* The Color of O2Team Brand */
- $color-brand: #000000 !default;
+ $color-brand: #FFC919 !default;
  $color-brand-light: #FFC919 !default;
  $color-brand-dark: #346FC2 !default;
 
@@ -373,15 +373,15 @@ $font-size-xxl: 30px * $hd !default; // 用于大号的数字
  $at-slider-text-size: $font-size-base !default;
 
 //  /* Steps */
- $at-steps-circle-size: 56px !default;
+ $at-steps-circle-size: 25px * $hd !default;
  $at-steps-icon-size: $font-size-sm !default;
  $at-steps-color: $color-white !default;
  $at-steps-color-active: $color-grey-2 !default;
  $at-steps-bg-color: $color-grey-4 !default;
  $at-steps-bg-color-active: $color-brand !default;
  $at-steps-line-color: $color-grey-3 !default;
- $at-steps-title-color: $color-black-0 !default;
- $at-steps-title-size: $font-size-lg !default;
+ $at-steps-title-color: #888888 !default;
+ $at-steps-title-size: $font-size-base !default;
  $at-steps-desc-color: $color-grey-3 !default;
  $at-steps-desc-size: $font-size-sm !default;
 

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import ads from './ads'
 import user from './user'
 import cbds from './cbds'
+import risks from './risks'
 import dists from './dists'
 import citys from './citys'
 import rooms from './rooms'
@@ -16,6 +17,7 @@ export default combineReducers({
   ads,
   user,
   cbds,
+  risks,
   dists,
   citys,
   rooms,

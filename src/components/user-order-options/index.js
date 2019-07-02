@@ -1,7 +1,9 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
+import { View } from '@tarojs/components'
+
+// 自定义组件
+import ABCIcon from '@components/abc-icon'
 import { COLOR_YELLOW } from '@constants/styles'
 
 // 自定义组件
@@ -31,8 +33,8 @@ class UserOrderOptions extends BaseComponent {
           {lists.map(i =>
             <View key={i.id} className='mx-2' onClick={this.onNavigation.bind(this, i.url)}>
               <View className='button-order at-row at-row__justify--center at-row__align--center'>
-                <AtIcon
-                  value={i.icon}
+                <ABCIcon
+                  icon={i.icon}
                   color={COLOR_YELLOW}
                   size={size}
                 />
