@@ -34,6 +34,7 @@ class App extends Component {
 
       'pages/order/show',
       'pages/order/index',
+      'pages/order/create',
       'pages/order/down-payment',
 
       'pages/article/show',

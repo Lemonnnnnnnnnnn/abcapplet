@@ -93,7 +93,7 @@ class RiskCreate extends Component {
     return true
   }
 
-  async onRiskCreate() {
+  onRiskCreate() {
     const { payload } = this.state
     this.onCheckPayload()
       && this.props.dispatchRiskCreate(payload)
