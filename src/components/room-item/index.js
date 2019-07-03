@@ -33,14 +33,15 @@ class RoomItem extends BaseComponent {
   static defaultProps = {
     room: {},
     type: '',
-    width: 200,
-    height: 200,
+    width: 220,
+    height: 220,
     className: '',
   }
 
   onSignRoom() {
-    const { room: { id } } = this.props
-    Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${id}` })
+    const { room } = this.props
+    console.log(room)
+    Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${room.room_id}` })
   }
 
   onCreateFavorite() {
