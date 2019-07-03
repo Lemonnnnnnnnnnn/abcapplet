@@ -40,7 +40,6 @@ class RoomItem extends BaseComponent {
 
   onSignRoom() {
     const { room } = this.props
-    console.log(room)
     Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${room.room_id}` })
   }
 

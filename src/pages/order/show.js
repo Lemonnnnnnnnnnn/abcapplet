@@ -29,16 +29,21 @@ import { PAGE_HOME } from '@constants/page'
 import { COLOR_WHITE } from '@constants/styles'
 
 import {
+
   ORDER_STATUS_DIST,
   ORDER_STATUS_CANCEL,
   ORDER_STATUS_SUCCESS,
 
   ORDER_STATUS_LOCK_FAIL,
+  ORDER_STATUS_PAY_WAITING,
   ORDER_STATUS_LOCK_WAITING,
   ORDER_STATUS_LOCK_SUCCESS,
+
+  ORDER_PAY_WAITING,
 } from '@constants/order'
 
 import {
+  LOCALE_PAY,
   LOCALE_NOTICE,
   LOCALE_SEMICOLON,
   LOCALE_WARM_PROMPT,
@@ -80,7 +85,7 @@ class OrderShow extends Component {
   }
 
   componentWillMount() {
-    const { id } = this.$router.params
+    const { id = 176 } = this.$router.params
 
     // 获取用户数据
     const { payload: user } = this.props.dispatchUser()
@@ -108,20 +113,20 @@ class OrderShow extends Component {
   // 显示签约码
   onShowSignCode() {
     this.setState({ showSignCode: true })
+    this.onOpenTimer()
+  }
 
+  onOpenTimer() {
     // 开定时器刷新数据
     if (!this.timer) {
+      this.onReset()
       this.timerCount = 0
       this.timer = setInterval(() => {
         this.onReset()
         this.timerCount++
         this.timerCount === 5 && clearInterval(this.timer)
-      }, 30000)
+      }, 10000)
     }
-  }
-
-  onHideSignCode() {
-
   }
 
   // 取消订单
@@ -167,10 +172,28 @@ class OrderShow extends Component {
     })
   }
 
+  // 付款
+  async onOrderPayment() {
+    const { order: { id } } = this.state
+    const { data: { data } } = await this.props.dispatchOrderPayment({ id })
+    console.log(data)
+
+    Taro.requestPayment({
+      timeStamp: String(data.timeStamp),
+      nonceStr: data.nonceStr,
+      package: data.package,
+      signType: data.signType,
+      paySign: data.paySign
+    }).then(() => this.onOpenTimer())
+  }
+
   render() {
     const { apartments } = this.props
     const { order, city, roomId, showSignCode } = this.state
-    let { status, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
+    let { status, paid, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
+
+    order.status = status = (status === ORDER_STATUS_LOCK_WAITING && paid === ORDER_PAY_WAITING)
+      ? ORDER_STATUS_PAY_WAITING : status
 
     signTime = day.unix(signTime).format('YYYY年MM月DD日')
 
@@ -179,7 +202,7 @@ class OrderShow extends Component {
       {/* 背景底色 */}
       <Decorate height='250' />
 
-      {/* 提示图标 */}
+      {/* 计时器 */}
       <View className='at-row at-row__justify--center'>
         <ABCIcon className='mt-2' icon='check_circle_outline' color={COLOR_WHITE} size='46' />
       </View>
@@ -200,7 +223,7 @@ class OrderShow extends Component {
       {/* 背景底色 */}
       <Decorate height='250' />
 
-      {/* 提示图标 */}
+      {/* 计时器 */}
       <View className='at-row at-row__justify--center'>
         <ABCIcon className='mt-2' icon='cancel' color={COLOR_WHITE} size='46' />
       </View>
@@ -221,7 +244,7 @@ class OrderShow extends Component {
       {/* 背景底色 */}
       <Decorate height='330' />
 
-      {/* 提示图标  */}
+      {/* 计时器  */}
       {!!countdownTime && <OrderTimer
         status={status}
         initTimer={countdownTime}
@@ -247,7 +270,7 @@ class OrderShow extends Component {
       {/* 背景底色 */}
       <Decorate height='330' />
 
-      {/* 提示图标  */}
+      {/* 计时器  */}
       {/* TODO 需要和宝哥沟通倒计时时间 */}
       <OrderTimer
         status={status}
@@ -270,8 +293,7 @@ class OrderShow extends Component {
       {/* 背景底色 */}
       <Decorate height='330' />
 
-      {/* 提示图标  */}
-      {/* TODO 需要和宝哥沟通倒计时时间 */}
+      {/* 计时器  */}
       <OrderTimer
         status={status}
         initTimer={countdownTime}
@@ -289,6 +311,21 @@ class OrderShow extends Component {
           </Text>
         </View>
       </Board>
+    </View>
+
+    // 待付款倒计时
+    const statusPayWaiting = <View>
+      <View className='mt-3'>
+        {/* 背景底色 */}
+        <Decorate height='150' />
+
+        {/* 计时器  */}
+        <OrderTimer
+          status={status}
+          initTimer={countdownTime}
+          onTimeOut={this.onReset}
+        />
+      </View>
     </View>
 
     return (
@@ -310,6 +347,9 @@ class OrderShow extends Component {
 
         {/* 已锁定头部 */}
         {ORDER_STATUS_LOCK_SUCCESS == status && statusLockSuccess}
+
+        {/* 待付款 */}
+        {ORDER_STATUS_PAY_WAITING == status && statusPayWaiting}
 
         {/* 看了又看 */}
         <View>
@@ -334,6 +374,7 @@ class OrderShow extends Component {
         {
           ORDER_STATUS_LOCK_FAIL != status
           && ORDER_STATUS_CANCEL != status
+          && !!order.sign_time
           && <OrderDesc order={order} className='pb-2' />
         }
 
@@ -344,6 +385,32 @@ class OrderShow extends Component {
           onSelectRoom={this.onSelectRoom}
           show={ORDER_STATUS_LOCK_FAIL == status}
         />
+
+        {/* 预定房源按钮 */}
+        {ORDER_STATUS_PAY_WAITING == status &&
+          <TabBarBoard>
+            <View className='at-row'>
+              <View className='at-col'>
+                <AtButton
+                  circle
+                  className='btn-grey'
+                  onClick={this.onOrderDelete}
+                >
+                  {LOCALE_ORDER_CANCEL}
+                </AtButton>
+              </View>
+              <View className='at-col-9'>
+                <View className='px-2'>
+                  <AtButton
+                    circle
+                    className='btn-yellow active'
+                    onClick={this.onOrderPayment}
+                  >{LOCALE_PAY}</AtButton>
+                </View>
+              </View>
+            </View>
+          </TabBarBoard>
+        }
 
         {/* 预定房源按钮 */}
         {ORDER_STATUS_LOCK_FAIL == status &&

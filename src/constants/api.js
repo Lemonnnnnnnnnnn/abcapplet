@@ -142,3 +142,6 @@ export const PAYLOAD_RISK_CREATE = { order_id: 0, name: '', mobile: '', img: '[]
 
 // 图片上传
 export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
+
+// 订单支付
+export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
