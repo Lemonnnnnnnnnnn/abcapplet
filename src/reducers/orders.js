@@ -8,7 +8,6 @@ import {
   ORDER_STATUS_PAY_WAITING,
   ORDER_STATUS_LOCK_WAITING,
 } from '@constants/order'
-import { pipeline } from 'stream';
 
 const formatList = (list) => {
   return list = list.map(i => formatItem(i))

@@ -17,6 +17,7 @@ import { COLOR_GREY_0, COLOR_BLACK } from '@constants/styles'
 class Search extends BaseComponent {
   static defaultProps = {
     size: 13,
+    showCancel: false,
     isFixed: false,
     selector: [''],
     selectorChecked: '',
@@ -64,7 +65,7 @@ class Search extends BaseComponent {
 
   render() {
     const { isInput, value } = this.state
-    const { selector, onChangeSelector, selectorChecked, size, isFixed, className } = this.props
+    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel } = this.props
 
     return (
       <View className={classNames(className, 'search', `${isFixed ? 'search-fixed' : ''}`)}>
@@ -94,7 +95,7 @@ class Search extends BaseComponent {
                     onInput={this.onInputValue}
                     onConfirm={this.onInputConfirm}
                   />
-                  <View className='mr-3 text-muted' onClick={this.onInputCancel}>取消</View>
+                  {showCancel && <View className='mr-3 text-muted' onClick={this.onInputCancel}>取消</View>}
                 </View>
               }
             </View>
