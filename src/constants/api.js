@@ -52,6 +52,9 @@ export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: '', house_type: 0, p
  ************************
  */
 
+// 公寓详情
+export const API_APARTMENT_SHOW = `${HOST}/apartment/getPost`
+
 // 搜索相关
 export const API_HOT_SEARCH = `${HOST}/apartment/listHotSearchPost`
 export const API_RECOMMEND_APARTMENT = `${HOST}/apartment/lookPost`
@@ -125,6 +128,10 @@ export const API_ORDER_DELETE = `${HOST}/order/cancelOrderPost`
 export const API_ORDER_CREATE = `${HOST}/order/createOrderPost`
 export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', sign_time: '', appointment_id: 0 }
 
+// 订单预览
+export const API_ORDER_PREVIEW = `${HOST}/order/perOrderPost`
+export const PAYLOAD_ORDER_PREVIEW = { room_id: 0, appointment_id: 0 }
+
 // 风险金
 export const API_RISK_LIST = `${HOST}/risk/listPost`
 export const PAYLOAD_RISK_LIST = { current_page: 0, page_size: PAGE_SIZE }
@@ -135,3 +142,6 @@ export const PAYLOAD_RISK_CREATE = { order_id: 0, name: '', mobile: '', img: '[]
 
 // 图片上传
 export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
+
+// 订单支付
+export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`

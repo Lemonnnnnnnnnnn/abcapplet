@@ -32,8 +32,9 @@ class App extends Component {
       'pages/risk/index',
       'pages/risk/create',
 
-      'pages/order/show',
       'pages/order/index',
+      'pages/order/show',
+      'pages/order/create',
       'pages/order/down-payment',
 
       'pages/article/show',

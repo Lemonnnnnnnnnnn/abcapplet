@@ -27,14 +27,20 @@ import {
   LOCALE_ABC_SIGN,
   LOCALE_NO_AWARD_AND_SPACE,
 } from '@constants/locale'
+import { PAGE_ORDER_CREATE } from '@constants/page'
 
 class RoomItem extends BaseComponent {
   static defaultProps = {
     room: {},
     type: '',
-    width: 200,
-    height: 200,
+    width: 220,
+    height: 220,
     className: '',
+  }
+
+  onSignRoom() {
+    const { room } = this.props
+    Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${room.room_id}` })
   }
 
   onCreateFavorite() {
@@ -114,7 +120,10 @@ class RoomItem extends BaseComponent {
                 <View className='text-huge text-yellow text-bold'>
                   {price === 0 ? '暂无数据' : `${price}/${LOCALE_MONTH}`}
                 </View>
-                {status === 1 && <AtButton circle className='btn-yellow active' size='small'>
+                {status === 1 && <AtButton
+                  circle className='btn-yellow active' size='small'
+                  onClick={this.onSignRoom}
+                >
                   {LOCALE_ABC_SIGN}
                 </AtButton>}
               </View>

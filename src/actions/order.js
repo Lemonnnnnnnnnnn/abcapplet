@@ -4,6 +4,8 @@ import {
   SHOW_ORDER,
   CREATE_ORDER,
   DELETE_ORDER,
+  PAYMENT_ORDER,
+  PREVIEW_ORDER,
   SET_ORDER_LIST,
   SET_NEXT_PAGE_ORDER_LIST,
 } from '@constants/order'
@@ -13,6 +15,8 @@ import {
   API_ORDER_SHOW,
   API_ORDER_DELETE,
   API_ORDER_CREATE,
+  API_ORDER_PAYMENT,
+  API_ORDER_PREVIEW,
 } from '@constants/api'
 
 /**
@@ -71,5 +75,23 @@ export const dispatchOrderCreate = payload => createAction({
   url: API_ORDER_CREATE,
 })
 
+/**
+ * 预览订单
+ */
+export const dispatchOrderPreview = payload => createAction({
+  payload,
+  method: 'POST',
+  type: PREVIEW_ORDER,
+  url: API_ORDER_PREVIEW,
+})
 
 
+/**
+ * 订单支付
+ */
+export const dispatchOrderPayment = payload => createAction({
+  payload,
+  method: 'POST',
+  type: PAYMENT_ORDER,
+  url: API_ORDER_PAYMENT,
+})

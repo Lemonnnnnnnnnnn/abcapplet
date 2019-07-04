@@ -18,6 +18,7 @@ export const PAGE_USER_FAVORITE = '/pages/user/favorite'
 // 订单相关
 export const PAGE_ORDER_INDEX = '/pages/order/index'
 export const PAGE_ORDER_SHOW = '/pages/order/show'
+export const PAGE_ORDER_CREATE = '/pages/order/create'
 export const PAGE_ORDER_DOWN_PAYMENT = '/pages/order/down-payment'
 
 // 风险金相关

@@ -11,10 +11,12 @@ import {
   API_SEARCH_APARTMENT,
   API_HOT_SEARCH,
   API_RECOMMEND_APARTMENT,
+  API_APARTMENT_SHOW,
 } from '@constants/api'
 
 import {
   SET_HOT_SEARCH,
+  SHOW_APARTMENT,
   SET_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
 
@@ -216,3 +218,15 @@ export const dispatchArticleApartment = (apartments) => ({
     type: TYPE_ARTICLE_APARTMENT,
   }
 })
+
+/**
+ * 设置文章公寓
+ */
+export const dispatchApartmentShow = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SHOW_APARTMENT,
+  url: API_APARTMENT_SHOW,
+  cb: ({ data: { data } }) => ({ ...data })
+})
+
