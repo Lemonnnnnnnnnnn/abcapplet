@@ -190,10 +190,7 @@ class OrderShow extends Component {
   render() {
     const { apartments } = this.props
     const { order, city, roomId, showSignCode } = this.state
-    let { status, paid, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
-
-    order.status = status = (status === ORDER_STATUS_LOCK_WAITING && paid === ORDER_PAY_WAITING)
-      ? ORDER_STATUS_PAY_WAITING : status
+    let { status, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
 
     signTime = day.unix(signTime).format('YYYY年MM月DD日')
 

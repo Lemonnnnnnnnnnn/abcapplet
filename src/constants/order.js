@@ -36,7 +36,7 @@ export const ORDER_PAIED = 1
 
 // 状态字典
 export const ORDER_STATUS_DIST = {
-  '-1': { const: ORDER_STATUS_PAY_WAITING, message: LOCALE_ORDER_STATUS_PAY_WAITING, isLight: false, },
+  '-1': { const: ORDER_STATUS_PAY_WAITING, message: LOCALE_ORDER_STATUS_PAY_WAITING, isLight: true, },
   0: { const: ORDER_STATUS_CANCEL, message: LOCALE_ORDER_STATUS_CANCEL, isLight: false, },
   1: { const: ORDER_STATUS_LOCK_WAITING, message: LOCALE_ORDER_STATUS_LOCK_WAITING, isLight: true },
   3: { const: ORDER_STATUS_LOCK_SUCCESS, message: LOCALE_ORDER_STATUS_LOCK_SUCCESS, isLight: true },
