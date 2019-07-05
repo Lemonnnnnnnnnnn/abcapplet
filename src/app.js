@@ -21,6 +21,7 @@ class App extends Component {
       'pages/common/search',
 
       'pages/apartment/cbd',
+      'pages/apartment/show',
       'pages/apartment/activity',
       'pages/apartment/services',
       'pages/apartment/recommend',

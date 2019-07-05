@@ -14,22 +14,26 @@ class ABCIcon extends BaseComponent {
   }
 
   render() {
-    const { customStyle, className, icon, size, color } = this.props
+    const { className, icon, size, color } = this.props
 
     const rootStyle = {
       fontSize: `${Taro.pxTransform(parseInt(size) * 2)}`,
-      width: `${Taro.pxTransform(parseInt(size) * 2)}`,
-      height: `${Taro.pxTransform(parseInt(size) * 2)}`,
       color,
     }
 
     return (
       <View className={classNames(className)}
-        style={this.mergeStyle(rootStyle, customStyle)}
+        style={this.mergeStyle(rootStyle, {
+          'text-align': 'center',
+          display: 'table',
+        })}
       >
         <View
           className='material-icons'
-          style={this.mergeStyle(rootStyle, customStyle)}
+          style={this.mergeStyle(rootStyle, {
+            'vertical-align': 'middle',
+            display: 'table-cell',
+          })}
         >
           {icon}
         </View>

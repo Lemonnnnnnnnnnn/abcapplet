@@ -237,7 +237,7 @@ class CommonSearch extends Component {
           ref={this.refRecommendApartmentList}
 
           defaultPayload={{ city }}
-          dispatchList={this.props.dispatchRecommendApartment}
+          dispatchList={this.props.dispatchRecommendHouseType}
         />
 
 

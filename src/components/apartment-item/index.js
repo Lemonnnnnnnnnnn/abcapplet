@@ -61,6 +61,12 @@ class ApartmentItem extends BaseComponent {
     }
   }
 
+  onNavigation() {
+    const { apartment } = this.props
+    const { url } = apartment
+    Taro.navigateTo({ url })
+  }
+
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
     const { className, apartment, type, } = this.props
@@ -100,7 +106,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className={classNames('apartment', className)}>
+      <View className={classNames('apartment', className)} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 

@@ -51,6 +51,14 @@ class UserFavorite extends Component {
     this.setState({ current: value })
   }
 
+  componentDidMount() {
+    this.houseTypeList.onReset(null)
+  }
+
+  componentDidShow() {
+    this.onReset()
+  }
+
   /**
    * 触底加载数据
    */
@@ -75,7 +83,7 @@ class UserFavorite extends Component {
   onReset() {
     const { tabList, current } = this.state
     const { ref } = tabList[current]
-    this[ref].onReset(null)
+    this[ref] && this[ref].onReset(null)
   }
 
   render() {
@@ -92,6 +100,7 @@ class UserFavorite extends Component {
           {/* 户型 */}
           <AtTabsPane current={this.state.current} index={0} >
             <ApartmentList
+              initReset={false}
               className='mx-2'
               key={apartments.type}
               type={apartments.type}

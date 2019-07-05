@@ -3,8 +3,12 @@ export const PAGE_HOME = '/pages/common/home'
 export const PAGE_SEARCH = '/pages/common/search'
 
 // 公寓列表相关
+export const PAGE_APARTMENT_SHOW = '/pages/apartment/show'
 export const PAGE_CBD_APARTMENT = '/pages/apartment/cbd'
 export const PAGE_ACTIVITY_APARTMENT = '/pages/apartment/activity'
+
+// 户型详情
+export const PAGE_HOUSE_TYPE_SHOW = '/pages/house-type/show'
 
 // 文章和外链
 export const PAGE_ARTICLE_SHOW = '/pages/article/show'

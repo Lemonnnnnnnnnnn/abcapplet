@@ -25,7 +25,7 @@ import {
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_ACTIVITY_APARTMENT,
-  TYPE_RECOMMEND_APARTMENT,
+  TYPE_RECOMMEND_HOUSE_TYPE,
   TYPE_FAVORITE_HOUSE_TYPE,
   TYPE_ARTICLE_APARTMENT,
 } from '@constants/apartment'
@@ -195,7 +195,7 @@ export const dispatchHotSearch = payload => createAction({
 /**
  * 推荐公寓列表
  */
-export const dispatchRecommendApartment = payload => createAction({
+export const dispatchRecommendHouseType = payload => createAction({
   payload,
   method: 'POST',
   type: SET_APARTMENT_LIST,
@@ -203,7 +203,7 @@ export const dispatchRecommendApartment = payload => createAction({
   cb: ({ data: { data } }) => ({
     list: data.list,
     total: data.list.length,
-    type: TYPE_RECOMMEND_APARTMENT,
+    type: TYPE_RECOMMEND_HOUSE_TYPE,
   })
 })
 
@@ -220,7 +220,7 @@ export const dispatchArticleApartment = (apartments) => ({
 })
 
 /**
- * 设置文章公寓
+ * 设置公寓详情
  */
 export const dispatchApartmentShow = payload => createAction({
   payload,

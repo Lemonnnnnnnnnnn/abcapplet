@@ -39,8 +39,6 @@ class Carousel extends Component {
     const isArtile = url.search(PAGE_ARTICLE_SHOW) !== -1
     if (isArtile) newUrl = `${url}&title=${title}`
 
-
-
     return Taro.navigateTo({ url: newUrl })
   }
 

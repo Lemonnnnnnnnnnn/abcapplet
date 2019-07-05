@@ -363,7 +363,7 @@ class OrderShow extends Component {
             items={apartments.list}
 
             defaultPayload={{ city }}
-            dispatchList={this.props.dispatchRecommendApartment}
+            dispatchList={this.props.dispatchRecommendHouseType}
           />
         </View>
 
