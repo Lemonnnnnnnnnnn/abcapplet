@@ -27,9 +27,9 @@ class App extends Component {
       'pages/apartment/recommend',
       'pages/apartment/house-type',
 
-      'pages/user/favorite',
-      'pages/user/profile',
       'pages/user/auth',
+      'pages/user/profile',
+      'pages/user/favorite',
 
       'pages/risk/index',
       'pages/risk/create',
