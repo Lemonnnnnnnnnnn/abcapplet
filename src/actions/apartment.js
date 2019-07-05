@@ -3,20 +3,22 @@ import { createAction } from '@utils/redux'
 import {
   API_APARTMENT_LIST,
   PAYLOAD_APARTMENT_LIST,
-  API_FAVORITE_APARTMENT_LIST,
-  API_FAVORITE_HOUSE_TYPE_LIST,
   API_CBD_APARTMENT_LIST,
   API_ACTIVITY_APARTMENT_LIST,
+  API_FAVORITE_APARTMENT_LIST,
+  API_FAVORITE_HOUSE_TYPE_LIST,
 
-  API_SEARCH_APARTMENT,
   API_HOT_SEARCH,
-  API_RECOMMEND_APARTMENT,
   API_APARTMENT_SHOW,
+  API_HOUSE_TYPE_SHOW,
+  API_SEARCH_APARTMENT,
+  API_RECOMMEND_APARTMENT,
 } from '@constants/api'
 
 import {
   SET_HOT_SEARCH,
   SHOW_APARTMENT,
+  SHOW_HOUSE_TYPE,
   SET_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
 
@@ -220,7 +222,7 @@ export const dispatchArticleApartment = (apartments) => ({
 })
 
 /**
- * 设置公寓详情
+ * 公寓详情
  */
 export const dispatchApartmentShow = payload => createAction({
   payload,
@@ -230,3 +232,12 @@ export const dispatchApartmentShow = payload => createAction({
   cb: ({ data: { data } }) => ({ ...data })
 })
 
+/**
+ * 户型详情
+ */
+export const dispatchHouseTypeShow = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SHOW_HOUSE_TYPE,
+  url: API_HOUSE_TYPE_SHOW,
+})

@@ -27,7 +27,7 @@ class ApartmentTypeItem extends BaseComponent {
     // 格式化价格
     const price = priceTitle ? parseInt(priceTitle) : 0
 
-    return <View className='py-2' onClcik={this.onNavigation}>
+    return <View className='py-2' onClick={this.onNavigation}>
       <View className='at-row'>
         {cover && <Image
           src={`${cover}?imageView2/1/w/${width}/h/${height}`}

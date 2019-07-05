@@ -51,6 +51,8 @@ export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: '', house_type: 0, p
  * 公寓相关
  ************************
  */
+// 户型详情
+export const API_HOUSE_TYPE_SHOW = `${HOST}/apartment/getTypePost`
 
 // 公寓详情
 export const API_APARTMENT_SHOW = `${HOST}/apartment/getPost`

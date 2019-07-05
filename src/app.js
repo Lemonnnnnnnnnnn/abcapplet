@@ -25,6 +25,7 @@ class App extends Component {
       'pages/apartment/activity',
       'pages/apartment/services',
       'pages/apartment/recommend',
+      'pages/apartment/house-type',
 
       'pages/user/favorite',
       'pages/user/profile',

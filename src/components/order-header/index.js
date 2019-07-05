@@ -13,13 +13,14 @@ class OrderHeader extends BaseComponent {
 
   static defaultProps = {
     items: [],
+    size: 'normal',
   }
 
   render() {
-    const { items, className } = this.props
+    const { items, className, size } = this.props
     return (
       <Borad color='black' className={className}>
-        <View className='px-3 py-3'>
+        {size === 'normal' && <View className='px-3 py-3'>
           <View className='at-row at-row__justify--center'>
             <View className='text-small text-secondary mb-2'>{LOCALE_LOCK_NOTICE}</View>
           </View>
@@ -38,6 +39,24 @@ class OrderHeader extends BaseComponent {
             )}
           </View>
         </View>
+        }
+
+        {size === 'small' && <View className='px-3 py-3'>
+          <View className='at-row at-row__justify--around'>
+            {items.map(i => <View key={i.id}>
+              <View className='at-row at-row__align--center'>
+                <View className='at-row'>
+                  <ABCIcon icon={i.icon} color={COLOR_YELLOW} size='45' />
+                  <View className='text-white text-normal ml-2'>
+                    <View className='text-white text-normal'>{i.title}</View>
+                    <View className='text-secondary text-small'>{i.desc}</View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            )}
+          </View>
+        </View>}
       </Borad>
     )
   }

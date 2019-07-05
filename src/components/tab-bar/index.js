@@ -16,10 +16,11 @@ class TabBar extends BaseComponent {
     show: true,
     buttons: [],
     hasShare: true,
+    hasContact: false,
   }
 
   render() {
-    const { className, buttons, hasShare, show } = this.props
+    const { className, buttons, hasShare, show, hasContact } = this.props
 
     return (
       show && <View className={classNames(className)}>
@@ -27,6 +28,12 @@ class TabBar extends BaseComponent {
           {hasShare && <View className='at-col-2'>
             <AtButton open-type='share' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
               <ABCIcon icon='share' color='#000' />
+            </AtButton>
+          </View>}
+
+          {hasContact && <View className='at-col-2'>
+            <AtButton open-type='contact' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
+              <ABCIcon icon='headset_mic' color='#000' />
             </AtButton>
           </View>}
 

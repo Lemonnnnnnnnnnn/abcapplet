@@ -6,9 +6,7 @@ export const PAGE_SEARCH = '/pages/common/search'
 export const PAGE_APARTMENT_SHOW = '/pages/apartment/show'
 export const PAGE_CBD_APARTMENT = '/pages/apartment/cbd'
 export const PAGE_ACTIVITY_APARTMENT = '/pages/apartment/activity'
-
-// 户型详情
-export const PAGE_HOUSE_TYPE_SHOW = '/pages/house-type/show'
+export const PAGE_HOUSE_TYPE_SHOW = '/pages/apartment/house-type'
 
 // 文章和外链
 export const PAGE_ARTICLE_SHOW = '/pages/article/show'

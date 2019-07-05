@@ -15,7 +15,7 @@ import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ACTIVITY_APARTMENT } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
@@ -25,7 +25,7 @@ const city = userActions.dispatchUser().payload.citycode
 })
 class ApartmentShow extends Component {
   config = {
-    navigationBarTitleText: '公寓详情',
+    navigationBarTitleText: '',
   }
 
   state = {
@@ -50,6 +50,8 @@ class ApartmentShow extends Component {
 
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
+    Taro.setNavigationBarTitle({ title: data.title })
+
     this.setState({
       apartment: {
         id: data.id,
@@ -57,7 +59,7 @@ class ApartmentShow extends Component {
         intro: data.one_word,
         // address: data.address,
         cbds: data.cbd_list,
-        types: data.house_types,
+        types: data.house_types.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
         isCollect: data.is_collect,
         rules: data.extend_info.rules,
         facilitys: data.facility_list,
@@ -180,7 +182,7 @@ class ApartmentShow extends Component {
       {/* 户型 */}
       <View className='mt-2'>
         {types.map((i, index) =>
-          <View key={i.id} className={`${index - 1 !== types.length} border-bottom`}>
+          <View key={i.id} className={`${index + 1 != types.length && 'border-bottom'}`}>
             <ApartmentTypeItem item={i} />
           </View>)}
       </View>
@@ -222,7 +224,7 @@ class ApartmentShow extends Component {
 
       {/* 周边生活 & 附近交通 */}
       <View className='at-row mt-2'>
-        <View className='at-col text-secondary text-normal mr-2'>附近商圈：</View>
+        <View className='at-col text-secondary text-normal mr-2'>附近商圈</View>
         <View>
           <View className='text-normal'>{cbds.join('、')}</View>
         </View>

@@ -15,7 +15,7 @@ import classNames from 'classnames'
 // 自定义常量
 import {
   ROOM_STATUS_DIST,
-  TYPE_NORMAL_ROOM,
+  TYPE_FAVORITE_ROOM,
 } from '@constants/room'
 
 import {
@@ -36,27 +36,37 @@ class RoomItem extends BaseComponent {
     width: 220,
     height: 220,
     className: '',
+    isSign: true,
   }
 
   onSignRoom() {
     const { room } = this.props
-    Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${room.room_id}` })
+    const id = room.room_id || room.id
+    Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${id}` })
   }
 
   onCreateFavorite() {
-    // 加入收藏
+    const { room } = this.props
+    const id = room.room_id || room.id
+
+    this.props.onCreateFavorite({ payload: { room_id: id } })
   }
 
   onDeleteFavorite() {
     const { room } = this.props
-    const { room_id } = room
+    const id = room.room_id || room.id
 
-    this.props.onDeleteFavorite({ payload: { room_id } })
+    this.props.onDeleteFavorite({ payload: { room_id: id } })
   }
 
   render() {
-    const { className, room, width, height, type } = this.props
-    const { cover, room_no: roomNo, status, space, toward, price_title: priceTitle } = room
+    const { className, room, width, height, type, isSign } = this.props
+    const { cover, status, space, toward, is_collect: isCollect } = room
+
+    // 兼容字段代码
+    const hasIsCollect = Object.keys(room).includes('is_collect')
+    const roomNo = room.room_no || room.no
+    const priceTitle = room.price_title || room.price
 
     const imageStyle = {
       width: Taro.pxTransform(width),
@@ -100,9 +110,13 @@ class RoomItem extends BaseComponent {
 
                 <View>
                   {/* 爱心按钮，当 type 为 TYPE_NORMAL_ROOM 显示添加、TYPE_FAVORITE_ROOM 显示取消 */}
-                  {type === TYPE_NORMAL_ROOM
-                    ? <AtIcon value='heart' size='25' color={COLOR_YELLOW} onClick={this.onCreateFavorite} />
-                    : <AtIcon value='heart-2' size='25' color={COLOR_YELLOW} onClick={this.onDeleteFavorite} />}
+                  {hasIsCollect
+                    ? (!isCollect
+                      ? <AtIcon value='heart' size='25' color={COLOR_YELLOW} onClick={this.onCreateFavorite} />
+                      : <AtIcon value='heart-2' size='25' color={COLOR_YELLOW} onClick={this.onDeleteFavorite} />
+                    )
+                    : (type === TYPE_FAVORITE_ROOM && <AtIcon value='heart-2' size='25' color={COLOR_YELLOW} onClick={this.onDeleteFavorite} />)
+                  }
                 </View>
               </View>
             </View>
@@ -110,7 +124,7 @@ class RoomItem extends BaseComponent {
             {/* 第二行 */}
             <View className='at-row'>
               <View className='text-secondary text-small my-2'>
-                {toward} {space} {space === '' && toward === '' && LOCALE_NO_AWARD_AND_SPACE}
+                {toward} {space} {(space === '' && toward === '') ? LOCALE_NO_AWARD_AND_SPACE : ''}
               </View>
             </View>
 
@@ -120,7 +134,7 @@ class RoomItem extends BaseComponent {
                 <View className='text-huge text-yellow text-bold'>
                   {price === 0 ? '暂无数据' : `${price}/${LOCALE_MONTH}`}
                 </View>
-                {status === 1 && <AtButton
+                {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'
                   onClick={this.onSignRoom}
                 >

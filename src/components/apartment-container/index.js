@@ -33,7 +33,6 @@ class ApartmentContainer extends BaseComponent {
           autoplay
           circular
           style={style}
-          indicatorDots
           displayMultipleItems={1}
           indicatorActiveColor={COLOR_YELLOW}
           indicatorColor={COLOR_DOATS_CAROUSEL}

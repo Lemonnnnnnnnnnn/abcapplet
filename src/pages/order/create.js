@@ -62,8 +62,8 @@ class OrderCreate extends Component {
   }
 
   async componentWillMount() {
-    const { room_id = 1, appointment_id = 0 } = this.$router.params
-    const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id })
+    const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
+    const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
     // 初始化表单
     this.setState({
@@ -168,7 +168,7 @@ class OrderCreate extends Component {
           show={showRoomList}
           onSelectRoom={this.onSelectRoom}
         />
-        <View className='m-3'>
+        <View className='p-3'>
           {/* 背景底色 */}
           <Decorate height='180' />
 
