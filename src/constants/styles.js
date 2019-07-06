@@ -33,7 +33,7 @@ export const CAROUSEL_ACTIVITY_IMAGE_WIDTH = 414
 export const CAROUSEL_ACTIVITY_CONTENT_HEIGHT = 0
 
 // SELECT 中的特殊需求
-export const CAROUSEL_SELECT_SPECIAL_HEIGHT = 60
+export const CAROUSEL_SELECT_SPECIAL_HEIGHT = 80
 
 /**
  * -------------------------------------------
