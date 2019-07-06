@@ -10,7 +10,7 @@ import { LOCALE_PRICE_UNIT, LOCALE_MONTH } from '@constants/locale'
 
 class ApartmentTypeItem extends BaseComponent {
   static defaultProps = {
-    item: {},
+    item: { cover: '' },
     width: 100,
     height: 100,
   }
@@ -25,12 +25,12 @@ class ApartmentTypeItem extends BaseComponent {
     const { cover, price_title: priceTitle, title, desc } = item
 
     // 格式化价格
-    const price = priceTitle ? parseInt(priceTitle) : 0
+    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     return <View className='py-2' onClick={this.onNavigation}>
       <View className='at-row'>
         {cover && <Image
-          src={`${cover}?imageView2/1/w/${width}/h/${height}`}
+          src={`${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
           style={{ width: `${width}px`, height: `${height}px`, 'border-radius': '20px' }}
         />}
         <View className='at-col ml-3'>
@@ -43,7 +43,7 @@ class ApartmentTypeItem extends BaseComponent {
               <View className='text-secondary text-small'>{desc || '暂无描述'}</View>
             </View>
             <View>
-              <View className='text-yellow'>{price === 0 ? '暂无数据' : `${price}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
+              <View className='text-yellow'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
             </View>
           </View>
         </View>

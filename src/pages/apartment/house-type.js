@@ -65,6 +65,7 @@ class HouseTypeShow extends Component {
       : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
 
 
+
     this.setState({
       buttons,
       houstType: {
@@ -87,7 +88,7 @@ class HouseTypeShow extends Component {
         lookTips: data.look_guide.tips || '',
         swipers: data.pictures.map(i => ({ url: i })),
         title: `${data.title}·${data.apartment_title}`,
-        price: data.price_title ? parseInt(data.price_title) : 0,
+        priceTitle: data.price_title,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
       },
@@ -184,12 +185,13 @@ class HouseTypeShow extends Component {
     const { houstType, map, buttons } = this.state
     const { latitude, longitude, markers } = map
     const {
-      title, swipers, isCollect, cost, types, price,
+      title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, lookTime, lookTips, cover,
       notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle,
     } = houstType
 
     const colors = ['blue', 'red', 'yellow']
+    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     return <ApartmentContainer
       swipers={swipers}
@@ -211,7 +213,7 @@ class HouseTypeShow extends Component {
 
       {/* 价格相关 */}
       <View className='at-row at-row__justify--between at-row__align--center mt-2'>
-        <View className='text-huge text-bold text-yellow'>{LOCALE_PRICE_SEMICOLON}{price}{LOCALE_PRICE_START}</View>
+        <View className='text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
         <View>
           <View className='at-row at-row__align--center at-row__justify--end'>
             <View className='text-small text-secondary'>{cost}</View>

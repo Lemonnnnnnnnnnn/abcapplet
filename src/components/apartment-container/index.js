@@ -41,7 +41,7 @@ class ApartmentContainer extends BaseComponent {
             <Image
               style={style}
               mode='scaleToFill'
-              src={`${i.url}?imageView2/1/w/${width}/h/${height}`}
+              src={`${i.url.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
             />
           </SwiperItem>)}
         </Swiper>
