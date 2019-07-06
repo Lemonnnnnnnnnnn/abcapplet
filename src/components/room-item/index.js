@@ -26,12 +26,13 @@ import {
   LOCALE_MONTH,
   LOCALE_ABC_SIGN,
   LOCALE_NO_AWARD_AND_SPACE,
+  LOCALE_PRICE_UNIT,
 } from '@constants/locale'
 import { PAGE_ORDER_CREATE } from '@constants/page'
 
 class RoomItem extends BaseComponent {
   static defaultProps = {
-    room: {},
+    room: { cover: '' },
     type: '',
     width: 220,
     height: 220,
@@ -67,6 +68,7 @@ class RoomItem extends BaseComponent {
     const hasIsCollect = Object.keys(room).includes('is_collect')
     const roomNo = room.room_no || room.no
     const priceTitle = room.price_title || room.price
+    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     const imageStyle = {
       width: Taro.pxTransform(width),
@@ -77,10 +79,7 @@ class RoomItem extends BaseComponent {
     const tag = ROOM_STATUS_DIST[status]
 
     // 设置图片宽高，方便七牛云格式化图片
-    const src = `${cover}?imageView2/1/w/${width}/h/${height}`
-
-    // 价格
-    const price = priceTitle ? parseInt(priceTitle) : 0
+    const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     return (
       <Board
@@ -132,7 +131,7 @@ class RoomItem extends BaseComponent {
             <View className='at-row'>
               <View className='at-row at-row__justify--between at-row at-row__align--center'>
                 <View className='text-huge text-yellow text-bold'>
-                  {price === 0 ? '暂无数据' : `${price}/${LOCALE_MONTH}`}
+                  {isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}
                 </View>
                 {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'

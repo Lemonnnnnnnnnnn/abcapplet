@@ -24,6 +24,11 @@ import {
   COLOR_YELLOW,
 } from '@constants/styles'
 
+import {
+  LOCALE_MONTH,
+  LOCALE_PRICE_UNIT,
+} from '@constants/locale'
+
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
     type: '',
@@ -32,7 +37,7 @@ class ApartmentItem extends BaseComponent {
     minWidth: 330,
     minHeight: 222,
     mini: false,
-    apartment: {},
+    apartment: { cover: '' },
     className: '',
   }
 
@@ -94,10 +99,10 @@ class ApartmentItem extends BaseComponent {
     }
 
     // 格式化价格
-    const price = priceTitle ? parseInt(priceTitle) : 0
+    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     // 设置图片宽高，方便七牛云格式化图片
-    const src = `${cover}?imageView2/1/w/${width}/h/${height}`
+    const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     // 是否已收藏
     // 当 type 为 favorite-house-type、favorite-apartment 时显示，isCollect为ture时显示
@@ -149,7 +154,7 @@ class ApartmentItem extends BaseComponent {
               <View className='text-bold mt-2'>{apartmentTitle}</View>
               {desc && <View className='text-muted mt-2 text-small apartment-content-desc'>{desc}</View>}
             </View>
-            <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
+            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
           </View>
         </View>
         }
@@ -158,7 +163,7 @@ class ApartmentItem extends BaseComponent {
         {mini && <View className='apartment-content mx-2 py-2'>
           {/* 价格和公寓名称 */}
           <View className='my-2 text-large'>{apartmentTitle}</View>
-          <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
+          <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
         </View>
         }
       </View>
