@@ -24,8 +24,44 @@ page {
   &-recommend {
     background: url('https://images.gongyuabc.com/bg.jpg') center center no-repeat;
     background-size: cover;
-    width: 100vw;
+    width: 100vh;
     height: 90vh;
+    
+  }
+
+  &-requirement {
+    background: url('https://images.gongyuabc.com/image/icon/requirement-card-one.png') center center no-repeat;
+    background-size: contain;
+    position: fixed;
+    width: 50vh;
+    height: 76vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5vh;
+  }
+
+  &-requirementnext {
+    background: url('https://images.gongyuabc.com/image/icon/requirement-card-two.png') center center no-repeat;
+    background-size: contain;
+    position: fixed;
+    width: 55vh;
+    height: 76vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5vh;
+  }
+
+  &-requirementtop {
+    background: url('https://images.gongyuabc.com/image/icon/card-top.png') center center no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 40vh;
+    height: 10vh;
+    top: 5%;
+    transform: translate(230px,-50px)
+  
   }
 
   &-mask {
@@ -37,3 +73,4 @@ page {
     background: rgba(0, 0, 0, 0.6)
   }
 }
+

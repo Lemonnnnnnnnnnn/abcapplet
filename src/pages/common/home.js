@@ -9,6 +9,9 @@ import Search from '@components/search'
 import Header from '@components/header'
 import Select from '@components/select'
 import ApartmentList from '@components/apartment-list'
+import RequirementCardMask from '@components/requirement-card-mask'
+import RequirementCardMaskNext from '@components/requirement-card-mask-next'
+import RequirementPriceMask from '@components/requirement-card-mask-price'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -24,7 +27,8 @@ import * as apartmentActions from '@actions/apartment'
 
 // 自定义常量
 import {
-  PAYLOAD_APARTMENT_LIST
+  PAYLOAD_APARTMENT_LIST,//公寓列表
+  PAYLOAD_CREATE_DEMAND ,//{ budget:'',cbd:0,living_time:'',people:'',house_type:0 }
 } from '@constants/api'
 
 import {
@@ -51,6 +55,11 @@ class CommonHome extends Component {
   }
 
   state = {
+    payload:PAYLOAD_CREATE_DEMAND,
+    showCard: false,//改为true就可以显示需求卡1
+    showNextCard:false,
+    showPrice:false,//需求卡2价格显示
+    isOpen:false,
     // 搜索相关
     searchScrollTop: null,
     searchIsFixed: false,
@@ -62,11 +71,30 @@ class CommonHome extends Component {
     // 城市相关
     selector: ['厦门市'],
     selectorChecked: '厦门市',
+
+    timeTagList: [
+      { name: '马上', active: false },
+      { name: '7 天', active: false },
+      { name: '15天', active: false },
+      { name: '一个月后', active: false }
+    ],
+
+    peopleTagList:[
+      { name: '1 人', active: false },
+      { name: '2 人', active: false },
+      { name: '3 人', active: false },
+      { name: '3人以上', active: false }
+    ],
+
+
   }
 
   refApartmentList = (node) => this.apartmentList = node
 
   componentWillMount() {
+    console.log('打印props')
+    console.log(this.props)
+    console.log('打印props')
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params
 
@@ -87,6 +115,8 @@ class CommonHome extends Component {
       this.setState({ selector, selectorChecked })
     })
   }
+
+
 
   /**
    * 选择城市
@@ -201,6 +231,101 @@ class CommonHome extends Component {
     this.props.dispatchFavoriteDelete(payload)
   }
 
+    /**
+   * 关闭需求卡1
+   */
+  onCloseCard() {
+    const { showCard} = this.state
+    this.setState({ showCard: false })
+  }
+  /**
+   * 关闭需求卡1，打开需求卡2
+   * @param {*} citycode
+   */
+  onNextCard(){
+    console.log('进入2')
+    const { showCard , showNextCard} = this.state
+    this.setState({
+      showCard: false ,
+      showNextCard:true,
+    })
+  }
+  /**
+   * 需求卡2，打开价格选择
+   */
+  onShowPrice(){
+    console.log('打开价格选择')
+    const { showNextCard , showPrice} = this.state
+    this.setState({
+      showNextCard:false,
+      showPrice:true
+    })
+  }
+  /**
+   * 需求卡2，关闭价格选择
+   */
+  onClosePrice(){
+    console.log('关闭价格选择')
+    this.setState({
+      showNextCard:true,
+      showPrice:false
+    })
+  }
+   /**
+   * 关闭需求卡2
+   * @param {*} citycode
+   */
+  onCloseCardNext(){
+    console.log('关闭2')
+
+    this.setState({
+      showNextCard:false,
+    })
+  }
+
+  /**
+   * 入住时间单选
+   */
+  onHandleTimeSolidClick ( data ) {
+      const { timeTagList } = this.state
+      const { payload } = this.state
+      const timeTagListLength = timeTagList.length
+      for(var nowTimeClick =0; nowTimeClick < timeTagListLength; nowTimeClick++){
+        if(timeTagList[nowTimeClick].name == data.name){
+          timeTagList[nowTimeClick].active = true
+          this.setState({ payload: { ...payload, living_time:data.name} })
+        }else{
+          timeTagList[nowTimeClick].active = false
+        }
+      }
+      this.setState({ timeTagList })
+    }
+  /**
+   * 入住人数单选
+   */
+  onHandlePeopleSolidClick ( data ) {
+    console.log(data)
+    const { peopleTagList } = this.state
+    const { payload } = this.state
+    const peopleTagListLength = peopleTagList.length
+    for(var nowPeopleClick =0; nowPeopleClick < peopleTagListLength; nowPeopleClick++){
+      if(peopleTagList[nowPeopleClick].name == data.name){
+        peopleTagList[nowPeopleClick].active = true
+        this.setState({ payload: { ...payload, people:data.name} })
+      }else{
+        peopleTagList[nowPeopleClick].active = false
+      }
+    }
+    this.setState({ peopleTagList })
+  }
+
+  /**
+   * 填写完毕，提交需求
+   */
+  onFinishCard(){
+    console.log(this.state.payload)
+  }
+
   render() {
     const {
       selectIsFixed,
@@ -215,6 +340,7 @@ class CommonHome extends Component {
       citys, banners, recommends,
       activities, apartments
     } = this.props
+
 
     return (
       <View className='page-white p-2'>
@@ -307,10 +433,10 @@ class CommonHome extends Component {
           <View>
             <Header className='my-2' title={LOCALE_APARTMENT} hasExtra={false} />
             <View className='home-select'>
+              {/* 选择框下拉框部分*/}
               <Select
                 top={searchScrollTop}
                 isFixed={selectIsFixed}
-
                 autoSortDist={[]}
                 cbdDist={dists.cbd_list}
                 priceDist={dists.price_list}
@@ -341,6 +467,36 @@ class CommonHome extends Component {
             city={citys}
             citycode={user.citycode}
             onSelectCity={this.onSelectCity}
+          />
+        </View>
+          {/**需求卡1 */}
+        <View>
+          <RequirementCardMask
+            show={showCard}
+            onNext={this.onNextCard}
+            onClose={this.onCloseCard}
+          />
+        </View>
+         {/**需求卡2 */}
+         <View>
+          <RequirementCardMaskNext
+            show={showNextCard}
+            isOpen={isOpen}
+            timeTagList={this.timeTagList}
+            peopleTagList={this.peopleTagList}
+            onCloseNext={this.onCloseCardNext}
+            onFinish={this.onFinishCard}
+            onTimeSelect={this.onHandleTimeSolidClick}
+            onPeopleSelect={this.onHandlePeopleSolidClick}
+            onShowPrice={this.onShowPrice}
+          />
+        </View>
+        {/* 需求卡2 价格 */}
+        <View>
+          <RequirementPriceMask
+            show={showPrice}
+            priceDist={dists.price_list}
+            onClose={this.onClosePrice}
           />
         </View>
       </View>

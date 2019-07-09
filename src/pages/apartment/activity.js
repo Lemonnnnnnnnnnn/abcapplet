@@ -109,7 +109,7 @@ class ApartmentCbd extends Component {
         />
       </View>
 
-      {/* 赛选器 */}
+      {/* 筛选器 */}
       <Select
         top={0}
         isFixed={false}

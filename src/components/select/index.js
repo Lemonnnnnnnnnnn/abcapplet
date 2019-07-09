@@ -120,7 +120,7 @@ class Select extends BaseComponent {
 
       // 字典相关
       cbdDist,
-      priceDist,
+      priceDist,//预算
       // autoSortDist,
       houseTypeDist,
       specialSelectDist,
@@ -152,7 +152,7 @@ class Select extends BaseComponent {
           index={headerIndex}
           onClick={this.onHeaderClick}
         />
-
+        {/* 对应内容(想住的区域) */}
         <SelectCbd
           ref={this.refSelectCbd}
           items={cbdDist}
@@ -160,7 +160,7 @@ class Select extends BaseComponent {
           onChange={this.onPayloadChange}
         />
 
-        {/* 对应内容 */}
+        {/* 对应内容(房子类型) */}
         <SelectHouseType
           ref={this.refSelectHouseType}
           items={houseTypeDist}
@@ -168,7 +168,7 @@ class Select extends BaseComponent {
           onChange={this.onPayloadChange}
         />
 
-        {/* 对应内容 */}
+        {/* 对应内容（预期价格） */}
         <SelectPrice
           ref={this.refSelectPrice}
           items={priceDist}
