@@ -6,7 +6,12 @@ import { View, Image } from '@tarojs/components'
 import BaseComponent from '@components/base'
 
 // 自定义变量
-import { LOCALE_PRICE_UNIT, LOCALE_MONTH } from '@constants/locale'
+import {
+    LOCALE_PRICE_UNIT,
+    LOCALE_MONTH,
+    LOCALE_MONEY,
+    LOCALE_QI,
+} from '@constants/locale'
 
 class ApartmentTypeItem extends BaseComponent {
   static defaultProps = {
@@ -43,7 +48,7 @@ class ApartmentTypeItem extends BaseComponent {
               <View className='text-secondary text-small'>{desc || '暂无描述'}</View>
             </View>
             <View>
-              <View className='text-yellow'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
+              <View className='text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
             </View>
           </View>
         </View>
