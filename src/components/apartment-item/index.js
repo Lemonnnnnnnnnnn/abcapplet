@@ -27,6 +27,8 @@ import {
 import {
   LOCALE_MONTH,
   LOCALE_PRICE_UNIT,
+  LOCALE_MONEY,
+  LOCALE_QI,
 } from '@constants/locale'
 
 class ApartmentItem extends BaseComponent {
@@ -154,7 +156,7 @@ class ApartmentItem extends BaseComponent {
               <View className='text-bold mt-2'>{apartmentTitle}</View>
               {desc && <View className='text-muted mt-2 text-small apartment-content-desc'>{desc}</View>}
             </View>
-            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
+            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
           </View>
         </View>
         }
