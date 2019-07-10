@@ -1,36 +1,34 @@
-// Taro 相关
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
 import Placeholder from '@components/placeholder'
-import ApartmentItem from '@components/apartment-item'
+import ServiceItem from '@components/services-item'
 
 // 常量
 import { LOCALE_NO_DATA } from '@constants/locale'
 
-class ApartmentList extends BaseList {
-
+class ServiceList extends BaseList {
   render() {
-    const { items, className, type, mini, show } = this.props
     const { hasMore, loading, page } = this.state
-    console.log("公寓")
+    const {  mini , items } = this.props
+
+    console.log('-------------')
     console.log(this.props)
+    console.log(this.state)
 
-    return (show && <View className={className}>
+    return (
+    <View >
 
-      {/* 渲染 公寓列表 */}
+      {/* 渲染 行程列表 */}
       <View className='at-row at-row--wrap'>
-        {page != 1 && items.map((i, index) =>
+        {page !== 1 && items.map((i, index) =>
           <View className={`at-col ${mini && (index % 2 === 0 ? 'pr-1' : 'pl-1')} ${mini ? 'at-col-6' : 'at-col-12'}`} key={i.id}>
-            <ApartmentItem
+            <ServiceItem
               mini={mini}
-              type={type}
-              apartment={i}
+              service={i}
               className='mt-2'
-              onCreateFavorite={this.props.onCreateFavorite}
-              onDeleteFavorite={this.props.onDeleteFavorite}
             />
           </View>
         )}
@@ -52,4 +50,5 @@ class ApartmentList extends BaseList {
   }
 }
 
-export default ApartmentList
+export default ServiceList
+

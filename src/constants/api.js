@@ -147,3 +147,13 @@ export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
 
 // 订单支付
 export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
+
+/**
+ ************************
+ * 用户行程相关
+ ************************
+ */
+export const API_APPOINTMENT_LIST = `${HOST}/appointment/listPost`
+export const PAYLOAD_APPOINTMENT_LIST = { date:'2019-07-09', current_page: 1, page_size: PAGE_SIZE }
+
+

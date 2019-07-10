@@ -202,6 +202,9 @@ class CommonHome extends Component {
   }
 
   render() {
+    console.log('首页')
+    console.log(this.props)
+    console.log(this.state)
     const {
       selectIsFixed,
       searchIsFixed,
@@ -215,6 +218,7 @@ class CommonHome extends Component {
       citys, banners, recommends,
       activities, apartments
     } = this.props
+    console.log(apartments)
 
     return (
       <View className='page-white p-2'>
@@ -310,7 +314,6 @@ class CommonHome extends Component {
               <Select
                 top={searchScrollTop}
                 isFixed={selectIsFixed}
-
                 autoSortDist={[]}
                 cbdDist={dists.cbd_list}
                 priceDist={dists.price_list}
@@ -327,7 +330,6 @@ class CommonHome extends Component {
                 items={apartments.list}
                 ref={this.refApartmentList}
                 defaultPayload={PAYLOAD_APARTMENT_LIST}
-
                 onCreateFavorite={this.onCreateFavorite}
                 onDeleteFavorite={this.onDeleteFavorite}
                 dispatchList={this.props.dispatchApartmentList}
