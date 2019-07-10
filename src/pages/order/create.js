@@ -240,7 +240,7 @@ class OrderCreate extends Component {
             </View>
           </Board>
 
-          {/* 预定公寓 */}
+          {/* 预订公寓 */}
           <Board className='px-3 py-2 mb-3'>
             {/* 内容头部 */}
             <View className='pb-2 border-bottom'>
@@ -305,7 +305,7 @@ class OrderCreate extends Component {
             </View>
           </View>
 
-          {/* 立即预定 */}
+          {/* 立即预订 */}
           <View className='at-row'>
             <View className='at-col-12'>
               <AtButton
