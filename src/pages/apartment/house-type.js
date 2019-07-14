@@ -54,7 +54,7 @@ class HouseTypeShow extends Component {
   }
 
   async componentDidMount() {
-    const { id = 83 } = this.$router.params
+    const { id  } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 

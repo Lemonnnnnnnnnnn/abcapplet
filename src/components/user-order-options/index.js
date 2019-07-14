@@ -23,7 +23,6 @@ class UserOrderOptions extends BaseComponent {
 
   render() {
     const { lists, size, className } = this.props
-
     return (
       <Borad className={`${className} p-3`}>
         <View className='text-bold border-bottom pb-3 text-normal'>

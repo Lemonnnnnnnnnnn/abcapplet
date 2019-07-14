@@ -202,9 +202,7 @@ class CommonHome extends Component {
   }
 
   render() {
-    console.log('首页')
-    console.log(this.props)
-    console.log(this.state)
+
     const {
       selectIsFixed,
       searchIsFixed,
@@ -218,7 +216,6 @@ class CommonHome extends Component {
       citys, banners, recommends,
       activities, apartments
     } = this.props
-    console.log(apartments)
 
     return (
       <View className='page-white p-2'>

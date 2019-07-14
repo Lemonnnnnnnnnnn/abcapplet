@@ -1,0 +1,45 @@
+@import "overrides";
+
+.service-button{
+  background:#FFC919;
+  border-radius:45px * $hd;
+  text-align:center;
+  align-items:center;
+}
+
+.service-head{
+  position:absolute ;
+  left:23px ;
+  top: 0px;
+}
+
+.service-house-type{
+  position:absolute ;
+  left:6% ;
+  top: 10%
+}
+
+.service-middle{
+  position:absolute ;
+  left:9px ;
+  top:44%;
+  border-radius:12px * $hd;
+  width:288px * $hd;
+  height:45px * $hd;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 6px rgba(0,0,0,0.04)
+}
+.service-line{
+  width:0px * $hd;
+  height:50px * $hd;
+  border:1px solid rgba(242,242,242,1);
+  opacity:1;
+}
+
+.font-center{
+  text-align:center;
+  align-items:center
+}
+
+
+

@@ -144,3 +144,28 @@ export const LOCALE_ACTIVITY_TYPE_RENTTIME = '免租期'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_RENTTIME = '免'
 export const LOCALE_ACTIVITY_TYPE_DISCOUNT = '限时折扣'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
+
+/**
+ * 看房服务相关
+ */
+
+export const LOCALE_APPOINTMENT_SIGNED  = '签约预订'
+export const LOCALE_APPOINTMENT_CASHPLEDGE  = '押金风险金保障'
+export const LOCALE_APPOINTMENT_DETAIL  = '查看详情'
+export const LOCALE_APPOINTMENT_HASLOOK  = '已带看服务'
+export const LOCALE_APPOINTMENT_SUMMON = '正在为你召唤'
+export const LOCALE_APPOINTMENT_BELONG = '专属管家...'
+//看房评价
+export const LOCALE_BUSINESS_LIKEABILITY_NONE = '非常不满意'
+export const LOCALE_BUSINESS_LIKEABILITY_NORMAL = '不满意'
+export const LOCALE_BUSINESS_LIKEABILITY_HIGH = '一般'
+export const LOCALE_BUSINESS_LIKEABILITY_SUPER = '比较满意'
+export const LOCALE_BUSINESS_LIKEABILITY_SIGNING = '非常满意'
+
+//找房服务下面四个功能块
+export const LOCALE_APPOINTMENT_MESSAGE = '行程留言'
+export const LOCALE_APPOINTMENT_RELUTION  = '联系管家'
+export const LOCALE_APPOINTMENT_EVALUTION  = '服务评价'
+export const LOCALE_APPOINTMENT_INTENTION  = '看房意向'
+
+

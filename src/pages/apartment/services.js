@@ -1,14 +1,16 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro, { Component  } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import ServicesHeader from '@components/services-header'
 import ServicesList from '@components/services-list'
 
+import {
+  PAYLOAD_APPOINTMENT_LIST
+} from '@constants/api'
+
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
-
-import Board from '../../components/board'
 
 @connect(state => state , {
   ...appointmentActions,
@@ -18,9 +20,56 @@ class ServicesHome extends Component {
   config = {
     navigationBarTitleText: '找房服务',
   }
-  componentWillMount() {
-    this.props.dispatchAppointmentList()
+  state = {
+    payload:PAYLOAD_APPOINTMENT_LIST,
+    time:'',
+    NowCurrentPage: 2,
   }
+
+  componentWillMount() {
+    const { payload  } = this.state
+    this.props.dispatchAppointmentList(payload).
+    then((res)=>{
+    this.setState({
+      time:res.data.data.date
+    })
+     if(res.data.data.total===0){
+        Taro.showToast({
+          title: '今天暂无行程',
+          icon: 'none',
+          duration: 2000
+        })
+    }}
+    )
+  }
+  componentDidMount(){
+    const { payload } = this.state
+    this.setState({ payload: { ...payload, current_page :2 }})
+  }
+
+  /**
+   * 到底部加载行程下一页
+   */
+  onReachBottom() {
+    const { payload , NowCurrentPage} = this.state
+    const currentPageNow = NowCurrentPage + 1
+    this.setState({
+       NowCurrentPage:currentPageNow,
+       payload: { ...payload, current_page : currentPageNow
+      }})
+    this.props.dispatchNextPageApartmentList(payload).
+    then((res)=>{
+       if(res.data.data.list.length===0){
+          Taro.showToast({
+            title: '加载完毕',
+            icon: 'none',
+            duration: 2000
+          })
+      }}
+
+    )
+  }
+
   onToLeft(){
     console.log('地图找房');
 
@@ -30,28 +79,31 @@ class ServicesHome extends Component {
   }
 
   render() {
-    console.log('=======')
-    console.log(this.props)
     const { appointments } = this.props
-    console.log(appointments)
+    const { time } = this.state
+
     return (
-      <View>
+      <View >
         <ServicesHeader
           onClickLeft={this.onToLeft}
           onClickRight={this.onToRight}
         />
-        <Board className='p-3 at-row'>
-          <View className='button--dot at-col at-col-1'></View>
-          <View className='at-col at-col-3 text-bold text-huge'>
-            今天
+        <View className=' at-col '>
+          <View className='at-row mt-3  mb-3'>
+            <View className='mt-2  button-yellow ml-4' ></View>
+            <View className='at-col at-col-2 text-bold ml-3'>
+              今天
+            </View>
+            <View className='at-col at-col-1 text-normal mt-1'>
+              {time}
+            </View>
           </View>
-          <View className='at-col at-col-3'>
-            当前时间
-          </View>
-        </Board>
-        <ServicesList>
-            items = {appointments.list}
-        </ServicesList>
+          <View >
+          <ServicesList
+            lists={appointments.list}
+          />
+        </View>
+        </View>
 
       </View>
 
