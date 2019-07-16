@@ -88,6 +88,7 @@ class ApartmentItem extends BaseComponent {
       apartment_title: apartmentTitle
     } = apartment
 
+
     const imageStyle = {
       width: '100%',
       height: '100%',

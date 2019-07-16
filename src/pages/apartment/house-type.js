@@ -182,6 +182,7 @@ class HouseTypeShow extends Component {
 
   render() {
     const { apartments } = this.props
+    
     const { houstType, map, buttons } = this.state
     const { latitude, longitude, markers } = map
     const {
@@ -379,8 +380,9 @@ class HouseTypeShow extends Component {
       {/* 看了又看 */}
       {city &&
         <View>
-          <View className='text-bold text-huge mt-4'>看了又看</View>
+          <View className='text-bold text-huge mt-4'>附近公寓</View>
           <ApartmentList
+            canScroll
             mini
             key={apartments.type}
             type={apartments.type}
@@ -390,6 +392,7 @@ class HouseTypeShow extends Component {
           />
         </View>
       }
+
 
     </ApartmentContainer>
   }
