@@ -182,7 +182,6 @@ class HouseTypeShow extends Component {
 
   render() {
     const { apartments } = this.props
-    console.log(apartments)
     
     const { houstType, map, buttons } = this.state
     const { latitude, longitude, markers } = map
