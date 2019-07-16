@@ -14,7 +14,7 @@ class ApartmentList extends BaseList {
 
   render() {
     const ScrollWrapStyle = {
-      height: '200px',
+      height: '210px',
       whiteSpace: "nowrap"
     }
 
