@@ -69,13 +69,18 @@ class ServicesHome extends Component {
 
     )
   }
-
+  //调转到地图找房
   onToLeft(){
-    console.log('地图找房');
+    // Taro.navigateTo({
+    //   url:'/pages/appointment/mapHouse/index'
+    // })
 
   }
+  //调转到通勤找房
   onToRight(){
-    console.log('通勤找房');
+    // Taro.navigateTo({
+    //   url:'/pages/appointment/commuteHouse/index'
+    // })
   }
 
   render() {
@@ -101,6 +106,7 @@ class ServicesHome extends Component {
           <View >
           <ServicesList
             lists={appointments.list}
+            time={time}
           />
         </View>
         </View>

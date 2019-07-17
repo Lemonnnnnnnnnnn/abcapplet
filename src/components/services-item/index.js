@@ -7,11 +7,12 @@ import { AtIcon } from 'taro-ui'
 import BaseComponent from '@components/base'
 import ImagePlaceholder from '@components/image-placeholder'
 import ServiceEvalution from '@components/service-evaluation-mask'
+import ServiceIntention from '@components/service-intention-mask'
 
 // NPM 包
 import classNames from 'classnames'
 
-import {PAGE_HOUSE_TYPE_SHOW} from '@constants/page'
+import {PAGE_HOUSE_TYPE_SHOW,PAGE_APPOINTMENT_MESSAGE} from '@constants/page'
 import {APPOINTMENT_FOUFUNCTION_DIST} from '@constants/appointment'
 
 import {
@@ -35,6 +36,7 @@ class ServiceItem extends BaseComponent {
   }
   state = {
     showEvalution:false,//看房评价
+    showIntention:false,//看房意向
   }
 
 
@@ -50,7 +52,10 @@ class ServiceItem extends BaseComponent {
   onFourClick(value){
     switch(value){
       case 1:
-        console.log("行程留言");break
+         Taro.navigateTo({
+         url: `${PAGE_APPOINTMENT_MESSAGE}?id=${this.props.id}&time=${this.props.time}&appointmentTitle=${this.props.service.apartment_title}&appointmentTime=${this.props.service.order_time}`
+         });
+         break
       case 2:
           const { service } = this.props
           const { server_user } = service
@@ -73,9 +78,18 @@ class ServiceItem extends BaseComponent {
         };
         break
       case 4:
-        const { showEvalution } = this.state
-        console.log(showEvalution)
-        console.log("看房意向");break
+          if( this.props.service.status !==3){
+            Taro.showToast({
+              title: '您还未看房',
+              icon: 'none',
+              duration: 2000
+            })
+          }else{
+            this.setState({
+              showIntention:true
+            })
+          };
+        break
     }
 
   }
@@ -85,11 +99,18 @@ class ServiceItem extends BaseComponent {
       showEvalution:false
     })
   }
+  // 关闭看房意向
+  onCloseIntention(){
+    this.setState({
+      showIntention:false
+    })
+  }
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
-    const { service  } = this.props
+    const { service } = this.props
+
     const { id,cover ,apartment_title,house_type_title,
-    order_time ,server_id ,server_user,comment,look_time} = service
+    order_time ,server_id ,server_user,comment,look_time,intention,remark} = service
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -108,7 +129,7 @@ class ServiceItem extends BaseComponent {
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     return (
-      <View className='pl-3 pr-3 pb-3 mt-1' style='position:relative ;'>
+      <View className='pl-3 pr-2 pb-3 mt-1' style='position:relative ;'>
         <View  className={classNames('apartment')} >
           {/* 行程头部 */}
           <View className='apartment-header' style={headerStyle}>
@@ -155,7 +176,7 @@ class ServiceItem extends BaseComponent {
           <View className='at-row p-2 service-house-type' >
               <View className='at-row at-row-5 mt-1 text-small' style='color:#FFFFFF' >{house_type_title}</View>
           </View>
-      {/* 中间，计时框 */}
+          {/* 中间，计时框 */}
           <View className='m-3 p-3 service-middle ml-4'>
               <View className='at-row at-row__justify--between'>
                 {/* 左边 */}
@@ -168,22 +189,22 @@ class ServiceItem extends BaseComponent {
                   </View>
                 </View>
                 {/* 中间竖线 */}
-                <View className='at-col at-col-1 ml-4'>
+                <View className='at-col at-col-0 ml-4'>
                   <View className='service-line'></View>
                 </View>
 
                 {/* 右边 server_id===0时*/}
-                <View  hidden={server_id===0? true:false} className='at-col at-col-9 at-row at-row__justify--center'>
+                <View  hidden={server_id===0? true:false} className='at-col at-col-9 at-row at-row__justify--center ml-3'>
                   <View className='at-row at-row__justify--between'>
                     <View className='at-col at-col-0'>
                       <image src={server_user.headimgurl}  style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;'/>
                     </View>
-                    <View className='at-col at-col-9'>
+                    <View className='at-col at-col-9 ml-2' >
                       <View className='at-row '>
                         <View className='at-col at-col-4 text-bold' style='font-size:16px'>{server_user.name}</View>
                         <View className='at-col at-col-6'>
                           <View className='at-row'>
-                            <View  className='at-col at-col-3 ml-1 '>
+                            <View  className='at-col at-col-3 ml-3 '>
                               <AtIcon
                                 value='star-2'
                                 size='15'
@@ -199,14 +220,14 @@ class ServiceItem extends BaseComponent {
                   </View>
                 </View>
                 {/* 右边 server_id!==0时*/}
-                <View  hidden={server_id===0? false:true} className='at-col at-col-9 at-row at-row__justify--center'>
-                  <View className='at-row at-row__justify--between'>
-                    <View className='at-col at-col-1'>
+                <View  hidden={server_id===0? false:true} className='at-col at-col-8 at-row at-row__justify--center'>
+                  <View className='at-row at-row__justify--between ml-3' >
+                    <View className='at-col at-col-2'>
                       <image src='http://images.gongyuabc.com/image/icon/head-no.png'  style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;'/>
                     </View>
                     <View className='at-col at-col-9 mr-4'>
                           <View className='text-small at-col font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>
-                          <View className='text-small at-col font-center' >{LOCALE_APPOINTMENT_BELONG}</View>
+                          <View className='text-small at-col font-center mt-2' >{LOCALE_APPOINTMENT_BELONG}</View>
 
                     </View>
                   </View>
@@ -215,6 +236,7 @@ class ServiceItem extends BaseComponent {
               </View>
           </View>
         </View>
+        {/* 服务评价 */}
         <ServiceEvalution
           show={showEvalution}
           comment={comment}
@@ -224,6 +246,16 @@ class ServiceItem extends BaseComponent {
           service_num={server_user.service_num}
           comment_score={server_user.comment_score}
           onClose={this.onCloseEvalution}
+        />
+        {/* 看房意向 */}
+        <ServiceIntention
+          show={showIntention}
+          intention={intention}
+          apartment_title={apartment_title}
+          house_type_title={house_type_title}
+          remark={remark}
+          appointment_id={id}
+          onClose={this.onCloseIntention}
         />
       </View>
     )

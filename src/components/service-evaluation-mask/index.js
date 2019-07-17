@@ -13,11 +13,14 @@ import Component from '@components/base'
 // 自定义常量
 import { COLOR_YELLOW , COLOR_GREY_7 ,COLOR_GREY_2} from '@constants/styles'
 import { BUSINESS_LIKEABILITY_DIST } from '@constants/appointment'
-
-import { PAYLOAD_REVULUTION_CREAT } from '@constants/api'
-
+import { PAYLOAD_REVULUTION_CREAT} from '@constants/api'
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
+
+import {
+  LOCALE_APPOINTMENT_SERVICE,
+  LOCALE_APPOINTMENT_SERVICE_EVALUTION
+} from '@constants/locale'
 
 @connect(state => state , {
   ...appointmentActions,
@@ -27,6 +30,7 @@ class AppointmentRevolution extends Component {
   static defaultProps = {
     show: false,
     Payload:PAYLOAD_REVULUTION_CREAT,
+
     score:'',
     lists:''
 }
@@ -76,7 +80,7 @@ onClickPost(){
             </View>
             <View className='at-col-6 ml-2'>
               <View className='mt-1'>{name}</View>
-              <View className='text-small text-muted mt-1'>已带看服务{service_num}次</View>
+              <View className='text-small text-muted mt-1'>{LOCALE_APPOINTMENT_SERVICE}{service_num}次</View>
               <View className='at-row'>
                 <AtIcon
                   value='star-2'
@@ -88,7 +92,7 @@ onClickPost(){
             </View>
           </View>
           <View className='at-row mt-3 ml-2  at-row__align--end'>
-            <View className='text-large text-bold'>管家服务评价</View>
+            <View className='text-large text-bold'>{LOCALE_APPOINTMENT_SERVICE_EVALUTION} </View>
             <View className='text-large ml-3' style='color:#FFCB1F' >
                {BUSINESS_LIKEABILITY_DIST[nowScore].message}
              </View>
@@ -121,7 +125,7 @@ onClickPost(){
             />
           </View>
           {/* 按钮 */}
-          <View className='mt-4'>
+          <View className='mt-4' hidden={comment.score ===0 ? false:true}>
             <AtButton
               onClick={this.onClickPost.bind(this,appointment_id)}
               circle

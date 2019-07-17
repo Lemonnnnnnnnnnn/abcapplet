@@ -42,4 +42,15 @@
 }
 
 
-
+.message {
+  &-item {
+    background: #ffffff;
+    border-radius: 12px * $hd;
+    max-width: 200px * $hd;
+    min-height: 20px * $hd;
+    line-height: 20px * $hd;
+  }
+  &-background {
+    width: 100%;
+  }
+}

@@ -13,7 +13,7 @@ import { LOCALE_NO_DATA } from '@constants/locale'
 class ServiceList extends Component {
   render() {
     const { hasMore, loading, page } = this.state
-    const {  mini , lists } = this.props
+    const {  mini , lists ,time} = this.props
     return (
     <View >
 
@@ -24,6 +24,7 @@ class ServiceList extends Component {
             <ServiceItem
               mini={mini}
               service={i}
+              time={time}
               className='mt-1'
             />
           </View>

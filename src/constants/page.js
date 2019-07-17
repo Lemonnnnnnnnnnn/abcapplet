@@ -26,3 +26,6 @@ export const PAGE_ORDER_DOWN_PAYMENT = '/pages/order/down-payment'
 // 风险金相关
 export const PAGE_RISK_INDEX = '/pages/risk/index'
 export const PAGE_RISK_CREATE = '/pages/risk/create'
+
+//行程留言
+export const PAGE_APPOINTMENT_MESSAGE = '/pages/appointment/message'
