@@ -26,9 +26,9 @@ class SelectPrice extends BaseComponent {
   static defaultState = {
     // 租金双向选择器 相关
     step: 100,
-    min: 1000,
+    min: 0,
     max: 10000,
-    minValue: 1000,
+    minValue: 0,
     maxValue: 10000,
 
     // AtTabs 相关
