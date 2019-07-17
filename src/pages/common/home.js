@@ -67,6 +67,25 @@ class CommonHome extends Component {
   refApartmentList = (node) => this.apartmentList = node
 
   componentWillMount() {
+
+    const {
+      selectScrollTop,
+      searchScrollTop,
+    } = this.state
+
+    !searchScrollTop
+    && Taro.createSelectorQuery()
+      .in(this.$scope)
+      .select('.home-search')
+      .boundingClientRect()
+      .exec(res => res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
+
+    !selectScrollTop
+    && Taro.createSelectorQuery()
+      .in(this.$scope)
+      .select('.home-select')
+      .boundingClientRect()
+      .exec(res => this.setState({ selectScrollTop: res[0].top, }))
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params
 
@@ -133,12 +152,7 @@ class CommonHome extends Component {
     } = this.state
 
     // 搜索相关
-    !searchScrollTop
-      && Taro.createSelectorQuery()
-        .in(this.$scope)
-        .select('.home-search')
-        .boundingClientRect()
-        .exec(res => res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
+   
 
     scrollTop > searchScrollTop
       && !searchIsFixed
@@ -149,16 +163,13 @@ class CommonHome extends Component {
       && this.setState({ searchIsFixed: false })
 
     // 公寓相关
-    !selectScrollTop
-      && Taro.createSelectorQuery()
-        .in(this.$scope)
-        .select('.home-select')
-        .boundingClientRect()
-        .exec(res => this.setState({ selectScrollTop: res[0].top, }))
+  
 
     scrollTop > selectScrollTop
       && !selectIsFixed
       && this.setState({ selectIsFixed: true })
+
+      console.log(scrollTop,selectScrollTop)
 
     scrollTop < selectScrollTop
       && selectIsFixed
