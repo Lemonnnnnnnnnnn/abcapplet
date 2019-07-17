@@ -175,7 +175,7 @@ class HouseTypeShow extends Component {
 
   onShareAppMessage(){
     return {
-      title: "我在公寓ABC上发现了一个好房源",
+      title: "我在公寓ABC上发现了一个好\n房源",
     }
   }
 
