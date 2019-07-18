@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { View, Input, Text, Picker } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
+import { AtButton, AtIcon } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -30,8 +30,10 @@ import {
   LOCALE_RISK_NOTICE,
   LOCALE_SIGN_APARTMENT,
   LOCALE_SIGN_TIME_RANGE,
-  LOCALE_SIGN_NOW
+  LOCALE_SIGN_NOW,
+  LOCALE_DOWN_PAYMENT_INTRODUCE
 } from '@constants/locale'
+
 
 // NPM 包
 import day from 'dayjs'
@@ -63,14 +65,16 @@ class OrderCreate extends Component {
 
   async componentWillMount() {
     const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
+
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
+
 
     // 初始化表单
     this.setState({
       room: { ...data.room },
       rooms: [...data.rooms],
       payload: {
-        room_id,
+        room_id: data.room.id,
         appointment_id,
         name: data.user_info.name,
         mobile: data.user_info.mobile,
@@ -128,6 +132,12 @@ class OrderCreate extends Component {
     this.setState({ showRoomList: true })
   }
 
+  // 关闭房间列表
+
+  onClose(){
+    this.setState({showRoomList : false})
+  }
+
   // 检查数据
   onCheckPayload() {
     const { payload } = this.state
@@ -154,6 +164,10 @@ class OrderCreate extends Component {
     })
   }
 
+  onNavigation() {
+    Taro.navigateTo({ url: '/pages/order/down-payment' })
+  }
+
   render() {
     const { payload, room, rooms, showRoomList, disabled } = this.state
     const { name, mobile, id_code: idCode, sign_time: signTime } = payload
@@ -167,6 +181,7 @@ class OrderCreate extends Component {
           selectId={id}
           show={showRoomList}
           onSelectRoom={this.onSelectRoom}
+          onClose={this.onClose}
         />
         <View className='p-3'>
           {/* 背景底色 */}
@@ -299,6 +314,10 @@ class OrderCreate extends Component {
               <View>
                 <View className='text-brand text-super text-bold'>{LOCALE_DOWN_PAYMENT}</View>
                 <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>
+                <View className='text-normal text-secondary mt-1' onClick={this.onNavigation}>
+                  {LOCALE_DOWN_PAYMENT_INTRODUCE}
+                  <AtIcon className='mb-1' value='alert-circle' size='15'></AtIcon>
+                </View>
               </View>
 
               <View className='text-brand text-super text-bold'>{price || 0}{LOCALE_PRICE_UNIT}</View>
