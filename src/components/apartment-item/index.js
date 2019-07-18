@@ -112,10 +112,11 @@ class ApartmentItem extends BaseComponent {
       top: 0,
       position: 'absolute',
       textAlign: 'center',
-      fontSize: "12px",
+      fontSize: "10px",
       left: '50%',
-      top: '45%',
+      top: '49%',
       transform: 'translate(-50%,-50%)',
+      color : '#FFC919'
     }
 
 
