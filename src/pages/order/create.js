@@ -79,7 +79,7 @@ class OrderCreate extends Component {
       room: { ...data.room },
       rooms: [...data.rooms],
       payload: {
-        room_id: data.room.id,
+        room_id,
         appointment_id,
         name: data.user_info.name,
         mobile: data.user_info.mobile,
@@ -137,11 +137,6 @@ class OrderCreate extends Component {
     this.setState({ showRoomList: true })
   }
 
-  // 关闭房间列表
-
-  onClose() {
-    this.setState({ showRoomList: false })
-  }
 
   // 检查数据
   onCheckPayload() {
@@ -172,6 +167,8 @@ class OrderCreate extends Component {
   onNavigation() {
     Taro.navigateTo({ url: '/pages/order/down-payment' })
   }
+
+
 
   render() {
     const { payload, room, rooms, showRoomList, disabled } = this.state
