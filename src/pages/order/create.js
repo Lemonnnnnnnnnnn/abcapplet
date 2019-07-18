@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { View, Input, Text, Picker } from '@tarojs/components'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -13,12 +13,17 @@ import Board from '@components/board'
 import Decorate from '@components/decorate'
 import OrderHeader from '@components/order-header'
 import OrderRoomListMask from '@components/order-room-list-mask'
+import ABCIcon from '@components/abc-icon'
+
+// 自定义常量
+import { COLOR_GREY_2 } from '@constants/styles'
 
 // 自定义变量相关
 import { ORDER_HEADERS } from '@constants/order'
 import { PAGE_ORDER_SHOW } from '@constants/page'
 import { PAYLOAD_ORDER_CREATE } from '@constants/api'
 import {
+  LOCALE_SCHEDULED_MESSAGE,
   LOCALE_CHANGE,
   LOCALE_DOWN_PAYMENT,
   LOCALE_DOWN_PAYMENT_RATIO,
@@ -31,7 +36,7 @@ import {
   LOCALE_SIGN_APARTMENT,
   LOCALE_SIGN_TIME_RANGE,
   LOCALE_SIGN_NOW,
-  LOCALE_DOWN_PAYMENT_INTRODUCE
+  LOCALE_VIEW_SERVICE_AGREEMENT,
 } from '@constants/locale'
 
 
@@ -134,8 +139,8 @@ class OrderCreate extends Component {
 
   // 关闭房间列表
 
-  onClose(){
-    this.setState({showRoomList : false})
+  onClose() {
+    this.setState({ showRoomList: false })
   }
 
   // 检查数据
@@ -192,6 +197,13 @@ class OrderCreate extends Component {
             className='mb-3'
             items={ORDER_HEADERS}
           />
+          <View className='mb-2'>
+            <Text className='text-bold text-huge'>{LOCALE_SCHEDULED_MESSAGE}</Text>
+            <View onClick={this.onNavigation} className='text-normal text-secondary' style='float:right'>
+              <ABCIcon style='float:right' icon='chevron_right' size='20' color={COLOR_GREY_2} />
+              <View style='float:right'>{LOCALE_VIEW_SERVICE_AGREEMENT} </View>
+            </View>
+          </View>
 
           {/* 预订人 */}
           <Board className='px-3 py-2 mb-3'>
@@ -314,10 +326,7 @@ class OrderCreate extends Component {
               <View>
                 <View className='text-brand text-super text-bold'>{LOCALE_DOWN_PAYMENT}</View>
                 <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>
-                <View className='text-normal text-secondary mt-1' onClick={this.onNavigation}>
-                  {LOCALE_DOWN_PAYMENT_INTRODUCE}
-                  <AtIcon className='mb-1' value='alert-circle' size='15'></AtIcon>
-                </View>
+
               </View>
 
               <View className='text-brand text-super text-bold'>{price || 0}{LOCALE_PRICE_UNIT}</View>
