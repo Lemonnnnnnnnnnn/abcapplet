@@ -183,7 +183,6 @@ class OrderCreate extends Component {
           selectId={id}
           show={showRoomList}
           onSelectRoom={this.onSelectRoom}
-          onClose={this.onClose}
         />
         <View className='p-3'>
           {/* 背景底色 */}
