@@ -115,6 +115,8 @@ export const LOCALE_APPLYING_RISK = '流程中'
 export const LOCALE_CALLBACK = '客服回复'
 
 // 订单创建
+export const LOCALE_SCHEDULED_MESSAGE = '预定信息'
+export const LOCALE_VIEW_SERVICE_AGREEMENT = '查看预定服务协议'
 export const LOCALE_SIGN_TIME_RANGE = '签约时间/半年'
 export const LOCALE_SIGN_USER = '预订人'
 export const LOCALE_SIGN_APARTMENT = '预订公寓'
