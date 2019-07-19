@@ -146,3 +146,16 @@ export const LOCALE_ACTIVITY_TYPE_RENTTIME = '免租期'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_RENTTIME = '免'
 export const LOCALE_ACTIVITY_TYPE_DISCOUNT = '限时折扣'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
+
+//预约看房
+export const LOCALE_APPOINTMENT_LOOKTIME =  "看房时间："
+export const LOCALE_APPOINTMENT_POST =  "提交预约"
+export const LOCALE_APPOINTMENT_SUCCESS = '预约成功!'
+export const LOCALE_APPOINTMENT_WATING = "柠小檬火速处理中，请耐心等待!"
+export const LOCALE_APPOINTMENT_ACCEPT= '管家已接单！'
+export const LOCALE_APPOINTMENT_ACCEPT_PHONE = '稍后管家将与您电话联系'
+export const LOCALE_APPOINTMENT_ACCEPT_ORDER ='预约接单'
+export const LOCALE_APPOINTMENT_CALL = '正在为您召唤管家...'
+export const LOCALE_APPOINTMENT_LOOK = '看房行程'
+export const LOCALE_APPOINTMENT_FINISH_REQUIRE = '完善需求'
+export const LOCALE_APPOINTMENT_HELP='完善需求有助于柠小檬为您推荐房源哦'

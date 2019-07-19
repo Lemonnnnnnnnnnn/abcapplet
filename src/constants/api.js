@@ -100,6 +100,9 @@ export const API_USER_FAVORITE_DELETE = `${HOST}/user/deleteCollectPost`
 // 心愿单添加
 export const API_USER_FAVORITE_CREATE = `${HOST}/apartment/collectPost`
 
+//获取用户信息
+export const API_USER_INFORMATION = `${HOST}/user/getPost`
+
 /**
  ************************
  * 房间相关
@@ -147,3 +150,10 @@ export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
 
 // 订单支付
 export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
+
+//新增预约行程
+export const API_APPOINTMENT_CREATE = `${HOST}/apartment/addappointmentpost`
+export const PAYLOAD_APPOINTMENT_CREATE = { apartment:'', house_type:'', order_time:'', name:'',mobile:'',form_id:''}
+
+//获取行程详情
+export const API_APPOINTMENT_SHOW = `${HOST}/appointment/detailPost`
