@@ -18,12 +18,18 @@ class OrderHeader extends BaseComponent {
 
   render() {
     const { items, className, size } = this.props
+    const grayline = {
+      borderBottom: "1Px solid #3D3D3D",
+    }
     return (
       <Borad color='black' className={className}>
         {size === 'normal' && <View className='px-3 py-3'>
           <View className='at-row at-row__justify--center'>
             <View className='text-small text-secondary mb-2'>{LOCALE_LOCK_NOTICE}</View>
           </View>
+          {/* 灰色分割线 */}
+          <View className='mb-3' style={grayline}></View>
+
           <View className='at-row at-row__justify--around'>
             {items.map(i => <View key={i.id}>
               <View className='at-row at-row__justify--center'>

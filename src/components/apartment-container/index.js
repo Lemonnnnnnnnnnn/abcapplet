@@ -30,6 +30,7 @@ class ApartmentContainer extends BaseComponent {
     return (
       <View>
         <Swiper
+          indicatorDots
           autoplay
           circular
           style={style}
