@@ -2,14 +2,18 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-// 自定义组件
-import Board from '@components/board'
-import ABCIcon from '@components/abc-icon'
-import Decorate from '@components/decorate'
-
 // 自定义变量
-import { COLOR_YELLOW } from '@constants/styles'
-import { LOCALE_DOWN_PAYMENT_RULE } from '@constants/locale'
+import {
+  LOCALE_AGREEMENT_NAME,
+  LOCALE_AGREEMENT_INTRODUCE,
+  LOCALE_AGREEMENT_TITLE,
+  LOCALE_AGREEMENT_CONTENT,
+  LOCALE_DISCLAIMER,
+  LOCALE_DISCLAIMER_CONTENT,
+  LOCALE_PROVACY_POLICY,
+  LOCALE_PROVACY_POLICY_CONTENT
+} from '@constants/locale'
+
 
 class OrderDownPayment extends Component {
   config = {
@@ -19,32 +23,56 @@ class OrderDownPayment extends Component {
 
   render() {
     return (
-      <View className='px-3'>
+      <View className='mb-5 px-3 pl-4 pr-4' >
         {/* 背景底色 */}
-        <Decorate height='100' />
+        <View style='text-align:center' className='mt-3 mb-3 text-large text-bold '>{LOCALE_AGREEMENT_NAME}</View>
+        <View style='text-indent:1.4Rem' className='text-normal'>{LOCALE_AGREEMENT_INTRODUCE}</View>
+        <View className='text-normal text-bold'  >{LOCALE_AGREEMENT_TITLE}</View>
+        {
+          LOCALE_AGREEMENT_CONTENT.map((value, index) => (
+            <View key={index}>
+              <View className='text-normal text-bold'>{value.title}</View>
+              <View className='text-normal '>
+                {
+                  value.content.map((v, i) => (
+                    <View style='line-height:20px' key={i}>{v}</View>
+                  ))
+                }
+              </View>
+            </View>
+          ))
+        }
+        <View className='text-normal text-bold '>{LOCALE_DISCLAIMER}</View>
+        {
+          LOCALE_DISCLAIMER_CONTENT.map((value, index) => (
+            <View key={index}>
+              <View className='text-normal text-bold'>{value.title}</View>
+              <View className='text-normal '>
+                {
+                  value.content.map((v, i) => (
+                    <View style='line-height:20px' key={i}>{v}</View>
+                  ))
+                }
+              </View>
+            </View>
+          ))
+        }
+        <View className='text-normal text-bold '>{LOCALE_PROVACY_POLICY}</View>
+        {
+          LOCALE_PROVACY_POLICY_CONTENT.map((value, index) => (
+            <View key={index}>
+              <View className='text-normal text-bold'>{value.title}</View>
+              <View className='text-normal '>
+                {
+                  value.content.map((v, i) => (
+                    <View style='line-height:20px' key={i}>{v}</View>
+                  ))
+                }
+              </View>
+            </View>
+          ))
+        }
 
-        <Board className='p-3 mt-3'>
-          <View className='at-row at-row__justify--center'>
-            <ABCIcon icon='event_note' color={COLOR_YELLOW} size='40' />
-          </View>
-
-          <View className='at-row at-row__justify--center text-small mt-1 mb-3'>
-            {LOCALE_DOWN_PAYMENT_RULE}
-          </View>
-
-          <View className='text-normal pt-3  border-top'>
-            还没有相应接口和文本~
-          </View>
-          <View className='text-normal pt-3'>
-            只能打段话来测试测试了~
-          </View>
-          <View className='text-normal pt-3'>
-            这里是吃饭睡觉打豆豆中心~
-          </View>
-          <View className='text-normal pt-3'>
-            AV8D 举起你们的双手和我一起摇~
-          </View>
-        </Board>
       </View>
     )
   }
