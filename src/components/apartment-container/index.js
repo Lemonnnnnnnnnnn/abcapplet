@@ -19,6 +19,10 @@ class ApartmentContainer extends BaseComponent {
     isCollect: false,
   }
 
+  onShowPic(){
+      Taro.navigateTo({url:'/pages/apartment/pic-browser'})
+  }
+
   render() {
     const { swipers, height, width, isCollect } = this.props
 
@@ -37,6 +41,7 @@ class ApartmentContainer extends BaseComponent {
           displayMultipleItems={1}
           indicatorActiveColor={COLOR_YELLOW}
           indicatorColor={COLOR_DOATS_CAROUSEL}
+          onClick={this.onShowPic}
         >
           {swipers.map(i => <SwiperItem key={i.url}>
             <Image

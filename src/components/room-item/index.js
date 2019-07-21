@@ -60,10 +60,20 @@ class RoomItem extends BaseComponent {
     this.props.onDeleteFavorite({ payload: { room_id: id } })
   }
 
-  onShowPic(){
 
+  onViewPic() {
+    const {  room, roomList} = this.props
+    const { cover } = room
+    let picList = []
+
+    roomList.map((value)=>{
+      picList.push(value.cover)
+    })
+    Taro.previewImage({
+      current: cover,
+      urls: picList
+    })
   }
-
 
 
   render() {
@@ -76,12 +86,6 @@ class RoomItem extends BaseComponent {
     const priceTitle = room.price_title || room.price
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
-    const imageStyle = {
-      width: Taro.pxTransform(width),
-      height: Taro.pxTransform(height),
-      'border-radius': Taro.pxTransform(10),
-    }
-
     const grayBg = {
       backgroundColor: "#F8F8F8",
       borderRadius: "12px"
@@ -90,7 +94,6 @@ class RoomItem extends BaseComponent {
     const tag = ROOM_STATUS_DIST[status]
 
     // 设置图片宽高，方便七牛云格式化图片
-    const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     return (
       <Board
@@ -147,7 +150,7 @@ class RoomItem extends BaseComponent {
 
                 {/* 爱心按钮，当 type 为 TYPE_NORMAL_ROOM 显示添加、TYPE_FAVORITE_ROOM 显示取消 */}
                 <View className='mr-3'>
-                  <AtIcon value='image' size='25' color={COLOR_YELLOW} onClick={this.onShowPic}></AtIcon>
+                  <AtIcon value='image' size='25' color={COLOR_YELLOW} onClick={this.onViewPic} ></AtIcon>
                 </View>
                 <View className='mr-3'>
                   {hasIsCollect
