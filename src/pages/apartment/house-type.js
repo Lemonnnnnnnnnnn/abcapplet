@@ -233,7 +233,13 @@ class HouseTypeShow extends Component {
 
       {/* 价格相关 */}
       <View className='at-row at-row__justify--between at-row__align--center  mt-2'>
-        <View className='text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
+        <View className='text-yellow'>
+          <Text className='text-super text-bold'>
+          {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}`}
+          </Text>
+          <Text className='text-large'>{LOCALE_PRICE_START}</Text>
+        </View>
+
         <View>
           <View className='at-row at-row__align--center  at-row__justify--end'>
             <View className='text-small text-secondary'>{cost}</View>
