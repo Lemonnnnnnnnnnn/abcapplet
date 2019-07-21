@@ -17,12 +17,14 @@ import RoomItem from '@components/room-item'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
+import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
+
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
-import { PAGE_HOME , PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -51,6 +53,8 @@ class HouseTypeShow extends Component {
       markers: [],
     },
     buttons: [],
+    showRentDescription: false
+
   }
 
   async componentDidMount() {
@@ -64,14 +68,13 @@ class HouseTypeShow extends Component {
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]
       : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
 
-
-
     this.setState({
       buttons,
       houstType: {
         id: data.id,
         desc: data.desc,
         cost: data.cost,
+        cost_info: data.cost_info,
         cover: data.cover,
         rules: data.rules,
         cbds: data.cbd_list,
@@ -114,6 +117,18 @@ class HouseTypeShow extends Component {
 
   onNavigation(url) {
     Taro.navigateTo({ url })
+  }
+
+  // 打开租金介绍
+
+  onOpenRentDescription() {
+    this.setState({ showRentDescription: true })
+  }
+
+  // 关闭租金介绍
+
+  onCloseRentDescription() {
+    this.setState({ showRentDescription: false })
   }
 
   onNavigationApartment() {
@@ -173,7 +188,7 @@ class HouseTypeShow extends Component {
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
 
-  onShareAppMessage(){
+  onShareAppMessage() {
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
@@ -186,15 +201,16 @@ class HouseTypeShow extends Component {
     this[method]()
   }
 
+
   render() {
     const { apartments } = this.props
-    
-    const { houstType, map, buttons } = this.state
+
+    const { houstType, map, buttons, showRentDescription } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, lookTime, lookTips, cover,
-      notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle,
+      notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle, cost_info,id
     } = houstType
 
     const colors = ['blue', 'red', 'yellow']
@@ -207,12 +223,23 @@ class HouseTypeShow extends Component {
       onDeleteFavorite={this.onDeleteFavorite}
     >
 
+
       <TabBar
+        show={!showRentDescription}
         hasShare
         hasContact
         buttons={buttons}
         onClick={this.onClick}
       />
+
+      <ApartmentRentDescriptionMask
+        cost={cost}
+        cost_info={cost_info}
+        show={showRentDescription}
+        onClose={this.onCloseRentDescription}
+        typeId={id}
+      />
+
 
       {/* 头部 */}
       <View className='text-bold text-huge'>{title}</View>
@@ -223,7 +250,7 @@ class HouseTypeShow extends Component {
         <View className='text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
         <View>
           <View className='at-row at-row__align--center at-row__justify--end'>
-            <View className='text-small text-secondary'>{cost}</View>
+            <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
             <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
           </View>
         </View>
@@ -313,8 +340,23 @@ class HouseTypeShow extends Component {
       </View>
 
       {/* 可租房间 */}
-      <View>
-        <View className='at-row at-row__justify--between at-row__align--center mt-4'>
+      <View >
+        <View className='text-bold text-huge'>可租房间</View>
+        {
+          isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
+        }
+        {roomList.map((i, index) =>
+          <RoomItem
+            key={i.id}
+            room={i}
+            isSign={isSign}
+            onCreateFavorite={this.onRoomCreateFavorite}
+            onDeleteFavorite={this.onRoomDeleteFavorite}
+            className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
+          />)}
+      </View>
+
+      {/* <View className='at-row at-row__justify--between at-row__align--center mt-4'>
           <View className='text-bold text-huge'>可租房间</View>
           {isSign && <View className='text-secondary text-small'>{LOCALE_LOCK_NOTICE}</View>}
         </View>
@@ -329,8 +371,7 @@ class HouseTypeShow extends Component {
             onCreateFavorite={this.onRoomCreateFavorite}
             onDeleteFavorite={this.onRoomDeleteFavorite}
             className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
-          />)}
-      </View>
+          />)} */}
 
       {/* 用户须知 */}
       {/* 左分3栏，右分9栏 */}

@@ -149,6 +149,18 @@ export const LOCALE_ACTIVITY_TYPE_SIMPLE_RENTTIME = '免'
 export const LOCALE_ACTIVITY_TYPE_DISCOUNT = '限时折扣'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
 
+// 租金详解
+export const LOCALE_RENT_TYPE = '租约方式'
+export const LOCALE_COST_DETAIL = '费用说明'
+export const LOCALE_TON = '吨'
+export const LOCALE_DEGREE = '度'
+export const LOCALE_RENT_INTRODUCE = '说明'
+export const LOCALE_RENT_INTRODUCE_ONE = '1.租房相关费用由公寓直接收取，请在支付和签约时存好相关凭证。'
+export const LOCALE_RENT_INTRODUCE_TWO = '2.签约时请仔细阅读相关押金项的说明，以免退租时产生纠纷。'
+export const LOCALE_RENT_BUTTON = '无忧预定'
+export const LOCALE_RENT_RISK_MONEY_ONE = '本公寓可享受'
+export const LOCALE_RENT_RISK_MONEY_TWO = '预定风险金保障最高￥500'
+
 // 协议相关
 
 export const LOCALE_AGREEMENT_NAME = '长租公寓预定服务协议（承租方）'
