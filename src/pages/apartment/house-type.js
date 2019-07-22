@@ -17,6 +17,8 @@ import RoomItem from '@components/room-item'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
+import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
+
 // 自定义变量
 import { COLOR_GREY_2, COLOR_RED } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
@@ -51,6 +53,8 @@ class HouseTypeShow extends Component {
       markers: [],
     },
     buttons: [],
+    showRentDescription: false
+
   }
 
   async componentDidMount() {
@@ -74,6 +78,7 @@ class HouseTypeShow extends Component {
         id: data.id,
         desc: data.desc,
         cost: data.cost,
+        cost_info: data.cost_info,
         cover: data.cover,
         rules: data.rules,
         position: data.position,
@@ -118,6 +123,18 @@ class HouseTypeShow extends Component {
 
   onNavigation(url) {
     Taro.navigateTo({ url })
+  }
+
+  // 打开租金介绍
+
+  onOpenRentDescription() {
+    this.setState({ showRentDescription: true })
+  }
+
+  // 关闭租金介绍
+
+  onCloseRentDescription() {
+    this.setState({ showRentDescription: false })
   }
 
   onNavigationApartment() {
@@ -190,15 +207,16 @@ class HouseTypeShow extends Component {
     this[method]()
   }
 
+
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons } = this.state
+    const { houstType, map, buttons, showRentDescription } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, lookTime, lookTips, cover,
-      notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle, position, tags
+      notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle, position, tags, cost_info,id
     } = houstType
 
 
@@ -224,12 +242,23 @@ class HouseTypeShow extends Component {
       onDeleteFavorite={this.onDeleteFavorite}
     >
 
+
       <TabBar
+        show={!showRentDescription}
         hasShare
         hasContact
         buttons={buttons}
         onClick={this.onClick}
       />
+
+      <ApartmentRentDescriptionMask
+        cost={cost}
+        cost_info={cost_info}
+        show={showRentDescription}
+        onClose={this.onCloseRentDescription}
+        typeId={id}
+      />
+
 
       {/* 头部 */}
       <View className='text-bold text-huge'>{title}</View>
@@ -245,8 +274,8 @@ class HouseTypeShow extends Component {
         </View>
 
         <View>
-          <View className='at-row at-row__align--center  at-row__justify--end'>
-            <View className='text-small text-secondary'>{cost}</View>
+          <View className='at-row at-row__align--center at-row__justify--end'>
+            <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
             <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
           </View>
         </View>
@@ -359,8 +388,23 @@ class HouseTypeShow extends Component {
       </View>
 
       {/* 可租房间 */}
-      <View>
-        <View className='at-row at-row__justify--between at-row__align--center mt-4'>
+      <View >
+        <View className='text-bold text-huge'>可租房间</View>
+        {
+          isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
+        }
+        {roomList.map((i, index) =>
+          <RoomItem
+            key={i.id}
+            room={i}
+            isSign={isSign}
+            onCreateFavorite={this.onRoomCreateFavorite}
+            onDeleteFavorite={this.onRoomDeleteFavorite}
+            className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
+          />)}
+      </View>
+
+      {/* <View className='at-row at-row__justify--between at-row__align--center mt-4'>
           <View className='text-bold text-huge'>可租房间</View>
         </View>
         {isSign && <View className='my-2'>
@@ -375,8 +419,7 @@ class HouseTypeShow extends Component {
             onCreateFavorite={this.onRoomCreateFavorite}
             onDeleteFavorite={this.onRoomDeleteFavorite}
             className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
-          />)}
-      </View>
+          />)} */}
 
       {/* 用户须知 */}
       {/* 左分3栏，右分9栏 */}
