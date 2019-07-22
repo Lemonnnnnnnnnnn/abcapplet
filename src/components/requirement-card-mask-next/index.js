@@ -56,10 +56,10 @@ class RequirementCardMaskNext extends BaseComponent {
 
               <View className='mt-4  ml-4' style='width:80vw;'>
                   <View className='at-row at-row__justify--center mt-4 '>
-                      <View className='at-col at-col-2 text-small mt-2'>{LOCALE_ROOM_CBD}：</View>
+                      <View className='at-col at-col-2 text-small mt-1' >{LOCALE_ROOM_CBD}：</View>
                       <View className='at-col at-col-7 ml-3 pr-1' onClick={this.props.onShowCbd} >
                           <Board className='at-row at-row__align--center at-row__justify--between ml-2 pl-2 pr-2' style=' width: 25vw;height: 10px;'>
-                              <View className='text-normal ' >{this.props.cdbDetailDetail}</View>
+                              <View className='text-normal overtext'>{this.props.cdbDetailDetail}</View>
                               <AtIcon value='chevron-down' size='15' />
                           </Board>
                       </View>
@@ -68,7 +68,7 @@ class RequirementCardMaskNext extends BaseComponent {
 
               <View className='mt-4  ml-4' style='width:80vw'>
                   <View className='at-row at-row__justify--center mt-2 '>
-                      <View className='at-col at-col-2 text-small mt-2'>{LOCALE_ROOM_LIVINFTIME}：</View>
+                      <View className='at-col at-col-2 text-small mt-2' > {LOCALE_ROOM_LIVINFTIME}:</View>
                       <View className='at-col at-col-7 ml-3 pr-1'>
                           <View className='at-row at-row__justify--around ml-3 '>
 

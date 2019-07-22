@@ -43,6 +43,7 @@ class AppointmentPost extends Component {
     Payload: PAYLOAD_APPOINTMENT_CREATE,
     showInformation:false,
     showNext:false,
+
     dateSel:'请选择看房日期',
     timeSel:'请选择看房时间',
     name:'姓名',
@@ -54,17 +55,20 @@ class AppointmentPost extends Component {
     },
     houstType: {
       swipers: [],
+
     },
+    screenHeight:'',
+    screenWidth:'',
   }
 
 
   async componentDidMount () {
     const { id = 83 } = this.$router.params
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+
     const  { payload } = await this.props.dispatchUser()
     const { Payload } = this.state
     this.setState({
-
       Payload:{ ...Payload, apartment:data.apartment_id,house_type:data.id}   ,
       users:{
         headimgurl:payload.headimgurl,
@@ -73,14 +77,20 @@ class AppointmentPost extends Component {
         id: data.id,
         desc: data.desc,
         cost: data.cost,
+        intro:data.one_word,
         apartmentTitle: data.apartment_title,
         swipers: data.pictures.map(i => ({ url: i })),
         title: `${data.title}·${data.apartment_title}`,
         priceTitle: data.price_title,
-
       },
-
     })
+    Taro.getSystemInfo()
+      .then(res => {
+        this.setState({
+          screenHeight:res.screenHeight-140,
+          screenWidth:res.screenWidth,
+        })
+      })
   }
   //获取日期
   onDateChange = e => {
@@ -90,7 +100,6 @@ class AppointmentPost extends Component {
       dateSel: e.detail.value,
       Payload:{ ...Payload, order_time:nowOrderTime}
     })
-
   }
 
    //获取时间
@@ -105,7 +114,7 @@ class AppointmentPost extends Component {
   //打开,关闭获取姓名和电话号码弹窗
   onClose(){
     const { showInformation } = this.state
-    this.setState({showInformation:!showInformation})
+    this.setState({showInformation:!showInformation,name:'姓名',tel:'电话',})
   }
   //关闭预约成功
   onCloseNext(){
@@ -115,6 +124,10 @@ class AppointmentPost extends Component {
       zeroSecTime:59,
       secTime:59,
       minTime:29,
+      dateSel:'请选择看房日期',
+      timeSel:'请选择看房时间',
+      name:'姓名',
+      tel:'电话',
     })
     clearInterval(this.state.sectime);
     clearInterval(this.state.getPost);
@@ -220,9 +233,13 @@ class AppointmentPost extends Component {
           },1000)
         })
       }})
+
   }
   render() {
-    const { houstType,height ,width,users ,name,tel,showInformation,showNext,zeroSecTime,zeroMinTime,serverId } = this.state
+    const { houstType,height ,width,users ,name,tel,showInformation,
+      showNext,zeroSecTime,zeroMinTime,serverId, screenHeight,screenWidth } = this.state
+      const allStyle={height:screenHeight +'px', width:screenWidth+'px'}
+
     const {
       title, swipers,  cost, priceTitle, intro,
     } = houstType
@@ -235,84 +252,92 @@ class AppointmentPost extends Component {
 
     return (
       <View >
-        <Swiper
-          autoplay
-          circular
-          style={style}
-          displayMultipleItems={1}
-        >
-          {swipers.map(i => <SwiperItem key={i.url}>
-            <Image
-              style={style}
-              mode='scaleToFill'
-              // src={i.url}
-              src={`${i.url.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
-            />
-          </SwiperItem>)}
-        </Swiper>
-  {/* 头部 */}
-            <Board className='p-3' border='bottom'>
-              <View className='text-bold text-huge' >{title}</View>
-              <View className='text-secondary text-normal'>{intro}</View>
-              <View className='at-row  mt-2'>
-                <View className='at-col-5 text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
-                <View className='at-col-7'>
-                  <View className='p-1 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
-                    <View className='text-mini text-secondary'>{cost}</View>
-                  </View>
-                </View>
-              </View>
-            </Board>
+        <View style={allStyle}>
+          <View style={style}>
+          <Swiper
+            autoplay
+            circular
+            style={style}
+            displayMultipleItems={1}
+          >
+            {swipers.map(i => <SwiperItem key={i.url}>
+              <Image
+                style={style}
+                mode='scaleToFill'
+                src={`${i.url.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
+              />
+            </SwiperItem>)}
+          </Swiper>
+        </View>
+         {/* 头部 */}
 
-            <Board className='p-3 mt-2' border='top'>
-              <View className='at-row'>
-                <View className='at-col-2'>
-                  <AtAvatar circle image={headimgurl}></AtAvatar>
-                </View>
-                <View className='at-col-4 ml-1'>
-                  <View>
-                    <View className='text-bold'>{name}</View>
-                    <View className='at-row'>
-                      <AtIcon value='iphone' size='13'></AtIcon>
-                      <View className='text-small mt-1'>{tel}</View>
+                <Board className='p-3 height:20%;width:100%' border='bottom' >
+                  <View className='text-bold text-huge' >{title}</View>
+                  <View className='text-secondary text-normal'>{intro}</View>
+                  <View className='at-row  mt-2'>
+                    <View className='at-col-5 text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
+                    <View className='at-col-7'>
+                      <View className='p-1 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
+                        <View className='text-mini text-secondary'>{cost}</View>
+                      </View>
                     </View>
                   </View>
-                </View>
-                <View className='at-col-6 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
-                  <View className='text-small text-muted'>{LOCALE_CHANGE}</View>
-                  <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
+                </Board>
+
+              <View style='height:36%;width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 mt-2'  border='all'>
+                <View className=' mt-2' border='all' >
+                  <View className='at-row ml-3 mt-3'>
+                    <View className='at-col-2'>
+                      <AtAvatar circle image={headimgurl}></AtAvatar>
+                    </View>
+                    <View className='at-col-4 ml-1'>
+                      <View>
+                        <View className='text-bold'>{name}</View>
+                        <View className='at-row'>
+                          <AtIcon value='iphone' size='13'></AtIcon>
+                          <View className='text-small mt-1'>{tel}</View>
+                        </View>
+                      </View>
+                    </View>
+                    <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
+                      <View className='text-small text-muted'>{LOCALE_CHANGE}</View>
+                      <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
+                    </View>
+                  </View>
+                  {/* 中间横线 */}
+
+                    <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
+                    {/* 下面部分 */}
+                    <View className='mt-3 at-row ml-3'>
+                      <View className='at-col-4 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME }</View>
+                      <View className='at-col-3 p-1 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
+
+                        {/* <View className='text-small '>选择看房日期</View> */}
+                        <Picker mode='date' onChange={this.onDateChange}>
+                          <View className='text-small'>
+                            {this.state.dateSel}
+                          </View>
+                        </Picker>
+                      </View>
+                      <View className='at-col-3 p-1 at-row at-row__justify--center ml-1' style='background:#F8F8F8; border-radius: 30px'>
+                        {/* <View className='text-small '>选择看房时间</View> */}
+                        <Picker mode='time' onChange={this.onTimeChange}>
+                          <View className='text-small'>
+                            {this.state.timeSel}
+                          </View>
+                        </Picker>
+                      </View>
+                    </View>
+                    {/* 按钮 */}
+                    <AtButton
+                      circle
+
+                      className='m-3 btn-yellow active'
+                      onClick={this.onAppointmentPost}
+                    >{LOCALE_APPOINTMENT_POST}</AtButton>
+
                 </View>
               </View>
-              {/* 中间横线 */}
-
-                <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
-                {/* 下面部分 */}
-                <View className='mt-3 at-row'>
-                  <View className='at-col-3 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME }</View>
-                  <View className='at-col-4 p-1 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
-
-                    {/* <View className='text-small '>选择看房日期</View> */}
-                    <Picker mode='date' onChange={this.onDateChange}>
-                      <View className='text-small'>
-                        {this.state.dateSel}
-                      </View>
-                    </Picker>
-                  </View>
-                  <View className='at-col-4 p-1 at-row at-row__justify--center ml-1' style='background:#F8F8F8; border-radius: 30px'>
-                    {/* <View className='text-small '>选择看房时间</View> */}
-                    <Picker mode='time' onChange={this.onTimeChange}>
-                      <View className='text-small'>
-                        {this.state.timeSel}
-                      </View>
-                    </Picker>
-                  </View>
-                </View>
-                {/* 按钮 */}
-                <AtButton
-                  circle
-                  className='mt-3 mb-2 btn-yellow active'
-                  onClick={this.onAppointmentPost}
-                >{LOCALE_APPOINTMENT_POST}</AtButton>
                 <AppointmentPostMask
                   show={showInformation}
                   name={name}
@@ -328,8 +353,8 @@ class AppointmentPost extends Component {
                   serverId={serverId}
                   onClose={this.onCloseNext}
                 />
-            </Board>
-      </View>
+            </View>
+          </View>
     )
   }
 }

@@ -30,7 +30,7 @@ class RequirementCardMask extends BaseComponent {
        </Board>
 
       {/* 主体内容 */}
-      <Board fixed='bottom' border='top'>
+      <Board fixed='bottom' border='all'>
 
         <View className='page-requirement' style='height:120vw;width: 100vw' >
           {/* 头部 */}
@@ -42,7 +42,7 @@ class RequirementCardMask extends BaseComponent {
           </View>
 
             {/*
-            {按钮部分}需要代码优化
+            {按钮部分}
             */}
 
           <View style='position: absolute;top:95vw; width:90vw' className='select-button  my-2 at-row at-row__justify--center ml-4'>
