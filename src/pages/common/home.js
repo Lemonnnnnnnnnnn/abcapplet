@@ -65,7 +65,7 @@ class CommonHome extends Component {
 
   state = {
     payload:PAYLOAD_CREATE_DEMAND,
-    showCard: true,//显示需求卡1
+    showCard: false,//显示需求卡1
     showNextCard:false,//显示需求卡2
     showPrice:false,//需求卡2价格显示
     showHouse:false,//需求卡2户型显示
@@ -117,9 +117,6 @@ class CommonHome extends Component {
       { id:4,name: '3人以上', active: false }
     ],
 
-    // timeTagList:  TIMETAGLIST,
-    // peopleTagList :PEOPLETTAGLIST,
-
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -144,6 +141,25 @@ class CommonHome extends Component {
 
       this.setState({ selector, selectorChecked })
     })
+  }
+  //分享收藏小程序
+  onShareAppMessage (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
+    return {
+      title: '自定义转发标题',
+      path: '/page/user?id=123'
+    }
+  }
+  componentDidMount(){
+    //判断是否弹出需求卡
+    const { user } = this.props
+    const { is_guide } = user
+    if(is_guide === 0){
+      this.setState({showCard:true})
+    }
+
   }
 
   /**
@@ -263,6 +279,7 @@ class CommonHome extends Component {
    * 关闭需求卡1
    */
   onCloseCard() {
+    this.props.dispatchRequirementCheck()
     this.setState({ showCard: false })
   }
   /**
@@ -270,21 +287,18 @@ class CommonHome extends Component {
    * @param {*} citycode
    */
   onNextCard(){
-    console.log('进入2')
     this.setState({showCard: false , showNextCard:true,})
   }
   /**
    * 需求卡2，打开价格选择
    */
   onShowPrice(){
-    console.log('打开价格选择')
     this.setState({showPrice:true})
   }
   /**
    * 需求卡2，关闭价格选择
    */
   onClosePrice(){
-    console.log('关闭价格选择')
     this.setState({
       showPrice:false
     })
@@ -293,28 +307,24 @@ class CommonHome extends Component {
    * 需求卡2，打开户型选择
    */
   onShowHouse(){
-    console.log('打开户型选择')
     this.setState({ showHouse:true, })
   }
    /**
    * 需求卡2，关闭户型选择
    */
   onCloseHouse(){
-    console.log('关闭户型选择')
     this.setState({showNextCard:true, showHouse:false })
   }
      /**
    * 需求卡2，打开位置选择
    */
   onShowCbd(){
-    console.log('打开位置选择')
     this.setState({showCbd:true, })
   }
    /**
    * 需求卡2，关闭位置选择
    */
   onCloseCbd(){
-    console.log('关闭位置选择')
     this.setState({showNextCard:true, showCbd:false })
   }
    /**
@@ -322,7 +332,7 @@ class CommonHome extends Component {
    * @param {*} citycode
    */
   onCloseCardNext(){
-    console.log('关闭2')
+    this.props.dispatchRequirementCheck()
     this.setState({showNextCard:false,})
   }
   /**
@@ -346,7 +356,6 @@ class CommonHome extends Component {
    * 入住人数单选
    */
   onHandlePeopleSolidClick ( data ) {
-    console.log(data)
     const { peopleTagList } = this.state
     const { payload } = this.state
     const peopleTagListLength = peopleTagList.length
@@ -367,7 +376,6 @@ handleClickPrice (value) {
 }
 //改变户型
 handleClickHouse (value) {
-  console.log(this.props.dists.housetype_list[value])
   const {id,title} = this.props.dists.housetype_list[value]
   this.setState({currentHouse:value,houseType:id,houseTypeDetail:title})
 }
@@ -379,7 +387,6 @@ handleClickCbd(value){
 onChangeCbdTwo(value){
   const { currentCbd } = this.state
   const { list }  = this.props.dists.cbd_list[currentCbd]//第二层数据
-  console.log(list[value].list.length,list[value].id)
   this.setState({cdbDetailList:[]})
   if(list[value].list.length === 0){
     this.setState({currentCbdTwo:value, cbdList :list[value].title , place:list[value].id,cbdListItem:[],placeSelected:[]})
@@ -389,7 +396,6 @@ onChangeCbdTwo(value){
 }
 //改变位置 第三层
 onChangeCbdThree(value){
-  console.log(value)
   let { placeSelected ,cdbDetailList} = this.state
 
   cdbDetailList = cdbDetailList.includes(value.title)
@@ -424,7 +430,6 @@ onComfireHouse(){
 //确定目标区域
 onComfireCbd(){
   const { placeSelected,payload,cdbDetailList,cbdList,place,cbdListItem } = this.state
-  console.log(placeSelected)
   if(cbdListItem.length !== 0 && placeSelected.length===0){
     Taro.showToast({
       title: '请选择',
@@ -432,7 +437,6 @@ onComfireCbd(){
       duration:2000
     })
   }else if(placeSelected.length !== 0){
-    console.log('er')
     const cbd = placeSelected.join(',')
     const showCdbDetailDetail = cdbDetailList.join(',')
     this.setState({
@@ -486,7 +490,6 @@ onComfireCbd(){
    */
   onFinishCard(){
     const { payload } = this.state
-    console.log(payload)
     this.onCheckPayload() && this.props.dispatchRequirementCreate(payload).
     then(res=>{
           if(res.data.code===1){
@@ -494,6 +497,7 @@ onComfireCbd(){
           }})
   }
   onCloseCurtion(){
+    this.props.dispatchRequirementCheck()
     this.setState({isOpenedFinish:false})
   }
   render() {

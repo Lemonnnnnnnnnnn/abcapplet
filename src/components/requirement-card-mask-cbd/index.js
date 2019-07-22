@@ -13,7 +13,8 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2,TABS_SELECT_ITEM_HEIGHT } from '@constants/styles'
-import { LOCALE_RESET,LOCALE_CONFIRM } from '@constants/locale'
+import { LOCALE_RESET,LOCALE_CONFIRM, LOCALE_ROOM_CBD} from '@constants/locale'
+
 
 class RequirementCbdMask extends BaseComponent {
   static defaultProps = {
@@ -43,7 +44,7 @@ class RequirementCbdMask extends BaseComponent {
         <View className='m-3'>
           {/* 头部 */}
           <View className='at-row at-row__justify--between mb-3'>
-            <View className='text-bold'>目标区域</View>
+            <View className='text-bold'>{LOCALE_ROOM_CBD}</View>
             <View onClick={this.props.onClose}>
               <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>

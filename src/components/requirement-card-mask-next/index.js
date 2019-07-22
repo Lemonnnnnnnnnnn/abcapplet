@@ -11,6 +11,7 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
+import {  LOCALE_ROOM_BUDGE,LOCALE_ROOM_CBD,LOCALE_ROOM_LIVINFTIME,LOCALE_ROOM_PEOPLE,LOCALE_ROOM_HOUSETYPE } from '@constants/locale'
 
 class RequirementCardMaskNext extends BaseComponent {
   static defaultProps = {
@@ -43,7 +44,7 @@ class RequirementCardMaskNext extends BaseComponent {
               <View style='position:absolute;'>
               <View className='mt-5  ml-4' style='width:80vw;top:30vw'>
                   <View className='at-row at-row__justify--center mt-5' >
-                      <View className='at-col at-col-2 text-small mt-1'>租房预算：</View>
+                      <View className='at-col at-col-2 text-small mt-1'>{ LOCALE_ROOM_BUDGE}：</View>
                       <View className='at-col at-col-7 ml-3 pr-1' onClick={this.props.onShowPrice} >
                           <Board className='at-row at-row__align--center at-row__justify--between ml-2 pl-2 pr-2' style=' width: 25vw;height: 10px;'>
                             <View className='text-normal ' >{this.props.budgetDetail}</View>
@@ -55,7 +56,7 @@ class RequirementCardMaskNext extends BaseComponent {
 
               <View className='mt-4  ml-4' style='width:80vw;'>
                   <View className='at-row at-row__justify--center mt-4 '>
-                      <View className='at-col at-col-2 text-small mt-2'>目标区域：</View>
+                      <View className='at-col at-col-2 text-small mt-2'>{LOCALE_ROOM_CBD}：</View>
                       <View className='at-col at-col-7 ml-3 pr-1' onClick={this.props.onShowCbd} >
                           <Board className='at-row at-row__align--center at-row__justify--between ml-2 pl-2 pr-2' style=' width: 25vw;height: 10px;'>
                               <View className='text-normal ' >{this.props.cdbDetailDetail}</View>
@@ -67,7 +68,7 @@ class RequirementCardMaskNext extends BaseComponent {
 
               <View className='mt-4  ml-4' style='width:80vw'>
                   <View className='at-row at-row__justify--center mt-2 '>
-                      <View className='at-col at-col-2 text-small mt-2'>入住时间：</View>
+                      <View className='at-col at-col-2 text-small mt-2'>{LOCALE_ROOM_LIVINFTIME}：</View>
                       <View className='at-col at-col-7 ml-3 pr-1'>
                           <View className='at-row at-row__justify--around ml-3 '>
 
@@ -91,7 +92,7 @@ class RequirementCardMaskNext extends BaseComponent {
               </View>
               <View className='mt-4  ml-4' style='width:80vw'>
                   <View className='at-row at-row__justify--center mt-2 '>
-                      <View className='at-col at-col-2 text-small mt-1'>入住人数：</View>
+                      <View className='at-col at-col-2 text-small mt-1'>{LOCALE_ROOM_PEOPLE}：</View>
                       <View className='at-col at-col-7 ml-3 pr-1'>
                           <View className='at-row at-row__justify--around ml-3 '>
 
@@ -114,7 +115,7 @@ class RequirementCardMaskNext extends BaseComponent {
 
               <View className='mt-4  ml-4' style='width:80vw'>
                   <View className='at-row at-row__justify--center mt-2 '>
-                      <View className='at-col at-col-2 text-small mt-1'>意向户型：</View>
+                      <View className='at-col at-col-2 text-small mt-1'>{LOCALE_ROOM_HOUSETYPE}：</View>
                       <View className='at-col at-col-7 ml-3 pr-1' onClick={this.props.onShowHouse}>
                           <Board className='at-row at-row__align--center at-row__justify--between ml-2 pl-2 pr-2' style=' width: 25vw;height: 10px;'>
                               <View className='text-normal ' >{this.props.houseTypeDetail}</View>

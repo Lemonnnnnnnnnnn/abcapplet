@@ -12,7 +12,7 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { LOCALE_RESET,LOCALE_CONFIRM } from '@constants/locale'
+import { LOCALE_RESET,LOCALE_CONFIRM ,LOCALE_ROOM_BUDGE} from '@constants/locale'
 
 class RequirementPriceMask extends BaseComponent {
   static defaultProps = {
@@ -32,7 +32,7 @@ class RequirementPriceMask extends BaseComponent {
         <View className='m-3'>
           {/* 头部 */}
           <View className='at-row at-row__justify--between mb-3'>
-            <View className='text-bold'>租房预算</View>
+            <View className='text-bold'>{LOCALE_ROOM_BUDGE}</View>
             <View onClick={this.props.onClose}>
               <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>

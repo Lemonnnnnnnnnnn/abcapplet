@@ -13,7 +13,7 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2,TABS_SELECT_ITEM_HEIGHT } from '@constants/styles'
-import { LOCALE_RESET,LOCALE_CONFIRM } from '@constants/locale'
+import { LOCALE_RESET,LOCALE_CONFIRM ,LOCALE_ROOM_HOUSETYPE} from '@constants/locale'
 
 class RequirementHouseMask extends BaseComponent {
   static defaultProps = {
@@ -38,7 +38,7 @@ class RequirementHouseMask extends BaseComponent {
         <View className='m-3'>
           {/* 头部 */}
           <View className='at-row at-row__justify--between mb-3'>
-            <View className='text-bold'>意向户型</View>
+            <View className='text-bold'>{LOCALE_ROOM_HOUSETYPE}</View>
             <View onClick={this.props.onClose}>
               <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>

@@ -149,3 +149,7 @@ export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
 //提交需求卡
 export const API_DEMAND_CREATE = `${HOST}/user/addDemandPost`
 export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',house_type:'' }
+
+//判断用户是否弹过引导框
+export const API_DEMAND_CHECK = `${HOST}/user/changeUserGuidePost`
+
