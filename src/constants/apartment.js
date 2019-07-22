@@ -135,3 +135,4 @@ export const HOUSE_TYPE_DESC = {
   yt: '阳台',
   jrz: '几人住',
 }
+

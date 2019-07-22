@@ -358,6 +358,7 @@ class CommonHome extends Component {
             onSelectCity={this.onSelectCity}
           />
         </View>
+
       </View>
     )
   }
