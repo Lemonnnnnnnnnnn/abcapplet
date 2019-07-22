@@ -34,8 +34,8 @@
 
     &-favorite {
       position: absolute;
-      top: 10px * $hd;
-      right: 18px * $hd;
+      top: 5px * $hd;
+      right: 5px * $hd;
     }
   }
 
@@ -75,3 +75,20 @@
   background: #F8F8F8;
   border-radius: 12px * $hd;
 }
+
+.apartment-container {
+  position: relative;
+
+  &-favorite {
+    position: absolute;
+    right: 25px * $hd;
+    top: -25px * $hd;
+    background: #ffffff;
+
+    height: 50px * $hd;
+    width: 50px * $hd;
+    border-radius: 50%;
+    box-shadow: 0px 3px 10px rgba(255,201,25,0.46);
+  }
+}
+

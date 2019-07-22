@@ -16,11 +16,17 @@ class ApartmentItemMask extends BaseComponent {
     apartment: {}
   }
 
+  onNavigation() {
+    const { apartment } = this.props
+    const { url } = apartment
+    Taro.navigateTo({ url })
+  }
+
   render() {
     const { apartment } = this.props
 
     return (
-      <View className='apartment-item-mask mb-2 p-3'>
+      <View className='apartment-item-mask mb-2 p-3' onClick={this.onNavigation}>
 
         <View className='at-row at-row__justify--between at-row__align--center'>
           {/* 左边 */}

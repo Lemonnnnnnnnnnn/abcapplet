@@ -3,20 +3,25 @@ import { createAction } from '@utils/redux'
 import {
   API_APARTMENT_LIST,
   PAYLOAD_APARTMENT_LIST,
-  API_FAVORITE_APARTMENT_LIST,
-  API_FAVORITE_HOUSE_TYPE_LIST,
   API_CBD_APARTMENT_LIST,
   API_ACTIVITY_APARTMENT_LIST,
+  API_FAVORITE_APARTMENT_LIST,
+  API_FAVORITE_HOUSE_TYPE_LIST,
 
-  API_SEARCH_APARTMENT,
   API_HOT_SEARCH,
-  API_RECOMMEND_APARTMENT,
   API_APARTMENT_SHOW,
+  API_HOUSE_TYPE_SHOW,
+  API_SEARCH_APARTMENT,
+  API_RECOMMEND_APARTMENT,
+
+  API_APPOINTMENT_CREATE,
+  API_APPOINTMENT_SHOW
 } from '@constants/api'
 
 import {
   SET_HOT_SEARCH,
   SHOW_APARTMENT,
+  SHOW_HOUSE_TYPE,
   SET_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
 
@@ -25,9 +30,12 @@ import {
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_ACTIVITY_APARTMENT,
-  TYPE_RECOMMEND_APARTMENT,
+  TYPE_RECOMMEND_HOUSE_TYPE,
   TYPE_FAVORITE_HOUSE_TYPE,
   TYPE_ARTICLE_APARTMENT,
+
+  TYPE_APPOINTMENT_CREATE,
+  TYPE_APPOINTMENT_SHOW
 } from '@constants/apartment'
 
 /**
@@ -195,7 +203,7 @@ export const dispatchHotSearch = payload => createAction({
 /**
  * 推荐公寓列表
  */
-export const dispatchRecommendApartment = payload => createAction({
+export const dispatchRecommendHouseType = payload => createAction({
   payload,
   method: 'POST',
   type: SET_APARTMENT_LIST,
@@ -203,7 +211,7 @@ export const dispatchRecommendApartment = payload => createAction({
   cb: ({ data: { data } }) => ({
     list: data.list,
     total: data.list.length,
-    type: TYPE_RECOMMEND_APARTMENT,
+    type: TYPE_RECOMMEND_HOUSE_TYPE,
   })
 })
 
@@ -220,7 +228,7 @@ export const dispatchArticleApartment = (apartments) => ({
 })
 
 /**
- * 设置文章公寓
+ * 公寓详情
  */
 export const dispatchApartmentShow = payload => createAction({
   payload,
@@ -230,3 +238,33 @@ export const dispatchApartmentShow = payload => createAction({
   cb: ({ data: { data } }) => ({ ...data })
 })
 
+/**
+ * 户型详情
+ */
+export const dispatchHouseTypeShow = payload => createAction({
+  payload,
+  method: 'POST',
+  type: SHOW_HOUSE_TYPE,
+  url: API_HOUSE_TYPE_SHOW,
+})
+
+/**
+ * 提交预约看房
+ */
+export const dispatchAppointmentCreate = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APPOINTMENT_CREATE,
+  url: API_APPOINTMENT_CREATE ,
+  // cb: ({ data: { data } }) => ({ ...data })
+})
+
+/**
+ * 获取行程详情
+ */
+export const dispatchAppointmentDetail = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APPOINTMENT_SHOW,
+  url: API_APPOINTMENT_SHOW ,
+})

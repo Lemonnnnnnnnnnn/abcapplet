@@ -126,6 +126,7 @@ class Select extends BaseComponent {
       specialSelectDist,
     } = this.props
 
+
     // 吸附相关样式
     const rootClassName = ['select']
     const selectStyle = { top: `${top - 1}px` }

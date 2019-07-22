@@ -25,7 +25,7 @@ class Board extends BaseComponent {
       color,
       border,
       className,
-      styleName,
+      customStyle,
     } = this.props
 
     const rootClassName = [
@@ -41,7 +41,7 @@ class Board extends BaseComponent {
 
     return (
       <View
-        style={styleName}
+        style={customStyle}
         className={classNames(rootClassName, classObject, className)}
       >
         {this.props.children}

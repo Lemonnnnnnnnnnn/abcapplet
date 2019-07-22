@@ -24,6 +24,13 @@ import {
   COLOR_YELLOW,
 } from '@constants/styles'
 
+import {
+  LOCALE_MONEY,
+  LOCALE_QI,
+} from '@constants/locale'
+
+
+
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
     type: '',
@@ -32,17 +39,19 @@ class ApartmentItem extends BaseComponent {
     minWidth: 330,
     minHeight: 222,
     mini: false,
-    apartment: {},
+    apartment: { cover: '' },
     className: '',
   }
 
-  onCreateFavorite() {
+  onCreateFavorite(e) {
+    e.stopPropagation()
     const payload = this.getFavoritePayload()
 
     this.props.onCreateFavorite({ payload })
   }
 
-  onDeleteFavorite() {
+  onDeleteFavorite(e) {
+    e.stopPropagation()
     const payload = this.getFavoritePayload()
     this.props.onDeleteFavorite({ payload })
   }
@@ -61,6 +70,12 @@ class ApartmentItem extends BaseComponent {
     }
   }
 
+  onNavigation() {
+    const { apartment } = this.props
+    const { url } = apartment
+    Taro.navigateTo({ url })
+  }
+
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
     const { className, apartment, type, } = this.props
@@ -74,8 +89,10 @@ class ApartmentItem extends BaseComponent {
       is_collect,
       cover, rules, title,
       price_title: priceTitle,
-      apartment_title: apartmentTitle
+      apartment_title: apartmentTitle,
+      num
     } = apartment
+
 
     const imageStyle = {
       width: '100%',
@@ -87,11 +104,27 @@ class ApartmentItem extends BaseComponent {
       height: Taro.pxTransform(height),
     }
 
+    const heartWrap = {
+      padding: '10px',
+    }
+
+    const heartNum = {
+      top: 0,
+      position: 'absolute',
+      textAlign: 'center',
+      fontSize: "10px",
+      left: '50%',
+      top: '49%',
+      transform: 'translate(-50%,-50%)',
+      color : '#FFC919'
+    }
+
+
     // 格式化价格
-    const price = priceTitle ? parseInt(priceTitle) : 0
+    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     // 设置图片宽高，方便七牛云格式化图片
-    const src = `${cover}?imageView2/1/w/${width}/h/${height}`
+    const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     // 是否已收藏
     // 当 type 为 favorite-house-type、favorite-apartment 时显示，isCollect为ture时显示
@@ -100,7 +133,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className={classNames('apartment', className)}>
+      <View className={classNames('apartment', className)} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
@@ -116,15 +149,21 @@ class ApartmentItem extends BaseComponent {
           </View>
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
-          {title && <View className='apartment-header-type'>{title}</View>}
+          {apartmentTitle && <View className='apartment-header-type'>{apartmentTitle}</View>}
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
             ? <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
-              <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
+              <View style={heartWrap}>
+                <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
+                <View style={heartNum}>{num}</View>
+              </View>
             </View>
             : <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
-              <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
+              <View style={heartWrap}>
+                <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
+                <View style={heartNum}>{num}</View>
+              </View>
             </View>)
           }
         </View>
@@ -140,10 +179,10 @@ class ApartmentItem extends BaseComponent {
           {/* 价格和公寓名称 */}
           <View className='at-row at-row__justify--between at-row__align--end'>
             <View className='apartment-content-main'>
-              <View className='text-bold mt-2'>{apartmentTitle}</View>
+              <View className='text-bold mt-2'>{title}</View>
               {desc && <View className='text-muted mt-2 text-small apartment-content-desc'>{desc}</View>}
             </View>
-            <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
+            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
           </View>
         </View>
         }
@@ -152,7 +191,7 @@ class ApartmentItem extends BaseComponent {
         {mini && <View className='apartment-content mx-2 py-2'>
           {/* 价格和公寓名称 */}
           <View className='my-2 text-large'>{apartmentTitle}</View>
-          <View className='text-yellow text-huge text-bold'>{price === 0 ? '暂无数据' : `￥${price}起`}</View>
+          <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
         </View>
         }
       </View>

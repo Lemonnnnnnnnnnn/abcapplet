@@ -183,9 +183,10 @@ class CommonSearch extends Component {
         {/* 搜索框 & 城市选择器 */}
         <Search
           isInput
-          ref={this.refSearch}
           isFixed={false}
+          ref={this.refSearch}
           selector={selector}
+          showCancel={!showPreview}
           selectorChecked={selectorChecked}
 
           onInputCancel={this.onInputCancel}
@@ -236,7 +237,7 @@ class CommonSearch extends Component {
           ref={this.refRecommendApartmentList}
 
           defaultPayload={{ city }}
-          dispatchList={this.props.dispatchRecommendApartment}
+          dispatchList={this.props.dispatchRecommendHouseType}
         />
 
 

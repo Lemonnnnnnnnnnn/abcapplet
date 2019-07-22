@@ -19,6 +19,21 @@
     background: $color-yellow-0;
   }
 
+  &--red {
+    color: #FFA2A2;
+    background: #FFEFEF;
+  }
+
+  &--yellow {
+    color: $color-yellow-0;
+    background: #FFFAE9;
+  }
+
+  &--blue {
+    color: #7BE3FF;
+    background: #ECFBFF;
+  }
+
   &--grey {
     color: $color-white;
     background: #888888;

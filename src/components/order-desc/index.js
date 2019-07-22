@@ -62,7 +62,7 @@ class OrderDesc extends BaseComponent {
 
     return (
       <View className={className}>
-        {/* 预定信息头部 */}
+        {/* 预订信息头部 */}
         <View className='my-2 at-row at-row__justify--between at-row__align--center' >
           <View className='text-bold'>{LOCALE_SIGN_INFO}</View>
           <View>
@@ -75,7 +75,7 @@ class OrderDesc extends BaseComponent {
           </View>
         </View >
 
-        {/* 预定信息 */}
+        {/* 预订信息 */}
         <Board className='text-normal'>
           <View style={{ position: 'relative' }}>
             <View className='btn-order-status'>{message}</View>

@@ -3,12 +3,26 @@ import {
   SET_APARTMENT_LIST,
   UPDATE_APARTMENT_FAVORITE,
   SET_NEXT_PAGE_APARTMENT_LIST,
+
+  APARTMENT_URL_DIST,
 } from '@constants/apartment'
 
-export default function home(state = APARTMENT_DEFAULT, action) {
+const formatList = (list, type) => {
+  return list = list.map(i => formatItem(i, type))
+}
+
+const formatItem = (item, type) => {
+  return {
+    ...item,
+    url: `${APARTMENT_URL_DIST[type]}?id=${item.id}`
+  }
+}
+
+export default function apartment(state = APARTMENT_DEFAULT, action) {
   switch (action.type) {
     case SET_APARTMENT_LIST: {
-      return { ...action.payload }
+      const { list, total, type } = action.payload
+      return { list: formatList(list, type), total, type }
     }
 
     case SET_NEXT_PAGE_APARTMENT_LIST: {

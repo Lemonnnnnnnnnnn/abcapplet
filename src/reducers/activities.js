@@ -12,8 +12,9 @@ export default function home(state = ACTIVITY_DEFAULT, action) {
 
     case SHOW_ACTIVITY: {
       const index = state.findIndex(i => i.id == action.payload.id)
+
       if (index === -1) {
-        return [...action.payload]
+        return [...state, action.payload]
       } else {
         state.splice(index, 1, { ...state[index], ...action.payload })
         return [...state]

@@ -51,6 +51,8 @@ export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: '', house_type: 0, p
  * 公寓相关
  ************************
  */
+// 户型详情
+export const API_HOUSE_TYPE_SHOW = `${HOST}/apartment/getTypePost`
 
 // 公寓详情
 export const API_APARTMENT_SHOW = `${HOST}/apartment/getPost`
@@ -97,6 +99,9 @@ export const API_USER_FAVORITE_DELETE = `${HOST}/user/deleteCollectPost`
 
 // 心愿单添加
 export const API_USER_FAVORITE_CREATE = `${HOST}/apartment/collectPost`
+
+//获取用户信息
+export const API_USER_INFORMATION = `${HOST}/user/getPost`
 
 /**
  ************************
@@ -153,3 +158,9 @@ export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:''
 //判断用户是否弹过引导框
 export const API_DEMAND_CHECK = `${HOST}/user/changeUserGuidePost`
 
+//新增预约行程
+export const API_APPOINTMENT_CREATE = `${HOST}/apartment/addappointmentpost`
+export const PAYLOAD_APPOINTMENT_CREATE = { apartment:'', house_type:'', order_time:'', name:'',mobile:'',form_id:''}
+
+//获取行程详情
+export const API_APPOINTMENT_SHOW = `${HOST}/appointment/detailPost`

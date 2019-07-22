@@ -1,0 +1,52 @@
+@import "overrides";
+
+.badge {
+  background: #FF9C9C;
+  color: #FFFFFF;
+  font-size: $font-size-xs;
+  border-radius: 50%;
+  width: 19px * $hd;
+  height: 19px * $hd;
+  text-align: center;
+  line-height: 19px * $hd;
+}
+
+.badge-lian {
+  color: #38c650;
+  background: #cbfdd3;
+}
+
+.badge-tuan {
+  color: #ff5000;
+  background: #26150d;
+}
+
+.badge-xiao {
+  color: #ff9421;
+  background: #fdeebf;
+}
+
+.badge-cu {
+  color: #fe1c03;
+  background: #fdeeeb;
+}
+
+.badge-lao {
+  color: #255bff;
+  background: #CBEEFC;
+}
+
+.badge-shuidian {
+  color: #8b572a;
+  background: #fbdec4;
+}
+
+.badge-rentTime {
+  color: #ff9421;
+  background: #faf4db;
+}
+
+.badge-discount {
+  color: #fe1c03;
+  background: #fdeeeb;
+}

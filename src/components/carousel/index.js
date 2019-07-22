@@ -3,7 +3,7 @@ import Taro, { Component } from '@tarojs/taro'
 import classNames from 'classnames'
 import { Image, Swiper, SwiperItem, View, ScrollView, Text } from '@tarojs/components'
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
-import { PAGE_EXTERNAL_INDEX, PAGE_ARTICLE_SHOW } from '@constants/page'
+import { PAGE_EXTERNAL_INDEX, PAGE_ARTICLE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
 
 class Carousel extends Component {
   static options = {
@@ -35,11 +35,14 @@ class Carousel extends Component {
     const isBackendArtile = url.search(artileLink) !== -1
     if (isBackendArtile) newUrl = `${url.replace(artileLink, PAGE_ARTICLE_SHOW)}&title=${title}`
 
+    // 判断是否为公寓详情
+    const apartmentLink = '/pages/home/detail/index'
+    const isBackendApartment = url.search(apartmentLink) !== -1
+    if (isBackendApartment) newUrl = `${url.replace(apartmentLink, PAGE_APARTMENT_SHOW)}`
+
     // 判断是否 本身就是文章链接
     const isArtile = url.search(PAGE_ARTICLE_SHOW) !== -1
     if (isArtile) newUrl = `${url}&title=${title}`
-
-
 
     return Taro.navigateTo({ url: newUrl })
   }

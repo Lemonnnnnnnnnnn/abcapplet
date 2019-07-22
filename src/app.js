@@ -21,13 +21,16 @@ class App extends Component {
       'pages/common/search',
 
       'pages/apartment/cbd',
+      'pages/apartment/show',
       'pages/apartment/activity',
       'pages/apartment/services',
       'pages/apartment/recommend',
+      'pages/apartment/house-type',
+      'pages/apartment/appointment',
 
-      'pages/user/favorite',
-      'pages/user/profile',
       'pages/user/auth',
+      'pages/user/profile',
+      'pages/user/favorite',
 
       'pages/risk/index',
       'pages/risk/create',
@@ -41,6 +44,11 @@ class App extends Component {
       'pages/external/index',
 
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

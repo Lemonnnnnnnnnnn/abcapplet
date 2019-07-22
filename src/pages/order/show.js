@@ -330,7 +330,7 @@ class OrderShow extends Component {
         {/* 签约码 */}
         <OrderSignCode show={showSignCode} code={appCode} />
 
-        {/* 预定成功头部 */}
+        {/* 预订成功头部 */}
         {ORDER_STATUS_SUCCESS == status && statusSuccess}
 
         {/* 取消成功头部 */}
@@ -363,7 +363,7 @@ class OrderShow extends Component {
             items={apartments.list}
 
             defaultPayload={{ city }}
-            dispatchList={this.props.dispatchRecommendApartment}
+            dispatchList={this.props.dispatchRecommendHouseType}
           />
         </View>
 
@@ -375,7 +375,7 @@ class OrderShow extends Component {
           && <OrderDesc order={order} className='pb-2' />
         }
 
-        {/* 预定房源 */}
+        {/* 预订房源 */}
         <OrderRoomList
           selectId={roomId}
           rooms={order.room_list}
@@ -383,7 +383,7 @@ class OrderShow extends Component {
           show={ORDER_STATUS_LOCK_FAIL == status}
         />
 
-        {/* 预定房源按钮 */}
+        {/* 预订房源按钮 */}
         {ORDER_STATUS_PAY_WAITING == status &&
           <TabBarBoard>
             <View className='at-row'>
@@ -409,7 +409,7 @@ class OrderShow extends Component {
           </TabBarBoard>
         }
 
-        {/* 预定房源按钮 */}
+        {/* 预订房源按钮 */}
         {ORDER_STATUS_LOCK_FAIL == status &&
           <TabBarBoard>
             <View className='at-row'>
@@ -435,7 +435,7 @@ class OrderShow extends Component {
           </TabBarBoard>
         }
 
-        {/* 预定成功按钮 */}
+        {/* 预订成功按钮 */}
         {ORDER_STATUS_LOCK_SUCCESS == status &&
           <TabBarBoard>
             <View className='at-row'>
