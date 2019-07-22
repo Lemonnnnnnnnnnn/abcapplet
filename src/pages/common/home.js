@@ -68,6 +68,8 @@ class CommonHome extends Component {
 
   componentWillMount() {
 
+    // 获取筛选器和搜索框距离顶部的距离
+
     const {
       selectScrollTop,
       searchScrollTop,

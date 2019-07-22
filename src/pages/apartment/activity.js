@@ -32,6 +32,9 @@ class ApartmentCbd extends Component {
   state = {
     id: 0,
     defaultPayload: {},
+    // 选择器相关
+    selectIsFixed: false,
+    selectScrollTop: null,
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -40,10 +43,26 @@ class ApartmentCbd extends Component {
     const { id } = this.$router.params
     const { payload: user } = this.props.dispatchUser()
 
+    const {
+      selectScrollTop,
+    } = this.state
+
     const defaultPayload = {
       ...PAYLOAD_ACTIVITY_APARTMENT_LIST,
-      id, city: user.citycode,
+      id,
+      city: user.citycode,
     }
+
+    // 获取筛选器和搜索框距离顶部的距离
+
+    setTimeout(() => {
+      !selectScrollTop
+        && Taro.createSelectorQuery()
+          .in(this.$scope)
+          .select('.activity-select')
+          .boundingClientRect()
+          .exec(res => this.setState({ selectScrollTop: res[0].top, }))
+    }, 500);
 
     // 获取字典
     this.props.dispatchDistList(user.citycode)
@@ -85,9 +104,30 @@ class ApartmentCbd extends Component {
     this.apartmentList.onReset({ ...defaultPayload, ...payload })
   }
 
+  /**
+ * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
+ */
+
+  onPageScroll({ scrollTop }) {
+    const {
+      selectIsFixed,
+      selectScrollTop,
+    } = this.state
+
+    scrollTop > selectScrollTop
+      && !selectIsFixed
+      && this.setState({ selectIsFixed: true })
+
+
+    scrollTop < selectScrollTop
+      && selectIsFixed
+      && this.setState({ selectIsFixed: false })
+
+  }
+
   render() {
     const { apartments, dists, activities } = this.props
-    const { id, defaultPayload } = this.state
+    const { id, defaultPayload, selectIsFixed } = this.state
 
     const activity = activities.find(i => i.id == id) || {
       title: '',
@@ -110,16 +150,19 @@ class ApartmentCbd extends Component {
       </View>
 
       {/* 赛选器 */}
-      <Select
-        top={0}
-        isFixed={false}
-        autoSortDist={[]}
-        cbdDist={dists.cbd_list}
-        priceDist={dists.price_list}
-        houseTypeDist={dists.housetype_list}
-        specialSelectDist={dists.special_select}
-        onApartmentPayloadChange={this.onApartmentPayloadChange}
-      />
+      <View className='activity-select'>
+        <Select
+          top={0}
+          isFixed={selectIsFixed}
+
+          autoSortDist={[]}
+          cbdDist={dists.cbd_list}
+          priceDist={dists.price_list}
+          houseTypeDist={dists.housetype_list}
+          specialSelectDist={dists.special_select}
+          onApartmentPayloadChange={this.onApartmentPayloadChange}
+        />
+      </View>
 
       {/* 公寓列表 */}
       <View className='mx-2'>
