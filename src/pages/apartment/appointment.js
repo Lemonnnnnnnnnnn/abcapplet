@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
-import { AtAvatar ,AtIcon, AtButton,Picker } from 'taro-ui'
+import { View, Swiper, SwiperItem, Image, Picker } from '@tarojs/components'
+import { AtAvatar ,AtIcon, AtButton } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'

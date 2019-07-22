@@ -14,5 +14,5 @@ export const TYPE_FAVORITE_ROOM = 'TYPE_FAVORITE_ROOM'
 export const ROOM_STATUS_DIST = {
   0: { message: '已租', color: 'grey' },
   1: { message: '未租', color: 'primary' },
-  2: { message: '待释放', color: 'grey' },
+  2: { message: '即将释放', color: 'grey' },
 }

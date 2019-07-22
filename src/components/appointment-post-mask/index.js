@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtButton ,Input} from 'taro-ui'
+import { View, Input } from '@tarojs/components'
+import { AtButton} from 'taro-ui'
 
 
 // 自定义组件
