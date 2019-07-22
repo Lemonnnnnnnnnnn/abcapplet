@@ -26,6 +26,7 @@ class App extends Component {
       'pages/apartment/services',
       'pages/apartment/recommend',
       'pages/apartment/house-type',
+      'pages/apartment/appointment',
 
       'pages/user/auth',
       'pages/user/profile',
@@ -43,6 +44,11 @@ class App extends Component {
       'pages/external/index',
 
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
