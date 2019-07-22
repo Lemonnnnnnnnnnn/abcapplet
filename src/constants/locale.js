@@ -156,6 +156,48 @@ export const LOCALE_ACTIVITY_TYPE_SIMPLE_RENTTIME = '免'
 export const LOCALE_ACTIVITY_TYPE_DISCOUNT = '限时折扣'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
 
+/**
+ * 看房服务相关
+ */
+
+export const LOCALE_APPOINTMENT_SIGNED  = '签约预订'
+export const LOCALE_APPOINTMENT_CASHPLEDGE  = '押金风险金保障'
+export const LOCALE_APPOINTMENT_DETAIL  = '查看详情'
+export const LOCALE_APPOINTMENT_HASLOOK  = '已带看服务'
+export const LOCALE_APPOINTMENT_SUMMON = '正在为你召唤'
+export const LOCALE_APPOINTMENT_BELONG = '专属管家...'
+//找房服务看房评价
+export const LOCALE_BUSINESS_LIKEABILITY_NONE = '非常不满意'
+export const LOCALE_BUSINESS_LIKEABILITY_NORMAL = '不满意'
+export const LOCALE_BUSINESS_LIKEABILITY_HIGH = '一般'
+export const LOCALE_BUSINESS_LIKEABILITY_SUPER = '比较满意'
+export const LOCALE_BUSINESS_LIKEABILITY_SIGNING = '非常满意'
+
+//找房服务下面四个功能块
+export const LOCALE_APPOINTMENT_MESSAGE = '行程留言'
+export const LOCALE_APPOINTMENT_RELUTION  = '联系管家'
+export const LOCALE_APPOINTMENT_EVALUTION  = '服务评价'
+export const LOCALE_APPOINTMENT_INTENTION  = '看房意向'
+
+//找房服务订房意向
+export const LOCALE_APPOINTMENT_LIKEABILITY_NONE = '无意向'
+export const LOCALE_APPOINTMENT_LIKEABILITY_NORMAL = '意向一般'
+export const LOCALE_APPOINTMENT_LIKEABILITY_HIGH = '意向较高'
+export const LOCALE_APPOINTMENT_LIKEABILITY_SUPER = '意向强烈'
+export const LOCALE_APPOINTMENT_LIKEABILITY_SIGNING = '马上预定'
+
+//服务评价
+
+export const LOCALE_APPOINTMENT_SERVICE= '已带看服务'
+export const LOCALE_APPOINTMENT_SERVICE_EVALUTION = "管家服务评价"
+
+//看房意向
+export const LOCALE_APPOINTMENT_INTENTION_DU = "您的订房意向度？"
+export const LOCALE_APPOINTMENT_INTENTION_LOCAL = "关注您本次看过的房间，可以跟踪房间的预定情况哦！"
+export const LOCALE_APPOINTMENT_INTENTION_FIND = "搜索"
+export const LOCALE_APPOINTMENT_INTENTION_LOOKROOM = "您可能看过的房间："
+
+export const LOCALE_APPOINTMENT_MESSAGE_LIU = '仅针对以下行程发起留言沟通'
 //预约看房
 export const LOCALE_APPOINTMENT_LOOKTIME =  "看房时间："
 export const LOCALE_APPOINTMENT_POST =  "提交预约"

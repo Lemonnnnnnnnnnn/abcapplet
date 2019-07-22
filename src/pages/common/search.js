@@ -241,7 +241,7 @@ class CommonSearch extends Component {
         />
 
 
-        {/* 赛选器 */}
+        {/* 筛选器 */}
         <Select
           show={showPreview === false}
           top={0}

@@ -3,7 +3,6 @@ import {
   SET_APARTMENT_LIST,
   UPDATE_APARTMENT_FAVORITE,
   SET_NEXT_PAGE_APARTMENT_LIST,
-
   APARTMENT_URL_DIST,
 } from '@constants/apartment'
 

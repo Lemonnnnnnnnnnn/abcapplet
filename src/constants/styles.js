@@ -65,6 +65,7 @@ export const COLOR_GREY_3 = "#CCCCCC" // 灰色
 export const COLOR_GREY_4 = "#E5E5E5" // 灰色
 export const COLOR_GREY_5 = "#F0F0F0" // 灰色
 export const COLOR_GREY_6 = "#F7F7F7" // 灰色
+export const COLOR_GREY_7 = "#D2D2D2" // 灰色
 
 /**
  * -------------------------------------------
@@ -81,3 +82,4 @@ export const FONT_SIZE_BASE = Taro.pxTransform(14) // 常用字号
 export const FONT_SIZE_LG = Taro.pxTransform(16)   // 常规标题
 export const FONT_SIZE_XL = Taro.pxTransform(20)   // 大标题
 export const FONT_SIZE_XXL = Taro.pxTransform(30)  // 用于大号的数字
+
