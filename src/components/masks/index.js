@@ -23,7 +23,6 @@ class Mask extends BaseComponent {
   }
 
   onMaskTouchMove(e) {
-    console.log(e)
     return e.stopPropagation()
   }
 
