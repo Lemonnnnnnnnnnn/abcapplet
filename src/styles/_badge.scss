@@ -4,11 +4,12 @@
   background: #FF9C9C;
   color: #FFFFFF;
   font-size: $font-size-xs;
-  border-radius: 50%;
+  border-radius: 12px;
   width: 19px * $hd;
   height: 19px * $hd;
   text-align: center;
   line-height: 19px * $hd;
+  padding: 11px
 }
 
 .badge-lian {

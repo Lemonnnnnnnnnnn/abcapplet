@@ -64,6 +64,8 @@ class HouseTypeShow extends Component {
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]
       : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
 
+    let facilitys = data.facility_list
+    const facilitys_list = facilitys.slice(0, 5)
 
 
     this.setState({
@@ -82,7 +84,7 @@ class HouseTypeShow extends Component {
         descList: data.desc_list,
         roomList: data.room_list,
         isCollect: data.is_collect,
-        facilitys: data.facility_list,
+        facilitys: facilitys_list,
         tags: data.tags,
         apartmentId: data.apartment_id,
         lookTime: data.look_guide.open_time,
@@ -199,17 +201,19 @@ class HouseTypeShow extends Component {
       notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle, position, tags
     } = houstType
 
+
     const colors = ['blue', 'red', 'yellow']
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
-
-    const activityStyle = {
-      borderRadius: "50%",
-      padding: "3px 5px"
-    }
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
       borderRadius: "12px"
+    }
+
+    const PublicConfiguration = {
+      backgroundColor: "rgba(248, 248, 248, 1)",
+      borderRadius: "12px",
+      padding: " 2px 5px"
     }
 
 
@@ -235,7 +239,7 @@ class HouseTypeShow extends Component {
       <View className='at-row at-row__justify--between at-row__align--center  mt-2'>
         <View className='text-yellow'>
           <Text className='text-super text-bold'>
-          {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}`}
+            {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}`}
           </Text>
           <Text className='text-large'>{LOCALE_PRICE_START}</Text>
         </View>
@@ -249,7 +253,7 @@ class HouseTypeShow extends Component {
       </View>
 
       {/* 活动信息 */}
-      {hotRules.map((i, index) =>
+      {/* {hotRules.map((i, index) =>
         <View className='at-row at-row__align--center' key={i.id}>
           <View className='at-col at-col-2'>
             <Tag
@@ -261,16 +265,16 @@ class HouseTypeShow extends Component {
           </View>
           <View className='text-secondary text-small ml-4 at-col at-col-6'>{i.title}</View>
         </View>
-      )}
+      )} */}
 
-      {/* <View >
+      <View >
         {rules.map(i =>
           <View key={i.id} className=' mt-2 mr-3'>
-            <Text style={activityStyle} className={`badge badge-${i.type}`}> {ACTIVITY_TYPE_DIST[i.type]['simple']}</Text>
+            <Text className={`badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
             <Text className='text-secondary text-small ml-3'>{i.content}</Text>
           </View>
         )}
-      </View> */}
+      </View>
 
       {/* 品牌宣传 */}
       <View style={BrandingStyle}>
@@ -319,13 +323,19 @@ class HouseTypeShow extends Component {
       }
 
       {/* 公共配置 */}
-      <View className='at-row at-row--wrap mt-2'>
+      <View className='at-row at-row--wrap mt-4'>
+
         {facilitys.map(i =>
-          <View key={i.title} className='at-col-2 text-center mt-2'>
+          <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
             <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
             <View className='text-small'>{i.title}</View>
           </View>
         )}
+
+        <View style={PublicConfiguration} className='text-center'>
+          <Image src={facilitys[0].icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} ></Image>
+          <View className='text-small'>更多</View>
+        </View>
       </View>
 
       {/* 位置信息 */}
@@ -415,11 +425,16 @@ class HouseTypeShow extends Component {
         <View style='text-indent: 10px' className='text-secondary text-normal'>{desc}</View>
         <View className='at-row at-row--wrap mt-2'>
           {facilitys.map(i =>
-            <View key={i.title} className='at-col-2 text-center mt-2'>
+            <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
               <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
               <View className='text-small'>{i.title}</View>
             </View>
           )}
+
+          <View style={PublicConfiguration} className='text-center'>
+            <Image src={facilitys[0].icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} ></Image>
+            <View className='text-small'>更多</View>
+          </View>
         </View>
         {types.map((i, index) =>
           <View key={i.id} className={`${index + 1 != types.length && 'border-bottom'} mt-2`}>

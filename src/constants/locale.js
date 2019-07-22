@@ -36,7 +36,7 @@ export const LOCALE_NO_AWARD_AND_SPACE = '无朝向和空间信息'
 export const LOCALE_ABC_SIGN = '平台代订'
 export const LOCALE_MONEY = '￥'
 export const LOCALE_MONTH = '月'
-export const LOCALE_QI = '起'
+export const LOCALE_QI = '/月起'
 
 // components/apartment-header
 export const LOCALE_HAVE_APARTMENT_TOTAL = '%s家公寓'
