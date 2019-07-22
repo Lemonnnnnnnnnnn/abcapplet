@@ -151,6 +151,13 @@ export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
 // 订单支付
 export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
 
+//提交需求卡
+export const API_DEMAND_CREATE = `${HOST}/user/addDemandPost`
+export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',house_type:'' }
+
+//判断用户是否弹过引导框
+export const API_DEMAND_CHECK = `${HOST}/user/changeUserGuidePost`
+
 //新增预约行程
 export const API_APPOINTMENT_CREATE = `${HOST}/apartment/addappointmentpost`
 export const PAYLOAD_APPOINTMENT_CREATE = { apartment:'', house_type:'', order_time:'', name:'',mobile:'',form_id:''}

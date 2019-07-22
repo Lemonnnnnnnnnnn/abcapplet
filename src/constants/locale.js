@@ -131,6 +131,13 @@ export const LOCALE_SIGN_NOW = '立即预订'
 export const LOCALE_CHANGE = '修改'
 export const LOCALE_PAY = '付款'
 
+export const LOCALE_SELF_SEE = '自己看看'
+export const LOCALE_HELP_REMOEND = '帮我推荐'
+export const LOCALE_ROOM_BUDGE = '租房预算'
+export const LOCALE_ROOM_CBD = '目标区域'
+export const LOCALE_ROOM_LIVINFTIME = '入住时间'
+export const LOCALE_ROOM_PEOPLE = '入住人数'
+export const LOCALE_ROOM_HOUSETYPE = '意向户型'
 // 活动相关
 export const LOCALE_ACTIVITY_TYPE_TUAN = '团购'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_TUAN = '团'

@@ -90,6 +90,11 @@ class App extends Component {
     navigateToMiniProgramAppIdList: [
       "wxd3537ccb429de3b4"
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    }
   }
 
   componentDidMount() { }

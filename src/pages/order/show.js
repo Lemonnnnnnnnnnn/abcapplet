@@ -176,7 +176,6 @@ class OrderShow extends Component {
   async onOrderPayment() {
     const { order: { id } } = this.state
     const { data: { data } } = await this.props.dispatchOrderPayment({ id })
-    console.log(data)
 
     Taro.requestPayment({
       timeStamp: String(data.timeStamp),

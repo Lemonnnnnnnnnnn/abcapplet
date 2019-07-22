@@ -1,5 +1,11 @@
 @import "overrides";
 
+.btn-card {
+  border-color:#FFC919;
+  background:#FFC919;
+  color: #0A0A0A;
+}
+
 .btn-green {
   border-color: #06bb08;
   background: #06bb08;
@@ -17,7 +23,6 @@
     color: $color-black-0;
   }
 }
-
 .btn-grey {
   border-color: #F2F2F2;
   background: #F2F2F2;

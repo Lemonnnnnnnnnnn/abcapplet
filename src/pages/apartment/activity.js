@@ -154,7 +154,6 @@ class ApartmentCbd extends Component {
         <Select
           top={0}
           isFixed={selectIsFixed}
-
           autoSortDist={[]}
           cbdDist={dists.cbd_list}
           priceDist={dists.price_list}
