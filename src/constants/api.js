@@ -147,5 +147,5 @@ export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
 export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
 
 //提交需求卡
-export const API_CREATE_DEMAND = `${HOST}/user/addDemandPost`
-export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:0,living_time:'',people:'',house_type:0 }
+export const API_DEMAND_CREATE = `${HOST}/user/addDemandPost`
+export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',house_type:'' }

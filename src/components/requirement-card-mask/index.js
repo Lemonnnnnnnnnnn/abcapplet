@@ -2,8 +2,6 @@
 import Taro from '@tarojs/taro'
 import { View} from '@tarojs/components'
 
-//引用图片
-import namedPng from '../../assets/images/home/card-top.png'
 
 
 
@@ -26,48 +24,48 @@ class RequirementCardMask extends BaseComponent {
   render() {
     let { show } = this.props
 
-    return show && 
+    return show &&
     <View className='apartment-mask'>
 
        <Board fixed='top' border='top'>
-          
+
        </Board>
-       
+
       {/* 主体内容 */}
       <Board fixed='bottom' border='top'>
-            <View className='page-requirementtop' ></View>
+
         <View className='page-requirement'  >
           {/* 公寓头部 */}
           <View className='at-row at-row__justify--between p-2 mt-4'>
-            <View className='at-col at-col-8'></View>
-            <View className='at-col at-col-3 ml-5 ' onClick={this.props.onClose}>
+             <View className='at-col at-col-9'></View>
+            <View className='at-col at-col-3 ml-4 mt-3'  onClick={this.props.onClose}>
               <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>
-          </View> 
+          </View>
 
-            {/* 
-            {按钮部分}需要代码优化 
+            {/*
+            {按钮部分}需要代码优化
             */}
-            
+
           <View style='position: absolute;top:60vh; ' className='select-button  my-2 at-row at-row__justify--center '>
             <View className='at-col at-col-5'>
-              <AtButton 
+              <AtButton
                 circle
                 onClick={this.props.onClose}
                 className='btn-grey'>自己看看
               </AtButton>
             </View>
             <View className='at-col at-col-5 ml-3'>
-              <AtButton  
+              <AtButton
                 circle
                 onClick={this.props.onNext}
                 className='mx-2 btn-yellow active'>帮我推荐
               </AtButton>
             </View>
-          </View> 
+          </View>
        </View>
-      
-        
+
+
       </Board>
 
       {/* 遮罩层 */}
