@@ -5,7 +5,7 @@ import { View, ScrollView } from '@tarojs/components'
 
 // 自定义组件
 import Board from '@components/board'
-import Masks from '@components/masks'
+import Masks from '@components/masks'//遮盖层
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
 import ApartmentItemMask from '@components/apartment-item-mask'

@@ -23,6 +23,7 @@ import {
 } from '@constants/styles'
 
 import {
+  LOCALE_MONEY,
   LOCALE_MONTH,
   LOCALE_ABC_SIGN,
   LOCALE_NO_AWARD_AND_SPACE,
@@ -131,7 +132,7 @@ class RoomItem extends BaseComponent {
             <View className='at-row'>
               <View className='at-row at-row__justify--between at-row at-row__align--center'>
                 <View className='text-huge text-yellow text-bold'>
-                  {isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}
+                  {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}/${LOCALE_MONTH}`}
                 </View>
                 {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'

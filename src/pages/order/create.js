@@ -13,12 +13,17 @@ import Board from '@components/board'
 import Decorate from '@components/decorate'
 import OrderHeader from '@components/order-header'
 import OrderRoomListMask from '@components/order-room-list-mask'
+import ABCIcon from '@components/abc-icon'
+
+// 自定义常量
+import { COLOR_GREY_2 } from '@constants/styles'
 
 // 自定义变量相关
 import { ORDER_HEADERS } from '@constants/order'
 import { PAGE_ORDER_SHOW } from '@constants/page'
 import { PAYLOAD_ORDER_CREATE } from '@constants/api'
 import {
+  LOCALE_SCHEDULED_MESSAGE,
   LOCALE_CHANGE,
   LOCALE_DOWN_PAYMENT,
   LOCALE_DOWN_PAYMENT_RATIO,
@@ -30,8 +35,10 @@ import {
   LOCALE_RISK_NOTICE,
   LOCALE_SIGN_APARTMENT,
   LOCALE_SIGN_TIME_RANGE,
-  LOCALE_SIGN_NOW
+  LOCALE_SIGN_NOW,
+  LOCALE_VIEW_SERVICE_AGREEMENT,
 } from '@constants/locale'
+
 
 // NPM 包
 import day from 'dayjs'
@@ -63,14 +70,16 @@ class OrderCreate extends Component {
 
   async componentWillMount() {
     const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
+
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
+
 
     // 初始化表单
     this.setState({
       room: { ...data.room },
       rooms: [...data.rooms],
       payload: {
-        room_id,
+        room_id: data.room.id,
         appointment_id,
         name: data.user_info.name,
         mobile: data.user_info.mobile,
@@ -128,6 +137,12 @@ class OrderCreate extends Component {
     this.setState({ showRoomList: true })
   }
 
+  // 关闭房间列表
+
+  onClose() {
+    this.setState({ showRoomList: false })
+  }
+
   // 检查数据
   onCheckPayload() {
     const { payload } = this.state
@@ -154,6 +169,10 @@ class OrderCreate extends Component {
     })
   }
 
+  onNavigation() {
+    Taro.navigateTo({ url: '/pages/order/down-payment' })
+  }
+
   render() {
     const { payload, room, rooms, showRoomList, disabled } = this.state
     const { name, mobile, id_code: idCode, sign_time: signTime } = payload
@@ -167,6 +186,7 @@ class OrderCreate extends Component {
           selectId={id}
           show={showRoomList}
           onSelectRoom={this.onSelectRoom}
+          onClose={this.onClose}
         />
         <View className='p-3'>
           {/* 背景底色 */}
@@ -177,6 +197,13 @@ class OrderCreate extends Component {
             className='mb-3'
             items={ORDER_HEADERS}
           />
+          <View className='mb-2'>
+            <Text className='text-bold text-huge'>{LOCALE_SCHEDULED_MESSAGE}</Text>
+            <View onClick={this.onNavigation} className='text-normal text-secondary' style='float:right'>
+              <ABCIcon style='float:right' icon='chevron_right' size='20' color={COLOR_GREY_2} />
+              <View style='float:right'>{LOCALE_VIEW_SERVICE_AGREEMENT} </View>
+            </View>
+          </View>
 
           {/* 预订人 */}
           <Board className='px-3 py-2 mb-3'>
@@ -240,7 +267,7 @@ class OrderCreate extends Component {
             </View>
           </Board>
 
-          {/* 预定公寓 */}
+          {/* 预订公寓 */}
           <Board className='px-3 py-2 mb-3'>
             {/* 内容头部 */}
             <View className='pb-2 border-bottom'>
@@ -299,13 +326,14 @@ class OrderCreate extends Component {
               <View>
                 <View className='text-brand text-super text-bold'>{LOCALE_DOWN_PAYMENT}</View>
                 <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>
+
               </View>
 
               <View className='text-brand text-super text-bold'>{price || 0}{LOCALE_PRICE_UNIT}</View>
             </View>
           </View>
 
-          {/* 立即预定 */}
+          {/* 立即预订 */}
           <View className='at-row'>
             <View className='at-col-12'>
               <AtButton

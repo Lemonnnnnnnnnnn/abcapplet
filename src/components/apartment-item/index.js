@@ -25,9 +25,11 @@ import {
 } from '@constants/styles'
 
 import {
-  LOCALE_MONTH,
-  LOCALE_PRICE_UNIT,
+  LOCALE_MONEY,
+  LOCALE_QI,
 } from '@constants/locale'
+
+
 
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
@@ -41,13 +43,15 @@ class ApartmentItem extends BaseComponent {
     className: '',
   }
 
-  onCreateFavorite() {
+  onCreateFavorite(e) {
+    e.stopPropagation()
     const payload = this.getFavoritePayload()
 
     this.props.onCreateFavorite({ payload })
   }
 
-  onDeleteFavorite() {
+  onDeleteFavorite(e) {
+    e.stopPropagation()
     const payload = this.getFavoritePayload()
     this.props.onDeleteFavorite({ payload })
   }
@@ -85,8 +89,10 @@ class ApartmentItem extends BaseComponent {
       is_collect,
       cover, rules, title,
       price_title: priceTitle,
-      apartment_title: apartmentTitle
+      apartment_title: apartmentTitle,
+      num
     } = apartment
+
 
     const imageStyle = {
       width: '100%',
@@ -97,6 +103,22 @@ class ApartmentItem extends BaseComponent {
       width: '100%',
       height: Taro.pxTransform(height),
     }
+
+    const heartWrap = {
+      padding: '10px',
+    }
+
+    const heartNum = {
+      top: 0,
+      position: 'absolute',
+      textAlign: 'center',
+      fontSize: "10px",
+      left: '50%',
+      top: '49%',
+      transform: 'translate(-50%,-50%)',
+      color : '#FFC919'
+    }
+
 
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -127,15 +149,21 @@ class ApartmentItem extends BaseComponent {
           </View>
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
-          {title && <View className='apartment-header-type'>{title}</View>}
+          {apartmentTitle && <View className='apartment-header-type'>{apartmentTitle}</View>}
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
             ? <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
-              <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
+              <View style={heartWrap}>
+                <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
+                <View style={heartNum}>{num}</View>
+              </View>
             </View>
             : <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
-              <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
+              <View style={heartWrap}>
+                <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
+                <View style={heartNum}>{num}</View>
+              </View>
             </View>)
           }
         </View>
@@ -151,10 +179,10 @@ class ApartmentItem extends BaseComponent {
           {/* 价格和公寓名称 */}
           <View className='at-row at-row__justify--between at-row__align--end'>
             <View className='apartment-content-main'>
-              <View className='text-bold mt-2'>{apartmentTitle}</View>
+              <View className='text-bold mt-2'>{title}</View>
               {desc && <View className='text-muted mt-2 text-small apartment-content-desc'>{desc}</View>}
             </View>
-            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
+            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
           </View>
         </View>
         }
@@ -163,7 +191,7 @@ class ApartmentItem extends BaseComponent {
         {mini && <View className='apartment-content mx-2 py-2'>
           {/* 价格和公寓名称 */}
           <View className='my-2 text-large'>{apartmentTitle}</View>
-          <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}${LOCALE_PRICE_UNIT}/${LOCALE_MONTH}`}</View>
+          <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
         </View>
         }
       </View>

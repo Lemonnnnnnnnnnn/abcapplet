@@ -23,7 +23,7 @@ class OrderRoomList extends BaseComponent {
 
     return (
       show && <View className={className}>
-        {/* 预定信息头部 */}
+        {/* 预订信息头部 */}
         <View className='my-2 at-row at-row__justify--between at-row__align--center' >
           <View className='text-bold'>{LOCALE_SIGN_ROOM}</View>
           <View>

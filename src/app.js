@@ -25,6 +25,7 @@ class App extends Component {
       'pages/apartment/activity',
       'pages/apartment/recommend',
       'pages/apartment/house-type',
+      'pages/apartment/appointment',
 
       'pages/appointment/services',
       'pages/appointment/message',
@@ -47,6 +48,11 @@ class App extends Component {
       'pages/external/index',
 
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -88,6 +94,11 @@ class App extends Component {
     navigateToMiniProgramAppIdList: [
       "wxd3537ccb429de3b4"
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    }
   }
 
   componentDidMount() { }

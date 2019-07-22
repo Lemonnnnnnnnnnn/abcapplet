@@ -58,11 +58,21 @@ class ServiceItem extends BaseComponent {
          break
       case 2:
           const { service } = this.props
-          const { server_user } = service
-          const { mobile } = server_user
-          Taro.makePhoneCall({
-            phoneNumber: mobile
-          });
+          const { server_user,server_id } = service
+          if( server_id !==0 ){
+            const { mobile } = server_user
+            Taro.makePhoneCall({
+              phoneNumber: mobile
+            });
+          }else{
+            Taro.showToast({
+              title: '正在为您召唤专属管家...',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+
+
           break
       case 3:
         if( this.props.service.status !==3){

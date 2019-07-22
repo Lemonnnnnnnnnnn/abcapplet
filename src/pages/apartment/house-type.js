@@ -17,12 +17,15 @@ import RoomItem from '@components/room-item'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
+
+
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_HOME ,PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE,PAGE_APPOINTMENT_CREATE } from '@constants/page'
+// import {  PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -51,6 +54,7 @@ class HouseTypeShow extends Component {
       markers: [],
     },
     buttons: [],
+    showDesc:false,
   }
 
   async componentDidMount() {
@@ -173,15 +177,31 @@ class HouseTypeShow extends Component {
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
 
+  onShareAppMessage(){
+    return {
+      title: "我在公寓ABC上发现了一个好\n房源",
+    }
+  }
+
   /**
-   * 点击
+   * 点击 预约看房,查看订单
    */
   onClick(method) {
-    this[method]()
+    if(method==='onCreateBusiness'){
+      const { houstType } = this.state
+      Taro.navigateTo({
+        url:`${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
+      })
+    }
+    if(method==='onCreateOrder'){
+      this[method]()
+    }
   }
+
 
   render() {
     const { apartments } = this.props
+
     const { houstType, map, buttons } = this.state
     const { latitude, longitude, markers } = map
     const {
@@ -195,18 +215,19 @@ class HouseTypeShow extends Component {
 
     return <ApartmentContainer
       swipers={swipers}
+      show={false}
       isCollect={isCollect}
       onCreateFavorite={this.onCreateFavorite}
       onDeleteFavorite={this.onDeleteFavorite}
     >
-
-      <TabBar
-        hasShare
-        hasContact
-        buttons={buttons}
-        onClick={this.onClick}
-      />
-
+      <View>
+        <TabBar
+          hasShare
+          hasContact
+          buttons={buttons}
+          onClick={this.onClick}
+        />
+      </View>
       {/* 头部 */}
       <View className='text-bold text-huge'>{title}</View>
       <View className='text-secondary text-normal'>{intro}</View>
@@ -379,8 +400,9 @@ class HouseTypeShow extends Component {
       {/* 看了又看 */}
       {city &&
         <View>
-          <View className='text-bold text-huge mt-4'>看了又看</View>
+          <View className='text-bold text-huge mt-4'>附近公寓</View>
           <ApartmentList
+            canScroll
             mini
             key={apartments.type}
             type={apartments.type}
@@ -390,6 +412,7 @@ class HouseTypeShow extends Component {
           />
         </View>
       }
+
 
     </ApartmentContainer>
   }

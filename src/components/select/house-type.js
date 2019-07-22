@@ -46,6 +46,7 @@ class SelectHouseType extends BaseComponent {
     const tabsHeight = Taro.pxTransform(tabItemHeight * items.length)
 
     return (show && <View className='at-row at-row__justify--center'>
+     {/* 户型选择 */}
       <AtTabs
         scroll
         tabDirection='vertical'

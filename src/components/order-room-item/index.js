@@ -27,7 +27,12 @@ class OrderRoomItem extends BaseComponent {
 
   render() {
     const { room, className, selectId } = this.props
-    const { no: roomNo, price, apartment_title: apartmentTitle, id } = room
+    const { no: roomNo, apartment_title: apartmentTitle, id } = room
+    
+    // 从后台获取的数据是定金，将其乘以2以租金的形式呈现在目标位置上较为合理
+    let { price } = room
+    price = price * 2
+    
 
     return (
       <Board className={classNames('p-3', className)}>
