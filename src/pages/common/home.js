@@ -696,99 +696,96 @@ class CommonHome extends Component {
             </View>
           </View>
 
-          {/* 城市模态框 */}
-          <CityModal
-            city={citys}
-            citycode={user.citycode}
-            onSelectCity={this.onSelectCity}
-          />
-        </View>
-        {/**需求卡1 */}
-        <View>
-          <RequirementCardMask
-            show={showCard}
-            onNext={this.onNextCard}
-            onClose={this.onCloseCard}
-          />
-        </View>
-        {/**需求卡2 */}
-        <View>
-          <RequirementCardMaskNext
-            show={showNextCard}
-            isOpen={isOpen}
-            budgetDetail={budgetDetail}
-            houseTypeDetail={houseTypeDetail}
-            roomDetail={roomDetail}
-            floorDetail={floorDetail}
-            cdbDetailDetail={cdbDetailDetail}
-            timeTagList={this.timeTagList}
-            peopleTagList={this.peopleTagList}
-            onCloseNext={this.onCloseCardNext}
-            onFinish={this.onFinishCard}
-            onTimeSelect={this.onHandleTimeSolidClick}
-            onPeopleSelect={this.onHandlePeopleSolidClick}
-            onShowPrice={this.onShowPrice}
-            onShowHouse={this.onShowHouse}
-            onShowCbd={this.onShowCbd}
-          />
-        </View>
-        {/* 需求卡2 价格 */}
-        <View className={classNames(rootClassName, classObject, className)}>
-          <RequirementPriceMask
-            show={showPrice}
-            priceDist={dists.price_list}
-            onClose={this.onClosePrice}
-            onChangePrice={this.handleClickPrice}
-            current={currentPrice}
-            onComfirePrice={this.onComfirePrice}
-            onResetClick={this.onResetClickP}
-          />
-        </View>
-        {/* 需求卡2 户型 */}
-        <View className={classNames(rootClassName, classObject, className)}>
-          <RequirementHouseMask
-            show={showHouse}
-            houseDist={dists.housetype_list}
-            onClose={this.onCloseHouse}
-            onhandleClickRoom={this.onhandleClickRoom}
-            onhandleClickFloor={this.onhandleClickFloor}
-            current={currentHouse}
-            onComfireHouse={this.onComfireHouse}
-            onResetClick={this.onResetClickH}
-          />
-        </View>
-        {/* 需求卡2 位置 */}
-        <View className={classNames(rootClassName, classObject, className)}>
-          <RequirementCbdMask
-            show={showCbd}
-            cbdDist={dists.cbd_list}
-            onClose={this.onCloseCbd}
-            onChangeCbd={this.handleClickCbd}
-            current={currentCbd}
-            onComfireHouse={this.onComfireCbd}
-            onResetClick={this.onResetClickC}
-            currentCbdTwo={currentCbdTwo}
-            onChangeCbdTwo={this.onChangeCbdTwo}
-            cbdListItem={cbdListItem}
-            onChangeCbdThree={this.onChangeCbdThree}
-            placeSelected={placeSelected}
-            onComfireCbd={this.onComfireCbd}
-            onResetClickC={this.onResetClickC}
-          />
-        </View>
-        {/* 提交需求卡 幕帘 */}
-
-        <AtCurtain
-          isOpened={this.state.isOpenedFinish}
-          onClose={this.onCloseCurtion.bind(this)}
-        >
-          <View className='at-row at-row__justify--center'>
-            <Image
-              style='width:150px;height:160px'
-              src='https://images.gongyuabc.com//image/requirement-finish.png'
+            {/* 城市模态框 */}
+            <CityModal
+              city={citys}
+              citycode={user.citycode}
+              onSelectCity={this.onSelectCity}
             />
           </View>
-        </AtCurtain>
+          {/**需求卡1 */}
+          <View>
+            <RequirementCardMask
+              show={showCard}
+              onNext={this.onNextCard}
+              onClose={this.onCloseCard}
+            />
+          </View>
+         {/**需求卡2 */}
+          <View>
+            <RequirementCardMaskNext
+              show={showNextCard}
+              isOpen={isOpen}
+              budgetDetail={budgetDetail}
+              houseTypeDetail={houseTypeDetail}
+              cdbDetailDetail={cdbDetailDetail}
+              timeTagList={this.timeTagList}
+              peopleTagList={this.peopleTagList}
+              onCloseNext={this.onCloseCardNext}
+              onFinish={this.onFinishCard}
+              onTimeSelect={this.onHandleTimeSolidClick}
+              onPeopleSelect={this.onHandlePeopleSolidClick}
+              onShowPrice={this.onShowPrice}
+              onShowHouse={this.onShowHouse}
+              onShowCbd={this.onShowCbd}
+            />
+          </View>
+        {/* 需求卡2 价格 */}
+          <View  className={classNames(rootClassName, classObject, className)}>
+            <RequirementPriceMask
+              show={showPrice}
+              priceDist={dists.price_list}
+              onClose={this.onClosePrice}
+              onChangePrice={this.handleClickPrice}
+              current={currentPrice}
+              onComfirePrice={this.onComfirePrice}
+              onResetClick={this.onResetClickP}
+            />
+          </View>
+           {/* 需求卡2 户型 */}
+          <View  className={classNames(rootClassName, classObject, className)}>
+            <RequirementHouseMask
+              show={showHouse}
+              houseDist={dists.housetype_list}
+              onClose={this.onCloseHouse}
+              onChangeHouse={this.handleClickHouse}
+              current={currentHouse}
+              onComfireHouse={this.onComfireHouse}
+              onResetClick={this.onResetClickH}
+            />
+          </View>
+          {/* 需求卡2 位置 */}
+          <View  className={classNames(rootClassName, classObject, className)}>
+            <RequirementCbdMask
+              show={showCbd}
+              cbdDist={dists.cbd_list}
+              onClose={this.onCloseCbd}
+              onChangeCbd={this.handleClickCbd}
+              current={currentCbd}
+              onComfireHouse={this.onComfireCbd}
+              onResetClick={this.onResetClickC}
+              currentCbdTwo={currentCbdTwo}
+              onChangeCbdTwo={this.onChangeCbdTwo}
+              cbdListItem={cbdListItem}
+              onChangeCbdThree={this.onChangeCbdThree}
+              placeSelected={placeSelected}
+              onComfireCbd={this.onComfireCbd}
+              onResetClickC={this.onResetClickC}
+            />
+          </View>
+          {/* 提交需求卡 幕帘 */}
+
+            <AtCurtain
+              isOpened={this.state.isOpenedFinish}
+              onClose={this.onCloseCurtion.bind(this)}
+            >
+            <View className='at-row at-row__justify--center'>
+              <Image
+                style='width:150px;height:160px'
+                src='https://images.gongyuabc.com//image/requirement-finish.png'
+              />
+            </View>
+            </AtCurtain>
 
       </View>
     )

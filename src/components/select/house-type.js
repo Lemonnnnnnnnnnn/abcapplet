@@ -17,7 +17,7 @@ class SelectHouseType extends Component {
     show: false,
     onChange: () => { },
   }
-
+ 
 
   onResetState() {
     const { initialRoom, initialFloor } = this.state

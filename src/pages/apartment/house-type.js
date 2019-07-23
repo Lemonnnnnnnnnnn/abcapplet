@@ -24,8 +24,8 @@ import AppartmentMatchingMask from '@components/apartment-matching-mask'
 import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
-import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE ,PAGE_APPOINTMENT_CREATE} from '@constants/page'
+import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
+import { PAGE_HOME ,PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE,PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -239,6 +239,7 @@ class HouseTypeShow extends Component {
       this[method]()
     }
   }
+
 
 
   render() {
