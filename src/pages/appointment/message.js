@@ -1,7 +1,6 @@
 import Taro, { Component  } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Input } from '@tarojs/components'
 import Board from '@components/board'
-import { Input } from 'taro-ui'
 
 import  {PAYLOAD_MESSAGE_CREATE } from '@constants/api'
 import { LOCALE_APPOINTMENT_MESSAGE_LIU } from '@constants/locale'
