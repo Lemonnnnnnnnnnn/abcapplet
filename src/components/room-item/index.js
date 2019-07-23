@@ -1,13 +1,12 @@
 // Taro 组件
 import Taro from '@tarojs/taro'
-import { View, Image, Text } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { AtIcon, AtButton } from 'taro-ui'
 
 // 自定义组件
 import Tag from '@components/tag'
 import Board from '@components/board'
 import BaseComponent from '@components/base'
-import ImagePlaceholder from '@components/image-placeholder'
 
 // NPM 包
 import classNames from 'classnames'
@@ -23,7 +22,6 @@ import {
 } from '@constants/styles'
 
 import {
-  LOCALE_MONEY,
   LOCALE_MONTH,
   LOCALE_ABC_SIGN,
   LOCALE_NO_AWARD_AND_SPACE,
@@ -113,8 +111,8 @@ class RoomItem extends BaseComponent {
 
 
   render() {
-    const { className, room, width, height, type, isSign } = this.props
-    const { cover, status, space, toward, is_collect: isCollect, open_time } = room
+    const { className, room, height, type, isSign } = this.props
+    const {  status, space, toward, is_collect: isCollect } = room
 
     const { showYear, year, releaseDate } = this.state
 
