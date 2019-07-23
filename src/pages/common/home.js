@@ -719,6 +719,8 @@ class CommonHome extends Component {
               budgetDetail={budgetDetail}
               houseTypeDetail={houseTypeDetail}
               cdbDetailDetail={cdbDetailDetail}
+              roomDetail={roomDetail}
+              floorDetail={floorDetail}
               timeTagList={this.timeTagList}
               peopleTagList={this.peopleTagList}
               onCloseNext={this.onCloseCardNext}
@@ -748,7 +750,8 @@ class CommonHome extends Component {
               show={showHouse}
               houseDist={dists.housetype_list}
               onClose={this.onCloseHouse}
-              onChangeHouse={this.handleClickHouse}
+              onhandleClickRoom={this.onhandleClickRoom}
+              onhandleClickFloor={this.onhandleClickFloor}
               current={currentHouse}
               onComfireHouse={this.onComfireHouse}
               onResetClick={this.onResetClickH}
