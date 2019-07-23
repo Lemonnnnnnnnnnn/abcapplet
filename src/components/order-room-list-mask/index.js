@@ -30,7 +30,7 @@ class OrderRoomListMask extends BaseComponent {
           <View className='at-row at-row__justify--between mb-3'>
             <View className='text-bold'>查看公寓详情</View>
             <View onClick={this.props.onClose}>
-              <ABCIcon icon='close' color={COLOR_GREY_2} />
+              <ABCIcon icon='close' color={COLOR_GREY_2}  />
             </View>
           </View>
 

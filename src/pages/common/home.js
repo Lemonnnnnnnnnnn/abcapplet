@@ -530,6 +530,7 @@ onComfireCbd(){
       searchScrollTop,
       selector,
       selectorChecked,
+      selectIsFixed
     } = this.state
 
     const {

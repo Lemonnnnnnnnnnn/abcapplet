@@ -1,6 +1,6 @@
 // Taro 组件
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
 import { AtIcon, AtTag } from 'taro-ui'
 
 // 自定义组件
@@ -18,6 +18,7 @@ import {
   TYPE_ACTIVITY_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_FAVORITE_HOUSE_TYPE,
+  ACTIVITY_TYPE_DIST
 } from '@constants/apartment'
 
 import {
@@ -116,7 +117,7 @@ class ApartmentItem extends BaseComponent {
       left: '50%',
       top: '49%',
       transform: 'translate(-50%,-50%)',
-      color : '#FFC919'
+      color: '#FFC919'
     }
 
 
@@ -149,7 +150,7 @@ class ApartmentItem extends BaseComponent {
           </View>
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
-          {apartmentTitle && <View className='apartment-header-type'>{apartmentTitle}</View>}
+          {apartmentTitle && <View className='apartment-header-type text-large '>{apartmentTitle}</View>}
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
@@ -170,19 +171,40 @@ class ApartmentItem extends BaseComponent {
 
         {/* 正常内容 */}
         {!mini && <View className='apartment-content mx-3 py-3'>
-          {/* 优惠活动 */}
-          <View>{rules.map(i =>
+          {/* <View>{rules.map(i =>
             <AtTag className='mr-1 p-1 text-mini' key={i.id} size='small' circle>{i.title}</AtTag>
           )}
-          </View>
+          </View> */}
 
-          {/* 价格和公寓名称 */}
+
+          {/* 公寓名称 */}
           <View className='at-row at-row__justify--between at-row__align--end'>
             <View className='apartment-content-main'>
-              <View className='text-bold mt-2'>{title}</View>
-              {desc && <View className='text-muted mt-2 text-small apartment-content-desc'>{desc}</View>}
+              <View className='text-huge text-bold mt-2'>{title}</View>
+              {desc && <View className='text-muted text-large mt-2 apartment-content-desc'>{desc}</View>}
             </View>
-            <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
+          </View>
+
+          {/* 优惠活动 */}
+
+          <View className='at-row at-row__align--center'>
+            <View className='at-row'>
+              {rules.map(i =>
+                <View key={i.id} className='at-col-1 at-col--auto mt-2 mr-2 '>
+                  <Text className={`badge badge-${i.type} text-small`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                </View>
+              )}
+            </View>
+
+            {/* 价格 */}
+
+            <View className='text-yellow'>
+              <Text className='text-super text-bold'>
+                {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
+              </Text>
+              <Text className='text-large'>{LOCALE_QI}</Text>
+            </View>
+
           </View>
         </View>
         }

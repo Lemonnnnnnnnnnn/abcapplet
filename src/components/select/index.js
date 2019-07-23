@@ -39,6 +39,9 @@ import {
  * 使用 AtTabs 来完成
  * ----------------------------
  */
+let type_floor = 0
+let type_room = 0
+
 class Select extends BaseComponent {
   static options = {
     addGlobalClass: true,
@@ -83,6 +86,23 @@ class Select extends BaseComponent {
     const { latitude, longitude } = this.state
     this.setState({ payload: { ...payload, latitude, longitude } })
   }
+
+
+  onPaylocadHouseTypeChange({ payload }) {
+
+    for (var i in payload) {
+      if (i === "type_floor") {
+        type_floor = payload[i]
+      } else if (i === "type_room") {
+        type_room = payload[i]
+      } else {
+        return false
+      }
+    }
+    this.setState({ payload: { type_floor: type_floor, type_room: type_room } })
+  }
+
+
 
   onPayloadChangeAndRefresh({ payload = {} }) {
     // 因为是异步，不要直接用 onPayloadChange ！！！
@@ -136,13 +156,17 @@ class Select extends BaseComponent {
     // Header 相关
     let header = []
 
-    showCbd && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
-    header = [
-      ...header,
-      { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.length > 0, index: 'house-type' },
-      { message: LOCALE_RENT, show: houseTypeDist.length > 0, index: 'price' },
-      // TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
-    ]
+    showCbd && cbdDist.length && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
+
+    if (houseTypeDist.length !== 0) {
+      header = [
+        ...header,
+        { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' },
+        { message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' },
+        // TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
+      ]
+    }
+
 
     return (show &&
       <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
@@ -166,7 +190,7 @@ class Select extends BaseComponent {
           ref={this.refSelectHouseType}
           items={houseTypeDist}
           show={headerIndex === 'house-type'}
-          onChange={this.onPayloadChange}
+          onChange={this.onPaylocadHouseTypeChange}
         />
 
         {/* 对应内容（预期价格） */}
