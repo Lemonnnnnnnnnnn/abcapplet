@@ -131,7 +131,7 @@ export const API_ORDER_DELETE = `${HOST}/order/cancelOrderPost`
 
 // 订单创建
 export const API_ORDER_CREATE = `${HOST}/order/createOrderPost`
-export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', sign_time: '', appointment_id: 0 }
+export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', tenancy: '', appointment_id: 0 }
 
 // 订单预览
 export const API_ORDER_PREVIEW = `${HOST}/order/perOrderPost`
