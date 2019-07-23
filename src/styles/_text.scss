@@ -65,3 +65,10 @@
     font-size: $font-size-xs;
   }
 }
+//文字超出省略
+.overtext{
+  overflow:hidden;
+  text-overflow:
+  ellipsis;white-space:nowrap;
+}
+

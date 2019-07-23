@@ -131,6 +131,13 @@ export const LOCALE_SIGN_NOW = '立即预订'
 export const LOCALE_CHANGE = '修改'
 export const LOCALE_PAY = '付款'
 
+export const LOCALE_SELF_SEE = '自己看看'
+export const LOCALE_HELP_REMOEND = '帮我推荐'
+export const LOCALE_ROOM_BUDGE = '租房预算'
+export const LOCALE_ROOM_CBD = '目标区域'
+export const LOCALE_ROOM_LIVINFTIME = '入住时间'
+export const LOCALE_ROOM_PEOPLE = '入住人数'
+export const LOCALE_ROOM_HOUSETYPE = '意向户型'
 // 活动相关
 export const LOCALE_ACTIVITY_TYPE_TUAN = '团购'
 export const LOCALE_ACTIVITY_TYPE_SIMPLE_TUAN = '团'
@@ -161,6 +168,60 @@ export const LOCALE_RENT_BUTTON = '无忧预定'
 export const LOCALE_RENT_RISK_MONEY_ONE = '本公寓可享受'
 export const LOCALE_RENT_RISK_MONEY_TWO = '预定风险金保障最高￥500'
 
+/**
+ * 看房服务相关
+ */
+
+export const LOCALE_APPOINTMENT_SIGNED  = '签约预订'
+export const LOCALE_APPOINTMENT_CASHPLEDGE  = '押金风险金保障'
+export const LOCALE_APPOINTMENT_DETAIL  = '查看详情'
+export const LOCALE_APPOINTMENT_HASLOOK  = '已带看服务'
+export const LOCALE_APPOINTMENT_SUMMON = '正在为你召唤'
+export const LOCALE_APPOINTMENT_BELONG = '专属管家...'
+//找房服务看房评价
+export const LOCALE_BUSINESS_LIKEABILITY_NONE = '非常不满意'
+export const LOCALE_BUSINESS_LIKEABILITY_NORMAL = '不满意'
+export const LOCALE_BUSINESS_LIKEABILITY_HIGH = '一般'
+export const LOCALE_BUSINESS_LIKEABILITY_SUPER = '比较满意'
+export const LOCALE_BUSINESS_LIKEABILITY_SIGNING = '非常满意'
+
+//找房服务下面四个功能块
+export const LOCALE_APPOINTMENT_MESSAGE = '行程留言'
+export const LOCALE_APPOINTMENT_RELUTION  = '联系管家'
+export const LOCALE_APPOINTMENT_EVALUTION  = '服务评价'
+export const LOCALE_APPOINTMENT_INTENTION  = '看房意向'
+
+//找房服务订房意向
+export const LOCALE_APPOINTMENT_LIKEABILITY_NONE = '无意向'
+export const LOCALE_APPOINTMENT_LIKEABILITY_NORMAL = '意向一般'
+export const LOCALE_APPOINTMENT_LIKEABILITY_HIGH = '意向较高'
+export const LOCALE_APPOINTMENT_LIKEABILITY_SUPER = '意向强烈'
+export const LOCALE_APPOINTMENT_LIKEABILITY_SIGNING = '马上预定'
+
+//服务评价
+
+export const LOCALE_APPOINTMENT_SERVICE= '已带看服务'
+export const LOCALE_APPOINTMENT_SERVICE_EVALUTION = "管家服务评价"
+
+//看房意向
+export const LOCALE_APPOINTMENT_INTENTION_DU = "您的订房意向度？"
+export const LOCALE_APPOINTMENT_INTENTION_LOCAL = "关注您本次看过的房间，可以跟踪房间的预定情况哦！"
+export const LOCALE_APPOINTMENT_INTENTION_FIND = "搜索"
+export const LOCALE_APPOINTMENT_INTENTION_LOOKROOM = "您可能看过的房间："
+
+export const LOCALE_APPOINTMENT_MESSAGE_LIU = '仅针对以下行程发起留言沟通'
+//预约看房
+export const LOCALE_APPOINTMENT_LOOKTIME =  "看房时间："
+export const LOCALE_APPOINTMENT_POST =  "提交预约"
+export const LOCALE_APPOINTMENT_SUCCESS = '预约成功!'
+export const LOCALE_APPOINTMENT_WATING = "柠小檬火速处理中，请耐心等待!"
+export const LOCALE_APPOINTMENT_ACCEPT= '管家已接单！'
+export const LOCALE_APPOINTMENT_ACCEPT_PHONE = '稍后管家将与您电话联系'
+export const LOCALE_APPOINTMENT_ACCEPT_ORDER ='预约接单'
+export const LOCALE_APPOINTMENT_CALL = '正在为您召唤管家...'
+export const LOCALE_APPOINTMENT_LOOK = '看房行程'
+export const LOCALE_APPOINTMENT_FINISH_REQUIRE = '完善需求'
+export const LOCALE_APPOINTMENT_HELP='完善需求有助于柠小檬为您推荐房源哦'
 // 协议相关
 
 export const LOCALE_AGREEMENT_NAME = '长租公寓预定服务协议（承租方）'

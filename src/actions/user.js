@@ -5,6 +5,8 @@ import {
   API_USER_LOGIN,
   API_USER_FAVORITE_DELETE,
   API_USER_FAVORITE_CREATE,
+  API_DEMAND_CREATE,
+  API_DEMAND_CHECK,
 } from '@constants/api'
 
 import {
@@ -13,6 +15,8 @@ import {
   USER_LOGOUT,
   USER_DEFAULT,
   USER_CITY_CODE,
+  TYPE_DEMAND_CREATE,
+  TYPE_DEMAND_CHECK,
 } from '@constants/user'
 
 import {
@@ -154,3 +158,24 @@ export const dispatchFavoriteCreate = (payload) => {
     url: API_USER_FAVORITE_CREATE,
   })
 }
+/**
+ * 提交需求卡
+ * @param {*} payload
+ */
+export const dispatchRequirementCreate = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type:TYPE_DEMAND_CREATE,
+  url: API_DEMAND_CREATE,
+})
+/**
+ * 判断用户已弹过引导框
+ * @param {*} payload
+ */
+export const dispatchRequirementCheck = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type:TYPE_DEMAND_CHECK,
+  url: API_DEMAND_CHECK,
+})
+

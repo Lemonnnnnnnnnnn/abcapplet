@@ -23,9 +23,14 @@ class App extends Component {
       'pages/apartment/cbd',
       'pages/apartment/show',
       'pages/apartment/activity',
-      'pages/apartment/services',
       'pages/apartment/recommend',
       'pages/apartment/house-type',
+      'pages/apartment/appointment',
+
+      'pages/appointment/services',
+      'pages/appointment/message',
+      // 'pages/appointment/mapHouse',
+      // 'pages/appointment/commuteHouse',
 
       'pages/user/auth',
       'pages/user/profile',
@@ -43,6 +48,11 @@ class App extends Component {
       'pages/external/index',
 
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -62,7 +72,7 @@ class App extends Component {
           selectedIconPath: "assets/icons/home-active.png"
         },
         {
-          pagePath: "pages/apartment/services",
+          pagePath: "pages/appointment/services",
           text: "找房",
           iconPath: "assets/icons/services.png",
           selectedIconPath: "assets/icons/services-active.png"
@@ -84,6 +94,11 @@ class App extends Component {
     navigateToMiniProgramAppIdList: [
       "wxd3537ccb429de3b4"
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    }
   }
 
   componentDidMount() { }

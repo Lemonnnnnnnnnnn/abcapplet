@@ -1,5 +1,11 @@
 @import "overrides";
 
+.btn-card {
+  border-color:#FFC919;
+  background:#FFC919;
+  color: #0A0A0A;
+}
+
 .btn-green {
   border-color: #06bb08;
   background: #06bb08;
@@ -14,10 +20,9 @@
   &.active {
     border-color: $color-yellow-0;
     background: $color-yellow-0;
-    color: $color-white;
+    color: $color-black-0;
   }
 }
-
 .btn-grey {
   border-color: #F2F2F2;
   background: #F2F2F2;
@@ -78,4 +83,18 @@
 
 .at-image-picker__choose-btn {
   border: 1PX solid #D2D2D2;
+}
+
+.button-yellow {
+  width:10px * $hd;
+  height:10px * $hd;
+  background:#FFC919;
+  border-radius:50%
+}
+
+.service-mask-head{
+  width:50px * $hd;
+  height:50px * $hd;
+  background:rgba(255,255,255,1);
+  border-radius:50%;
 }

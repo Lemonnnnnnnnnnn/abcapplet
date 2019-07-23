@@ -20,14 +20,6 @@ class SelectHouseType extends Component {
     onChange: () => { },
   }
 
-  // static defaultState = {
-  //   // AtTabs 相关
-  //   tabIndex: -1,
-  //   tabItemHeight: TABS_SELECT_ITEM_HEIGHT,
-  // }
-
-  // state = { ...SelectHouseType.defaultProps }
-
   onResetState() {
     const { initialRoom, initialFloor } = this.state
     this.setState({
@@ -72,34 +64,6 @@ class SelectHouseType extends Component {
     }, 500)
 
   }
-
-
-
-
-
-  // onTabRoomChange(tabIndex) {
-  //   const { items } = this.props
-  //   const { id: type_floor } = items.floor[tabIndex]
-
-  //   this.setState({ tabIndex: tabIndex })
-  //   this.props.onChange({ payload: { type_floor } })
-  // }
-
-  // onTabFloorChange(tabIndex) {
-  //   const { items } = this.props
-  //   const { id: type_floor } = items.floor[tabIndex]
-
-  //   this.setState({ tabIndex: tabIndex })
-  //   this.props.onChange({ payload: { type_floor } })
-  // }
-
-  // onTabRoomChange(e,index) {
-  //   const { items } = this.props
-  //   const { id: type_floor } = items.floor[index]
-
-  //   this.setState({ tabIndex: tabIndex })
-  //   this.props.onChange({ payload: { type_floor } })
-  // }
 
   onTabFloorChange(e, index) {
     const { floor } = this.state
@@ -146,9 +110,6 @@ class SelectHouseType extends Component {
   render() {
     const { show, items } = this.props
     const { room, floor } = this.state
-
-    // const { tabItemHeight, tabIndex } = this.state
-    // const tabsHeight = Taro.pxTransform(tabItemHeight * items.length)
 
     return (show && <View className='at-row '>
       <View >

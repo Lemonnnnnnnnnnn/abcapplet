@@ -112,7 +112,7 @@ class SelectCbd extends BaseComponent {
         />
         }
       </View>
-
+{/* 位置二级选择框 */}
       <View className='select-cbd-item'>
         {cbdIndex != -1 && <AtTabs
           scroll

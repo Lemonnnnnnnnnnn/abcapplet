@@ -1,3 +1,4 @@
+//首页顶端选择器加搜索样式（点击跳转）
 // Taro 相关
 import Taro from '@tarojs/taro'
 import { View, Picker, Text, Input } from '@tarojs/components'

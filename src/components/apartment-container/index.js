@@ -48,7 +48,7 @@ class ApartmentContainer extends BaseComponent {
   }
 
   render() {
-    const { swipers, height, width, isCollect } = this.props
+    const { swipers, height, width, isCollect,show } = this.props
 
     const style = {
       width: '100%',
@@ -79,8 +79,8 @@ class ApartmentContainer extends BaseComponent {
           </SwiperItem>)}
         </Swiper>
 
-        <View className='page-white apartment-container p-3'>
-          <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center'>
+        <View className='page-white apartment-container p-3' >
+          <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show===true?true:false}>
             {isCollect
               ? <AtIcon value='heart-2' size='35' color={COLOR_YELLOW} onClick={this.props.onDeleteFavorite} />
               : <AtIcon value='heart' size='35' color={COLOR_YELLOW} onClick={this.props.onCreateFavorite} />

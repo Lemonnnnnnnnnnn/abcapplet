@@ -12,6 +12,8 @@ import articles from './articles'
 import activities from './activities'
 import recommends from './recommends'
 import apartments from './apartments'
+import appointments from './appointment'
+import message from './message'
 
 export default combineReducers({
   ads,
@@ -27,4 +29,6 @@ export default combineReducers({
   activities,
   recommends,
   apartments,
+  appointments,
+  message,
 })

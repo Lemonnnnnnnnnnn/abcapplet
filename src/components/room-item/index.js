@@ -23,6 +23,7 @@ import {
 } from '@constants/styles'
 
 import {
+  LOCALE_MONEY,
   LOCALE_MONTH,
   LOCALE_ABC_SIGN,
   LOCALE_NO_AWARD_AND_SPACE,

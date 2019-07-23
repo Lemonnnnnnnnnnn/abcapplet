@@ -25,7 +25,7 @@ import { COLOR_GREY_2, COLOR_RED } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
-import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_HOME ,PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE,PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -61,7 +61,7 @@ class HouseTypeShow extends Component {
   }
 
   async componentDidMount() {
-    const { id = 83 } = this.$router.params
+    const { id  } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
@@ -226,11 +226,20 @@ class HouseTypeShow extends Component {
   }
 
   /**
-   * 点击
+   * 点击 预约看房,查看订单
    */
   onClick(method) {
-    this[method]()
+    if(method==='onCreateBusiness'){
+      const { houstType } = this.state
+      Taro.navigateTo({
+        url:`${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
+      })
+    }
+    if(method==='onCreateOrder'){
+      this[method]()
+    }
   }
+
 
 
   render() {
@@ -269,6 +278,7 @@ class HouseTypeShow extends Component {
     return <ApartmentContainer
       houseType_id={houseType_id}
       swipers={swipers}
+      show={false}
       isCollect={isCollect}
       onCreateFavorite={this.onCreateFavorite}
       onDeleteFavorite={this.onDeleteFavorite}
