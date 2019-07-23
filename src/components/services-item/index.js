@@ -12,7 +12,7 @@ import ServiceIntention from '@components/service-intention-mask'
 // NPM 包
 import classNames from 'classnames'
 
-import {PAGE_HOUSE_TYPE_SHOW,PAGE_APPOINTMENT_MESSAGE} from '@constants/page'
+import {PAGE_HOUSE_TYPE_SHOW,PAGE_APPOINTMENT_MESSAGE,PAGE_ORDER_CREATE} from '@constants/page'
 import {APPOINTMENT_FOUFUNCTION_DIST} from '@constants/appointment'
 
 import {
@@ -38,7 +38,14 @@ class ServiceItem extends BaseComponent {
     showEvalution:false,//看房评价
     showIntention:false,//看房意向
   }
-
+//跳转签约下定页面
+ onNavigationAgency(){
+  const { service } = this.props
+  const { house_type_id } = service
+  Taro.navigateTo({
+    url: `${PAGE_ORDER_CREATE}?type_id=${house_type_id}`
+   })
+}
 
 //跳转详情
   onNavigation() {
@@ -141,7 +148,7 @@ class ServiceItem extends BaseComponent {
     return (
       <View className='pl-3 pr-2 pb-3 mt-1' style='position:relative ;'>
         <View  className={classNames('apartment')} >
-          {/* 行程头部 */}
+          {/* 头部 */}
           <View className='apartment-header' style={headerStyle}>
 
            {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
@@ -151,7 +158,7 @@ class ServiceItem extends BaseComponent {
             }
           </View>
           <View className='at-row at-row__justify--around mt-1'>
-            <View className='at-row at-row-6 mb-2 ml-3 mt-5'>
+            <View className='at-row at-row-6 mb-2  mt-5'>
               {/* 下面四个按钮 */}
             {APPOINTMENT_FOUFUNCTION_DIST.map(i =>
               <View key={i.id} className='mx-1'onClick={this.onFourClick.bind(this,i.name)}>
@@ -164,7 +171,7 @@ class ServiceItem extends BaseComponent {
               </View>
             )}
             </View>
-           <View  className='mb-3 mr-4 ml-1 p-1 at-col at-col-4 mt-5 service-button'>
+           <View  className='mb-3 mr-4 ml-1 p-1 at-col at-col-4 mt-5 service-button' onClick={this.onNavigationAgency}>
               <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
               <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
             </View>
@@ -187,7 +194,7 @@ class ServiceItem extends BaseComponent {
               <View className='at-row at-row-5 mt-1 text-small' style='color:#FFFFFF' >{house_type_title}</View>
           </View>
           {/* 中间，计时框 */}
-          <View className='m-3 p-3 service-middle ml-4'>
+          <View className='m-3 p-3 service-middle ml-4' style='width:255px * $hd'>
               <View className='at-row at-row__justify--between'>
                 {/* 左边 */}
                 <View className='at-col at-col-3 '>
