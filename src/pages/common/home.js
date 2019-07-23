@@ -427,7 +427,6 @@ class CommonHome extends Component {
   onhandleClickFloor(value) {
     const {floorList} = this.state
     const { id, title } = floorList[value]
-    console.log(id, title)
     this.setState({ currentHouse: value, houseType: id, floorDetail: title })
   }
 
