@@ -50,12 +50,14 @@ export const ORDER_HEADERS = [
     id: 1,
     icon: 'lock',
     title: LOCALE_LOCK_ROOM,
+    url : "https://images.gongyuabc.com//image/lock.png",
     desc: LOCALE_LOCK_ROOM_DESC,
   },
   {
     id: 2,
     icon: 'all_inclusive',
     title: LOCALE_LOCK_RISK,
+    url : "https://images.gongyuabc.com//image/riskMoney.png",
     desc: LOCALE_LOCK_RISK_DESC,
   }
 ]

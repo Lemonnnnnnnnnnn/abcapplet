@@ -4,7 +4,7 @@
   background: #FF9C9C;
   color: #FFFFFF;
   font-size: $font-size-xs;
-  border-radius: 12px;
+  border-radius: 15px;
   width: 19px * $hd;
   height: 19px * $hd;
   text-align: center;
@@ -18,8 +18,8 @@
 }
 
 .badge-tuan {
-  color: #ff5000;
-  background: #26150d;
+  color: rgba(255, 125, 125, 1);
+  background: #fdeeeb;
 }
 
 .badge-xiao {
@@ -28,12 +28,12 @@
 }
 
 .badge-cu {
-  color: #fe1c03;
+  color: rgba(255, 125, 125, 1);
   background: #fdeeeb;
 }
 
 .badge-lao {
-  color: #255bff;
+  color: rgba(236, 251, 255, 1);
   background: #CBEEFC;
 }
 
@@ -48,6 +48,6 @@
 }
 
 .badge-discount {
-  color: #fe1c03;
+  color: rgba(255, 125, 125, 1);
   background: #fdeeeb;
 }

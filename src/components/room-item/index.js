@@ -40,6 +40,18 @@ class RoomItem extends BaseComponent {
     isSign: true,
   }
 
+  state = {
+    releaseDate: "",
+    showYear: false,
+    year: 0,
+  }
+
+  componentDidMount() {
+    const { room } = this.props
+    const { open_time, status } = room
+    status === 2 && this.changeTime(open_time)
+  }
+
   onSignRoom() {
     const { room } = this.props
     const id = room.room_id || room.id
@@ -62,11 +74,11 @@ class RoomItem extends BaseComponent {
 
 
   onViewPic() {
-    const {  room, roomList} = this.props
+    const { room, roomList } = this.props
     const { cover } = room
     let picList = []
 
-    roomList.map((value)=>{
+    roomList.map((value) => {
       picList.push(value.cover)
     })
     Taro.previewImage({
@@ -75,10 +87,35 @@ class RoomItem extends BaseComponent {
     })
   }
 
+  changeTime(time) {
+    const nowDate = new Date()
+    const year = nowDate.getFullYear()
+    const timeArr = time.split("-")
+    const yearLease = parseInt(timeArr[0])
+    const monthLease = parseInt(timeArr[1])
+    const dayLease = parseInt(timeArr[2])
+
+    const releaseDate = monthLease + "月" + dayLease + "日"
+
+
+    if (yearLease != year) {
+      this.setState({
+        showYear: true,
+        year: yearLease
+      })
+    }
+
+    this.setState({
+      releaseDate: releaseDate
+    })
+  }
+
 
   render() {
     const { className, room, width, height, type, isSign } = this.props
-    const { cover, status, space, toward, is_collect: isCollect } = room
+    const { cover, status, space, toward, is_collect: isCollect, open_time } = room
+
+    const { showYear, year, releaseDate } = this.state
 
     // 兼容字段代码
     const hasIsCollect = Object.keys(room).includes('is_collect')
@@ -90,7 +127,6 @@ class RoomItem extends BaseComponent {
       backgroundColor: "#F8F8F8",
       borderRadius: "12px"
     }
-
     const tag = ROOM_STATUS_DIST[status]
 
     // 设置图片宽高，方便七牛云格式化图片
@@ -126,7 +162,11 @@ class RoomItem extends BaseComponent {
                       {toward} {space} {(space === '' && toward === '') ? LOCALE_NO_AWARD_AND_SPACE : ''}
                     </Text>
                   </View>
-                  <Tag className='mt-2' type={tag.color} circle small>{tag.message}</Tag>
+                  {
+                    status === 2 ? <Tag className='mt-2' type={tag.color} circle small>{showYear ? year + releaseDate + tag.message : releaseDate + tag.message}</Tag> :
+                      <Tag className='mt-2' type={tag.color} circle small>{tag.message}</Tag>
+                  }
+
                 </View>
 
               </View>

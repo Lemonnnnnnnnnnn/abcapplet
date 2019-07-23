@@ -180,7 +180,7 @@ class ApartmentItem extends BaseComponent {
           {/* 公寓名称 */}
           <View className='at-row at-row__justify--between at-row__align--end'>
             <View className='apartment-content-main'>
-              <View className='normal mt-2'>{title}</View>
+              <View className='text-huge text-bold mt-2'>{title}</View>
               {desc && <View className='text-muted text-large mt-2 apartment-content-desc'>{desc}</View>}
             </View>
           </View>

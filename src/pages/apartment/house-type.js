@@ -18,6 +18,7 @@ import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
 import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
+import AppartmentMatchingMask from '@components/apartment-matching-mask'
 
 // 自定义变量
 import { COLOR_GREY_2, COLOR_RED } from '@constants/styles'
@@ -37,6 +38,7 @@ class HouseTypeShow extends Component {
   }
 
   state = {
+    houseType_id: 83,
     houstType: {
       cbds: [],
       rules: [],
@@ -53,7 +55,8 @@ class HouseTypeShow extends Component {
       markers: [],
     },
     buttons: [],
-    showRentDescription: false
+    showRentDescription: false,
+    showMatch: false,
 
   }
 
@@ -69,10 +72,21 @@ class HouseTypeShow extends Component {
       : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
 
     let facilitys = data.facility_list
-    const facilitys_list = facilitys.slice(0, 5)
+    let roomMatch = []
+    let publicMatch = []
+    facilitys.map(i=>{
+      i.type === 2 && roomMatch.push(i)
+      i.type === 1 && publicMatch.push(i)
+    })
+
+    const roomMatch_list = roomMatch.slice(0, 5)
+    const publicMatch_list = publicMatch.slice(0,5)
 
 
     this.setState({
+      roomMatch_list: roomMatch_list,
+      publicMatch_list: publicMatch_list,
+      houseType_id: id,
       buttons,
       houstType: {
         id: data.id,
@@ -89,7 +103,7 @@ class HouseTypeShow extends Component {
         descList: data.desc_list,
         roomList: data.room_list,
         isCollect: data.is_collect,
-        facilitys: facilitys_list,
+        facilitys: data.facility_list,
         tags: data.tags,
         apartmentId: data.apartment_id,
         lookTime: data.look_guide.open_time,
@@ -135,6 +149,17 @@ class HouseTypeShow extends Component {
 
   onCloseRentDescription() {
     this.setState({ showRentDescription: false })
+  }
+
+  // 打开所有配置弹窗
+  onOpenAllMatching() {
+    this.setState({ showMatch: true })
+  }
+
+  // 关闭所有配置弹窗
+
+  onCloseAllMatching() {
+    this.setState({ showMatch: false })
   }
 
   onNavigationApartment() {
@@ -211,12 +236,12 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list,publicMatch_list } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, lookTime, lookTips, cover,
-      notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle, position, tags, cost_info,id
+      notices, cbds, intro, hotRules, rules, facilitys, apartmentTitle, position, tags, cost_info, id
     } = houstType
 
 
@@ -225,17 +250,24 @@ class HouseTypeShow extends Component {
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
-      borderRadius: "12px"
+      borderRadius: "12px",
     }
 
     const PublicConfiguration = {
       backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "12px",
-      padding: " 2px 5px"
+      padding: " 2px 6px"
     }
 
+    const deposit = {
+      borderRadius: "12px",
+      backgroundColor: "rgba(255, 201, 25, 1)",
+      color: "#fff",
+      padding: "3px"
+    }
 
     return <ApartmentContainer
+      houseType_id={houseType_id}
       swipers={swipers}
       isCollect={isCollect}
       onCreateFavorite={this.onCreateFavorite}
@@ -244,7 +276,7 @@ class HouseTypeShow extends Component {
 
 
       <TabBar
-        show={!showRentDescription}
+        show={!showRentDescription && !showMatch}
         hasShare
         hasContact
         buttons={buttons}
@@ -259,47 +291,54 @@ class HouseTypeShow extends Component {
         typeId={id}
       />
 
+      <AppartmentMatchingMask
+        facilitys={facilitys}
+        show={showMatch}
+        onClose={this.onCloseAllMatching}
+      />
+
+
 
       {/* 头部 */}
       <View className='text-bold text-huge'>{title}</View>
-      <View className='text-secondary text-normal'>{intro}</View>
+      <View className='text-secondary text-large'>{intro}</View>
 
       {/* 价格相关 */}
-      <View className='at-row at-row__justify--between at-row__align--center  mt-2'>
-        <View className='text-yellow'>
+      <View className='at-row at-row__justify--between at-row__align--end  mt-2'>
+        <View className='text-yellow at-col'>
           <Text className='text-super text-bold'>
             {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}`}
           </Text>
           <Text className='text-large'>{LOCALE_PRICE_START}</Text>
         </View>
 
-        <View>
-          <View className='at-row at-row__align--center at-row__justify--end'>
+        <View className='at-col'>
+          <View className='at-row at-row__align--center at-row__justify--end mb-2'>
             <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
             <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
           </View>
         </View>
       </View>
 
-      {/* 活动信息 */}
-      {/* {hotRules.map((i, index) =>
-        <View className='at-row at-row__align--center' key={i.id}>
-          <View className='at-col at-col-2'>
-            <Tag
-              small active
-              circle
-              type={colors[index % 3]}
-              onClick={this.onNavigation.bind(this, i.url)}
-            >#{i.title}#</Tag>
-          </View>
-          <View className='text-secondary text-small ml-4 at-col at-col-6'>{i.title}</View>
-        </View>
-      )} */}
+      {/* 押金保障 */}
 
-      <View >
-        {rules.map(i =>
-          <View key={i.id} className=' mt-2 mr-3'>
-            <Text className={`badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+      {
+        isSign && <View className='at-row '>
+          <View className='at-col at-col-2 text-normal' style={deposit}>押金保障</View>
+          <View className='at-col at-col-6 text-normal ml-3 text-secondary mt-1'>该房源支持退租押金最高50%无忧赔付</View>
+        </View>
+      }
+
+
+      <View className='mt-2' style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
+
+
+      {/* 活动信息 */}
+
+      <View className='mt-3'>
+        {rules && rules.map(i =>
+          <View key={i.id} className=' mt-2 mr-3 mb-3'>
+            <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
             <Text className='text-secondary text-small ml-3'>{i.content}</Text>
           </View>
         )}
@@ -308,17 +347,12 @@ class HouseTypeShow extends Component {
       {/* 品牌宣传 */}
       <View style={BrandingStyle}>
         <Tag className='my-3' active circle>
-          <View className='at-row  at-row__justify--center text-secondary'>
+          <View className='at-row  at-row__align--center text-secondary'>
 
-            <View className='at-row at-row__align--end'>
-              <ABCIcon icon='lens' color='#888888' size='18' />
+              <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
               <View className='ml-2'>100%免中介费</View>
-            </View>
-
-            <View className='at-row at-row__align--end'>
-              <ABCIcon icon='lens' color='#888888' size='18' />
+              <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
               <View className='ml-2'>严选厦门3万+房源</View>
-            </View>
 
           </View>
         </Tag>
@@ -327,9 +361,9 @@ class HouseTypeShow extends Component {
       {/* 地图 */}
       <View className='at-row at-row__align--start'>
         <View className='at-col at-col-1'>
-          <ABCIcon icon='map-pin' color='#888888' size='20' />
+          <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
         </View>
-        <View className='at-col at-col-3 text-normal text-secondary  ml-2'>{position}</View>
+        <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
       </View>
 
       {/* 文章相关 */}
@@ -347,22 +381,21 @@ class HouseTypeShow extends Component {
               </View>
             )}
           </View>
-          <View className='text-normal text-secondary mt-2'>{desc}</View>
         </View>
       }
 
       {/* 公共配置 */}
       <View className='at-row at-row--wrap mt-4'>
 
-        {facilitys.map(i =>
-          <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
+        {roomMatch_list && roomMatch_list.map(i =>
+          <View  style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto mr-2'>
             <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
             <View className='text-small'>{i.title}</View>
           </View>
         )}
 
-        <View style={PublicConfiguration} className='text-center'>
-          <Image src={facilitys[0].icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} ></Image>
+        <View style={PublicConfiguration}  className='text-center'>
+          <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
           <View className='text-small'>更多</View>
         </View>
       </View>
@@ -389,28 +422,11 @@ class HouseTypeShow extends Component {
 
       {/* 可租房间 */}
       <View >
-        <View className='text-bold text-huge'>可租房间</View>
+        <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
         {
           isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
         }
-        {roomList.map((i, index) =>
-          <RoomItem
-            key={i.id}
-            room={i}
-            isSign={isSign}
-            onCreateFavorite={this.onRoomCreateFavorite}
-            onDeleteFavorite={this.onRoomDeleteFavorite}
-            className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
-          />)}
-      </View>
-
-      {/* <View className='at-row at-row__justify--between at-row__align--center mt-4'>
-          <View className='text-bold text-huge'>可租房间</View>
-        </View>
-        {isSign && <View className='my-2'>
-          <OrderHeader items={ORDER_HEADERS} />
-        </View>}
-        {roomList.map((i, index) =>
+        {roomList && roomList.map((i, index) =>
           <RoomItem
             key={i.id}
             room={i}
@@ -419,7 +435,9 @@ class HouseTypeShow extends Component {
             onCreateFavorite={this.onRoomCreateFavorite}
             onDeleteFavorite={this.onRoomDeleteFavorite}
             className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
-          />)} */}
+          />)}
+      </View>
+
 
       {/* 用户须知 */}
       {/* 左分3栏，右分9栏 */}
@@ -450,7 +468,7 @@ class HouseTypeShow extends Component {
 
       {/* 公寓信息 */}
       <View>
-        <View className='text-bold text-huge mt-4'>公寓信息</View>
+        <View className='text-bold text-huge mt-4 mb-3'>公寓信息</View>
         <View className='at-row at-row__align--center  at-row__justify--between my-2'>
           <View>
             <View className='at-row at-row__align--center'>
@@ -466,8 +484,8 @@ class HouseTypeShow extends Component {
           </View>
         </View>
         <View style='text-indent: 10px' className='text-secondary text-normal'>{desc}</View>
-        <View className='at-row at-row--wrap mt-2'>
-          {facilitys.map(i =>
+        <View className='at-row at-row--wrap mt-3 mb-3'>
+          {publicMatch_list && publicMatch_list.map(i =>
             <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
               <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
               <View className='text-small'>{i.title}</View>
@@ -475,7 +493,7 @@ class HouseTypeShow extends Component {
           )}
 
           <View style={PublicConfiguration} className='text-center'>
-            <Image src={facilitys[0].icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} ></Image>
+            <View onClick={this.onOpenAllMatching} style={{ height: '30px', width: '30px' }}>...</View>
             <View className='text-small'>更多</View>
           </View>
         </View>

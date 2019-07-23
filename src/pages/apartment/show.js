@@ -59,7 +59,7 @@ class ApartmentShow extends Component {
         intro: data.one_word,
         // address: data.address,
         cbds: data.cbd_list,
-        types: data.house_types.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
+        types: data.type_floors.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
         isCollect: data.is_collect,
         rules: data.extend_info.rules,
         facilitys: data.facility_list,

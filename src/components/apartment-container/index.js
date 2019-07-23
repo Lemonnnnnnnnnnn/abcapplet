@@ -7,6 +7,7 @@ import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
 // 自定义组件
 import BaseComponent from '@components/base'
 
+
 // 自定义常量
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 
@@ -19,8 +20,31 @@ class ApartmentContainer extends BaseComponent {
     isCollect: false,
   }
 
-  onShowPic(){
-      Taro.navigateTo({url:'/pages/apartment/pic-browser'})
+  state = {
+    current: 0
+  }
+
+  onShowPic() {
+    const picList = []
+    const { swipers } = this.props
+    const { current } = this.state
+    swipers.map(i => {
+      picList.push(i.url)
+    })
+    const currentPic = picList[current + 1]
+
+    Taro.previewImage({
+      urls: picList,
+      current : currentPic
+    })
+
+  }
+
+  changePicIndex() {
+    const { current } = this.state
+    this.setState({
+      current: current + 1
+    })
   }
 
   render() {
@@ -34,9 +58,12 @@ class ApartmentContainer extends BaseComponent {
     return (
       <View>
         <Swiper
+          className='swiper'
           indicatorDots
           autoplay
           circular
+          current
+          onChange={this.changePicIndex}
           style={style}
           displayMultipleItems={1}
           indicatorActiveColor={COLOR_YELLOW}
