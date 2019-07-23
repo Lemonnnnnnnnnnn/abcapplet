@@ -130,7 +130,6 @@ class SelectHouseType extends Component {
 
       if (i.id === index ) {
         i.active = !i.active
-        console.log(i.id - 1)
         const { id: type_room } = room[i.id ]
         this.props.onChange({ payload: { type_room } })
       } else {
@@ -171,25 +170,6 @@ class SelectHouseType extends Component {
         }
       </View>
 
-
-
-
-      {/* <AtTabs
-        scroll
-        tabDirection='vertical'
-        tabList={items.floor}
-        current={tabIndex}
-        height={tabsHeight}
-        onClick={this.onTabFloorChange}
-      />
-      <AtTabs
-        scroll
-        tabDirection='vertical'
-        tabList={items.room}
-        current={tabIndex}
-        height={tabsHeight}
-        onClick={this.onTabRoomChange}
-      /> */}
     </View>
     )
   }
