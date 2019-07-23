@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View, Input, Text, Picker } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
+import { View, Input, Text } from '@tarojs/components'
+import { AtButton ,AtTag} from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -42,6 +42,7 @@ import {
 
 // NPM 包
 import day from 'dayjs'
+import { threadId } from 'worker_threads';
 
 @connect(state => state, {
   ...orderActions,
@@ -54,6 +55,9 @@ class OrderCreate extends Component {
   }
 
   state = {
+    signTime: day().format('YYYY-MM-DD'),
+
+    timeList:[],
     disabled: false,
     showRoomList: false,
     room: {
@@ -73,30 +77,46 @@ class OrderCreate extends Component {
 
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
-
     // 初始化表单
     this.setState({
+      timeList:data.tenancy,
+      // tenancy:data.tenancy,
       room: { ...data.room },
       rooms: [...data.rooms],
+      signTime: day().format('YYYY-MM-DD'),
       payload: {
         room_id: data.room.id,
         appointment_id,
         name: data.user_info.name,
         mobile: data.user_info.mobile,
         id_code: data.user_info.id_no,
-        sign_time: day().format('YYYY-MM-DD')
+
       }
     })
   }
 
-  // 设置时间
-  onSignTimeChange({ currentTarget: { value } }) {
-    const { payload } = this.state
+  componentDidMount(){
+    const { timeList } = this.state
     this.setState({
-      payload: { ...payload, sign_time: value }
+      timeList:timeList.map(i =>({...i,active:false}))
     })
   }
 
+  // 选择租期
+  onTimeChange(id) {
+    const { payload,timeList } = this.state
+    const timeListLength = timeList.length
+    for(var timeSelect=0 ;timeSelect<timeListLength;timeSelect++){
+      if(timeList[timeSelect].id === id){
+        timeList[timeSelect].active = true
+      }else{
+        timeList[timeSelect].active = false
+      }
+    }
+    this.setState({
+      timeList ,
+      payload: { ...payload, tenancy: id }})
+  }
   // 名字
   onNameInput({ currentTarget: { value } }) {
     const { payload } = this.state
@@ -104,7 +124,6 @@ class OrderCreate extends Component {
       payload: { ...payload, name: value }
     })
   }
-
   // 电话
   onMobileInput({ currentTarget: { value } }) {
     const { payload } = this.state
@@ -112,7 +131,6 @@ class OrderCreate extends Component {
       payload: { ...payload, mobile: value }
     })
   }
-
   // 身份证
   onIdCodeInput({ currentTarget: { value } }) {
     const { payload } = this.state
@@ -120,7 +138,6 @@ class OrderCreate extends Component {
       payload: { ...payload, id_code: value }
     })
   }
-
   // 选择房间
   onSelectRoom(id) {
     const { payload, rooms } = this.state
@@ -174,8 +191,8 @@ class OrderCreate extends Component {
   }
 
   render() {
-    const { payload, room, rooms, showRoomList, disabled } = this.state
-    const { name, mobile, id_code: idCode, sign_time: signTime } = payload
+    const { payload, room, rooms, showRoomList, disabled ,timeList,signTime} = this.state
+    const { name, mobile, id_code: idCode} = payload
     const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money: riskMoney, id } = room
 
     return (
@@ -244,6 +261,35 @@ class OrderCreate extends Component {
             </View>
           </Board>
 
+          {/* 租期*/}
+          <Board className='px-3 py-2  mb-3'>
+            {/* 内容头部 */}
+            <View className='py-1'>
+              <View className='at-row at-row__justify--between at-row at-row__align--center'>
+                <View >
+                  <View className='at-row'>
+                    <View className='border-decorate border-decorate-yellow' style={{ height: '18px' }}></View>
+                    <View className='ml-2 text-normal text-secondary'>租期</View>
+                  </View>
+                </View>
+
+                <View className='at-col-4 at-row'>
+                     {timeList.map((item,index)=> (
+                          <View className='at-row at-row__justify--around ml-2 '  key={index}>
+                            <AtTag
+                              type='primary'
+                              size='small'
+                              name={item.name}
+                              active={item.active}
+                              circle
+                              onClick={this.onTimeChange.bind(this,item.id)}
+                            >{item.name}</AtTag>
+                        </View>
+                        ))}
+                </View>
+              </View>
+            </View>
+          </Board>
           {/* 签约时间 */}
           <Board className='px-3 py-2  mb-3'>
             {/* 内容头部 */}
@@ -252,16 +298,16 @@ class OrderCreate extends Component {
                 <View>
                   <View className='at-row'>
                     <View className='border-decorate border-decorate-yellow' style={{ height: '18px' }}></View>
-                    <View className='ml-2 text-normal text-secondary'>{LOCALE_SIGN_TIME_RANGE}</View>
+                    <View className='ml-2 text-normal text-secondary'>签约时间</View>
                   </View>
                 </View>
 
                 <View>
-                  <Picker mode='date' onChange={this.onSignTimeChange}>
+
                     <View className='picker text-normal'>
                       {signTime}
                     </View>
-                  </Picker>
+
                 </View>
               </View>
             </View>
