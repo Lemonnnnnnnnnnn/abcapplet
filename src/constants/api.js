@@ -151,6 +151,34 @@ export const API_UPLOAD_IMAGE = `${HOST}/upload/picturePost`
 // 订单支付
 export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
 
+/**
+ ************************
+ * 用户行程相关
+ ************************
+ */
+//获取看房行程信息
+export const API_APPOINTMENT_LIST = `${HOST}/appointment/listPost`
+export const PAYLOAD_APPOINTMENT_LIST = { current_page: 1, page_size: PAGE_SIZE}
+
+//添加评价
+export const API_REVULUTION_CREAT = `${HOST}/appointment/commentPost`
+export const PAYLOAD_REVULUTION_CREAT = { appointment_id: 0, score: 1, comment:''}
+
+//添加看房评价
+export const API_INTENTION_CREATE = `${HOST}/appointment/intentionPost`
+export const PAYLOAD_INTENTION_CREATE = { appointment_id: '', score: '', room_ids:''}
+
+//获取行程下相关的房间列表
+export const API_INTENTION_ROOM_SHOW = `${HOST}/appointment/roomPost`
+export const PAYLOAD_INTENTION_ROOM_SHOW = { appointment_id: 0, room_no:''}
+
+//行程留言,新增一条留言
+export const API_MESSAGE_CREATE = `${HOST}/appointment/addMessagePost`
+export const PAYLOAD_MESSAGE_CREATE  = { appointment_id: 0, content:''}
+
+//获取行程留言
+export const API_MESSAGE_LIST = `${HOST}/appointment/listMessagePost`
+export const PAYLOAD_MESSAGE_LIST  = { appointment_id: 0}
 //提交需求卡
 export const API_DEMAND_CREATE = `${HOST}/user/addDemandPost`
 export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',house_type:'' }

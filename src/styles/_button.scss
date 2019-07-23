@@ -84,3 +84,17 @@
 .at-image-picker__choose-btn {
   border: 1PX solid #D2D2D2;
 }
+
+.button-yellow {
+  width:10px * $hd;
+  height:10px * $hd;
+  background:#FFC919;
+  border-radius:50%
+}
+
+.service-mask-head{
+  width:50px * $hd;
+  height:50px * $hd;
+  background:rgba(255,255,255,1);
+  border-radius:50%;
+}

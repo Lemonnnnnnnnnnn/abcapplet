@@ -23,10 +23,14 @@ class App extends Component {
       'pages/apartment/cbd',
       'pages/apartment/show',
       'pages/apartment/activity',
-      'pages/apartment/services',
       'pages/apartment/recommend',
       'pages/apartment/house-type',
       'pages/apartment/appointment',
+
+      'pages/appointment/services',
+      'pages/appointment/message',
+      // 'pages/appointment/mapHouse',
+      // 'pages/appointment/commuteHouse',
 
       'pages/user/auth',
       'pages/user/profile',
@@ -68,7 +72,7 @@ class App extends Component {
           selectedIconPath: "assets/icons/home-active.png"
         },
         {
-          pagePath: "pages/apartment/services",
+          pagePath: "pages/appointment/services",
           text: "找房",
           iconPath: "assets/icons/services.png",
           selectedIconPath: "assets/icons/services-active.png"
