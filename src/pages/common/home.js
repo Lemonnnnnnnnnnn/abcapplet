@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View,Image } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import { AtCurtain } from 'taro-ui'
 
 // 自定义组件
@@ -32,13 +32,9 @@ import * as apartmentActions from '@actions/apartment'
 // 自定义常量
 import {
   PAYLOAD_APARTMENT_LIST,//公寓列表
-  PAYLOAD_CREATE_DEMAND ,//{ budget:'',cbd:0,living_time:'',people:'',house_type:0 }
+  PAYLOAD_CREATE_DEMAND,//{ budget:'',cbd:0,living_time:'',people:'',house_type:0 }
 } from '@constants/api'
 
-import{
-  TIMETAGLIST,
-  PEOPLETTAGLIST
-}from '@constants/user'
 
 import {
   LOCALE_HOT_CBD,
@@ -64,31 +60,34 @@ class CommonHome extends Component {
   }
 
   state = {
-    payload:PAYLOAD_CREATE_DEMAND,
+    payload: PAYLOAD_CREATE_DEMAND,
     showCard: false,//显示需求卡1
-    showNextCard:false,//显示需求卡2
-    showPrice:false,//需求卡2价格显示
-    showHouse:false,//需求卡2户型显示
-    showCbd:false,//需求卡2位置显示
-    isOpen:false,
-    isOpenedFinish:false,//需求卡填写完成
+    showNextCard: false,//显示需求卡2
+    showPrice: false,//需求卡2价格显示
+    showHouse: false,//需求卡2户型显示
+    showCbd: false,//需求卡2位置显示
+    isOpen: false,
+    isOpenedFinish: false,//需求卡填写完成
 
 
-    currentPrice:-1,
-    currentHouse:-1,
-    currentCbd:-1,
-    currentCbdTwo:-1,
-    budget:'',
-    houseType:'',
-    budgetDetail:'无',
-    houseTypeDetail:'无',
-    cdbDetailDetail:'无',
-    cbdListItem:[],
+    currentPrice: -1,
+    currentHouse: -1,
+    currentCbd: -1,
+    currentCbdTwo: -1,
+    budget: '',
+    houseType: '',
+    budgetDetail: '无',
+    roomDetail: '无',
+    floorDetail : "",
+    cdbDetailDetail: '无',
+    cbdListItem: [],
     placeSelected: [],//三层有数据
-    cdbDetailList:[],//三层有数据
-    place:'',//三层无数据
-    livingTime:'',
-    livingPeople:'',
+    cdbDetailList: [],//三层有数据
+    place: '',//三层无数据
+    livingTime: '',
+    livingPeople: '',
+    roomList: [],
+    floorList: [],
 
 
     // 搜索相关
@@ -104,17 +103,17 @@ class CommonHome extends Component {
     selectorChecked: '厦门市',
 
     timeTagList: [
-      { id:1,name: '马上', active: false },
-      { id:7,name: '7 天', active: false },
-      { id:15,name: '15天', active: false },
-      { id:32,name: '一个月后', active: false }
+      { id: 1, name: '马上', active: false },
+      { id: 7, name: '7 天', active: false },
+      { id: 15, name: '15天', active: false },
+      { id: 32, name: '一个月后', active: false }
     ],
 
-    peopleTagList:[
-      { id:1,name: '1 人', active: false },
-      { id:2,name: '2 人', active: false },
-      { id:3,name: '3 人', active: false },
-      { id:4,name: '3人以上', active: false }
+    peopleTagList: [
+      { id: 1, name: '1 人', active: false },
+      { id: 2, name: '2 人', active: false },
+      { id: 3, name: '3 人', active: false },
+      { id: 4, name: '3人以上', active: false }
     ],
 
   }
@@ -123,12 +122,37 @@ class CommonHome extends Component {
 
   componentWillMount() {
 
-    // 获取筛选器和搜索框距离顶部的距离
+    // 自定义roomList和floorList
 
     const {
       selectScrollTop,
       searchScrollTop,
     } = this.state
+
+
+    const initialFloor = [{id : 0 , title : "不限"}]
+    const initialRoom = [{id : 0 , title : "不限"}]
+
+    setTimeout(() => {
+      const { dists } = this.props
+
+      const room = dists.housetype_list.room
+      const floor = dists.housetype_list.floor
+
+      floor.map(i => {
+        initialFloor.push(i)
+      })
+      room.map(i => {
+        initialRoom.push(i)
+      })
+
+      this.setState({
+        floorList: [...initialFloor],
+        roomList: [...initialRoom],
+      })
+    }, 500)
+
+    // 获取筛选器和搜索框距离顶部的距离
 
     !searchScrollTop
       && Taro.createSelectorQuery()
@@ -169,7 +193,7 @@ class CommonHome extends Component {
     })
   }
   //分享收藏小程序
-  onShareAppMessage (res) {
+  onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
     }
@@ -178,13 +202,14 @@ class CommonHome extends Component {
       path: '/page/user?id=123'
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     //判断是否弹出需求卡
     const { user } = this.props
     const { is_guide } = user
-    if(is_guide === 0){
-      this.setState({showCard:true})
+    if (is_guide === 0) {
+      this.setState({ showCard: true })
     }
+
 
   }
 
@@ -292,9 +317,9 @@ class CommonHome extends Component {
     this.props.dispatchFavoriteDelete(payload)
   }
 
-    /**
-   * 关闭需求卡1
-   */
+  /**
+ * 关闭需求卡1
+ */
   onCloseCard() {
     this.props.dispatchRequirementCheck()
     this.setState({ showCard: false })
@@ -303,233 +328,246 @@ class CommonHome extends Component {
    * 关闭需求卡1，打开需求卡2
    * @param {*} citycode
    */
-  onNextCard(){
-    this.setState({showCard: false , showNextCard:true,})
+  onNextCard() {
+    this.setState({ showCard: false, showNextCard: true, })
   }
   /**
    * 需求卡2，打开价格选择
    */
-  onShowPrice(){
-    this.setState({showPrice:true})
+  onShowPrice() {
+    this.setState({ showPrice: true })
   }
   /**
    * 需求卡2，关闭价格选择
    */
-  onClosePrice(){
+  onClosePrice() {
     this.setState({
-      showPrice:false
+      showPrice: false
     })
   }
-   /**
-   * 需求卡2，打开户型选择
-   */
-  onShowHouse(){
-    this.setState({ showHouse:true, })
+  /**
+  * 需求卡2，打开户型选择
+  */
+  onShowHouse() {
+    this.setState({ showHouse: true, })
   }
-   /**
-   * 需求卡2，关闭户型选择
-   */
-  onCloseHouse(){
-    this.setState({showNextCard:true, showHouse:false })
+  /**
+  * 需求卡2，关闭户型选择
+  */
+  onCloseHouse() {
+    this.setState({ showNextCard: true, showHouse: false })
   }
-     /**
-   * 需求卡2，打开位置选择
-   */
-  onShowCbd(){
-    this.setState({showCbd:true, })
+  /**
+* 需求卡2，打开位置选择
+*/
+  onShowCbd() {
+    this.setState({ showCbd: true, })
   }
-   /**
-   * 需求卡2，关闭位置选择
-   */
-  onCloseCbd(){
-    this.setState({showNextCard:true, showCbd:false })
+  /**
+  * 需求卡2，关闭位置选择
+  */
+  onCloseCbd() {
+    this.setState({ showNextCard: true, showCbd: false })
   }
-   /**
-   * 关闭需求卡2
-   * @param {*} citycode
-   */
-  onCloseCardNext(){
+  /**
+  * 关闭需求卡2
+  * @param {*} citycode
+  */
+  onCloseCardNext() {
     this.props.dispatchRequirementCheck()
-    this.setState({showNextCard:false,})
+    this.setState({ showNextCard: false, })
   }
   /**
    * 入住时间单选
    */
-  onHandleTimeSolidClick ( data ) {
-      const { timeTagList } = this.state
-      const { payload } = this.state
-      const timeTagListLength = timeTagList.length
-      for(var nowTimeClick =0; nowTimeClick < timeTagListLength; nowTimeClick++){
-        if(timeTagList[nowTimeClick].name == data.name){
-          timeTagList[nowTimeClick].active = true
-          this.setState({livingTime:data.id, payload: { ...payload, living_time:data.id} })
-        }else{
-          timeTagList[nowTimeClick].active = false
-        }
+  onHandleTimeSolidClick(data) {
+    const { timeTagList } = this.state
+    const { payload } = this.state
+    const timeTagListLength = timeTagList.length
+    for (var nowTimeClick = 0; nowTimeClick < timeTagListLength; nowTimeClick++) {
+      if (timeTagList[nowTimeClick].name == data.name) {
+        timeTagList[nowTimeClick].active = true
+        this.setState({ livingTime: data.id, payload: { ...payload, living_time: data.id } })
+      } else {
+        timeTagList[nowTimeClick].active = false
       }
-      this.setState({ timeTagList })
     }
+    this.setState({ timeTagList })
+  }
   /**
    * 入住人数单选
    */
-  onHandlePeopleSolidClick ( data ) {
+  onHandlePeopleSolidClick(data) {
     const { peopleTagList } = this.state
     const { payload } = this.state
     const peopleTagListLength = peopleTagList.length
-    for(var nowPeopleClick =0; nowPeopleClick < peopleTagListLength; nowPeopleClick++){
-      if(peopleTagList[nowPeopleClick].name == data.name){
+    for (var nowPeopleClick = 0; nowPeopleClick < peopleTagListLength; nowPeopleClick++) {
+      if (peopleTagList[nowPeopleClick].name == data.name) {
         peopleTagList[nowPeopleClick].active = true
-        this.setState({ livingPeople:data.id,payload: { ...payload, people:data.id} })
-      }else{
+        this.setState({ livingPeople: data.id, payload: { ...payload, people: data.id } })
+      } else {
         peopleTagList[nowPeopleClick].active = false
       }
     }
     this.setState({ peopleTagList })
   }
-//改变价格
-handleClickPrice (value) {
-  const {id,title} = this.props.dists.price_list[value]
-  this.setState({currentPrice: value,budget:id,budgetDetail:title,})
-}
-//改变户型
-handleClickHouse (value) {
-  const {id,title} = this.props.dists.housetype_list[value]
-  this.setState({currentHouse:value,houseType:id,houseTypeDetail:title})
-}
-//改变位置 第一层
-handleClickCbd(value){
-  this.setState({currentCbd:value,currentCbdTwo:-1,placeSelected:[],})
-}
-//改变位置 第二层
-onChangeCbdTwo(value){
-  const { currentCbd } = this.state
-  const { list }  = this.props.dists.cbd_list[currentCbd]//第二层数据
-  this.setState({cdbDetailList:[]})
-  if(list[value].list.length === 0){
-    this.setState({currentCbdTwo:value, cbdList :list[value].title , place:list[value].id,cbdListItem:[],placeSelected:[]})
-  }else{
-    this.setState({currentCbdTwo:value, cbdListItem :list[value].list, place:'',placeSelected:[]})
+  //改变价格
+  handleClickPrice(value) {
+    const { id, title } = this.props.dists.price_list[value]
+    this.setState({ currentPrice: value, budget: id, budgetDetail: title, })
   }
-}
-//改变位置 第三层
-onChangeCbdThree(value){
-  let { placeSelected ,cdbDetailList} = this.state
+  //改变户型
 
-  cdbDetailList = cdbDetailList.includes(value.title)
-  ? cdbDetailList.filter(i => i != value.title)
-  : [...cdbDetailList, value.title],
-
-  placeSelected = placeSelected.includes(value.id)
-    ? placeSelected.filter(i => i != value.id)
-    : [...placeSelected, value.id],
-
-  this.setState({cdbDetailList, placeSelected })
-}
-//确定价格
-onComfirePrice(){
-  const { payload ,budget} = this.state
-  this.setState({
-    showNextCard:true,
-    showPrice:false,
-    payload: { ...payload, budget:budget}
-  })
-}
-//确定户型
-onComfireHouse(){
-  const { payload ,houseType} = this.state
-  this.setState({
-    showNextCard:true,
-    showHouse:false,
-    payload: { ...payload, house_type	:houseType}
-
-  })
-}
-//确定目标区域
-onComfireCbd(){
-  const { placeSelected,payload,cdbDetailList,cbdList,place,cbdListItem } = this.state
-  if(cbdListItem.length !== 0 && placeSelected.length===0){
-    Taro.showToast({
-      title: '请选择',
-      icon:'none',
-      duration:2000
-    })
-  }else if(placeSelected.length !== 0){
-    const cbd = placeSelected.join(',')
-    const showCdbDetailDetail = cdbDetailList.join(',')
-    this.setState({
-      cdbDetailDetail:showCdbDetailDetail,
-      showNextCard:true,
-      showCbd:false,
-      payload: { ...payload, cbd:cbd}
-    })
-  }else  if(cbdListItem.length === 0 ){
-    this.setState({
-      cdbDetailDetail:cbdList,
-      showNextCard:true,
-      showCbd:false,
-      payload: { ...payload, cbd:place}
-    })
+  onhandleClickRoom(value) {
+    const {roomList} = this.state
+    const { id, title } = roomList[value]
+    this.setState({ currentHouse: value, houseType: id, roomDetail: title })
   }
 
-}
-//重置价格
-  onResetClickP(){
-    this.setState({budget:'',currentPrice:-1,budgetDetail:'无',
+  onhandleClickFloor(value) {
+    const {floorList} = this.state
+    const { id, title } = floorList[value]
+    this.setState({ currentHouse: value, houseType: id, floorDetail: title })
+  }
+
+  //改变位置 第一层
+  handleClickCbd(value) {
+    this.setState({ currentCbd: value, currentCbdTwo: -1, placeSelected: [], })
+  }
+  //改变位置 第二层
+  onChangeCbdTwo(value) {
+    const { currentCbd } = this.state
+    const { list } = this.props.dists.cbd_list[currentCbd]//第二层数据
+    this.setState({ cdbDetailList: [] })
+    if (list[value].list.length === 0) {
+      this.setState({ currentCbdTwo: value, cbdList: list[value].title, place: list[value].id, cbdListItem: [], placeSelected: [] })
+    } else {
+      this.setState({ currentCbdTwo: value, cbdListItem: list[value].list, place: '', placeSelected: [] })
+    }
+  }
+  //改变位置 第三层
+  onChangeCbdThree(value) {
+    let { placeSelected, cdbDetailList } = this.state
+
+    cdbDetailList = cdbDetailList.includes(value.title)
+      ? cdbDetailList.filter(i => i != value.title)
+      : [...cdbDetailList, value.title],
+
+      placeSelected = placeSelected.includes(value.id)
+        ? placeSelected.filter(i => i != value.id)
+        : [...placeSelected, value.id],
+
+      this.setState({ cdbDetailList, placeSelected })
+  }
+  //确定价格
+  onComfirePrice() {
+    const { payload, budget } = this.state
+    this.setState({
+      showNextCard: true,
+      showPrice: false,
+      payload: { ...payload, budget: budget }
+    })
+  }
+  //确定户型
+  onComfireHouse() {
+    const { payload, houseType } = this.state
+    this.setState({
+      showNextCard: true,
+      showHouse: false,
+      payload: { ...payload, house_type: houseType }
+
+    })
+  }
+  //确定目标区域
+  onComfireCbd() {
+    const { placeSelected, payload, cdbDetailList, cbdList, place, cbdListItem } = this.state
+    if (cbdListItem.length !== 0 && placeSelected.length === 0) {
+      Taro.showToast({
+        title: '请选择',
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (placeSelected.length !== 0) {
+      const cbd = placeSelected.join(',')
+      const showCdbDetailDetail = cdbDetailList.join(',')
+      this.setState({
+        cdbDetailDetail: showCdbDetailDetail,
+        showNextCard: true,
+        showCbd: false,
+        payload: { ...payload, cbd: cbd }
+      })
+    } else if (cbdListItem.length === 0) {
+      this.setState({
+        cdbDetailDetail: cbdList,
+        showNextCard: true,
+        showCbd: false,
+        payload: { ...payload, cbd: place }
+      })
+    }
+
+  }
+  //重置价格
+  onResetClickP() {
+    this.setState({
+      budget: '', currentPrice: -1, budgetDetail: '无',
     })
   }
   //重置户型
-  onResetClickH(){
-    this.setState({houseType:'',currentHouse:-1,budgetDetail:'无',
+  onResetClickH() {
+    this.setState({
+      houseType: '', currentHouse: -1, budgetDetail: '无',
     })
   }
   //重置可选区域
-  onResetClickC(){
-    this.setState({currentCbd:-1,currentCbdTwo:-1,cdbDetailDetail:'无',cbdListItem:[],})
+  onResetClickC() {
+    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], })
   }
-  onCheckPayload(){
-    const { livingPeople , livingTime ,budget, houseType, cbd} = this.state
-    if( livingPeople === ''
-      || livingTime===''
-      || budget ===''
-      || houseType===''
-      || cbd===''){
-        Taro.showToast({
-          title: '请检查数据是否正确',
-          icon:'none',
-          duration:2000
-        })
-        return false
-      }
-      return true
+  onCheckPayload() {
+    const { livingPeople, livingTime, budget, houseType, cbd } = this.state
+    if (livingPeople === ''
+      || livingTime === ''
+      || budget === ''
+      || houseType === ''
+      || cbd === '') {
+      Taro.showToast({
+        title: '请检查数据是否正确',
+        icon: 'none',
+        duration: 2000
+      })
+      return false
+    }
+    return true
   }
   /**
    * 填写完毕，提交需求
    */
-  onFinishCard(){
+  onFinishCard() {
     const { payload } = this.state
     this.onCheckPayload() && this.props.dispatchRequirementCreate(payload).
-    then(res=>{
-          if(res.data.code===1){
-            this.setState({isOpenedFinish:true,showNextCard:false})
-          }})
+      then(res => {
+        if (res.data.code === 1) {
+          this.setState({ isOpenedFinish: true, showNextCard: false })
+        }
+      })
   }
-  onCloseCurtion(){
+  onCloseCurtion() {
     this.props.dispatchRequirementCheck()
-    this.setState({isOpenedFinish:false})
+    this.setState({ isOpenedFinish: false })
   }
   render() {
 
     const rootClassName = ['select']
     const classObject = {}
-    const className={}
+    const className = {}
 
     const {
-      showCard,showNextCard,isOpen,showPrice,showHouse,currentPrice, budgetDetail,currentHouse,houseTypeDetail,
-      showCbd,currentCbd,currentCbdTwo,cbdListItem,placeSelected,cdbDetailDetail,
+      showCard, showNextCard, isOpen, showPrice, showHouse, currentPrice, budgetDetail, currentHouse, houseTypeDetail,roomDetail,floorDetail,
+      showCbd, currentCbd, currentCbdTwo, cbdListItem, placeSelected, cdbDetailDetail,
       searchIsFixed,
       searchScrollTop,
       selector,
       selectorChecked,
+      selectIsFixed
     } = this.state
 
     const {
@@ -681,6 +719,8 @@ onComfireCbd(){
               budgetDetail={budgetDetail}
               houseTypeDetail={houseTypeDetail}
               cdbDetailDetail={cdbDetailDetail}
+              roomDetail={roomDetail}
+              floorDetail={floorDetail}
               timeTagList={this.timeTagList}
               peopleTagList={this.peopleTagList}
               onCloseNext={this.onCloseCardNext}
@@ -710,7 +750,8 @@ onComfireCbd(){
               show={showHouse}
               houseDist={dists.housetype_list}
               onClose={this.onCloseHouse}
-              onChangeHouse={this.handleClickHouse}
+              onhandleClickRoom={this.onhandleClickRoom}
+              onhandleClickFloor={this.onhandleClickFloor}
               current={currentHouse}
               onComfireHouse={this.onComfireHouse}
               onResetClick={this.onResetClickH}

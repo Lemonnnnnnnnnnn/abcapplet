@@ -38,8 +38,8 @@ class ApartmentList extends BaseList {
             ?
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView  scrollX>
-                {page != 1 && items.map((i, index) =>
-                  <View style={imageStyle} className={`at-col pl-1 ${mini ? 'at-col-6' : 'at-col-12'}`} key={i.id}>
+                {page != 1 && items.map((i) =>
+                  <View style={imageStyle} className={`at-col pr-2 ${mini ? 'at-col-6' : 'at-col-12'}`} key={i.id}>
                     <ApartmentItem
                       mini={mini}
                       type={type}
