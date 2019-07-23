@@ -2,7 +2,7 @@
 import Taro from '@tarojs/taro'
 
 import { View } from '@tarojs/components'
-import { AtTabs, AtButton , AtTag } from 'taro-ui'
+import { AtTabs, AtButton, AtTag } from 'taro-ui'
 
 
 // 自定义组件
@@ -68,6 +68,7 @@ class RequirementHouseMask extends BaseComponent {
 
   onTabFloorChange(e, index) {
     const { floor } = this.state
+    const { onhandleClickFloor } = this.props
     let newFloor = JSON.parse(JSON.stringify(floor))
 
     newFloor.map(i => {
@@ -76,7 +77,7 @@ class RequirementHouseMask extends BaseComponent {
         i.active = !i.active
         const { id: type_floor } = floor[i.id]
 
-        this.props.onChange({ payload: { type_floor } })
+        onhandleClickFloor(type_floor)
       } else {
         i.active = false
       }
@@ -89,6 +90,7 @@ class RequirementHouseMask extends BaseComponent {
 
   onTabRoomChange(e, index) {
     const { room } = this.state
+    const { onhandleClickRoom } = this.props
     let newRoom = JSON.parse(JSON.stringify(room))
 
     newRoom.map(i => {
@@ -96,7 +98,7 @@ class RequirementHouseMask extends BaseComponent {
       if (i.id === index) {
         i.active = !i.active
         const { id: type_room } = room[i.id]
-        this.props.onChange({ payload: { type_room } })
+        onhandleClickRoom(type_room)
       } else {
         i.active = false
       }
@@ -135,6 +137,8 @@ class RequirementHouseMask extends BaseComponent {
             </View>
           </View>
           {/* 主体 */}
+
+          {/*  */}
 
           <View >
             <View style={{ marginLeft: "10px", fontSize: "14px", fontWeight: "bold" }} >户型选择</View>
@@ -181,8 +185,8 @@ class RequirementHouseMask extends BaseComponent {
         </View>
       </Board>
 
-    {/* 遮罩层 */ }
-    <Masks show={show} style='position:relative;z-index:1' />
+      {/* 遮罩层 */}
+      <Masks show={show} style='position:relative;z-index:1' />
     </View >
   }
 }
