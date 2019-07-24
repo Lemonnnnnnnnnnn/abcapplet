@@ -109,13 +109,18 @@ class ApartmentItem extends BaseComponent {
       padding: '10px',
     }
 
+    const heartWrapOpacity = {
+      padding: '10px',
+      opacity: 0.5
+    }
+
     const heartNum = {
       top: 0,
       position: 'absolute',
       textAlign: 'center',
       fontSize: "10px",
       left: '50%',
-      top: '49%',
+      top: '46%',
       transform: 'translate(-50%,-50%)',
       color: '#FFC919'
     }
@@ -154,17 +159,21 @@ class ApartmentItem extends BaseComponent {
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
-            ? <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
+            ?
+            <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
               <View style={heartWrap}>
-                <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
-                <View style={heartNum}>{num}</View>
+                <AtIcon value='heart-2' size='40'  color={COLOR_YELLOW} />
               </View>
+              <View  style={heartNum}>{num}</View>
+
             </View>
-            : <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
-              <View style={heartWrap}>
-                <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
-                <View style={heartNum}>{num}</View>
+            :
+            <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
+              <View style={heartWrapOpacity}>
+                <AtIcon value='heart-2' size='40' />
               </View>
+              <View  style={heartNum}>{num}</View>
+
             </View>)
           }
         </View>
