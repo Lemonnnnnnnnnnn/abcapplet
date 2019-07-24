@@ -154,17 +154,21 @@ class ApartmentItem extends BaseComponent {
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
-            ? <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
+            ?
+            <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
               <View style={heartWrap}>
                 <AtIcon value='heart-2' size='40' color={COLOR_YELLOW} />
-                <View style={heartNum}>{num}</View>
               </View>
+              <View style={heartNum}>{num}</View>
+
             </View>
-            : <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
+            :
+            <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
               <View style={heartWrap}>
                 <AtIcon value='heart' size='40' color={COLOR_YELLOW} />
-                <View style={heartNum}>{num}</View>
               </View>
+              <View style={heartNum}>{num}</View>
+
             </View>)
           }
         </View>
@@ -178,10 +182,16 @@ class ApartmentItem extends BaseComponent {
 
 
           {/* 公寓名称 */}
-          <View className='at-row at-row__justify--between at-row__align--end'>
-            <View className='apartment-content-main'>
-              <View className='text-huge text-bold mt-2'>{title}</View>
+          <View className=''>
+            <View >
+              <View className='at-row at-row__justify--between at-row__align--center'>
+                <View  className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
+                <View className='mt-2'>
+                  <Image src='https://images.gongyuabc.com//image/signing.png' style={{ width: "18px", height: "18px" }}></Image>
+                </View>
+              </View>
               {desc && <View className='text-muted text-large mt-2 apartment-content-desc'>{desc}</View>}
+
             </View>
           </View>
 
