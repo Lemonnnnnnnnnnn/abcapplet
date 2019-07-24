@@ -192,3 +192,4 @@ export const PAYLOAD_APPOINTMENT_CREATE = { apartment:'', house_type:'', order_t
 
 //获取行程详情
 export const API_APPOINTMENT_SHOW = `${HOST}/appointment/detailPost`
+export const API_USER_MSG = `${HOST}/user/getPost`

@@ -7,6 +7,7 @@ import {
   API_USER_FAVORITE_CREATE,
   API_DEMAND_CREATE,
   API_DEMAND_CHECK,
+  API_USER_MSG,
 } from '@constants/api'
 
 import {
@@ -17,6 +18,7 @@ import {
   USER_CITY_CODE,
   TYPE_DEMAND_CREATE,
   TYPE_DEMAND_CHECK,
+  
 } from '@constants/user'
 
 import {
@@ -177,5 +179,12 @@ export const dispatchRequirementCheck = (payload) => createAction({
   method: 'POST',
   type:TYPE_DEMAND_CHECK,
   url: API_DEMAND_CHECK,
+})
+
+export const dispatchGetUserMsg = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type: "getUserMsg",
+  url: API_USER_MSG
 })
 
