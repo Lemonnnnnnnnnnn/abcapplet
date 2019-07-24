@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { AtAvatar } from 'taro-ui'
-import { View, Map, Image, Text } from '@tarojs/components'
+import { View, Map, Image, Text, ScrollView } from '@tarojs/components'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -25,7 +25,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
-import { PAGE_HOME ,PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE,PAGE_APPOINTMENT_CREATE } from '@constants/page'
+import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -61,7 +61,7 @@ class HouseTypeShow extends Component {
   }
 
   async componentDidMount() {
-    const { id  } = this.$router.params
+    const { id } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
@@ -74,13 +74,13 @@ class HouseTypeShow extends Component {
     let facilitys = data.facility_list
     let roomMatch = []
     let publicMatch = []
-    facilitys.map(i=>{
+    facilitys.map(i => {
       i.type === 2 && roomMatch.push(i)
       i.type === 1 && publicMatch.push(i)
     })
 
     const roomMatch_list = roomMatch.slice(0, 5)
-    const publicMatch_list = publicMatch.slice(0,5)
+    const publicMatch_list = publicMatch.slice(0, 5)
 
 
     this.setState({
@@ -229,13 +229,13 @@ class HouseTypeShow extends Component {
    * 点击 预约看房,查看订单
    */
   onClick(method) {
-    if(method==='onCreateBusiness'){
+    if (method === 'onCreateBusiness') {
       const { houstType } = this.state
       Taro.navigateTo({
-        url:`${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
+        url: `${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
       })
     }
-    if(method==='onCreateOrder'){
+    if (method === 'onCreateOrder') {
       this[method]()
     }
   }
@@ -245,7 +245,7 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list,publicMatch_list } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
@@ -272,6 +272,23 @@ class HouseTypeShow extends Component {
       backgroundColor: "rgba(255, 201, 25, 1)",
       color: "#fff",
       padding: "3px"
+    }
+
+    const ScrollWrapStyle = {
+      height: '210px',
+      whiteSpace: "nowrap"
+    }
+
+    const imageStyle = {
+      width: '300px',
+      height: Taro.pxTransform(346),
+      display: "inline-block",
+
+    }
+
+    const textDeal ={
+      wordBreak: "break-all",
+      textIndent: "10px"
     }
 
     return <ApartmentContainer
@@ -358,10 +375,10 @@ class HouseTypeShow extends Component {
         <Tag className='my-3' active circle>
           <View className='at-row  at-row__align--center text-secondary'>
 
-              <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
-              <View className='ml-2'>100%免中介费</View>
-              <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
-              <View className='ml-2'>严选厦门3万+房源</View>
+            <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
+            <View className='ml-2'>100%免中介费</View>
+            <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
+            <View className='ml-2'>严选厦门3万+房源</View>
 
           </View>
         </Tag>
@@ -397,13 +414,13 @@ class HouseTypeShow extends Component {
       <View className='at-row at-row--wrap mt-4'>
 
         {roomMatch_list && roomMatch_list.map(i =>
-          <View  style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto mr-2'>
+          <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto mr-2'>
             <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
             <View className='text-small'>{i.title}</View>
           </View>
         )}
 
-        <View style={PublicConfiguration}  className='text-center'>
+        <View style={PublicConfiguration} className='text-center'>
           <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
           <View className='text-small'>更多</View>
         </View>
@@ -492,7 +509,7 @@ class HouseTypeShow extends Component {
 
           </View>
         </View>
-        <View style='text-indent: 10px' className='text-secondary text-normal'>{desc}</View>
+        <View className='text-secondary text-normal' style={textDeal}>{desc}</View>
         <View className='at-row at-row--wrap mt-3 mb-3'>
           {publicMatch_list && publicMatch_list.map(i =>
             <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
@@ -506,10 +523,21 @@ class HouseTypeShow extends Component {
             <View className='text-small'>更多</View>
           </View>
         </View>
-        {types.map((i, index) =>
+
+        <View style={ScrollWrapStyle} className='at-col'>
+          <ScrollView scrollX>
+            {types.map((i, index) =>
+              <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-2  mt-2 `}>
+                <ApartmentTypeItem item={i} />
+              </View>)}
+          </ScrollView>
+        </View>
+
+
+        {/* {types.map((i, index) =>
           <View key={i.id} className={`${index + 1 != types.length && 'border-bottom'} mt-2`}>
             <ApartmentTypeItem item={i} />
-          </View>)}
+          </View>)} */}
 
       </View>
 

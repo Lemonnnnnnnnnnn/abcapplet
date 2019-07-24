@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image , Text} from '@tarojs/components'
 
 // 自定义组件
 import BaseComponent from '@components/base'
@@ -16,7 +16,7 @@ import {
 class ApartmentTypeItem extends BaseComponent {
   static defaultProps = {
     item: { cover: '' },
-    width: 100,
+    width: 117,
     height: 100,
   }
 
@@ -33,22 +33,25 @@ class ApartmentTypeItem extends BaseComponent {
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     return <View className='py-2' onClick={this.onNavigation}>
-      <View className='at-row'>
+      <View className=''>
         {cover && <Image
           src={`${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
-          style={{ width: `${width}px`, height: `${height}px`, 'border-radius': '20px' }}
+          style={{ width: `${width}px`, height: `${height}px`, 'border-radius': '12px' }}
         />}
-        <View className='at-col ml-3'>
+        <View className=''>
           <View
-            className='at-row at-row__justify--between'
-            style={{ 'flex-direction': 'column', height: '100%' }}
+            className=''
+            style={{height: '100%' }}
           >
-            <View>
-              <View className='text-huge text-bold'>{title}</View>
+            <View className='ml-1'>
+              <View className='text-normal text-bold'>{title}</View>
               <View className='text-secondary text-small'>{desc || '暂无描述'}</View>
             </View>
             <View>
-              <View className='text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
+              <View className='text-yellow'>
+              {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
+              <Text className='text-small'>元/月</Text>
+              </View>
             </View>
           </View>
         </View>
