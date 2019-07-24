@@ -49,7 +49,7 @@ class AppointPostMask extends BaseComponent {
           <AtButton
             circle
             className='mt-3 mb-2 btn-yellow active'
-            onClick={this.props.onClose}
+            onClick={this.props.onCenter}
             >确定</AtButton>
         </View>
       </Board>
