@@ -42,6 +42,7 @@ import {
   LOCALE_APARTMENT,
   LOCALE_RECOMMEND_APARTMENT,
 } from '@constants/locale'
+import dist from '../../../dist/npm/@tarojs/redux/dist';
 
 @connect(state => state, {
   ...adActions,
@@ -78,7 +79,7 @@ class CommonHome extends Component {
     houseType: '',
     budgetDetail: '无',
     roomDetail: '无',
-    floorDetail : "",
+    floorDetail: "",
     cdbDetailDetail: '无',
     cbdListItem: [],
     placeSelected: [],//三层有数据
@@ -120,37 +121,11 @@ class CommonHome extends Component {
 
   refApartmentList = (node) => this.apartmentList = node
 
-  componentWillMount() {
-
-    // 自定义roomList和floorList
+  async componentWillMount() {
 
     const {
-      selectScrollTop,
       searchScrollTop,
     } = this.state
-
-
-    const initialFloor = [{id : 0 , title : "不限"}]
-    const initialRoom = [{id : 0 , title : "不限"}]
-
-    setTimeout(() => {
-      const { dists } = this.props
-
-      const room = dists.housetype_list.room
-      const floor = dists.housetype_list.floor
-
-      floor.map(i => {
-        initialFloor.push(i)
-      })
-      room.map(i => {
-        initialRoom.push(i)
-      })
-
-      this.setState({
-        floorList: [...initialFloor],
-        roomList: [...initialRoom],
-      })
-    }, 500)
 
     // 获取筛选器和搜索框距离顶部的距离
 
@@ -161,25 +136,14 @@ class CommonHome extends Component {
         .boundingClientRect()
         .exec(res => res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
 
-    setTimeout(() => {
-      !selectScrollTop
-        && Taro.createSelectorQuery()
-          .in(this.$scope)
-          .select('.home-select')
-          .boundingClientRect()
-          .exec(res => this.setState({ selectScrollTop: res[0].top, }))
-    }, 500);
-
-
-
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params
 
     page && id && Taro.navigateTo({ url: `${page}?id=${id}` })
 
     // 获取用户数据 和 刷新页面数据
-    const { payload: user } = this.props.dispatchUser()
-    this.onSelectCity(user.citycode)
+    const { payload: user } = await this.props.dispatchUser()
+    user && this.onSelectCity(user.citycode)
 
     // 拉取城市列表
     this.props.dispatchCityList().then((res) => {
@@ -209,24 +173,73 @@ class CommonHome extends Component {
     if (is_guide === 0) {
       this.setState({ showCard: true })
     }
-
-
   }
 
   /**
    * 选择城市
    */
-  onSelectCity(citycode) {
+  async onSelectCity(citycode) {
+
+    const {
+      selectScrollTop,
+    } = this.state
+
+    const overloadData = []
+    const overloadDist = []
+
     // 当城市 id 不存在的时候不读取数据
     if (citycode === 0 || !citycode) return;
 
-    this.props.dispatchUserCity(citycode)
-    this.props.dispatchAdList(citycode)
-    this.props.dispatchCbdList(citycode)
-    this.props.dispatchDistList(citycode)
-    this.props.dispatchBannerList(citycode)
-    this.props.dispatchActivityList(citycode)
-    this.props.dispatchRecommendList(citycode)
+
+    // 城市
+    await this.props.dispatchUserCity(citycode) && overloadData.push(1)
+    // 轮播图
+    await this.props.dispatchBannerList(citycode) && overloadData.push(1)
+    // 商圈
+    await this.props.dispatchCbdList(citycode) && overloadData.push(1)
+    // 广告
+    await this.props.dispatchAdList(citycode) && overloadData.push(1)
+    // 品牌公寓
+    await this.props.dispatchRecommendList(citycode) && overloadData.push(1)
+    // 活动专区
+    await this.props.dispatchActivityList(citycode) && overloadData.push(1)
+    // 字典
+    await this.props.dispatchDistList(citycode) && overloadDist.push(1)
+
+
+    // 当数据全部加载完成后读取筛选框的位置
+    overloadData.length === 6 && !selectScrollTop && Taro.createSelectorQuery()
+      .in(this.$scope)
+      .select('.home-select')
+      .boundingClientRect()
+      .exec(res => this.setState({ selectScrollTop: res[0].top, }))
+
+
+    overloadDist.length === 1 && this.initialHouseType()
+
+  }
+
+  // 初始化户型的数据，供筛选项使用
+
+  initialHouseType() {
+    const initialFloor = [{ id: 0, title: "不限" }]
+    const initialRoom = [{ id: 0, title: "不限" }]
+    const { dists } = this.props
+
+    const room = dists.housetype_list.room
+    const floor = dists.housetype_list.floor
+
+    floor.map(i => {
+      initialFloor.push(i)
+    })
+    room.map(i => {
+      initialRoom.push(i)
+    })
+
+    this.setState({
+      floorList: [...initialFloor],
+      roomList: [...initialRoom],
+    })
   }
 
   /**
@@ -419,13 +432,13 @@ class CommonHome extends Component {
   //改变户型
 
   onhandleClickRoom(value) {
-    const {roomList} = this.state
+    const { roomList } = this.state
     const { id, title } = roomList[value]
     this.setState({ currentHouse: value, houseType: id, roomDetail: title })
   }
 
   onhandleClickFloor(value) {
-    const {floorList} = this.state
+    const { floorList } = this.state
     const { id, title } = floorList[value]
     this.setState({ currentHouse: value, houseType: id, floorDetail: title })
   }
@@ -561,7 +574,7 @@ class CommonHome extends Component {
     const className = {}
 
     const {
-      showCard, showNextCard, isOpen, showPrice, showHouse, currentPrice, budgetDetail, currentHouse, houseTypeDetail,roomDetail,floorDetail,
+      showCard, showNextCard, isOpen, showPrice, showHouse, currentPrice, budgetDetail, currentHouse, houseTypeDetail, roomDetail, floorDetail, selectScrollTop,
       showCbd, currentCbd, currentCbdTwo, cbdListItem, placeSelected, cdbDetailDetail,
       searchIsFixed,
       searchScrollTop,
@@ -575,6 +588,7 @@ class CommonHome extends Component {
       citys, banners, recommends,
       activities, apartments
     } = this.props
+
 
 
     return (
@@ -669,16 +683,19 @@ class CommonHome extends Component {
             <Header className='my-2' title={LOCALE_APARTMENT} hasExtra={false} />
             <View className='home-select'>
               {/* 选择框下拉框部分*/}
-              <Select
-                top={searchScrollTop}
-                isFixed={selectIsFixed}
-                autoSortDist={[]}
-                cbdDist={dists.cbd_list}
-                priceDist={dists.price_list}
-                houseTypeDist={dists.housetype_list}
-                specialSelectDist={dists.special_select}
-                onApartmentPayloadChange={this.onApartmentPayloadChange}
-              />
+              {
+                !(JSON.stringify(dists) === '{}') && <Select
+                  top={searchScrollTop}
+                  isFixed={selectIsFixed}
+                  autoSortDist={[]}
+                  cbdDist={dists.cbd_list}
+                  priceDist={dists.price_list}
+                  houseTypeDist={dists.housetype_list}
+                  specialSelectDist={dists.special_select}
+                  onApartmentPayloadChange={this.onApartmentPayloadChange}
+                />
+              }
+
             </View>
 
             <View className='home-apartment'>
@@ -696,57 +713,58 @@ class CommonHome extends Component {
             </View>
           </View>
 
-            {/* 城市模态框 */}
-            <CityModal
-              city={citys}
-              citycode={user.citycode}
-              onSelectCity={this.onSelectCity}
-            />
-          </View>
-          {/**需求卡1 */}
-          <View>
-            <RequirementCardMask
-              show={showCard}
-              onNext={this.onNextCard}
-              onClose={this.onCloseCard}
-            />
-          </View>
-         {/**需求卡2 */}
-          <View>
-            <RequirementCardMaskNext
-              show={showNextCard}
-              isOpen={isOpen}
-              budgetDetail={budgetDetail}
-              houseTypeDetail={houseTypeDetail}
-              cdbDetailDetail={cdbDetailDetail}
-              roomDetail={roomDetail}
-              floorDetail={floorDetail}
-              timeTagList={this.timeTagList}
-              peopleTagList={this.peopleTagList}
-              onCloseNext={this.onCloseCardNext}
-              onFinish={this.onFinishCard}
-              onTimeSelect={this.onHandleTimeSolidClick}
-              onPeopleSelect={this.onHandlePeopleSolidClick}
-              onShowPrice={this.onShowPrice}
-              onShowHouse={this.onShowHouse}
-              onShowCbd={this.onShowCbd}
-            />
-          </View>
+          {/* 城市模态框 */}
+          <CityModal
+            city={citys}
+            citycode={user.citycode}
+            onSelectCity={this.onSelectCity}
+          />
+        </View>
+        {/**需求卡1 */}
+        <View>
+          <RequirementCardMask
+            show={showCard}
+            onNext={this.onNextCard}
+            onClose={this.onCloseCard}
+          />
+        </View>
+        {/**需求卡2 */}
+        <View>
+          <RequirementCardMaskNext
+            show={showNextCard}
+            isOpen={isOpen}
+            budgetDetail={budgetDetail}
+            houseTypeDetail={houseTypeDetail}
+            cdbDetailDetail={cdbDetailDetail}
+            roomDetail={roomDetail}
+            floorDetail={floorDetail}
+            timeTagList={this.timeTagList}
+            peopleTagList={this.peopleTagList}
+            onCloseNext={this.onCloseCardNext}
+            onFinish={this.onFinishCard}
+            onTimeSelect={this.onHandleTimeSolidClick}
+            onPeopleSelect={this.onHandlePeopleSolidClick}
+            onShowPrice={this.onShowPrice}
+            onShowHouse={this.onShowHouse}
+            onShowCbd={this.onShowCbd}
+          />
+        </View>
         {/* 需求卡2 价格 */}
-          <View  className={classNames(rootClassName, classObject, className)}>
-            <RequirementPriceMask
-              show={showPrice}
-              priceDist={dists.price_list}
-              onClose={this.onClosePrice}
-              onChangePrice={this.handleClickPrice}
-              current={currentPrice}
-              onComfirePrice={this.onComfirePrice}
-              onResetClick={this.onResetClickP}
-            />
-          </View>
-           {/* 需求卡2 户型 */}
-          <View  className={classNames(rootClassName, classObject, className)}>
-            <RequirementHouseMask
+        <View className={classNames(rootClassName, classObject, className)}>
+          <RequirementPriceMask
+            show={showPrice}
+            priceDist={dists.price_list}
+            onClose={this.onClosePrice}
+            onChangePrice={this.handleClickPrice}
+            current={currentPrice}
+            onComfirePrice={this.onComfirePrice}
+            onResetClick={this.onResetClickP}
+          />
+        </View>
+        {/* 需求卡2 户型 */}
+        <View className={classNames(rootClassName, classObject, className)}>
+          {
+            !(JSON.stringify(dists) === '{}') && <RequirementHouseMask
               show={showHouse}
               houseDist={dists.housetype_list}
               onClose={this.onCloseHouse}
@@ -756,39 +774,41 @@ class CommonHome extends Component {
               onComfireHouse={this.onComfireHouse}
               onResetClick={this.onResetClickH}
             />
-          </View>
-          {/* 需求卡2 位置 */}
-          <View  className={classNames(rootClassName, classObject, className)}>
-            <RequirementCbdMask
-              show={showCbd}
-              cbdDist={dists.cbd_list}
-              onClose={this.onCloseCbd}
-              onChangeCbd={this.handleClickCbd}
-              current={currentCbd}
-              onComfireHouse={this.onComfireCbd}
-              onResetClick={this.onResetClickC}
-              currentCbdTwo={currentCbdTwo}
-              onChangeCbdTwo={this.onChangeCbdTwo}
-              cbdListItem={cbdListItem}
-              onChangeCbdThree={this.onChangeCbdThree}
-              placeSelected={placeSelected}
-              onComfireCbd={this.onComfireCbd}
-              onResetClickC={this.onResetClickC}
+          }
+
+        </View>
+        {/* 需求卡2 位置 */}
+        <View className={classNames(rootClassName, classObject, className)}>
+          <RequirementCbdMask
+            show={showCbd}
+            cbdDist={dists.cbd_list}
+            onClose={this.onCloseCbd}
+            onChangeCbd={this.handleClickCbd}
+            current={currentCbd}
+            onComfireHouse={this.onComfireCbd}
+            onResetClick={this.onResetClickC}
+            currentCbdTwo={currentCbdTwo}
+            onChangeCbdTwo={this.onChangeCbdTwo}
+            cbdListItem={cbdListItem}
+            onChangeCbdThree={this.onChangeCbdThree}
+            placeSelected={placeSelected}
+            onComfireCbd={this.onComfireCbd}
+            onResetClickC={this.onResetClickC}
+          />
+        </View>
+        {/* 提交需求卡 幕帘 */}
+
+        <AtCurtain
+          isOpened={this.state.isOpenedFinish}
+          onClose={this.onCloseCurtion.bind(this)}
+        >
+          <View className='at-row at-row__justify--center'>
+            <Image
+              style='width:150px;height:160px'
+              src='https://images.gongyuabc.com//image/requirement-finish.png'
             />
           </View>
-          {/* 提交需求卡 幕帘 */}
-
-            <AtCurtain
-              isOpened={this.state.isOpenedFinish}
-              onClose={this.onCloseCurtion.bind(this)}
-            >
-            <View className='at-row at-row__justify--center'>
-              <Image
-                style='width:150px;height:160px'
-                src='https://images.gongyuabc.com//image/requirement-finish.png'
-              />
-            </View>
-            </AtCurtain>
+        </AtCurtain>
 
       </View>
     )
