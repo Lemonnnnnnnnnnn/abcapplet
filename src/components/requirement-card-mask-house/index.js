@@ -38,9 +38,8 @@ class RequirementHouseMask extends BaseComponent {
   }
 
   componentWillMount() {
-    setTimeout(() => {
+
       const { houseDist } = this.props
-      // const { items } = this.props
 
       const floorList = [{ id: 0, title: "不限", active: true }]
       const roomList = [{ id: 0, title: "不限", active: true }]
@@ -60,7 +59,6 @@ class RequirementHouseMask extends BaseComponent {
         floor: [...floorList],
         room: [...roomList],
       })
-    }, 500)
 
   }
 

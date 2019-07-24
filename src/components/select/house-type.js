@@ -39,7 +39,6 @@ class SelectHouseType extends Component {
   }
 
   componentWillMount() {
-    setTimeout(() => {
       const { items } = this.props
 
       const floorList = [{id : 0 , title : "不限",active : true}]
@@ -60,8 +59,6 @@ class SelectHouseType extends Component {
         floor: [...floorList],
         room: [...roomList],
       })
-    }, 500)
-
   }
 
 
