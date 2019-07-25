@@ -67,8 +67,6 @@ class SelectSpecial extends BaseComponent {
   render() {
     const { show } = this.props
     const { specialList } = this.state
-    console.log(specialList)
-
 
     const fontStyle = {
       fontSize: "12px",
