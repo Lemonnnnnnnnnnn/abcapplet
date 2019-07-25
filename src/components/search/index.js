@@ -77,7 +77,6 @@ class Search extends BaseComponent {
                 <View className='picker text-normal ml-3 at-row at-row__align--center'>
                   <Text>{selectorChecked}</Text>
                   <AtIcon prefixClass='iconfont icon' value='down' size={size} color={COLOR_BLACK} />
-                  <AtIcon className='ml-2' value='search' size={size} color={COLOR_GREY_0} />
                 </View>
               </Picker>
             </View>
@@ -86,7 +85,9 @@ class Search extends BaseComponent {
             <View className='at-col at-col-9' onClick={this.onNavigation}>
               {!isInput
                 ? <View className='at-row at-row__align--center text-normal text-muted' >
-                  <Text className='ml-3'>{LOCALE_SEARCH_PLACEHOLDER}</Text>
+                  <AtIcon className='ml-2' value='search' size={size} color={COLOR_GREY_0} />
+
+                  <Text className='ml-2'>{LOCALE_SEARCH_PLACEHOLDER}</Text>
                 </View>
                 : <View className='at-row at-row__align--center at-row__justify--between text-normal' >
                   <Input className='ml-3'

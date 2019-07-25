@@ -118,9 +118,9 @@ class ApartmentItem extends BaseComponent {
       top: 0,
       position: 'absolute',
       textAlign: 'center',
-      fontSize: "10px",
+      fontSize: "15px",
       left: '50%',
-      top: '46%',
+      top: '40%',
       transform: 'translate(-50%,-50%)',
       color: '#FFC919'
     }
@@ -139,7 +139,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className={classNames('apartment', className)} onClick={this.onNavigation}>
+      <View className='apartment ml-3 mr-3 mb-4' onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
@@ -162,17 +162,19 @@ class ApartmentItem extends BaseComponent {
             ?
             <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
               <View style={heartWrap}>
-                <AtIcon value='heart-2' size='40'  color={COLOR_YELLOW} />
+                {/* <AtIcon value='heart-2' size='40'  color={COLOR_YELLOW} /> */}
+                <Image src='https://images.gongyuabc.com//image/heart-yellow.png' style={{ width: "40px", height: "35px" }}></Image>
               </View>
-              <View  style={heartNum}>{num}</View>
+              <View style={heartNum}>{num}</View>
 
             </View>
             :
             <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
               <View style={heartWrapOpacity}>
-                <AtIcon value='heart-2' size='40' />
+                {/* <AtIcon value='heart-2' size='40' /> */}
+                <Image src='https://images.gongyuabc.com//image/heart-black.png' style={{ width: "40px", height: "35px" }}></Image>
               </View>
-              <View  style={heartNum}>{num}</View>
+              <View style={heartNum}>{num}</View>
 
             </View>)
           }
@@ -190,7 +192,7 @@ class ApartmentItem extends BaseComponent {
           <View className=''>
             <View >
               <View className='at-row at-row__justify--between at-row__align--center'>
-                <View  className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
+                <View className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
                 <View className='mt-2'>
                   <Image src='https://images.gongyuabc.com//image/signing.png' style={{ width: "18px", height: "18px" }}></Image>
                 </View>
@@ -213,8 +215,8 @@ class ApartmentItem extends BaseComponent {
 
             {/* 价格 */}
 
-            <View className='text-yellow'>
-              <Text className='text-super text-bold'>
+            <View className='text-yellow mt-2'>
+              <Text className='text-bold' style={{ fontSize: "24px" }}>
                 {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
               </Text>
               <Text className='text-large'>{LOCALE_QI}</Text>

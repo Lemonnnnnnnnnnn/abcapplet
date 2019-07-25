@@ -59,6 +59,26 @@ class Carousel extends Component {
       displayMultipleItems,
     } = this.props
 
+    const countStyle = {
+      position: "absolute",
+      left: " 8px",
+      top: "8px",
+      borderRadius: " 16px",
+      padding: " 6px 5px",
+      backgroundColor: "#fff",
+      width: "40px",
+      height: "5px",
+      // min-width: 48px * $hd;
+      // background: $color-white;
+      // text-align: center;
+      // justify-content: center;
+      // align-items: center;
+      opacity: "0.8",
+      textAlign: "center",
+      justifyContent: "center",
+      alignItems: "center",
+    }
+
     /**
      * 计算轮播高度
      */
@@ -72,10 +92,11 @@ class Carousel extends Component {
 
 
     return (
-      <View className={classNames(className, 'carousel')}>
+      <View className={classNames(className, 'carousel', 'ml-3')}>
 
         {type === 'banner' &&
           <Swiper
+            className='mr-3'
             autoplay
             circular
             indicatorDots
@@ -114,7 +135,12 @@ class Carousel extends Component {
                   mode='scaleToFill' style={imageStyle}
                 />
                 <Text className='title text-large text-white'>{item.title}</Text>
-                {item.sum && <Text className='count text-mini text-yellow'>{item.sum}</Text>}
+                {item.sum &&
+                  <View style={countStyle} className='at-row'>
+                    <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" }}></Image>
+                    <View className='text-mini text-yellow ml-1' style={{marginTop:"1Px"}}>{item.sum}</View>
+                  </View>
+                }
               </View>
             )}
           </ScrollView>
