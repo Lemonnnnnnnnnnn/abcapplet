@@ -74,7 +74,7 @@ class HouseTypeShow extends Component {
     let facilitys = data.facility_list
     let roomMatch = []
     let publicMatch = []
-    facilitys.map(i => {
+    facilitys && facilitys.map(i => {
       i.type === 2 && roomMatch.push(i)
       i.type === 1 && publicMatch.push(i)
     })
@@ -83,7 +83,7 @@ class HouseTypeShow extends Component {
     const publicMatch_list = publicMatch.slice(0, 5)
 
 
-    this.setState({
+    data && this.setState({
       roomMatch_list: roomMatch_list,
       publicMatch_list: publicMatch_list,
       houseType_id: id,
@@ -206,15 +206,20 @@ class HouseTypeShow extends Component {
 
   onRoomCreateFavorite({ payload }) {
     const { houstType } = this.state
-    const roomList = houstType.roomList.map(i => i.id == payload.room_id ? { ...i, is_collect: true } : i)
+    let roomList = []
+    if (houstType) {
+      roomList = houstType.roomList.map(i => i.id == payload.room_id ? { ...i, is_collect: true } : i)
+    }
     this.props.dispatchFavoriteCreate(payload)
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
 
   onRoomDeleteFavorite({ payload }) {
     const { houstType } = this.state
-
-    const roomList = houstType.roomList.map(i => i.id == payload.room_id ? { ...i, is_collect: false } : i)
+    let roomList = []
+    if (houstType) {
+      roomList = houstType.roomList.map(i => i.id == payload.room_id ? { ...i, is_collect: false } : i)
+    }
     this.props.dispatchFavoriteDelete(payload)
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
@@ -271,7 +276,9 @@ class HouseTypeShow extends Component {
       borderRadius: "12px",
       backgroundColor: "rgba(255, 201, 25, 1)",
       color: "#fff",
-      padding: "3px"
+      fontSize: "10px",
+      textAlign: "center",
+      height: "15px",
     }
 
     const ScrollWrapStyle = {
@@ -286,7 +293,7 @@ class HouseTypeShow extends Component {
 
     }
 
-    const textDeal ={
+    const textDeal = {
       wordBreak: "break-all",
       textIndent: "10px"
     }
@@ -326,19 +333,19 @@ class HouseTypeShow extends Component {
 
 
       {/* 头部 */}
-      <View className='text-bold text-huge'>{title}</View>
-      <View className='text-secondary text-large'>{intro}</View>
+      <View style={{ fontSize: '20px' }}>{title}</View>
+      <View className='text-secondary text-large mt-1'>{intro}</View>
 
       {/* 价格相关 */}
       <View className='at-row at-row__justify--between at-row__align--end  mt-2'>
         <View className='text-yellow at-col'>
-          <Text className='text-super text-bold'>
+          <Text className='text-super ' style={{ fontSize: '23px' }}>
             {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}`}
           </Text>
           <Text className='text-large'>{LOCALE_PRICE_START}</Text>
         </View>
 
-        <View className='at-col'>
+        <View className='at-col '>
           <View className='at-row at-row__align--center at-row__justify--end mb-2'>
             <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
             <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
@@ -349,8 +356,8 @@ class HouseTypeShow extends Component {
       {/* 押金保障 */}
 
       {
-        isSign && <View className='at-row '>
-          <View className='at-col at-col-2 text-normal' style={deposit}>押金保障</View>
+        isSign && <View className='at-row at-row__align--center '>
+          <View className='at-col at-col-2 text-normal mt-1' style={deposit}>押金保障</View>
           <View className='at-col at-col-6 text-normal ml-3 text-secondary mt-1'>该房源支持退租押金最高50%无忧赔付</View>
         </View>
       }
@@ -365,7 +372,7 @@ class HouseTypeShow extends Component {
         {rules && rules.map(i =>
           <View key={i.id} className=' mt-2 mr-3 mb-3'>
             <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
-            <Text className='text-secondary text-small ml-3'>{i.content}</Text>
+            <Text className='text-secondary text-small ml-2'>{i.content}</Text>
           </View>
         )}
       </View>
@@ -385,8 +392,8 @@ class HouseTypeShow extends Component {
       </View>
 
       {/* 地图 */}
-      <View className='at-row at-row__align--start'>
-        <View className='at-col at-col-1'>
+      <View className='at-row at-row__align--center'>
+        <View className='at-col at-col-1 mt-1'>
           <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
         </View>
         <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
@@ -526,7 +533,7 @@ class HouseTypeShow extends Component {
 
         <View style={ScrollWrapStyle} className='at-col'>
           <ScrollView scrollX>
-            {types.map((i, index) =>
+            {types && types.map((i, index) =>
               <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-2  mt-2 `}>
                 <ApartmentTypeItem item={i} />
               </View>)}
