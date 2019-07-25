@@ -139,7 +139,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className={classNames('apartment', className)} onClick={this.onNavigation}>
+      <View className='apartment ml-3 mr-3 mb-4' onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
@@ -213,8 +213,8 @@ class ApartmentItem extends BaseComponent {
 
             {/* 价格 */}
 
-            <View className='text-yellow'>
-              <Text className='text-super text-bold'>
+            <View className='text-yellow mt-2'>
+              <Text className='text-bold' style={{fontSize:"24px"}}>
                 {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
               </Text>
               <Text className='text-large'>{LOCALE_QI}</Text>

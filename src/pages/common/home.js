@@ -592,10 +592,10 @@ class CommonHome extends Component {
 
 
     return (
-      <View className='page-white p-2'>
+      <View className='page-white' >
         <View>
           {/* 搜索框 & 城市选择器 */}
-          <View className='home-search'>
+          <View className='home-search pl-3 lr-3'>
             <Search
               className='mb-2'
               isFixed={searchIsFixed}
@@ -616,7 +616,7 @@ class CommonHome extends Component {
 
           {/* 热门租房商圈 */}
           {cbds.length > 0 &&
-            <View>
+            <View >
               <Header
                 className='mb-3'
                 title={LOCALE_HOT_CBD}

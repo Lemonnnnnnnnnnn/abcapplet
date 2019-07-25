@@ -30,7 +30,7 @@ class SelectHeader extends BaseComponent {
         {items.map((item, key) => (item.show &&
           <View key={key} onClick={onClick.bind(this, item.index)}>
             <Text className={[
-              'text-small mr-2',
+              'text-normal mr-2',
               `text-${index == item.index ? 'yellow' : 'muted'}`
             ]}
             >
