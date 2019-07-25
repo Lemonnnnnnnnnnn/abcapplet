@@ -134,7 +134,7 @@ class CommonHome extends Component {
         .in(this.$scope)
         .select('.home-search')
         .boundingClientRect()
-        .exec(res => res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
+        .exec(res => res && res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
 
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params

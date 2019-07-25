@@ -50,7 +50,10 @@ class ApartmentTypeItem extends BaseComponent {
             <View>
               <View className='text-yellow'>
               {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
-              <Text className='text-small'>元/月</Text>
+              {
+                isNaNPrice ? <View></View> : <Text className='text-small'>元/月</Text> 
+              }
+              
               </View>
             </View>
           </View>
