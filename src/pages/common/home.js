@@ -592,10 +592,10 @@ class CommonHome extends Component {
 
 
     return (
-      <View className='page-white' >
+      <View className='page-white' style={{overflow:"hidden"}} >
         <View>
           {/* 搜索框 & 城市选择器 */}
-          <View className='home-search pl-3 lr-3'>
+          <View className='home-search pl-3 pr-3'>
             <Search
               className='mb-2'
               isFixed={searchIsFixed}

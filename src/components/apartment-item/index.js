@@ -125,6 +125,12 @@ class ApartmentItem extends BaseComponent {
       color: '#FFC919'
     }
 
+    const apartmentItem = {
+      background: "rgba(255,255,255,1)",
+      boxShadow: "0px 0px 10px 0px rgba(222, 222, 222, 1)",
+      borderRadius:"12px",
+    }
+
 
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -139,7 +145,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className='apartment ml-3 mr-3 mb-4' onClick={this.onNavigation}>
+      <View style={apartmentItem} className=' ml-3 mr-2 mb-4' onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
