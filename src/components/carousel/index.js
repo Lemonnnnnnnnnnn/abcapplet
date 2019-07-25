@@ -61,8 +61,8 @@ class Carousel extends Component {
 
     const countStyle = {
       position: "absolute",
-      left: " 10px",
-      top: "10px",
+      left: " 8px",
+      top: "8px",
       borderRadius: " 16px",
       padding: " 6px 5px",
       backgroundColor: "#fff",

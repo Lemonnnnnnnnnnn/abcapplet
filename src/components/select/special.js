@@ -5,7 +5,6 @@ import { AtTag } from 'taro-ui'
 
 // import Tag from '@components/tag'
 import BaseComponent from '@components/base'
-import { CAROUSEL_SELECT_SPECIAL_HEIGHT } from '@constants/styles'
 
 /**
  * Select 中的特殊需求部分
@@ -22,10 +21,6 @@ class SelectSpecial extends BaseComponent {
     onChange: () => { },
   }
 
-  // static defaultState = {
-  //   selectedItems: [],
-  //   scrollViewHeight: CAROUSEL_SELECT_SPECIAL_HEIGHT,
-  // }
 
   state = {
     specialList: [],
@@ -48,21 +43,6 @@ class SelectSpecial extends BaseComponent {
     })
   }
 
-  // onResetState() {
-  //   this.setState({ ...SelectSpecial.defaultState })
-  // }
-
-  // onSelectedItemsChange({ name: id }) {
-  //   let { selectedItems } = this.state
-  //   console.log(selectedItems)
-
-  //   selectedItems = selectedItems.includes(id)
-  //     ? selectedItems.filter(i => i !== id)
-  //     : [...selectedItems, id]
-
-  //   this.setState({ selectedItems })
-  //   this.props.onChange({ payload: { tags: selectedItems.toString() } })
-  // }
 
   onSelectedItemsChange(e, index) {
     let { specialList } = this.state
@@ -71,9 +51,9 @@ class SelectSpecial extends BaseComponent {
     newselectedItems.map(i => {
       if (i.posi === index) {
         i.type = !i.type
-        if (i.type === true) {
-          arr.push(i.id)
-        }
+      }
+      if (i.type === true) {
+        arr.push(i.id)
       }
     })
     this.setState({
@@ -82,7 +62,6 @@ class SelectSpecial extends BaseComponent {
 
     this.props.onChange({ payload: { tags: arr.toString() } })
 
-    // selectedItems.push(index + 1)
   }
 
   render() {
@@ -90,24 +69,22 @@ class SelectSpecial extends BaseComponent {
     const { specialList } = this.state
     console.log(specialList)
 
-    // const style = { height: Taro.pxTransform(scrollViewHeight) }
 
     const fontStyle = {
-      fontSize: "15px",
+      fontSize: "12px",
       padding: "0 5px"
     }
 
     return (show &&
       <ScrollView
         scrollX
-        // style={style}
         className='my-2 ml-2 carousel-normal'
       >
         {
           specialList.map((i, key) =>
             <AtTag
               type={i.type ? "primary" : ""}
-              className='ml-3 mr-1 mt-3 mb-3'
+              className='ml-3 mr-1 mt-2 mb-3'
               circle
               onClick={(e) => this.onSelectedItemsChange(e, key)}
               key={key}
@@ -115,16 +92,7 @@ class SelectSpecial extends BaseComponent {
               <View style={fontStyle}>{i.title}</View>
             </AtTag>)
         }
-        {/* {items.map((item) =>
-          <Tag
-            key={item.id}
-            type='special'
-            name={item.id}
-            className='carousel-normal-item'
-            active={selectedItems.includes(item.id)}
-            onClick={this.onSelectedItemsChange}
-          >{item.title}</Tag>
-        )} */}
+       
       </ScrollView>
     )
   }
