@@ -64,15 +64,22 @@ class AppointmentPost extends Component {
 
   async componentDidMount() {
     const { id = 83 } = this.$router.params
-    const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-    await this.props.dispatchGetUserMsg().then(res => {
-      res.data.data.user.name && this.setState({ name: res.data.data.user.name })
-      res.data.data.user.mobile && this.setState({ tel: res.data.data.user.mobile })
+    const { Payload } = this.state
 
+    const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+
+    await this.props.dispatchGetUserMsg().then(res => {
+      const name = res.data.data.user.name
+      const tel = res.data.data.user.mobile
+      name && this.setState({
+        name: name,
+      })
+      tel && this.setState({
+        tel: tel,
+      })
     })
 
     const { payload } = await this.props.dispatchUser()
-    const { Payload } = this.state
     this.setState({
       Payload: { ...Payload, apartment: data.apartment_id, house_type: data.id },
       users: {
@@ -99,11 +106,11 @@ class AppointmentPost extends Component {
   }
   //获取日期
   onDateChange = e => {
-    const { Payload, timeSel } = this.state
+    const { Payload, timeSel, tel, name } = this.state
     const nowOrderTime = e.detail.value + " " + timeSel
     this.setState({
       dateSel: e.detail.value,
-      Payload: { ...Payload, order_time: nowOrderTime }
+      Payload: { ...Payload, order_time: nowOrderTime, mobile: tel, name: name }
     })
   }
 
@@ -118,12 +125,11 @@ class AppointmentPost extends Component {
   }
   //打开,关闭获取姓名和电话号码弹窗
   onClose() {
-    const { showInformation } = this.state
-    this.setState({ showInformation: !showInformation, name: '姓名', tel: '电话', })
-  }
-  onCenter() {
-    const { showInformation } = this.state
-    this.setState({ showInformation: !showInformation })
+    const { showInformation, name, tel, Payload } = this.state
+    this.setState({
+      showInformation: !showInformation,
+      Payload: { ...Payload, name: name, mobile: tel }
+    })
   }
 
   //关闭预约成功
@@ -188,6 +194,7 @@ class AppointmentPost extends Component {
     const { Payload, showNext } = this.state
     this.onChenkPayload() &&
       this.props.dispatchAppointmentCreate(Payload).then(res => {
+        console.log(res)
         if (res.data.msg === '预约成功') {
           //倒计时，需要优化
           const { appointment } = res.data.data
@@ -283,6 +290,7 @@ class AppointmentPost extends Component {
           <Board className='p-3 height:20%;width:100%' border='bottom' >
             <View className='text-bold text-huge' >{title}</View>
             <View className='text-secondary text-normal'>{intro}</View>
+
             <View className='at-row  mt-2'>
               <View className='at-col-5 text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
               <View className='at-col-7'>
@@ -290,6 +298,7 @@ class AppointmentPost extends Component {
                   <View className='text-mini text-secondary'>{cost}</View>
                 </View>
               </View>
+              
             </View>
           </Board>
 
@@ -352,7 +361,6 @@ class AppointmentPost extends Component {
             name={name}
             tel={tel}
             onClose={this.onClose}
-            onCenter={this.onCenter}
             onGetName={this.onGetName}
             onGetTel={this.onGetTel}
           />

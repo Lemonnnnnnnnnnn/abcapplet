@@ -21,7 +21,7 @@ class AppointPostMask extends BaseComponent {
   }
 
   render() {
-    let { show } = this.props
+    let { show ,name , tel} = this.props
 
     return show && <View className='apartment-mask'>
       {/* 主体内容 */}
@@ -37,19 +37,31 @@ class AppointPostMask extends BaseComponent {
           <View className='at-row'>
             <View className='at-col-3 text-normal at-row at-row__align--center '>姓名：</View>
             <View className='at-col-8 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
-              <Input className='text-normal ml-2'   placeholder='修改姓名' onChange={this.props.onGetName} ></Input>
+              {
+                name==='姓名' ? 
+                <Input className='text-normal ml-2'   placeholder='修改姓名' onChange={this.props.onGetName} ></Input>
+                : 
+                <Input className='text-normal ml-2'   placeholder='修改姓名' onChange={this.props.onGetName}value={name} ></Input> 
+              }
+              
             </View>
           </View>
           <View className='at-row mt-3'>
             <View className='at-col-3 text-normal at-row at-row__align--center '>电话号码：</View>
             <View className='at-col-8 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
-              <Input className='text-normal ml-2 '  placeholder='修改电话号码' onChange={this.props.onGetTel} ></Input>
+            {
+                tel==='电话' ? 
+                <Input className='text-normal ml-2 '  placeholder='修改电话号码' onChange={this.props.onGetTel} ></Input>
+                : 
+                <Input className='text-normal ml-2 '  placeholder='修改电话号码' onChange={this.props.onGetTel} value={tel}></Input>
+              }
+              
             </View>
           </View>
           <AtButton
             circle
             className='mt-3 mb-2 btn-yellow active'
-            onClick={this.props.onCenter}
+            onClick={this.props.onClose}
             >确定</AtButton>
         </View>
       </Board>
