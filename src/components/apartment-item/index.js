@@ -125,8 +125,8 @@ class ApartmentItem extends BaseComponent {
       color: '#FFC919'
     }
 
-    const fontSize = mini ? "10px" : "16px"
-    const padding = mini ? "4px 12px" : "8px 24px"
+    const fontSize = mini ? "10px" : "15px"
+    const padding = mini ? "4px 12px" : "6px 16px"
 
     const apartmentHeaderType = {
       position: "absolute",
