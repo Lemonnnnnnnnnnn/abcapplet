@@ -697,7 +697,7 @@ class CommonHome extends Component {
 
             </View>
 
-            <View className='home-apartment'>
+            <View className='home-apartment ml-3 mr-3'>
               <ApartmentList
                 key={apartments.type}
                 type={apartments.type}
