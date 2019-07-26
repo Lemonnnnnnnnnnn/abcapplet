@@ -62,7 +62,7 @@ class ApartmentContainer extends BaseComponent {
       left: Taro.pxTransform(40),
       top: Taro.pxTransform(height - 75),
       height: "25px",
-      width: "75px",
+      width: "70px",
     }
 
     const opacityBgStyle = {
@@ -80,8 +80,7 @@ class ApartmentContainer extends BaseComponent {
       left: Taro.pxTransform(40),
       top: Taro.pxTransform(height - 75),
       height: "25px",
-      width: "75px",
-      textAlign: "center",
+      width: "70px",
     }
 
     const fontYellowStyle = {
@@ -119,7 +118,7 @@ class ApartmentContainer extends BaseComponent {
         <View style={picIndexStyle}>
           <View style={opacityBgStyle}></View>
         </View>
-        <View style={fontStyle}>
+        <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>
           <Text style={fontYellowStyle}>{current + 1}</Text>
           <Text style={fontWhiteStyle}>/{swipers.length}</Text>
         </View>

@@ -490,8 +490,8 @@ class HouseTypeShow extends Component {
         {
           showApartRoom && <View
             onClick={this.onshowMorePic}
-            className='text-secondary text-normal'
-            style={{ textAlign: "center" }} >展示更多</View>
+            className='text-secondary text-normal mt-2'
+            style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
         }
         <View onClick={this.onSearchRoom} className='text-secondary at-row at-row__align--center at-row__justify--end'>
           <AtIcon className='ml-2' value='search' size='13' color={COLOR_GREY_0} />
