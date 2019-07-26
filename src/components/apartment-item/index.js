@@ -125,10 +125,19 @@ class ApartmentItem extends BaseComponent {
       color: '#FFC919'
     }
 
-    const apartmentItem = {
-      background: "rgba(255,255,255,1)",
-      boxShadow: "0px 0px 10px 0px rgba(222, 222, 222, 1)",
-      borderRadius:"12px",
+    const fontSize = mini ? "10px" : "16px"
+    const padding = mini ? "4px 12px" : "8px 24px"
+
+    const apartmentHeaderType = {
+      position: "absolute",
+      left: "6%",
+      bottom: "0",
+      transform: "translateY(50%)",
+      color: "#fff",
+      padding: padding,
+      fontSize: fontSize,
+      borderRadius: "12px",
+      background: "#ffc919",
     }
 
 
@@ -161,7 +170,7 @@ class ApartmentItem extends BaseComponent {
           </View>
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
-          {apartmentTitle && <View className='apartment-header-type text-large '>{apartmentTitle}</View>}
+          {apartmentTitle && <View style={apartmentHeaderType} className=' text-large '>{apartmentTitle}</View>}
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
