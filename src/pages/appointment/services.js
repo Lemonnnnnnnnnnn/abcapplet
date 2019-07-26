@@ -1,4 +1,4 @@
-import Taro, { Component  } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import ServicesHeader from '@components/services-header'
@@ -12,7 +12,7 @@ import {
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
 
-@connect(state => state , {
+@connect(state => state, {
   ...appointmentActions,
 })
 
@@ -21,63 +21,67 @@ class ServicesHome extends Component {
     navigationBarTitleText: '找房服务',
   }
   state = {
-    payload:PAYLOAD_APPOINTMENT_LIST,
-    time:'',
+    payload: PAYLOAD_APPOINTMENT_LIST,
+    time: '',
     NowCurrentPage: 2,
   }
 
   componentWillMount() {
-    const { payload  } = this.state
-    this.props.dispatchAppointmentList(payload).
-    then((res)=>{
-    this.setState({
-      time:res.data.data.date
-    })
-     if(res.data.data.total===0){
-        Taro.showToast({
-          title: '今天暂无行程',
-          icon: 'none',
-          duration: 2000
-        })
-    }}
-    )
-  }
-  componentDidMount(){
     const { payload } = this.state
-    this.setState({ payload: { ...payload, current_page :2 }})
+    this.props.dispatchAppointmentList(payload).
+      then((res) => {
+        this.setState({
+          time: res.data.data.date
+        })
+        if (res.data.data.total === 0) {
+          Taro.showToast({
+            title: '今天暂无行程',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+      )
+  }
+  componentDidMount() {
+    const { payload } = this.state
+    this.setState({ payload: { ...payload, current_page: 2 } })
   }
 
   /**
    * 到底部加载行程下一页
    */
   onReachBottom() {
-    const { payload , NowCurrentPage} = this.state
+    const { payload, NowCurrentPage } = this.state
     const currentPageNow = NowCurrentPage + 1
     this.setState({
-       NowCurrentPage:currentPageNow,
-       payload: { ...payload, current_page : currentPageNow
-      }})
+      NowCurrentPage: currentPageNow,
+      payload: {
+        ...payload, current_page: currentPageNow
+      }
+    })
     this.props.dispatchNextPageApartmentList(payload).
-    then((res)=>{
-       if(res.data.data.list.length===0){
+      then((res) => {
+        if (res.data.data.list.length === 0) {
           Taro.showToast({
             title: '加载完毕',
             icon: 'none',
             duration: 2000
           })
-      }}
+        }
+      }
 
-    )
+      )
   }
   //调转到地图找房
-  onToLeft(){
+  onToLeft() {
     // Taro.navigateTo({
     //   url:'/pages/appointment/mapHouse/index'
     // })
 
   }
   //调转到通勤找房
-  onToRight(){
+  onToRight() {
     // Taro.navigateTo({
     //   url:'/pages/appointment/commuteHouse/index'
     // })
@@ -88,7 +92,7 @@ class ServicesHome extends Component {
     const { time } = this.state
 
     return (
-      <View >
+      <View style={{ overflow: "hidden" }}>
         <ServicesHeader
           onClickLeft={this.onToLeft}
           onClickRight={this.onToRight}
@@ -104,11 +108,11 @@ class ServicesHome extends Component {
             </View>
           </View>
           <View >
-          <ServicesList
-            lists={appointments.list}
-            time={time}
-          />
-        </View>
+            <ServicesList
+              lists={appointments.list}
+              time={time}
+            />
+          </View>
         </View>
 
       </View>
