@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { AtAvatar } from 'taro-ui'
+import { AtAvatar , AtIcon } from 'taro-ui'
 import { View, Map, Image, Text, ScrollView } from '@tarojs/components'
 
 // Redux 相关
@@ -21,7 +21,7 @@ import ApartmentRentDescriptionMask from '@components/apartment-rent-description
 import AppartmentMatchingMask from '@components/apartment-matching-mask'
 
 // 自定义变量
-import { COLOR_GREY_2 } from '@constants/styles'
+import { COLOR_GREY_2 , COLOR_GREY_0 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
@@ -57,7 +57,7 @@ class HouseTypeShow extends Component {
     buttons: [],
     showRentDescription: false,
     showMatch: false,
-
+    showApartRoom: true
   }
 
   async componentDidMount() {
@@ -81,6 +81,7 @@ class HouseTypeShow extends Component {
 
     const roomMatch_list = roomMatch.slice(0, 5)
     const publicMatch_list = publicMatch.slice(0, 5)
+    const roomList = (data.room_list).slice(0, 5)
 
 
     data && this.setState({
@@ -101,7 +102,7 @@ class HouseTypeShow extends Component {
         isSign: data.is_sign,
         notices: data.notices,
         descList: data.desc_list,
-        roomList: data.room_list,
+        roomList: roomList,
         isCollect: data.is_collect,
         facilitys: data.facility_list,
         tags: data.tags,
@@ -230,6 +231,24 @@ class HouseTypeShow extends Component {
     }
   }
 
+  onSearchRoom(){
+    const { id } = this.$router.params
+    Taro.navigateTo({url : `/pages/apartment/search-room?id=${id}`})
+  }
+
+  async onshowMorePic() {
+    this.setState({ showApartRoom: false })
+    const { id } = this.$router.params
+    const { houstType } = this.state
+
+    const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+
+    const roomList = data.room_list
+
+    this.setState({ houstType: { ...houstType, roomList: roomList } })
+
+  }
+
   /**
    * 点击 预约看房,查看订单
    */
@@ -250,7 +269,7 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
@@ -469,6 +488,17 @@ class HouseTypeShow extends Component {
             onDeleteFavorite={this.onRoomDeleteFavorite}
             className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
           />)}
+        {
+          showApartRoom && <View
+            onClick={this.onshowMorePic}
+            className='text-secondary text-normal'
+            style={{ textAlign: "center" }} >展示更多</View>
+        }
+        <View onClick={this.onSearchRoom} className='text-secondary at-row at-row__align--center at-row__justify--end'>
+          <AtIcon className='ml-2' value='search' size='13' color={COLOR_GREY_0} />
+          <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
+        </View>
+
       </View>
 
 
