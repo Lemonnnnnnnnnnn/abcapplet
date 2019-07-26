@@ -37,7 +37,7 @@ class ArticleShow extends Component {
     ],
   }
 
-  componentWillMount() {
+  componentDidShow() {
     const { id } = this.$router.params
 
     this.props.dispatchArticle({ id }).then(() => {
