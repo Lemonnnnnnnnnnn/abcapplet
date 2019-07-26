@@ -580,7 +580,7 @@ class HouseTypeShow extends Component {
       {/* 看了又看 */}
       {city &&
         <View>
-          <View className='text-bold text-huge mt-4'>附近公寓</View>
+          <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
           <ApartmentList
             canScroll
             mini
