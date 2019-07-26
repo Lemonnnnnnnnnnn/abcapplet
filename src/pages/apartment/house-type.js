@@ -48,6 +48,7 @@ class HouseTypeShow extends Component {
       hotRules: [],
       facilitys: [],
       roomList: [],
+      nearbyPost : [],
     },
     map: {
       latitude: 0,
@@ -57,13 +58,17 @@ class HouseTypeShow extends Component {
     buttons: [],
     showRentDescription: false,
     showMatch: false,
-    showApartRoom: true
+    showApartRoom: true,
   }
 
   async componentDidMount() {
     const { id } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+    
+    await this.props.dispatchAppointmentNearbyPost({id}).then(res=>console.log(res))
+
+    
 
     Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
 
