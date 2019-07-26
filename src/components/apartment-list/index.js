@@ -32,7 +32,7 @@ class ApartmentList extends BaseList {
     return (show && <View className={className}>
 
       {/* 渲染 公寓列表 */}
-      <View className='at-row at-row--wrap'>
+      <View className='at-row at-row--wrap '>
         {
           canScroll
             ?
@@ -45,7 +45,6 @@ class ApartmentList extends BaseList {
                       type={type}
                       apartment={i}
                       className='mt-2'
-                      
                     />
                   </View>
                 )}

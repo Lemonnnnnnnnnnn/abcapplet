@@ -134,7 +134,7 @@ class CommonHome extends Component {
         .in(this.$scope)
         .select('.home-search')
         .boundingClientRect()
-        .exec(res => res && res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
+        .exec(res => res[0] && res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
 
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params
@@ -592,10 +592,10 @@ class CommonHome extends Component {
 
 
     return (
-      <View className='page-white' >
+      <View className='page-white' style={{overflow:"hidden"}} >
         <View>
           {/* 搜索框 & 城市选择器 */}
-          <View className='home-search pl-3 lr-3'>
+          <View className='home-search pl-3 pr-3'>
             <Search
               className='mb-2'
               isFixed={searchIsFixed}
@@ -604,7 +604,6 @@ class CommonHome extends Component {
               onChangeSelector={this.onChangeSelector}
             />
           </View>
-
           {/* 轮播 */}
           {banners.length > 0 &&
             <Carousel
