@@ -37,12 +37,12 @@ class OrderHeader extends BaseComponent {
           <View className='at-row '>
             {items.map(i =>
               <View className='at-row ml-3 ' key={i.id}>
-                <View className='at-col-5'>
+                <View className='at-col-4'>
                   <Image src={i.url} style={PicStyle}></Image>
                 </View>
-                <View className='at-col-5 at-col__justify--center'>
+                <View className='at-col-6 at-col__justify--center'>
                   <View className='text-white text-normal'>{i.title}</View>
-                  <View className='text-secondary text-small '>{i.desc}</View>
+                  <View className='text-secondary text-small'>({i.desc})</View>
                 </View>
               </View>
             )}

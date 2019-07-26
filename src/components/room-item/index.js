@@ -174,13 +174,13 @@ class RoomItem extends BaseComponent {
             {/* 第二行 */}
 
             <View className=' mt-3'>
-              <View className='at-row at-row__justify--between  '>
+              <View className='at-row at-row__justify--between  at-row__align--center'>
 
                 {/* 左侧 */}
 
-                <View className='at-row text-huge text-yellow text-bold at-row__align--center'>
-                  {isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}`}
-                  <Text className='text-normal text-yellow '>
+                <View className='at-row  at-row__align--end'>
+                  <Text className='text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}`}</Text>
+                  <Text className='text-small text-yellow mb-1'>
                     {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
                   </Text>
                 </View>
@@ -191,15 +191,7 @@ class RoomItem extends BaseComponent {
                 <View className='mr-3'>
                   <AtIcon value='image' size='25' color={COLOR_YELLOW} onClick={this.onViewPic} ></AtIcon>
                 </View>
-                <View className='mr-3'>
-                  {hasIsCollect
-                    ? (!isCollect
-                      ? <AtIcon value='heart' size='25' color={COLOR_YELLOW} onClick={this.onCreateFavorite} />
-                      : <AtIcon value='heart-2' size='25' color={COLOR_YELLOW} onClick={this.onDeleteFavorite} />
-                    )
-                    : (type === TYPE_FAVORITE_ROOM && <AtIcon value='heart-2' size='25' color={COLOR_YELLOW} onClick={this.onDeleteFavorite} />)
-                  }
-                </View>
+                
                 {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'
                   onClick={this.onSignRoom}
