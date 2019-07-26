@@ -57,7 +57,6 @@ class HouseTypeShow extends Component {
     buttons: [],
     showRentDescription: false,
     showMatch: false,
-    showPic_list : [],
     showApartRoom: true
   }
 
@@ -82,12 +81,10 @@ class HouseTypeShow extends Component {
 
     const roomMatch_list = roomMatch.slice(0, 5)
     const publicMatch_list = publicMatch.slice(0, 5)
-    const showPic_list = (data.pictures.map(i => ({ url: i }))).slice(0,5)
     const roomList = (data.room_list).slice(0, 5)
 
 
     data && this.setState({
-      showPic_list : showPic_list,
       roomMatch_list: roomMatch_list,
       publicMatch_list: publicMatch_list,
       houseType_id: id,
@@ -272,7 +269,7 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, showPic_list } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
@@ -298,9 +295,8 @@ class HouseTypeShow extends Component {
       borderRadius: "12px",
       backgroundColor: "rgba(255, 201, 25, 1)",
       color: "#fff",
-      fontSize: "10px",
+      fontSize: "11px",
       textAlign: "center",
-      height: "15px",
     }
 
     const ScrollWrapStyle = {
@@ -322,7 +318,7 @@ class HouseTypeShow extends Component {
 
     return <ApartmentContainer
       houseType_id={houseType_id}
-      swipers={showPic_list}
+      swipers={swipers}
       show={false}
       isCollect={isCollect}
       onCreateFavorite={this.onCreateFavorite}
@@ -378,9 +374,9 @@ class HouseTypeShow extends Component {
       {/* 押金保障 */}
 
       {
-        isSign && <View className='at-row at-row__align--center '>
-          <View className='at-col at-col-2 text-normal ' style={deposit}>押金保障</View>
-          <View className='at-col at-col-6 text-normal ml-3 text-secondary mt-1'>该房源支持退租押金最高50%无忧赔付</View>
+        isSign && <View className='at-row at-row__align--center  '>
+          <View className='at-col at-col-2 text-normal at-row at-row__align--center' style={deposit}>押金保障</View>
+          <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
         </View>
       }
 

@@ -1,7 +1,7 @@
 // Taro 组件
 import Taro from '@tarojs/taro'
 import { AtIcon } from 'taro-ui'
-import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
+import { View, Swiper, SwiperItem, Image, Text } from '@tarojs/components'
 
 
 // 自定义组件
@@ -35,7 +35,7 @@ class ApartmentContainer extends BaseComponent {
 
     Taro.previewImage({
       urls: picList,
-      current : currentPic
+      current: currentPic
     })
 
   }
@@ -48,18 +48,54 @@ class ApartmentContainer extends BaseComponent {
   }
 
   render() {
-    const { swipers, height, width, isCollect,show } = this.props
+    const { swipers, height, width, isCollect, show } = this.props
+
+    const { current } = this.state
 
     const style = {
       width: '100%',
       height: Taro.pxTransform(height),
     }
 
+    const picIndexStyle = {
+      position: "absolute",
+      left: Taro.pxTransform(40),
+      top: Taro.pxTransform(height - 75),
+      height: "25px",
+      width: "75px",
+    }
+
+    const opacityBgStyle = {
+      position: "absolute",
+      borderRadius: "12px",
+      height: "100%",
+      width: "100%",
+      background: "#000",
+      opacity: "0.5",
+    }
+
+    const fontStyle = {
+      position: "absolute",
+      borderRadius: "12px",
+      left: Taro.pxTransform(40),
+      top: Taro.pxTransform(height - 75),
+      height: "25px",
+      width: "75px",
+      textAlign: "center",
+    }
+
+    const fontYellowStyle = {
+      color: COLOR_YELLOW,
+    }
+
+    const fontWhiteStyle = {
+      color: "#fff",
+    }
+
     return (
-      <View>
+      <View style={{ position: "relative" }}>
         <Swiper
           className='swiper'
-          indicatorDots
           autoplay
           circular
           current
@@ -79,8 +115,17 @@ class ApartmentContainer extends BaseComponent {
           </SwiperItem>)}
         </Swiper>
 
+        {/* index */}
+        <View style={picIndexStyle}>
+          <View style={opacityBgStyle}></View>
+        </View>
+        <View style={fontStyle}>
+          <Text style={fontYellowStyle}>{current + 1}</Text>
+          <Text style={fontWhiteStyle}>/{swipers.length}</Text>
+        </View>
+
         <View className='page-white apartment-container p-3' >
-          <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show===true?true:false}>
+          <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>
             {isCollect
               ? <AtIcon value='heart-2' size='35' color={COLOR_YELLOW} onClick={this.props.onDeleteFavorite} />
               : <AtIcon value='heart' size='35' color={COLOR_YELLOW} onClick={this.props.onCreateFavorite} />

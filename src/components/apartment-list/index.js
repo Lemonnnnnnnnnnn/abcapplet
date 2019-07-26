@@ -26,7 +26,7 @@ class ApartmentList extends BaseList {
     }
 
 
-    const { canScroll, items, className, type, mini, show } = this.props
+    const { canScroll, items, className, type, mini, show , isSign} = this.props
     const { hasMore, loading, page } = this.state
 
     return (show && <View className={className}>

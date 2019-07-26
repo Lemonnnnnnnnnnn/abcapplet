@@ -80,6 +80,7 @@ class ApartmentItem extends BaseComponent {
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
     const { className, apartment, type, } = this.props
+    const { is_sign } = apartment
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -107,11 +108,6 @@ class ApartmentItem extends BaseComponent {
 
     const heartWrap = {
       padding: '10px',
-    }
-
-    const heartWrapOpacity = {
-      padding: '10px',
-      opacity: 0.5
     }
 
     const heartNum = {
@@ -185,7 +181,7 @@ class ApartmentItem extends BaseComponent {
             </View>
             :
             <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
-              <View style={heartWrapOpacity}>
+              <View style={heartWrap}>
                 {/* <AtIcon value='heart-2' size='40' /> */}
                 <Image src='https://images.gongyuabc.com//image/heart-black.png' style={{ width: "40px", height: "35px" }}></Image>
               </View>
@@ -208,9 +204,11 @@ class ApartmentItem extends BaseComponent {
             <View >
               <View className='at-row at-row__justify--between at-row__align--center'>
                 <View className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
-                <View className='mt-2'>
-                  <Image src='https://images.gongyuabc.com//image/signing.png' style={{ width: "18px", height: "18px" }}></Image>
-                </View>
+                {
+                  is_sign && <View className='mt-2'>
+                    <Image src='https://images.gongyuabc.com//image/signing.png' style={{ width: "18px", height: "18px" }}></Image>
+                  </View>
+                }
               </View>
               {desc && <View className='text-muted text-large mt-2 apartment-content-desc'>{desc}</View>}
 
