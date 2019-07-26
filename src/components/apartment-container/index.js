@@ -33,6 +33,7 @@ class ApartmentContainer extends BaseComponent {
     })
     const currentPic = picList[current + 1]
 
+
     Taro.previewImage({
       urls: picList,
       current: currentPic
@@ -40,8 +41,12 @@ class ApartmentContainer extends BaseComponent {
 
   }
 
+  
+
   changePicIndex() {
-    const { current } = this.state
+    let { current } = this.state
+    const { swipers } = this.props
+    if(current > swipers.length - 2){current = -1}
     this.setState({
       current: current + 1
     })
