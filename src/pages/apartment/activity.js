@@ -137,7 +137,7 @@ class ApartmentCbd extends Component {
 
     activity.title !== '' && Taro.setNavigationBarTitle({ title: activity.title })
 
-    return <View className='page-white'>
+    return <View style={{overflow : "hidden"}} className='page-white'>
 
       {/* 头部 */}
       <View className='mx-2 py-3'>

@@ -145,7 +145,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View style={apartmentItem} className=' ml-3 mr-2 mb-4' onClick={this.onNavigation}>
+      <View className='apartment ml-3 mr-3 mb-4 ' onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
