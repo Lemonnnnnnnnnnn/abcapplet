@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { AtAvatar , AtIcon } from 'taro-ui'
+import { AtAvatar, AtIcon } from 'taro-ui'
 import { View, Map, Image, Text, ScrollView } from '@tarojs/components'
 
 // Redux 相关
@@ -21,7 +21,7 @@ import ApartmentRentDescriptionMask from '@components/apartment-rent-description
 import AppartmentMatchingMask from '@components/apartment-matching-mask'
 
 // 自定义变量
-import { COLOR_GREY_2 , COLOR_GREY_0 } from '@constants/styles'
+import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
@@ -48,7 +48,7 @@ class HouseTypeShow extends Component {
       hotRules: [],
       facilitys: [],
       roomList: [],
-      nearbyPost : [],
+      nearbyPost: [],
     },
     map: {
       latitude: 0,
@@ -59,16 +59,19 @@ class HouseTypeShow extends Component {
     showRentDescription: false,
     showMatch: false,
     showApartRoom: true,
+    nearbyPost: [],
   }
 
   async componentDidMount() {
     const { id } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-    
-    await this.props.dispatchAppointmentNearbyPost({id}).then(res=>console.log(res))
 
-    
+    const apartmentID = data.apartment_id
+
+    await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
+
+
 
     Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
 
@@ -236,9 +239,9 @@ class HouseTypeShow extends Component {
     }
   }
 
-  onSearchRoom(){
+  onSearchRoom() {
     const { id } = this.$router.params
-    Taro.navigateTo({url : `/pages/apartment/search-room?id=${id}`})
+    Taro.navigateTo({ url: `/pages/apartment/search-room?id=${id}` })
   }
 
   async onshowMorePic() {
@@ -274,7 +277,7 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
@@ -587,6 +590,7 @@ class HouseTypeShow extends Component {
         <View>
           <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
           <ApartmentList
+            nearbyPost={nearbyPost}
             canScroll
             mini
             key={apartments.type}
