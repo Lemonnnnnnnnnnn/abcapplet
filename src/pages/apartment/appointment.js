@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { View, Swiper, SwiperItem, Image, Picker } from '@tarojs/components'
-import { AtAvatar, AtIcon, AtButton } from 'taro-ui'
+import { AtAvatar, AtIcon, AtButton, AtTag } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -55,10 +55,10 @@ class AppointmentPost extends Component {
     },
     houstType: {
       swipers: [],
-
     },
     screenHeight: '',
     screenWidth: '',
+    types: [],
   }
 
 
@@ -95,6 +95,7 @@ class AppointmentPost extends Component {
         title: `${data.title}·${data.apartment_title}`,
         priceTitle: data.price_title,
       },
+      types: data.other_house_type
     })
     Taro.getSystemInfo()
       .then(res => {
@@ -103,7 +104,54 @@ class AppointmentPost extends Component {
           screenWidth: res.screenWidth,
         })
       })
+
+    // 初始化户型列表
+    const types = data.other_house_type
+
+    const typeList = []
+
+    types.map((i, key) => {
+      i.onlyId = key
+      i.type = false
+      i.active = false
+      typeList.push(i)
+    })
+
+    typeList[0].type = true
+    typeList[0].active = true
+
+    this.setState({
+      types: [...typeList],
+    })
   }
+
+  // 户型选择
+
+
+  onChoiseHouseType(e, index) {
+    const { types } = this.state
+    let newTypes = JSON.parse(JSON.stringify(types))
+
+    newTypes.map(i => {
+
+      if (i.onlyId === index) {
+        i.type = !i.type
+        i.active = !i.active
+        // const { id: type_floor } = types[i.id]
+        // this.props.onChange({ payload: { type_floor } })
+      } else {
+        i.type = false
+        i.active = false
+      }
+    })
+    this.setState({
+      types: [...newTypes]
+    })
+
+  }
+
+
+
   //获取日期
   onDateChange = e => {
     const { Payload, timeSel, tel, name } = this.state
@@ -252,8 +300,10 @@ class AppointmentPost extends Component {
   }
   render() {
     const { houstType, height, width, users, name, tel, showInformation,
-      showNext, zeroSecTime, zeroMinTime, serverId, screenHeight, screenWidth } = this.state
+      showNext, zeroSecTime, zeroMinTime, serverId, screenHeight, screenWidth, types } = this.state
     const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
+
+    console.log(types)
 
     const {
       title, swipers, cost, priceTitle, intro,
@@ -263,6 +313,11 @@ class AppointmentPost extends Component {
     const style = {
       width: '100%',
       height: Taro.pxTransform(height),
+    }
+
+    const fontStyle = {
+      fontSize: "15px",
+      padding: "0 5px"
     }
 
     return (
@@ -297,7 +352,7 @@ class AppointmentPost extends Component {
                   <View className='text-mini text-secondary'>{cost}</View>
                 </View>
               </View>
-              
+
             </View>
           </Board>
 
@@ -321,6 +376,24 @@ class AppointmentPost extends Component {
                   <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
                 </View>
               </View>
+
+              {/* 选择户型 */}
+              {
+                types && types.map((i, key) =>
+                  <AtTag
+                    type={i.type ? "primary" : ""}
+                    className='ml-3 mr-1 mt-3 mb-3'
+                    circle
+                    onClick={(e) => this.onChoiseHouseType(e, key)}
+                    key={key}
+                    active={i.active}>
+                    <View style={fontStyle}>{i.title}</View>
+                  </AtTag>)
+              }
+
+
+
+
               {/* 中间横线 */}
 
               <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
