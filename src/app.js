@@ -58,7 +58,7 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '公寓ABC',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
     },
     tabBar: {
       color: "#4A4A4A",

@@ -569,12 +569,6 @@ class HouseTypeShow extends Component {
           </ScrollView>
         </View>
 
-
-        {/* {types.map((i, index) =>
-          <View key={i.id} className={`${index + 1 != types.length && 'border-bottom'} mt-2`}>
-            <ApartmentTypeItem item={i} />
-          </View>)} */}
-
       </View>
 
       {/* 看了又看 */}
