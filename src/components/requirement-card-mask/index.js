@@ -19,11 +19,15 @@ class RequirementCardMask extends BaseComponent {
     apartments: [],
   }
 
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
+
   render() {
     let { show } = this.props
 
     return show &&
-      <View className='apartment-mask'>
+      <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
 
         <Board fixed='top' border='top'>
           <View className='page-requirementtop'></View>

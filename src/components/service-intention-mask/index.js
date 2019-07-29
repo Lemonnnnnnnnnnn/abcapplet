@@ -49,6 +49,10 @@ componentDidMount(){
   }
   )
 }
+
+onMaskTouchMove(e) {
+  return e.stopPropagation()
+}
 //分数，星星数
 onScoreChange(value) {
   const { payload,Payloadlist } = this.state
@@ -90,7 +94,7 @@ onClickPost(){
     const { score , roomList} = this.state
     var nowIntention;
     nowIntention =  intention===0?score:intention;
-    return show && <View className='apartment-mask'>
+    return show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
       {/* 主体内容 */}
       <Board fixed='bottom' border='top' >
         <View className='m-3'>

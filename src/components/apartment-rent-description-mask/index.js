@@ -44,6 +44,10 @@ class ApartmentItemMask extends BaseComponent {
         Taro.navigateTo({url:`${PAGE_ORDER_CREATE}?type_id=${typeId}`})
     }
 
+    onMaskTouchMove(e) {
+        return e.stopPropagation()
+      }
+
     render() {
         const { show, cost, cost_info, onClose } = this.props
         let cost_list = []
@@ -66,7 +70,7 @@ class ApartmentItemMask extends BaseComponent {
         }
 
         return (
-            show && <View className=' apartment-mask'>
+            show && <View className=' apartment-mask' onTouchMove={this.onMaskTouchMove}>
                 <Board fixed='bottom' border='top'>
                     <AtIcon onClick={onClose} value='close' size='15' className='mt-3 mr-3' color='#888' style='float:right'></AtIcon>
 
