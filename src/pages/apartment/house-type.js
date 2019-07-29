@@ -453,10 +453,14 @@ class HouseTypeShow extends Component {
           </View>
         )}
 
-        <View style={PublicConfiguration} className='text-center'>
-          <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
-          <View className='text-small'>更多</View>
-        </View>
+        {
+          roomMatch_list && roomMatch_list.length > 5 && <View style={PublicConfiguration} className='text-center'>
+            <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
+            <View className='text-small'>更多</View>
+          </View>
+        }
+
+
       </View>
 
       {/* 位置信息 */}
@@ -562,10 +566,13 @@ class HouseTypeShow extends Component {
             </View>
           )}
 
-          <View style={PublicConfiguration} className='text-center'>
-            <View onClick={this.onOpenAllMatching} style={{ height: '30px', width: '30px' }}>...</View>
-            <View className='text-small'>更多</View>
-          </View>
+          {
+            publicMatch_list && publicMatch_list.length > 5 && <View style={PublicConfiguration} className='text-center'>
+              <View onClick={this.onOpenAllMatching} style={{ height: '30px', width: '30px' }}>...</View>
+              <View className='text-small'>更多</View>
+            </View>
+          }
+
         </View>
 
         <View style={ScrollWrapStyle} className='at-col'>
