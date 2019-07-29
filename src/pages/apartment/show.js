@@ -45,15 +45,13 @@ class ApartmentShow extends Component {
       longitude: 0,
       markers: [],
     },
-    buttons: [],
+    buttons : [],
   }
 
   async componentDidMount() {
     const { id = 255 } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
-
-    console.log(data)
 
     let facilitys = data.facility_list
     let publicMatch = []
@@ -71,12 +69,12 @@ class ApartmentShow extends Component {
 
     this.setState({
       publicMatch_list: publicMatch_list,
+      buttons: buttons,
       apartment: {
         id: data.id,
         title: data.title,
         intro: data.one_word,
-        buttons,
-        cover: data.extend_info.adv,
+        cover: data.extend_info.pictures[0].url,
         tags: data.tags,
         desc: data.desc,
         apartmentTitle: data.apartment_title,
@@ -87,6 +85,7 @@ class ApartmentShow extends Component {
         isCollect: data.is_collect,
         rules: data.extend_info.rules,
         position: data.position,
+        is_sign: data.is_sign,
         facilitys: data.facility_list,
         special: data.extend_info.special,
         notices: data.extend_info.notices,
@@ -148,12 +147,11 @@ class ApartmentShow extends Component {
 
   render() {
     const { apartments } = this.props
-    const { apartment, map, buttons, publicMatch_list } = this.state
+    const { apartment, map, publicMatch_list , buttons } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
       notices, cbds, intro, rules, facilitys, position, cover } = apartment
-
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
@@ -176,9 +174,6 @@ class ApartmentShow extends Component {
       whiteSpace: "nowrap",
     }
 
-    const boxShadowStyle = {
-      boxShadow: "0 1px 3px rgb(200,200,200)"
-    }
 
     const imageStyle = {
       width: '300px',
@@ -195,6 +190,7 @@ class ApartmentShow extends Component {
     >
 
       <TabBar
+        show
         hasShare
         hasContact
         buttons={buttons}
@@ -206,13 +202,14 @@ class ApartmentShow extends Component {
       <View className='text-secondary text-normal'>{intro}</View>
 
       {/* 活动信息 */}
-      <View className='mt-3'>
-        {rules && rules.map(i =>
+      <View className='mt-2'>
+        {rules.length ? rules.map(i =>
           <View key={i.id} className=' mt-2 mr-3 mb-3'>
             <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
             <Text className='text-secondary text-small ml-2'>{i.content}</Text>
           </View>
-        )}
+        ):<View className='text-secondary'>暂无相关活动信息</View>  
+      }
       </View>
       <View className='at-row at-row--wrap'>
 
@@ -234,21 +231,24 @@ class ApartmentShow extends Component {
 
 
       {/* 地图 */}
-      <View className='at-row at-row__align--center'>
+      <View className='at-row at-row__align--center mb-2'>
         <View className='at-col at-col-1 mt-1'>
           <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
         </View>
-        <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
+        {
+          position ?<View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View> : <View className='text-secondary'>暂无相关位置信息</View>
+        }
+        
       </View>
 
       {/* 公寓列表 */}
 
-      <View style={ScrollWrapStyle} className='at-col ' >
+      <View style={ScrollWrapStyle} className='at-col' >
         <ScrollView scrollX>
           {types && types.map((i, index) =>
             <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 `}>
-              <View style={boxShadowStyle}>
-                <ApartmentTypeItem item={i} />
+              <View >
+                <ApartmentTypeItem apartmentDetail item={i} />
               </View>
             </View>)}
         </ScrollView>
@@ -258,7 +258,7 @@ class ApartmentShow extends Component {
 
 
       <View>
-        <View className='text-bold text-huge mt-4 mb-3'>公寓信息</View>
+        <View className='text-bold text-huge mt-2 mb-3'>公寓信息</View>
         <View className='at-row at-row__align--center  at-row__justify--between my-2'>
           <View>
             <View className='at-row at-row__align--center'>
@@ -273,23 +273,22 @@ class ApartmentShow extends Component {
 
           </View>
         </View>
-        <View className='text-secondary text-normal' style={textDeal}>{desc}</View>
-
-
-
-
+        {
+          desc ? <View className='text-secondary text-normal' style={textDeal}>{desc}</View> : <View className='text-secondary'>暂无相关描述</View>
+        }
+        
         {/* 公共配置 */}
 
         <View className='at-row at-row--wrap mt-3 mb-3'>
           {publicMatch_list && publicMatch_list.map(i =>
-            <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
-              <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+            <View key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-4'>
+              <Image src={i.icon} mode='aspectFit' style={{ height: '35px', width: '35px' }} />
               <View className='text-small'>{i.title}</View>
             </View>
           )}
 
           {publicMatch_list && publicMatch_list.length > 5 && <View style={PublicConfiguration} className='text-center'>
-            <View onClick={this.onOpenAllMatching} style={{ height: '30px', width: '30px' }}>...</View>
+            <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '35px' }}>...</View>
             <View className='text-small'>更多</View>
           </View>}
         </View>
