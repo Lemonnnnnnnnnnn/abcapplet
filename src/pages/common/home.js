@@ -280,8 +280,10 @@ class CommonHome extends Component {
 
     // 判断上滑还是下滑
     this.setState({ scrollNow: scrollTop })
-    scrollTop > scrollNow && this.setState({ showSearch: false })
-    scrollTop < scrollNow && this.setState({ showSearch: true })
+    // scrollTop > scrollNow && this.setState({ showSearch: false })
+    if(scrollTop <scrollNow || scrollTop === 0 ){this.setState({ showSearch: true })}else if(scrollTop < scrollNow){this.setState({showSearch : false})}
+    // scrollTop < scrollNow && this.setState({ showSearch: true })
+
     scrollTop > scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: false })
     scrollTop < scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: true })
 
