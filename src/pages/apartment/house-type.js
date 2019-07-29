@@ -49,6 +49,7 @@ class HouseTypeShow extends Component {
       hotRules: [],
       facilitys: [],
       roomList: [],
+      nearbyPost: [],
     },
     map: {
       latitude: 0,
@@ -58,13 +59,20 @@ class HouseTypeShow extends Component {
     buttons: [],
     showRentDescription: false,
     showMatch: false,
-    showApartRoom: true
+    showApartRoom: true,
+    nearbyPost: [],
   }
 
   async componentDidMount() {
     const { id } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+
+    const apartmentID = data.apartment_id
+
+    await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
+
+
 
     Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
 
@@ -282,7 +290,7 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, showLittleMask } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
@@ -599,21 +607,22 @@ class HouseTypeShow extends Component {
 
             </View>
 
-            {/* 看了又看 */}
-            {city &&
-              <View>
-                <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
-                <ApartmentList
-                  canScroll
-                  mini
-                  key={apartments.type}
-                  type={apartments.type}
-                  items={apartments.list}
-                  defaultPayload={{ city }}
-                  dispatchList={this.props.dispatchRecommendHouseType}
-                />
-              </View>
-            }
+      {/* 看了又看 */}
+      {city &&
+        <View>
+          <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
+          <ApartmentList
+            nearbyPost={nearbyPost}
+            canScroll
+            mini
+            key={apartments.type}
+            type={apartments.type}
+            items={apartments.list}
+            defaultPayload={{ city }}
+            dispatchList={this.props.dispatchRecommendHouseType}
+          />
+        </View>
+      }
 
 
           </ApartmentContainer>

@@ -89,4 +89,8 @@
     border-radius: 50%;
     box-shadow: 0px 3px 10px rgba(255,201,25,0.46);
   }
+  &-sign {
+    width : 9px * $hd;
+    height: 9px * $hd
+  }
 }

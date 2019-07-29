@@ -78,7 +78,7 @@ class ApartmentItem extends BaseComponent {
   }
 
   render() {
-    let { width, height, minWidth, minHeight, mini } = this.props
+    let { width, height, minWidth, minHeight, mini, nearbyPost } = this.props
     const { className, apartment, type, } = this.props
     const { is_sign } = apartment
 
@@ -206,7 +206,7 @@ class ApartmentItem extends BaseComponent {
                 <View className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
                 {
                   is_sign && <View className='mt-2'>
-                    <Image src='https://images.gongyuabc.com//image/signing.png' style={{ width: "18px", height: "18px" }}></Image>
+                    <Image src='https://images.gongyuabc.com//image/signing.png' className='apartment-container-sign'></Image>
                   </View>
                 }
               </View>
@@ -242,7 +242,9 @@ class ApartmentItem extends BaseComponent {
         {/* 迷你内容 */}
         {mini && <View className='apartment-content mx-2 py-2'>
           {/* 价格和公寓名称 */}
-          <View className='my-2 text-large'>{apartmentTitle}</View>
+          {
+            nearbyPost ? <View className='my-2 text-normal'>{title}</View> : <View className='my-2 text-normal'>{apartmentTitle}</View>
+          }
           <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
         </View>
         }
