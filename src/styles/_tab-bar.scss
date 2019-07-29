@@ -33,4 +33,25 @@
   }
 }
 
+.Customer-button::after{
+  border: none
+}
+
+.at-float-layout .layout-body{
+  &.layout-body{
+    min-height : 0
+  }
+  &.layout-body__content{
+    min-height : 0
+  }
+}
+
+.at-float-layout__container{
+  min-height : 0
+}
+
+.at-float-layout .layout-body__content {
+  min-height : 0
+}
+
 
