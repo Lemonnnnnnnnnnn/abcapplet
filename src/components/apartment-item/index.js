@@ -206,7 +206,7 @@ class ApartmentItem extends BaseComponent {
                 <View className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
                 {
                   is_sign && <View className='mt-2'>
-                    <Image src='https://images.gongyuabc.com//image/signing.png' style={{ width: "18px", height: "18px" }}></Image>
+                    <Image src='https://images.gongyuabc.com//image/signing.png' className='apartment-container-sign'></Image>
                   </View>
                 }
               </View>
