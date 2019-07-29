@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
 import { View, Input } from '@tarojs/components'
-import { AtButton} from 'taro-ui'
+import { AtButton } from 'taro-ui'
 
 
 // 自定义组件
@@ -20,10 +20,14 @@ class AppointPostMask extends BaseComponent {
     apartments: [],
   }
 
-  render() {
-    let { show ,name , tel} = this.props
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
 
-    return show && <View className='apartment-mask'>
+  render() {
+    let { show, name, tel } = this.props
+
+    return show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
       {/* 主体内容 */}
       <Board fixed='bottom' border='top'>
         <View className='m-3'>
@@ -38,31 +42,31 @@ class AppointPostMask extends BaseComponent {
             <View className='at-col-3 text-normal at-row at-row__align--center '>姓名：</View>
             <View className='at-col-8 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
               {
-                name==='姓名' ? 
-                <Input className='text-normal ml-2'   placeholder='修改姓名' onChange={this.props.onGetName} ></Input>
-                : 
-                <Input className='text-normal ml-2'   placeholder='修改姓名' onChange={this.props.onGetName}value={name} ></Input> 
+                name === '姓名' ?
+                  <Input className='text-normal ml-2' placeholder='修改姓名' onChange={this.props.onGetName} ></Input>
+                  :
+                  <Input className='text-normal ml-2' placeholder='修改姓名' onChange={this.props.onGetName} value={name} ></Input>
               }
-              
+
             </View>
           </View>
           <View className='at-row mt-3'>
             <View className='at-col-3 text-normal at-row at-row__align--center '>电话号码：</View>
             <View className='at-col-8 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
-            {
-                tel==='电话' ? 
-                <Input className='text-normal ml-2 '  placeholder='修改电话号码' onChange={this.props.onGetTel} ></Input>
-                : 
-                <Input className='text-normal ml-2 '  placeholder='修改电话号码' onChange={this.props.onGetTel} value={tel}></Input>
+              {
+                tel === '电话' ?
+                  <Input className='text-normal ml-2 ' placeholder='修改电话号码' onChange={this.props.onGetTel} ></Input>
+                  :
+                  <Input className='text-normal ml-2 ' placeholder='修改电话号码' onChange={this.props.onGetTel} value={tel}></Input>
               }
-              
+
             </View>
           </View>
           <AtButton
             circle
             className='mt-3 mb-2 btn-yellow active'
             onClick={this.props.onClose}
-            >确定</AtButton>
+          >确定</AtButton>
         </View>
       </Board>
 
