@@ -20,10 +20,15 @@ class OrderRoomListMask extends BaseComponent {
     selectId: 0,
   }
 
+  
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
+
   render() {
     const { className, show, rooms, selectId } = this.props
     const height = rooms.length < 3 ? rooms.length * 90 : 270
-    return (show && <View className={className}>
+    return (show && <View className={className} onTouchMove={this.onMaskTouchMove}>
       <Board fixed='bottom' border='top' color='light-grey'>
         <View className='m-3'>
           {/* 公寓头部 */}

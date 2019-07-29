@@ -26,7 +26,7 @@ class ApartmentList extends BaseList {
     }
 
 
-    const { canScroll, items, className, type, mini, show } = this.props
+    const { canScroll, items, className, type, mini, show, nearbyPost } = this.props
     const { hasMore, loading, page } = this.state
 
     return (show && <View className={className}>
@@ -34,13 +34,14 @@ class ApartmentList extends BaseList {
       {/* 渲染 公寓列表 */}
       <View className='at-row at-row--wrap mb-5'>
         {
-          canScroll
+          nearbyPost
             ?
             <View style={ScrollWrapStyle} className='at-col'>
-              <ScrollView  scrollX>
-                {page != 1 && items.map((i) =>
+              <ScrollView scrollX>
+                {page != 1 && nearbyPost.map((i) =>
                   <View style={imageStyle} className={`at-col pr-2 ${mini ? 'at-col-6' : 'at-col-12'}`} key={i.id}>
                     <ApartmentItem
+                      nearbyPost
                       mini={mini}
                       type={type}
                       apartment={i}

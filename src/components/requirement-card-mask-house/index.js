@@ -62,6 +62,9 @@ class RequirementHouseMask extends BaseComponent {
 
   }
 
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
 
 
   onTabFloorChange(e, index) {
@@ -123,7 +126,7 @@ class RequirementHouseMask extends BaseComponent {
 
 
 
-    return show && <View className='apartment-mask'>
+    return show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
       {/* 主体内容 */}
       <Board fixed='bottom' border='top'>
         <View className='m-3'>

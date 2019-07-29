@@ -15,7 +15,9 @@ import {
   API_RECOMMEND_APARTMENT,
 
   API_APPOINTMENT_CREATE,
-  API_APPOINTMENT_SHOW
+  API_APPOINTMENT_SHOW,
+
+  API_APARTMENT_NEARBYPOST
 } from '@constants/api'
 
 import {
@@ -35,7 +37,8 @@ import {
   TYPE_ARTICLE_APARTMENT,
 
   TYPE_APPOINTMENT_CREATE,
-  TYPE_APPOINTMENT_SHOW
+  TYPE_APPOINTMENT_SHOW,
+  TYPE_APARTMENT_NEARBYPOST
 } from '@constants/apartment'
 
 /**
@@ -267,4 +270,13 @@ export const dispatchAppointmentDetail = payload => createAction({
   method: 'POST',
   type: TYPE_APPOINTMENT_SHOW,
   url: API_APPOINTMENT_SHOW ,
+})
+
+
+// 获取附近公寓列表
+export const dispatchAppointmentNearbyPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APARTMENT_NEARBYPOST,
+  url: API_APARTMENT_NEARBYPOST ,
 })

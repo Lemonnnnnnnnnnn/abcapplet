@@ -23,10 +23,14 @@ class RequirementPriceMask extends BaseComponent {
 
   }
 
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
+
   render() {
     let { show } = this.props
     const { priceDist } = this.props
-    return show && <View className='apartment-mask'>
+    return show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
       {/* 主体内容 */}
       <Board fixed='bottom' border='top'>
         <View className='m-3'>

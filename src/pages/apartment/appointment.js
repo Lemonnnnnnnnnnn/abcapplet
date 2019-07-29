@@ -23,6 +23,9 @@ import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
 
 
+let month = "01"
+let day = "01"
+let time = "08:00"
 
 @connect(state => state, {
   ...userActions,
@@ -39,7 +42,7 @@ class AppointmentPost extends Component {
     zeroSecTime: 59,
     secTime: 59,
     minTime: 29,
-    sectime: '',			// 计时器
+    sectime: '',      // 计时器
     Payload: PAYLOAD_APPOINTMENT_CREATE,
     showInformation: false,
     showNext: false,
@@ -105,72 +108,103 @@ class AppointmentPost extends Component {
         })
       })
 
-    // 初始化户型列表
-    const types = data.other_house_type
+    // 计算可供选择的时间列表
+    const nowTime = new Date()
 
-    const typeList = []
+    const finalList = []
 
-    types.map((i, key) => {
-      i.onlyId = key
-      i.type = false
-      i.active = false
-      typeList.push(i)
-    })
+    const monthList_NaN = Array.from({ length: 12 })
+    const timeList_NaN = Array.from({ length: 14 })
+    const dayList_NaN = Array.from({ length: 30 })
 
-    typeList[0].type = true
-    typeList[0].active = true
+    let yearList = [nowTime.getFullYear() + "年"]
+    let monthList = []
+    let dayList = []
+    let timeList = []
 
-    this.setState({
-      types: [...typeList],
-    })
-  }
+    monthList_NaN.map((i, key) => monthList.push(key + 1 + "月"))
+    dayList_NaN.map((i,key)=> dayList.push(key + 1 + "日"))
 
-  // 户型选择
+    timeList_NaN.map((i, key) => timeList.push(key + 8 + " :00"))
+    
 
-
-  onChoiseHouseType(e, index) {
-    const { types } = this.state
-    let newTypes = JSON.parse(JSON.stringify(types))
-
-    newTypes.map(i => {
-
-      if (i.onlyId === index) {
-        i.type = !i.type
-        i.active = !i.active
-        // const { id: type_floor } = types[i.id]
-        // this.props.onChange({ payload: { type_floor } })
-      } else {
-        i.type = false
-        i.active = false
-      }
-    })
-    this.setState({
-      types: [...newTypes]
-    })
+    finalList.push(yearList)
+    finalList.push(monthList)
+    finalList.push(dayList)
+    finalList.push(timeList)
+    this.setState({ range: finalList })
 
   }
 
+  onColumnChange = e => {
+    const { column, value } = e.detail
+    const { Payload, tel, name, range } = this.state
+    const year = (range[0][0]).split("年")[0]
 
 
-  //获取日期
-  onDateChange = e => {
-    const { Payload, timeSel, tel, name } = this.state
-    const nowOrderTime = e.detail.value + " " + timeSel
+    if (column === 1) { month = this.onJudgeTen(value + 1) }
+    if (column === 2) { day = this.onJudgeTen(value + 1) }
+    if (column === 3) { time = this.onJudgeTen(value + 8) + ":00" }
+
+    const payloadStr = year + "-" + month + "-" + day + " " + time
+
     this.setState({
-      dateSel: e.detail.value,
-      Payload: { ...Payload, order_time: nowOrderTime, mobile: tel, name: name }
+      dateSel: payloadStr,
+      Payload: { ...Payload, order_time: payloadStr, mobile: tel, name: name }
     })
+
+
+    if (column !== 1) { return }
+
+    let finalList = []
+
+    const yearList = range[0]
+    const monthList = range[1]
+    const timeList = range[3]
+
+    let judge = { "bigMonth": true, "flatYear": true }
+
+    let dayList = []
+    const dayBigDayList_NaN = Array.from({ length: 31 })
+    const daySmailDayList_NaN = Array.from({ length: 30 })
+    const dayflatDayList_NaN = Array.from({ length: 28 })
+    const dayleapDayList_NaN = Array.from({ length: 29 })
+
+    if (value === 0 || value === 2 || value === 4 || value === 6 || value === 7 || value === 9 || value === 11) {
+      judge.bigMonth = true
+    } else if (value === 3 || value === 5 || value === 8 || value === 10) {
+      judge.bigMonth = false
+    }
+
+    if ((year % 4 === 0 && year % 100 != 0) || year % 400 === 0) {
+      judge.flatYear = false
+    } else {
+      judge.flatYear = true
+    }
+
+    if (value !== 1) {
+      judge.bigMonth ? dayBigDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : daySmailDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
+    } else if (value === 1) {
+      judge.flatYear ? dayflatDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : dayleapDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
+    }
+
+    finalList.push(yearList)
+    finalList.push(monthList)
+    finalList.push(dayList)
+    finalList.push(timeList)
+    this.setState({ range: finalList })
+
   }
 
-  //获取时间
-  onTimeChange = e => {
-    const { Payload, dateSel } = this.state
-    const nowOrderTime = dateSel + " " + e.detail.value
-    this.setState({
-      timeSel: e.detail.value,
-      Payload: { ...Payload, order_time: nowOrderTime }
-    })
+  onJudgeTen(num) {
+    let newNum = parseInt(num)
+    if (newNum < 10) { return "0" + newNum }
+    else {
+      return newNum
+    }
   }
+
+
   //打开,关闭获取姓名和电话号码弹窗
   onClose() {
     const { showInformation, name, tel, Payload } = this.state
@@ -226,8 +260,7 @@ class AppointmentPost extends Component {
     const { name, tel, dateSel, timeSel } = this.state
     if (name === '姓名'
       || tel === '电话'
-      || dateSel === '请选择放日期'
-      || timeSel === '请选择看房时间') {
+      || dateSel === '请选择放日期') {
       Taro.showToast({
         icon: 'none',
         title: '请检查数据是否正确',
@@ -240,6 +273,7 @@ class AppointmentPost extends Component {
   //提交预约
   onAppointmentPost() {
     const { Payload, showNext } = this.state
+
     this.onChenkPayload() &&
       this.props.dispatchAppointmentCreate(Payload).then(res => {
         if (res.data.msg === '预约成功') {
@@ -300,10 +334,8 @@ class AppointmentPost extends Component {
   }
   render() {
     const { houstType, height, width, users, name, tel, showInformation,
-      showNext, zeroSecTime, zeroMinTime, serverId, screenHeight, screenWidth, types } = this.state
+      showNext, zeroSecTime, zeroMinTime, serverId, screenHeight, screenWidth, range } = this.state
     const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
-
-    console.log(types)
 
     const {
       title, swipers, cost, priceTitle, intro,
@@ -400,23 +432,30 @@ class AppointmentPost extends Component {
               {/* 下面部分 */}
               <View className='mt-3 at-row ml-3'>
                 <View className='at-col-4 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME}</View>
-                <View className='at-col-3 p-1 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
+                <View className='p-1 mr-4 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
 
                   {/* <View className='text-small '>选择看房日期</View> */}
-                  <Picker mode='date' onChange={this.onDateChange}>
+
+                  <Picker mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
                     <View className='text-small'>
                       {this.state.dateSel}
                     </View>
                   </Picker>
+
+                  {/* <Picker mode='date' onChange={this.onDateChange}>
+                    <View className='text-small'>
+                      {this.state.dateSel}
+                    </View>
+                  </Picker> */}
                 </View>
-                <View className='at-col-3 p-1 at-row at-row__justify--center ml-1' style='background:#F8F8F8; border-radius: 30px'>
-                  {/* <View className='text-small '>选择看房时间</View> */}
+                {/* <View className='at-col-3 p-1 at-row at-row__justify--center ml-1' style='background:#F8F8F8; border-radius: 30px'>
+                  <View className='text-small '>选择看房时间</View>
                   <Picker mode='time' onChange={this.onTimeChange}>
                     <View className='text-small'>
                       {this.state.timeSel}
                     </View>
                   </Picker>
-                </View>
+                </View> */}
               </View>
               {/* 按钮 */}
               <AtButton
