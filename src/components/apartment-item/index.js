@@ -18,8 +18,12 @@ import {
   TYPE_ACTIVITY_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_FAVORITE_HOUSE_TYPE,
-  ACTIVITY_TYPE_DIST
+  ACTIVITY_TYPE_DIST,
 } from '@constants/apartment'
+
+import {
+  PAGE_APARTMENT_SHOW,
+} from '@constants/page'
 
 import {
   COLOR_YELLOW,
@@ -74,7 +78,9 @@ class ApartmentItem extends BaseComponent {
   onNavigation() {
     const { apartment } = this.props
     const { url } = apartment
-    Taro.navigateTo({ url })
+    const { id } = apartment
+    url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })
+
   }
 
   render() {
@@ -136,7 +142,6 @@ class ApartmentItem extends BaseComponent {
       background: "#ffc919",
     }
 
-
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
@@ -150,7 +155,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className='apartment  mb-5 ' onClick={this.onNavigation}>
+      <View className=' mb-5' onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
@@ -243,9 +248,9 @@ class ApartmentItem extends BaseComponent {
         {mini && <View className='apartment-content mx-2 py-2'>
           {/* 价格和公寓名称 */}
           {
-            nearbyPost ? <View className='my-2 text-normal'>{title}</View> : <View className='my-2 text-normal'>{apartmentTitle}</View>
+            nearbyPost ? <View className='text-normal'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
           }
-          <View className='text-yellow text-huge text-bold'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
+          <View className='text-yellow text-large'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
         </View>
         }
       </View>

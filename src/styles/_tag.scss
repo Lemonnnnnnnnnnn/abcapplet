@@ -20,18 +20,18 @@
   }
 
   &--red {
-    color: #FFA2A2;
-    background: #FFEFEF;
+    color: #ffa2a2;
+    background: #ffefef;
   }
 
   &--yellow {
     color: $color-yellow-0;
-    background: #FFFAE9;
+    background: #fffae9;
   }
 
   &--blue {
-    color: #7BE3FF;
-    background: #ECFBFF;
+    color: #7be3ff;
+    background: #ecfbff;
   }
 
   &--grey {
@@ -47,4 +47,13 @@
   &-circle {
     border-radius: 20px * $hd;
   }
+}
+
+.at-tag--small.at-tag--circle {
+  border-radius: 15px * $hd;
+}
+
+.at-tag--small {
+  height: 35px * $hd;
+  line-height: 35px * $hd;
 }

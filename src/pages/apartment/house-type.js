@@ -49,7 +49,6 @@ class HouseTypeShow extends Component {
       hotRules: [],
       facilitys: [],
       roomList: [],
-      nearbyPost: [],
     },
     map: {
       latitude: 0,
@@ -100,6 +99,8 @@ class HouseTypeShow extends Component {
       buttons,
       houstType: {
         id: data.id,
+        roomMatch :roomMatch,
+        publicMatch : publicMatch,
         desc: data.desc,
         cost: data.cost,
         cost_info: data.cost_info,
@@ -276,8 +277,9 @@ class HouseTypeShow extends Component {
   onClick(method) {
     if (method === 'onCreateBusiness') {
       const { houstType } = this.state
+      const { apartmentId, id } = houstType
       Taro.navigateTo({
-        url: `${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
+        url: `${PAGE_APPOINTMENT_CREATE}?id=${id}&apartmentId=${apartmentId}`
       })
     }
     if (method === 'onCreateOrder') {
@@ -290,13 +292,14 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost, showLittleMask } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, cover,
-      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id
+      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id,roomMatch,publicMatch
     } = houstType
+
 
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -337,8 +340,10 @@ class HouseTypeShow extends Component {
       textIndent: "10px"
     }
 
+    console.log(nearbyPost)
+
     return (
-      <View>
+      <View  className='mb-3'>
 
         <TabBar
           showLittleMask={showLittleMask}
@@ -440,12 +445,15 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 地图 */}
-            <View className='at-row at-row__align--center'>
-              <View className='at-col at-col-1 mt-1'>
-                <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
+            {
+              position && <View className='at-row at-row__align--center'>
+                <View className='at-col at-col-1 mt-1'>
+                  <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
+                </View>
+                <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
               </View>
-              <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
-            </View>
+            }
+
 
             {/* 文章相关 */}
 
@@ -475,10 +483,14 @@ class HouseTypeShow extends Component {
                 </View>
               )}
 
-              <View style={PublicConfiguration} className='text-center'>
-                <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
-                <View className='text-small'>更多</View>
-              </View>
+              {
+                roomMatch && roomMatch.length > 5 && <View style={PublicConfiguration} className='text-center'>
+                  <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
+                  <View className='text-small'>更多</View>
+                </View>
+              }
+
+
             </View>
 
             {/* 位置信息 */}
@@ -518,7 +530,7 @@ class HouseTypeShow extends Component {
                   className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
                 />)}
               {
-                showApartRoom && <View
+                showApartRoom && roomList.length > 5 && <View
                   onClick={this.onshowMorePic}
                   className='text-secondary text-normal mt-2'
                   style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
@@ -583,46 +595,42 @@ class HouseTypeShow extends Component {
                     <View className='text-small'>{i.title}</View>
                   </View>
                 )}
+              </View>
 
-                <View style={PublicConfiguration} className='text-center'>
+              {
+                publicMatch && publicMatch.length > 5 && <View style={PublicConfiguration} className='text-center'>
                   <View onClick={this.onOpenAllMatching} style={{ height: '30px', width: '30px' }}>...</View>
                   <View className='text-small'>更多</View>
                 </View>
-              </View>
-
-              <View style={ScrollWrapStyle} className='at-col'>
-                <ScrollView scrollX>
-                  {types && types.map((i, index) =>
-                    <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-2  mt-2 `}>
-                      <ApartmentTypeItem item={i} />
-                    </View>)}
-                </ScrollView>
-              </View>
-
-
-              {/* {types.map((i, index) =>
-          <View key={i.id} className={`${index + 1 != types.length && 'border-bottom'} mt-2`}>
-            <ApartmentTypeItem item={i} />
-          </View>)} */}
+              }
 
             </View>
 
-      {/* 看了又看 */}
-      {city &&
-        <View>
-          <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
-          <ApartmentList
-            nearbyPost={nearbyPost}
-            canScroll
-            mini
-            key={apartments.type}
-            type={apartments.type}
-            items={apartments.list}
-            defaultPayload={{ city }}
-            dispatchList={this.props.dispatchRecommendHouseType}
-          />
-        </View>
-      }
+            <View style={ScrollWrapStyle} className='at-col'>
+              <ScrollView scrollX>
+                {types && types.map((i, index) =>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-2  mt-2 `}>
+                    <ApartmentTypeItem item={i} />
+                  </View>)}
+              </ScrollView>
+            </View>
+
+            {/* 附近公寓 */}
+            {city && 
+              <View >
+                <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
+                <ApartmentList
+                  nearbyPost={nearbyPost}
+                  mini
+                  key={apartments.type}
+                  type={apartments.type}
+                  items={apartments.list}
+                  defaultPayload={{ city }}
+                  dispatchList={this.props.dispatchRecommendHouseType}
+                />
+              </View>
+            }
+
 
 
           </ApartmentContainer>
