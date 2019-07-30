@@ -98,7 +98,7 @@ class ServicesHome extends Component {
           onClickRight={this.onToRight}
         />
         <View className=' at-col '>
-          <View className='at-row mt-3  mb-3'>
+          {/* <View className='at-row mt-3  mb-3'>
             <View className='mt-2  button-yellow ml-4' ></View>
             <View className='at-col at-col-2 text-bold ml-3'>
               今天
@@ -106,7 +106,7 @@ class ServicesHome extends Component {
             <View className='at-col at-col-1 text-normal mt-1'>
               {time}
             </View>
-          </View>
+          </View> */}
           <View >
             <ServicesList
               lists={appointments.list}
@@ -114,7 +114,6 @@ class ServicesHome extends Component {
             />
           </View>
         </View>
-
       </View>
 
     )
