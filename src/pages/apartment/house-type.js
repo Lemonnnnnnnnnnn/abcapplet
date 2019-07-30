@@ -276,8 +276,9 @@ class HouseTypeShow extends Component {
   onClick(method) {
     if (method === 'onCreateBusiness') {
       const { houstType } = this.state
+      const { apartmentId, id } = houstType
       Taro.navigateTo({
-        url: `${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
+        url: `${PAGE_APPOINTMENT_CREATE}?id=${id}&apartmentId=${apartmentId}`
       })
     }
     if (method === 'onCreateOrder') {
@@ -607,22 +608,22 @@ class HouseTypeShow extends Component {
 
             </View>
 
-      {/* 看了又看 */}
-      {city &&
-        <View>
-          <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
-          <ApartmentList
-            nearbyPost={nearbyPost}
-            canScroll
-            mini
-            key={apartments.type}
-            type={apartments.type}
-            items={apartments.list}
-            defaultPayload={{ city }}
-            dispatchList={this.props.dispatchRecommendHouseType}
-          />
-        </View>
-      }
+            {/* 看了又看 */}
+            {city &&
+              <View>
+                <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
+                <ApartmentList
+                  nearbyPost={nearbyPost}
+                  canScroll
+                  mini
+                  key={apartments.type}
+                  type={apartments.type}
+                  items={apartments.list}
+                  defaultPayload={{ city }}
+                  dispatchList={this.props.dispatchRecommendHouseType}
+                />
+              </View>
+            }
 
 
           </ApartmentContainer>

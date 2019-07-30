@@ -39,6 +39,7 @@ class Board extends BaseComponent {
       'board--fixed-top': fixed === 'top',
     }
 
+
     return (
       <View
         style={customStyle}
