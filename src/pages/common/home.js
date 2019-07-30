@@ -282,6 +282,9 @@ class CommonHome extends Component {
     this.setState({ scrollNow: scrollTop })
     scrollTop > scrollNow && this.setState({ showSearch: false })
     scrollTop < scrollNow && this.setState({ showSearch: true })
+    if(scrollTop ===0){this.setState({showSearch: true})}
+
+
     scrollTop > scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: false })
     scrollTop < scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: true })
 
@@ -600,7 +603,6 @@ class CommonHome extends Component {
       citys, banners, recommends,
       activities, apartments
     } = this.props
-
 
     return (
       <View className='page-white' style={{ overflow: "hidden" }} >

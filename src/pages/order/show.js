@@ -186,12 +186,19 @@ class OrderShow extends Component {
     }).then(() => this.onOpenTimer())
   }
 
+
+
   render() {
     const { apartments } = this.props
     const { order, city, roomId, showSignCode } = this.state
     let { status, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
 
     signTime = day.unix(signTime).format('YYYY年MM月DD日')
+    const signSeccessStyle = {
+      position: "absolute",
+      left: "50%",
+      transform: " translate(-50% 0 )",
+    }
 
     // 签约成功头部
     const statusSuccess = <View style={{ height: Taro.pxTransform(250) }}>
@@ -199,13 +206,13 @@ class OrderShow extends Component {
       <Decorate height='250' />
 
       {/* 计时器 */}
-      <View className='at-row at-row__justify--center'>
+      <View className='at-row at-row__justify--center'  style={signSeccessStyle}>
         <ABCIcon className='mt-2' icon='check_circle_outline' color={COLOR_WHITE} size='46' />
       </View>
 
       {/* 签约完成 */}
-      <View className='at-row at-row__justify--center'>
-        <View className='text-huge text-bold mt-2'>{LOCALE_ORDER_STATUS_SUCCESS}</View>
+      <View className='at-row at-row__justify--center '>
+        <View className='text-huge text-bold' style={{marginTop : "61px"}}>{LOCALE_ORDER_STATUS_SUCCESS}</View>
       </View>
 
       {/* 提示词 */}
