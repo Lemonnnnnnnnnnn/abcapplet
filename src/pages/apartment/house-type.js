@@ -276,8 +276,9 @@ class HouseTypeShow extends Component {
   onClick(method) {
     if (method === 'onCreateBusiness') {
       const { houstType } = this.state
+      const { apartmentId, id } = houstType
       Taro.navigateTo({
-        url: `${PAGE_APPOINTMENT_CREATE}?id=${houstType.id}`
+        url: `${PAGE_APPOINTMENT_CREATE}?id=${id}&apartmentId=${apartmentId}`
       })
     }
     if (method === 'onCreateOrder') {
