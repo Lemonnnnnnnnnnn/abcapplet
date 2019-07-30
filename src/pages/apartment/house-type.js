@@ -290,7 +290,7 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost , showLittleMask} = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, cost, types, priceTitle,
