@@ -340,8 +340,6 @@ class HouseTypeShow extends Component {
       textIndent: "10px"
     }
 
-    console.log(nearbyPost)
-
     return (
       <View  className='mb-3'>
 

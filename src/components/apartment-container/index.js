@@ -41,12 +41,12 @@ class ApartmentContainer extends BaseComponent {
 
   }
 
-  
+
 
   changePicIndex() {
     let { current } = this.state
     const { swipers } = this.props
-    if(current > swipers.length - 2){current = -1}
+    if (current > swipers.length - 2) { current = -1 }
     this.setState({
       current: current + 1
     })
@@ -98,26 +98,36 @@ class ApartmentContainer extends BaseComponent {
 
     return (
       <View style={{ position: "relative" }}>
-        <Swiper
-          className='swiper'
-          autoplay
-          circular
-          current
-          onChange={this.changePicIndex}
-          style={style}
-          displayMultipleItems={1}
-          indicatorActiveColor={COLOR_YELLOW}
-          indicatorColor={COLOR_DOATS_CAROUSEL}
-          onClick={this.onShowPic}
-        >
-          {swipers.map(i => <SwiperItem key={i.url}>
+        {
+          swipers.length > 1 ?
+            <Swiper
+              className='swiper'
+              autoplay
+              circular
+              current
+              onChange={this.changePicIndex}
+              style={style}
+              displayMultipleItems={1}
+              indicatorActiveColor={COLOR_YELLOW}
+              indicatorColor={COLOR_DOATS_CAROUSEL}
+              onClick={this.onShowPic}
+            >
+              {swipers.map(i => <SwiperItem key={i.url}>
+                <Image
+                  style={style}
+                  mode='scaleToFill'
+                  src={`${i.url.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
+                />
+              </SwiperItem>)}
+            </Swiper>
+            :
             <Image
               style={style}
               mode='scaleToFill'
-              src={`${i.url.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
-            />
-          </SwiperItem>)}
-        </Swiper>
+              src={swipers.length ? `${swipers[0].url.split('?')[0]}?imageView2/1/w/${width}/h/${height}` : ''} >
+            </Image>
+        }
+
 
         {/* index */}
         <View style={picIndexStyle}>
