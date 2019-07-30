@@ -84,7 +84,7 @@ class AppointmentPost extends Component {
 
     const { payload } = await this.props.dispatchUser()
     this.setState({
-      Payload: { ...Payload, apartment: data.apartment_id, house_type: data.id },
+      Payload: { ...Payload, apartment: data.apartment_id },
       users: {
         headimgurl: payload.headimgurl,
       },
@@ -110,9 +110,18 @@ class AppointmentPost extends Component {
     // 初始化户型列表
 
     await this.props.dispatchApartmentShow({ id: apartmentId }).then(res => {
-      const houseTypeList = res.data.data.house_types
+      const houseTypeListInal = res.data.data.house_types
+      let houseTypeList = JSON.parse(JSON.stringify(houseTypeListInal))
+      let index = 0
+      houseTypeListInal.map((i) => {
+        if (i.price_title === "暂无房源") {
+          houseTypeList.splice(index, 1)
+        } else {
+          index += 1
+        }
+      })
       const typeList = []
-      houseTypeList.length && houseTypeList.map((i, key) => {
+      houseTypeList && houseTypeList.length && houseTypeList.map((i, key) => {
         i.onlyId = key
         i.type = false
         i.active = false
@@ -304,10 +313,11 @@ class AppointmentPost extends Component {
     }
   }
   onChenkPayload() {
-    const { name, tel, dateSel, timeSel } = this.state
+    const { name, tel, dateSel, timeSel , Payload } = this.state
     if (name === '姓名'
       || tel === '电话'
-      || dateSel === '请选择放日期') {
+      || dateSel === '请选择放日期'
+      || !Payload.house_type) {
       Taro.showToast({
         icon: 'none',
         title: '请检查数据是否正确',
@@ -418,7 +428,7 @@ class AppointmentPost extends Component {
     const imageFontStyle = {
       color: "#fff",
       fontWeight: "700",
-      postion:"absolute"
+      postion: "absolute"
     }
 
     const imageFontWholeStyle = {
@@ -511,9 +521,9 @@ class AppointmentPost extends Component {
                 </View>
 
                 {/* 选择户型 */}
-                <View className='mt-2'>
+                <View className='mt-2' style={{height : "80px"}}>
                   {
-                    houseTypeList.length && houseTypeList.map((i, key) =>
+                    houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                       <AtTag
                         type={i.type ? "primary" : ""}
                         className='ml-3 mt-1 mb-3'
@@ -524,10 +534,9 @@ class AppointmentPost extends Component {
                         active={i.active}>
                         <View style={fontStyle}>{i.title}</View>
                       </AtTag>
-                    )
+                    ):<View className='text-secondary ml-3'>暂无可选户型</View>  
                   }
                 </View>
-
 
 
 

@@ -22,17 +22,16 @@ class ApartmentList extends BaseList {
       width: '300px',
       height: Taro.pxTransform(346),
       display: "inline-block",
-
     }
 
 
-    const { canScroll, items, className, type, mini, show, nearbyPost } = this.props
+    const { items, className, type, mini, show, nearbyPost } = this.props
     const { hasMore, loading, page } = this.state
 
     return (show && <View className={className}>
 
       {/* 渲染 公寓列表 */}
-      <View className='at-row at-row--wrap mb-5'>
+      <View className='at-row at-row--wrap'>
         {
           nearbyPost
             ?

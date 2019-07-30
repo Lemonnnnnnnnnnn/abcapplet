@@ -33,15 +33,15 @@ class ApartmentTypeItem extends BaseComponent {
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
-    const PublicConfiguration = {
-      backgroundColor: "rgba(248, 248, 248, 1)",
-      borderRadius: "6px",
-      boxShadow: "0 1px 5px rgb(200,200,200)",
-      overflow:'hidden',
-    }
+    // const PublicConfiguration = {
+    //   backgroundColor: "rgba(248, 248, 248, 1)",
+    //   borderRadius: "6px",
+    //   boxShadow: "0 1px 5px rgb(200,200,200)",
+    //   overflow:'hidden',
+    // }
     
 
-    return <View className='' style={PublicConfiguration} onClick={this.onNavigation}>
+    return <View className='' onClick={this.onNavigation}>
       <View className=''>
         {cover && <Image
           src={`${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
@@ -57,7 +57,7 @@ class ApartmentTypeItem extends BaseComponent {
               <View className='text-secondary text-small'>{desc || '暂无描述'}</View>
             </View>
             <View>
-              <View className='text-yellow mb-1'>
+              <View className='text-yellow mb-1 text-large'>
               {isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}`}
               {
                 isNaNPrice ? <View></View> : <Text className='text-small'>元/月</Text> 

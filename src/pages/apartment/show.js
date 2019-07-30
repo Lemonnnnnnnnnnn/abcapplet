@@ -17,7 +17,7 @@ import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
@@ -47,12 +47,20 @@ class ApartmentShow extends Component {
       markers: [],
     },
     buttons: [],
+    nearbyPost: [],
   }
 
   async componentDidMount() {
     const { id = 255 } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
+
+    await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
+
+    // await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: [] }))
+
+
+
 
     let facilitys = data.facility_list
     let publicMatch = []
@@ -157,9 +165,23 @@ class ApartmentShow extends Component {
       .then(() => this.setState({ apartment: { ...apartment, isCollect: false } }))
   }
 
+  onClick(method) {
+    if (method === 'onCreateBusiness') {
+      const { apartment } = this.state
+      const { id, types } = apartment
+      // const { apartmentId, id } = houstType
+      Taro.navigateTo({
+        url: `${PAGE_APPOINTMENT_CREATE}?id=${types[0].id}&apartmentId=${id}`
+      })
+    }
+    if (method === 'onCreateOrder') {
+      this[method]()
+    }
+  }
+
   render() {
     const { apartments } = this.props
-    const { apartment, map, publicMatch_list, buttons, showLittleMask } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
@@ -193,9 +215,16 @@ class ApartmentShow extends Component {
       display: "inline-block",
     }
 
+    const borderStyle = {
+      // backgroundColor: "rgba(248, 248, 248, 1)",
+      borderRadius: "6px",
+      boxShadow: "0 1px 5px rgb(200,200,200)",
+      overflow:'hidden',
+    }
+
 
     return (
-      <View>
+      <View className='mb-3'>
 
         <TabBar
           showLittleMask={showLittleMask}
@@ -206,7 +235,7 @@ class ApartmentShow extends Component {
           buttons={buttons}
           onClick={this.onClick}
         />
-        
+
         <View onClick={this.onCloseLittleMask}>
 
           <ApartmentContainer
@@ -268,7 +297,7 @@ class ApartmentShow extends Component {
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
                   <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 `}>
-                    <View >
+                    <View style={borderStyle}>
                       <ApartmentTypeItem apartmentDetail item={i} />
                     </View>
                   </View>)}
@@ -370,10 +399,11 @@ class ApartmentShow extends Component {
             )}
 
             {/* 其他公寓 */}
-            {city &&
-              <View>
-                <View className='text-bold text-huge mt-4 mb-3'>看了又看</View>
+            {city && 
+              <View >
+                <View className='text-bold text-huge mt-4 mb-3'>附近公寓</View>
                 <ApartmentList
+                  nearbyPost={nearbyPost}
                   mini
                   key={apartments.type}
                   type={apartments.type}
@@ -383,7 +413,6 @@ class ApartmentShow extends Component {
                 />
               </View>
             }
-
           </ApartmentContainer>
         </View>
       </View>
