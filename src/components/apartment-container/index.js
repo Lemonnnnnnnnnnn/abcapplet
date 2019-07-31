@@ -152,12 +152,12 @@ class ApartmentContainer extends BaseComponent {
           <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>
             {isCollect
               ?
-              <View className='mt-1'>
+              <View className='mt-1' onClick={this.props.onDeleteFavorite}>
                 <Image src='https://images.gongyuabc.com//image/heart-yellow.png' style={{ width: "30px", height: "26px" }}></Image>
                 <View style={heartNum}>{appointment_show_num}</View>
               </View>
               :
-              <View className='mt-1'>
+              <View className='mt-1' onClick={this.props.onCreateFavorite}>
                 <Image src='https://images.gongyuabc.com//image/heart-yellow-empty.png' style={{ width: "30px", height: "26px" }}></Image>
                 <View style={heartNum}>{appointment_show_num}</View>
               </View>
