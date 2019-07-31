@@ -282,7 +282,7 @@ class CommonHome extends Component {
     this.setState({ scrollNow: scrollTop })
     scrollTop > scrollNow && this.setState({ showSearch: false })
     scrollTop < scrollNow && this.setState({ showSearch: true })
-    if(scrollTop ===0){this.setState({showSearch: true})}
+    if (scrollTop === 0) { this.setState({ showSearch: true }) }
 
 
     scrollTop > scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: false })
@@ -714,6 +714,7 @@ class CommonHome extends Component {
 
             <View className='home-apartment ml-3 mr-3'>
               <ApartmentList
+                home
                 key={apartments.type}
                 type={apartments.type}
                 items={apartments.list}

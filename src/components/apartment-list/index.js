@@ -25,7 +25,7 @@ class ApartmentList extends BaseList {
     }
 
 
-    const { items, className, type, mini, show, nearbyPost } = this.props
+    const { items, className, type, mini, show, nearbyPost, home } = this.props
     const { hasMore, loading, page } = this.state
 
     return (show && <View className={className}>
@@ -40,6 +40,7 @@ class ApartmentList extends BaseList {
                 {page != 1 && nearbyPost.map((i) =>
                   <View style={imageStyle} className={`at-col pr-2 ${mini ? 'at-col-6' : 'at-col-12'}`} key={i.id}>
                     <ApartmentItem
+                      home={1}
                       nearbyPost
                       mini={mini}
                       type={type}

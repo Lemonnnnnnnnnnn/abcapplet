@@ -56,7 +56,6 @@ class ApartmentShow extends Component {
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
-
     // await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: [] }))
 
 
