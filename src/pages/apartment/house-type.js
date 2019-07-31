@@ -49,6 +49,7 @@ class HouseTypeShow extends Component {
       hotRules: [],
       facilitys: [],
       roomList: [],
+      appointment_show_num: 0,
     },
     map: {
       latitude: 0,
@@ -91,6 +92,8 @@ class HouseTypeShow extends Component {
     const publicMatch_list = publicMatch.slice(0, 5)
     const roomList = (data.room_list).slice(0, 5)
 
+    console.log(data)
+
 
     data && this.setState({
       roomMatch_list: roomMatch_list,
@@ -99,8 +102,8 @@ class HouseTypeShow extends Component {
       buttons,
       houstType: {
         id: data.id,
-        roomMatch :roomMatch,
-        publicMatch : publicMatch,
+        roomMatch: roomMatch,
+        publicMatch: publicMatch,
         desc: data.desc,
         cost: data.cost,
         cost_info: data.cost_info,
@@ -125,6 +128,7 @@ class HouseTypeShow extends Component {
         priceTitle: data.price_title,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
+        appointment_show_num: data.appointment_show_num
       },
       map: {
         latitude: parseFloat(data.latitude),
@@ -297,9 +301,8 @@ class HouseTypeShow extends Component {
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, cover,
-      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id,roomMatch,publicMatch
+      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id, roomMatch, publicMatch, appointment_show_num
     } = houstType
-
 
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -341,7 +344,7 @@ class HouseTypeShow extends Component {
     }
 
     return (
-      <View  className='mb-3'>
+      <View className='mb-3'>
 
         <TabBar
           showLittleMask={showLittleMask}
@@ -361,6 +364,7 @@ class HouseTypeShow extends Component {
             swipers={swipers}
             show={false}
             isCollect={isCollect}
+            appointment_show_num={appointment_show_num}
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
           >
@@ -614,7 +618,7 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 附近公寓 */}
-            {city && 
+            {city &&
               <View >
                 <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
                 <ApartmentList
