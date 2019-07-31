@@ -53,7 +53,7 @@ class ApartmentContainer extends BaseComponent {
   }
 
   render() {
-    const { swipers, height, width, isCollect, show } = this.props
+    const { swipers, height, width, isCollect, show, appointment_show_num } = this.props
 
     const { current } = this.state
 
@@ -94,6 +94,16 @@ class ApartmentContainer extends BaseComponent {
 
     const fontWhiteStyle = {
       color: "#fff",
+    }
+
+    const heartNum = {
+      position: 'absolute',
+      textAlign: 'center',
+      fontSize: "12px",
+      left: '50%',
+      top: '45%',
+      transform: 'translate(-50%,-50%)',
+      color: '#FFC919'
     }
 
     return (
@@ -141,8 +151,16 @@ class ApartmentContainer extends BaseComponent {
         <View className='page-white apartment-container p-3' >
           <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>
             {isCollect
-              ? <AtIcon value='heart-2' size='35' color={COLOR_YELLOW} onClick={this.props.onDeleteFavorite} />
-              : <AtIcon value='heart' size='35' color={COLOR_YELLOW} onClick={this.props.onCreateFavorite} />
+              ?
+              <View className='mt-1'>
+                <Image src='https://images.gongyuabc.com//image/heart-yellow.png' style={{ width: "30px", height: "26px" }}></Image>
+                <View style={heartNum}>{appointment_show_num}</View>
+              </View>
+              :
+              <View className='mt-1'>
+                <Image src='https://images.gongyuabc.com//image/heart-yellow-empty.png' style={{ width: "30px", height: "26px" }}></Image>
+                <View style={heartNum}>{appointment_show_num}</View>
+              </View>
             }
           </View>
           {this.props.children}

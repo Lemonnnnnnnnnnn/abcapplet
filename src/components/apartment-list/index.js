@@ -28,6 +28,7 @@ class ApartmentList extends BaseList {
     const { items, className, type, mini, show, nearbyPost, home } = this.props
     const { hasMore, loading, page } = this.state
 
+
     return (show && <View className={className}>
 
       {/* 渲染 公寓列表 */}

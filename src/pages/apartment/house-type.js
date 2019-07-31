@@ -49,6 +49,7 @@ class HouseTypeShow extends Component {
       hotRules: [],
       facilitys: [],
       roomList: [],
+      appointment_show_num: 0,
     },
     map: {
       latitude: 0,
@@ -123,8 +124,9 @@ class HouseTypeShow extends Component {
         priceTitle: data.price_title,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
+        appointment_show_num: data.appointment_show_num,
         one_word: data.one_word,
-        type_desc: data.type_desc
+        type_desc: data.type_desc,
       },
       map: {
         latitude: parseFloat(data.latitude),
@@ -298,7 +300,7 @@ class HouseTypeShow extends Component {
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, cover,
-      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id, roomMatch, publicMatch, one_word, type_desc
+      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id, roomMatch, publicMatch, appointment_show_num, one_word, type_desc
     } = houstType
 
 
@@ -362,6 +364,7 @@ class HouseTypeShow extends Component {
             swipers={swipers}
             show={false}
             isCollect={isCollect}
+            appointment_show_num={appointment_show_num}
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
           >
