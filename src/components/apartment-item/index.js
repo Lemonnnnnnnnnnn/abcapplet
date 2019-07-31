@@ -240,7 +240,7 @@ class ApartmentItem extends BaseComponent {
             {/* 价格 */}
 
             <View className='text-yellow mt-1'>
-              <Text className='text-bold' style={{ fontSize: "24px" }}>
+              <Text className='text-bold' style={{ fontSize: "20px" }}>
                 {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
               </Text>
               <Text className='text-large'>{LOCALE_QI}</Text>
