@@ -84,9 +84,8 @@ class ApartmentItem extends BaseComponent {
   }
 
   render() {
-    let { width, height, minWidth, minHeight, mini, nearbyPost } = this.props
+    let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
     const { className, apartment, type, } = this.props
-    const { is_sign } = apartment
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -98,7 +97,7 @@ class ApartmentItem extends BaseComponent {
       cover, rules, title,
       price_title: priceTitle,
       apartment_title: apartmentTitle,
-      num
+      num , is_sign , sub_title,one_word
     } = apartment
 
 
@@ -128,7 +127,8 @@ class ApartmentItem extends BaseComponent {
     }
 
     const fontSize = mini ? "10px" : "15px"
-    const padding = mini ? "4px 12px" : "6px 16px"
+    const padding = mini ? "0 10px" : "2px 12px"
+    // const borderRadius = mini ? "6px" : "12px"
 
     const apartmentHeaderType = {
       position: "absolute",
@@ -138,8 +138,14 @@ class ApartmentItem extends BaseComponent {
       color: "#fff",
       padding: padding,
       fontSize: fontSize,
-      borderRadius: "12px",
+      borderRadius: "6px",
       background: "#ffc919",
+    }
+
+    const boxShadowStyle = {
+      borderRadius: "6px",
+      boxShadow: "0 1px 5px rgb(200,200,200)",
+      overflow: 'hidden',
     }
 
     // 格式化价格
@@ -155,7 +161,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className=' mb-5' onClick={this.onNavigation}>
+      <View className=' mb-4' style={home === null ? boxShadowStyle : ""} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
@@ -197,7 +203,7 @@ class ApartmentItem extends BaseComponent {
         </View>
 
         {/* 正常内容 */}
-        {!mini && <View className='apartment-content mx-3 py-3'>
+        {!mini && <View className='apartment-content mx-3 py-2'>
           {/* <View>{rules.map(i =>
             <AtTag className='mr-1 p-1 text-mini' key={i.id} size='small' circle>{i.title}</AtTag>
           )}
@@ -205,17 +211,17 @@ class ApartmentItem extends BaseComponent {
 
 
           {/* 公寓名称 */}
-          <View className=''>
+          <View className='mt-1'>
             <View >
               <View className='at-row at-row__justify--between at-row__align--center'>
-                <View className='text-large mt-2 at-col-1 at-col--auto'>{title}</View>
+                <View className='text-large mt-2 at-col-1 at-col--auto' style={{ color: "rgba(53, 53, 53, 1)" }}>{sub_title}</View>
                 {
                   is_sign && <View className='mt-2'>
                     <Image src='https://images.gongyuabc.com//image/signing.png' className='apartment-container-sign'></Image>
                   </View>
                 }
               </View>
-              {desc && <View className='text-muted text-large mt-2 apartment-content-desc'>{desc}</View>}
+              {desc && <View className='text-muted text-normal apartment-content-desc'>{one_word}</View>}
 
             </View>
           </View>
@@ -225,15 +231,15 @@ class ApartmentItem extends BaseComponent {
           <View className='at-row at-row__align--center'>
             <View className='at-row'>
               {rules.map(i =>
-                <View key={i.id} className='at-col-1 at-col--auto mt-2 mr-2 '>
-                  <Text className={`badge badge-${i.type} text-small`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                <View key={i.id} className='at-col-1 at-col--auto mr-2 mb-1 '>
+                  <Text className={`badge badge-${i.type} text-mini`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
                 </View>
               )}
             </View>
 
             {/* 价格 */}
 
-            <View className='text-yellow mt-2'>
+            <View className='text-yellow mt-1'>
               <Text className='text-bold' style={{ fontSize: "24px" }}>
                 {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
               </Text>
@@ -245,10 +251,10 @@ class ApartmentItem extends BaseComponent {
         }
 
         {/* 迷你内容 */}
-        {mini && <View className='apartment-content mx-2 py-2'>
+        {mini && <View className='apartment-content mx-2 mt-2'>
           {/* 价格和公寓名称 */}
           {
-            nearbyPost ? <View className='text-normal'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
+            nearbyPost ? <View className='text-normal text-bold'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
           }
           <View className='text-yellow text-large'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
         </View>

@@ -73,7 +73,6 @@ class HouseTypeShow extends Component {
     await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
 
 
-
     Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
 
     const buttons = !data.is_sign
@@ -91,9 +90,6 @@ class HouseTypeShow extends Component {
     const roomMatch_list = roomMatch.slice(0, 5)
     const publicMatch_list = publicMatch.slice(0, 5)
     const roomList = (data.room_list).slice(0, 5)
-
-    console.log(data)
-
 
     data && this.setState({
       roomMatch_list: roomMatch_list,
@@ -128,7 +124,9 @@ class HouseTypeShow extends Component {
         priceTitle: data.price_title,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
-        appointment_show_num: data.appointment_show_num
+        appointment_show_num: data.appointment_show_num,
+        one_word: data.one_word,
+        type_desc: data.type_desc,
       },
       map: {
         latitude: parseFloat(data.latitude),
@@ -149,6 +147,7 @@ class HouseTypeShow extends Component {
       }
     })
   }
+
 
   // 电话客服/在线客服
 
@@ -301,7 +300,7 @@ class HouseTypeShow extends Component {
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, cover,
-      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id, roomMatch, publicMatch, appointment_show_num
+      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id, roomMatch, publicMatch, appointment_show_num, one_word, type_desc
     } = houstType
 
 
@@ -342,6 +341,7 @@ class HouseTypeShow extends Component {
       wordBreak: "break-all",
       textIndent: "10px"
     }
+
 
     return (
       <View className='mb-3'>
@@ -426,7 +426,7 @@ class HouseTypeShow extends Component {
             <View className='mt-3'>
               {rules && rules.map(i =>
                 <View key={i.id} className=' mt-2 mr-3 mb-3'>
-                  <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                  <Text className={`text-smail badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
                   <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                 </View>
               )}
@@ -474,6 +474,9 @@ class HouseTypeShow extends Component {
                 </View>
               </View>
             }
+            {/* 一句话描述 */}
+            <View className='text-secondary text-small mt-2' style={{ textIndent: "10px" }}>{type_desc}</View>
+
 
             {/* 公共配置 */}
             <View className='at-row at-row--wrap mt-4'>
@@ -632,8 +635,6 @@ class HouseTypeShow extends Component {
                 />
               </View>
             }
-
-
 
           </ApartmentContainer>
         </View>
