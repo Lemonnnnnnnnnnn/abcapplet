@@ -461,9 +461,7 @@ class AppointmentPost extends Component {
             <Image style={imageStyle} src={swipers}></Image>
             <View style={blackOpacityStyle}>
             </View>
-
-
-
+            
             {/* <Swiper
               autoplay
               circular

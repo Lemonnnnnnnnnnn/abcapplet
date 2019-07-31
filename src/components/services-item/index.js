@@ -127,7 +127,7 @@ class ServiceItem extends BaseComponent {
     const { service } = this.props
 
     const { id, cover, apartment_title, house_type_title,
-      order_time, server_id, server_user, comment, look_time, intention, remark, date } = service
+      order_time, server_id, server_user, comment, look_time, intention, remark, date, status } = service
 
 
     // 重置宽高
@@ -172,7 +172,7 @@ class ServiceItem extends BaseComponent {
               : <ImagePlaceholder height={height} />
             }
           </View>
-          <View className='at-row at-row__justify--around mt-3'>
+          <View className='at-row at-row__justify--around mt-5'>
             <View className='at-row at-row-6 mb-2  mt-5'>
               {/* 下面四个按钮 */}
               {APPOINTMENT_FOUFUNCTION_DIST.map(i =>
@@ -222,7 +222,7 @@ class ServiceItem extends BaseComponent {
               {/* 左边 */}
 
               {
-                look_time === '已到看房时间' ?
+                status === 3 ?
                   <View className='at-row at-row__justify--center' style={{ position: "relative", left: '5px', top: '-10px' }}>
                     <Image src='https://images.gongyuabc.com//image/appointmentOver.png' style={{ width: "75px", height: "75px" }}></Image>
                   </View>
