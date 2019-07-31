@@ -80,8 +80,8 @@ class ApartmentItem extends BaseComponent {
     const { url } = apartment
     const { id } = apartment
     url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })
-
   }
+  
 
   render() {
     let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
@@ -146,6 +146,11 @@ class ApartmentItem extends BaseComponent {
       borderRadius: "6px",
       boxShadow: "0 1px 5px rgb(200,200,200)",
       overflow: 'hidden',
+      marginBottom : "20px"
+    }
+
+    const cardMarginStyle = {
+      marginBottom : "20px"
     }
 
     // 格式化价格
@@ -161,7 +166,7 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View className=' mb-4' style={home === null ? boxShadowStyle : ""} onClick={this.onNavigation}>
+      <View  style={home === null ? boxShadowStyle : cardMarginStyle} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 

@@ -342,7 +342,7 @@ class HouseTypeShow extends Component {
 
 
     return (
-      <View className='mb-3'>
+      <View >
 
         <TabBar
           showLittleMask={showLittleMask}
@@ -355,7 +355,7 @@ class HouseTypeShow extends Component {
           onClick={this.onClick}
         />
 
-        <View onClick={this.onCloseLittleMask}>
+        <View onClick={this.onCloseLittleMask} style={{paddingBottom : Taro.pxTransform(120)}}>
 
           <ApartmentContainer
             houseType_id={houseType_id}
@@ -618,7 +618,7 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 附近公寓 */}
-            {city &&
+            {city && nearbyPost.length &&
               <View >
                 <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
                 <ApartmentList

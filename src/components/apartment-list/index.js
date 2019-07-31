@@ -14,7 +14,6 @@ class ApartmentList extends BaseList {
 
   render() {
     const ScrollWrapStyle = {
-      height: '210px',
       whiteSpace: "nowrap"
     }
 
@@ -30,6 +29,7 @@ class ApartmentList extends BaseList {
 
     return (show && <View className={className}>
 
+
       {/* 渲染 公寓列表 */}
       <View className='at-row at-row--wrap'>
         {
@@ -37,7 +37,7 @@ class ApartmentList extends BaseList {
             ?
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView scrollX>
-                {page != 1 && nearbyPost.map((i) =>
+                {nearbyPost.map((i) =>
                   <View style={imageStyle} className={`at-col pr-2 ${mini ? 'at-col-6' : 'at-col-12'}`} key={i.id}>
                     <ApartmentItem
                       home={1}
