@@ -174,13 +174,13 @@ class CommonHome extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidShow() {
     //判断是否弹出需求卡
-    const { user } = this.props
-    const { is_guide } = user
-    if (is_guide === 0) {
-      this.setState({ showCard: true })
-    }
+    this.props.dispatchGetUserMsg().then((res)=>{
+      if(res.data.data.user.is_guide===0){ 
+        this.setState({ showCard: true })
+     }})
+
   }
 
   /**
