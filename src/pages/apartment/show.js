@@ -177,6 +177,12 @@ class ApartmentShow extends Component {
       .then(() => this.setState({ apartment: { ...apartment, isCollect: false } }))
   }
 
+  onShareAppMessage() {
+    return {
+      title: "我在公寓ABC上发现了一个好\n房源",
+    }
+  }
+
   onClick(method) {
     if (method === 'onCreateBusiness') {
       const { apartment } = this.state

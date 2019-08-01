@@ -111,11 +111,14 @@ class RequirementHouseMask extends BaseComponent {
 
 
   onResetState() {
+    const { onhandleClickRoom ,  onhandleClickFloor} = this.props
     const { initialRoom, initialFloor } = this.state
     this.setState({
       room: initialRoom,
       floor: initialFloor
     })
+    onhandleClickRoom(0)
+    onhandleClickFloor(0)
   }
 
 
@@ -167,7 +170,7 @@ class RequirementHouseMask extends BaseComponent {
             <View className='at-col at-col-4'>
               <AtButton
                 circle
-                onClick={this.props.onResetClick}
+                onClick={this.onResetState}
                 className='ml-2 btn-yellow'
               >
                 {LOCALE_RESET}

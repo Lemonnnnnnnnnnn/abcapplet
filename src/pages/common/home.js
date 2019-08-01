@@ -77,10 +77,11 @@ class CommonHome extends Component {
     currentCbd: -1,
     currentCbdTwo: -1,
     budget: '',
-    houseType: '',
+    type_room: 0,
+    type_floor: 0,
     budgetDetail: '无',
-    roomDetail: '无',
-    floorDetail: "",
+    roomDetail: '不限',
+    floorDetail: "不限",
     cdbDetailDetail: '无',
     cbdListItem: [],
     placeSelected: [],//三层有数据
@@ -172,12 +173,13 @@ class CommonHome extends Component {
       path: '/page/user?id=123'
     }
   }
+
   componentDidMount() {
     //判断是否弹出需求卡
     const { user } = this.props
     const { is_guide } = user
     if (is_guide === 0) {
-      this.setState({ showCard: true })
+      this.setState({ showCard: true }) 
     }
   }
 
@@ -451,13 +453,13 @@ class CommonHome extends Component {
   onhandleClickRoom(value) {
     const { roomList } = this.state
     const { id, title } = roomList[value]
-    this.setState({ currentHouse: value, houseType: id, roomDetail: title })
+    this.setState({ currentHouse: value, type_room: id, roomDetail: title })
   }
 
   onhandleClickFloor(value) {
     const { floorList } = this.state
     const { id, title } = floorList[value]
-    this.setState({ currentHouse: value, houseType: id, floorDetail: title })
+    this.setState({ currentHouse: value, type_floor: id, floorDetail: title })
   }
 
   //改变位置 第一层
@@ -500,12 +502,11 @@ class CommonHome extends Component {
   }
   //确定户型
   onComfireHouse() {
-    const { payload, houseType } = this.state
+    const { payload, type_floor, type_room } = this.state
     this.setState({
       showNextCard: true,
       showHouse: false,
-      payload: { ...payload, house_type: houseType }
-
+      payload: { ...payload, type_floor: type_floor, type_room: type_room }
     })
   }
   //确定目标区域

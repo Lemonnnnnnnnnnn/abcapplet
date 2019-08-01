@@ -26,6 +26,7 @@ class RequirementCardMaskNext extends BaseComponent {
 
   render() {
     let { show, roomDetail, floorDetail } = this.props
+
     return show &&
       <View className='apartment-mask' onTouchMove={this.onMaskTouchMove} >
 
@@ -123,8 +124,8 @@ class RequirementCardMaskNext extends BaseComponent {
                     <View className='at-col at-col-7 ml-3 pr-1' onClick={this.props.onShowHouse}>
                       <Board className='at-row at-row__align--center at-row__justify--between ml-2 pl-2 pr-2' style=' width: 25vw;height: 10px;'>
                         {
-                          roomDetail === "无" ?
-                            <View className='text-normal '>无</View>
+                          roomDetail === "不限" &&  floorDetail === "不限" ?
+                            <View className='text-normal '>不限</View>
                             :
                             <View className='text-normal '>{this.props.roomDetail + "、" + this.props.floorDetail}</View>
                         }

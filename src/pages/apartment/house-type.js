@@ -34,7 +34,7 @@ const city = userActions.dispatchUser().payload.citycode
 })
 class HouseTypeShow extends Component {
   config = {
-    navigationBarTitleText: '',
+    navigationBarTitleText: '户型详情',
     navigationStyle: 'custom',
   }
 
@@ -86,7 +86,7 @@ class HouseTypeShow extends Component {
     await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
 
 
-    Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
+    // Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
 
     const buttons = !data.is_sign
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]

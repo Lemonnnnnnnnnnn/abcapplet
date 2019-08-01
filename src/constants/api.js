@@ -182,7 +182,7 @@ export const API_MESSAGE_LIST = `${HOST}/appointment/listMessagePost`
 export const PAYLOAD_MESSAGE_LIST  = { appointment_id: 0}
 //提交需求卡
 export const API_DEMAND_CREATE = `${HOST}/user/addDemandPost`
-export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',house_type:'' }
+export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',type_room: 0 , type_floor : 0 }
 
 //判断用户是否弹过引导框
 export const API_DEMAND_CHECK = `${HOST}/user/changeUserGuidePost`
