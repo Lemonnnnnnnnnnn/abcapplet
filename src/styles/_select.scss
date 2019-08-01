@@ -25,28 +25,28 @@
   &-cbd {
     .multi-selected text,
     .multi-unselect text{
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
     }
     .multi-selected text{
       color: #ffc919 !important;
     }
     .multi-unselect icon{
-      width: 14px;
-      height: 14px;
+      width: 20px;
+      height: 20px;
       border: 1px solid #ffc919;
       border-radius: 50%;
       background: #fff;
-      margin-right: 4px;
+      margin-right: 6px;
       color: #ffc919;
     }
     .multi-selected icon{
       position: relative;
-      width: 14px;
-      height: 14px;
+      width: 20px;
+      height: 20px;
       border: 1px solid #ffc919;
       border-radius: 50%;
       background: #fff;
-      margin-right: 4px;
+      margin-right: 6px;
       color: #ffc919;
     }
     .multi-selected icon::after{
@@ -55,8 +55,8 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
-      width: 8px;
-      height: 8px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
       background: #ffc919;
     }
@@ -78,7 +78,7 @@
   }
 
   .at-tabs__item {
-    padding: 5px * $hd 0;
-    font-size: $font-size-sm;
+    padding: 8px * $hd 0;
+    font-size: $font-size-base;
   }
 }

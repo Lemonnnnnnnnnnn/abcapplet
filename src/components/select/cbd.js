@@ -34,7 +34,7 @@ class SelectCbd extends BaseComponent {
     cbdIndex: -1,
     areaIndexs: [],
     placeIndex: [],
-    tabItemHeight: TABS_SELECT_ITEM_HEIGHT,
+    tabItemHeight: 100,
   }
 
   state = { ...SelectCbd.defaultState }
@@ -91,7 +91,7 @@ class SelectCbd extends BaseComponent {
     const { cbdIndex, areaIndexs, tabItemHeight, placeSelected } = this.state
     const { show, items, className } = this.props
 
-    const rootClassName = ['at-row', 'select-cbd']
+    const rootClassName = ['at-row', 'select-cbd' ,'mb-3']
     const classObject = {}
     const tabsHeight = Taro.pxTransform(tabItemHeight * items.length)
 
@@ -101,10 +101,11 @@ class SelectCbd extends BaseComponent {
     const plase = areaIndex != -1 && area[areaIndex].list
 
     return (show && <View className={classNames(rootClassName, classObject, className)}>
-      <View className='select-cbd-item'>
+      <View className='select-cbd-item '>
         {cbd && <AtTabs
           scroll
           tabDirection='vertical'
+          className='mt-2'
           tabList={cbd || []}
           current={cbdIndex}
           height={tabsHeight}
@@ -118,21 +119,30 @@ class SelectCbd extends BaseComponent {
           scroll
           tabDirection='vertical'
           tabList={area || []}
+          className='mt-2'
           current={areaIndex}
           height={tabsHeight}
           onClick={this.onAreaChange}
         />}
       </View>
 
-      <View className='select-cbd-item'>
+      <View className='select-cbd-item ml-2'>
         {plase &&
           <ScrollView scrollY style={{ height: tabsHeight }}>{plase.map(i =>
-            <View key={i.id}
+            <View  key={i.id}
               onClick={this.onPlaceChange.bind(this, i.id)}
-              className={`ml-3 multi-${placeSelected.includes(i.id) ? 'selected' : 'unselect'}`}
+              className={`ml-3 mt-2 multi-${placeSelected.includes(i.id) ? 'selected' : 'unselect'}`}
             >
-              <Icon />
-              <Text className='ml-2'>{i.title}</Text>
+              <View className='at-row'>
+                <View>
+                  <Icon  />
+                </View>
+                <View>
+                  <Text className='mt-1 text-small'>{i.title}</Text>
+                </View>
+
+              </View>
+
             </View>)}
           </ScrollView>
         }
