@@ -26,7 +26,12 @@ class ServicesHome extends Component {
     NowCurrentPage: 2,
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    const { payload } = this.state
+    this.setState({ payload: { ...payload, current_page: 2 } })
+  }
+
+  componentDidShow() {
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
@@ -42,10 +47,6 @@ class ServicesHome extends Component {
         }
       }
       )
-  }
-  componentDidMount() {
-    const { payload } = this.state
-    this.setState({ payload: { ...payload, current_page: 2 } })
   }
 
   /**
