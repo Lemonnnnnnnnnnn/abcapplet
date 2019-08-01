@@ -1,0 +1,17 @@
+.menuButtonStyle {
+  height: 64px;
+  border-radius: 36px;
+  border: 1Px solid rgb(240, 240, 240);
+  padding: 0 5px;
+  width: 174px;
+  position: relative;
+}
+
+.grayLineStyle {
+  height: 60%;
+  border-left: 1Px solid rgb(240, 240, 240);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

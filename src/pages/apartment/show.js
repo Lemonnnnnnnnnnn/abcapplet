@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { View, Map, Image, Text, ScrollView } from '@tarojs/components'
-import { AtAvatar } from 'taro-ui'
+import { AtAvatar, AtIcon } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -17,7 +17,7 @@ import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
@@ -28,6 +28,7 @@ const city = userActions.dispatchUser().payload.citycode
 class ApartmentShow extends Component {
   config = {
     navigationBarTitleText: '',
+    navigationStyle: 'custom',
   }
 
   state = {
@@ -48,6 +49,8 @@ class ApartmentShow extends Component {
     },
     buttons: [],
     nearbyPost: [],
+    statusBarHeight: 0,
+    navHeight: 0,
   }
 
   async componentDidMount() {
@@ -57,6 +60,15 @@ class ApartmentShow extends Component {
 
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
     // await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: [] }))
+
+    await Taro.getSystemInfo().then(res => {
+      this.setState({ navHeight: 80, statusBarHeight: res.statusBarHeight })
+      if (res.model.indexOf('iPhone X') !== -1) {
+        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+      } else if (res.model.indexOf('iPhone') !== -1) {
+        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+      }
+    })
 
 
 
@@ -178,9 +190,19 @@ class ApartmentShow extends Component {
     }
   }
 
+  onReturn() {
+    Taro.navigateBack()
+  }
+
+  onBackHome() {
+    Taro.switchTab({
+      url: PAGE_HOME
+    })
+  }
+
   render() {
     const { apartments } = this.props
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, statusBarHeight } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
@@ -218,12 +240,48 @@ class ApartmentShow extends Component {
       // backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "6px",
       boxShadow: "0 1px 5px rgb(200,200,200)",
-      overflow:'hidden',
+      overflow: 'hidden',
+    }
+
+    const navStyle = {
+      position: 'fixed',
+      height: navHeight + "px",
+      width: "100%",
+      backgroundColor: "#fff",
+      top: 0,
+      zIndex: 999,
     }
 
 
+    const titleStyle = {
+      height: navHeight - statusBarHeight + "px",
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50% , 0)",
+    }
+
     return (
       <View className='mb-3'>
+
+        {/* 自定义导航栏 */}
+        <View style={navStyle}>
+          {/* 状态栏 */}
+          <View style={{ height: statusBarHeight + "px" }}></View>
+          {/* 标题栏 */}
+          <View className='at-row at-row__align--center  ml-2' style={{ height: navHeight - statusBarHeight + "px" }} >
+            <View className='at-row at-row-3 at-row__align--center at-row__justify--between menuButtonStyle'>
+              <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
+                <AtIcon onClick={this.onReturn} value='chevron-left' size='25' ></AtIcon>
+              </View>
+              <View className='grayLineStyle' ></View>
+              <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-3' style={{ height: "17px", width: "17px" }}></Image>
+            </View>
+          </View>
+          {/* title */}
+          <View style={titleStyle} className='text-normal'>{apartment.title}</View>
+        </View>
+
 
         <TabBar
           showLittleMask={showLittleMask}
@@ -398,7 +456,7 @@ class ApartmentShow extends Component {
             )}
 
             {/* 其他公寓 */}
-            {city && 
+            {city &&
               <View >
                 <View className='text-bold text-huge mt-4 mb-3'>附近公寓</View>
                 <ApartmentList

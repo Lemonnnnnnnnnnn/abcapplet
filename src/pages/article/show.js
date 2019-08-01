@@ -1,6 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -27,14 +28,28 @@ class ArticleShow extends Component {
   config = {
     navigationBarTitleText: '文章详情',
     enablePullDownRefresh: true,
+    navigationStyle: 'custom',
   }
 
   state = {
     showDesc: false,
     article: null,
+    statusBarHeight: 0,
+    navHeight: 0,
     buttons: [
       { message: LOCALE_SHOW_DESC, method: 'onShowDescToggle' },
     ],
+  }
+
+  async componentDidMount() {
+    await Taro.getSystemInfo().then(res => {
+      this.setState({ navHeight: 74, statusBarHeight: res.statusBarHeight })
+      if (res.model.indexOf('iPhone X') !== -1) {
+        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+      } else if (res.model.indexOf('iPhone') !== -1) {
+        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+      }
+    })
   }
 
   componentDidShow() {
@@ -76,12 +91,59 @@ class ArticleShow extends Component {
     this[method]()
   }
 
+  onReturn() {
+    Taro.navigateBack()
+  }
+
+  onBackHome() {
+    Taro.switchTab({
+      url: PAGE_HOME
+    })
+  }
+
   render() {
     const { apartments } = this.props
-    const { article, buttons, showDesc, } = this.state
+    const { article, buttons, showDesc, navHeight, statusBarHeight } = this.state
+
+    const navStyle = {
+      position: 'fixed',
+      height: navHeight + "px",
+      width: "100%",
+      backgroundColor: "#fff",
+      top: 0,
+    }
+
+
+    const titleStyle = {
+      height: navHeight - statusBarHeight + "px",
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50% , 0)",
+    }
+
 
     return (
+      // 自定义导航栏
       <View>
+        <View style={navStyle}>
+          {/* 状态栏 */}
+          <View style={{ height: statusBarHeight + "px" }}></View>
+          {/* 标题栏 */}
+          <View className='at-row at-row__align--center  ml-2' style={{ height: navHeight - statusBarHeight + "px" }} >
+            <View  className='at-row at-row-3 at-row__align--center at-row__justify--between menuButtonStyle'>
+              <View className='at-col-6'>
+                <AtIcon onClick={this.onReturn} value='chevron-left' size='25' className='ml-2' ></AtIcon>
+              </View>
+              <View  className='grayLineStyle' ></View>
+              <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-3' style={{ height: "17px", width: "17px" }}></Image>
+            </View>
+          </View>
+          {/* title */}
+          <View style={titleStyle} className='text-normal'>{article.title}</View>
+        </View>
+
+
         {article &&
           <View className='m-3' style={{ 'padding-bottom': '70px' }}>
             <View>
