@@ -110,6 +110,7 @@ class ApartmentShow extends Component {
         special: data.extend_info.special,
         notices: data.extend_info.notices,
         swipers: data.extend_info.pictures,
+        appointment_show_num: data.appointment_show_num,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
       },
       map: {
@@ -206,7 +207,7 @@ class ApartmentShow extends Component {
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
-      notices, cbds, intro, rules, facilitys, position, cover } = apartment
+      notices, cbds, intro, rules, facilitys, position, cover, appointment_show_num } = apartment
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
@@ -293,14 +294,15 @@ class ApartmentShow extends Component {
           onClick={this.onClick}
         />
 
-        <View onClick={this.onCloseLittleMask}>
+        <View onClick={this.onCloseLittleMask} style={{ paddingTop: navHeight + "px" }}>
 
           <ApartmentContainer
             swipers={swipers}
             isCollect={isCollect}
+            appointment_show_num={appointment_show_num} 
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
-          >
+          > 
 
 
 
