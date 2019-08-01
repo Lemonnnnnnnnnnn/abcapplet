@@ -25,7 +25,7 @@ class RequirementCardMaskNext extends BaseComponent {
   }
 
   render() {
-    let { show, roomDetail, floorDetail } = this.props
+    let { show, roomDetail, floorDetail  } = this.props
 
     return show &&
       <View className='apartment-mask' onTouchMove={this.onMaskTouchMove} >
@@ -140,7 +140,7 @@ class RequirementCardMaskNext extends BaseComponent {
                 </View>
 
                 {/*  {按钮部分} */}
-                <View className='mt-5 ' style='width:100vw '>
+                <View className='mt-4 mb-3' style='width:100vw '>
                   <View className='select-button at-row at-row__justify--center '>
                     <AtButton
                       circle

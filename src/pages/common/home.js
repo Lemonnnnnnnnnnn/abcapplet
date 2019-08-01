@@ -1,5 +1,5 @@
 // Taro 相关
-import Taro, { Component } from '@tarojs/taro'
+import Taro, { Component, pauseBackgroundAudio } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtCurtain } from 'taro-ui'
 
@@ -80,6 +80,7 @@ class CommonHome extends Component {
     type_room: 0,
     type_floor: 0,
     budgetDetail: '无',
+    budgetDetailStore: "",
     roomDetail: '不限',
     floorDetail: "不限",
     cdbDetailDetail: '无',
@@ -179,7 +180,7 @@ class CommonHome extends Component {
     const { user } = this.props
     const { is_guide } = user
     if (is_guide === 0) {
-      this.setState({ showCard: true }) 
+      this.setState({ showCard: true })
     }
   }
 
@@ -443,10 +444,10 @@ class CommonHome extends Component {
     }
     this.setState({ peopleTagList })
   }
-  //改变价格
+  //改变租房预算
   handleClickPrice(value) {
     const { id, title } = this.props.dists.price_list[value]
-    this.setState({ currentPrice: value, budget: id, budgetDetail: title, })
+    this.setState({ currentPrice: value, budget: id, budgetDetailStore: title, })
   }
   //改变户型
 
@@ -493,12 +494,19 @@ class CommonHome extends Component {
   }
   //确定价格
   onComfirePrice() {
-    const { payload, budget } = this.state
+    const { payload, budget, budgetDetailStore } = this.state
+
     this.setState({
       showNextCard: true,
       showPrice: false,
+      budgetDetail: budgetDetailStore,
       payload: { ...payload, budget: budget }
     })
+    if(budgetDetailStore===''){
+      this.setState({
+        budgetDetail:'无'
+      })
+    }
   }
   //确定户型
   onComfireHouse() {
@@ -512,6 +520,7 @@ class CommonHome extends Component {
   //确定目标区域
   onComfireCbd() {
     const { placeSelected, payload, cdbDetailList, cbdList, place, cbdListItem } = this.state
+
     if (cbdListItem.length !== 0 && placeSelected.length === 0) {
       Taro.showToast({
         title: '请选择',
@@ -539,35 +548,36 @@ class CommonHome extends Component {
   }
   //重置价格
   onResetClickP() {
+    const { payload } = this.state
     this.setState({
-      budget: '', currentPrice: -1, budgetDetail: '无',
-    })
-  }
-  //重置户型
-  onResetClickH() {
-    this.setState({
-      houseType: '', currentHouse: -1, budgetDetail: '无',
+      budget: '', currentPrice: -1, budgetDetail: '无', budgetDetailStore : "" , payload: { ...payload, budget: "" }
     })
   }
   //重置可选区域
   onResetClickC() {
-    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], })
+    const { payload } = this.state
+    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], cdbDetailList: [], placeSelected: [], cbd: "", payload: { ...payload, cbd: "" } })
   }
+
   onCheckPayload() {
-    const { livingPeople, livingTime, budget, houseType, cbd } = this.state
-    if (livingPeople === ''
-      || livingTime === ''
+    const { payload } = this.state
+    console.log(payload)
+    const { budget,cbd,living_time,people,type_floor,type_room } = payload
+    if (people === ''
+      || living_time === ''
       || budget === ''
-      || houseType === ''
-      || cbd === '') {
+      || cbd === ''
+      || type_floor===''
+      || type_room==='') {
       Taro.showToast({
         title: '请检查数据是否正确',
         icon: 'none',
         duration: 2000
       })
       return false
+    } else {
+      return true
     }
-    return true
   }
   /**
    * 填写完毕，提交需求
@@ -790,7 +800,6 @@ class CommonHome extends Component {
               onhandleClickFloor={this.onhandleClickFloor}
               current={currentHouse}
               onComfireHouse={this.onComfireHouse}
-              onResetClick={this.onResetClickH}
             />
           }
 

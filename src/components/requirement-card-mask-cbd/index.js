@@ -29,13 +29,14 @@ class RequirementCbdMask extends BaseComponent {
   onMaskTouchMove(e) {
     return e.stopPropagation()
   }
+  
   render() {
     let { show, cbdDist } = this.props
     const { current, currentCbdTwo, cbdListItem, placeSelected, className, tabItemHeight } = this.props
 
     cbdDist !== undefined && cbdDist !== null && delete cbdDist[0]
     const nowCbdDist = cbdDist
-    const tabsHeight = (cbdDist !== undefined && cbdDist !== null) ? Taro.pxTransform(tabItemHeight * cbdDist.length + 20) : '0'
+    const tabsHeight = (cbdDist !== undefined && cbdDist !== null) ? Taro.pxTransform(tabItemHeight * cbdDist.length + 40) : '0'
 
     const rootClassName = ['at-row', 'select-cbd']
     const classObject = {}
@@ -56,7 +57,8 @@ class RequirementCbdMask extends BaseComponent {
             {/* 主体 */}
             {/* 第一层 */}
             <View className='at-row at-row__justify--around'>
-              <View className='at-col-3'>
+              
+              <View className='at-col-2'>
                 <AtTabs
                   scroll
                   tabDirection='vertical'
@@ -67,7 +69,7 @@ class RequirementCbdMask extends BaseComponent {
                 />
               </View>
               {/* 第二层 */}
-              <View className='at-col-3'>
+              <View className='at-col-2 mt-2'>
                 {current != -1 && <AtTabs
                   scroll
                   tabDirection='vertical'
@@ -78,8 +80,8 @@ class RequirementCbdMask extends BaseComponent {
                 />}
               </View>
               {/* 第三层 */}
-              <View className='at-col-3'>
-                {cbdListItem !== undefined && <ScrollView scrollY >{cbdListItem.map(i =>
+              <View className='at-col-6 mt-2'>
+                {cbdListItem !== undefined && <ScrollView scrollY style={{ height: tabsHeight }}>{cbdListItem.map(i =>
                   <View key={i.id}
                     onClick={this.props.onChangeCbdThree.bind(this, i)}
                     className={`ml-3 multi-${placeSelected.includes(i.id) ? 'selected' : 'unselect'}`}
