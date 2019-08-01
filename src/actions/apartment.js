@@ -203,20 +203,21 @@ export const dispatchHotSearch = payload => createAction({
   url: API_HOT_SEARCH,
 })
 
-/**
- * 推荐公寓列表
- */
-export const dispatchRecommendHouseType = payload => createAction({
-  payload,
-  method: 'POST',
-  type: SET_APARTMENT_LIST,
-  url: API_RECOMMEND_APARTMENT,
-  cb: ({ data: { data } }) => ({
-    list: data.list,
-    total: data.list.length,
-    type: TYPE_RECOMMEND_HOUSE_TYPE,
-  })
-})
+
+// /**
+//  * 推荐公寓列表
+//  */
+// export const dispatchRecommendHouseType = payload => createAction({
+//   payload,
+//   method: 'POST',
+//   type: SET_APARTMENT_LIST,
+//   url: API_RECOMMEND_APARTMENT,
+//   cb: ({ data: { data } }) => ({
+//     list: data.list,
+//     total: data.list.length,
+//     type: TYPE_RECOMMEND_HOUSE_TYPE,
+//   })
+// })
 
 /**
  * 设置文章公寓

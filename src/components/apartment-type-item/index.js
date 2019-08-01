@@ -5,13 +5,7 @@ import { View, Image , Text} from '@tarojs/components'
 // 自定义组件
 import BaseComponent from '@components/base'
 
-// 自定义变量
-import {
-    LOCALE_PRICE_UNIT,
-    LOCALE_MONTH,
-    LOCALE_MONEY,
-    LOCALE_QI,
-} from '@constants/locale'
+
 
 class ApartmentTypeItem extends BaseComponent {
   static defaultProps = {
@@ -33,13 +27,6 @@ class ApartmentTypeItem extends BaseComponent {
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
-    // const PublicConfiguration = {
-    //   backgroundColor: "rgba(248, 248, 248, 1)",
-    //   borderRadius: "6px",
-    //   boxShadow: "0 1px 5px rgb(200,200,200)",
-    //   overflow:'hidden',
-    // }
-    
 
     return <View className='' onClick={this.onNavigation}>
       <View className=''>
@@ -60,9 +47,9 @@ class ApartmentTypeItem extends BaseComponent {
               <View className='text-yellow mb-1 text-large'>
               {isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}`}
               {
-                isNaNPrice ? <View></View> : <Text className='text-small'>元/月</Text> 
+                isNaNPrice ? <View></View> : <Text className='text-small'>元/月</Text>
               }
-              
+
               </View>
             </View>
           </View>

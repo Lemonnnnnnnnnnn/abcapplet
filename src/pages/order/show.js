@@ -9,6 +9,7 @@ import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 import * as orderActions from '@actions/order'
 import * as apartmentActions from '@actions/apartment'
+import * as apartmentLookActions from '@actions/apartmentlook'
 
 // NPM 包
 import day from 'dayjs'
@@ -69,6 +70,7 @@ import {
   ...userActions,
   ...orderActions,
   ...apartmentActions,
+  ...apartmentLookActions,
 })
 class OrderShow extends Component {
   config = {
@@ -189,7 +191,7 @@ class OrderShow extends Component {
 
 
   render() {
-    const { apartments } = this.props
+    const { apartmentlook } = this.props
     const { order, city, roomId, showSignCode } = this.state
     let { status, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
 
@@ -364,9 +366,9 @@ class OrderShow extends Component {
           <ApartmentList
             mini
             show={ORDER_STATUS_CANCEL == status}
-            key={apartments.type}
-            type={apartments.type}
-            items={apartments.list}
+            key={apartmentlook.type}
+            type={apartmentlook.type}
+            items={apartmentlook.list}
 
             defaultPayload={{ city }}
             dispatchList={this.props.dispatchRecommendHouseType}
