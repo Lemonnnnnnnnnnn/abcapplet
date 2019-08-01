@@ -332,7 +332,7 @@ class ServiceItem extends BaseComponent {
           onClose={this.onCloseEvalution}
         />
         {/* 看房意向 */}
-        < ServiceIntention
+        <ServiceIntention
           show={showIntention}
           intention={intention}
           apartment_title={apartment_title}
