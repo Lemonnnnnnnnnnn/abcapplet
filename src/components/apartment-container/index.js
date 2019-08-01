@@ -18,6 +18,7 @@ class ApartmentContainer extends BaseComponent {
     width: 375 * 2,
     height: 250 * 2,
     isCollect: false,
+    appointment_show_num : 0,
   }
 
   state = {

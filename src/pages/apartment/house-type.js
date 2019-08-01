@@ -35,9 +35,12 @@ const city = userActions.dispatchUser().payload.citycode
 class HouseTypeShow extends Component {
   config = {
     navigationBarTitleText: '',
+    navigationStyle: 'custom',
   }
 
   state = {
+    statusBarHeight: 0,
+    navHeight: 0,
     showLittleMask: false,
     houseType_id: 83,
     houstType: {
@@ -68,7 +71,17 @@ class HouseTypeShow extends Component {
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
+    await Taro.getSystemInfo().then(res => {
+      this.setState({ navHeight: 80, statusBarHeight: res.statusBarHeight })
+      if (res.model.indexOf('iPhone X') !== -1) {
+        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+      } else if (res.model.indexOf('iPhone') !== -1) {
+        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+      }
+    })
+
     const apartmentID = data.apartment_id
+
 
     await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
 
@@ -291,16 +304,33 @@ class HouseTypeShow extends Component {
   }
 
 
+  onReturn() {
+    Taro.navigateBack()
+  }
+
+  onBackHome() {
+    Taro.switchTab({
+      url: PAGE_HOME
+    })
+  }
+
+
 
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch, roomMatch_list, publicMatch_list, showApartRoom, nearbyPost, showLittleMask } = this.state
+    const { houstType, map, buttons, showRentDescription,
+      houseType_id, showMatch, roomMatch_list, publicMatch_list,
+      showApartRoom, nearbyPost, showLittleMask, navHeight, statusBarHeight } = this.state
+
     const { latitude, longitude, markers } = map
+
     const {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, cover,
-      notices, cbds, intro, rules, facilitys, apartmentTitle, position, tags, cost_info, id, roomMatch, publicMatch, appointment_show_num, one_word, type_desc
+      notices, cbds, intro, rules, facilitys, apartmentTitle,
+      position, tags, cost_info, id, roomMatch, publicMatch,
+      appointment_show_num, type_desc
     } = houstType
 
 
@@ -342,6 +372,24 @@ class HouseTypeShow extends Component {
       textIndent: "10px"
     }
 
+    const navStyle = {
+      position: 'fixed',
+      height: navHeight + "px",
+      width: "100%",
+      backgroundColor: "#fff",
+      top: 0,
+      zIndex: 999,
+    }
+
+
+    const titleStyle = {
+      height: navHeight - statusBarHeight + "px",
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50% , 0)",
+    }
+
 
     return (
       <View >
@@ -357,7 +405,26 @@ class HouseTypeShow extends Component {
           onClick={this.onClick}
         />
 
-        <View onClick={this.onCloseLittleMask} style={{paddingBottom : Taro.pxTransform(120)}}>
+        {/* 自定义导航栏 */}
+        <View style={navStyle}>
+          {/* 状态栏 */}
+          <View style={{ height: statusBarHeight + "px" }}></View>
+          {/* 标题栏 */}
+          <View className='at-row at-row__align--center  ml-2' style={{ height: navHeight - statusBarHeight + "px" }} >
+            <View className='at-row at-row-3 at-row__align--center at-row__justify--between menuButtonStyle'>
+              <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
+                <AtIcon onClick={this.onReturn} value='chevron-left' size='25' ></AtIcon>
+              </View>
+              <View className='grayLineStyle' ></View>
+              <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-3' style={{ height: "17px", width: "17px" }}></Image>
+            </View>
+          </View>
+          {/* title */}
+          <View style={titleStyle} className='text-normal'>{title}</View>
+        </View>
+
+
+        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
 
           <ApartmentContainer
             houseType_id={houseType_id}

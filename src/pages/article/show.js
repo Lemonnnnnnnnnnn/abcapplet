@@ -125,7 +125,7 @@ class ArticleShow extends Component {
 
     return (
       // 自定义导航栏
-      <View>
+      <View >
         <View style={navStyle}>
           {/* 状态栏 */}
           <View style={{ height: statusBarHeight + "px" }}></View>
@@ -145,7 +145,7 @@ class ArticleShow extends Component {
 
 
         {article &&
-          <View className='m-3' style={{ 'padding-bottom': '70px' }}>
+          <View className='m-3' style={{ paddingBottom: '70px' ,paddingTop : navHeight + "px"}}>
             <View>
               <View className='text-huge text-bold'>{article.title}</View>
               <View className='text-muted text-small mt-2'>{day.unix(article.create_time).format('YYYY-MM-DD')}</View>
