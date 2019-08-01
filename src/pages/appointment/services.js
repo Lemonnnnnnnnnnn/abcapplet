@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 
 import ServicesHeader from '@components/services-header'
 import ServicesList from '@components/services-list'
@@ -18,13 +18,14 @@ import * as appointmentActions from '@actions/appointment'
 
 class ServicesHome extends Component {
   config = {
-    navigationBarTitleText: '找房服务',
+    navigationBarTitleText: '行程服务',
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
     NowCurrentPage: 2,
   }
+
 
   componentWillMount() {
     const { payload } = this.state
@@ -48,11 +49,14 @@ class ServicesHome extends Component {
     this.setState({ payload: { ...payload, current_page: 2 } })
   }
 
-
-  componentDidHide(){
+  componentDidShow() {
+    this.componentWillMount()
+  }
+  componentDidHide() {
     const { payload } = this.state
     this.setState({ payload: { ...payload, current_page: 1 } })
   }
+
 
   /**
    * 到底部加载行程下一页
@@ -97,29 +101,44 @@ class ServicesHome extends Component {
     const { appointments } = this.props
     const { time } = this.state
 
+    const yellowPointStyle = {
+      height: '8px',
+      width: '8px',
+      borderRadius: '50%',
+      backgroundColor: 'rgba(255, 201, 25, 1)'
+    }
+
+
     return (
       <View style={{ overflow: "hidden" }}>
         <ServicesHeader
           onClickLeft={this.onToLeft}
           onClickRight={this.onToRight}
         />
-        <View className=' at-col '>
-          {/* <View className='at-row mt-3  mb-3'>
-            <View className='mt-2  button-yellow ml-4' ></View>
-            <View className='at-col at-col-2 text-bold ml-3'>
-              今天
-            </View>
-            <View className='at-col at-col-1 text-normal mt-1'>
-              {time}
-            </View>
-          </View> */}
-          <View >
-            <ServicesList
-              lists={appointments.list}
-              time={time}
-            />
+        <View className='at-row at-row__align--center  p-2' >
+          <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}>
+
+          </View>
+          <View className='pl-2 text-bold text-large'>
+            看房行程
           </View>
         </View>
+        {
+          appointments.list.length ?
+            <View className=' at-col'>
+              <View >
+                <ServicesList
+                  lists={appointments.list}
+                  time={time}
+                />
+              </View>
+            </View>
+            :
+            <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
+              <Image src='https://images.gongyuabc.com//image/noneTravel.png'></Image>
+            </View>
+        }
+
       </View>
 
     )
