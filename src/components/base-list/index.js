@@ -22,8 +22,8 @@ class BaseList extends BaseComponent {
 
   componentDidShow() {
     const { defaultPayload } = this.props
-    const {city } = defaultPayload
-    if(!city){
+    const {is_select} = defaultPayload
+    if(!is_select){
       this.props.initReset && this.onReset()
     }
 
