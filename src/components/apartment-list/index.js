@@ -24,7 +24,7 @@ class ApartmentList extends BaseList {
     }
 
 
-    const { items, className, type, mini, show, nearbyPost, home } = this.props
+    const { items, className, type, mini, show, nearbyPost } = this.props
     const { hasMore, loading, page } = this.state
 
 

@@ -28,6 +28,7 @@ import * as bannerActions from '@actions/banner'
 import * as activityActions from '@actions/activity'
 import * as recommendActions from '@actions/recommend'
 import * as apartmentActions from '@actions/apartment'
+import * as apartmentLookActions from '@actions/apartmentlook'
 
 // 自定义常量
 import {
@@ -42,7 +43,6 @@ import {
   LOCALE_APARTMENT,
   LOCALE_RECOMMEND_APARTMENT,
 } from '@constants/locale'
-import dist from '../../../dist/npm/@tarojs/redux/dist';
 
 @connect(state => state, {
   ...adActions,
@@ -54,6 +54,7 @@ import dist from '../../../dist/npm/@tarojs/redux/dist';
   ...activityActions,
   ...recommendActions,
   ...apartmentActions,
+  ...apartmentLookActions,
 })
 class CommonHome extends Component {
   config = {
@@ -383,6 +384,7 @@ class CommonHome extends Component {
   * 需求卡2，关闭户型选择
   */
   onCloseHouse() {
+
     this.setState({ showNextCard: true, showHouse: false })
   }
   /**

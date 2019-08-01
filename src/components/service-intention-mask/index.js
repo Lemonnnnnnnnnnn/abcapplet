@@ -60,7 +60,7 @@ onScoreChange(value) {
     score:value,
     payload:{...payload, score:value ,appointment_id:this.props.appointment_id,room_ids:''},
   })
-  console.log(this.props)
+
   if(value>=4){
     this.props.dispatchIntentionList({...Payloadlist,appointment_id:this.props.appointment_id}).
     then((res)=>

@@ -14,6 +14,7 @@ import recommends from './recommends'
 import apartments from './apartments'
 import appointments from './appointment'
 import message from './message'
+import apartmentlook from './apartmentlook'
 
 export default combineReducers({
   ads,
@@ -31,4 +32,5 @@ export default combineReducers({
   apartments,
   appointments,
   message,
+  apartmentlook,
 })

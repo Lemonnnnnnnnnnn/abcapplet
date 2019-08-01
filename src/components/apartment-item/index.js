@@ -1,14 +1,13 @@
 // Taro 组件
 import Taro from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import { AtIcon, AtTag } from 'taro-ui'
+
 
 // 自定义组件
 import BaseComponent from '@components/base'
 import ImagePlaceholder from '@components/image-placeholder'
 
-// NPM 包
-import classNames from 'classnames'
+
 
 // 自定义常量
 import {
@@ -24,10 +23,6 @@ import {
 import {
   PAGE_APARTMENT_SHOW,
 } from '@constants/page'
-
-import {
-  COLOR_YELLOW,
-} from '@constants/styles'
 
 import {
   LOCALE_MONEY,
@@ -77,15 +72,16 @@ class ApartmentItem extends BaseComponent {
 
   onNavigation() {
     const { apartment } = this.props
+
     const { url } = apartment
     const { id } = apartment
     url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })
   }
-  
+
 
   render() {
     let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
-    const { className, apartment, type, } = this.props
+    const { apartment, type } = this.props
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -256,7 +252,7 @@ class ApartmentItem extends BaseComponent {
         }
 
         {/* 迷你内容 */}
-        {mini && <View className='apartment-content mx-2 mt-2'>
+        {mini && <View className='apartment-content mx-2 mt-3'>
           {/* 价格和公寓名称 */}
           {
             nearbyPost ? <View className='text-normal text-bold'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
