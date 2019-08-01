@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View, Swiper, SwiperItem, Image, Picker } from '@tarojs/components'
+import { View, Image, Picker } from '@tarojs/components'
 import { AtAvatar, AtIcon, AtButton, AtTag } from 'taro-ui'
 
 // Redux 相关
@@ -11,21 +11,23 @@ import * as apartmentActions from '@actions/apartment'
 // 自定义变量
 import { PAYLOAD_APPOINTMENT_CREATE } from '@constants/api'
 import {
-  LOCALE_PRICE_START,
-  LOCALE_PRICE_SEMICOLON,
   LOCALE_CHANGE,
   LOCALE_APPOINTMENT_LOOKTIME,
   LOCALE_APPOINTMENT_POST,
 } from '@constants/locale'
 // 自定义组件
-import Board from '../../components/board'
 import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
 
 
-let month = "01"
-let day = "01"
-let time = "08:00"
+// let month = "01"
+// let day = "01"
+// let time = "08:00"
+
+const nowTime = new Date()
+let currentMonth =  nowTime.getMonth()
+let currentDay =  nowTime.getDate()
+let currentHours =  nowTime.getHours()
 
 @connect(state => state, {
   ...userActions,
@@ -54,18 +56,20 @@ class AppointmentPost extends Component {
     width: 375 * 2,
     height: 200 * 2,
     users: {
-      headimgurl: '',
+    headimgurl: '',
     },
     houstType: {
-      swipers: [],
+    swipers: [],
     },
     screenHeight: '',
     screenWidth: '',
     houseTypeList: [],
-  }
+    currentTime : [],
+    }
 
 
   async componentDidMount() {
+
     const { id = 83, apartmentId } = this.$router.params
     const { Payload } = this.state
 
@@ -74,8 +78,11 @@ class AppointmentPost extends Component {
     await this.props.dispatchGetUserMsg().then(res => {
       const name = res.data.data.user.name
       const tel = res.data.data.user.mobile
-      name && this.setState({
+      name ? this.setState({
         name: name,
+      }):
+      this.setState({
+        name: res.data.data.user.username,
       })
       tel && this.setState({
         tel: tel,
@@ -84,7 +91,7 @@ class AppointmentPost extends Component {
 
     const { payload } = await this.props.dispatchUser()
     this.setState({
-      Payload: { ...Payload, apartment: data.apartment_id },
+      Payload: { ...Payload, apartment: data.apartment_id ,house_type:id},
       users: {
         headimgurl: payload.headimgurl,
       },
@@ -139,7 +146,8 @@ class AppointmentPost extends Component {
 
 
     // 计算可供选择的时间列表
-    const nowTime = new Date()
+    let currentTime = [1,currentMonth,currentDay - 1,currentHours - 7]
+    this.setState({currentTime :currentTime })
 
     const finalList = []
 
@@ -190,6 +198,16 @@ class AppointmentPost extends Component {
     })
   }
 
+  onClickPicker(){
+    const { Payload, tel, name, range } = this.state
+    const year = (range[0][0]).split("年")[0]
+    const payloadStr = year + "-" + this.onJudgeTen(currentMonth  + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
+    this.setState({
+      dateSel: payloadStr,
+      Payload: { ...Payload, order_time: payloadStr, mobile: tel, name: name }
+    })
+  }
+
 
 
   onColumnChange = e => {
@@ -198,11 +216,11 @@ class AppointmentPost extends Component {
     const year = (range[0][0]).split("年")[0]
 
 
-    if (column === 1) { month = this.onJudgeTen(value + 1) }
-    if (column === 2) { day = this.onJudgeTen(value + 1) }
-    if (column === 3) { time = this.onJudgeTen(value + 8) + ":00" }
+    if (column === 1) { currentMonth = value  }
+    if (column === 2) { currentDay = value + 1 }
+    if (column === 3) { currentHours = value + 7 }
 
-    const payloadStr = year + "-" + month + "-" + day + " " + time
+    const payloadStr = year + "-" + this.onJudgeTen(currentMonth  + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
 
     this.setState({
       dateSel: payloadStr,
@@ -276,8 +294,6 @@ class AppointmentPost extends Component {
       showNext: false,
       zeroMinTime: 29,
       zeroSecTime: 59,
-      secTime: 59,
-      minTime: 29,
       dateSel: '请选择看房日期',
       timeSel: '请选择看房时间',
       name: '姓名',
@@ -316,7 +332,7 @@ class AppointmentPost extends Component {
     const { name, tel, dateSel, timeSel , Payload } = this.state
     if (name === '姓名'
       || tel === '电话'
-      || dateSel === '请选择放日期'
+      || dateSel === '请选择看房日期'
       || !Payload.house_type) {
       Taro.showToast({
         icon: 'none',
@@ -326,6 +342,14 @@ class AppointmentPost extends Component {
     }
     return true
   }
+
+
+  onCloseRequirement(){
+    clearInterval(this.state.sectime);
+    clearInterval(this.state.getPost);
+    Taro.navigateBack()
+  }
+
 
   //提交预约
   onAppointmentPost() {
@@ -390,13 +414,15 @@ class AppointmentPost extends Component {
 
   }
   render() {
-    const { houstType, height, width, users, name, tel, showInformation,
-      showNext, zeroSecTime, zeroMinTime, serverId, screenHeight, screenWidth, houseTypeList, range } = this.state
+    const { houstType, height, users, tel, showInformation,name,
+      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range , currentTime } = this.state
     // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
+
+    console.log(this.state.Payload)
 
 
     const {
-      title, swipers, cost, priceTitle, intro,
+      title, swipers, priceTitle, intro,
     } = houstType
     const { headimgurl } = users
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -422,7 +448,7 @@ class AppointmentPost extends Component {
 
     const imageStyle = {
       width: '100%',
-      // height: Taro.pxTransform(height),
+
     }
 
     const imageFontStyle = {
@@ -435,7 +461,7 @@ class AppointmentPost extends Component {
       position: "absolute",
       left: "40px",
       top: "20px",
-      zIndex: 999,
+      zIndex: 9,
 
     }
 
@@ -444,7 +470,7 @@ class AppointmentPost extends Component {
       borderTopRightRadius: "12px",
       backgroundColor: "#fff",
       position: "relative",
-      // top: "-50px"
+
     }
 
     return (
@@ -461,25 +487,9 @@ class AppointmentPost extends Component {
             <Image style={imageStyle} src={swipers}></Image>
             <View style={blackOpacityStyle}>
             </View>
-            
-            {/* <Swiper
-              autoplay
-              circular
-              style={style}
-              displayMultipleItems={1}
-            >
-              {swipers.map(i => <SwiperItem key={i.url}>
-                <Image
-                  style={style}
-                  mode='scaleToFill'
-                  src={`${i.url.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
-                />
-              </SwiperItem>)}
-            </Swiper> */}
+
           </View>
           {/* 头部 */}
-
-          {/* <Board  fixed='bottom' customStyle={borderRadiusStyle}> */}
           <View style={borderRadiusStyle}>
             <View className='pl-3'>
               <View className='text-bold text-huge mt-2' >{title}</View>
@@ -487,15 +497,6 @@ class AppointmentPost extends Component {
             </View>
             <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
 
-            {/* <View className='at-row  mt-2'>
-                <View className='at-col-5 text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}${LOCALE_PRICE_START}`}</View>
-                <View className='at-col-7'>
-                  <View className='p-1 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
-                    <View className='text-mini text-secondary'>{cost}</View>
-                  </View>
-                </View>
-
-              </View> */}
 
             <View style='width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 ' border='all'>
               <View className=' mt-2' border='all' >
@@ -532,7 +533,7 @@ class AppointmentPost extends Component {
                         active={i.active}>
                         <View style={fontStyle}>{i.title}</View>
                       </AtTag>
-                    ):<View className='text-secondary ml-3'>暂无可选户型</View>  
+                    ):<View className='text-secondary ml-3'>暂无可选户型</View>
                   }
                 </View>
 
@@ -548,31 +549,19 @@ class AppointmentPost extends Component {
 
                     {/* <View className='text-small '>选择看房日期</View> */}
 
-                    <Picker mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
+                    <Picker onClick={this.onClickPicker} value={currentTime}  mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
                       <View className='text-small'>
                         {this.state.dateSel}
                       </View>
                     </Picker>
 
-                    {/* <Picker mode='date' onChange={this.onDateChange}>
-                    <View className='text-small'>
-                      {this.state.dateSel}
-                    </View>
-                  </Picker> */}
+
                   </View>
-                  {/* <View className='at-col-3 p-1 at-row at-row__justify--center ml-1' style='background:#F8F8F8; border-radius: 30px'>
-                  <View className='text-small '>选择看房时间</View>
-                  <Picker mode='time' onChange={this.onTimeChange}>
-                    <View className='text-small'>
-                      {this.state.timeSel}
-                    </View>
-                  </Picker>
-                </View> */}
+
                 </View>
                 {/* 按钮 */}
                 <AtButton
                   circle
-
                   className='m-3 btn-yellow active'
                   onClick={this.onAppointmentPost}
                 >{LOCALE_APPOINTMENT_POST}</AtButton>
@@ -589,10 +578,10 @@ class AppointmentPost extends Component {
             />
             <AppointmentPostNextMask
               show={showNext}
+              onCloseRequirement={this.onCloseRequirement}
               secTime={zeroSecTime}
               minTime={zeroMinTime}
               serverId={serverId}
-              onClose={this.onCloseNext}
             />
           </View>
           {/* </Board> */}

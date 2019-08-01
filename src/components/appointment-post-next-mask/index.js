@@ -43,7 +43,7 @@ class AppointPostNextMask extends BaseComponent {
           {/* 头部 */}
           <View className='at-row at-row__justify--between '>
             <View className='text-bold'></View>
-            <View onClick={this.props.onClose}>
+            <View onClick={this.props.onCloseRequirement}>
               <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>
           </View>
@@ -78,12 +78,14 @@ class AppointPostNextMask extends BaseComponent {
 
             <View className='at-row at-row__justify--center mt-2 mb-5 mt-5'>
               <View className='at-row at-row__justify--center'>
-                <View className='text-yellow text-normal mt-1'>{LOCALE_APPOINTMENT_ACCEPT_ORDER}</View>
-                <AtIcon value='chevron-right' size='15' color='#FFC919' className='ml-3'></AtIcon>
-                <View className='text-yellow text-normal  mt-1 ml-3'>{LOCALE_APPOINTMENT_CALL}</View>
-                <AtIcon value='chevron-right' size='15' color={serverId!==0?COLOR_YELLOW:COLOR_GREY_2} className='ml-3'></AtIcon>
-                {serverId===0 &&  <View className='text-muted text-normal mt-1 ml-3' >{LOCALE_APPOINTMENT_LOOK}</View>}
-                {serverId!==0 && <View className='text-yellow text-normal mt-1 ml-3' >{LOCALE_APPOINTMENT_LOOK}</View>}
+                <View className='text-yellow text-normal mt-1 ml-1'>{LOCALE_APPOINTMENT_ACCEPT_ORDER}</View>
+                {/* <AtIcon value='chevron-right' size='15' color='#FFC919' className='ml-1'></AtIcon> */}
+                <View className='text-yellow text-large ml-2 mr-2'>—</View>
+                <View className='text-yellow text-normal  mt-1 ml-1'>{LOCALE_APPOINTMENT_CALL}</View>
+                {/* <AtIcon value='chevron-right' size='15' color={serverId!==0?COLOR_YELLOW:COLOR_GREY_2} className='ml-1'></AtIcon> */}
+                <View className='text-yellow text-large  ml-2 mr-2'>—</View>
+                {serverId===0 &&  <View className='text-muted text-normal mt-1 ml-1' >{LOCALE_APPOINTMENT_LOOK}</View>}
+                {serverId!==0 && <View className='text-yellow text-normal mt-2 ml-1' >{LOCALE_APPOINTMENT_LOOK}</View>}
               </View>
             </View>
 
@@ -94,7 +96,7 @@ class AppointPostNextMask extends BaseComponent {
               <AtButton
                 circle
                 className=' btn-yellow active at-col at-col-8 pl-5 pr-5 '
-                // onClick={this.props.onClose}
+                onClick={this.props.onCloseRequirement}
                 >  {LOCALE_APPOINTMENT_FINISH_REQUIRE}  </AtButton>
                 <View className='at-col at-col-1'></View>
             </View>

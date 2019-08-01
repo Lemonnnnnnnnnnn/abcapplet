@@ -60,7 +60,16 @@ page {
     height: 10vh;
     top: 5%;
     transform: translate(230px,-50px)
+  }
 
+
+  &-msg {
+    background: #FFFFFF center center no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
   }
 
   &-mask {

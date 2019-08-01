@@ -1,5 +1,5 @@
 // Taro 相关
-import Taro, { Component, pauseBackgroundAudio } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtCurtain } from 'taro-ui'
 
@@ -88,8 +88,7 @@ class CommonHome extends Component {
     placeSelected: [],//三层有数据
     cdbDetailList: [],//三层有数据
     place: '',//三层无数据
-    livingTime: '',
-    livingPeople: '',
+
     roomList: [],
     floorList: [],
 
@@ -420,7 +419,7 @@ class CommonHome extends Component {
     for (var nowTimeClick = 0; nowTimeClick < timeTagListLength; nowTimeClick++) {
       if (timeTagList[nowTimeClick].name == data.name) {
         timeTagList[nowTimeClick].active = true
-        this.setState({ livingTime: data.id, payload: { ...payload, living_time: data.id } })
+        this.setState({  payload: { ...payload, living_time: data.id } })
       } else {
         timeTagList[nowTimeClick].active = false
       }
@@ -437,7 +436,7 @@ class CommonHome extends Component {
     for (var nowPeopleClick = 0; nowPeopleClick < peopleTagListLength; nowPeopleClick++) {
       if (peopleTagList[nowPeopleClick].name == data.name) {
         peopleTagList[nowPeopleClick].active = true
-        this.setState({ livingPeople: data.id, payload: { ...payload, people: data.id } })
+        this.setState({  payload: { ...payload, people: data.id } })
       } else {
         peopleTagList[nowPeopleClick].active = false
       }
@@ -556,7 +555,7 @@ class CommonHome extends Component {
   //重置可选区域
   onResetClickC() {
     const { payload } = this.state
-    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], cdbDetailList: [], placeSelected: [], cbd: "", payload: { ...payload, cbd: "" } })
+    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], cdbDetailList: [], placeSelected: [],  payload: { ...payload, cbd: "" } })
   }
 
   onCheckPayload() {
@@ -602,7 +601,7 @@ class CommonHome extends Component {
     const className = {}
 
     const {
-      showCard, showNextCard, isOpen, showPrice, showHouse, currentPrice, budgetDetail, currentHouse, houseTypeDetail, roomDetail, floorDetail, selectScrollTop,
+      showCard, showNextCard, isOpen, showPrice, showHouse, currentPrice, budgetDetail, currentHouse, houseTypeDetail, roomDetail, floorDetail,
       showCbd, currentCbd, currentCbdTwo, cbdListItem, placeSelected, cdbDetailDetail, showSelect, showSearch,
       searchIsFixed,
       searchScrollTop,
@@ -831,7 +830,7 @@ class CommonHome extends Component {
         >
           <View className='at-row at-row__justify--center'>
             <Image
-              style='width:150px;height:160px'
+              style='width:50vw;height:58vw'
               src='https://images.gongyuabc.com//image/requirement-finish.png'
             />
           </View>
