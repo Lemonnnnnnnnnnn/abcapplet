@@ -48,6 +48,14 @@ class ServicesHome extends Component {
     this.setState({ payload: { ...payload, current_page: 2 } })
   }
 
+  componentDidShow(){
+    this.componentWillMount()
+  }
+  componentDidHide(){
+    const { payload } = this.state
+    this.setState({ payload: { ...payload, current_page: 1 } })
+  }
+
   /**
    * 到底部加载行程下一页
    */

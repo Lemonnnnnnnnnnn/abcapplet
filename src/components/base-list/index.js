@@ -21,7 +21,12 @@ class BaseList extends BaseComponent {
   }
 
   componentDidShow() {
-    this.props.initReset && this.onReset()
+    const { defaultPayload } = this.props
+    const {city } = defaultPayload
+    if(!city){
+      this.props.initReset && this.onReset()
+    }
+
   }
 
   onReset(payload) {
