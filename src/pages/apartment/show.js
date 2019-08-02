@@ -305,10 +305,10 @@ class ApartmentShow extends Component {
           <ApartmentContainer
             swipers={swipers}
             isCollect={isCollect}
-            appointment_show_num={appointment_show_num} 
+            appointment_show_num={appointment_show_num}
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
-          > 
+          >
 
 
 
@@ -361,7 +361,7 @@ class ApartmentShow extends Component {
             <View style={ScrollWrapStyle} className='at-col' >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 `}>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 ml-1`}>
                     <View style={borderStyle}>
                       <ApartmentTypeItem apartmentDetail item={i} />
                     </View>
@@ -465,7 +465,7 @@ class ApartmentShow extends Component {
 
             {/* 其他公寓 */}
             {city &&
-              <View >
+              <View className='mb-5'>
                 <View className='text-bold text-huge mt-4 mb-3'>附近公寓</View>
                 <ApartmentList
                   nearbyPost={nearbyPost}
