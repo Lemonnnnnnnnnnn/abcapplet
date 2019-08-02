@@ -32,7 +32,7 @@ class ApartmentList extends BaseList {
 
 
       {/* 渲染 公寓列表 */}
-      <View className='at-row at-row--wrap'>
+      <View className='at-row at-row--wrap mb-3'>
         {
           nearbyPost
             ?

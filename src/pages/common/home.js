@@ -262,15 +262,20 @@ class CommonHome extends Component {
     const selectorChecked = selector[value]
     const newCity = citys.filter(i => i.title === selectorChecked)[0]
 
-    this.setState({ selectorChecked })
+    this.setState({ selectorChecked ,})
     this.onSelectCity(newCity.id)
   }
 
+  onSearchTrue(){
+    this.setState({ showSearch: true ,showSelect: true})
+  }
   /**
    * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
    * @param {*} param0
    */
   onPageScroll({ scrollTop }) {
+    const { apartments } = this.props
+
     const {
       selectIsFixed,
       selectScrollTop,
@@ -289,8 +294,8 @@ class CommonHome extends Component {
     if (scrollTop === 0) { this.setState({ showSearch: true }) }
 
 
-    scrollTop > scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: false })
-    scrollTop < scrollNow && scrollTop > selectScrollTop && this.setState({ showSelect: true })
+    scrollTop > scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
+    scrollTop < scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
 
     scrollTop > searchScrollTop
       && !searchIsFixed
@@ -300,10 +305,11 @@ class CommonHome extends Component {
       && searchIsFixed
       && this.setState({ searchIsFixed: false })
 
+
     // 公寓相关
 
-
     scrollTop > selectScrollTop
+      && apartments.total !== 0
       && !selectIsFixed
       && this.setState({ selectIsFixed: true })
 
@@ -638,6 +644,7 @@ class CommonHome extends Component {
                 selector={selector}
                 selectorChecked={selectorChecked}
                 onChangeSelector={this.onChangeSelector}
+
               />
             }
           </View>
@@ -715,12 +722,13 @@ class CommonHome extends Component {
           }
 
           {/* 严选公寓 */}
-          <View>
+          <View className='selectTab'>
             <Header className='my-2' title={LOCALE_APARTMENT} hasExtra={false} />
             <View className='home-select'>
               {/* 选择框下拉框部分*/}
               {
                 !(JSON.stringify(dists) === '{}') && showSelect && <Select
+                  onSearchTrue={this.onSearchTrue}
                   top={searchScrollTop}
                   isFixed={selectIsFixed}
                   autoSortDist={[]}

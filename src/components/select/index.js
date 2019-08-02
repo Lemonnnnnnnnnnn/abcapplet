@@ -69,15 +69,14 @@ class Select extends BaseComponent {
   }
 
   // 创建子组件关联，用于重置数据
+
   refSelectCbd = (node) => this.selectCbd = node
   refSelectPrice = (node) => this.selectPrice = node
-  refSelectSpecial = (node) => this.selectSpecial = node
   refSelectHouseType = (node) => this.selectHouseType = node
 
   onPayloadReset() {
     this.selectCbd && this.selectCbd.onResetState()
     this.selectPrice && this.selectPrice.onResetState()
-    this.selectSpecial && this.selectSpecial.onResetState()
     this.selectHouseType && this.selectHouseType.onResetState()
     this.onPayloadChange({ payload: {} })
   }
@@ -104,12 +103,28 @@ class Select extends BaseComponent {
 
 
 
-  onPayloadChangeAndRefresh({ payload = {} }) {
+ async onPayloadChangeAndRefresh({ payload = {} }) {
     // 因为是异步，不要直接用 onPayloadChange ！！！
+
     payload = { ...this.state.payload, ...payload }
 
     this.setState({ payload, headerIndex: '' })
-    this.props.onApartmentPayloadChange({ payload })
+    await this.props.onApartmentPayloadChange({ payload })
+   //此处暂时没有想到更好的解决方式，可优化
+    setTimeout(()=>{
+      Taro.createSelectorQuery()
+      .in(this.$scope)
+      .select('.selectTab')
+      .boundingClientRect(rect =>
+        Taro.pageScrollTo({
+          scrollTop:parseInt(rect.height) + 800,
+          duration:0
+      })
+      )
+      .exec()
+    })
+
+
   }
 
   async componentWillMount() {
@@ -117,8 +132,10 @@ class Select extends BaseComponent {
     this.setState({ latitude, longitude })
   }
 
+  //筛选器选择下拉
   onHeaderClick(headerIndex) {
     this.setState({ headerIndex })
+    this.props.onSearchTrue()
   }
 
   onMasksClick() {
@@ -168,57 +185,58 @@ class Select extends BaseComponent {
     }
 
 
-    return (show &&
-      <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
-        {/* 头部 */}
-        <SelectHeader
-          className='mb-2'
-          items={header}
-          index={headerIndex}
-          onClick={this.onHeaderClick}
-        />
-        {/* 对应内容(想住的区域) */}
-        <SelectCbd
-          ref={this.refSelectCbd}
-          items={cbdDist}
-          show={headerIndex === 'cbd'}
-          onChange={this.onPayloadChange}
-        />
+    return (show &&<View className='selectTab'>
+        <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
+          {/* 头部 */}
+          <SelectHeader
+            className='mb-2'
+            items={header}
+            index={headerIndex}
+            onClick={this.onHeaderClick}
+          />
+          {/* 对应内容(想住的区域) */}
+          <SelectCbd
+            ref={this.refSelectCbd}
+            items={cbdDist}
+            show={headerIndex === 'cbd'}
+            onChange={this.onPayloadChange}
+          />
 
-        {/* 对应内容(房子类型) */}
-        <SelectHouseType
-          ref={this.refSelectHouseType}
-          items={houseTypeDist}
-          show={headerIndex === 'house-type'}
-          onChange={this.onPaylocadHouseTypeChange}
-        />
+          {/* 对应内容(房子类型) */}
+          <SelectHouseType
+            ref={this.refSelectHouseType}
+            items={houseTypeDist}
+            show={headerIndex === 'house-type'}
+            onChange={this.onPaylocadHouseTypeChange}
+          />
 
-        {/* 对应内容（预期价格） */}
-        <SelectPrice
-          ref={this.refSelectPrice}
-          items={priceDist}
-          show={headerIndex === 'price'}
-          onChange={this.onPayloadChange}
-        />
+          {/* 对应内容（预期价格） */}
+          <SelectPrice
+            ref={this.refSelectPrice}
+            items={priceDist}
+            show={headerIndex === 'price'}
+            onChange={this.onPayloadChange}
+          />
 
-        {/* 按钮 */}
-        <SelectButton
-          show={headerIndex !== ''}
-          onResetClick={this.onPayloadReset}
-          onConfirmClick={this.onPayloadChangeAndRefresh}
-        />
+          {/* 按钮 */}
+          <SelectButton
+            show={headerIndex !== ''}
+            onResetClick={this.onPayloadReset}
+            onConfirmClick={this.onPayloadChangeAndRefresh}
+          />
 
-        {/* 特殊需求 */}
-        <SelectSpecial
-          show={headerIndex === ''}
-          ref={this.refSelectSpecial}
-          items={specialSelectDist}
-          onChange={this.onPayloadChangeAndRefresh}
-        />
+          {/* 特殊需求 */}
+          <SelectSpecial
+            show={headerIndex === ''}
+            ref={this.refSelectSpecial}
+            items={specialSelectDist}
+            onChange={this.onPayloadChangeAndRefresh}
+          />
 
-        {/* 遮罩层 */}
-        <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
-      </View >
+          {/* 遮罩层 */}
+          <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
+        </View >
+      </View>
     )
   }
 }
