@@ -418,8 +418,6 @@ class AppointmentPost extends Component {
       showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range , currentTime } = this.state
     // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
 
-    console.log(this.state.Payload)
-
 
     const {
       title, swipers, priceTitle, intro,

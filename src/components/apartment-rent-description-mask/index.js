@@ -40,7 +40,6 @@ class ApartmentItemMask extends BaseComponent {
 
     onBookRoom(){
         const {typeId} = this.props
-        console.log(PAGE_ORDER_CREATE)
         Taro.navigateTo({url:`${PAGE_ORDER_CREATE}?type_id=${typeId}`})
     }
 

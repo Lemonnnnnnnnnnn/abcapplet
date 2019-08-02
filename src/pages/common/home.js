@@ -177,7 +177,7 @@ class CommonHome extends Component {
   componentDidShow() {
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res)=>{
-      if(res.data.data.user.is_guide===0){ 
+      if(res.data.data.user.is_guide===0){
         this.setState({ showCard: true })
      }})
 
@@ -560,7 +560,7 @@ class CommonHome extends Component {
 
   onCheckPayload() {
     const { payload } = this.state
-    console.log(payload)
+
     const { budget,cbd,living_time,people,type_floor,type_room } = payload
     if (people === ''
       || living_time === ''
