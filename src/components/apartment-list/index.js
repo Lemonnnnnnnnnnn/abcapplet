@@ -69,11 +69,11 @@ class ApartmentList extends BaseList {
       </View>
 
       {/* 记载效果 */}
-      <Placeholder
+      {/* <Placeholder
         className='mt-2'
         show={loading && !mini}
         quantity={5}
-      />
+      /> */}
 
       {/* 无数据 */}
       {items.length === 0
