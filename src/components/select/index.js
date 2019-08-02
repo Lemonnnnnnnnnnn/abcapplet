@@ -66,6 +66,7 @@ class Select extends BaseComponent {
     latitude: 0,
     longitude: 0,
     headerIndex: '',
+
   }
 
   // 创建子组件关联，用于重置数据
@@ -105,24 +106,21 @@ class Select extends BaseComponent {
 
  async onPayloadChangeAndRefresh({ payload = {} }) {
     // 因为是异步，不要直接用 onPayloadChange ！！！
-
     payload = { ...this.state.payload, ...payload }
-
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
-   //此处暂时没有想到更好的解决方式，可优化
+
     setTimeout(()=>{
       Taro.createSelectorQuery()
       .in(this.$scope)
       .select('.selectTab')
       .boundingClientRect(rect =>
         Taro.pageScrollTo({
-          scrollTop:parseInt(rect.height) + 800,
+          scrollTop:parseInt(rect.right) *2.27,
           duration:0
       })
-      )
-      .exec()
-    })
+      ).exec()
+    },500)
 
 
   }
