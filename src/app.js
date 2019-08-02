@@ -74,7 +74,7 @@ class App extends Component {
         },
         {
           pagePath: "pages/appointment/services",
-          text: "找房",
+          text: "找房·行程",
           iconPath: "assets/icons/services.png",
           selectedIconPath: "assets/icons/services-active.png"
         },

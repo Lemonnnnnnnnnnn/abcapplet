@@ -27,7 +27,7 @@ const city = userActions.dispatchUser().payload.citycode
 })
 class ApartmentShow extends Component {
   config = {
-    navigationBarTitleText: '',
+    navigationBarTitleText: '公寓详情',
     navigationStyle: 'custom',
   }
 
@@ -81,7 +81,6 @@ class ApartmentShow extends Component {
 
     const publicMatch_list = publicMatch.slice(0, 5)
 
-    Taro.setNavigationBarTitle({ title: data.title })
 
     const buttons = !data.is_sign
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]
@@ -286,7 +285,7 @@ class ApartmentShow extends Component {
             </View>
           </View>
           {/* title */}
-          <View style={titleStyle} className='text-normal'>{apartment.title}</View>
+          <View style={titleStyle} className='text-normal'>公寓详情</View>
         </View>
 
 

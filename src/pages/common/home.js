@@ -176,10 +176,11 @@ class CommonHome extends Component {
 
   componentDidShow() {
     //判断是否弹出需求卡
-    this.props.dispatchGetUserMsg().then((res)=>{
-      if(res.data.data.user.is_guide===0){
+    this.props.dispatchGetUserMsg().then((res) => {
+      if (res.data.data.user.is_guide === 0) {
         this.setState({ showCard: true })
-     }})
+      }
+    })
 
   }
 
@@ -419,7 +420,7 @@ class CommonHome extends Component {
     for (var nowTimeClick = 0; nowTimeClick < timeTagListLength; nowTimeClick++) {
       if (timeTagList[nowTimeClick].name == data.name) {
         timeTagList[nowTimeClick].active = true
-        this.setState({  payload: { ...payload, living_time: data.id } })
+        this.setState({ payload: { ...payload, living_time: data.id } })
       } else {
         timeTagList[nowTimeClick].active = false
       }
@@ -436,7 +437,7 @@ class CommonHome extends Component {
     for (var nowPeopleClick = 0; nowPeopleClick < peopleTagListLength; nowPeopleClick++) {
       if (peopleTagList[nowPeopleClick].name == data.name) {
         peopleTagList[nowPeopleClick].active = true
-        this.setState({  payload: { ...payload, people: data.id } })
+        this.setState({ payload: { ...payload, people: data.id } })
       } else {
         peopleTagList[nowPeopleClick].active = false
       }
@@ -501,9 +502,9 @@ class CommonHome extends Component {
       budgetDetail: budgetDetailStore,
       payload: { ...payload, budget: budget }
     })
-    if(budgetDetailStore===''){
+    if (budgetDetailStore === '') {
       this.setState({
-        budgetDetail:'无'
+        budgetDetail: '无'
       })
     }
   }
@@ -549,25 +550,25 @@ class CommonHome extends Component {
   onResetClickP() {
     const { payload } = this.state
     this.setState({
-      budget: '', currentPrice: -1, budgetDetail: '无', budgetDetailStore : "" , payload: { ...payload, budget: "" }
+      budget: '', currentPrice: -1, budgetDetail: '无', budgetDetailStore: "", payload: { ...payload, budget: "" }
     })
   }
   //重置可选区域
   onResetClickC() {
     const { payload } = this.state
-    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], cdbDetailList: [], placeSelected: [],  payload: { ...payload, cbd: "" } })
+    this.setState({ currentCbd: -1, currentCbdTwo: -1, cdbDetailDetail: '无', cbdListItem: [], cdbDetailList: [], placeSelected: [], payload: { ...payload, cbd: "" } })
   }
 
   onCheckPayload() {
     const { payload } = this.state
 
-    const { budget,cbd,living_time,people,type_floor,type_room } = payload
+    const { budget, cbd, living_time, people, type_floor, type_room } = payload
     if (people === ''
       || living_time === ''
       || budget === ''
       || cbd === ''
-      || type_floor===''
-      || type_room==='') {
+      || type_floor === ''
+      || type_room === '') {
       Taro.showToast({
         title: '请检查数据是否正确',
         icon: 'none',
@@ -594,6 +595,15 @@ class CommonHome extends Component {
     this.props.dispatchRequirementCheck()
     this.setState({ isOpenedFinish: false })
   }
+
+  // 分享
+
+  onShareAppMessage() {
+    return {
+      title: "我在公寓ABC上发现了一个好\n房源",
+    }
+  }
+
   render() {
 
     const rootClassName = ['select']

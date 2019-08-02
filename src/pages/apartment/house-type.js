@@ -71,6 +71,8 @@ class HouseTypeShow extends Component {
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
+    console.log(data)
+
     await Taro.getSystemInfo().then(res => {
       this.setState({ navHeight: 80, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
@@ -86,8 +88,6 @@ class HouseTypeShow extends Component {
     await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
 
 
-    // Taro.setNavigationBarTitle({ title: `${data.title}·${data.apartment_title}` })
-
     const buttons = !data.is_sign
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]
       : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
@@ -100,9 +100,9 @@ class HouseTypeShow extends Component {
       i.type === 1 && publicMatch.push(i)
     })
 
-    const roomMatch_list = roomMatch.slice(0, 5)
-    const publicMatch_list = publicMatch.slice(0, 5)
-    const roomList = (data.room_list).slice(0, 5)
+    let roomMatch_list = roomMatch.slice(0, 5)
+    let publicMatch_list = publicMatch.slice(0, 5)
+    let roomList = (data.room_list).slice(0, 5)
 
     data && this.setState({
       roomMatch_list: roomMatch_list,
@@ -420,7 +420,7 @@ class HouseTypeShow extends Component {
             </View>
           </View>
           {/* title */}
-          <View style={titleStyle} className='text-normal'>{title}</View>
+          <View style={titleStyle} className='text-normal'>户型详情</View>
         </View>
 
 
