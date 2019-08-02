@@ -18,7 +18,7 @@ import * as appointmentActions from '@actions/appointment'
 
 class ServicesHome extends Component {
   config = {
-    navigationBarTitleText: '行程服务',
+    navigationBarTitleText: '找房·行程',
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
