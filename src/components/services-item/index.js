@@ -182,7 +182,7 @@ class ServiceItem extends BaseComponent {
     const rightStyle = {
       position: "absolute",
       top: '50%',
-      left : "39%",
+      left: "39%",
       transform: "translate( 0 , -50%)",
     }
 
@@ -198,17 +198,17 @@ class ServiceItem extends BaseComponent {
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
             {cover
               ?
-              <View style={{height : "240px"}}>
+              <View style={{ height: "240px" }}>
                 <View style={imageStyleMask}></View>
 
-                <Image src={src} mode='scaleToFill' style={imageStyle}/>
+                <Image src={src} mode='scaleToFill' style={imageStyle} />
 
               </View>
               : <ImagePlaceholder height={height} />
             }
           </View>
           <View className='at-row at-row__justify--around' >
-            <View className='at-row at-row-6 mb-2 ml-2' style={{marginTop : "55px"}}>
+            <View className='at-row at-row-6 mb-2 ml-2' style={{ marginTop: "55px" }}>
               {/* 下面四个按钮 */}
               {APPOINTMENT_FOUFUNCTION_DIST.map(i =>
                 <View key={i.id} className='at-col' onClick={this.onFourClick.bind(this, i.name)}>
@@ -221,13 +221,13 @@ class ServiceItem extends BaseComponent {
                 </View>
               )}
             </View>
-            <View className='mb-3 mr-2 at-col at-col-4 p-2  service-button at-col__align--center' style={{marginTop : "55px"}} onClick={this.onNavigationAgency}>
+            <View className='mb-3 mr-2 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
               <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
               <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
             </View>
           </View>
           {/* 头部 公寓类型以及查看详情 */}
-          <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "999" }} >
+          <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >
             <View className='mt-1' style='color:#FFFFFF ;font-size:17px'>
               <View >{date}</View>
               <View className='mt-1'>
@@ -262,7 +262,7 @@ class ServiceItem extends BaseComponent {
                     <Image src='https://images.gongyuabc.com//image/appointmentOver.png' style={ImageCenteredStyle}></Image>
                   </View>
                   :
-                  <View className='at-col at-col-3 'style={CenterStyle}>
+                  <View className='at-col at-col-3 ' style={CenterStyle}>
                     <View className='at-row at-row__justify--center text-bold' style='font-size:22px;'>
                       {order_time}
                     </View>
@@ -273,7 +273,7 @@ class ServiceItem extends BaseComponent {
               }
 
               {/* 中间竖线 */}
-              <View className='at-col at-col-0' style={{position : "absolute" , left : '32%' , top : "50%" ,transform: "translate(0,-50%)"}}>
+              <View className='at-col at-col-0' style={{ position: "absolute", left: '32%', top: "50%", transform: "translate(0,-50%)" }}>
                 <View className='service-line'></View>
               </View>
 

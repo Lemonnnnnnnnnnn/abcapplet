@@ -71,8 +71,6 @@ class HouseTypeShow extends Component {
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
-    console.log(data)
-
     await Taro.getSystemInfo().then(res => {
       this.setState({ navHeight: 80, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
@@ -101,7 +99,15 @@ class HouseTypeShow extends Component {
     })
 
     let roomMatch_list = roomMatch.slice(0, 5)
+    const loadMore = {
+      icon: 'https://images.gongyuabc.com//image/pointThree.png',
+      title: '更多',
+    }
     let publicMatch_list = publicMatch.slice(0, 5)
+
+    roomMatch_list.length >= 5 && roomMatch_list.push(loadMore)
+    publicMatch_list.length >= 5 && publicMatch_list.push(loadMore)
+
     let roomList = (data.room_list).slice(0, 5)
 
     data && this.setState({
@@ -344,7 +350,9 @@ class HouseTypeShow extends Component {
     const PublicConfiguration = {
       backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "12px",
-      padding: " 2px 6px"
+      width: "40px",
+      height: "40px"
+      // padding: " 2px 6px"
     }
 
     const deposit = {
@@ -546,22 +554,25 @@ class HouseTypeShow extends Component {
 
 
             {/* 公共配置 */}
-            <View className='at-row at-row--wrap mt-4'>
+            <View className='at-row at-row__justify--around mt-4'>
 
-              {roomMatch_list && roomMatch_list.map(i =>
-                <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto mr-2'>
-                  <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
-                  <View className='text-small'>{i.title}</View>
+              {roomMatch_list && roomMatch_list.map((i, key) => key !== 5 ?
+                <View key={i.title} className='at-col' style={{ position: "relative" }}>
+                  <View style={PublicConfiguration}></View>
+                  <View style={{ position: "absolute", top: "5px", left: "5px" }}>
+                    <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px'}} />
+                    <View className='text-small text-center' >{i.title}</View>
+                  </View>
+                </View>
+                :
+                <View onClick={this.onOpenAllMatching} key={i.title} className='at-col ' style={{ position: "relative" }}>
+                  <View style={PublicConfiguration}></View>
+                  <View style={{ position: "absolute", top: "5px", left: "5px" }}>
+                    <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                    <View className='text-small text-center'>{i.title}</View>
+                  </View>
                 </View>
               )}
-
-              {
-                roomMatch && roomMatch.length > 5 && <View style={PublicConfiguration} className='text-center'>
-                  <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '30px' }}>...</View>
-                  <View className='text-small'>更多</View>
-                </View>
-              }
-
 
             </View>
 
@@ -661,20 +672,25 @@ class HouseTypeShow extends Component {
               </View>
               <View className='text-secondary text-normal' style={textDeal}>{desc}</View>
               <View className='at-row at-row--wrap mt-3 mb-3'>
-                {publicMatch_list && publicMatch_list.map(i =>
-                  <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
-                    <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
-                    <View className='text-small'>{i.title}</View>
+
+                {publicMatch_list && publicMatch_list.map((i, key) => key !== 5 ?
+                  <View key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
+                    <View style={PublicConfiguration}></View>
+                    <View style={{ position: "absolute", top: "5px", left: "5px" }}>
+                      <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px', }} />
+                      <View className='text-small text-center' >{i.title}</View>
+                    </View>
+                  </View>
+                  :
+                  <View onClick={this.onOpenAllMatching} key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
+                    <View style={PublicConfiguration}></View>
+                    <View style={{ position: "absolute", top: "5px", left: "5px" }}>
+                      <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                      <View className='text-small text-center'>{i.title}</View>
+                    </View>
                   </View>
                 )}
               </View>
-
-              {
-                publicMatch && publicMatch.length > 5 && <View style={PublicConfiguration} className='text-center'>
-                  <View onClick={this.onOpenAllMatching} style={{ height: '30px', width: '30px' }}>...</View>
-                  <View className='text-small'>更多</View>
-                </View>
-              }
 
             </View>
 
