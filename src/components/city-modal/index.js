@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import cityModelBackground from '@assets/images/home/city-modal.png'
+// import cityModelBackground from '@assets/images/home/city-modal.png'
 import { AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
 import { COLOR_YELLOW } from '@constants/styles'
 
@@ -32,7 +32,7 @@ class CityModal extends Component {
 
         {/* 模态框头部 */}
         <AtModalHeader>
-          <Image src={cityModelBackground} style={style} ></Image>
+          <Image src='https://images.gongyuabc.com//image/city-modal.png' style={style} ></Image>
         </AtModalHeader>
 
         {/* 模态框内容 */}
