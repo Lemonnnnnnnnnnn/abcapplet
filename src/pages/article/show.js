@@ -145,7 +145,7 @@ class ArticleShow extends Component {
 
 
         {article &&
-          <View className='m-3' style={{ paddingBottom: '70px' ,paddingTop : navHeight + "px"}}>
+          <View className='m-3' style={{ paddingBottom: '10px' ,paddingTop : navHeight + "px"}}>
             <View>
               <View className='text-huge text-bold'>{article.title}</View>
               <View className='text-muted text-small mt-2'>{day.unix(article.create_time).format('YYYY-MM-DD')}</View>
