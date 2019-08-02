@@ -28,15 +28,14 @@ class ApartmentTypeItem extends BaseComponent {
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
 
-    return <View className='' onClick={this.onNavigation}>
-      <View className=''>
+    return <View className='apartment-type-item' onClick={this.onNavigation}>
+      <View >
         {cover && <Image
           src={`${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
           style={{ width: '100%', height: `${height}px`}}
         />}
-        <View className=''>
+        <View >
           <View
-            className=''
             style={{height: '100%' }}
           >
             <View className='ml-1'>

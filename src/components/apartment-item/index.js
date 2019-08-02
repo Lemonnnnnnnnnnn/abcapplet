@@ -20,6 +20,8 @@ import {
   ACTIVITY_TYPE_DIST,
 } from '@constants/apartment'
 
+import { HEART_YELLOW, HEART_BLACK, SIGN } from '@constants/picture'
+
 import {
   PAGE_APARTMENT_SHOW,
 } from '@constants/page'
@@ -93,7 +95,7 @@ class ApartmentItem extends BaseComponent {
       cover, rules, title,
       price_title: priceTitle,
       apartment_title: apartmentTitle,
-      num , is_sign , sub_title,one_word
+      num, is_sign, sub_title, one_word
     } = apartment
 
 
@@ -127,26 +129,19 @@ class ApartmentItem extends BaseComponent {
     // const borderRadius = mini ? "6px" : "12px"
 
     const apartmentHeaderType = {
-      position: "absolute",
-      left: "6%",
-      bottom: "0",
-      transform: "translateY(50%)",
-      color: "#fff",
       padding: padding,
       fontSize: fontSize,
-      borderRadius: "6px",
-      background: "#ffc919",
     }
 
     const boxShadowStyle = {
       borderRadius: "6px",
       boxShadow: "0 1px 5px rgb(200,200,200)",
       overflow: 'hidden',
-      marginBottom : "20px"
+      marginBottom: "20px"
     }
 
     const cardMarginStyle = {
-      marginBottom : "20px"
+      marginBottom: "20px"
     }
 
     // 格式化价格
@@ -162,13 +157,13 @@ class ApartmentItem extends BaseComponent {
       || is_collect
 
     return (
-      <View  style={home === null ? boxShadowStyle : cardMarginStyle} onClick={this.onNavigation}>
+      <View className={home === null ? 'apartment-box-shadow-style' : 'apartment-card-margin-style'} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
           {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
           {cover
-            ? <Image src={src} mode='scaleToFill' style={imageStyle} />
+            ? <Image src={src} mode='scaleToFill' className='apartment-image' />
             : <ImagePlaceholder height={height} />
           }
 
@@ -178,26 +173,25 @@ class ApartmentItem extends BaseComponent {
           </View>
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
-          {apartmentTitle && <View style={apartmentHeaderType} className=' text-large '>{apartmentTitle}</View>}
+          {apartmentTitle && <View style={apartmentHeaderType} className=' text-large apartment-header-type'>{apartmentTitle}</View>}
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
             ?
             <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
-              <View style={heartWrap}>
+              <View className='apartment-heart-wrap' >
                 {/* <AtIcon value='heart-2' size='40'  color={COLOR_YELLOW} /> */}
-                <Image src='https://images.gongyuabc.com//image/heart-yellow.png' style={{ width: "40px", height: "35px" }}></Image>
+                <Image className='apartment-heart' src={HEART_YELLOW} ></Image>
               </View>
-              <View style={heartNum}>{num}</View>
+              <View className='apartment-heart-num' >{num}</View>
 
             </View>
             :
             <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
-              <View style={heartWrap}>
-                {/* <AtIcon value='heart-2' size='40' /> */}
-                <Image src='https://images.gongyuabc.com//image/heart-black.png' style={{ width: "40px", height: "35px" }}></Image>
+              <View className='apartment-heart-wrap' >
+                <Image className='apartment-heart' src={HEART_BLACK} ></Image>
               </View>
-              <View style={heartNum}>{num}</View>
+              <View className='apartment-heart-num' >{num}</View>
 
             </View>)
           }
@@ -218,7 +212,7 @@ class ApartmentItem extends BaseComponent {
                 <View className='text-large mt-2 at-col-1 at-col--auto' style={{ color: "rgba(53, 53, 53, 1)" }}>{sub_title}</View>
                 {
                   is_sign && <View className='mt-2'>
-                    <Image src='https://images.gongyuabc.com//image/signing.png' className='apartment-container-sign'></Image>
+                    <Image src={SIGN} className='apartment-container-sign'></Image>
                   </View>
                 }
               </View>

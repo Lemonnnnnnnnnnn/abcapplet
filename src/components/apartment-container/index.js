@@ -10,6 +10,7 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
+import {HEART_YELLOW,HEART_YELLOW_EMPTY} from '@constants/picture'
 
 class ApartmentContainer extends BaseComponent {
 
@@ -18,7 +19,7 @@ class ApartmentContainer extends BaseComponent {
     width: 375 * 2,
     height: 250 * 2,
     isCollect: false,
-    appointment_show_num : 0,
+    appointment_show_num: 0,
   }
 
   state = {
@@ -39,7 +40,6 @@ class ApartmentContainer extends BaseComponent {
       urls: picList,
       current: currentPic
     })
-
   }
 
 
@@ -64,51 +64,20 @@ class ApartmentContainer extends BaseComponent {
     }
 
     const picIndexStyle = {
-      position: "absolute",
       left: Taro.pxTransform(40),
       top: Taro.pxTransform(height - 75),
-      height: "25px",
-      width: "70px",
     }
 
-    const opacityBgStyle = {
-      position: "absolute",
-      borderRadius: "12px",
-      height: "100%",
-      width: "100%",
-      background: "#000",
-      opacity: "0.5",
-    }
 
     const fontStyle = {
-      position: "absolute",
       borderRadius: "12px",
       left: Taro.pxTransform(40),
       top: Taro.pxTransform(height - 75),
-      height: "25px",
-      width: "70px",
     }
 
-    const fontYellowStyle = {
-      color: COLOR_YELLOW,
-    }
-
-    const fontWhiteStyle = {
-      color: "#fff",
-    }
-
-    const heartNum = {
-      position: 'absolute',
-      textAlign: 'center',
-      fontSize: "12px",
-      left: '50%',
-      top: '45%',
-      transform: 'translate(-50%,-50%)',
-      color: '#FFC919'
-    }
 
     return (
-      <View style={{ position: "relative" }}>
+      <View className='position-relative' >
         {
           swipers.length > 1 ?
             <Swiper
@@ -141,12 +110,12 @@ class ApartmentContainer extends BaseComponent {
 
 
         {/* index */}
-        <View style={picIndexStyle}>
-          <View style={opacityBgStyle}></View>
+        <View className='apartment-container-picIndexStyle' style={picIndexStyle}>
+          <View  className='apartment-container-opacityBgStyle'></View>
         </View>
-        <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>
-          <Text style={fontYellowStyle}>{current + 1}</Text>
-          <Text style={fontWhiteStyle}>/{swipers.length}</Text>
+        <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle' style={fontStyle}>
+          <Text className='text-yellow'>{current + 1}</Text>
+          <Text className='text-white'>/{swipers.length}</Text>
         </View>
 
         <View className='page-white apartment-container p-3' >
@@ -154,13 +123,13 @@ class ApartmentContainer extends BaseComponent {
             {isCollect
               ?
               <View className='mt-1' onClick={this.props.onDeleteFavorite}>
-                <Image src='https://images.gongyuabc.com//image/heart-yellow.png' style={{ width: "30px", height: "26px" }}></Image>
-                <View style={heartNum}>{appointment_show_num}</View>
+                <Image src={HEART_YELLOW} className='apartment-container-heart'></Image>
+                <View className='apartment-container-heartNum' >{appointment_show_num}</View>
               </View>
               :
               <View className='mt-1' onClick={this.props.onCreateFavorite}>
-                <Image src='https://images.gongyuabc.com//image/heart-yellow-empty.png' style={{ width: "30px", height: "26px" }}></Image>
-                <View style={heartNum}>{appointment_show_num}</View>
+                <Image src={HEART_YELLOW_EMPTY} className='apartment-container-heart' ></Image>
+                <View className='apartment-container-heartNum' >{appointment_show_num}</View>
               </View>
             }
           </View>

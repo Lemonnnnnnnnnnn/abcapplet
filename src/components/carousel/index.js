@@ -68,11 +68,6 @@ class Carousel extends Component {
       backgroundColor: "#fff",
       width: "40px",
       height: "5px",
-      // min-width: 48px * $hd;
-      // background: $color-white;
-      // text-align: center;
-      // justify-content: center;
-      // align-items: center;
       opacity: "0.8",
       textAlign: "center",
       justifyContent: "center",
@@ -136,9 +131,11 @@ class Carousel extends Component {
                 />
                 <Text className='title text-large text-white'>{item.title}</Text>
                 {item.sum &&
-                  <View style={countStyle} className='at-row'>
-                    <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" }}></Image>
-                    <View className='text-mini text-yellow ml-1' style={{marginTop:"1Px"}}>{item.sum}</View>
+                  <View style={countStyle} className='at-row at-row__align--center'>
+                    <View className='at-col at-col-3'>
+                      <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" }}></Image>
+                    </View>
+                    <View className='at-col at-col-8 text-mini text-yellow ml-1' style={{ marginTop: "1Px" ,overflow:'hidden'}}>{item.sum}</View>
                   </View>
                 }
               </View>
