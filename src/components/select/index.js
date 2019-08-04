@@ -39,8 +39,8 @@ import {
  * 使用 AtTabs 来完成
  * ----------------------------
  */
-let type_floor = 0
-let type_room = 0
+let type_floorStorage = 0
+let type_roomStorage = 0
 
 class Select extends BaseComponent {
   static options = {
@@ -62,11 +62,13 @@ class Select extends BaseComponent {
   }
 
   state = {
-    payload: {},
+    payload: {
+      cbd: "", city: 350200, current_page: 1, distance: 0, is_select: 11111, latitude: 0, longitude: 0,
+      page_size: 10, price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
+    },
     latitude: 0,
     longitude: 0,
     headerIndex: '',
-
   }
 
   // 创建子组件关联，用于重置数据
@@ -76,58 +78,69 @@ class Select extends BaseComponent {
   refSelectHouseType = (node) => this.selectHouseType = node
 
   onPayloadReset() {
+    const { cityCode } = this.props
     this.selectCbd && this.selectCbd.onResetState()
     this.selectPrice && this.selectPrice.onResetState()
     this.selectHouseType && this.selectHouseType.onResetState()
     this.onPayloadChange({ payload: {} })
+    this.setState({
+      payload: {
+        cbd: "", city: cityCode, current_page: 1, distance: 0, is_select: 11111, latitude: 0, longitude: 0,
+        page_size: 10, price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
+      }
+    })
   }
 
-  onPayloadChange({ payload }) {
-    const { latitude, longitude } = this.state
-    this.setState({ payload: { ...payload, latitude, longitude } })
+  onPayloadChange({ value }) {
+    const { latitude, longitude, payload } = this.state
+    this.setState({ payload: { ...payload, ...value, latitude, longitude } })
   }
 
 
-  onPaylocadHouseTypeChange({ payload }) {
+  onPaylocadHouseTypeChange({ value }) {
+    const { payload } = this.state
 
-    for (var i in payload) {
+    for (var i in value) {
       if (i === "type_floor") {
-        type_floor = payload[i]
+        type_floorStorage = value[i]
       } else if (i === "type_room") {
-        type_room = payload[i]
+        type_roomStorage = value[i]
       } else {
         return false
       }
     }
-    this.setState({ payload: { type_floor: type_floor, type_room: type_room } })
+    this.setState({ payload: { ...payload, type_floor : type_floorStorage, type_room : type_roomStorage } })
   }
 
 
 
- async onPayloadChangeAndRefresh({ payload = {} }) {
+  async onPayloadChangeAndRefresh({ payload = {} }) {
     // 因为是异步，不要直接用 onPayloadChange ！！！
     payload = { ...this.state.payload, ...payload }
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
 
-    setTimeout(()=>{
+
+    setTimeout(() => {
       Taro.createSelectorQuery()
-      .in(this.$scope)
-      .select('.selectTab')
-      .boundingClientRect(rect =>
-        Taro.pageScrollTo({
-          scrollTop:parseInt(rect.right) *2.27,
-          duration:0
-      })
-      ).exec()
-    },500)
+        .in(this.$scope)
+        .select('.selectTab')
+        .boundingClientRect(rect =>
+          Taro.pageScrollTo({
+            scrollTop: parseInt(rect.right) * 2.27,
+            duration: 0
+          })
+        ).exec()
+    }, 500)
 
 
   }
 
   async componentWillMount() {
     const { latitude, longitude } = await Taro.getLocation()
-    this.setState({ latitude, longitude })
+    const { cityCode } = this.props
+    const { payload } = this.state
+    this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
   }
 
   //筛选器选择下拉
@@ -142,7 +155,8 @@ class Select extends BaseComponent {
   }
 
   render() {
-    const { headerIndex } = this.state
+    const { headerIndex, payload } = this.state
+    const { distance, cbd, price_high, price_low, type_floor, type_room } = payload
     const {
       // 选项控制
       show,
@@ -171,70 +185,90 @@ class Select extends BaseComponent {
     // Header 相关
     let header = []
 
-    showCbd && cbdDist.length && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
-
-    if (houseTypeDist.length !== 0) {
-      header = [
-        ...header,
-        { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' },
-        { message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' },
-        // TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
-      ]
+    if (showCbd && cbdDist.length) {
+      distance || cbd ?
+        header.push({ message: distance, show: cbdDist.length > 0, index: 'cbd' })
+        :
+        header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
     }
 
+    // showCbd && cbdDist.length && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
 
-    return (show &&<View className='selectTab'>
-        <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
-          {/* 头部 */}
-          <SelectHeader
-            className='mb-2'
-            items={header}
-            index={headerIndex}
-            onClick={this.onHeaderClick}
-          />
-          {/* 对应内容(想住的区域) */}
-          <SelectCbd
-            ref={this.refSelectCbd}
-            items={cbdDist}
-            show={headerIndex === 'cbd'}
-            onChange={this.onPayloadChange}
-          />
+    if (houseTypeDist.length !== 0) {
+      type_floor || type_room
+        ?
+        header.push({ message: type_floor + "~" + type_room, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' })
+        :
+        header.push({ message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' })
+    }
 
-          {/* 对应内容(房子类型) */}
-          <SelectHouseType
-            ref={this.refSelectHouseType}
-            items={houseTypeDist}
-            show={headerIndex === 'house-type'}
-            onChange={this.onPaylocadHouseTypeChange}
-          />
+    if (houseTypeDist.length !==0) {
+      price_high || price_low
+        ?
+        header.push({ message: price_low + "~" + price_high, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' })
+        :
+        header.push({ message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' })
+    }
+    // header = [
+    //   ...header,
+    //   { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' },
+    //   { message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' },
+    //   TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
+    // ]
 
-          {/* 对应内容（预期价格） */}
-          <SelectPrice
-            ref={this.refSelectPrice}
-            items={priceDist}
-            show={headerIndex === 'price'}
-            onChange={this.onPayloadChange}
-          />
 
-          {/* 按钮 */}
-          <SelectButton
-            show={headerIndex !== ''}
-            onResetClick={this.onPayloadReset}
-            onConfirmClick={this.onPayloadChangeAndRefresh}
-          />
+    return (show && <View className='selectTab'>
+      <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
+        {/* 头部 */}
+        <SelectHeader
+          className='mb-2'
+          items={header}
+          index={headerIndex}
+          onClick={this.onHeaderClick}
+        />
+        {/* 对应内容(想住的区域) */}
+        <SelectCbd
+          ref={this.refSelectCbd}
+          items={cbdDist}
+          show={headerIndex === 'cbd'}
+          onChange={this.onPayloadChange}
+        />
 
-          {/* 特殊需求 */}
-          <SelectSpecial
-            show={headerIndex === ''}
-            ref={this.refSelectSpecial}
-            items={specialSelectDist}
-            onChange={this.onPayloadChangeAndRefresh}
-          />
+        {/* 对应内容(房子类型) */}
+        <SelectHouseType
+          ref={this.refSelectHouseType}
+          items={houseTypeDist}
+          show={headerIndex === 'house-type'}
+          onChange={this.onPaylocadHouseTypeChange}
+        />
 
-          {/* 遮罩层 */}
-          <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
-        </View >
-      </View>
+        {/* 对应内容（预期价格） */}
+        <SelectPrice
+          ref={this.refSelectPrice}
+          items={priceDist}
+          show={headerIndex === 'price'}
+          onChange={this.onPayloadChange}
+        />
+
+        {/* 按钮 */}
+        <SelectButton
+          show={headerIndex !== ''}
+          onResetClick={this.onPayloadReset}
+          onConfirmClick={this.onPayloadChangeAndRefresh}
+        />
+
+        {/* 特殊需求 */}
+        <SelectSpecial
+          show={headerIndex === ''}
+          ref={this.refSelectSpecial}
+          items={specialSelectDist}
+          onChange={this.onPayloadChangeAndRefresh}
+        />
+
+        {/* 遮罩层 */}
+        <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
+      </View >
+    </View>
     )
   }
 }

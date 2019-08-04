@@ -68,7 +68,7 @@ class SelectCbd extends BaseComponent {
     placeSelected = placeSelected || this.state.placeSelected
 
     this.props.onChange({
-      payload:
+      value:
       {
         distance: areaSelected,
         cbd: [...placeSelected,].toString()

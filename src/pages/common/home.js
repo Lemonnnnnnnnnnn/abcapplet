@@ -103,12 +103,13 @@ class CommonHome extends Component {
 
 
     scrollNow: false,
-    showSearch: true,
+    showSearch: false,
     showSelect: true,
 
     // 城市相关
     selector: ['厦门市'],
     selectorChecked: '厦门市',
+    cityCode: 0,
 
     timeTagList: [
       { id: 1, name: '马上', active: false },
@@ -151,6 +152,7 @@ class CommonHome extends Component {
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
     user && this.onSelectCity(user.citycode)
+    user && this.setState({ cityCode: user.citycode })
 
     // 拉取城市列表
     this.props.dispatchCityList().then((res) => {
@@ -262,12 +264,12 @@ class CommonHome extends Component {
     const selectorChecked = selector[value]
     const newCity = citys.filter(i => i.title === selectorChecked)[0]
 
-    this.setState({ selectorChecked ,})
+    this.setState({ selectorChecked, })
     this.onSelectCity(newCity.id)
   }
 
-  onSearchTrue(){
-    this.setState({ showSearch: true ,showSelect: true})
+  onSearchTrue() {
+    this.setState({ showSearch: true, showSelect: true })
   }
   /**
    * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
@@ -623,7 +625,8 @@ class CommonHome extends Component {
       searchScrollTop,
       selector,
       selectorChecked,
-      selectIsFixed
+      selectIsFixed,
+      cityCode
     } = this.state
 
     const {
@@ -634,17 +637,29 @@ class CommonHome extends Component {
 
     return (
       <View className='page-white' style={{ overflow: "hidden" }} >
+
+        {/* 设置两个search和两个select，一个位于页面内，一个位于页面外，到达指定
+        位置，将页面外的那个设置为fixed布局 */}
+        <View className='home-search pl-3 pr-3'>
+          {
+            showSearch && <Search
+              className='mb-2'
+              isFixed={searchIsFixed}
+              selector={selector}
+              selectorChecked={selectorChecked}
+              onChangeSelector={this.onChangeSelector}
+            />
+          }
+        </View>
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
             {
-              showSearch && <Search
+              <Search
                 className='mb-2'
-                isFixed={searchIsFixed}
                 selector={selector}
                 selectorChecked={selectorChecked}
                 onChangeSelector={this.onChangeSelector}
-
               />
             }
           </View>
@@ -725,11 +740,12 @@ class CommonHome extends Component {
           <View className='selectTab'>
             <Header className='my-2' title={LOCALE_APARTMENT} hasExtra={false} />
             <View className='home-select'>
-              {/* 选择框下拉框部分*/}
+              {/* 选择框下拉框部分 */}
               {
                 !(JSON.stringify(dists) === '{}') && showSelect && <Select
                   onSearchTrue={this.onSearchTrue}
                   top={searchScrollTop}
+                  cityCode={cityCode}
                   isFixed={selectIsFixed}
                   autoSortDist={[]}
                   cbdDist={dists.cbd_list}

@@ -75,7 +75,7 @@ class SelectHouseType extends Component {
       if (i.id === index) {
         i.type = !i.type
         const { id: type_floor } = floor[i.id]
-        this.props.onChange({ payload: { type_floor } })
+        this.props.onChange({ value: { type_floor } })
       } else {
         i.type = false
       }
@@ -95,7 +95,7 @@ class SelectHouseType extends Component {
       if (i.id === index) {
         i.type = !i.type
         const { id: type_room } = room[i.id]
-        this.props.onChange({ payload: { type_room } })
+        this.props.onChange({ value: { type_room } })
       } else {
         i.type = false
       }
@@ -103,8 +103,6 @@ class SelectHouseType extends Component {
     this.setState({
       room: [...newRoom]
     })
-
-
   }
 
   render() {
