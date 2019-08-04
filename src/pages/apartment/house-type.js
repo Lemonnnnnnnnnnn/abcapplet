@@ -597,7 +597,7 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 可租房间 */}
-            <View >
+           { roomList.length!==0&&<View >
               <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
               {
                 isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
@@ -623,7 +623,7 @@ class HouseTypeShow extends Component {
                 <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
               </View>
 
-            </View>
+            </View>}
 
 
             {/* 用户须知 */}
