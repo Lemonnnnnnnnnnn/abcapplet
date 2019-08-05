@@ -15,7 +15,7 @@ class ServiceList extends Component {
     const { hasMore, loading, page } = this.state
     const {  mini , lists ,time} = this.props
     return (
-    <View >
+    <View className>
 
       {/* 渲染 行程列表 */}
       <View className='at-row at-row--wrap'>

@@ -58,10 +58,20 @@ class ServiceItem extends BaseComponent {
   //case 1行程留言 2联系管家 3服务评价 4看房意向
   onFourClick(value) {
     switch (value) {
-      case 1:
-        Taro.navigateTo({
-          url: `${PAGE_APPOINTMENT_MESSAGE}?id=${this.props.id}&time=${this.props.time}&appointmentTitle=${this.props.service.apartment_title}&appointmentTime=${this.props.service.order_time}`
-        });
+      case 1: {
+          const { service } = this.props
+          const {  server_id } = service
+        if( server_id !==0){
+          Taro.navigateTo({
+            url: `${PAGE_APPOINTMENT_MESSAGE}?id=${this.props.id}&time=${this.props.time}&appointmentTitle=${this.props.service.apartment_title}&appointmentTime=${this.props.service.order_time}`
+          });
+        } else {
+          Taro.showToast({
+            title: '正在为您召唤专属管家...',
+            icon: 'none',
+            duration: 2000
+          })
+        }}
         break
       case 2:
         const { service } = this.props
@@ -154,9 +164,9 @@ class ServiceItem extends BaseComponent {
     const serviceMiddleStyle = {
       position: 'absolute',
       left: "50%",
-      top: '50%',
+      top: '43%',
       height: "69px",
-      transform: "translate( -50% , 40%)",
+      transform: "translate( -50% , 30%)",
       borderRadius: '12px',
       width: '90%',
       background: 'rgba(255,255,255,1)',
@@ -190,7 +200,7 @@ class ServiceItem extends BaseComponent {
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     return (
-      <View className='pl-2 pr-2 pb-3 mt-1' style='position:relative ;' >
+      <View className='pl-2 pr-2 pb-3 mt-1 m-2' style='position:relative ;' >
         <View className={classNames('apartment')} >
           {/* 头部 */}
           <View className='apartment-header' style={headerStyle}>
@@ -198,7 +208,7 @@ class ServiceItem extends BaseComponent {
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
             {cover
               ?
-              <View style={{ height: "240px" }}>
+              <View style={{ height: "200px" }}>
                 <View style={imageStyleMask}></View>
 
                 <Image src={src} mode='scaleToFill' style={imageStyle} />
@@ -221,7 +231,7 @@ class ServiceItem extends BaseComponent {
                 </View>
               )}
             </View>
-            <View className='mb-3 mr-2 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
+            <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
               <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
               <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
             </View>

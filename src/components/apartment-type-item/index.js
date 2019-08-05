@@ -38,15 +38,15 @@ class ApartmentTypeItem extends BaseComponent {
           <View
             style={{height: '100%' }}
           >
-            <View className='ml-1'>
+            <View className='ml-2'>
               <View className='text-normal text-bold'>{title}</View>
               <View className='text-secondary text-small'>{desc || '暂无描述'}</View>
             </View>
             <View>
-              <View className='text-yellow mb-1 text-large'>
+              <View className='text-yellow mb-1 text-large ml-2'>
               {isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}`}
               {
-                isNaNPrice ? <View></View> : <Text className='text-small'>元/月</Text>
+                isNaNPrice ? <View></View> : <Text className='text-small '>元/月</Text>
               }
 
               </View>

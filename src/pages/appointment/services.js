@@ -135,7 +135,7 @@ class ServicesHome extends Component {
             </View>
             :
             <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
-              <Image src='https://images.gongyuabc.com//image/noneTravel.png'></Image>
+              <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
             </View>
         }
 
