@@ -133,9 +133,10 @@ class OrderTimer extends BaseComponent {
             border: '5px solid #FFDA61'
           }}
         >
-          <View className='text-large text-white text-bold' >{message}</View>
+          <View className='text-large text-white text-bold' style={{ 'z-index': '1', position: 'absolute' }}>{message}</View>
+       {/* {   锁} */}
           <ABCIcon icon='lock_open' color={COLOR_LIGHT_YELLOW} size='80'
-            customStyle={{ 'z-index': '-1', position: 'absolute', top: 0, left: 0 }}
+            customStyle={{ 'z-index': '0', position: 'absolute', top: 0, left: 0 }}
           />
         </View>
       </View>
