@@ -95,16 +95,18 @@ class CommonHome extends Component {
 
     // 搜索相关
     searchScrollTop: null,
-    searchIsFixed: false,
+    searchIsFixed: true,
 
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
 
 
-    scrollNow: false,
+    scrollDown: false,
+    Displacement: 0,
     showSearch: false,
-    showSelect: true,
+    showSelect: false,
+    start_p: 0,
 
     // 城市相关
     selector: ['厦门市'],
@@ -179,7 +181,7 @@ class CommonHome extends Component {
   componentDidShow() {
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res) => {
-      if (res.data.data.user.is_guide === 0) {
+      if (res && res.data.data.user.is_guide === 0) {
         this.setState({ showCard: true })
       }
     })
@@ -200,7 +202,6 @@ class CommonHome extends Component {
 
     // 当城市 id 不存在的时候不读取数据
     if (citycode === 0 || !citycode) return;
-
 
     // 城市
     await this.props.dispatchUserCity(citycode) && overloadData.push(1)
@@ -284,39 +285,47 @@ class CommonHome extends Component {
       searchScrollTop,
       searchIsFixed,
       apartmentScrollTop,
-      scrollNow
+      scrollDown
     } = this.state
 
     // 搜索相关
 
     // 判断上滑还是下滑
-    this.setState({ scrollNow: scrollTop })
-    scrollTop > scrollNow && this.setState({ showSearch: false })
-    scrollTop < scrollNow && this.setState({ showSearch: true })
+    scrollDown && this.setState({ showSearch: false })
+    !scrollDown && this.setState({ showSearch: true })
     if (scrollTop === 0) { this.setState({ showSearch: true }) }
 
 
-    scrollTop > scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
-    scrollTop < scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
+    // 在下滑并且当前屏幕距离顶部的高度大于select元素距离顶部的高度时，不展示select元素
+    scrollDown && scrollTop > selectScrollTop  && apartments.total !== 0 && this.setState({ showSelect: false })
 
-    scrollTop > searchScrollTop
-      && !searchIsFixed
-      && this.setState({ searchIsFixed: true })
+    // 在上滑并且当前屏幕距离顶部的高度大于select元素距离顶部的高度时，展示select元素
 
-    scrollTop < searchScrollTop
-      && searchIsFixed
-      && this.setState({ searchIsFixed: false })
+    !scrollDown && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
+
+    // 当前屏幕距离顶部的高度小于select元素距离顶部的高度时，不展示select元素
+
+    scrollTop < selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
+
+
+    // scrollTop > 0
+    //   && !searchIsFixed
+    //   && this.setState({ searchIsFixed: true })
+
+    // scrollTop < 0
+    //   && searchIsFixed
+    //   && this.setState({ searchIsFixed: false })
 
 
     // 公寓相关
 
-    scrollTop > selectScrollTop
+    scrollTop > selectScrollTop + 87
       && apartments.total !== 0
       && !selectIsFixed
       && this.setState({ selectIsFixed: true })
 
 
-    scrollTop < selectScrollTop
+    scrollTop < selectScrollTop 
       && selectIsFixed
       && this.setState({ selectIsFixed: false })
 
@@ -612,6 +621,26 @@ class CommonHome extends Component {
     }
   }
 
+  onTouchmove(e) {
+    const { start_p } = this.state
+    let move_p = e.touches[0]
+
+    let start_y = start_p.clientY
+    let move_y = move_p.clientY
+
+    start_y > move_y
+      ? this.setState({ scrollDown: true, Displacement: Math.abs(start_y - move_y) })
+      : this.setState({ scrollDown: false, Displacement: Math.abs(start_y - move_y) })
+
+  }
+
+  onTouchStart(e) {
+    this.setState({
+      start_p: e.touches[0]
+    })
+  }
+
+
   render() {
 
     const rootClassName = ['select']
@@ -626,7 +655,9 @@ class CommonHome extends Component {
       selector,
       selectorChecked,
       selectIsFixed,
-      cityCode
+      cityCode,
+      Displacement,
+      scrollDown
     } = this.state
 
     const {
@@ -636,32 +667,30 @@ class CommonHome extends Component {
     } = this.props
 
     return (
-      <View className='page-white' style={{ overflow: "hidden" }} >
+      <View
+        className='page-white'
+        onTouchStart={this.onTouchStart}
+        onTouchMove={this.onTouchmove}
+        style={{ overflow: "hidden" }} >
 
-        {/* 设置两个search和两个select，一个位于页面内，一个位于页面外，到达指定
-        位置，将页面外的那个设置为fixed布局 */}
-        <View className='home-search pl-3 pr-3'>
-          {
-            showSearch && <Search
-              className='mb-2'
-              isFixed={searchIsFixed}
-              selector={selector}
-              selectorChecked={selectorChecked}
-              onChangeSelector={this.onChangeSelector}
-            />
-          }
-        </View>
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
             {
               <Search
                 className='mb-2'
+                isFixed={searchIsFixed}
+                showSearch={showSearch}
+                scrollDown={scrollDown}
+                Displacement={Displacement}
+
+
                 selector={selector}
                 selectorChecked={selectorChecked}
                 onChangeSelector={this.onChangeSelector}
               />
             }
+            <View style={searchIsFixed ? { height: Taro.pxTransform(92) } : {}}></View>
           </View>
           {/* 轮播 */}
           {banners.length > 0 &&
@@ -742,11 +771,15 @@ class CommonHome extends Component {
             <View className='home-select'>
               {/* 选择框下拉框部分 */}
               {
-                !(JSON.stringify(dists) === '{}') && showSelect && <Select
+                !(JSON.stringify(dists) === '{}') && <Select
                   onSearchTrue={this.onSearchTrue}
-                  top={searchScrollTop}
-                  cityCode={cityCode}
                   isFixed={selectIsFixed}
+                  showSelect={showSelect}
+                  top={searchScrollTop}
+                  Displacement={Displacement}
+                  scrollDown={scrollDown}
+
+                  cityCode={cityCode}
                   autoSortDist={[]}
                   cbdDist={dists.cbd_list}
                   priceDist={dists.price_list}
@@ -755,8 +788,9 @@ class CommonHome extends Component {
                   onApartmentPayloadChange={this.onApartmentPayloadChange}
                 />
               }
-
             </View>
+
+            <View style={selectIsFixed ? { height: "87px" } : {}}></View>
 
             <View className='home-apartment ml-3 mr-3'>
               <ApartmentList
@@ -869,7 +903,6 @@ class CommonHome extends Component {
             />
           </View>
         </AtCurtain>
-
       </View>
     )
   }

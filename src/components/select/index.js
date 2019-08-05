@@ -41,6 +41,8 @@ import {
  */
 let type_floorStorage = 0
 let type_roomStorage = 0
+let moveBottom = false
+let moveTop = true
 
 class Select extends BaseComponent {
   static options = {
@@ -109,7 +111,7 @@ class Select extends BaseComponent {
         return false
       }
     }
-    this.setState({ payload: { ...payload, type_floor : type_floorStorage, type_room : type_roomStorage } })
+    this.setState({ payload: { ...payload, type_floor: type_floorStorage, type_room: type_roomStorage } })
   }
 
 
@@ -154,6 +156,40 @@ class Select extends BaseComponent {
     this.setState({ headerIndex: '' })
   }
 
+  onJudgeDirect() {
+    const { scrollDown, Displacement } = this.props
+    if (scrollDown) {
+      return this.onSelectHide(Displacement)
+    } else {
+      return this.onSelectShow(Displacement)
+    }
+  }
+
+
+  onSelectHide(num) {
+    moveBottom = true
+    const testNum = num * 2
+    if (moveTop && num <= 266 / 2) {
+      return Taro.pxTransform(92 - testNum)
+    } else {
+      moveTop = false
+      return Taro.pxTransform(-266)
+    }
+  }
+
+  onSelectShow(num) {
+    moveTop = true
+    const testNum = num * 2
+    if (moveBottom && num <= 266 / 2) {
+      return Taro.pxTransform(testNum - 174)
+    } else {
+      moveBottom = false
+      return Taro.pxTransform(92)
+    }
+  }
+
+
+
   render() {
     const { headerIndex, payload } = this.state
     const { distance, cbd, price_high, price_low, type_floor, type_room } = payload
@@ -173,54 +209,128 @@ class Select extends BaseComponent {
       // autoSortDist,
       houseTypeDist,
       specialSelectDist,
+      showSelect,
+      Displacement
+      // selectIsFixed
     } = this.props
-
 
     // 吸附相关样式
     const rootClassName = ['select']
-    const selectStyle = { top: `${top - 1}px` }
-    const selectIsFixed = isFixed || headerIndex !== ''
-    const classObject = { 'select-fixed': selectIsFixed }
+    // const selectStyle = { top: `${top - 1}px` }
+    // const selectIsFixed = isFixed || headerIndex !== ''
+    // const classObject = { 'select-fixed': selectIsFixed }
+
+    // const fixedStyle = {
+    //   position: 'fixed',
+    // }
+
+    const SelectMoveStyle = {
+      top: this.onJudgeDirect()
+    }
+
+    // const turnTopStyle = {
+    //   top: this.onJudgeNumTop(Displacement)
+    // }
+
+    // const turnBottomStyle = {
+    //   top: this.onJudgeNumBottom(Displacement)
+    // }
 
     // Header 相关
     let header = []
+    let cbdMessage = []
+    let houseTypeMessage = []
+    let cbdStr = ""
+    let houseTypeStr = ""
+    let type_floorStr = ""
+    let type_roomStr = ""
+
+
+    // 位置
 
     if (showCbd && cbdDist.length) {
-      distance || cbd ?
-        header.push({ message: distance, show: cbdDist.length > 0, index: 'cbd' })
-        :
+
+      if (distance) {
+        cbdDist[0].list.map(i => {
+          if (i.id === distance) {
+            cbdMessage.push(i.title)
+            header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+          }
+        })
+      } else if (cbd) {
+        cbdDist.map(i => {
+          i.list.map(v => {
+            v.list && v.list.map(k => {
+              if (k.id === parseInt(cbd)) {
+
+
+                if (k.title.length > 5) {
+                  cbdStr = k.title.substring(0, 5) + "..."
+                } else {
+                  cbdStr = k.title
+                }
+
+                if (cbd.length > 3) {
+                  cbdStr = k.title + "..."
+                }
+                cbdMessage.push(cbdStr)
+                header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+              }
+              return false
+            })
+          })
+        })
+      } else {
         header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
+      }
     }
 
-    // showCbd && cbdDist.length && header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
+    // 户型
+
 
     if (houseTypeDist.length !== 0) {
-      type_floor || type_room
-        ?
-        header.push({ message: type_floor + "~" + type_room, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' })
-        :
-        header.push({ message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' })
+      if (type_floor || type_room) {
+
+        houseTypeDist.floor.map(i => {
+          if (i.id === type_floor) {
+            type_floorStr = i.title
+          }
+        })
+
+        houseTypeDist.room.map(v => {
+          if (v.id === type_room) {
+            type_roomStr = v.title
+          }
+        })
+
+        if (type_floorStr && type_roomStr) {
+          houseTypeMessage = type_floorStr + "、" + type_roomStr
+        } else {
+          houseTypeMessage = type_floorStr + type_roomStr
+        }
+        header.push({ message: houseTypeMessage, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' })
+      } else {
+        header.push({ message: LOCALE_HOUSE_TYPE, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' })
+      }
     }
 
-    if (houseTypeDist.length !==0) {
+    // 租金
+
+    if (houseTypeDist.length !== 0) {
       price_high || price_low
         ?
         header.push({ message: price_low + "~" + price_high, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' })
         :
         header.push({ message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' })
     }
-    // header = [
-    //   ...header,
-    //   { message: LOCALE_HOUSE_TYPE, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'house-type' },
-    //   { message: LOCALE_RENT, show: houseTypeDist.room.length && houseTypeDist.floor.length, index: 'price' },
-    //   TODO 接口未提供 { message: LOCALE_AUTO_SORT, index: 'auto-sort' },
-    // ]
+
+
 
 
     return (show && <View className='selectTab'>
-      <View className={classNames(rootClassName, classObject, className)} style={selectStyle}>
+      <View className={classNames(rootClassName, className, isFixed ? 'select-fixed' : '')} style={SelectMoveStyle} >
         {/* 头部 */}
-        <SelectHeader
+        < SelectHeader
           className='mb-2'
           items={header}
           index={headerIndex}
@@ -268,7 +378,7 @@ class Select extends BaseComponent {
         {/* 遮罩层 */}
         <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
       </View >
-    </View>
+    </View >
     )
   }
 }
