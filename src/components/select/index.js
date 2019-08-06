@@ -64,8 +64,8 @@ class Select extends BaseComponent {
 
   state = {
     payload: {
-      cbd: "", city: 350200, current_page: 1, distance: 0, is_select: 11111, latitude: 0, longitude: 0,
-      page_size: 10, price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
+      cbd: "", distance: 0, latitude: 0, longitude: 0,
+      price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
     },
     latitude: 0,
     longitude: 0,
@@ -86,8 +86,8 @@ class Select extends BaseComponent {
     this.onPayloadChange({ payload: {} })
     this.setState({
       payload: {
-        cbd: "", city: cityCode, current_page: 1, distance: 0, is_select: 11111, latitude: 0, longitude: 0,
-        page_size: 10, price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
+        cbd: "", distance: 0, latitude: 0, longitude: 0, city : cityCode,
+        price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
       }
     })
   }
@@ -139,8 +139,8 @@ class Select extends BaseComponent {
 
   async componentWillMount() {
     const { latitude, longitude } = await Taro.getLocation()
-    const { cityCode } = this.props
     const { payload } = this.state
+    const { cityCode } = this.props
     this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
   }
 
@@ -185,10 +185,10 @@ class Select extends BaseComponent {
     const classObject = { 'select-fixed': selectIsFixed }
 
     const hideStyle = {
-      top : Taro.pxTransform(-266)
+      top: Taro.pxTransform(-266)
     }
     const showStyle = {
-      top : Taro.pxTransform(92)
+      top: Taro.pxTransform(92)
     }
 
 
@@ -282,7 +282,7 @@ class Select extends BaseComponent {
 
 
 
-    return (show && <View className='selectTab' style={{height : Taro.pxTransform(174)}}>
+    return (show && <View className='selectTab' style={{ height: Taro.pxTransform(174) }}>
       <View className={classNames(rootClassName, className, classObject)} style={showSelect ? showStyle : hideStyle} >
         {/* 头部 */}
         < SelectHeader

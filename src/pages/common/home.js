@@ -152,6 +152,7 @@ class CommonHome extends Component {
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
     user && this.onSelectCity(user.citycode)
+
     user && this.setState({ cityCode: user.citycode })
 
     // 拉取城市列表
