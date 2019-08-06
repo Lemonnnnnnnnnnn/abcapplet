@@ -74,8 +74,13 @@ class SelectHouseType extends Component {
 
       if (i.id === index) {
         i.type = !i.type
-        const { id: type_floor } = floor[i.id]
-        this.props.onChange({ payload: { type_floor } })
+        if (i.type) {
+          const { id: type_floor } = floor[i.id]
+          this.props.onChange({ value: { type_floor } })
+        } else {
+          this.props.onChange({ value: { type_floor: 0 } })
+        }
+
       } else {
         i.type = false
       }
@@ -94,8 +99,12 @@ class SelectHouseType extends Component {
 
       if (i.id === index) {
         i.type = !i.type
-        const { id: type_room } = room[i.id]
-        this.props.onChange({ payload: { type_room } })
+        if (i.type) {
+          const { id: type_room } = room[i.id]
+          this.props.onChange({ value: { type_room } })
+        } else {
+          this.props.onChange({ value: { type_room: 0 } })
+        }
       } else {
         i.type = false
       }
@@ -103,8 +112,6 @@ class SelectHouseType extends Component {
     this.setState({
       room: [...newRoom]
     })
-
-
   }
 
   render() {
@@ -128,7 +135,7 @@ class SelectHouseType extends Component {
             </AtTag>)
         }
       </View>
-      <View style={{marginBottom : "20px"}}>
+      <View style={{ marginBottom: "20px" }}>
         <View style={{ marginLeft: "10px", fontSize: "16px", marginTop: "15px" }}>类型选择</View>
         {
           floor.map((i, key) =>

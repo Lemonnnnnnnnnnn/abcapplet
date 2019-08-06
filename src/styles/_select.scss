@@ -6,6 +6,7 @@
   z-index: 200;
   background: #fff;
   width: 100%;
+  
 
   &-fixed {
     position: fixed;
@@ -24,13 +25,13 @@
 
   &-cbd {
     .multi-selected text,
-    .multi-unselect text{
+    .multi-unselect text {
       font-size: $font-size-base;
     }
-    .multi-selected text{
+    .multi-selected text {
       color: #ffc919 !important;
     }
-    .multi-unselect icon{
+    .multi-unselect icon {
       width: 20px;
       height: 20px;
       border: 1px solid #ffc919;
@@ -39,7 +40,7 @@
       margin-right: 6px;
       color: #ffc919;
     }
-    .multi-selected icon{
+    .multi-selected icon {
       position: relative;
       width: 20px;
       height: 20px;
@@ -49,12 +50,12 @@
       margin-right: 6px;
       color: #ffc919;
     }
-    .multi-selected icon::after{
+    .multi-selected icon::after {
       position: absolute;
-      content: '';
+      content: "";
       left: 50%;
       top: 50%;
-      transform: translate(-47%,-53%);
+      transform: translate(-47%, -53%);
       width: 15px;
       height: 15px;
       border-radius: 50%;
@@ -69,12 +70,11 @@
   .at-tabs__header,
   .at-tabs__underline,
   .at-tabs__item-underline {
-
     background-color: transparent;
   }
 
   .at-tabs__header {
-    width: 100px * $hd
+    width: 100px * $hd;
   }
 
   .at-tabs__item {

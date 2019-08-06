@@ -15,6 +15,7 @@ import { PAGE_SEARCH } from '@constants/page'
 import { LOCALE_SEARCH_PLACEHOLDER } from '@constants/locale'
 import { COLOR_GREY_0, COLOR_BLACK } from '@constants/styles'
 
+
 class Search extends BaseComponent {
   static defaultProps = {
     size: 13,
@@ -64,12 +65,21 @@ class Search extends BaseComponent {
     })
   }
 
+
   render() {
     const { isInput, value } = this.state
-    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel } = this.props
+    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel , showSearch} = this.props
+
+    const hideStyle = {
+      top : Taro.pxTransform(-92)
+    }
+
+    const showStyle = {
+      top : 0
+    }
 
     return (
-      <View className={classNames(className, 'search', `${isFixed ? 'search-fixed' : ''}`)}>
+      <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={showSearch ? showStyle : hideStyle } >
         <View className='search-box'>
           <View className='search-content at-row at-row__align--center'>
             <View className='at-col at-col-3'>

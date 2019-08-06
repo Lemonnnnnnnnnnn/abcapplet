@@ -46,12 +46,12 @@ class SelectPrice extends BaseComponent {
     const { items } = this.props
     const { low: price_low, high: price_high } = items[tabIndex]
     this.setState({ minValue: price_low, maxValue: price_high, tabIndex })
-    this.props.onChange({ payload: { price_low, price_high } })
+    this.props.onChange({ value: { price_low, price_high } })
   }
 
   onSliderChange({ minValue, maxValue }) {
     this.setState({ minValue: minValue, maxValue: maxValue, tabIndex: -1 })
-    this.props.onChange({ payload: { price_low: minValue, price_high: maxValue } })
+    this.props.onChange({ value: { price_low: minValue, price_high: maxValue } })
   }
 
   onPriceValueChange({ minValue, maxValue }) {
