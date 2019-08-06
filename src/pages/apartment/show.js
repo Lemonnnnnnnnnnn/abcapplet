@@ -250,42 +250,40 @@ class ApartmentShow extends Component {
     }
 
     const navStyle = {
-      position: 'fixed',
-      height: navHeight + "px",
-      width: "100%",
-      backgroundColor: "#fff",
-      top: 0,
-      zIndex: 999,
+      height: navHeight ? Taro.pxTransform(navHeight * 2) : Taro.pxTransform(128),
+    }
+
+    const statusBarStyle = {
+      height: statusBarHeight ? Taro.pxTransform(statusBarHeight * 2) : Taro.pxTransform(40)
     }
 
 
     const titleStyle = {
-      height: navHeight - statusBarHeight + "px",
-      position: "absolute",
-      left: "50%",
-      top: "50%",
-      transform: "translate(-50% , 0)",
+      height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
     }
 
     return (
       <View className='mb-3'>
 
         {/* 自定义导航栏 */}
-        <View style={navStyle}>
+        <View className='navStyle' style={navStyle}>
           {/* 状态栏 */}
-          <View style={{ height: statusBarHeight + "px" }}></View>
+
+          <View style={statusBarStyle}></View>
           {/* 标题栏 */}
-          <View className='at-row at-row__align--center  ml-2' style={{ height: navHeight - statusBarHeight + "px" }} >
-            <View className='at-row at-row-3 at-row__align--center at-row__justify--between menuButtonStyle'>
-              <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
-                <AtIcon onClick={this.onReturn} value='chevron-left' size='25' ></AtIcon>
+          <View style={{ position: "relative" }}>
+            <View className='at-row at-row__align--center  ml-2 navStyle-titleStyle' style={titleStyle} >
+              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle'>
+                <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
+                  <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>
+                </View>
+                <View className='grayLineStyle' ></View>
+                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-2' style={{ height: "17px", width: "17px" }}></Image>
               </View>
-              <View className='grayLineStyle' ></View>
-              <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-3' style={{ height: "17px", width: "17px" }}></Image>
             </View>
+            {/* title */}
+            <View className='text-normal navStyle-titleFontStyle'>公寓详情</View>
           </View>
-          {/* title */}
-          <View style={titleStyle} className='text-normal'>公寓详情</View>
         </View>
 
 

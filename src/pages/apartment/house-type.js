@@ -64,6 +64,7 @@ class HouseTypeShow extends Component {
     showMatch: false,
     showApartRoom: true,
     nearbyPost: [],
+    iphone: false,
   }
 
   async componentDidMount() {
@@ -72,11 +73,12 @@ class HouseTypeShow extends Component {
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
     await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 80, statusBarHeight: res.statusBarHeight })
+      console.log(res)
+      this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight, iphone: true })
       } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight, iphone: true })
       }
     })
 
@@ -327,7 +329,7 @@ class HouseTypeShow extends Component {
 
     const { houstType, map, buttons, showRentDescription,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, statusBarHeight } = this.state
+      showApartRoom, nearbyPost, showLittleMask, navHeight, statusBarHeight, iphone } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -338,6 +340,8 @@ class HouseTypeShow extends Component {
       position, tags, cost_info, id, roomMatch, publicMatch,
       appointment_show_num, type_desc
     } = houstType
+
+    console.log(navHeight)
 
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -381,12 +385,11 @@ class HouseTypeShow extends Component {
     }
 
     const navStyle = {
-      position: 'fixed',
-      height: navHeight + "px",
-      width: "100%",
-      backgroundColor: "#fff",
-      top: 0,
-      zIndex: 999,
+      height: navHeight ? Taro.pxTransform(navHeight * 2) : Taro.pxTransform(128),
+    }
+
+    const statusBarStyle = {
+      height: statusBarHeight ? Taro.pxTransform(statusBarHeight * 2) : Taro.pxTransform(40)
     }
 
     const borderStyle = {
@@ -395,12 +398,9 @@ class HouseTypeShow extends Component {
       boxShadow: "0 1px 5px rgb(200,200,200)",
       overflow: 'hidden',
     }
+
     const titleStyle = {
-      height: navHeight - statusBarHeight + "px",
-      position: "absolute",
-      left: "50%",
-      top: "50%",
-      transform: "translate(-50% , 0)",
+      height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
     }
 
 
@@ -419,21 +419,23 @@ class HouseTypeShow extends Component {
         />
 
         {/* 自定义导航栏 */}
-        <View style={navStyle}>
+        <View className='navStyle' style={navStyle}>
           {/* 状态栏 */}
-          <View style={{ height: statusBarHeight + "px" }}></View>
+          <View style={statusBarStyle}></View>
           {/* 标题栏 */}
-          <View className='at-row at-row__align--center  ml-2' style={{ height: navHeight - statusBarHeight + "px" }} >
-            <View className='at-row at-row-3 at-row__align--center at-row__justify--between menuButtonStyle'>
-              <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
-                <AtIcon onClick={this.onReturn} value='chevron-left' size='25' ></AtIcon>
+          <View style={{position: "relative"}}>
+            <View className='at-row at-row__align--center  ml-2 navStyle-titleStyle' style={titleStyle} >
+              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle' >
+                <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
+                  <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>
+                </View>
+                <View className='grayLineStyle' ></View>
+                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-2' style={{ height: "17px", width: "17px" }}></Image>
               </View>
-              <View className='grayLineStyle' ></View>
-              <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-3' style={{ height: "17px", width: "17px" }}></Image>
             </View>
+            {/* title */}
+            <View className='text-normal navStyle-titleFontStyle'>户型详情</View>
           </View>
-          {/* title */}
-          <View style={titleStyle} className='text-normal'>户型详情</View>
         </View>
 
 
@@ -565,7 +567,7 @@ class HouseTypeShow extends Component {
                 <View key={i.title} className='at-col' style={{ position: "relative" }}>
                   <View style={PublicConfiguration}></View>
                   <View style={{ position: "absolute", top: "5px", left: "5px" }}>
-                    <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px'}} />
+                    <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                     <View className='text-small text-center' >{i.title}</View>
                   </View>
                 </View>
@@ -602,7 +604,7 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 可租房间 */}
-           { roomList.length!==0&&<View >
+            {roomList.length !== 0 && <View >
               <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
               {
                 isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
@@ -704,8 +706,8 @@ class HouseTypeShow extends Component {
                 {types && types.map((i, index) =>
 
                   <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom  '} at-col at-col-5 mt-1 `}>
-                     <View style={borderStyle} className='ml-2'>
-                       <ApartmentTypeItem  item={i} />
+                    <View style={borderStyle} className='ml-2'>
+                      <ApartmentTypeItem item={i} />
                     </View>
                   </View>)}
               </ScrollView>
