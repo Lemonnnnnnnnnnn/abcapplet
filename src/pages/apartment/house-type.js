@@ -634,9 +634,9 @@ class HouseTypeShow extends Component {
             {/* 用户须知 */}
             {/* 左分3栏，右分9栏 */}
             {/* 右边里面各自分为两栏并居中*/}
-            {notices.length > 0 && <View className='text-bold text-huge mt-4'>用户须知</View>}
+            {notices.length > 0 && <View className='text-bold text-huge mt-4 '>用户须知</View>}
             {notices.map((i, index) =>
-              <View key={i.id} className={`at-row at-row__align--center ${index + 1 !== notices.length && 'border-bottom'} py-2`}>
+              <View key={i.id} className={`at-row at-row__align--center ${index + 1 !== notices.length && 'border-bottom'} py-2 `}>
                 <View className='text-secondary at-col-3'>
                   <View className='at-row at-row__justify--center '>
                     <ABCIcon icon={APARTMENT_NOTICE_DIST[i.id].icon} color={COLOR_GREY_2} size='30' />

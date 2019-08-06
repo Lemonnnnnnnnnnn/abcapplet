@@ -179,16 +179,15 @@ class ApartmentItem extends BaseComponent {
           {/* 爱心按钮*/}
           {!mini && (isCollect
             ?
-            <View className='apartment-header-favorite' onClick={this.onDeleteFavorite}>
+            <View className='apartment-header-favorite mr-2 mt-2' onClick={this.onDeleteFavorite}>
               <View className='apartment-heart-wrap' >
-                {/* <AtIcon value='heart-2' size='40'  color={COLOR_YELLOW} /> */}
                 <Image className='apartment-heart' src={HEART_YELLOW} ></Image>
               </View>
               <View className='apartment-heart-num' >{num}</View>
 
             </View>
             :
-            <View className='apartment-header-favorite' onClick={this.onCreateFavorite}>
+            <View className='apartment-header-favorite mr-2 mt-2' onClick={this.onCreateFavorite}>
               <View className='apartment-heart-wrap' >
                 <Image className='apartment-heart' src={HEART_BLACK} ></Image>
               </View>
@@ -200,10 +199,6 @@ class ApartmentItem extends BaseComponent {
 
         {/* 正常内容 */}
         {!mini && <View className='apartment-content mx-3 py-2'>
-          {/* <View>{rules.map(i =>
-            <AtTag className='mr-1 p-1 text-mini' key={i.id} size='small' circle>{i.title}</AtTag>
-          )}
-          </View> */}
 
 
           {/* 公寓名称 */}

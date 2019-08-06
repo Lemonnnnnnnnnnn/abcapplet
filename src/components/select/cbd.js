@@ -131,7 +131,7 @@ class SelectCbd extends BaseComponent {
           <ScrollView scrollY style={{ height: tabsHeight }}>{plase.map(i =>
             <View  key={i.id}
               onClick={this.onPlaceChange.bind(this, i.id)}
-              className={`ml-3 mt-2 multi-${placeSelected.includes(i.id) ? 'selected' : 'unselect'}`}
+              className={`ml-3 mt-3 multi-${placeSelected.includes(i.id) ? 'selected' : 'unselect'}`}
             >
               <View className='at-row'>
                 <View>

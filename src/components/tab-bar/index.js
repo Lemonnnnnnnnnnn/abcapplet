@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, Button } from '@tarojs/components'
+import { View, Button ,Image} from '@tarojs/components'
 import { AtButton, AtFloatLayout } from 'taro-ui'
 
 // 自定义组件
@@ -33,7 +33,7 @@ class TabBar extends BaseComponent {
     this.props.onCloseLittleMask()
   }
 
-  
+
   onCloseCallPhoneView(){
     this.setState({ showCallPhoneView: false })
   }
@@ -130,7 +130,7 @@ class TabBar extends BaseComponent {
 
           {hasContact && <View className='at-col-2'>
             <View onClick={onOpenLittleMask} className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              <ABCIcon icon='headset_mic' color='#000' />
+              <Image style='width:7vw;height:7vw' src='https://images.gongyuabc.com/image/call.png'></Image>
             </View>
             {/* <AtButton open-type='contact' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
               <ABCIcon icon='headset_mic' color='#000' />
@@ -138,7 +138,8 @@ class TabBar extends BaseComponent {
           </View>}
           {hasShare && <View className='at-col-2'>
             <AtButton open-type='share' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              <ABCIcon icon='share' color='#000' />
+              {/* <ABCIcon icon='share' color='#000' /> */}
+              <Image style='width:7vw;height:7vw' src='https://images.gongyuabc.com/image/share.png'></Image>
             </AtButton>
           </View>}
 
