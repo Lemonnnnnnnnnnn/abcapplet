@@ -95,18 +95,16 @@ class CommonHome extends Component {
 
     // 搜索相关
     searchScrollTop: null,
-    searchIsFixed: true,
+    searchIsFixed: false,
 
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
 
 
-    scrollDown: false,
-    Displacement: 0,
-    showSearch: false,
-    showSelect: false,
-    start_p: 0,
+    scrollNow: false,
+    showSearch: true,
+    showSelect: true,
 
     // 城市相关
     selector: ['厦门市'],
@@ -285,37 +283,28 @@ class CommonHome extends Component {
       searchScrollTop,
       searchIsFixed,
       apartmentScrollTop,
-      scrollDown
+      scrollNow
     } = this.state
 
     // 搜索相关
 
     // 判断上滑还是下滑
-    scrollDown && this.setState({ showSearch: false })
-    !scrollDown && this.setState({ showSearch: true })
-    if (scrollTop === 0) { this.setState({ showSearch: true }) }
+    this.setState({ scrollNow: scrollTop })
+    scrollTop > scrollNow && scrollTop > searchScrollTop && this.setState({ showSearch: false })
+    scrollTop < scrollNow && this.setState({ showSearch: true })
 
 
-    // 在下滑并且当前屏幕距离顶部的高度大于select元素距离顶部的高度时，不展示select元素
-    scrollDown && scrollTop > selectScrollTop  && apartments.total !== 0 && this.setState({ showSelect: false })
-
-    // 在上滑并且当前屏幕距离顶部的高度大于select元素距离顶部的高度时，展示select元素
-
-    !scrollDown && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
-
-    // 当前屏幕距离顶部的高度小于select元素距离顶部的高度时，不展示select元素
-
-    scrollTop < selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
+    scrollTop > scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
+    scrollTop < scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
 
 
-    // scrollTop > 0
-    //   && !searchIsFixed
-    //   && this.setState({ searchIsFixed: true })
+    scrollTop > searchScrollTop
+      && !searchIsFixed
+      && this.setState({ searchIsFixed: true })
 
-    // scrollTop < 0
-    //   && searchIsFixed
-    //   && this.setState({ searchIsFixed: false })
-
+    scrollTop < searchScrollTop - 45
+      && searchIsFixed
+      && this.setState({ searchIsFixed: false })
 
     // 公寓相关
 
@@ -325,7 +314,7 @@ class CommonHome extends Component {
       && this.setState({ selectIsFixed: true })
 
 
-    scrollTop < selectScrollTop 
+    scrollTop < selectScrollTop - 46
       && selectIsFixed
       && this.setState({ selectIsFixed: false })
 
@@ -621,26 +610,6 @@ class CommonHome extends Component {
     }
   }
 
-  onTouchmove(e) {
-    const { start_p } = this.state
-    let move_p = e.touches[0]
-
-    let start_y = start_p.clientY
-    let move_y = move_p.clientY
-
-    start_y > move_y
-      ? this.setState({ scrollDown: true, Displacement: Math.abs(start_y - move_y) })
-      : this.setState({ scrollDown: false, Displacement: Math.abs(start_y - move_y) })
-
-  }
-
-  onTouchStart(e) {
-    this.setState({
-      start_p: e.touches[0]
-    })
-  }
-
-
   render() {
 
     const rootClassName = ['select']
@@ -656,8 +625,6 @@ class CommonHome extends Component {
       selectorChecked,
       selectIsFixed,
       cityCode,
-      Displacement,
-      scrollDown
     } = this.state
 
     const {
@@ -669,8 +636,6 @@ class CommonHome extends Component {
     return (
       <View
         className='page-white'
-        onTouchStart={this.onTouchStart}
-        onTouchMove={this.onTouchmove}
         style={{ overflow: "hidden" }} >
 
         <View>
@@ -681,8 +646,6 @@ class CommonHome extends Component {
                 className='mb-2'
                 isFixed={searchIsFixed}
                 showSearch={showSearch}
-                scrollDown={scrollDown}
-                Displacement={Displacement}
 
 
                 selector={selector}
@@ -776,8 +739,6 @@ class CommonHome extends Component {
                   isFixed={selectIsFixed}
                   showSelect={showSelect}
                   top={searchScrollTop}
-                  Displacement={Displacement}
-                  scrollDown={scrollDown}
 
                   cityCode={cityCode}
                   autoSortDist={[]}
@@ -790,7 +751,7 @@ class CommonHome extends Component {
               }
             </View>
 
-            <View style={selectIsFixed ? { height: "87px" } : {}}></View>
+            {/* <View style={selectIsFixed ? { height: Taro.pxTransform(174) } : {}}></View> */}
 
             <View className='home-apartment ml-3 mr-3'>
               <ApartmentList

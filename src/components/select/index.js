@@ -41,8 +41,7 @@ import {
  */
 let type_floorStorage = 0
 let type_roomStorage = 0
-let moveBottom = false
-let moveTop = true
+
 
 class Select extends BaseComponent {
   static options = {
@@ -156,39 +155,6 @@ class Select extends BaseComponent {
     this.setState({ headerIndex: '' })
   }
 
-  onJudgeDirect() {
-    const { scrollDown, Displacement } = this.props
-    if (scrollDown) {
-      return this.onSelectHide(Displacement)
-    } else {
-      return this.onSelectShow(Displacement)
-    }
-  }
-
-
-  onSelectHide(num) {
-    moveBottom = true
-    const testNum = num * 2
-    if (moveTop && num <= 266 / 2) {
-      return Taro.pxTransform(92 - testNum)
-    } else {
-      moveTop = false
-      return Taro.pxTransform(-266)
-    }
-  }
-
-  onSelectShow(num) {
-    moveTop = true
-    const testNum = num * 2
-    if (moveBottom && num <= 266 / 2) {
-      return Taro.pxTransform(testNum - 174)
-    } else {
-      moveBottom = false
-      return Taro.pxTransform(92)
-    }
-  }
-
-
 
   render() {
     const { headerIndex, payload } = this.state
@@ -209,39 +175,28 @@ class Select extends BaseComponent {
       // autoSortDist,
       houseTypeDist,
       specialSelectDist,
-      showSelect,
-      Displacement
-      // selectIsFixed
+      showSelect
     } = this.props
 
     // 吸附相关样式
     const rootClassName = ['select']
     // const selectStyle = { top: `${top - 1}px` }
-    // const selectIsFixed = isFixed || headerIndex !== ''
-    // const classObject = { 'select-fixed': selectIsFixed }
+    const selectIsFixed = isFixed || headerIndex !== ''
+    const classObject = { 'select-fixed': selectIsFixed }
 
-    // const fixedStyle = {
-    //   position: 'fixed',
-    // }
-
-    const SelectMoveStyle = {
-      top: this.onJudgeDirect()
+    const hideStyle = {
+      top : Taro.pxTransform(-266)
+    }
+    const showStyle = {
+      top : Taro.pxTransform(92)
     }
 
-    // const turnTopStyle = {
-    //   top: this.onJudgeNumTop(Displacement)
-    // }
-
-    // const turnBottomStyle = {
-    //   top: this.onJudgeNumBottom(Displacement)
-    // }
 
     // Header 相关
     let header = []
     let cbdMessage = []
     let houseTypeMessage = []
     let cbdStr = ""
-    let houseTypeStr = ""
     let type_floorStr = ""
     let type_roomStr = ""
 
@@ -327,8 +282,8 @@ class Select extends BaseComponent {
 
 
 
-    return (show && <View className='selectTab'>
-      <View className={classNames(rootClassName, className, isFixed ? 'select-fixed' : '')} style={SelectMoveStyle} >
+    return (show && <View className='selectTab' style={{height : Taro.pxTransform(174)}}>
+      <View className={classNames(rootClassName, className, classObject)} style={showSelect ? showStyle : hideStyle} >
         {/* 头部 */}
         < SelectHeader
           className='mb-2'

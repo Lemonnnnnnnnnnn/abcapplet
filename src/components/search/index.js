@@ -15,8 +15,6 @@ import { PAGE_SEARCH } from '@constants/page'
 import { LOCALE_SEARCH_PLACEHOLDER } from '@constants/locale'
 import { COLOR_GREY_0, COLOR_BLACK } from '@constants/styles'
 
-var moveTop = true
-var moveBottom = false
 
 class Search extends BaseComponent {
   static defaultProps = {
@@ -67,57 +65,21 @@ class Search extends BaseComponent {
     })
   }
 
-  onJudgeDirect() {
-    const { scrollDown, Displacement } = this.props
-    if (scrollDown) {
-      return this.onSearchHide(Displacement)
-    } else {
-      return this.onSearchShow(Displacement)
-    }
-  }
-
-  onSearchHide(num) {
-    moveBottom = true
-    const testNum = num * 2
-    if (moveTop && num <= 92 / 2) {
-      return Taro.pxTransform(-testNum)
-    } else {
-      moveTop = false
-      return Taro.pxTransform(-92)
-    }
-  }
-
-  // 这里用0-92递增数组生成了0- -92的递减数组，根据触摸位移量进行搜索框隐藏的动画渲染
-
-  onSearchShow(num) {
-    moveTop = true
-    const testNum = num * 2
-    if (moveBottom && num <= 92 / 2) {
-      return Taro.pxTransform(testNum - 92)
-    } else {
-      moveBottom = false
-      return 0
-    }
-  }
-  // 这里要用0-92递增数组生成-92 - 0的递增数组，根据触摸位移量进行搜索框出现的动画渲染
 
   render() {
     const { isInput, value } = this.state
-    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel } = this.props
+    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel , showSearch} = this.props
 
-    // Taro.createSelectorQuery()
-    //   .in(this.$scope)
-    //   .select('.search')
-    //   .boundingClientRect()
-    //   .exec(res => posi = res[0].top)
+    const hideStyle = {
+      top : Taro.pxTransform(-92)
+    }
 
-
-    const selectMoveStyle = {
-      top: this.onJudgeDirect()
+    const showStyle = {
+      top : 0
     }
 
     return (
-      <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={selectMoveStyle}>
+      <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={showSearch ? showStyle : hideStyle } >
         <View className='search-box'>
           <View className='search-content at-row at-row__align--center'>
             <View className='at-col at-col-3'>

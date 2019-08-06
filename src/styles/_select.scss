@@ -4,13 +4,12 @@
   left: 0;
   top: 0;
   z-index: 200;
-  background: #fff !important;
+  background: #fff;
   width: 100%;
   
 
   &-fixed {
     position: fixed;
-    top : -133px * $hd
   }
 
   &-header {
