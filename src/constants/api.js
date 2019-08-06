@@ -1,7 +1,7 @@
 // 接口基础配置
 const isDev = process.env.NODE_ENV === 'development'
-export const DEV_HOST = "http://test.abc.411er.cn/mini"
-export const PROD_HOST = "http://test.abc.411er.cn/mini"
+export const DEV_HOST = "https://api.gongyuabc.com/mini"
+export const PROD_HOST = "https://api.gongyuabc.com/mini"
 export const HOST = isDev ? DEV_HOST : PROD_HOST
 export const PAGE_SIZE = 10
 
