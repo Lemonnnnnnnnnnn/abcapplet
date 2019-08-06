@@ -62,7 +62,7 @@ class ApartmentShow extends Component {
     // await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: [] }))
 
     await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 80, statusBarHeight: res.statusBarHeight })
+      this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
         this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
       } else if (res.model.indexOf('iPhone') !== -1) {
@@ -268,12 +268,11 @@ class ApartmentShow extends Component {
         {/* 自定义导航栏 */}
         <View className='navStyle' style={navStyle}>
           {/* 状态栏 */}
-
           <View style={statusBarStyle}></View>
           {/* 标题栏 */}
           <View style={{ position: "relative" }}>
             <View className='at-row at-row__align--center  ml-2 navStyle-titleStyle' style={titleStyle} >
-              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle'>
+              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle' >
                 <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
                   <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>
                 </View>
@@ -307,58 +306,59 @@ class ApartmentShow extends Component {
             onDeleteFavorite={this.onDeleteFavorite}
           >
 
+            {/* 加上边距 */}
+            <View className='ml-3 mr-3'>
 
+              {/* 头部 */}
+              <View className='text-bold text-huge'>{title}</View>
+              <View className='text-secondary text-normal'>{intro}</View>
 
-            {/* 头部 */}
-            <View className='text-bold text-huge'>{title}</View>
-            <View className='text-secondary text-normal'>{intro}</View>
-
-            {/* 活动信息 */}
-            <View className='mt-2'>
-              {rules.length ? rules.map(i =>
-                <View key={i.id} className=' mt-2 mr-3 mb-3'>
-                  <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
-                  <Text className='text-secondary text-small ml-2'>{i.content}</Text>
-                </View>
-              ) : <View className='text-secondary'>暂无相关活动信息</View>
-              }
-            </View>
-            <View className='at-row at-row--wrap'>
-
-            </View>
-
-
-            <View style={BrandingStyle}>
-              <Tag className='my-3' active circle>
-                <View className='at-row  at-row__align--center text-secondary'>
-
-                  <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
-                  <View className='ml-2'>100%免中介费</View>
-                  <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
-                  <View className='ml-2'>严选厦门3万+房源</View>
-
-                </View>
-              </Tag>
-            </View>
-
-
-            {/* 地图 */}
-            <View className='at-row at-row__align--center mb-2'>
-              <View className='at-col at-col-1 mt-1'>
-                <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
+              {/* 活动信息 */}
+              <View className='mt-2'>
+                {rules.length ? rules.map(i =>
+                  <View key={i.id} className=' mt-2 mr-3 mb-3'>
+                    <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                    <Text className='text-secondary text-small ml-2'>{i.content}</Text>
+                  </View>
+                ) : <View className='text-secondary'>暂无相关活动信息</View>
+                }
               </View>
-              {
-                position ? <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View> : <View className='text-secondary'>暂无相关位置信息</View>
-              }
+
+
+              <View style={BrandingStyle}>
+                <Tag className='my-3' active circle>
+                  <View className='at-row  at-row__align--center text-secondary'>
+
+                    <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
+                    <View className='ml-2'>100%免中介费</View>
+                    <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
+                    <View className='ml-2'>严选厦门3万+房源</View>
+
+                  </View>
+                </Tag>
+              </View>
+
+
+              {/* 地图 */}
+              <View className='at-row at-row__align--center mb-2'>
+                <View className='at-col at-col-1 mt-1'>
+                  <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
+                </View>
+                {
+                  position ? <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View> : <View className='text-secondary'>暂无相关位置信息</View>
+                }
+
+              </View>
 
             </View>
+
 
             {/* 公寓列表 */}
 
-            <View style={ScrollWrapStyle} className='at-col' >
+            <View style={ScrollWrapStyle} className='at-col ml-3' >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 ml-1`}>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 mr-1`}>
                     <View style={borderStyle}>
                       <ApartmentTypeItem apartmentDetail item={i} />
                     </View>
@@ -366,103 +366,106 @@ class ApartmentShow extends Component {
               </ScrollView>
             </View>
 
-            {/* 户型 */}
+            {/* 公寓信息 */}
 
+            <View className='ml-3 mr-3'>
 
-            <View>
-              <View className='text-bold text-huge mt-2 mb-3'>公寓信息</View>
-              <View className='at-row at-row__align--center  at-row__justify--between my-2'>
-                <View>
-                  <View className='at-row at-row__align--center'>
-                    <View className='at-col'>
-                      <AtAvatar circle image={cover} />
-                    </View>
-                    <View>
-                      <View className='text-normal ml-2'>{title}</View>
-                      <View className='text-normal text-secondary ml-2'>{tags}</View>
-                    </View>
-                  </View>
-
-                </View>
-              </View>
-              {
-                desc ? <View className='text-secondary text-normal' style={textDeal}>{desc}</View> : <View className='text-secondary'>暂无相关描述</View>
-              }
-
-              {/* 公共配置 */}
-
-              <View className='at-row at-row--wrap mt-3 mb-3'>
-                {publicMatch_list && publicMatch_list.map(i =>
-                  <View key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-4'>
-                    <Image src={i.icon} mode='aspectFit' style={{ height: '35px', width: '35px' }} />
-                    <View className='text-small'>{i.title}</View>
-                  </View>
-                )}
-
-                {publicMatch_list && publicMatch_list.length > 5 && <View style={PublicConfiguration} className='text-center'>
-                  <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '35px' }}>...</View>
-                  <View className='text-small'>更多</View>
-                </View>}
-              </View>
-
-            </View>
-
-
-            {/* 公寓详情 */}
-
-
-
-            {/* 特色服务 */}
-            <View className='text-normal mt-2'>
-              {special.length && <View className='text-secondary at-col-3 mr-2'>特色服务：</View>}
-              <View className='at-row at-row--wrap'>
-                {special.map(i => <View key={i} className='mr-2'>{i}</View>)}
-              </View>
-            </View>
-
-            {/* 位置信息 */}
-            <View className='text-bold text-huge mt-4'>位置信息</View>
-            <Map
-              className='mt-2'
-              showLocation
-              markers={markers}
-              latitude={latitude}
-              longitude={longitude}
-              style={{ width: '100%' }}
-              onClick={this.onOpenMap}
-            />
-
-            {/* 周边生活 & 附近交通 */}
-            <View className='at-row mt-2'>
-              <View className='at-col text-secondary text-normal mr-2'>附近商圈</View>
               <View>
-                <View className='text-normal'>{cbds.join('、')}</View>
+                <View className='text-bold text-huge mt-2 mb-3'>公寓信息</View>
+                <View className='at-row at-row__align--center  at-row__justify--between my-2'>
+                  <View>
+                    <View className='at-row at-row__align--center'>
+                      <View className='at-col'>
+                        <AtAvatar circle image={cover} />
+                      </View>
+                      <View>
+                        <View className='text-normal ml-2'>{title}</View>
+                        <View className='text-normal text-secondary ml-2'>{tags}</View>
+                      </View>
+                    </View>
+
+                  </View>
+                </View>
+                {
+                  desc ? <View className='text-secondary text-normal' style={textDeal}>{desc}</View> : <View className='text-secondary'>暂无相关描述</View>
+                }
+
+                {/* 公共配置 */}
+
+                <View className='at-row at-row--wrap mt-3 mb-3'>
+                  {publicMatch_list && publicMatch_list.map(i =>
+                    <View key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-4'>
+                      <Image src={i.icon} mode='aspectFit' style={{ height: '35px', width: '35px' }} />
+                      <View className='text-small'>{i.title}</View>
+                    </View>
+                  )}
+
+                  {publicMatch_list && publicMatch_list.length > 5 && <View style={PublicConfiguration} className='text-center'>
+                    <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '35px' }}>...</View>
+                    <View className='text-small'>更多</View>
+                  </View>}
+                </View>
+
               </View>
+
+
+              {/* 公寓详情 */}
+
+
+
+              {/* 特色服务 */}
+              <View className='text-normal mt-2'>
+                {special.length && <View className='text-secondary at-col-3 mr-2'>特色服务：</View>}
+                <View className='at-row at-row--wrap'>
+                  {special.map(i => <View key={i} className='mr-2'>{i}</View>)}
+                </View>
+              </View>
+
+              {/* 位置信息 */}
+              <View className='text-bold text-huge mt-4'>位置信息</View>
+              <Map
+                className='mt-2'
+                showLocation
+                markers={markers}
+                latitude={latitude}
+                longitude={longitude}
+                style={{ width: '100%' }}
+                onClick={this.onOpenMap}
+              />
+
+              {/* 周边生活 & 附近交通 */}
+              <View className='at-row mt-2'>
+                <View className='at-col text-secondary text-normal mr-2'>附近商圈</View>
+                <View>
+                  <View className='text-normal'>{cbds.join('、')}</View>
+                </View>
+              </View>
+
+              {/* 用户须知 */}
+              {/* 左分3栏，右分9栏 */}
+              {/* 右边里面各自分为两栏并居中*/}
+              {notices.length > 0 && <View className='text-bold text-huge mt-4'>用户须知</View>}
+              {notices.map((i, index) =>
+                <View key={i.id} className={`at-row at-row__align--center ${index + 1 !== notices.length && 'border-bottom'} py-2`}>
+                  <View className='text-secondary at-col-3'>
+                    <View className='at-row at-row__justify--center '>
+                      <ABCIcon icon={APARTMENT_NOTICE_DIST[i.id].icon} color={COLOR_GREY_2} size='30' />
+                    </View>
+                    <View className='at-row at-row__justify--center '>
+                      <View className='text-small'>{APARTMENT_NOTICE_DIST[i.id].message}</View>
+                    </View>
+                  </View>
+                  <View className='at-col-9 at-row at-row--wrap'>
+                    {i.word.map(w => <View key={w} className='text-normal at-col-6 text-center'>{w}</View>)}
+                  </View>
+                </View>
+              )}
+
             </View>
 
-            {/* 用户须知 */}
-            {/* 左分3栏，右分9栏 */}
-            {/* 右边里面各自分为两栏并居中*/}
-            {notices.length > 0 && <View className='text-bold text-huge mt-4'>用户须知</View>}
-            {notices.map((i, index) =>
-              <View key={i.id} className={`at-row at-row__align--center ${index + 1 !== notices.length && 'border-bottom'} py-2`}>
-                <View className='text-secondary at-col-3'>
-                  <View className='at-row at-row__justify--center '>
-                    <ABCIcon icon={APARTMENT_NOTICE_DIST[i.id].icon} color={COLOR_GREY_2} size='30' />
-                  </View>
-                  <View className='at-row at-row__justify--center '>
-                    <View className='text-small'>{APARTMENT_NOTICE_DIST[i.id].message}</View>
-                  </View>
-                </View>
-                <View className='at-col-9 at-row at-row--wrap'>
-                  {i.word.map(w => <View key={w} className='text-normal at-col-6 text-center'>{w}</View>)}
-                </View>
-              </View>
-            )}
-
-            {/* 其他公寓 */}
+            {/* 附近公寓 */}
             {city &&
-              <View className='mb-5'>
+              <View className='mb-5 ml-3'>
                 <View className='text-bold text-huge mt-4 mb-3'>附近公寓</View>
                 <ApartmentList
                   nearbyPost={nearbyPost}

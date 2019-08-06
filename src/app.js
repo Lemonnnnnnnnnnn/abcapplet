@@ -40,20 +40,33 @@ class App extends Component {
       'pages/risk/index',
       'pages/risk/create',
 
-      'pages/order/index',
-      'pages/order/show',
-      'pages/order/create',
-      'pages/order/down-payment',
+      // 'pages/order/index',
+      // 'pages/order/show',
+      // 'pages/order/create',
+      // 'pages/order/down-payment',
 
       'pages/article/show',
       'pages/external/index',
 
     ],
+    subPackages: [
+      {
+        root: 'pages/order',
+        pages: [
+          'index',
+          'show',
+          'create',
+          'down-payment',
+        ]
+      }
+    ],
+
     "permission": {
       "scope.userLocation": {
         "desc": "你的位置信息将用于小程序位置接口的效果展示"
       }
     },
+    
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -102,7 +115,47 @@ class App extends Component {
     }
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    this.autoUpdate()
+  }
+
+  //自动检测更新
+  autoUpdate() {
+
+    if (Taro.canIUse('getUpdateManager')) {
+      //创建UpdateManager实例
+      const updateManager = Taro.getUpdateManager();
+      //检测版本更新
+      updateManager.onCheckForUpdate((res) => {
+        if (!res.hasUpdate) return;
+
+        //请求更新
+        updateManager.onUpdateReady(() => {
+          Taro.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好了，是否重启应用？',
+            success: (res) => res.confirm && updateManager.applyUpdate(),
+          });
+        });
+
+        //更新失败
+        updateManager.onUpdateFailed(() => {
+          Taro.showModal({
+            title: '已经有新版本咯~~',
+            content: '新版本已经上线，请您删除当前小程序，重新搜索打开。',
+          });
+        });
+
+      });
+    } else {
+      //希望用户在最新版本的客户端上体验您的小程序
+      Taro.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试'
+      })
+    }
+
+  }
 
   componentDidShow() { }
 

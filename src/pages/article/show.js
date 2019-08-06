@@ -43,7 +43,7 @@ class ArticleShow extends Component {
 
   async componentDidMount() {
     await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 74, statusBarHeight: res.statusBarHeight })
+      this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
         this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
       } else if (res.model.indexOf('iPhone') !== -1) {

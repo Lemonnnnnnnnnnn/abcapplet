@@ -39,7 +39,7 @@ class ApartmentList extends BaseList {
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView scrollX>
                 {nearbyPost.map((i) =>
-                  <View style={imageStyle} className='image ml-2' key={i.id}>
+                  <View style={imageStyle} className='image mr-2' key={i.id}>
                     <ApartmentItem
                       home={1}
                       nearbyPost
