@@ -73,7 +73,6 @@ class HouseTypeShow extends Component {
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
     await Taro.getSystemInfo().then(res => {
-      console.log(res)
       this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
         this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight, iphone: true })
@@ -340,7 +339,6 @@ class HouseTypeShow extends Component {
       appointment_show_num, type_desc
     } = houstType
 
-    console.log(navHeight)
 
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -382,7 +380,7 @@ class HouseTypeShow extends Component {
       wordBreak: "break-all",
       textIndent: "10px"
     }
-    
+
     const borderStyle = {
       // backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "6px",
