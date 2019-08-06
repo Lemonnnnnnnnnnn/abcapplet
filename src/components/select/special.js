@@ -83,7 +83,7 @@ class SelectSpecial extends BaseComponent {
           specialList.map((i, key) =>
             <AtTag
               type={i.type ? "primary" : ""}
-              className='ml-3 mr-1 mt-2 mb-3'
+              className='ml-2 mr-1 mt-2 mb-3'
               circle
               onClick={(e) => this.onSelectedItemsChange(e, key)}
               key={key}
@@ -91,7 +91,7 @@ class SelectSpecial extends BaseComponent {
               <View style={fontStyle}>{i.title}</View>
             </AtTag>)
         }
-       
+
       </ScrollView>
     )
   }

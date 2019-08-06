@@ -668,7 +668,7 @@ class CommonHome extends Component {
           {cbds.length > 0 &&
             <View >
               <Header
-                className='mb-3'
+                className='mb-2'
                 title={LOCALE_HOT_CBD}
               />
               <Carousel
@@ -697,7 +697,7 @@ class CommonHome extends Component {
           {recommends.length > 0 &&
             <View>
               <Header
-                className='my-3'
+                className='mt-4 mb-2'
                 title={LOCALE_RECOMMEND_APARTMENT}
               />
               <Carousel
@@ -714,7 +714,7 @@ class CommonHome extends Component {
           {activities.length > 0 &&
             <View>
               <Header
-                className='my-3'
+                className='mt-4 mb-2'
                 title={LOCALE_ACTIVITY}
                 hasExtra={false}
               />
@@ -730,7 +730,7 @@ class CommonHome extends Component {
 
           {/* 严选公寓 */}
           <View className='selectTab'>
-            <Header className='my-2' title={LOCALE_APARTMENT} hasExtra={false} />
+            <Header className='mt-4 mb-2' title={LOCALE_APARTMENT} hasExtra={false} />
             <View className='home-select'>
               {/* 选择框下拉框部分 */}
               {

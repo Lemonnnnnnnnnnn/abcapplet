@@ -389,7 +389,12 @@ class HouseTypeShow extends Component {
       zIndex: 999,
     }
 
-
+    const borderStyle = {
+      // backgroundColor: "rgba(248, 248, 248, 1)",
+      borderRadius: "6px",
+      boxShadow: "0 1px 5px rgb(200,200,200)",
+      overflow: 'hidden',
+    }
     const titleStyle = {
       height: navHeight - statusBarHeight + "px",
       position: "absolute",
@@ -554,7 +559,7 @@ class HouseTypeShow extends Component {
 
 
             {/* 公共配置 */}
-            <View className='at-row at-row__justify--around mt-4'>
+            <View className='at-row at-row__justify--around mt-4 '>
 
               {roomMatch_list && roomMatch_list.map((i, key) => key !== 5 ?
                 <View key={i.title} className='at-col' style={{ position: "relative" }}>
@@ -577,7 +582,7 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 位置信息 */}
-            <View className='text-bold text-huge mt-4'>位置信息</View>
+            <View className='text-bold text-huge mt-5'>位置信息</View>
             <Map
               className='mt-2'
               showLocation
@@ -597,7 +602,7 @@ class HouseTypeShow extends Component {
             </View>
 
             {/* 可租房间 */}
-            <View >
+           { roomList.length!==0&&<View >
               <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
               {
                 isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
@@ -623,7 +628,7 @@ class HouseTypeShow extends Component {
                 <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
               </View>
 
-            </View>
+            </View>}
 
 
             {/* 用户须知 */}
@@ -697,8 +702,11 @@ class HouseTypeShow extends Component {
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-2  mt-2 `}>
-                    <ApartmentTypeItem item={i} />
+
+                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom  '} at-col at-col-5 mt-1 `}>
+                     <View style={borderStyle} className='ml-2'>
+                       <ApartmentTypeItem  item={i} />
+                    </View>
                   </View>)}
               </ScrollView>
             </View>
@@ -706,7 +714,7 @@ class HouseTypeShow extends Component {
             {/* 附近公寓 */}
             {city && nearbyPost.length &&
               <View >
-                <View className='text-bold text-huge mt-2 mb-2'>附近公寓</View>
+                <View className='text-bold text-huge mt-1 mb-2'>附近公寓</View>
                 <ApartmentList
                   nearbyPost={nearbyPost}
                   mini

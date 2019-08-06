@@ -161,6 +161,7 @@ class ApartmentItem extends BaseComponent {
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
 
+
           {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
           {cover
             ? <Image src={src} mode='scaleToFill' className='apartment-image' />

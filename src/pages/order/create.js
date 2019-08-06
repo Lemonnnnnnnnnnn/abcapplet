@@ -198,13 +198,15 @@ class OrderCreate extends Component {
     return (
       <View>
         {/* 修改房间 */}
-        <OrderRoomListMask
-          rooms={rooms}
-          selectId={id}
-          show={showRoomList}
-          onSelectRoom={this.onSelectRoom}
-          onClose={this.onClose}
-        />
+
+          <OrderRoomListMask
+            rooms={rooms}
+            selectId={id}
+            show={showRoomList}
+            onSelectRoom={this.onSelectRoom}
+            onClose={this.onClose}
+          />
+
         <View className='p-3'>
           {/* 背景底色 */}
           <Decorate height='180' />
@@ -338,11 +340,11 @@ class OrderCreate extends Component {
                 <View className='at-row at-row__align--center'>
                   <View className='pt-3'>
                     <View className='text-bold text-normal'>{apartmentTitle}{roomNo}</View>
-                    <View className='text-small text-yellow mt-2'>
+                    {rooms.length!==0 && <View className='text-small text-yellow mt-2'>
                       {LOCALE_RENT}{LOCALE_SEMICOLON}
                       <Text className='text-normal'>{discountPrice}</Text>
                       {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
-                    </View>
+                    </View>}
                   </View>
                 </View>
               </View>
@@ -380,7 +382,7 @@ class OrderCreate extends Component {
           </View>
 
           {/* 立即预订 */}
-          <View className='at-row'>
+         { rooms.length!==0 ? <View className='at-row'>
             <View className='at-col-12'>
               <AtButton
                 circle
@@ -390,6 +392,17 @@ class OrderCreate extends Component {
               >{LOCALE_SIGN_NOW}</AtButton>
             </View>
           </View>
+          :
+          <View className='at-row'>
+            <View className='at-col-12'>
+              <AtButton
+                circle
+                disabled={disabled}
+                className='btn-grey btn-light-writh'
+
+              >该公寓已满房</AtButton>
+            </View>
+          </View>}
         </View>
       </View>
     )
