@@ -539,9 +539,8 @@ class AppointmentPost extends Component {
                     <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
                   </View>
                 </View>
-
                 {/* 选择户型 */}
-                <View className='mt-2 service-house-type'>
+                <View className='mt-2 '>
                   {
                     houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                       <AtTag
