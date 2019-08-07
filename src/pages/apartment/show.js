@@ -340,12 +340,12 @@ class ApartmentShow extends Component {
 
 
               {/* 地图 */}
-              <View className='at-row at-row__align--center mb-2'>
-                <View className='at-col at-col-1 mt-1'>
+              <View className='at-row  mb-2'>
+                <View className='at-col at-col-1 '>
                   <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
                 </View>
                 {
-                  position ? <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View> : <View className='text-secondary'>暂无相关位置信息</View>
+                  position ? <View className='text-large text-secondary  ml-1'>{position}</View> : <View className='text-secondary'>暂无相关位置信息</View>
                 }
 
               </View>

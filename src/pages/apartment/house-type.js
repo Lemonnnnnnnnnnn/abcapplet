@@ -139,7 +139,7 @@ class HouseTypeShow extends Component {
         apartmentTitle: data.apartment_title,
         lookTips: data.look_guide.tips || '',
         swipers: data.pictures.map(i => ({ url: i })),
-        title: `${data.title}·${data.apartment_title}`,
+        title: `${data.title} · ${data.apartment_title}`,
         priceTitle: data.price_title,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
@@ -339,7 +339,6 @@ class HouseTypeShow extends Component {
     } = houstType
 
 
-
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     const BrandingStyle = {
@@ -529,12 +528,12 @@ class HouseTypeShow extends Component {
 
               {/* 地图 */}
               {
-                position && <View className='at-row at-row__align--center'>
-                  <View className='at-col at-col-1 mt-1'>
+                position && <View className='at-row '>
+                  <View className='at-col at-col-1 '>
                     <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
                   </View>
-                  <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
-                </View>
+                  <View className=' text-large text-secondary  ml-1' >{position}</View>
+                </View> 
               }
 
 
