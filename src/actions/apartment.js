@@ -25,6 +25,7 @@ import {
   SHOW_APARTMENT,
   SHOW_HOUSE_TYPE,
   SET_APARTMENT_LIST,
+  SET_ARTICLE_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
   SET_APARTMENT_LOOK_LIST,
   TYPE_CBD_APARTMENT,
@@ -224,7 +225,7 @@ export const dispatchRecommendHouseType = payload => createAction({
  * 设置文章公寓
  */
 export const dispatchArticleApartment = (apartments) => ({
-  type: SET_APARTMENT_LIST,
+  type: SET_ARTICLE_APARTMENT_LIST,
   payload: {
     list: apartments,
     total: apartments.length,

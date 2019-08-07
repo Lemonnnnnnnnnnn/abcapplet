@@ -528,12 +528,12 @@ class HouseTypeShow extends Component {
 
               {/* 地图 */}
               {
-                position && <View className='at-row at-row__align--center'>
-                  <View className='at-col at-col-1 mt-1'>
+                position && <View className='at-row '>
+                  <View className='at-col at-col-1 '>
                     <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
                   </View>
-                  <View className='at-col at-col-3 text-large text-secondary  ml-1'>{position}</View>
-                </View>
+                  <View className=' text-large text-secondary  ml-1' >{position}</View>
+                </View> 
               }
 
 

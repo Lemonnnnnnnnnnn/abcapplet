@@ -102,7 +102,7 @@ class ArticleShow extends Component {
   }
 
   render() {
-    const { apartments } = this.props
+    const {  articleApartment } = this.props
     const { article, buttons, showDesc, navHeight, statusBarHeight } = this.state
 
     const navStyle = {
@@ -120,8 +120,8 @@ class ArticleShow extends Component {
 
     return (
       // 自定义导航栏
-      <View >
-        <View className='navStyle' style={navStyle}>
+      <View style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
+        <View className='navStyle' style={navStyle} >
           {/* 状态栏 */}
           <View style={statusBarStyle}></View>
           {/* 标题栏 */}
@@ -142,7 +142,7 @@ class ArticleShow extends Component {
 
 
         {article &&
-          <View className='m-3' style={{ paddingBottom: '10px', paddingTop: navHeight + "px" }}>
+          <View className='m-3' >
             <View>
               <View className='text-huge text-bold'>{article.title}</View>
               <View className='text-muted text-small mt-2'>{day.unix(article.create_time).format('YYYY-MM-DD')}</View>
@@ -160,7 +160,7 @@ class ArticleShow extends Component {
 
         <ApartmentListMask
           show={showDesc}
-          apartments={apartments.list}
+          apartments={articleApartment.list}
           onClose={this.onShowDescToggle}
         />
       </View >
