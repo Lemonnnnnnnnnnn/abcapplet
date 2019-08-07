@@ -102,7 +102,7 @@ class ArticleShow extends Component {
   }
 
   render() {
-    const {  articleApartment } = this.props
+    const { articleApartment } = this.props
     const { article, buttons, showDesc, navHeight, statusBarHeight } = this.state
 
     const navStyle = {
@@ -116,6 +116,17 @@ class ArticleShow extends Component {
     const titleStyle = {
       height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
     }
+
+    let articleChange = ''
+    
+    if (article) {
+      if (article.title.length > 10) {
+        articleChange = article.title.substr(0, 10) + "..."
+      } else {
+        articleChange = article.title
+      }
+    }
+
 
 
     return (
@@ -136,7 +147,7 @@ class ArticleShow extends Component {
               </View>
             </View>
             {/* title */}
-            <View className='text-normal navStyle-titleFontStyle'>{article.title}</View>
+            <View className='text-normal navStyle-titleFontStyle'>{articleChange}</View>
           </View>
         </View>
 

@@ -35,6 +35,7 @@ class ApartmentCbd extends Component {
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
+    cityCode: 0,
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -62,6 +63,8 @@ class ApartmentCbd extends Component {
 
     // 获取字典
     this.props.dispatchDistList(user.citycode)
+
+    this.setState({ cityCode: user.citycode })
 
     // 获取活动详情
     this.props.dispatchCbdShow(defaultPayload)
@@ -97,14 +100,21 @@ class ApartmentCbd extends Component {
    */
   onApartmentPayloadChange({ payload }) {
     const { defaultPayload } = this.state
+    console.log(defaultPayload)
     this.apartmentList.onReset({ ...defaultPayload, ...payload })
   }
+
+
+  // onApartmentPayloadChange({ payload }) {
+  //   this.apartmentList.onReset(payload)
+  // }
+
 
   /**
    * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
    */
 
-  onPageScroll({scrollTop}) {
+  onPageScroll({ scrollTop }) {
     const {
       selectIsFixed,
       selectScrollTop,
@@ -121,9 +131,12 @@ class ApartmentCbd extends Component {
 
   }
 
+
+
   render() {
-    const { apartments, dists, cbds } = this.props
-    const { id, defaultPayload , selectIsFixed } = this.state
+    const { apartments, dists, cbds, cbdApartment } = this.props
+    const { id, defaultPayload, selectIsFixed, cityCode } = this.state
+    console.log(dists)
 
     const cbd = cbds.find(i => i.id == id) || {
       title: '',
@@ -151,7 +164,10 @@ class ApartmentCbd extends Component {
           top={0}
           showCbd={false}
           isFixed={selectIsFixed}
-          
+          cbdSelect
+          cbdId={id}
+
+          cityCode={cityCode}
           autoSortDist={[]}
           cbdDist={dists.cbd_list}
           priceDist={dists.price_list}
@@ -164,9 +180,9 @@ class ApartmentCbd extends Component {
       <View className='mx-2'>
         {/* 公寓列表 */}
         <ApartmentList
-          key={apartments.type}
-          type={apartments.type}
-          items={apartments.list}
+          key={cbdApartment.type}
+          type={cbdApartment.type}
+          items={cbdApartment.list}
           ref={this.refApartmentList}
           defaultPayload={defaultPayload}
 

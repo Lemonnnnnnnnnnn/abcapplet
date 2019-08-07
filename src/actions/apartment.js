@@ -28,6 +28,7 @@ import {
   SET_ARTICLE_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
   SET_APARTMENT_LOOK_LIST,
+  SET_CBD_APARTMENT_LIST,
   TYPE_CBD_APARTMENT,
   TYPE_SEARCH_APARTMENT,
   TYPE_NORMAL_APARTMENT,
@@ -118,7 +119,7 @@ export const dispatchNextPageFavoriteHouseTypeList = payload => createAction({
 export const dispatchCbdApartmentList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_APARTMENT_LIST,
+  type: SET_CBD_APARTMENT_LIST,
   url: API_CBD_APARTMENT_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_CBD_APARTMENT })
 })

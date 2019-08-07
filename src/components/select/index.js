@@ -64,7 +64,7 @@ class Select extends BaseComponent {
 
   state = {
     payload: {
-      cbd: "", distance: 0, latitude: 0, longitude: 0,
+      distance: 0, latitude: 0, longitude: 0,
       price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
     },
     latitude: 0,
@@ -79,14 +79,14 @@ class Select extends BaseComponent {
   refSelectHouseType = (node) => this.selectHouseType = node
 
   onPayloadReset() {
-    const { cityCode } = this.props
+    const { cityCode, cbdId } = this.props
     this.selectCbd && this.selectCbd.onResetState()
     this.selectPrice && this.selectPrice.onResetState()
     this.selectHouseType && this.selectHouseType.onResetState()
     this.onPayloadChange({ payload: {} })
     this.setState({
       payload: {
-        cbd: "", distance: 0, latitude: 0, longitude: 0, city: cityCode,
+        cbd: cbdId ? cbdId : '', distance: 0, latitude: 0, longitude: 0, city: cityCode,
         price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
       }
     })
@@ -127,18 +127,19 @@ class Select extends BaseComponent {
 
 
     setTimeout(() => {
-      Taro.createSelectorQuery()
-        .in(this.$scope)
-        .select('.selectTab')
-        .boundingClientRect(rect =>
-          Taro.pageScrollTo({
-            scrollTop: parseInt(rect.right) * 2.27,
-            duration: 0
-          })
-        ).exec()
+      const currentPages = Taro.getCurrentPages()
+      if (currentPages[currentPages.length - 1].route === 'pages/common/home') {
+        Taro.createSelectorQuery()
+          .in(this.$scope)
+          .select('.selectTab')
+          .boundingClientRect(rect =>
+            Taro.pageScrollTo({
+              scrollTop: parseInt(rect.right) * 2.27,
+              duration: 0
+            })
+          ).exec()
+      }
     }, 500)
-
-
   }
 
   async componentWillMount() {
@@ -157,6 +158,16 @@ class Select extends BaseComponent {
   onMasksClick() {
     // TODO 传递搜索数据
     this.setState({ headerIndex: '' })
+  }
+
+  onJudge() {
+    const { showSelect } = this.props
+    if (showSelect) {
+      return Taro.pxTransform(92)
+    } else {
+      return Taro.pxTransform(-266)
+    }
+
   }
 
 
@@ -179,8 +190,9 @@ class Select extends BaseComponent {
       // autoSortDist,
       houseTypeDist,
       specialSelectDist,
-      showSelect
+      cbdSelect,
     } = this.props
+
 
     // 吸附相关样式
     const rootClassName = ['select']
@@ -188,12 +200,16 @@ class Select extends BaseComponent {
     const selectIsFixed = isFixed || headerIndex !== ''
     const classObject = { 'select-fixed': selectIsFixed }
 
-    const hideStyle = {
-      top: Taro.pxTransform(-266)
+    const posiStyle = {
+      top: this.onJudge()
     }
-    const showStyle = {
-      top: Taro.pxTransform(92)
-    }
+
+    // const hideStyle = {
+    //   top: Taro.pxTransform(-266)
+    // }
+    // const showStyle = {
+    //   top: Taro.pxTransform(92)
+    // }
 
 
     // Header 相关
@@ -288,7 +304,7 @@ class Select extends BaseComponent {
 
     return (show &&
       <View className='selectTab' style={{ height: Taro.pxTransform(174) }} onTouchMove={this.onMaskTouchMove}>
-        <View className={classNames(rootClassName, className, classObject)} style={showSelect ? showStyle : hideStyle} >
+        <View className={classNames(rootClassName, className, classObject)} style={cbdSelect ? '' : posiStyle} >
           {/* 头部 */}
           < SelectHeader
             className='mb-2'

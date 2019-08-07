@@ -533,7 +533,7 @@ class HouseTypeShow extends Component {
                     <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
                   </View>
                   <View className=' text-large text-secondary  ml-1' >{position}</View>
-                </View> 
+                </View>
               }
 
 
@@ -591,7 +591,9 @@ class HouseTypeShow extends Component {
                 longitude={longitude}
                 style={{ width: '100%' }}
                 onClick={this.onOpenMap}
-              />
+              >
+
+              </Map>
 
               {/* 周边生活 & 附近交通 */}
               <View className='at-row mt-2'>
@@ -705,7 +707,7 @@ class HouseTypeShow extends Component {
               {
                 types && <View style={ScrollWrapStyle} className='at-col'>
                   <ScrollView scrollX>
-                    { types.map((i, index) =>
+                    {types.map((i, index) =>
 
                       <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom  '} at-col at-col-5 mt-1 `}>
                         <View style={borderStyle} className='ml-1 mr-1' >
