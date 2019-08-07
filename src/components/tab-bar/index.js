@@ -29,8 +29,10 @@ class TabBar extends BaseComponent {
   }
 
   onOpenCallPhoneView() {
-    this.setState({ showCallPhoneView: true })
-    this.props.onCloseLittleMask()
+
+    Taro.makePhoneCall({
+      phoneNumber: '0529-5911297'
+    });
   }
 
 
@@ -40,6 +42,7 @@ class TabBar extends BaseComponent {
 
   onCallPhone() {
     Taro.makePhoneCall({ phoneNumber: '0529-5911297' })
+
   }
 
 
@@ -113,7 +116,7 @@ class TabBar extends BaseComponent {
 
         {/* 拨打电话 */}
         {/*  */}
-        <AtFloatLayout isOpened={showCallPhoneView} onClose={this.onCloseCallPhoneView} >
+        {/* <AtFloatLayout isOpened={showCallPhoneView} onClose={this.onCloseCallPhoneView} >
           <View className='at-col mb-3' >
             <View className='text-secondary text-smail at-row at-row__align--center at-row__justify--center' style={floatLayoutStyle} >0529-5911297</View>
             <View style={grayLineStyle}></View>
@@ -121,7 +124,7 @@ class TabBar extends BaseComponent {
             <View style={grayRudeLineStyle}></View>
             <View className=' at-row at-row__align--center at-row__justify--center' style={floatLayoutStyle}>取消</View>
           </View>
-        </AtFloatLayout>
+        </AtFloatLayout> */}
 
 
 
