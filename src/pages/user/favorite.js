@@ -92,7 +92,7 @@ class UserFavorite extends Component {
   }
 
   render() {
-    const { apartments, rooms , favoriteApartment } = this.props
+    const { apartments, rooms , favoriteApartment ,favoriteHouseType} = this.props
 
 
     return (
@@ -108,9 +108,9 @@ class UserFavorite extends Component {
             <ApartmentList
               initReset={false}
               className='mx-2'
-              key={favoriteApartment.type}
-              type={favoriteApartment.type}
-              items={favoriteApartment.list}
+              key={favoriteHouseType.type}
+              type={favoriteHouseType.type}
+              items={favoriteHouseType.list}
               ref={this.refHouseTypeList}
               defaultPayload={PAYLOAD_FAVORITE_HOUSE_TYPE_LIST}
 
@@ -138,19 +138,7 @@ class UserFavorite extends Component {
           </AtTabsPane>
 
           {/* 房间 */}
-          <AtTabsPane current={this.state.current} index={2} >
-            <RoomList className='mx-2'
-              initReset={false}
-              type={rooms.type}
-              items={rooms.list}
-              ref={this.refRoomList}
-              defaultPayload={PAYLOAD_FAVORITE_ROOM_LIST}
 
-              onDeleteFavorite={this.onDeleteFavorite}
-              dispatchList={this.props.dispatchFavoriteRoomList}
-              dispatchNextPageList={this.props.dispatchNextPageFavoriteRoomList}
-            />
-          </AtTabsPane>
         </AtTabs>
       </View>
     )

@@ -29,19 +29,21 @@ import {
   SET_NEXT_PAGE_APARTMENT_LIST,
   SET_APARTMENT_LOOK_LIST,
   SET_CBD_APARTMENT_LIST,
-  SET_FAVORITE_APARTMENT_LIST,
   TYPE_CBD_APARTMENT,
   TYPE_SEARCH_APARTMENT,
+  SET_NEXT_PAGE_FAVORITE_HOUSETYPE_LIST,
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
   TYPE_ACTIVITY_APARTMENT,
   TYPE_RECOMMEND_HOUSE_TYPE,
   TYPE_FAVORITE_HOUSE_TYPE,
   TYPE_ARTICLE_APARTMENT,
-
+  SET_FAVORITE_HOUSETYPE_LIST,
   TYPE_APPOINTMENT_CREATE,
   TYPE_APPOINTMENT_SHOW,
-  TYPE_APARTMENT_NEARBYPOST
+  TYPE_APARTMENT_NEARBYPOST,
+  SET_FAVORITE_APARTMENT_LIST,
+  SET_NEXT_PAGE_FAVORITE_APARTMENT_LIST,
 } from '@constants/apartment'
 
 
@@ -75,7 +77,7 @@ export const dispatchNextPageApartmentList = payload => createAction({
 export const dispatchFavoriteApartmentList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_APARTMENT_LIST,
+  type: SET_FAVORITE_APARTMENT_LIST,
   url: API_FAVORITE_APARTMENT_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_FAVORITE_APARTMENT })
 })
@@ -86,7 +88,7 @@ export const dispatchFavoriteApartmentList = payload => createAction({
 export const dispatchNextPageFavoriteApartmentList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  type: SET_NEXT_PAGE_FAVORITE_APARTMENT_LIST,
   url: API_FAVORITE_APARTMENT_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_FAVORITE_APARTMENT })
 })
@@ -97,7 +99,7 @@ export const dispatchNextPageFavoriteApartmentList = payload => createAction({
 export const dispatchFavoriteHouseTypeList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_FAVORITE_APARTMENT_LIST,
+  type: SET_FAVORITE_HOUSETYPE_LIST,
   url: API_FAVORITE_HOUSE_TYPE_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_FAVORITE_HOUSE_TYPE })
 })
@@ -108,7 +110,7 @@ export const dispatchFavoriteHouseTypeList = payload => createAction({
 export const dispatchNextPageFavoriteHouseTypeList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  type: SET_NEXT_PAGE_FAVORITE_HOUSETYPE_LIST,
   url: API_FAVORITE_HOUSE_TYPE_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_FAVORITE_HOUSE_TYPE })
 })
