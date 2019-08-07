@@ -18,6 +18,7 @@ import apartmentlook from './apartmentlook'
 import apartmentsearch from './searchApartment'
 import articleApartment from './articleApartment'
 import cbdApartment from './cbdApartment'
+import favoriteHouseType from './favoriteHouseType'
 import favoriteApartment from './favoriteApartment'
 
 export default combineReducers({
@@ -40,5 +41,6 @@ export default combineReducers({
   apartmentsearch,
   articleApartment,
   cbdApartment,
+  favoriteHouseType,
   favoriteApartment
 })
