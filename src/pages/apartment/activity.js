@@ -35,6 +35,7 @@ class ApartmentCbd extends Component {
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
+    cityCode : 0,
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -42,6 +43,8 @@ class ApartmentCbd extends Component {
   componentWillMount() {
     const { id } = this.$router.params
     const { payload: user } = this.props.dispatchUser()
+
+    this.setState({ cityCode: user.citycode })
 
     const {
       selectScrollTop,
@@ -127,7 +130,7 @@ class ApartmentCbd extends Component {
 
   render() {
     const { apartments, dists, activities } = this.props
-    const { id, defaultPayload, selectIsFixed } = this.state
+    const { id, defaultPayload, selectIsFixed , cityCode } = this.state
 
     const activity = activities.find(i => i.id == id) || {
       title: '',
@@ -155,6 +158,10 @@ class ApartmentCbd extends Component {
           top={0}
           isFixed={selectIsFixed}
           autoSortDist={[]}
+
+          cbdSelect
+          cityCode={cityCode}
+
           cbdDist={dists.cbd_list}
           priceDist={dists.price_list}
           houseTypeDist={dists.housetype_list}

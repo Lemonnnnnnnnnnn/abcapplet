@@ -454,6 +454,8 @@ class HouseTypeShow extends Component {
               <ApartmentRentDescriptionMask
                 cost={cost}
                 cost_info={cost_info}
+                isSign={isSign}
+
                 show={showRentDescription}
                 onClose={this.onCloseRentDescription}
                 typeId={id}

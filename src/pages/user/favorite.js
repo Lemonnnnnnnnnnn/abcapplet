@@ -92,7 +92,8 @@ class UserFavorite extends Component {
   }
 
   render() {
-    const { apartments, rooms } = this.props
+    const { apartments, rooms , favoriteApartment } = this.props
+
 
     return (
       <View class='favorite'>
@@ -107,9 +108,9 @@ class UserFavorite extends Component {
             <ApartmentList
               initReset={false}
               className='mx-2'
-              key={apartments.type}
-              type={apartments.type}
-              items={apartments.list}
+              key={favoriteApartment.type}
+              type={favoriteApartment.type}
+              items={favoriteApartment.list}
               ref={this.refHouseTypeList}
               defaultPayload={PAYLOAD_FAVORITE_HOUSE_TYPE_LIST}
 
@@ -124,9 +125,9 @@ class UserFavorite extends Component {
             <ApartmentList className='mx-2'
               isapartment='apartmrnt'
               initReset={false}
-              key={apartments.type}
-              type={apartments.type}
-              items={apartments.list}
+              key={favoriteApartment.type}
+              type={favoriteApartment.type}
+              items={favoriteApartment.list}
               ref={this.refApartmentList}
               defaultPayload={PAYLOAD_FAVORITE_APARTMENT_LIST}
 
