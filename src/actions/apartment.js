@@ -26,7 +26,7 @@ import {
   SHOW_HOUSE_TYPE,
   SET_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
-
+  SET_APARTMENT_LOOK_LIST,
   TYPE_CBD_APARTMENT,
   TYPE_SEARCH_APARTMENT,
   TYPE_NORMAL_APARTMENT,
@@ -207,10 +207,11 @@ export const dispatchHotSearch = payload => createAction({
 // /**
 //  * 推荐公寓列表
 //  */
+
 export const dispatchRecommendHouseType = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_APARTMENT_LIST,
+  type: SET_APARTMENT_LOOK_LIST,
   url: API_RECOMMEND_APARTMENT,
   cb: ({ data: { data } }) => ({
     list: data.list,

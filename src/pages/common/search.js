@@ -178,7 +178,7 @@ class CommonSearch extends  BaseComponent{
 
     const {
       dists,
-      apartments,
+      apartmentlook,
       apartmentsearch,
     } = this.props
 
@@ -235,9 +235,9 @@ class CommonSearch extends  BaseComponent{
         <ApartmentList
           mini
           show={showPreview === true}
-          key={apartments.type}
-          type={apartments.type}
-          items={apartments.list}
+          key={apartmentlook.type}
+          type={apartmentlook.type}
+          items={apartmentlook.list}
           ref={this.refRecommendApartmentList}
 
           defaultPayload={{ city }}
