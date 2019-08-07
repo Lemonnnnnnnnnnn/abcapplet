@@ -18,10 +18,15 @@ class AppartmentMatchingMask extends BaseComponent {
     }
 
 
+    onMaskTouchMove(e) {
+        return e.stopPropagation()
+    }
+
+
     render() {
-        const { show, facilitys ,onClose} = this.props
-        const roomMatch = facilitys.find(i=>{return i.type===2})
-        const publicMatch = facilitys.find(i=>{return i.type===1})
+        const { show, facilitys, onClose } = this.props
+        const roomMatch = facilitys.find(i => { return i.type === 2 })
+        const publicMatch = facilitys.find(i => { return i.type === 1 })
 
         const PublicConfiguration = {
             padding: " 5px 5px"
@@ -29,7 +34,7 @@ class AppartmentMatchingMask extends BaseComponent {
 
 
         return (
-            show && <View className=' apartment-mask'>
+            show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
                 <Board fixed='bottom' border='top'>
                     <AtIcon onClick={onClose} value='close' size='15' className='mt-3 mr-3' color='#888' style='float:right'></AtIcon>
                     <View style={{ textAlign: "center" }} className='text-huge text-bold mt-2'> 全部配套</View>
@@ -43,7 +48,7 @@ class AppartmentMatchingMask extends BaseComponent {
                                         <View className='text-small'>{i.title}</View>
                                     </View>
                                 )}
-                                {roomMatch ? <View></View>: <View className='text-secondary'>暂无相关数据</View> }
+                                {roomMatch ? <View></View> : <View className='text-secondary'>暂无相关数据</View>}
                             </View>
                         </View>
 
@@ -56,7 +61,7 @@ class AppartmentMatchingMask extends BaseComponent {
                                         <View className='text-small'>{i.title}</View>
                                     </View>
                                 )}
-                                {publicMatch ? <View></View>: <View className='text-secondary text-smail'>暂无相关数据</View> }
+                                {publicMatch ? <View></View> : <View className='text-secondary text-smail'>暂无相关数据</View>}
                             </View>
                         </View>
                     </View>

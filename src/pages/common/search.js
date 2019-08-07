@@ -34,7 +34,7 @@ import {
   ...apartmentActions,
   ...searchApartmentActions,
 })
-class CommonSearch extends  BaseComponent{
+class CommonSearch extends BaseComponent {
   config = {
     navigationBarTitleText: '公寓ABC',
   }
@@ -52,6 +52,7 @@ class CommonSearch extends  BaseComponent{
     // 搜索记录
     hotList: [],
     historyList: [],
+    cityCode: 0,
   }
 
   refSelect = (node) => this.select = node
@@ -63,6 +64,7 @@ class CommonSearch extends  BaseComponent{
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = this.props.dispatchUser()
     this.onReset(user.citycode)
+    this.setState({ cityCode: user.citycode })
   }
 
   /**
@@ -174,6 +176,7 @@ class CommonSearch extends  BaseComponent{
       hotList,
       historyList,
       defaultPayload,
+      cityCode
     } = this.state
 
     const {
@@ -251,6 +254,10 @@ class CommonSearch extends  BaseComponent{
           top={0}
           isFixed={false}
           autoSortDist={[]}
+          // 暂时复用商圈搜索框的信息
+          cbdSelect
+
+          cityCode={cityCode}
           cbdDist={dists.cbd_list}
           priceDist={dists.price_list}
           houseTypeDist={dists.housetype_list}

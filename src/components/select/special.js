@@ -61,7 +61,6 @@ class SelectSpecial extends BaseComponent {
     })
 
     this.props.onChange({ payload: { tags: arr.toString() } })
-
   }
 
   render() {

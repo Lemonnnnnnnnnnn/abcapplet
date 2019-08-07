@@ -15,7 +15,7 @@ const formatItem = (item, type) => {
     }
 }
 
-export default function apartment(state = APARTMENT_DEFAULT, action) {
+export default function articleApartment(state = APARTMENT_DEFAULT, action) {
     switch (action.type) {
         case SET_ARTICLE_APARTMENT_LIST: {
             const { list, total, type } = action.payload
