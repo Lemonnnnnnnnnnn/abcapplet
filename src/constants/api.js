@@ -1,7 +1,7 @@
 // 接口基础配置
 const isDev = process.env.NODE_ENV === 'development'
-export const DEV_HOST = "http://test.abc.411er.cn/mini"
-export const PROD_HOST = "http://test.abc.411er.cn/mini"
+export const DEV_HOST = "http://pre.abc.411er.cn/mini"
+export const PROD_HOST = "http://pre.abc.411er.cn/mini"
 export const HOST = isDev ? DEV_HOST : PROD_HOST
 export const PAGE_SIZE = 10
 
@@ -68,7 +68,7 @@ export const PAYLOAD_SEARCH_APARTMENT = { id: 0, city: 350200, search_key: '', c
 // 公寓列表
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
 //is_select字段只是用来判断解决首页刷新问题。
-export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, type_room : 0 , type_floor: 0, latitude: 0, longitude: 0, current_page: 1, page_size: PAGE_SIZE ,is_select:11111}
+export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, type_room : 0 , type_floor: 0, latitude: 0, longitude: 0, current_page: 1, page_size: PAGE_SIZE ,is_select:1,isNew:2}
 
 // 心愿单公寓列表
 export const API_FAVORITE_APARTMENT_LIST = `${HOST}/user/listCollectPost`

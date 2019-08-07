@@ -74,10 +74,8 @@ class ApartmentItem extends BaseComponent {
   }
 
   onNavigation() {
-
-
     const { apartment } = this.props
-    console.log(apartment)
+
     // const { url } = apartment
     const { id } = apartment
     // url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })

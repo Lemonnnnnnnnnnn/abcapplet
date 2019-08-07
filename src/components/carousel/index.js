@@ -127,13 +127,16 @@ class Carousel extends Component {
                 onClick={this.onNavigation.bind(this, item)}
                 className='mr-2 carousel-normal-item'
               >
+
                 <Image
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
                 />
+                <View>111</View>
                 {
                   haveText && <Text className='title text-large text-white'>{item.title}</Text>
                 }
+
                 {item.sum &&
                   <View style={countStyle} className='at-row at-row__align--center'>
                     <View className='at-col at-col-2'>
@@ -142,10 +145,43 @@ class Carousel extends Component {
                     <View className='at-col at-col-8 text-mini text-yellow ml-1' style={{ marginTop: "1Px" ,overflow:'hidden'}}>{item.sum}</View>
                   </View>
                 }
+
               </View>
+
             )}
+
           </ScrollView>
+
         }
+
+        { type === 'apartment' && <View>
+        <ScrollView scrollX className='carousel-normal' >
+            {carousel.map(item =>
+              <View
+                key={item.id}
+                style={imageStyle}
+                onClick={this.onNavigation.bind(this, item)}
+                className='mr-2 carousel-normal-item'
+              >
+
+                <Image
+                  src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                  mode='scaleToFill' style={imageStyle}
+                />
+                <View style={contentStyle}>
+                  <View className='mt-2 text-normal'>{item.title}</View>
+
+                </View>
+
+
+
+              </View>
+
+            )}
+
+          </ScrollView>
+
+        </View>}
       </View>
     )
   }

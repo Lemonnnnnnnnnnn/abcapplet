@@ -1,5 +1,6 @@
 import BaseComponent from '@components/base'
 import { PAGE_SIZE } from '@constants/api'
+import Taro from '@tarojs/taro'
 
 class BaseList extends BaseComponent {
   static defaultProps = {
@@ -18,14 +19,23 @@ class BaseList extends BaseComponent {
     loading: false,
     hasMore: true,
     payload: {},
+    latitude:0,
+    longitude:0,
   }
 
-  componentDidShow() {
+
+  async componentDidShow() {
     const { defaultPayload } = this.props
+    const { latitude, longitude } = await Taro.getLocation()
+
     const {is_select} = defaultPayload
-    if(!is_select){
-      this.props.initReset && this.onReset()
+    if(is_select===1){
+      this.onReset({...defaultPayload,latitude,longitude})
     }
+    // if(is_select!==1){
+    //   this.onReset()
+    // }
+
   }
 
   onReset(payload) {
