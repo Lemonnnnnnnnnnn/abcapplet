@@ -400,7 +400,7 @@ class OrderCreate extends Component {
                 disabled={disabled}
                 className='btn-grey btn-light-writh'
 
-              >该公寓已满房</AtButton>
+              >暂无可选房间</AtButton>
             </View>
           </View>}
         </View>
