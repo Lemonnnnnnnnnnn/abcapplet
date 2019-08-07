@@ -27,7 +27,7 @@ class ServicesHome extends Component {
   }
 
 
-  componentDidShow() {
+  componentWillMount() {
 
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
@@ -53,10 +53,10 @@ class ServicesHome extends Component {
 
 
 
-  componentDidHide() {
-    const { payload } = this.state
-    this.setState({ payload: { ...payload, current_page: 1 } })
-  }
+  // componentDidHide() {
+  //   const { payload } = this.state
+  //   this.setState({ payload: { ...payload, current_page: 1 } })
+  // }
 
 
   /**
