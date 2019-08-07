@@ -29,15 +29,7 @@ class ServicesHome extends Component {
   refAppointmentList =  (node) => this.appointmentList = node
 
 
-
-  // componentDidMount() {
-  //   console.log(222)
-  //   const { payload } = this.state
-  //   this.setState({ payload: { ...payload, current_page: 2 } })
-  // }
-
   componentDidShow(){
-    console.log(3333)
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
@@ -95,16 +87,15 @@ class ServicesHome extends Component {
   }
   //调转到地图找房
   onToLeft() {
-    // Taro.navigateTo({
-    //   url:'/pages/appointment/mapHouse/index'
-    // })
-
+    Taro.navigateTo({
+      url:'/pages/appointment/mapHouse/index'
+    })
   }
   //调转到通勤找房
   onToRight() {
-    // Taro.navigateTo({
-    //   url:'/pages/appointment/commuteHouse/index'
-    // })
+    Taro.navigateTo({
+      url:'/pages/appointment/commuteHouse/index'
+    })
   }
 
   render() {
