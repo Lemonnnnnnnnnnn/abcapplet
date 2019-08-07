@@ -19,6 +19,13 @@ class UserHeader extends BaseComponent {
   render() {
     const { username, mobile, onLogin, className } = this.props
 
+    let usernameChange = ''
+    if(username.length < 7){
+      usernameChange = username
+    }else{
+      usernameChange = username.substr(0,7) + "..."
+    }
+
     const userAvatar = (
       <View className='mr-3'>
         <AtAvatar circle openData={{ type: 'userAvatarUrl' }} />
@@ -28,7 +35,7 @@ class UserHeader extends BaseComponent {
     const userInfo = (
       <View className='at-row at-row__align--center'>
         <View className='at-col'>
-          <Text className='at-col text-super text-bold'>{username}</Text>
+          <Text className='at-col text-super text-bold'>{usernameChange}</Text>
           <Text className='at-col text-normal'>{mobile}</Text>
         </View>
       </View>

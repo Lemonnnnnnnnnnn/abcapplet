@@ -202,7 +202,11 @@ class AppointmentPost extends Component {
         i.type = !i.type
         i.active = !i.active
         // const { id: type_floor } = types[i.id]
-        this.setState({ Payload: { ...Payload, house_type: i.id } })
+        if(i.type === true && i.active ===true){
+          this.setState({ Payload: { ...Payload, house_type: i.id } })
+        }else{
+          this.setState({ Payload: { ...Payload, house_type: '' } })
+        }
       } else {
         i.type = false
         i.active = false
