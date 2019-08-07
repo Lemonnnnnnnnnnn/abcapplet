@@ -47,6 +47,7 @@ import {
   LOCALE_APARTMENT,
   LOCALE_RECOMMEND_APARTMENT,
 } from '@constants/locale'
+import BaseComponent from '../../components/base';
 
 @connect(state => state, {
   ...adActions,
@@ -60,13 +61,14 @@ import {
   ...apartmentActions,
   ...apartmentLookActions,
 })
-class CommonHome extends Component {
+class CommonHome extends BaseComponent {
   config = {
     navigationBarTitleText: '公寓ABC',
   }
 
   state = {
     payload: PAYLOAD_CREATE_DEMAND,
+    payloadApartment: PAYLOAD_APARTMENT_LIST,
     showCard: false,//显示需求卡1
     showNextCard: false,//显示需求卡2
     showPrice: false,//需求卡2价格显示
@@ -95,6 +97,9 @@ class CommonHome extends Component {
 
     roomList: [],
     floorList: [],
+
+    latitude :'',
+    longitude: '',
 
 
     // 搜索相关
@@ -139,10 +144,12 @@ class CommonHome extends Component {
 
   async componentWillMount() {
 
-    this.props.dispatchGetUserMsg().then((res) => {
-      if (!res) {
+    // const { payloadApartment,payload } =this.state
+    this.props.dispatchGetUserMsg().then((res)=>{
+      if(!res){
         this.onLogin()
       }
+
     })
 
     const {
@@ -182,6 +189,7 @@ class CommonHome extends Component {
   }
   //分享收藏小程序
   onShareAppMessage(res) {
+
     if (res.from === 'button') {
       // 来自页面内转发按钮
     }
@@ -191,7 +199,17 @@ class CommonHome extends Component {
     }
   }
 
-  componentDidShow() {
+
+  async componentDidShow() {
+    const { payloadApartment  } =this.state
+    const { latitude, longitude } = await Taro.getLocation()
+    this.setState({
+          //  latitude ,
+          //  longitude ,
+           payloadApartment:{...payloadApartment, latitude:latitude, longitude:longitude,}
+        })
+
+
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res) => {
       if (res && res.data.data.user.is_guide === 0) {
@@ -200,6 +218,7 @@ class CommonHome extends Component {
     })
 
   }
+
 
   /**
    * 选择城市
@@ -640,6 +659,7 @@ class CommonHome extends Component {
       selectorChecked,
       selectIsFixed,
       cityCode,
+      payloadApartment
     } = this.state
 
     const {
@@ -687,12 +707,12 @@ class CommonHome extends Component {
                 title={LOCALE_HOT_CBD}
               />
               <Carousel
-                haveText={false}
                 type='normal'
                 imageHeight='176'
                 imageWidth='312'
                 carousel={cbds}
                 hasContent={false}
+                haveText={false}
               />
             </View>
           }
@@ -706,6 +726,7 @@ class CommonHome extends Component {
               imageWidth='686'
               carousel={ads}
               hasContent={false}
+              haveText={false}
             />
           }
 
@@ -717,11 +738,12 @@ class CommonHome extends Component {
                 title={LOCALE_RECOMMEND_APARTMENT}
               />
               <Carousel
-                type='normal'
+                type='apartment'
                 imageHeight='275'
                 imageWidth='642'
                 carousel={recommends}
                 hasContent={false}
+                haveText={false}
               />
             </View>
           }
@@ -772,12 +794,11 @@ class CommonHome extends Component {
 
             <View className='home-apartment ml-3 mr-3'>
               <ApartmentList
-                home
                 key={apartments.type}
                 type={apartments.type}
                 items={apartments.list}
                 ref={this.refApartmentList}
-                defaultPayload={PAYLOAD_APARTMENT_LIST}
+                defaultPayload={payloadApartment}
                 onCreateFavorite={this.onCreateFavorite}
                 onDeleteFavorite={this.onDeleteFavorite}
                 dispatchList={this.props.dispatchApartmentList}

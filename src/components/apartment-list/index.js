@@ -12,6 +12,8 @@ import { LOCALE_NO_DATA } from '@constants/locale'
 
 class ApartmentList extends BaseList {
 
+
+
   render() {
     const ScrollWrapStyle = {
       whiteSpace: "nowrap"
@@ -24,7 +26,7 @@ class ApartmentList extends BaseList {
     }
 
 
-    const { items, className, type, mini, show, nearbyPost } = this.props
+    const { items, className, type, mini, show, nearbyPost ,defaultPayload} = this.props
     const { hasMore, loading, page } = this.state
 
 

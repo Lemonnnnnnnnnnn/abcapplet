@@ -43,6 +43,7 @@ import {
   TYPE_APARTMENT_NEARBYPOST
 } from '@constants/apartment'
 
+
 /**
  * 获取公寓列表
  * @param {*} payload
