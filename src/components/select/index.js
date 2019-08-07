@@ -86,7 +86,7 @@ class Select extends BaseComponent {
     this.onPayloadChange({ payload: {} })
     this.setState({
       payload: {
-        cbd: "", distance: 0, latitude: 0, longitude: 0, city : cityCode,
+        cbd: "", distance: 0, latitude: 0, longitude: 0, city: cityCode,
         price_high: 0, price_low: 0, tags: "", type_floor: 0, type_room: 0
       }
     })
@@ -282,58 +282,59 @@ class Select extends BaseComponent {
 
 
 
-    return (show && <View className='selectTab' style={{ height: Taro.pxTransform(174) }}>
-      <View className={classNames(rootClassName, className, classObject)} style={showSelect ? showStyle : hideStyle} >
-        {/* 头部 */}
-        < SelectHeader
-          className='mb-2'
-          items={header}
-          index={headerIndex}
-          onClick={this.onHeaderClick}
-        />
-        {/* 对应内容(想住的区域) */}
-        <SelectCbd
-          ref={this.refSelectCbd}
-          items={cbdDist}
-          show={headerIndex === 'cbd'}
-          onChange={this.onPayloadChange}
-        />
+    return (show &&
+      <View className='selectTab' style={{ height: Taro.pxTransform(174) }}>
+        <View className={classNames(rootClassName, className, classObject)} style={showSelect ? showStyle : hideStyle} >
+          {/* 头部 */}
+          < SelectHeader
+            className='mb-2'
+            items={header}
+            index={headerIndex}
+            onClick={this.onHeaderClick}
+          />
+          {/* 对应内容(想住的区域) */}
+          <SelectCbd
+            ref={this.refSelectCbd}
+            items={cbdDist}
+            show={headerIndex === 'cbd'}
+            onChange={this.onPayloadChange}
+          />
 
-        {/* 对应内容(房子类型) */}
-        <SelectHouseType
-          ref={this.refSelectHouseType}
-          items={houseTypeDist}
-          show={headerIndex === 'house-type'}
-          onChange={this.onPaylocadHouseTypeChange}
-        />
+          {/* 对应内容(房子类型) */}
+          <SelectHouseType
+            ref={this.refSelectHouseType}
+            items={houseTypeDist}
+            show={headerIndex === 'house-type'}
+            onChange={this.onPaylocadHouseTypeChange}
+          />
 
-        {/* 对应内容（预期价格） */}
-        <SelectPrice
-          ref={this.refSelectPrice}
-          items={priceDist}
-          show={headerIndex === 'price'}
-          onChange={this.onPayloadChange}
-        />
+          {/* 对应内容（预期价格） */}
+          <SelectPrice
+            ref={this.refSelectPrice}
+            items={priceDist}
+            show={headerIndex === 'price'}
+            onChange={this.onPayloadChange}
+          />
 
-        {/* 按钮 */}
-        <SelectButton
-          show={headerIndex !== ''}
-          onResetClick={this.onPayloadReset}
-          onConfirmClick={this.onPayloadChangeAndRefresh}
-        />
+          {/* 按钮 */}
+          <SelectButton
+            show={headerIndex !== ''}
+            onResetClick={this.onPayloadReset}
+            onConfirmClick={this.onPayloadChangeAndRefresh}
+          />
 
-        {/* 特殊需求 */}
-        <SelectSpecial
-          show={headerIndex === ''}
-          ref={this.refSelectSpecial}
-          items={specialSelectDist}
-          onChange={this.onPayloadChangeAndRefresh}
-        />
+          {/* 特殊需求 */}
+          <SelectSpecial
+            show={headerIndex === ''}
+            ref={this.refSelectSpecial}
+            items={specialSelectDist}
+            onChange={this.onPayloadChangeAndRefresh}
+          />
 
-        {/* 遮罩层 */}
-        <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
+          {/* 遮罩层 */}
+          <Masks show={headerIndex !== ''} onClick={this.onMasksClick}></Masks>
+        </View >
       </View >
-    </View >
     )
   }
 }

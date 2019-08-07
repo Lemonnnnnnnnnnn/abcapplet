@@ -8,6 +8,7 @@ import * as distActions from '@actions/dist'
 import * as userActions from '@actions/user'
 import * as cityActions from '@actions/city'
 import * as apartmentActions from '@actions/apartment'
+import * as searchApartmentActions from '@actions/searchApartment'
 
 // 自定义组件
 import Select from '@components/select'
@@ -30,6 +31,7 @@ import {
   ...userActions,
   ...distActions,
   ...apartmentActions,
+  ...searchApartmentActions,
 })
 class CommonSearch extends Component {
   config = {
@@ -176,6 +178,7 @@ class CommonSearch extends Component {
     const {
       dists,
       apartments,
+      apartmentsearch,
     } = this.props
 
     return <View className='page-white'>
@@ -258,9 +261,9 @@ class CommonSearch extends Component {
         <ApartmentList
           show={showPreview === false}
           initReset={false}
-          key={apartments.type}
-          type={apartments.type}
-          items={apartments.list}
+          key={apartmentsearch.type}
+          type={apartmentsearch.type}
+          items={apartmentsearch.list}
           ref={this.refSearchApartmentList}
 
           defaultPayload={defaultPayload}

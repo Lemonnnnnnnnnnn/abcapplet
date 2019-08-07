@@ -19,15 +19,19 @@ import {
 import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
 
+import {
+  PAGE_USER_AUTH
+} from '@constants/page'
+
 
 // let month = "01"
 // let day = "01"
 // let time = "08:00"
 
 const nowTime = new Date()
-let currentMonth =  nowTime.getMonth()
-let currentDay =  nowTime.getDate()
-let currentHours =  nowTime.getHours()
+let currentMonth = nowTime.getMonth()
+let currentDay = nowTime.getDate()
+let currentHours = nowTime.getHours()
 
 @connect(state => state, {
   ...userActions,
@@ -56,16 +60,21 @@ class AppointmentPost extends Component {
     width: 375 * 2,
     height: 200 * 2,
     users: {
-    headimgurl: '',
+      headimgurl: '',
     },
     houstType: {
-    swipers: [],
+      swipers: [],
     },
     screenHeight: '',
     screenWidth: '',
     houseTypeList: [],
-    currentTime : [],
-    }
+    currentTime: [],
+    login: false,
+  }
+
+  onLogin() {
+    Taro.navigateTo({ url: PAGE_USER_AUTH })
+  }
 
 
   async componentDidMount() {
@@ -76,22 +85,28 @@ class AppointmentPost extends Component {
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
     await this.props.dispatchGetUserMsg().then(res => {
-      const name = res.data.data.user.name
-      const tel = res.data.data.user.mobile
-      name ? this.setState({
-        name: name,
-      }):
-      this.setState({
-        name: res.data.data.user.username,
-      })
-      tel && this.setState({
-        tel: tel,
-      })
+      if (res) {
+        const name = res.data.data.user.name
+        const tel = res.data.data.user.mobile
+        name ? this.setState({
+          name: name,
+        }) :
+          this.setState({
+            name: res.data.data.user.username,
+          })
+        tel && this.setState({
+          tel: tel,
+        })
+        this.setState({ login: true })
+      } else {
+        this.onLogin()
+      }
     })
 
     const { payload } = await this.props.dispatchUser()
+
     this.setState({
-      Payload: { ...Payload, apartment: data.apartment_id ,house_type:id},
+      Payload: { ...Payload, apartment: data.apartment_id, house_type: id },
       users: {
         headimgurl: payload.headimgurl,
       },
@@ -146,8 +161,8 @@ class AppointmentPost extends Component {
 
 
     // 计算可供选择的时间列表
-    let currentTime = [1,currentMonth,currentDay - 1,currentHours - 7]
-    this.setState({currentTime :currentTime })
+    let currentTime = [1, currentMonth, currentDay - 1, currentHours - 7]
+    this.setState({ currentTime: currentTime })
 
     const finalList = []
 
@@ -198,17 +213,15 @@ class AppointmentPost extends Component {
     })
   }
 
-  onClickPicker(){
+  onClickPicker() {
     const { Payload, tel, name, range } = this.state
     const year = (range[0][0]).split("年")[0]
-    const payloadStr = year + "-" + this.onJudgeTen(currentMonth  + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
+    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
     this.setState({
       dateSel: payloadStr,
       Payload: { ...Payload, order_time: payloadStr, mobile: tel, name: name }
     })
   }
-
-
 
   onColumnChange = e => {
     const { column, value } = e.detail
@@ -216,11 +229,11 @@ class AppointmentPost extends Component {
     const year = (range[0][0]).split("年")[0]
 
 
-    if (column === 1) { currentMonth = value  }
+    if (column === 1) { currentMonth = value }
     if (column === 2) { currentDay = value + 1 }
     if (column === 3) { currentHours = value + 7 }
 
-    const payloadStr = year + "-" + this.onJudgeTen(currentMonth  + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
+    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
 
     this.setState({
       dateSel: payloadStr,
@@ -329,7 +342,7 @@ class AppointmentPost extends Component {
     }
   }
   onChenkPayload() {
-    const { name, tel, dateSel, timeSel , Payload } = this.state
+    const { name, tel, dateSel, timeSel, Payload, login } = this.state
     if (name === '姓名'
       || tel === '电话'
       || dateSel === '请选择看房日期'
@@ -339,15 +352,25 @@ class AppointmentPost extends Component {
         title: '请检查数据是否正确',
       })
       return false
+    } else if (!login) {
+      Taro.showToast({
+        icon: 'none',
+        title: '您还未登录',
+      })
+      return false 
     }
     return true
   }
 
 
-  onCloseRequirement(){
+  onCloseRequirement() {
     clearInterval(this.state.sectime);
     clearInterval(this.state.getPost);
     Taro.navigateBack()
+  }
+
+  componentWillUnmount(){
+    this.onCloseRequirement()
   }
 
 
@@ -414,8 +437,8 @@ class AppointmentPost extends Component {
 
   }
   render() {
-    const { houstType, height, users, tel, showInformation,name,
-      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range , currentTime } = this.state
+    const { houstType, height, users, tel, showInformation, name,
+      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime } = this.state
     // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
 
 
@@ -518,7 +541,7 @@ class AppointmentPost extends Component {
                 </View>
 
                 {/* 选择户型 */}
-                <View className='mt-2' style={{height : "80px"}}>
+                <View className='mt-2 service-house-type'>
                   {
                     houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                       <AtTag
@@ -531,7 +554,7 @@ class AppointmentPost extends Component {
                         active={i.active}>
                         <View style={fontStyle}>{i.title}</View>
                       </AtTag>
-                    ):<View className='text-secondary ml-3'>暂无可选户型</View>
+                    ) : <View className='text-secondary ml-3'>暂无可选户型</View>
                   }
                 </View>
 
@@ -547,7 +570,7 @@ class AppointmentPost extends Component {
 
                     {/* <View className='text-small '>选择看房日期</View> */}
 
-                    <Picker onClick={this.onClickPicker} value={currentTime}  mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
+                    <Picker onClick={this.onClickPicker} value={currentTime} mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
                       <View className='text-small'>
                         {this.state.dateSel}
                       </View>

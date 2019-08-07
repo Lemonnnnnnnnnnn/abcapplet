@@ -725,6 +725,7 @@ class CommonHome extends Component {
                 imageWidth='414'
                 carousel={activities}
                 hasContent={false}
+                haveText={false}
               />
             </View>
           }

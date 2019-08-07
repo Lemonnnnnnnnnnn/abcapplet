@@ -246,7 +246,7 @@ class ApartmentShow extends Component {
       // backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "6px",
       boxShadow: "0 1px 5px rgb(200,200,200)",
-      overflow: 'hidden',
+      // overflow: 'hidden',
     }
 
     const navStyle = {
@@ -263,7 +263,7 @@ class ApartmentShow extends Component {
     }
 
     return (
-      <View className='mb-3'>
+      <View style={{overflow : "hidden"}}>
 
         {/* 自定义导航栏 */}
         <View className='navStyle' style={navStyle}>
@@ -296,7 +296,7 @@ class ApartmentShow extends Component {
           onClick={this.onClick}
         />
 
-        <View onClick={this.onCloseLittleMask} style={{ paddingTop: navHeight + "px" }}>
+        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
 
           <ApartmentContainer
             swipers={swipers}
@@ -317,7 +317,7 @@ class ApartmentShow extends Component {
               <View className='mt-2'>
                 {rules.length ? rules.map(i =>
                   <View key={i.id} className=' mt-2 mr-3 mb-3'>
-                    <Text className={`text-normal badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                    <Text className={`text-smail badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
                     <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                   </View>
                 ) : <View className='text-secondary'>暂无相关活动信息</View>
@@ -355,10 +355,10 @@ class ApartmentShow extends Component {
 
             {/* 公寓列表 */}
 
-            <View style={ScrollWrapStyle} className='at-col ml-3' >
+            <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pr-3  mt-2 mr-1`}>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pl-1 pr-2 pb-1  mt-2 mr-1`}>
                     <View style={borderStyle}>
                       <ApartmentTypeItem apartmentDetail item={i} />
                     </View>
@@ -464,8 +464,8 @@ class ApartmentShow extends Component {
             </View>
 
             {/* 附近公寓 */}
-            {city &&
-              <View className='mb-5 ml-3'>
+            {city && nearbyPost.length &&
+              <View className='ml-3'>
                 <View className='text-bold text-huge mt-4 mb-3'>附近公寓</View>
                 <ApartmentList
                   nearbyPost={nearbyPost}

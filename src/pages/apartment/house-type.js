@@ -64,7 +64,6 @@ class HouseTypeShow extends Component {
     showMatch: false,
     showApartRoom: true,
     nearbyPost: [],
-    iphone: false,
   }
 
   async componentDidMount() {
@@ -75,9 +74,9 @@ class HouseTypeShow extends Component {
     await Taro.getSystemInfo().then(res => {
       this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
       if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight, iphone: true })
+        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
       } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight, iphone: true })
+        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
       }
     })
 
@@ -327,7 +326,7 @@ class HouseTypeShow extends Component {
 
     const { houstType, map, buttons, showRentDescription,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, statusBarHeight, iphone } = this.state
+      showApartRoom, nearbyPost, showLittleMask, navHeight, statusBarHeight } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -451,7 +450,6 @@ class HouseTypeShow extends Component {
           >
 
             <View className='ml-3 mr-3'>
-
 
 
               <ApartmentRentDescriptionMask
@@ -705,17 +703,20 @@ class HouseTypeShow extends Component {
 
               </View>
 
-              <View style={ScrollWrapStyle} className='at-col'>
-                <ScrollView scrollX>
-                  {types && types.map((i, index) =>
+              {
+                types && <View style={ScrollWrapStyle} className='at-col'>
+                  <ScrollView scrollX>
+                    { types.map((i, index) =>
 
-                    <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom  '} at-col at-col-5 mt-1 `}>
-                      <View style={borderStyle} className='mr-2' >
-                        <ApartmentTypeItem item={i} />
-                      </View>
-                    </View>)}
-                </ScrollView>
-              </View>
+                      <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom  '} at-col at-col-5 mt-1 `}>
+                        <View style={borderStyle} className='ml-1 mr-1' >
+                          <ApartmentTypeItem item={i} />
+                        </View>
+                      </View>)}
+                  </ScrollView>
+                </View>
+              }
+
 
               {/* 附近公寓 */}
               {city && nearbyPost.length &&

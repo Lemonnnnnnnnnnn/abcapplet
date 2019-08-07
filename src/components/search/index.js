@@ -34,6 +34,7 @@ class Search extends BaseComponent {
     focus: false,
   }
 
+
   onNavigation() {
     const { isInput } = this.props
     !isInput && Taro.navigateTo({ url: PAGE_SEARCH })
@@ -64,6 +65,8 @@ class Search extends BaseComponent {
       payload: { search_key: value }
     })
   }
+
+  
 
 
   render() {

@@ -26,7 +26,6 @@ class BaseList extends BaseComponent {
     if(!is_select){
       this.props.initReset && this.onReset()
     }
-
   }
 
   onReset(payload) {

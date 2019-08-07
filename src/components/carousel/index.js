@@ -18,6 +18,7 @@ class Carousel extends Component {
     hasContent: true,
     contentHeight: 170,
     displayMultipleItems: 1,
+    haveText:true
   }
 
   onNavigation({ url, title }) {
@@ -57,6 +58,7 @@ class Carousel extends Component {
       hasContent,
       contentHeight,
       displayMultipleItems,
+      haveText,
     } = this.props
 
     const countStyle = {
@@ -129,7 +131,9 @@ class Carousel extends Component {
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
                 />
-                <Text className='title text-large text-white'>{item.title}</Text>
+                {
+                  haveText && <Text className='title text-large text-white'>{item.title}</Text>
+                }
                 {item.sum &&
                   <View style={countStyle} className='at-row at-row__align--center'>
                     <View className='at-col at-col-3'>

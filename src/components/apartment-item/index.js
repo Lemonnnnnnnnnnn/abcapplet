@@ -99,30 +99,12 @@ class ApartmentItem extends BaseComponent {
     } = apartment
 
 
-    const imageStyle = {
-      width: '100%',
-      height: '100%',
-    }
-
     const headerStyle = {
       width: '100%',
       height: Taro.pxTransform(height),
     }
 
-    const heartWrap = {
-      padding: '10px',
-    }
 
-    const heartNum = {
-      top: 0,
-      position: 'absolute',
-      textAlign: 'center',
-      fontSize: "15px",
-      left: '50%',
-      top: '42%',
-      transform: 'translate(-50%,-50%)',
-      color: '#FFC919'
-    }
 
     const fontSize = mini ? "10px" : "15px"
     const padding = mini ? "0 10px" : "2px 12px"
@@ -133,16 +115,6 @@ class ApartmentItem extends BaseComponent {
       fontSize: fontSize,
     }
 
-    const boxShadowStyle = {
-      borderRadius: "6px",
-      boxShadow: "0 1px 5px rgb(200,200,200)",
-      overflow: 'hidden',
-      marginBottom: "20px"
-    }
-
-    const cardMarginStyle = {
-      marginBottom: "20px"
-    }
 
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -155,6 +127,18 @@ class ApartmentItem extends BaseComponent {
     const isCollect = type === TYPE_FAVORITE_APARTMENT
       || type === TYPE_FAVORITE_HOUSE_TYPE
       || is_collect
+
+    let cbdTitle = ''
+    if (cbd) {
+      cbdTitle = cbd.map(i => i.title).toString().replace(',', ' / ')
+    }
+    
+    if (mini) {
+      if (cbdTitle.length > 8) {
+        cbdTitle = cbdTitle.substring(0, 8) + "..."
+      }
+    }
+
 
     return (
       <View className={home === null ? 'apartment-box-shadow-style' : 'apartment-card-margin-style'} onClick={this.onNavigation}>
@@ -169,9 +153,12 @@ class ApartmentItem extends BaseComponent {
           }
 
           {/* 户型 cbd 列表 */}
-          <View className='apartment-header-title'>
-            {cbd && cbd.map(i => i.title).toString().replace(',', ' / ')}
-          </View>
+          {
+            cbd && <View className='apartment-header-title'>
+              {cbdTitle}
+            </View>
+          }
+
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
           {apartmentTitle && <View style={apartmentHeaderType} className=' text-large apartment-header-type'>{apartmentTitle}</View>}
