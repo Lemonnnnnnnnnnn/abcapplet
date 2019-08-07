@@ -73,7 +73,7 @@ class AppointmentPost extends Component {
   }
 
   onLogin() {
-    Taro.navigateTo({ url: PAGE_USER_AUTH })
+    Taro.reLaunch({ url: PAGE_USER_AUTH })
   }
 
 
@@ -361,7 +361,7 @@ class AppointmentPost extends Component {
         icon: 'none',
         title: '您还未登录',
       })
-      return false 
+      return false
     }
     return true
   }
@@ -543,9 +543,8 @@ class AppointmentPost extends Component {
                     <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
                   </View>
                 </View>
-
                 {/* 选择户型 */}
-                <View className='mt-2 service-house-type'>
+                <View className='mt-2 '>
                   {
                     houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                       <AtTag

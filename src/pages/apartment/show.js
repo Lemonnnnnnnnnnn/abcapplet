@@ -281,7 +281,7 @@ class ApartmentShow extends Component {
               </View>
             </View>
             {/* title */}
-            <View className='text-normal navStyle-titleFontStyle'>公寓详情</View>
+            <View className='text-large navStyle-titleFontStyle text-bold'>公寓详情</View>
           </View>
         </View>
 

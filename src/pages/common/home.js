@@ -17,6 +17,10 @@ import RequirementHouseMask from '@components/requirement-card-mask-house'
 import RequirementCbdMask from '@components/requirement-card-mask-cbd'
 import classNames from 'classnames'
 
+import {
+  PAGE_USER_AUTH
+} from '@constants/page'
+
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as adActions from '@actions/ad'
@@ -127,9 +131,19 @@ class CommonHome extends Component {
 
   }
 
+  onLogin() {
+    Taro.reLaunch({ url: PAGE_USER_AUTH })
+  }
+
   refApartmentList = (node) => this.apartmentList = node
 
   async componentWillMount() {
+
+    this.props.dispatchGetUserMsg().then((res)=>{
+      if(!res){
+        this.onLogin()
+      }
+    })
 
     const {
       searchScrollTop,

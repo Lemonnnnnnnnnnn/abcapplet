@@ -432,7 +432,7 @@ class HouseTypeShow extends Component {
               </View>
             </View>
             {/* title */}
-            <View className='text-normal navStyle-titleFontStyle'>户型详情</View>
+            <View className='text-large navStyle-titleFontStyle text-bold'>户型详情</View>
           </View>
         </View>
 
