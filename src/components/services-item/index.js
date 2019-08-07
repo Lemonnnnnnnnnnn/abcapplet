@@ -59,9 +59,9 @@ class ServiceItem extends BaseComponent {
   onFourClick(value) {
     switch (value) {
       case 1: {
-          const { service } = this.props
-          const {  server_id } = service
-        if( server_id !==0){
+        const { service } = this.props
+        const { server_id } = service
+        if (server_id !== 0) {
           Taro.navigateTo({
             url: `${PAGE_APPOINTMENT_MESSAGE}?id=${this.props.id}&time=${this.props.time}&appointmentTitle=${this.props.service.apartment_title}&appointmentTime=${this.props.service.order_time}`
           });
@@ -71,7 +71,8 @@ class ServiceItem extends BaseComponent {
             icon: 'none',
             duration: 2000
           })
-        }}
+        }
+      }
         break
       case 2:
         const { service } = this.props
@@ -132,13 +133,22 @@ class ServiceItem extends BaseComponent {
       showIntention: false
     })
   }
+
+  onalert(){
+    Taro.showToast({
+      title: '暂不支持该功能',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+
+
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
     const { service } = this.props
 
     const { id, cover, apartment_title, house_type_title,
-      order_time, server_id, server_user, comment, look_time, intention, remark, date, status } = service
-
+      order_time, server_id, server_user, comment, look_time, intention, remark, date, status, is_sign } = service
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -231,10 +241,20 @@ class ServiceItem extends BaseComponent {
                 </View>
               )}
             </View>
-            <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
-              <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
-              <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
-            </View>
+            {
+              is_sign
+                ?
+                <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
+                  <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
+                  <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
+                </View>
+                :
+                <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button-gray at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onalert} >
+                  <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
+                  <View style='font-size:10px ;color:#888888'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
+                </View>
+            }
+
           </View>
           {/* 头部 公寓类型以及查看详情 */}
           <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >

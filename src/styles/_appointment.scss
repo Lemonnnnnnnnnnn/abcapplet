@@ -1,22 +1,29 @@
 @import "overrides";
 
-.service{
-  &-button{
-    background:#FFC919;
-    border-radius:45px * $hd;
-    text-align:center;
-    align-items:center;
+.service {
+  &-button {
+    background: #ffc919;
+    border-radius: 45px * $hd;
+    text-align: center;
+    align-items: center;
+    &-gray {
+      border-radius: 45px * $hd;
+      text-align: center;
+      align-items: center;
+      border-color: #F2F2F2;
+      background: #F2F2F2;
+    }
   }
-  &-head{
-    position:absolute ;
-    left:23px ;
+  &-head {
+    position: absolute;
+    left: 23px;
     top: 0px;
   }
-  &-line{
-    width:0px * $hd;
-    height:30px * $hd;
-    border:1px solid rgba(242,242,242,1);
-    opacity:1;
+  &-line {
+    width: 0px * $hd;
+    height: 30px * $hd;
+    border: 1px solid rgba(242, 242, 242, 1);
+    opacity: 1;
   }
 }
 
@@ -31,12 +38,10 @@
 //   box-shadow:0px 3px 6px rgba(0,0,0,0.04);
 // }
 
-
-.font-center{
-  text-align:center;
-  align-items:center
+.font-center {
+  text-align: center;
+  align-items: center;
 }
-
 
 .message {
   &-item {
