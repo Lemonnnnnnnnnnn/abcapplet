@@ -23,7 +23,7 @@ import AppartmentMatchingMask from '@components/apartment-matching-mask'
 // 自定义变量
 import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
-import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC } from '@constants/apartment'
+import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC , TYPE_FAVORITE_APARTMENT} from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
@@ -729,7 +729,7 @@ class HouseTypeShow extends Component {
                     nearbyPost={nearbyPost}
                     mini
                     key={apartments.type}
-                    type={apartments.type}
+                    type={TYPE_FAVORITE_APARTMENT}
                     items={apartments.list}
                     defaultPayload={{ city }}
                     dispatchList={this.props.dispatchRecommendHouseType}
