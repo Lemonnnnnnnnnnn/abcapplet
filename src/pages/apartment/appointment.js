@@ -202,9 +202,9 @@ class AppointmentPost extends Component {
         i.type = !i.type
         i.active = !i.active
         // const { id: type_floor } = types[i.id]
-        if(i.type === true && i.active ===true){
+        if (i.type === true && i.active === true) {
           this.setState({ Payload: { ...Payload, house_type: i.id } })
-        }else{
+        } else {
           this.setState({ Payload: { ...Payload, house_type: '' } })
         }
       } else {
@@ -373,8 +373,9 @@ class AppointmentPost extends Component {
     Taro.navigateBack()
   }
 
-  componentWillUnmount(){
-    this.onCloseRequirement()
+  componentWillUnmount() {
+    clearInterval(this.state.sectime);
+    clearInterval(this.state.getPost);
   }
 
 

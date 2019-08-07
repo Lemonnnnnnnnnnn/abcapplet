@@ -18,6 +18,7 @@ import apartmentlook from './apartmentlook'
 import apartmentsearch from './searchApartment'
 import articleApartment from './articleApartment'
 import cbdApartment from './cbdApartment'
+import favoriteApartment from './favoriteApartment'
 
 export default combineReducers({
   ads,
@@ -38,5 +39,6 @@ export default combineReducers({
   apartmentlook,
   apartmentsearch,
   articleApartment,
-  cbdApartment
+  cbdApartment,
+  favoriteApartment
 })

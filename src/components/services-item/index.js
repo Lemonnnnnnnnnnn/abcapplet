@@ -136,7 +136,7 @@ class ServiceItem extends BaseComponent {
 
   onalert(){
     Taro.showToast({
-      title: '暂不支持该功能',
+      title: '该公寓暂不支持线上预订',
       icon: 'none',
       duration: 2000
     })
