@@ -26,9 +26,18 @@ class ServicesHome extends Component {
     NowCurrentPage: 2,
   }
 
+  refAppointmentList =  (node) => this.appointmentList = node
 
-  componentWillMount() {
 
+
+  // componentDidMount() {
+  //   console.log(222)
+  //   const { payload } = this.state
+  //   this.setState({ payload: { ...payload, current_page: 2 } })
+  // }
+
+  componentDidShow(){
+    console.log(3333)
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
@@ -44,19 +53,19 @@ class ServicesHome extends Component {
         }
       }
       )
-  }
-  componentDidMount() {
+      this.setState({ payload: { ...payload, current_page: 2 } })
 
+  }
+
+  componentDidHide() {
     const { payload } = this.state
-    this.setState({ payload: { ...payload, current_page: 2 } })
+    this.props.dispatchAppointmentList({current_page: 100000, page_size: 10}).then(()=>
+    this.setState({
+      NowCurrentPage:2,
+      payload: { ...payload, current_page: 1 } })
+    )
+
   }
-
-
-
-  // componentDidHide() {
-  //   const { payload } = this.state
-  //   this.setState({ payload: { ...payload, current_page: 1 } })
-  // }
 
 
   /**
@@ -100,7 +109,7 @@ class ServicesHome extends Component {
 
   render() {
     const { appointments } = this.props
-    const { time } = this.state
+    const { time,payload } = this.state
 
     const yellowPointStyle = {
       height: '8px',
@@ -131,6 +140,10 @@ class ServicesHome extends Component {
                 <ServicesList
                   lists={appointments.list}
                   time={time}
+                  ref={this.refApartmentList}
+                  defaultPayload={payload}
+                  dispatchList={this.props.dispatchApartmentList}
+                  dispatchNextPageList={this.props.dispatchNextPageApartmentList}
                 />
               </View>
             </View>
