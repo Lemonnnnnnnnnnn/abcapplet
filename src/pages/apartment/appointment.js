@@ -73,7 +73,7 @@ class AppointmentPost extends Component {
   }
 
   onLogin() {
-    Taro.navigateTo({ url: PAGE_USER_AUTH })
+    Taro.reLaunch({ url: PAGE_USER_AUTH })
   }
 
 
@@ -357,7 +357,7 @@ class AppointmentPost extends Component {
         icon: 'none',
         title: '您还未登录',
       })
-      return false 
+      return false
     }
     return true
   }
