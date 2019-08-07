@@ -139,7 +139,7 @@ class HouseTypeShow extends Component {
         apartmentTitle: data.apartment_title,
         lookTips: data.look_guide.tips || '',
         swipers: data.pictures.map(i => ({ url: i })),
-        title: `${data.title}·${data.apartment_title}`,
+        title: `${data.title} · ${data.apartment_title}`,
         priceTitle: data.price_title,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
@@ -337,7 +337,6 @@ class HouseTypeShow extends Component {
       position, tags, cost_info, id, roomMatch, publicMatch,
       appointment_show_num, type_desc
     } = houstType
-
 
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
