@@ -27,9 +27,9 @@ class SelectPrice extends BaseComponent {
     // 租金双向选择器 相关
     step: 100,
     min: 0,
-    max: 10000,
+    max: 8000,
     minValue: 0,
-    maxValue: 10000,
+    maxValue: 8000,
 
     // AtTabs 相关
     tabIndex: -1,

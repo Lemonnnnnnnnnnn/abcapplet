@@ -139,8 +139,8 @@ class CommonHome extends Component {
 
   async componentWillMount() {
 
-    this.props.dispatchGetUserMsg().then((res) => {
-      if (!res) {
+    this.props.dispatchGetUserMsg().then((res)=>{
+      if(!res){
         this.onLogin()
       }
     })
@@ -687,7 +687,6 @@ class CommonHome extends Component {
                 title={LOCALE_HOT_CBD}
               />
               <Carousel
-                haveText={false}
                 type='normal'
                 imageHeight='176'
                 imageWidth='312'

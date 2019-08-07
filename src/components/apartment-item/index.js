@@ -24,6 +24,7 @@ import { HEART_YELLOW, HEART_BLACK, SIGN } from '@constants/picture'
 
 import {
   PAGE_APARTMENT_SHOW,
+  PAGE_HOUSE_TYPE_SHOW
 } from '@constants/page'
 
 import {
@@ -73,17 +74,22 @@ class ApartmentItem extends BaseComponent {
   }
 
   onNavigation() {
-    const { apartment } = this.props
 
-    const { url } = apartment
+
+    const { apartment } = this.props
+    console.log(apartment)
+    // const { url } = apartment
     const { id } = apartment
-    url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })
+    // url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })
+    Taro.navigateTo({ url: `${PAGE_HOUSE_TYPE_SHOW}?id=${id}` })
   }
 
 
   render() {
     let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
     const { apartment, type } = this.props
+
+
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -132,7 +138,7 @@ class ApartmentItem extends BaseComponent {
     if (cbd) {
       cbdTitle = cbd.map(i => i.title).toString().replace(',', ' / ')
     }
-    
+
     if (mini) {
       if (cbdTitle.length > 8) {
         cbdTitle = cbdTitle.substring(0, 8) + "..."
