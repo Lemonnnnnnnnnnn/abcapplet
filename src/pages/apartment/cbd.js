@@ -100,7 +100,6 @@ class ApartmentCbd extends Component {
    */
   onApartmentPayloadChange({ payload }) {
     const { defaultPayload } = this.state
-    console.log(defaultPayload)
     this.apartmentList.onReset({ ...defaultPayload, ...payload })
   }
 
@@ -136,7 +135,6 @@ class ApartmentCbd extends Component {
   render() {
     const { apartments, dists, cbds, cbdApartment } = this.props
     const { id, defaultPayload, selectIsFixed, cityCode } = this.state
-    console.log(dists)
 
     const cbd = cbds.find(i => i.id == id) || {
       title: '',

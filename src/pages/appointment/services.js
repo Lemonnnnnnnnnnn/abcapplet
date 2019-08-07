@@ -30,14 +30,9 @@ class ServicesHome extends Component {
 
 
 
-  // componentDidMount() {
-  //   console.log(222)
-  //   const { payload } = this.state
-  //   this.setState({ payload: { ...payload, current_page: 2 } })
-  // }
 
   componentDidShow(){
-    console.log(3333)
+
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {

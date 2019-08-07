@@ -74,19 +74,19 @@ class ApartmentItem extends BaseComponent {
   }
 
   onNavigation() {
-    const { apartment } = this.props
+    const { apartment,type } = this.props
+    if(type===TYPE_FAVORITE_APARTMENT){
+      Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${apartment.id}` })
+    }else{
+      Taro.navigateTo({ url: `${PAGE_HOUSE_TYPE_SHOW}?id=${apartment.id}` })
+    }
 
-    // const { url } = apartment
-    const { id } = apartment
-    // url ? Taro.navigateTo({ url }) : Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${id}` })
-    Taro.navigateTo({ url: `${PAGE_HOUSE_TYPE_SHOW}?id=${id}` })
   }
 
 
   render() {
-    let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
+    let { width, height, minWidth, minHeight, mini, nearbyPost, home ,} = this.props
     const { apartment, type } = this.props
-
 
 
     // 重置宽高

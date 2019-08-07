@@ -35,11 +35,11 @@ class UserFavorite extends Component {
     tabList: [
       { title: '户型', ref: 'houseTypeList' },
       { title: '公寓', ref: 'apartmentList' },
-      { title: '房间', ref: 'roomList' },
+      // { title: '房间', ref: 'roomList' },
     ]
   }
 
-  refRoomList = (node) => this.roomList = node
+  // refRoomList = (node) => this.roomList = node
   refHouseTypeList = (node) => this.houseTypeList = node
   refApartmentList = (node) => this.apartmentList = node
 
@@ -59,6 +59,11 @@ class UserFavorite extends Component {
     this.onReset()
   }
 
+  componentDidHide(){
+    this.setState({
+      current:0
+    })
+  }
   /**
    * 触底加载数据
    */
@@ -117,6 +122,7 @@ class UserFavorite extends Component {
           {/* 公寓 */}
           <AtTabsPane current={this.state.current} index={1} >
             <ApartmentList className='mx-2'
+              isapartment='apartmrnt'
               initReset={false}
               key={apartments.type}
               type={apartments.type}
