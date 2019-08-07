@@ -21,21 +21,25 @@ class BaseList extends BaseComponent {
     payload: {},
     latitude:0,
     longitude:0,
+    count:0,
   }
 
 
   async componentDidShow() {
     const { defaultPayload } = this.props
+    const { count } = this.state
     const { latitude, longitude } = await Taro.getLocation()
 
     const {is_select} = defaultPayload
-    if(is_select===1){
+    if(is_select===1 && count === 0){
       this.onReset({...defaultPayload,latitude,longitude})
+      this.setState({
+        count:1
+      })
     }
-    // if(is_select!==1){
-    //   this.onReset()
-    // }
-
+    if(!is_select){
+      this.onReset()
+    }
   }
 
   onReset(payload) {
