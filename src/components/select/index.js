@@ -92,6 +92,10 @@ class Select extends BaseComponent {
     })
   }
 
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
+
   onPayloadChange({ value }) {
     const { latitude, longitude, payload } = this.state
     this.setState({ payload: { ...payload, ...value, latitude, longitude } })
@@ -283,7 +287,7 @@ class Select extends BaseComponent {
 
 
     return (show &&
-      <View className='selectTab' style={{ height: Taro.pxTransform(174) }}>
+      <View className='selectTab' style={{ height: Taro.pxTransform(174) }} onTouchMove={this.onMaskTouchMove}>
         <View className={classNames(rootClassName, className, classObject)} style={showSelect ? showStyle : hideStyle} >
           {/* 头部 */}
           < SelectHeader

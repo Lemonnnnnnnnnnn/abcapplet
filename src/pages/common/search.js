@@ -14,6 +14,7 @@ import * as searchApartmentActions from '@actions/searchApartment'
 import Select from '@components/select'
 import Search from '@components/search'
 import ApartmentList from '@components/apartment-list'
+import BaseComponent from '@components/base'
 
 // 自定义变量
 import {
@@ -33,7 +34,7 @@ import {
   ...apartmentActions,
   ...searchApartmentActions,
 })
-class CommonSearch extends Component {
+class CommonSearch extends  BaseComponent{
   config = {
     navigationBarTitleText: '公寓ABC',
   }
