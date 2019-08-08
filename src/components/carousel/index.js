@@ -18,7 +18,7 @@ class Carousel extends Component {
     hasContent: true,
     contentHeight: 170,
     displayMultipleItems: 1,
-    haveText:true
+    haveText: true
   }
 
   onNavigation({ url, title }) {
@@ -61,7 +61,7 @@ class Carousel extends Component {
       haveText,
     } = this.props
 
-    const countStyle = {
+    const bgStyle = {
       position: "absolute",
       left: " 8px",
       top: "8px",
@@ -71,9 +71,28 @@ class Carousel extends Component {
       width: "50px",
       height: "5px",
       opacity: "0.8",
+    }
+
+    const countStyle = {
+      position: "absolute",
+      left: " 8px",
+      top: "8px",
+      padding: " 6px 5px",
+      width: "50px",
+      height: "5px",
       textAlign: "center",
       justifyContent: "center",
       alignItems: "center",
+    }
+
+    const maskStyle = {
+      position : "absolute",
+      background : 'linear-gradient(to bottom ,rgba(0,0,0,0) 0%,rgba(50,50,50,0.7) 100% )',
+      bottom : 0,
+      left : 0,
+      height : '35%',
+      width : '100%',
+      zIndex: '20'
     }
 
     /**
@@ -127,61 +146,33 @@ class Carousel extends Component {
                 onClick={this.onNavigation.bind(this, item)}
                 className='mr-2 carousel-normal-item'
               >
-
                 <Image
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
                 />
-                <View>111</View>
                 {
-                  haveText && <Text className='title text-large text-white'>{item.title}</Text>
-                }
-
-                {item.sum &&
-                  <View style={countStyle} className='at-row at-row__align--center'>
-                    <View className='at-col at-col-2'>
-                      <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" }}></Image>
-                    </View>
-                    <View className='at-col at-col-8 text-mini text-yellow ml-1' style={{ marginTop: "1Px" ,overflow:'hidden'}}>{item.sum}</View>
+                  haveText && <View >
+                    <Text className='title text-large text-white'>{item.title}</Text>
+                    <View style={maskStyle}></View>
                   </View>
                 }
 
+                {item.sum &&
+                  <View>
+                    <View style={bgStyle} ></View>
+                    <View style={countStyle} className='at-row at-row__align--center'>
+                      <View className='at-col at-col-2'>
+                        <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" }}></Image>
+                      </View>
+                      <View className='at-col at-col-8 text-mini text-yellow ml-1' style={{ marginTop: "1Px", overflow: 'hidden' }}>{item.sum}</View>
+                    </View>
+                  </View>
+                }
               </View>
-
             )}
-
           </ScrollView>
 
         }
-
-        { type === 'apartment' && <View>
-        <ScrollView scrollX className='carousel-normal' >
-            {carousel.map(item =>
-              <View
-                key={item.id}
-                style={imageStyle}
-                onClick={this.onNavigation.bind(this, item)}
-                className='mr-2 carousel-normal-item'
-              >
-
-                <Image
-                  src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
-                  mode='scaleToFill' style={imageStyle}
-                />
-                <View style={contentStyle}>
-                  <View className='mt-2 text-normal'>{item.title}</View>
-
-                </View>
-
-
-
-              </View>
-
-            )}
-
-          </ScrollView>
-
-        </View>}
       </View>
     )
   }

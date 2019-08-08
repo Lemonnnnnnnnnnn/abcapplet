@@ -738,12 +738,11 @@ class CommonHome extends BaseComponent {
                 title={LOCALE_RECOMMEND_APARTMENT}
               />
               <Carousel
-                type='apartment'
+                type='normal'
                 imageHeight='275'
                 imageWidth='642'
                 carousel={recommends}
                 hasContent={false}
-                haveText={false}
               />
             </View>
           }

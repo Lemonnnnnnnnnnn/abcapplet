@@ -18,7 +18,7 @@ import ApartmentContainer from '@components/apartment-container'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME } from '@constants/page'
-import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST } from '@constants/apartment'
+import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST , TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -471,7 +471,7 @@ class ApartmentShow extends Component {
                   nearbyPost={nearbyPost}
                   mini
                   key={apartments.type}
-                  type={apartments.type}
+                  type={TYPE_FAVORITE_APARTMENT}
                   items={apartments.list}
                   defaultPayload={{ city }}
                   dispatchList={this.props.dispatchRecommendHouseType}

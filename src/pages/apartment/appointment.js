@@ -178,7 +178,7 @@ class AppointmentPost extends Component {
     monthList_NaN.map((i, key) => monthList.push(key + 1 + "月"))
     dayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
 
-    timeList_NaN.map((i, key) => timeList.push(key + 8 + " :00"))
+    timeList_NaN.map((i, key) => timeList.push(key + 9 + " :00"))
 
 
     finalList.push(yearList)
