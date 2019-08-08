@@ -87,6 +87,7 @@ onClickPost(){
   })
   var room_ids = selectRoom.join(',')
   this.props.dispatchIntentionComment({...payload,room_ids:room_ids})
+  this.props.onClose()
 }
 
   render() {

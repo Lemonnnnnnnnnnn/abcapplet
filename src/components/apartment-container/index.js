@@ -78,6 +78,7 @@ class ApartmentContainer extends BaseComponent {
 
     return (
       <View className='position-relative' >
+       {swipers!==undefined&& <View>
         {
           swipers.length > 1 ?
             <Swiper
@@ -107,7 +108,7 @@ class ApartmentContainer extends BaseComponent {
               src={swipers.length ? `${swipers[0].url.split('?')[0]}?imageView2/1/w/${width}/h/${height}` : ''} >
             </Image>
         }
-
+        </View>}
 
         {/* index */}
         <View className='apartment-container-picIndexStyle' style={picIndexStyle}>

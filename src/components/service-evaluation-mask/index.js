@@ -53,6 +53,7 @@ class AppointmentRevolution extends Component {
   onClickPost() {
     let { payload } = this.state
     this.props.dispatchRevelutionComment(payload)
+    this.props.onClose()
   }
 
   onMaskTouchMove(e) {
