@@ -35,7 +35,6 @@ class AppointmentRevolution extends Component {
     lists: '',
   }
   state = {
-    haveComment: false,
     localComment: 0,
   }
 
@@ -51,7 +50,7 @@ class AppointmentRevolution extends Component {
   // 本地存储数据
   onComment() {
     const { payload } = this.state
-    this.setState({ haveComment: true, localComment: payload.score })
+    this.setState({  localComment: payload.score })
   }
 
 
@@ -63,6 +62,7 @@ class AppointmentRevolution extends Component {
   //提交评价
   onClickPost() {
     let { payload } = this.state
+    const { onEvalution, dispatchRevelutionComment, onClose } = this.props
     const { comment, score } = payload
 
     // 判断是否评价是否为空
@@ -74,9 +74,10 @@ class AppointmentRevolution extends Component {
         duration: 1000
       })
     } else {
-      this.props.dispatchRevelutionComment(payload).then(() => {
+      dispatchRevelutionComment(payload).then(() => {
         this.onComment()
-        this.props.onClose()
+        onEvalution()
+        onClose()
       })
     }
   }
@@ -86,13 +87,13 @@ class AppointmentRevolution extends Component {
   }
 
   render() {
-    const { show, headimgurl, name, service_num, comment_score, appointment_id, comment } = this.props
-    const { score, haveComment, localComment } = this.state
+    const { show, headimgurl, name, service_num, comment_score, appointment_id, comment , haveEvalution } = this.props
+    const { score, localComment } = this.state
 
     var nowScore;
 
     if (comment) {
-      if (!comment.score && haveComment) {
+      if (!comment.score && haveEvalution) {
         nowScore = localComment
       } else {
         nowScore = comment.score ? comment.score : score
@@ -162,7 +163,7 @@ class AppointmentRevolution extends Component {
             />
           </View>
           {/* 按钮 */}
-          <View className='mt-4' hidden={haveComment || comment.score ? true : false}>
+          <View className='mt-4' hidden={haveEvalution || comment.score ? true : false}>
             <AtButton
               onClick={this.onClickPost.bind(this, appointment_id)}
               circle

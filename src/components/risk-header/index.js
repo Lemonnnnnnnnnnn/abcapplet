@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 
 // 自定义组件
 import Borad from '@components/board'
@@ -18,16 +18,16 @@ class RiskHeader extends BaseComponent {
     const { items, className } = this.props
     return (
       <Borad color='black' className={className}>
-        <View className='px-3 py-4'>
-          <View className='at-row at-row__justify--between'>
+        <View className='px-4 py-4'>
+          <View className='at-row at-row__justify--between '>
             {items.map(i => <View key={i.id}>
-              <View className='at-row at-row__align--center'>
-                <View className='btn-risk-header-item at-row at-row__justify--center at-row__align--center'>
-                  <ABCIcon icon={i.icon} color={COLOR_BLACK} size='30' />
+              <View className='at-row  at-row__align--center'>
+                <View className=''>
+                  <Image src={i.url} style={{ width: Taro.pxTransform(i.width), height: Taro.pxTransform(i.height) }}></Image>
                 </View>
-                <View className='text-white text-normal ml-2'>
+                <View className='text-white text-normal ml-2 mb-1'>
                   <View>{i.title}</View>
-                  <View className='mt-2'>{i.desc}</View>
+                  <View>{i.desc}</View>
                 </View>
               </View>
             </View>

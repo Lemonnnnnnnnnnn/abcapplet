@@ -27,12 +27,18 @@ export const RISK_HEADERS = [
     icon: 'local_atm',
     title: LOCALE_HEADER_RETURN_TITLE,
     desc: LOCALE_HEADER_RETURN_DESC,
+    url : 'https://images.gongyuabc.com//image/money.png',
+    height : 76,
+    width : 66,
   },
   {
     id: 2,
     icon: 'all_inclusive',
     title: LOCALE_HEADER_LIMIT_TITLE,
     desc: LOCALE_HEADER_LIMIT_DESC,
+    url : 'https://images.gongyuabc.com//image/prompt.png',
+    height : 68,
+    width : 72,
   }
 ]
 

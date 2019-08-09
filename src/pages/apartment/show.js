@@ -206,6 +206,12 @@ class ApartmentShow extends Component {
     })
   }
 
+  onShareAppMessage() {
+    return {
+      title: "我在公寓ABC上发现了一个好\n房源",
+    }
+  }
+
   render() {
     const { apartments } = this.props
     const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, statusBarHeight } = this.state
