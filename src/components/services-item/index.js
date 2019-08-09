@@ -238,13 +238,8 @@ class ServiceItem extends BaseComponent {
       left: "39%",
       transform: "translate( 0 , -50%)",
     }
-
-    // { name: 1, src: , title: LOCALE_APPOINTMENT_MESSAGE },
-    //   { name: 2, src: , title: LOCALE_APPOINTMENT_RELUTION },
-    //   { name: 3, src: , title: LOCALE_APPOINTMENT_EVALUTION },
-    //   { name: 4, src: , title: LOCALE_APPOINTMENT_INTENTION },
-
     let buttonList = []
+
 
     server_id
       ? buttonList = [
@@ -253,12 +248,12 @@ class ServiceItem extends BaseComponent {
         {
           name: 3,
           src: haveEvalution || comment.score ? COMMENT : COMMENT_GRAY,
-          title: haveEvalution || comment.score ? LOCALE_APPOINTMENT_EVALUTION : LOCALE_APPOINTMENT_HAVE_EVALUTION
+          title: haveEvalution || comment.score ? LOCALE_APPOINTMENT_HAVE_EVALUTION : LOCALE_APPOINTMENT_EVALUTION
         },
         {
           name: 4,
           src: haveIntention || intention ? EXPECT : EXPECT_GRAY,
-          title: haveIntention || intention ? LOCALE_APPOINTMENT_INTENTION : LOCALE_APPOINTMENT_HAVE_INTENTION
+          title: haveIntention || intention ? LOCALE_APPOINTMENT_HAVE_INTENTION : LOCALE_APPOINTMENT_INTENTION
         },
       ] : buttonList = [
         { name: 1, src: LEAVE_MSG_GRAY, title: LOCALE_APPOINTMENT_MESSAGE },
