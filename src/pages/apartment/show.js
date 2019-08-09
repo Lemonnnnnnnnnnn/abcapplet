@@ -238,7 +238,7 @@ class ApartmentShow extends Component {
 
     const imageStyle = {
       width: '300px',
-      height: Taro.pxTransform(346),
+      height: Taro.pxTransform(350),
       display: "inline-block",
     }
 
@@ -246,7 +246,7 @@ class ApartmentShow extends Component {
       // backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "6px",
       boxShadow: "0 1px 5px rgb(200,200,200)",
-      // overflow: 'hidden',
+      overflow: 'hidden',
     }
 
     const navStyle = {
@@ -358,9 +358,9 @@ class ApartmentShow extends Component {
             <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom'} at-col at-col-5 pl-1 pr-2 pb-1  mt-2 mr-1`}>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length } at-col at-col-5 pl-1 pr-2  mt-2 mr-1`}>
                     <View style={borderStyle}>
-                      <ApartmentTypeItem apartmentDetail item={i} />
+                      <ApartmentTypeItem item={i} index={index} />
                     </View>
                   </View>)}
               </ScrollView>
@@ -368,7 +368,7 @@ class ApartmentShow extends Component {
 
             {/* 公寓信息 */}
 
-            <View className='ml-3 mr-3'>
+            <View className='ml-3 mr-3 mt-1'>
 
               <View>
                 <View className='text-bold text-huge mt-2 mb-3'>公寓信息</View>

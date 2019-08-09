@@ -371,7 +371,7 @@ class HouseTypeShow extends Component {
 
     const imageStyle = {
       width: '300px',
-      height: Taro.pxTransform(346),
+      height: Taro.pxTransform(350),
       display: "inline-block",
 
     }
@@ -668,7 +668,7 @@ class HouseTypeShow extends Component {
             <View className='ml-3'>
 
               {/* 公寓信息 */}
-              <View>
+              <View onClick={this.onNavigationApartment}>
                 <View className='text-bold text-huge mt-4 mb-3'>公寓信息</View>
                 <View className='at-row at-row__align--center  at-row__justify--between my-2'>
                   <View>
@@ -716,7 +716,7 @@ class HouseTypeShow extends Component {
                   <ScrollView scrollX>
                     {types.map((i, index) =>
 
-                      <View style={imageStyle} key={i.id} className={`${index + 1 != types.length && 'border-bottom  '} at-col at-col-5 mt-1 `}>
+                      <View style={imageStyle} key={i.id} className={`${index + 1 != types.length } at-col at-col-5 mt-1 `}>
                         <View style={borderStyle} className='ml-1 mr-1' >
                           <ApartmentTypeItem item={i} />
                         </View>
