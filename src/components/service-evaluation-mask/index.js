@@ -32,7 +32,11 @@ class AppointmentRevolution extends Component {
     Payload: PAYLOAD_REVULUTION_CREAT,
 
     score: '',
-    lists: ''
+    lists: '',
+  }
+  state = {
+    haveComment: false,
+    localComment: 0,
   }
 
   //分数，星星数
@@ -42,8 +46,15 @@ class AppointmentRevolution extends Component {
       score: score,
       payload: { ...payload, score: score, appointment_id: this.props.appointment_id }
     })
-
   }
+
+  // 本地存储数据
+  onComment() {
+    const { payload } = this.state
+    this.setState({ haveComment: true, localComment: payload.score })
+  }
+
+
   //获得评论
   onRemarkChange({ currentTarget: { value } }) {
     let { payload } = this.state
@@ -52,8 +63,22 @@ class AppointmentRevolution extends Component {
   //提交评价
   onClickPost() {
     let { payload } = this.state
-    this.props.dispatchRevelutionComment(payload)
-    this.props.onClose()
+    const { comment, score } = payload
+
+    // 判断是否评价是否为空
+
+    if (!comment || !score) {
+      Taro.showToast({
+        title: '您的评价信息尚未填写完整',
+        icon: 'none',
+        duration: 1000
+      })
+    } else {
+      this.props.dispatchRevelutionComment(payload).then(() => {
+        this.onComment()
+        this.props.onClose()
+      })
+    }
   }
 
   onMaskTouchMove(e) {
@@ -62,11 +87,18 @@ class AppointmentRevolution extends Component {
 
   render() {
     const { show, headimgurl, name, service_num, comment_score, appointment_id, comment } = this.props
-    const { score } = this.state
+    const { score, haveComment, localComment } = this.state
+
     var nowScore;
-    nowScore = comment !== undefined ? (
-      comment.score !== undefined && comment.score === 0 ? score : comment.score
-    ) : score;
+
+    if (comment) {
+      if (!comment.score && haveComment) {
+        nowScore = localComment
+      } else {
+        nowScore = comment.score ? comment.score : score
+      }
+    }
+
 
     return show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
       {/* 主体内容 */}
@@ -130,7 +162,7 @@ class AppointmentRevolution extends Component {
             />
           </View>
           {/* 按钮 */}
-          <View className='mt-4' hidden={comment.score === 0 ? false : true}>
+          <View className='mt-4' hidden={haveComment || comment.score ? true : false}>
             <AtButton
               onClick={this.onClickPost.bind(this, appointment_id)}
               circle
