@@ -206,6 +206,12 @@ class ApartmentShow extends Component {
     })
   }
 
+  onShareAppMessage() {
+    return {
+      title: "我在公寓ABC上发现了一个好\n房源",
+    }
+  }
+
   render() {
     const { apartments } = this.props
     const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, statusBarHeight } = this.state
@@ -362,7 +368,7 @@ class ApartmentShow extends Component {
             <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 != types.length } at-col at-col-5 pl-1 pr-2  mt-2 mr-1`}>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 === types.length ? 'pr-2' : '' } at-col at-col-5 pl-1 mt-2 mr-3`}>
                     <View style={borderStyle}>
                       <ApartmentTypeItem item={i} index={index} />
                     </View>

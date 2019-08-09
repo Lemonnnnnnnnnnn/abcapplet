@@ -81,11 +81,17 @@ export default async function fetch({
         url: '/pages/user-login/user-login'
       })
     } else {
-      error.message = error.message || LOCALE_ERROR
-      showToast && Taro.showToast({
-        icon: 'none',
-        title: error.message,
-      })
+      if (error.message = error.message || LOCALE_ERROR) {
+        setTimeout(() => {
+          showToast && Taro.showToast({
+            icon: 'none',
+            title: error.message,
+          })
+          setTimeout(() => {
+            Taro.hideToast()
+          }, 2000)
+        }, 20)
+      }
     }
 
     fail(error)

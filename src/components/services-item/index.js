@@ -21,8 +21,27 @@ import {
   LOCALE_APPOINTMENT_DETAIL,
   LOCALE_APPOINTMENT_HASLOOK,
   LOCALE_APPOINTMENT_SUMMON,
-  LOCALE_APPOINTMENT_BELONG
+  LOCALE_APPOINTMENT_BELONG,
+
+  LOCALE_APPOINTMENT_MESSAGE,
+  LOCALE_APPOINTMENT_RELUTION,
+  LOCALE_APPOINTMENT_EVALUTION,
+  LOCALE_APPOINTMENT_INTENTION,
+  LOCALE_APPOINTMENT_HAVE_EVALUTION,
+  LOCALE_APPOINTMENT_HAVE_INTENTION,
 } from '@constants/locale'
+
+import {
+  LEAVE_MSG_GRAY,
+  CALL_PHONE_GRAY,
+  COMMENT_GRAY,
+  EXPECT_GRAY,
+  LEAVE_MSG,
+  CALL_PHONE,
+  COMMENT,
+  EXPECT
+} from '@constants/picture'
+
 
 class ServiceItem extends BaseComponent {
   static defaultProps = {
@@ -37,6 +56,16 @@ class ServiceItem extends BaseComponent {
   state = {
     showEvalution: false,//看房评价
     showIntention: false,//看房意向
+    haveEvalution: false,//是否已经评价
+    haveIntention: false,//是否已有意向
+  }
+
+  onIntention() {
+    this.setState({ haveIntention: true })
+  }
+
+  onEvalution() {
+    this.setState({ haveEvalution: true })
   }
   //跳转签约下定页面
   onNavigationAgency() {
@@ -55,6 +84,8 @@ class ServiceItem extends BaseComponent {
       url: `${PAGE_HOUSE_TYPE_SHOW}?id=${house_type_id}`
     })
   }
+
+
   //case 1行程留言 2联系管家 3服务评价 4看房意向
   onFourClick(value) {
     switch (value) {
@@ -119,8 +150,8 @@ class ServiceItem extends BaseComponent {
         };
         break
     }
-
   }
+
   // 关闭服务评价
   onCloseEvalution() {
     this.setState({
@@ -134,7 +165,7 @@ class ServiceItem extends BaseComponent {
     })
   }
 
-  onalert(){
+  onalert() {
     Taro.showToast({
       title: '该公寓暂不支持线上预订',
       icon: 'none',
@@ -146,6 +177,8 @@ class ServiceItem extends BaseComponent {
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
     const { service } = this.props
+
+    const { haveIntention, haveEvalution, showIntention, showEvalution } = this.state
 
     const { id, cover, apartment_title, house_type_title,
       order_time, server_id, server_user, comment, look_time, intention, remark, date, status, is_sign } = service
@@ -205,6 +238,31 @@ class ServiceItem extends BaseComponent {
       left: "39%",
       transform: "translate( 0 , -50%)",
     }
+    let buttonList = []
+
+
+    server_id
+      ? buttonList = [
+        { name: 1, src: LEAVE_MSG, title: LOCALE_APPOINTMENT_MESSAGE },
+        { name: 2, src: CALL_PHONE, title: LOCALE_APPOINTMENT_RELUTION },
+        {
+          name: 3,
+          src: haveEvalution || comment.score ? COMMENT : COMMENT_GRAY,
+          title: haveEvalution || comment.score ? LOCALE_APPOINTMENT_HAVE_EVALUTION : LOCALE_APPOINTMENT_EVALUTION
+        },
+        {
+          name: 4,
+          src: haveIntention || intention ? EXPECT : EXPECT_GRAY,
+          title: haveIntention || intention ? LOCALE_APPOINTMENT_HAVE_INTENTION : LOCALE_APPOINTMENT_INTENTION
+        },
+      ] : buttonList = [
+        { name: 1, src: LEAVE_MSG_GRAY, title: LOCALE_APPOINTMENT_MESSAGE },
+        { name: 2, src: CALL_PHONE_GRAY, title: LOCALE_APPOINTMENT_RELUTION },
+        { name: 3, src: COMMENT_GRAY, title: LOCALE_APPOINTMENT_EVALUTION },
+        { name: 4, src: EXPECT_GRAY, title: LOCALE_APPOINTMENT_INTENTION },
+      ]
+
+
 
     // 设置图片宽高，方便七牛云格式化图片
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
@@ -230,10 +288,10 @@ class ServiceItem extends BaseComponent {
           <View className='at-row at-row__justify--around' >
             <View className='at-row at-row-6 mb-2 ml-2' style={{ marginTop: "55px" }}>
               {/* 下面四个按钮 */}
-              {APPOINTMENT_FOUFUNCTION_DIST.map(i =>
+              {buttonList.map(i =>
                 <View key={i.id} className='at-col' onClick={this.onFourClick.bind(this, i.name)}>
                   <View className=' at-row at-row__justify--center at-row__align--center' >
-                    <image src={i.src} style='height:34px;width:34px' />
+                    <Image src={i.src} style='height:34px;width:34px' />
                   </View>
                   <View className='at-row at-row__justify--center'>
                     <View className=' text-normal text-muted  mt-1' style='font-size:10px'>{i.title}</View>
@@ -353,6 +411,9 @@ class ServiceItem extends BaseComponent {
         {/* 服务评价 */}
         <ServiceEvalution
           show={showEvalution}
+          haveEvalution={haveEvalution}
+          onEvalution={this.onEvalution}
+
           comment={comment}
           appointment_id={id}
           name={server_user.name}
@@ -361,9 +422,15 @@ class ServiceItem extends BaseComponent {
           comment_score={server_user.comment_score}
           onClose={this.onCloseEvalution}
         />
+
+
         {/* 看房意向 */}
+
         <ServiceIntention
           show={showIntention}
+          onIntention={this.onIntention}
+          haveIntention={haveIntention}
+
           intention={intention}
           apartment_title={apartment_title}
           house_type_title={house_type_title}
@@ -371,6 +438,8 @@ class ServiceItem extends BaseComponent {
           appointment_id={id}
           onClose={this.onCloseIntention}
         />
+
+
       </View>
     )
   }

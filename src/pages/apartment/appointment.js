@@ -177,7 +177,6 @@ class AppointmentPost extends Component {
 
     monthList_NaN.map((i, key) => monthList.push(key + 1 + "月"))
     dayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-
     timeList_NaN.map((i, key) => timeList.push(key + 9 + " :00"))
 
 
@@ -359,7 +358,7 @@ class AppointmentPost extends Component {
     } else if (!login) {
       Taro.showToast({
         icon: 'none',
-        title: '您还未登录',
+        title: '亲，您还未登录',
       })
       return false
     }

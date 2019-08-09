@@ -41,7 +41,6 @@ class AppointmentIntention extends Component {
     roomList: [],
     payload: PAYLOAD_INTENTION_CREATE,//appointment_id: 0, score: 1, room_ids:''
     Payloadlist: PAYLOAD_INTENTION_ROOM_SHOW,//行程下相关的房间列表appointment_id: 0, room_no:''
-    haveComment: false,
     localComment: 0,
   }
   componentDidMount() {
@@ -88,7 +87,7 @@ class AppointmentIntention extends Component {
 
   onComment() {
     const { payload } = this.state
-    this.setState({ haveComment: true, localComment: payload.score })
+    this.setState({ localComment: payload.score })
   }
 
 
@@ -96,6 +95,8 @@ class AppointmentIntention extends Component {
   onClickPost() {
     const { payload, roomList, selectRoom } = this.state
     const { score } = payload
+    const { dispatchIntentionComment, onClose, onIntention } = this.props
+
     roomList.map(i => {
       if (i.active == true)
         selectRoom.push(i.no)
@@ -109,19 +110,20 @@ class AppointmentIntention extends Component {
         duration: 1000
       })
     } else {
-      this.props.dispatchIntentionComment({ ...payload, room_ids: room_ids }).then(() => {
+      dispatchIntentionComment({ ...payload, room_ids: room_ids }).then(() => {
         this.onComment()
-        this.props.onClose()
+        onIntention()
+        onClose()
       })
     }
   }
 
   render() {
-    const { show, intention, appointment_id, apartment_title, house_type_title } = this.props
-    const { score, roomList, haveComment, localComment } = this.state
+    const { show, intention, appointment_id, apartment_title, house_type_title , haveIntention } = this.props
+    const { score, roomList, localComment } = this.state
 
     var nowIntention;
-    if (!haveComment) {
+    if (!haveIntention) {
       nowIntention = intention === 0 ? score : intention;
     } else {
       nowIntention = intention === 0 ? localComment : intention;
@@ -157,7 +159,7 @@ class AppointmentIntention extends Component {
           )}
         </View>
         <View className='mt-4' hidden={nowIntention >= 4 && intention === 0 ? false : true}>
-          <View hidden={haveComment ? true : false}>
+          <View hidden={haveIntention ? true : false}>
             <View className=''>
               <View className='at-row ml-3'>
                 <View className='button-yellow mt-1'></View>
@@ -216,7 +218,7 @@ class AppointmentIntention extends Component {
             </View>
           </View>
         </View>
-        <View className='p-1 m-2' hidden={haveComment || intention ? true : false}>
+        <View className='p-1 m-2' hidden={haveIntention || intention ? true : false}>
           <AtButton
             circle
             type='primary'

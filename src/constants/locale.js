@@ -178,6 +178,8 @@ export const LOCALE_APPOINTMENT_MESSAGE = '行程留言'
 export const LOCALE_APPOINTMENT_RELUTION  = '联系管家'
 export const LOCALE_APPOINTMENT_EVALUTION  = '服务评价'
 export const LOCALE_APPOINTMENT_INTENTION  = '看房意向'
+export const LOCALE_APPOINTMENT_HAVE_EVALUTION = '查看评价'
+export const LOCALE_APPOINTMENT_HAVE_INTENTION  = '查看意向'
 
 //找房服务订房意向
 export const LOCALE_APPOINTMENT_LIKEABILITY_NONE = '无意向'
