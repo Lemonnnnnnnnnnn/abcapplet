@@ -24,8 +24,11 @@ import AppartmentMatchingMask from '@components/apartment-matching-mask'
 import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC , TYPE_FAVORITE_APARTMENT} from '@constants/apartment'
-import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_LOCK_NOTICE } from '@constants/locale'
+import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
+
+
+
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -67,6 +70,8 @@ class HouseTypeShow extends Component {
   }
 
   async componentDidMount() {
+
+
     const { id } = this.$router.params
 
     if(id){
@@ -407,6 +412,7 @@ class HouseTypeShow extends Component {
       <View >
 
         <TabBar
+
           showLittleMask={showLittleMask}
           onOpenLittleMask={this.onOpenLittleMask}
           onCloseLittleMask={this.onCloseLittleMask}
@@ -415,6 +421,9 @@ class HouseTypeShow extends Component {
           hasContact
           buttons={buttons}
           onClick={this.onClick}
+          title={title}
+          Id={houseType_id}
+          type='house'
         />
 
         {/* 自定义导航栏 */}
@@ -684,7 +693,12 @@ class HouseTypeShow extends Component {
 
                   </View>
                 </View>
-                <View className='text-secondary text-normal' style={textDeal}>{desc}</View>
+                <View className='text-secondary text-normal' style={textDeal}>
+
+
+
+
+                </View>
                 <View className='at-row at-row--wrap mt-3 mb-3'>
 
                   {publicMatch_list && publicMatch_list.map((i, key) => key !== 5 ?

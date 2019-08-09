@@ -214,6 +214,7 @@ class ApartmentShow extends Component {
       title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
       notices, cbds, intro, rules, facilitys, position, cover, appointment_show_num } = apartment
 
+      console.log(apartment.id)
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
       borderRadius: "12px",
@@ -294,6 +295,9 @@ class ApartmentShow extends Component {
           hasContact
           buttons={buttons}
           onClick={this.onClick}
+          title={title}
+          Id={apartment.id}
+          type='apart'
         />
 
         <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>

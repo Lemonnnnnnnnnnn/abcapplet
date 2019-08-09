@@ -7,8 +7,10 @@ import { AtButton, AtFloatLayout } from 'taro-ui'
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
 
+import {  PAGE_HOUSE_TYPE_SHOW,PAGE_APARTMENT_SHOW } from '@constants/page'
 // NPM 包
 import classNames from 'classnames'
+import { format } from 'path';
 
 class TabBar extends BaseComponent {
 
@@ -25,7 +27,8 @@ class TabBar extends BaseComponent {
   }
 
   state = {
-    showCallPhoneView: false
+    showCallPhoneView: false,
+    url:'',
   }
 
   onOpenCallPhoneView() {
@@ -45,10 +48,24 @@ class TabBar extends BaseComponent {
 
   }
 
-
+  onShareAppMessage() {
+    return {
+      title: "我在公寓ABC上发现了一个好\n房源",
+    }
+  }
 
   render() {
-    const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask, showLittleMask, floatLayoutHeightNum } = this.props
+    const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,
+      showLittleMask, floatLayoutHeightNum,title ,Id,type} = this.props
+
+    //   const { url } = this.state
+
+    //   url = type==='house'? PAGE_HOUSE_TYPE_SHOW : PAGE_APARTMENT_SHOW
+
+    //   console.log(url)
+
+    // console.log(this.props)
+
 
     const { showCallPhoneView } = this.state
 
@@ -107,7 +124,10 @@ class TabBar extends BaseComponent {
             <View style={grayLineStyle}></View>
 
             <View className='at-row at-row__align--center at-row__justify--center' >
-              <Button className='Customer-button' open-type='contact' size='mini' plain style={buttonStyle} show-message-card >
+              <Button
+                className='Customer-button'
+                send-message-path={`${PAGE_HOUSE_TYPE_SHOW}?id=${Id}`}
+                open-type='contact' size='mini' plain style={buttonStyle} show-message-card  bindcontact='handleContact' send-message-title={title}>
                 <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>在线客服</View>
               </Button>
             </View>
