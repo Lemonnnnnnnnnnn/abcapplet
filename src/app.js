@@ -40,11 +40,6 @@ class App extends Component {
       'pages/risk/index',
       'pages/risk/create',
 
-      // 'pages/order/index',
-      // 'pages/order/show',
-      // 'pages/order/create',
-      // 'pages/order/down-payment',
-
       'pages/article/show',
       'pages/external/index',
 
@@ -66,7 +61,7 @@ class App extends Component {
         "desc": "你的位置信息将用于小程序位置接口的效果展示"
       }
     },
-    
+
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

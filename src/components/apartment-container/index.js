@@ -75,10 +75,9 @@ class ApartmentContainer extends BaseComponent {
       top: Taro.pxTransform(height - 75),
     }
 
-
     return (
       <View className='position-relative' >
-       {swipers!==undefined&& <View>
+       {swipers!==undefined && swipers!==null&&  swipers.length!==0 &&<View>
         {
           swipers.length > 1 ?
             <Swiper
