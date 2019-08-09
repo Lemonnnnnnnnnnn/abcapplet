@@ -69,7 +69,8 @@ class HouseTypeShow extends Component {
   async componentDidMount() {
     const { id } = this.$router.params
 
-    const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+    if(id){
+      const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
     await Taro.getSystemInfo().then(res => {
       this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
@@ -167,7 +168,7 @@ class HouseTypeShow extends Component {
     })
   }
 
-
+  }
   // 电话客服/在线客服
 
   onOpenLittleMask() {
@@ -363,8 +364,9 @@ class HouseTypeShow extends Component {
     }
 
     const ScrollWrapStyle = {
-      height: '210px',
-      whiteSpace: "nowrap"
+
+      whiteSpace: "nowrap",
+
     }
 
     const imageStyle = {
@@ -707,7 +709,10 @@ class HouseTypeShow extends Component {
               </View>
 
               {
-                types && <View style={ScrollWrapStyle} className='at-col'>
+                types &&
+
+                <View style={ScrollWrapStyle}  >
+
                   <ScrollView scrollX>
                     {types.map((i, index) =>
 
@@ -718,6 +723,7 @@ class HouseTypeShow extends Component {
                       </View>)}
                   </ScrollView>
                 </View>
+
               }
 
 

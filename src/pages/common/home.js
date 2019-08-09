@@ -610,7 +610,7 @@ class CommonHome extends BaseComponent {
       || type_floor === ''
       || type_room === '') {
       Taro.showToast({
-        title: '请检查数据是否正确',
+        title: '亲，请检查您填写的内容是否正确',
         icon: 'none',
         duration: 2000
       })

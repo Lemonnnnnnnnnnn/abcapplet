@@ -168,7 +168,7 @@ class OrderCreate extends Component {
     if (room_id === 0 || name === '' || mobile === '' || id_code === '' || sign_time === '') {
       Taro.showToast({
         icon: 'none',
-        title: '请检查数据是否正确',
+        title: '亲，请检查您填写的内容是否正确',
       })
       return false
     }

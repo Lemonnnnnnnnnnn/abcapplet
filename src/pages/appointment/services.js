@@ -19,6 +19,7 @@ import * as appointmentActions from '@actions/appointment'
 class ServicesHome extends Component {
   config = {
     navigationBarTitleText: '找房·行程',
+    backgroundColor: '#FFFFFF',
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
@@ -112,8 +113,13 @@ class ServicesHome extends Component {
       backgroundColor: 'rgba(255, 201, 25, 1)'
     }
 
+   const page={
+      backgroundColor: '#FFFFFF',
+      minHeight:'100vh',
+    }
 
     return (
+      <View style={page}>
       <View style={{ overflow: "hidden" }}>
         <ServicesHeader
           onClickLeft={this.onToLeft}
@@ -148,7 +154,7 @@ class ServicesHome extends Component {
         }
 
       </View>
-
+      </View>
     )
   }
 }

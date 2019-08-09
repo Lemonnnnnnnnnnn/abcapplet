@@ -59,11 +59,7 @@ class UserFavorite extends Component {
     this.onReset()
   }
 
-  componentDidHide(){
-    this.setState({
-      current:0
-    })
-  }
+
   /**
    * 触底加载数据
    */

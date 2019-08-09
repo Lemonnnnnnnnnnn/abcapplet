@@ -353,7 +353,7 @@ class AppointmentPost extends Component {
       || !Payload.house_type) {
       Taro.showToast({
         icon: 'none',
-        title: '请检查数据是否正确',
+        title: '亲，请检查您填写的内容是否正确',
       })
       return false
     } else if (!login) {
