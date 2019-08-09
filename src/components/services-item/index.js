@@ -94,7 +94,7 @@ class ServiceItem extends BaseComponent {
         const { server_id } = service
         if (server_id !== 0) {
           Taro.navigateTo({
-            url: `${PAGE_APPOINTMENT_MESSAGE}?id=${this.props.id}&time=${this.props.service.date}&appointmentTitle=${this.props.service.apartment_title}&appointmentTime=${this.props.service.order_time}`
+            url: `${PAGE_APPOINTMENT_MESSAGE}?id=${this.props.id}&time=${this.props.service.date}&appointmentTitle=${this.props.service.apartment_title}&appointmentTime=${this.props.service.order_time}&cover=${this.props.service.server_user.headimgurl}`
           });
         } else {
           Taro.showToast({

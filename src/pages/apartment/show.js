@@ -220,7 +220,6 @@ class ApartmentShow extends Component {
       title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
       notices, cbds, intro, rules, facilitys, position, cover, appointment_show_num } = apartment
 
-      console.log(apartment.id)
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
       borderRadius: "12px",

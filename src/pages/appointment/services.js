@@ -106,6 +106,8 @@ class ServicesHome extends Component {
     const { appointments } = this.props
     const { time,payload } = this.state
 
+   
+
     const yellowPointStyle = {
       height: '8px',
       width: '8px',

@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import day from 'dayjs'
 import { AtAvatar } from 'taro-ui'
 
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import BaseComponent from '@components/base'
 
 class AppointmentMessageList extends BaseComponent {
@@ -10,14 +10,14 @@ class AppointmentMessageList extends BaseComponent {
     items: [],
   }
   render() {
-    const { items } = this.props
+    const { items, cover } = this.props
     return (
       <View>
         {items.map(i =>
           <View key={i.id} className='text-normal'>
 
             {i.sayer !== 'user' && <View className='at-row mt-3'>
-              <AtAvatar circle openData={{ type: 'userAvatarUrl' }} size='small' />
+              <Image src={cover} style={{ width: Taro.pxTransform(80), height: Taro.pxTransform(80),borderRadius:"50%" }}></Image>
               <View className='ml-2'>
                 <View className='message-item p-2'>{i.content}</View>
                 <View className='text-secondary text-mini mt-1'>

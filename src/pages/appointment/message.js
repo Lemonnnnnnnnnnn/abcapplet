@@ -27,16 +27,17 @@ class ServicesHome extends Component {
     appointmentTime:'',
     content:'',
     payload:PAYLOAD_MESSAGE_CREATE,//{ appointment_id: 0, content:''}
-
+    cover: '',
   }
 
   componentWillMount() {
-    const {id,time,appointmentTime,appointmentTitle } = this.$router.params
+    const {id,time,appointmentTime,appointmentTitle , cover } = this.$router.params
     this.setState({
       id:id,
       time : time,
       appointmentTitle : appointmentTitle,
-      appointmentTime : appointmentTime
+      appointmentTime : appointmentTime,
+      cover,
     })
 
   // 获取数据
@@ -74,7 +75,7 @@ class ServicesHome extends Component {
 
 
   render() {
-    const {time,appointmentTime,appointmentTitle ,content} = this.state
+    const {time,appointmentTime,appointmentTitle ,content , cover} = this.state
     const { message } = this.props
     const { list } = message
 
@@ -94,7 +95,7 @@ class ServicesHome extends Component {
           </View>
 
           <View className='mx-2' >
-            <AppointmentMessageList items={list || []} />
+            <AppointmentMessageList cover={cover} items={list || []} />
           </View>
 
           <View class=' board--fixed' >
