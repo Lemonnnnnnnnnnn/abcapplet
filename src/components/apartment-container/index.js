@@ -122,12 +122,12 @@ class ApartmentContainer extends BaseComponent {
           <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>
             {isCollect
               ?
-              <View className='mt-1' onClick={this.props.onDeleteFavorite}>
+              <View className='at-row at-row__justify--center at-row__align--center' style={{marginTop : '1px'}} onClick={this.props.onDeleteFavorite}>
                 <Image src={HEART_YELLOW} className='apartment-container-heart'></Image>
                 <View className='apartment-container-heartNum' >{appointment_show_num}</View>
               </View>
               :
-              <View className='mt-1' onClick={this.props.onCreateFavorite}>
+              <View className='at-row at-row__justify--center at-row__align--center' style={{marginTop : '1px'}} onClick={this.props.onCreateFavorite}>
                 <Image src={HEART_YELLOW_EMPTY} className='apartment-container-heart' ></Image>
                 <View className='apartment-container-heartNum' >{appointment_show_num}</View>
               </View>

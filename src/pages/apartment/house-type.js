@@ -723,14 +723,12 @@ class HouseTypeShow extends Component {
                       </View>)}
                   </ScrollView>
                 </View>
-
               }
-
 
               {/* 附近公寓 */}
               {city && nearbyPost.length &&
-                <View >
-                  <View className='text-bold text-huge mt-1 mb-2'>附近公寓</View>
+                <View className='mt-4'>
+                  <View className='text-bold text-huge mb-3'>附近公寓</View>
                   <ApartmentList
                     nearbyPost={nearbyPost}
                     mini
