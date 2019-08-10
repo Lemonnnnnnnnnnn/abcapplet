@@ -346,13 +346,28 @@ class AppointmentPost extends Component {
   }
   onChenkPayload() {
     const { name, tel, dateSel, timeSel, Payload, login } = this.state
-    if (name === '姓名'
-      || tel === '电话'
-      || dateSel === '请选择看房日期'
-      || !Payload.house_type) {
+    if (tel === '电话') {
       Taro.showToast({
         icon: 'none',
-        title: '亲，请检查您填写的内容是否正确',
+        title: '亲，请点击修改填写看房手机号码',
+      })
+      return false
+    } else if (name === '姓名') {
+      Taro.showToast({
+        icon: 'none',
+        title: '亲，请点击修改填写看房者姓名',
+      })
+      return false
+    } else if (dateSel === '请选择看房日期') {
+      Taro.showToast({
+        icon: 'none',
+        title: '亲，请选择看房日期哦',
+      })
+      return false
+    } else if (!Payload.house_type) {
+      Taro.showToast({
+        icon: 'none',
+        title: '亲，您还未选择所看户型呢',
       })
       return false
     } else if (!login) {
