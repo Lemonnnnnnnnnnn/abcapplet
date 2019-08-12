@@ -369,7 +369,7 @@ class ApartmentShow extends Component {
                 {types && types.map((i, index) =>
                   <View style={imageStyle} key={i.id} className={`${index + 1 === types.length ? 'pr-2' : '' } at-col at-col-5 pl-1 mt-2 mr-3`}>
                     <View style={borderStyle}>
-                      <ApartmentTypeItem item={i} index={index} />
+                      <ApartmentTypeItem item={i} />
                     </View>
                   </View>)}
               </ScrollView>

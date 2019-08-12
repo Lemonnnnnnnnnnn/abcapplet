@@ -23,7 +23,7 @@ import AppartmentMatchingMask from '@components/apartment-matching-mask'
 // 自定义变量
 import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
-import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC , TYPE_FAVORITE_APARTMENT} from '@constants/apartment'
+import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
@@ -74,104 +74,121 @@ class HouseTypeShow extends Component {
 
     const { id } = this.$router.params
 
-    if(id){
+    if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
-    await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
-      if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
-      } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+      await Taro.getSystemInfo().then(res => {
+        this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
+        if (res.model.indexOf('iPhone X') !== -1) {
+          this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+        } else if (res.model.indexOf('iPhone') !== -1) {
+          this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+        }
+      })
+
+      const apartmentID = data.apartment_id
+
+
+      await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
+
+
+      const buttons = !data.is_sign
+        ? [{ message: '预约看房', method: 'onCreateBusiness' }]
+        : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
+
+      // 生成前五个房间配置/公共配置/房间
+
+      let facilitys = data.facility_list
+      let roomMatch = []
+      let publicMatch = []
+      let allHouseType = []
+      let firstIndex = 0
+
+      facilitys && facilitys.map(i => {
+        i.type === 2 && roomMatch.push(i)
+        i.type === 1 && publicMatch.push(i)
+      })
+
+      let roomMatch_list = roomMatch.slice(0, 5)
+      let publicMatch_list = publicMatch.slice(0, 5)
+      const loadMore = {
+        icon: 'https://images.gongyuabc.com//image/pointThree.png',
+        title: '更多',
       }
-    })
 
-    const apartmentID = data.apartment_id
+      roomMatch_list.length >= 5 && roomMatch_list.push(loadMore)
+      publicMatch_list.length >= 5 && publicMatch_list.push(loadMore)
+
+      let roomList = (data.room_list).slice(0, 5)
+
+      // 生成当前户型位于other_houseType数组第一位的新数组
+
+      allHouseType = data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` }))
+      allHouseType.forEach((i, key) => {
+        if (i.id === data.id) {
+          firstIndex = key
+        }
+      })
+      const currentHouseType = allHouseType.splice(firstIndex, 1)
+      const all_houseType = currentHouseType.concat(allHouseType)
 
 
-    await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
-
-
-    const buttons = !data.is_sign
-      ? [{ message: '预约看房', method: 'onCreateBusiness' }]
-      : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
-
-    let facilitys = data.facility_list
-    let roomMatch = []
-    let publicMatch = []
-    facilitys && facilitys.map(i => {
-      i.type === 2 && roomMatch.push(i)
-      i.type === 1 && publicMatch.push(i)
-    })
-
-    let roomMatch_list = roomMatch.slice(0, 5)
-    const loadMore = {
-      icon: 'https://images.gongyuabc.com//image/pointThree.png',
-      title: '更多',
-    }
-    let publicMatch_list = publicMatch.slice(0, 5)
-
-    roomMatch_list.length >= 5 && roomMatch_list.push(loadMore)
-    publicMatch_list.length >= 5 && publicMatch_list.push(loadMore)
-
-    let roomList = (data.room_list).slice(0, 5)
-
-    data && this.setState({
-      roomMatch_list: roomMatch_list,
-      publicMatch_list: publicMatch_list,
-      houseType_id: id,
-      buttons,
-      houstType: {
-        id: data.id,
-        roomMatch: roomMatch,
-        publicMatch: publicMatch,
-        desc: data.desc,
-        cost: data.cost,
-        cost_info: data.cost_info,
-        cover: data.cover,
-        rules: data.rules,
-        position: data.position,
-        cbds: data.cbd_list,
-        intro: data.one_word,
-        isSign: data.is_sign,
-        notices: data.notices,
-        descList: data.desc_list,
-        roomList: roomList,
-        isCollect: data.is_collect,
-        facilitys: data.facility_list,
-        tags: data.tags,
-        apartmentId: data.apartment_id,
-        lookTime: data.look_guide.open_time,
-        apartmentTitle: data.apartment_title,
-        lookTips: data.look_guide.tips || '',
-        swipers: data.pictures.map(i => ({ url: i })),
-        title: `${data.title} · ${data.apartment_title}`,
-        priceTitle: data.price_title,
-        hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
-        types: data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
-        appointment_show_num: data.appointment_show_num,
-        one_word: data.one_word,
-        type_desc: data.type_desc,
-      },
-      map: {
-        latitude: parseFloat(data.latitude),
-        longitude: parseFloat(data.longitude),
-        markers: [{
+      data && this.setState({
+        roomMatch_list: roomMatch_list,
+        publicMatch_list: publicMatch_list,
+        houseType_id: id,
+        buttons,
+        houstType: {
           id: data.id,
-          latitude: data.latitude,
-          longitude: data.longitude,
-          callout: {
-            content: data.apartment_title,
-            display: 'ALWAYS',
-            bgColor: "#3a3a3a",
-            color: "#fff",
-            borderRadius: 50,
-            padding: 10,
-          },
-        }],
-      }
-    })
-  }
+          roomMatch: roomMatch,
+          publicMatch: publicMatch,
+          desc: data.desc,
+          cost: data.cost,
+          cost_info: data.cost_info,
+          cover: data.cover,
+          rules: data.rules,
+          position: data.position,
+          cbds: data.cbd_list,
+          intro: data.one_word,
+          isSign: data.is_sign,
+          notices: data.notices,
+          descList: data.desc_list,
+          roomList: roomList,
+          isCollect: data.is_collect,
+          facilitys: data.facility_list,
+          tags: data.tags,
+          apartmentId: data.apartment_id,
+          lookTime: data.look_guide.open_time,
+          apartmentTitle: data.apartment_title,
+          lookTips: data.look_guide.tips || '',
+          swipers: data.pictures.map(i => ({ url: i })),
+          title: `${data.title} · ${data.apartment_title}`,
+          priceTitle: data.price_title,
+          hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
+          types: all_houseType,
+          appointment_show_num: data.appointment_show_num,
+          one_word: data.one_word,
+          type_desc: data.type_desc,
+        },
+        map: {
+          latitude: parseFloat(data.latitude),
+          longitude: parseFloat(data.longitude),
+          markers: [{
+            id: data.id,
+            latitude: data.latitude,
+            longitude: data.longitude,
+            callout: {
+              content: data.apartment_title,
+              display: 'ALWAYS',
+              bgColor: "#3a3a3a",
+              color: "#fff",
+              borderRadius: 50,
+              padding: 10,
+            },
+          }],
+        }
+      })
+    }
 
   }
   // 电话客服/在线客服
@@ -730,9 +747,9 @@ class HouseTypeShow extends Component {
                   <ScrollView scrollX>
                     {types.map((i, index) =>
 
-                      <View style={imageStyle} key={i.id} className={`${index + 1 != types.length } at-col at-col-5 mt-1 `}>
+                      <View style={imageStyle} key={i.id} className={`${index + 1 != types.length} at-col at-col-5 mt-1 `}>
                         <View style={borderStyle} className='ml-1 mr-1' >
-                          <ApartmentTypeItem item={i} />
+                          <ApartmentTypeItem item={i} houseType index={index} />
                         </View>
                       </View>)}
                   </ScrollView>

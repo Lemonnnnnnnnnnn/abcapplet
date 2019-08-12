@@ -22,13 +22,12 @@ class ApartmentTypeItem extends BaseComponent {
 
 
   render() {
-    let { item, width, height, index } = this.props
+    let { item, width, height, houseType, index } = this.props
     const { cover, price_title: priceTitle, title, desc } = item
 
     const wrapStyle = {
       overflow: 'hidden',
       position: 'relative'
-
     }
 
     const maskStyle = {
@@ -47,7 +46,7 @@ class ApartmentTypeItem extends BaseComponent {
       left: '50%',
       top: '50%',
       transform: 'translate(-50%,-50%)',
-      height : Taro.pxTransform(200)
+      height: Taro.pxTransform(200)
     }
 
     // 格式化价格
@@ -56,7 +55,7 @@ class ApartmentTypeItem extends BaseComponent {
 
     return <View className='apartment-type-item' style={wrapStyle} onClick={this.onNavigation}>
       {
-        index === 0 &&
+        houseType && index === 0 &&
         <View className='at-row at-row__justify--center'>
           <View style={maskStyle}></View>
           <View style={fontStyle} className='text-normal'>您正在浏览此户型</View>
