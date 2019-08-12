@@ -112,7 +112,7 @@ class RoomItem extends BaseComponent {
 
   render() {
     const { className, room, height, type, isSign } = this.props
-    const {  status, space, toward, is_collect: isCollect } = room
+    const { status, space, toward, is_collect: isCollect } = room
 
     const { showYear, year, releaseDate } = this.state
 
@@ -179,9 +179,9 @@ class RoomItem extends BaseComponent {
                 {/* 左侧 */}
 
                 <View className='at-row  at-row__align--end'>
-                  <Text className='text-huge text-bold text-yellow'>{isNaNPrice ? priceTitle : `${parseFloat(priceTitle)}`}</Text>
+                  <Text className='text-huge text-bold text-yellow'>{priceTitle}</Text>
                   <Text className='text-small text-yellow mb-1'>
-                    {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
+                    {isNaNPrice ? {LOCALE_PRICE_UNIT}/{LOCALE_MONTH} : ""}
                   </Text>
                 </View>
 
@@ -191,7 +191,7 @@ class RoomItem extends BaseComponent {
                 <View className='mr-3'>
                   <AtIcon value='image' size='25' color={COLOR_YELLOW} onClick={this.onViewPic} ></AtIcon>
                 </View>
-                
+
                 {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'
                   onClick={this.onSignRoom}

@@ -361,7 +361,6 @@ class HouseTypeShow extends Component {
       appointment_show_num, type_desc
     } = houstType
 
-
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     const BrandingStyle = {
@@ -502,16 +501,16 @@ class HouseTypeShow extends Component {
               <View className='text-secondary text-large mt-1'>{intro}</View>
 
               {/* 价格相关 */}
-              <View className='at-row at-row__justify--between at-row__align--end  mt-2'>
+              <View className='at-row at-row__justify--between at-row__align--center  mt-2'>
                 <View className='text-yellow at-col'>
-                  <Text className='text-super ' style={{ fontSize: '23px' }}>
-                    {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${parseFloat(priceTitle)}`}
+                  <Text className='text-super ' style={{ fontSize: '18px' }}>
+                    {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${priceTitle}`}
                   </Text>
-                  <Text className='text-large'>{LOCALE_PRICE_START}</Text>
+                  <Text className='text-normal'>{LOCALE_PRICE_START}</Text>
                 </View>
 
                 <View className='at-col '>
-                  <View className='at-row at-row__align--center at-row__justify--end mb-2'>
+                  <View className='at-row at-row__align--center at-row__justify--end '>
                     <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
                     <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
                   </View>

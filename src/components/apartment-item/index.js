@@ -74,10 +74,10 @@ class ApartmentItem extends BaseComponent {
   }
 
   onNavigation() {
-    const { apartment,type } = this.props
-    if(type===TYPE_FAVORITE_APARTMENT){
+    const { apartment, type } = this.props
+    if (type === TYPE_FAVORITE_APARTMENT) {
       Taro.navigateTo({ url: `${PAGE_APARTMENT_SHOW}?id=${apartment.id}` })
-    }else{
+    } else {
       Taro.navigateTo({ url: `${PAGE_HOUSE_TYPE_SHOW}?id=${apartment.id}` })
     }
 
@@ -85,7 +85,7 @@ class ApartmentItem extends BaseComponent {
 
 
   render() {
-    let { width, height, minWidth, minHeight, mini, nearbyPost, home ,} = this.props
+    let { width, height, minWidth, minHeight, mini, nearbyPost, home, } = this.props
     const { apartment, type } = this.props
 
 
@@ -222,10 +222,10 @@ class ApartmentItem extends BaseComponent {
             {/* 价格 */}
 
             <View className='text-yellow mt-1'>
-              <Text className='text-bold' style={{ fontSize: "20px" }}>
-                {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}`}
+              <Text className='text-bold text-large'>
+                {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${priceTitle}`}
               </Text>
-              <Text className='text-large'>{LOCALE_QI}</Text>
+              <Text className='text-normal'>{LOCALE_QI}</Text>
             </View>
 
           </View>
@@ -233,12 +233,12 @@ class ApartmentItem extends BaseComponent {
         }
 
         {/* 迷你内容 */}
-        {mini && <View className='apartment-content mx-2 mt-3'>
+        {mini && <View className='apartment-content mx-2 mt-2'>
           {/* 价格和公寓名称 */}
           {
-            nearbyPost ? <View className='text-normal text-bold'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
+            nearbyPost ? <View className='text-normal'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
           }
-          <View className='text-yellow text-large'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${parseFloat(priceTitle)}${LOCALE_QI}`}</View>
+          <View className='text-yellow text-normal'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
         </View>
         }
       </View>
