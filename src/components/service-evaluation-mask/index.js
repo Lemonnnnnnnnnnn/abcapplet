@@ -36,6 +36,7 @@ class AppointmentRevolution extends Component {
   }
   state = {
     localComment: 0,
+    localText: '',
   }
 
   //分数，星星数
@@ -50,7 +51,7 @@ class AppointmentRevolution extends Component {
   // 本地存储数据
   onComment() {
     const { payload } = this.state
-    this.setState({  localComment: payload.score })
+    this.setState({ localComment: payload.score, localText: payload.comment })
   }
 
 
@@ -82,13 +83,14 @@ class AppointmentRevolution extends Component {
     }
   }
 
+
   onMaskTouchMove(e) {
     return e.stopPropagation()
   }
 
   render() {
-    const { show, headimgurl, name, service_num, comment_score, appointment_id, comment , haveEvalution } = this.props
-    const { score, localComment } = this.state
+    const { show, headimgurl, name, service_num, comment_score, appointment_id, comment, haveEvalution } = this.props
+    const { score, localComment, localText } = this.state
 
     var nowScore;
 
@@ -98,6 +100,12 @@ class AppointmentRevolution extends Component {
       } else {
         nowScore = comment.score ? comment.score : score
       }
+    }
+
+    const textStyle = {
+      wordBreak : 'break-all',
+      textIndent : '15px',
+      height : Taro.pxTransform(300)
     }
 
 
@@ -152,15 +160,20 @@ class AppointmentRevolution extends Component {
           {/* 输入框 */}
 
           <View className='mt-4 '>
-            <AtTextarea
-              fixed
-              count={false}
-              value={comment.remark}
-              maxLength={200}
-              className='mt-3 textarea text-normal p-3'
-              onChange={this.onRemarkChange}
-              placeholder='评价'
-            />
+            {
+              haveEvalution || comment.score ?
+                <View className='text-normal p-3 mt-3' style={textStyle}>{comment.remark || localText}</View>
+                : <AtTextarea
+                  fixed
+                  count={false}
+                  value={comment.remark}
+                  maxLength={200}
+                  className='mt-3 textarea text-normal p-3'
+                  onChange={this.onRemarkChange}
+                  placeholder='评价'
+                />
+            }
+
           </View>
           {/* 按钮 */}
           <View className='mt-4' hidden={haveEvalution || comment.score ? true : false}>

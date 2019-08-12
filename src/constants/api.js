@@ -197,3 +197,7 @@ export const API_USER_MSG = `${HOST}/user/getPost`
 
 // 获取附近公寓列表
 export const API_APARTMENT_NEARBYPOST = `${HOST}/apartment/nearbyPost`
+
+// 手机授权
+
+export const API_AUTH_MOBILEPOST = `${HOST}/auth/mobilePost`

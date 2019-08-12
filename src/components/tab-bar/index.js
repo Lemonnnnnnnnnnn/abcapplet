@@ -34,7 +34,7 @@ class TabBar extends BaseComponent {
   onOpenCallPhoneView() {
 
     Taro.makePhoneCall({
-      phoneNumber: '0529-5911297'
+      phoneNumber: '0592-5911297'
     });
   }
 
@@ -44,7 +44,7 @@ class TabBar extends BaseComponent {
   }
 
   onCallPhone() {
-    Taro.makePhoneCall({ phoneNumber: '0529-5911297' })
+    Taro.makePhoneCall({ phoneNumber: '0592-5911297' })
 
   }
 

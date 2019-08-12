@@ -448,7 +448,7 @@ class HouseTypeShow extends Component {
           <View style={statusBarStyle}></View>
           {/* 标题栏 */}
           <View style={{ position: "relative" }}>
-            <View className='at-row at-row__align--center  ml-2 navStyle-titleStyle' style={titleStyle} >
+            <View className='at-row at-row__align--center ml-2 navStyle-titleStyle' style={titleStyle} >
               <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle' >
                 <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
                   <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>

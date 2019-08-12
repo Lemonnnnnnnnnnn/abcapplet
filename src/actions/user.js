@@ -8,6 +8,7 @@ import {
   API_DEMAND_CREATE,
   API_DEMAND_CHECK,
   API_USER_MSG,
+  API_AUTH_MOBILEPOST
 } from '@constants/api'
 
 import {
@@ -18,7 +19,8 @@ import {
   USER_CITY_CODE,
   TYPE_DEMAND_CREATE,
   TYPE_DEMAND_CHECK,
-  
+  GET_USER_PHONE,
+
 } from '@constants/user'
 
 import {
@@ -167,7 +169,7 @@ export const dispatchFavoriteCreate = (payload) => {
 export const dispatchRequirementCreate = (payload) => createAction({
   payload,
   method: 'POST',
-  type:TYPE_DEMAND_CREATE,
+  type: TYPE_DEMAND_CREATE,
   url: API_DEMAND_CREATE,
 })
 /**
@@ -177,7 +179,7 @@ export const dispatchRequirementCreate = (payload) => createAction({
 export const dispatchRequirementCheck = (payload) => createAction({
   payload,
   method: 'POST',
-  type:TYPE_DEMAND_CHECK,
+  type: TYPE_DEMAND_CHECK,
   url: API_DEMAND_CHECK,
 })
 
@@ -186,5 +188,13 @@ export const dispatchGetUserMsg = (payload) => createAction({
   method: 'POST',
   type: "getUserMsg",
   url: API_USER_MSG
+})
+
+// 获取手机号码
+export const dispatchUserPhone = (payload) =>createAction({
+  payload,
+  method : 'POST',
+  type : GET_USER_PHONE,
+  url : API_AUTH_MOBILEPOST,
 })
 

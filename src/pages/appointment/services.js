@@ -29,11 +29,7 @@ class ServicesHome extends Component {
 
   refAppointmentList =  (node) => this.appointmentList = node
 
-
-
-
   componentDidShow(){
-
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
@@ -154,7 +150,6 @@ class ServicesHome extends Component {
               <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
             </View>
         }
-
       </View>
       </View>
     )

@@ -18,6 +18,7 @@ import {
 // 自定义组件
 import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
+import GetPhoneNumMask from '@components/get-phoneNum-mask'
 
 import {
   PAGE_USER_AUTH
@@ -31,7 +32,7 @@ import {
 const nowTime = new Date()
 let currentMonth = nowTime.getMonth()
 let currentDay = nowTime.getDate()
-let currentHours = nowTime.getHours() 
+let currentHours = nowTime.getHours()
 
 @connect(state => state, {
   ...userActions,
@@ -52,6 +53,7 @@ class AppointmentPost extends Component {
     Payload: PAYLOAD_APPOINTMENT_CREATE,
     showInformation: false,
     showNext: false,
+    showGetPhoneNumMask: false,
 
     dateSel: '请选择看房日期',
     timeSel: '请选择看房时间',
@@ -69,13 +71,27 @@ class AppointmentPost extends Component {
     screenWidth: '',
     houseTypeList: [],
     currentTime: [],
-    login: false,
   }
 
-  onLogin() {
-    Taro.reLaunch({ url: PAGE_USER_AUTH })
+  async getPhoneNumber(e) {
+    const { code } = await Taro.login()
+    const { encryptedData: encrypt_data, iv } = e.currentTarget
+    const urlCode = decodeURI(code)
+    const urlEncrypt_data = decodeURI(encrypt_data)
+    const urlIv = decodeURI(iv)
+
+    await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(res => {
+      const tel = res.data.data.user.mobile
+      if (res) {
+        this.setState({ tel: tel })
+      }
+      this.onClosePhoneMask()
+    })
   }
 
+  onClosePhoneMask() {
+    this.setState({ showGetPhoneNumMask: false })
+  }
 
   async componentDidMount() {
 
@@ -94,14 +110,15 @@ class AppointmentPost extends Component {
           this.setState({
             name: res.data.data.user.username,
           })
-        tel && this.setState({
+        tel ? this.setState({
           tel: tel,
-        })
-        this.setState({ login: true })
-      } else {
-        this.onLogin()
+        }) :
+          this.setState({ showGetPhoneNumMask: true })
       }
     })
+
+
+
 
     const { payload } = await this.props.dispatchUser()
 
@@ -234,7 +251,7 @@ class AppointmentPost extends Component {
 
     if (column === 1) { currentMonth = value }
     if (column === 2) { currentDay = value + 1 }
-    if (column === 3) { currentHours = value + 7 }
+    if (column === 3) { currentHours = value + 8 }
 
     const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":30"
 
@@ -298,6 +315,7 @@ class AppointmentPost extends Component {
   //打开,关闭获取姓名和电话号码弹窗
   onClose() {
     const { showInformation, name, tel, Payload } = this.state
+
     this.setState({
       showInformation: !showInformation,
       Payload: { ...Payload, name: name, mobile: tel }
@@ -345,7 +363,7 @@ class AppointmentPost extends Component {
     }
   }
   onChenkPayload() {
-    const { name, tel, dateSel, timeSel, Payload, login } = this.state
+    const { name, tel, dateSel, timeSel, Payload } = this.state
     if (tel === '电话') {
       Taro.showToast({
         icon: 'none',
@@ -368,12 +386,6 @@ class AppointmentPost extends Component {
       Taro.showToast({
         icon: 'none',
         title: '亲，您还未选择所看户型呢',
-      })
-      return false
-    } else if (!login) {
-      Taro.showToast({
-        icon: 'none',
-        title: '亲，您还未登录',
       })
       return false
     }
@@ -457,9 +469,8 @@ class AppointmentPost extends Component {
   }
   render() {
     const { houstType, height, users, tel, showInformation, name,
-      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime } = this.state
+      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask } = this.state
     // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
-
 
     const {
       title, swipers, priceTitle, intro,
@@ -554,7 +565,7 @@ class AppointmentPost extends Component {
                     </View>
                   </View>
                   <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
-                    <View className='text-small text-muted'>{LOCALE_CHANGE}</View>
+                    <View className='text-normal'>{LOCALE_CHANGE}</View>
                     <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
                   </View>
                 </View>
@@ -622,6 +633,12 @@ class AppointmentPost extends Component {
               minTime={zeroMinTime}
               serverId={serverId}
             />
+            {/* <GetPhoneNumMask
+              onClose={this.onClosePhoneMask}
+              show={showGetPhoneNumMask}
+              onFillPhone={this.getPhoneNumber} /> */}
+
+
           </View>
           {/* </Board> */}
 

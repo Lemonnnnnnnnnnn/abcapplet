@@ -112,11 +112,13 @@ class ApartmentItem extends BaseComponent {
 
     const fontSize = mini ? "10px" : "15px"
     const padding = mini ? "0 10px" : "2px 12px"
+    const left = mini ? '3%' : '5%'
     // const borderRadius = mini ? "6px" : "12px"
 
     const apartmentHeaderType = {
       padding: padding,
       fontSize: fontSize,
+      left : left
     }
 
 
@@ -236,7 +238,7 @@ class ApartmentItem extends BaseComponent {
         {mini && <View className='apartment-content mx-2 mt-2'>
           {/* 价格和公寓名称 */}
           {
-            nearbyPost ? <View className='text-normal'>{title}</View> : <View className=' text-normal'>{apartmentTitle}</View>
+            nearbyPost ? <View className='text-normal '>{title}</View> : <View className=' text-normal mt-3'>{apartmentTitle}</View>
           }
           <View className='text-yellow text-normal'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
         </View>

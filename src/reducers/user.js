@@ -3,7 +3,8 @@ import {
   USER_INFO,
   USER_LOGIN,
   USER_LOGOUT,
-  USER_DEFAULT
+  USER_DEFAULT,
+  GET_USER_PHONE
 } from '@constants/user'
 
 export default function user(state = USER_DEFAULT, action) {

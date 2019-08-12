@@ -107,3 +107,4 @@ export const  PEOPLETTAGLIST={
 }
 
 
+export const GET_USER_PHONE = 'getUserPhone'

@@ -1,9 +1,11 @@
 import Taro, { Component } from '@tarojs/taro'
 import { LOCALE_AUTH } from '@constants/locale'
 import { PAGE_HOME } from '@constants/page'
-import { connect } from '@tarojs/redux'
+
 import Auth from '@components/auth'
 import logo from '@assets/icons/logo.png'
+// redux
+import { connect } from '@tarojs/redux'
 import * as actions from '@actions/user'
 
 
