@@ -10,14 +10,14 @@ class AppointmentMessageList extends BaseComponent {
     items: [],
   }
   render() {
-    const { items, cover } = this.props
+    const { items} = this.props
     return (
       <View>
         {items.map(i =>
           <View key={i.id} className='text-normal'>
 
             {i.sayer !== 'user' && <View className='at-row mt-3'>
-              <Image src={cover} style={{ width: Taro.pxTransform(80), height: Taro.pxTransform(80),borderRadius:"50%" }}></Image>
+              <Image src='http://images.gongyuabc.com/image/icon/head-no.png' style={{ width: Taro.pxTransform(80), height: Taro.pxTransform(80), borderRadius: "50%" }}></Image>
               <View className='ml-2'>
                 <View className='message-item p-2'>{i.content}</View>
                 <View className='text-secondary text-mini mt-1'>
