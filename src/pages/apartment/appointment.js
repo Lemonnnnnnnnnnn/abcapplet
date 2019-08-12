@@ -31,7 +31,7 @@ import {
 const nowTime = new Date()
 let currentMonth = nowTime.getMonth()
 let currentDay = nowTime.getDate()
-let currentHours = nowTime.getHours()
+let currentHours = nowTime.getHours() 
 
 @connect(state => state, {
   ...userActions,
@@ -161,13 +161,13 @@ class AppointmentPost extends Component {
 
 
     // 计算可供选择的时间列表
-    let currentTime = [1, currentMonth, currentDay - 1, currentHours - 7]
+    let currentTime = [1, currentMonth, currentDay - 1, currentHours - 8]
     this.setState({ currentTime: currentTime })
 
     const finalList = []
 
     const monthList_NaN = Array.from({ length: 12 })
-    const timeList_NaN = Array.from({ length: 14 })
+    const timeList_NaN = Array.from({ length: 13 })
     const dayList_NaN = Array.from({ length: 30 })
 
     let yearList = [nowTime.getFullYear() + "年"]
@@ -177,7 +177,7 @@ class AppointmentPost extends Component {
 
     monthList_NaN.map((i, key) => monthList.push(key + 1 + "月"))
     dayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-    timeList_NaN.map((i, key) => timeList.push(key + 9 + " :00"))
+    timeList_NaN.map((i, key) => timeList.push(key + 9 + " :30"))
 
 
     finalList.push(yearList)
@@ -219,7 +219,7 @@ class AppointmentPost extends Component {
   onClickPicker() {
     const { Payload, tel, name, range } = this.state
     const year = (range[0][0]).split("年")[0]
-    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
+    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":30"
     this.setState({
       dateSel: payloadStr,
       Payload: { ...Payload, order_time: payloadStr, mobile: tel, name: name }
@@ -236,7 +236,7 @@ class AppointmentPost extends Component {
     if (column === 2) { currentDay = value + 1 }
     if (column === 3) { currentHours = value + 7 }
 
-    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":00"
+    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":30"
 
     this.setState({
       dateSel: payloadStr,
