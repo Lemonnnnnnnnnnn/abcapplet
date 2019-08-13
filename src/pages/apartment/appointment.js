@@ -24,7 +24,6 @@ import {
   PAGE_USER_AUTH
 } from '@constants/page'
 
-
 // let month = "01"
 // let day = "01"
 // let time = "08:00"
@@ -33,6 +32,9 @@ const nowTime = new Date()
 let currentMonth = nowTime.getMonth()
 let currentDay = nowTime.getDate()
 let currentHours = nowTime.getHours()
+let currentYear = nowTime.getFullYear()
+
+let payloadH = currentHours + 2
 
 @connect(state => state, {
   ...userActions,
@@ -71,6 +73,7 @@ class AppointmentPost extends Component {
     screenWidth: '',
     houseTypeList: [],
     currentTime: [],
+    secTimeClick: false,
   }
 
   async getPhoneNumber(e) {
@@ -178,15 +181,58 @@ class AppointmentPost extends Component {
 
 
     // 计算可供选择的时间列表
-    let currentTime = [1, currentMonth, currentDay - 1, currentHours - 8]
+
+    let currentHoursIndex = 0
+    if (currentHours * 2 - 15 > 24) {
+      currentHoursIndex = 24
+    } else if (currentHours * 2 - 15 < 0) {
+      currentHoursIndex = 0
+    } else {
+      currentHoursIndex = currentHours * 2 - 15
+    }
+
+
+    let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
     this.setState({ currentTime: currentTime })
 
     const finalList = []
 
+    // 生成用于map的空数组
     const monthList_NaN = Array.from({ length: 12 })
-    const timeList_NaN = Array.from({ length: 13 })
-    const dayList_NaN = Array.from({ length: 30 })
+    const timeList_NaN = Array.from({ length: 25 })
+    let dayList_NaN = []
 
+    // 判断大小月与平年闰年
+
+    let bigMonth = [1, 3, 5, 7, 8, 10, 12]
+    let smailMonth = [4, 6, 9, 11]
+    let judge = { "bigMonth": true, "flatYear": true }
+
+    bigMonth.forEach(i => {
+      if (i === currentMonth) {
+        judge.bigMonth = true
+      }
+    })
+
+    smailMonth.forEach(i => {
+      if (i === currentMonth) {
+        judge.bigMonth = false
+      }
+    })
+
+    if ((currentYear % 4 === 0 && currentYear % 100 != 0) || currentYear % 400 === 0) {
+      judge.flatYear = false
+    } else {
+      judge.flatYear = true
+    }
+
+    if (currentMonth !== 2) {
+      judge.bigMonth ? dayList_NaN = Array.from({ length: 31 }) : dayList_NaN = Array.from({ length: 30 })
+    } else if (currentMonth === 2) {
+      judge.flatYear ? dayList_NaN = Array.from({ length: 28 }) : dayList_NaN = Array.from({ length: 29 })
+    }
+
+    //填充数据 
     let yearList = [nowTime.getFullYear() + "年"]
     let monthList = []
     let dayList = []
@@ -194,7 +240,10 @@ class AppointmentPost extends Component {
 
     monthList_NaN.map((i, key) => monthList.push(key + 1 + "月"))
     dayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-    timeList_NaN.map((i, key) => timeList.push(key + 9 + " :30"))
+    timeList_NaN.map((i, key) => {
+      key % 2 === 0 && timeList.push((key / 2) + 9 + " :30")
+      key % 2 === 1 && timeList.push(((key + 1) / 2) + 9 + " :00")
+    })
 
 
     finalList.push(yearList)
@@ -202,7 +251,6 @@ class AppointmentPost extends Component {
     finalList.push(dayList)
     finalList.push(timeList)
     this.setState({ range: finalList })
-
   }
 
   // 户型选择
@@ -234,13 +282,37 @@ class AppointmentPost extends Component {
   }
 
   onClickPicker() {
-    const { Payload, tel, name, range } = this.state
+    const { Payload, tel, name, range, secTimeClick } = this.state
     const year = (range[0][0]).split("年")[0]
-    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":30"
-    this.setState({
-      dateSel: payloadStr,
-      Payload: { ...Payload, order_time: payloadStr, mobile: tel, name: name }
-    })
+
+    if (!secTimeClick) {
+      currentMonth = nowTime.getMonth()
+      currentDay = nowTime.getDate() 
+      currentHours = nowTime.getHours()
+
+      let currentHoursIndex = 0
+      if (currentHours * 2 - 15 > 24) {
+        currentHoursIndex = 24
+      } else if (currentHours * 2 - 15 < 0) {
+        currentHoursIndex = 0
+      } else {
+        currentHoursIndex = currentHours * 2 - 15
+      }
+
+      let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
+      this.setState({ currentTime: currentTime })
+
+      const payloadStr = year + "-"
+        + this.onJudgeTen(currentMonth + 1)
+        + "-" + this.onJudgeTen(currentDay)
+        + " " + this.onJudgeTen(currentHours + 2) + ":00"
+
+      this.setState({
+        dateSel: payloadStr,
+        Payload: { ...Payload, order_time: payloadStr, mobile: tel, name: name }
+      })
+    }
+    this.setState({ secTimeClick: true })
   }
 
   onColumnChange = e => {
@@ -248,12 +320,21 @@ class AppointmentPost extends Component {
     const { Payload, tel, name, range } = this.state
     const year = (range[0][0]).split("年")[0]
 
-
     if (column === 1) { currentMonth = value }
     if (column === 2) { currentDay = value + 1 }
-    if (column === 3) { currentHours = value + 8 }
+    if (column === 3) {
+      if (value % 2 === 0) {
+        payloadH = this.onJudgeTen(value / 2 + 9) + ':30'
+      } else if (value % 2 === 1) {
+        payloadH = this.onJudgeTen((value + 1) / 2 + 9) + ':00'
+      }
+    }
 
-    const payloadStr = year + "-" + this.onJudgeTen(currentMonth + 1) + "-" + this.onJudgeTen(currentDay) + " " + this.onJudgeTen(currentHours + 1) + ":30"
+    const payloadStr = year + "-"
+      + this.onJudgeTen(currentMonth + 1) + "-"
+      + this.onJudgeTen(currentDay) + " "
+      + payloadH
+
 
     this.setState({
       dateSel: payloadStr,
@@ -633,10 +714,10 @@ class AppointmentPost extends Component {
               minTime={zeroMinTime}
               serverId={serverId}
             />
-            {/* <GetPhoneNumMask
+            <GetPhoneNumMask
               onClose={this.onClosePhoneMask}
               show={showGetPhoneNumMask}
-              onFillPhone={this.getPhoneNumber} /> */}
+              onFillPhone={this.getPhoneNumber} />
 
 
           </View>

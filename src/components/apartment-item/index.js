@@ -112,13 +112,13 @@ class ApartmentItem extends BaseComponent {
 
     const fontSize = mini ? "10px" : "15px"
     const padding = mini ? "0 10px" : "2px 12px"
-    const left = mini ? '3%' : '5%'
+    // const left = mini ? '4%' : '5%'
     // const borderRadius = mini ? "6px" : "12px"
 
     const apartmentHeaderType = {
       padding: padding,
       fontSize: fontSize,
-      left : left
+      left : '5%'
     }
 
 
@@ -160,7 +160,7 @@ class ApartmentItem extends BaseComponent {
 
           {/* 户型 cbd 列表 */}
           {
-            cbd && <View className='apartment-header-title'>
+            cbd && <View className='apartment-header-title' >
               {cbdTitle}
             </View>
           }
