@@ -29,6 +29,7 @@ import {
   SET_NEXT_PAGE_APARTMENT_LIST,
   SET_APARTMENT_LOOK_LIST,
   SET_CBD_APARTMENT_LIST,
+  SET_NEXT_PAGE_CBD_APARTMENT_LIST,
   TYPE_CBD_APARTMENT,
   TYPE_SEARCH_APARTMENT,
   SET_NEXT_PAGE_FAVORITE_HOUSETYPE_LIST,
@@ -133,7 +134,7 @@ export const dispatchCbdApartmentList = payload => createAction({
 export const dispatchNextPageCbdApartmentList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  type: SET_NEXT_PAGE_CBD_APARTMENT_LIST,
   url: API_CBD_APARTMENT_LIST,
   cb: ({ data: { data } }) => ({ ...data, type: TYPE_CBD_APARTMENT })
 })
@@ -167,37 +168,6 @@ export const dispatchNextPageActivityApartmentList = payload => createAction({
     type: TYPE_ACTIVITY_APARTMENT
   })
 })
-
-
-/**
- * 搜索合集
- */
-// export const dispatchSearchApartmentList = payload => createAction({
-//   payload,
-//   method: 'POST',
-//   type: SET_APARTMENT_LIST,
-//   url: API_SEARCH_APARTMENT,
-//   cb: ({ data: { data } }) => ({
-//     list: data.list,
-//     total: data.total,
-//     type: TYPE_SEARCH_APARTMENT
-//   })
-// })
-
-/**
- * 搜索合集下一页
- */
-// export const dispatchNextPageSearchApartmentList = payload => createAction({
-//   payload,
-//   method: 'POST',
-//   type: SET_NEXT_PAGE_APARTMENT_LIST,
-//   url: API_SEARCH_APARTMENT,
-//   cb: ({ data: { data } }) => ({
-//     list: data.list,
-//     total: data.total,
-//     type: TYPE_SEARCH_APARTMENT
-//   })
-// })
 
 /**
  * 搜索关键词
