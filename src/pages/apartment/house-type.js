@@ -293,8 +293,11 @@ class HouseTypeShow extends Component {
   }
 
   onShareAppMessage() {
+    const { houstType} = this.state
+    const { swipers} = houstType
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
+      imageUrl : swipers[0].url
     }
   }
 
@@ -361,6 +364,7 @@ class HouseTypeShow extends Component {
       position, tags, cost_info, id, roomMatch, publicMatch,
       appointment_show_num, type_desc, html
     } = houstType
+
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 

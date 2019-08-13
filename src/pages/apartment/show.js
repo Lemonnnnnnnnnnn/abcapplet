@@ -207,8 +207,11 @@ class ApartmentShow extends Component {
   }
 
   onShareAppMessage() {
+    const { apartment } = this.state
+    const { swipers } = apartment
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
+      imageUrl: swipers[0].url
     }
   }
 
