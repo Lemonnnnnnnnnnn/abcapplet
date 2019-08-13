@@ -118,7 +118,16 @@ class ApartmentItem extends BaseComponent {
     const apartmentHeaderType = {
       padding: padding,
       fontSize: fontSize,
-      left : '5%'
+      left: '5%'
+    }
+
+    const imageStyle = {
+      position : 'absolute',
+      left : '50%',
+      top : '50%',
+      transform: 'translate(-50%,-50%)',
+      // width : '100%',
+      objectFit: 'cover'
     }
 
 
@@ -150,13 +159,13 @@ class ApartmentItem extends BaseComponent {
       <View className={home === null ? 'apartment-box-shadow-style' : 'apartment-card-margin-style'} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
-
-
-          {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-          {cover
-            ? <Image src={src} mode='scaleToFill' className='apartment-image' />
-            : <ImagePlaceholder height={height} />
-          }
+          <View style={{ width: '100%', height: Taro.pxTransform(height) ,overflow :'hidden' , position : 'relative'}}>
+            {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
+            {cover
+              ? <Image src={cover} mode='scaleToFill' style={imageStyle} className='' />
+              : <ImagePlaceholder height={height} />
+            }
+          </View>
 
           {/* 户型 cbd 列表 */}
           {
