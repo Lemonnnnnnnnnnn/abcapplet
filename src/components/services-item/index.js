@@ -243,7 +243,7 @@ class ServiceItem extends BaseComponent {
 
     server_id
       ? buttonList = [
-        { name: 1, src: LEAVE_MSG, title: LOCALE_APPOINTMENT_MESSAGE },
+        // { name: 1, src: LEAVE_MSG, title: LOCALE_APPOINTMENT_MESSAGE },
         { name: 2, src: CALL_PHONE, title: LOCALE_APPOINTMENT_RELUTION },
         {
           name: 3,
@@ -256,7 +256,7 @@ class ServiceItem extends BaseComponent {
           title: haveIntention || intention ? LOCALE_APPOINTMENT_HAVE_INTENTION : LOCALE_APPOINTMENT_INTENTION
         },
       ] : buttonList = [
-        { name: 1, src: LEAVE_MSG_GRAY, title: LOCALE_APPOINTMENT_MESSAGE },
+        // { name: 1, src: LEAVE_MSG_GRAY, title: LOCALE_APPOINTMENT_MESSAGE },
         { name: 2, src: CALL_PHONE_GRAY, title: LOCALE_APPOINTMENT_RELUTION },
         { name: 3, src: COMMENT_GRAY, title: LOCALE_APPOINTMENT_EVALUTION },
         { name: 4, src: EXPECT_GRAY, title: LOCALE_APPOINTMENT_INTENTION },

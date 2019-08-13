@@ -18,7 +18,7 @@ import ApartmentContainer from '@components/apartment-container'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME } from '@constants/page'
-import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST , TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
+import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -269,7 +269,7 @@ class ApartmentShow extends Component {
     }
 
     return (
-      <View style={{overflow : "hidden"}}>
+      <View style={{ overflow: "hidden" }}>
 
         {/* 自定义导航栏 */}
         <View className='navStyle' style={navStyle}>
@@ -367,7 +367,7 @@ class ApartmentShow extends Component {
             <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 === types.length ? 'pr-2' : '' } at-col at-col-5 pl-1 mt-2 mr-3`}>
+                  <View style={imageStyle} key={i.id} className={`${index + 1 === types.length ? 'pr-2' : ''} at-col at-col-5 pl-1 mt-2 mr-3`}>
                     <View style={borderStyle}>
                       <ApartmentTypeItem item={i} />
                     </View>

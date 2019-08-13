@@ -37,12 +37,6 @@ class App extends Component {
       'pages/user/profile',
       'pages/user/favorite',
 
-      'pages/risk/index',
-      'pages/risk/create',
-
-      'pages/article/show',
-      'pages/external/index',
-
     ],
     subPackages: [
       {
@@ -53,7 +47,26 @@ class App extends Component {
           'create',
           'down-payment',
         ]
-      }
+      },
+      {
+        root: 'pages/risk',
+        pages: [
+          'index',
+          'create',
+        ]
+      },
+      {
+        root: 'pages/article',
+        pages: [
+          'show',
+        ]
+      },
+      {
+        root: 'pages/external',
+        pages: [
+          'index',
+        ]
+      },
     ],
 
     "permission": {

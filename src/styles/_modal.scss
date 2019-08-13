@@ -7,7 +7,7 @@
 
   .at-modal__header {
     padding: 0;
-    height: 147px * $hd;
+    height: 90px * $hd;
   }
 
   &-content {
@@ -46,10 +46,10 @@
     .city-modal-item {
       height: 33px * $hd;
       line-height: 33px * $hd;
+      // width : 60% ;
 
-      padding: 0;
       border: none;
-      border-bottom: 1px solid $color-grey-4;
+      // border-bottom: 1px solid $color-grey-4;
     }
   }
 }
