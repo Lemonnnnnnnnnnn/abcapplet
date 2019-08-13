@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { AtAvatar, AtIcon } from 'taro-ui'
-import { View, Map, Image, Text, ScrollView } from '@tarojs/components'
+import { View, Map, Image, Text, ScrollView, RichText } from '@tarojs/components'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -169,6 +169,7 @@ class HouseTypeShow extends Component {
           appointment_show_num: data.appointment_show_num,
           one_word: data.one_word,
           type_desc: data.type_desc,
+          html: data.html
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -358,7 +359,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, roomMatch, publicMatch,
-      appointment_show_num, type_desc
+      appointment_show_num, type_desc, html
     } = houstType
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -423,10 +424,8 @@ class HouseTypeShow extends Component {
       height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
     }
 
-
     return (
       <View >
-
         <TabBar
 
           showLittleMask={showLittleMask}
@@ -693,13 +692,13 @@ class HouseTypeShow extends Component {
             <View className='ml-3'>
 
               {/* 公寓信息 */}
-              <View onClick={this.onNavigationApartment}>
+              <View >
                 <View className='text-bold text-huge mt-4 mb-3'>公寓信息</View>
                 <View className='at-row at-row__align--center  at-row__justify--between my-2'>
                   <View>
                     <View className='at-row at-row__align--center'>
                       <View className='at-col'>
-                        <AtAvatar circle image={cover} />
+                        <AtAvatar circle image={cover} onClick={this.onNavigationApartment}/>
                       </View>
                       <View>
                         <View className='text-normal ml-2'>{apartmentTitle}</View>
@@ -709,12 +708,10 @@ class HouseTypeShow extends Component {
 
                   </View>
                 </View>
-                <View className='text-secondary text-normal' style={textDeal}>
-
-
-
-
+                <View className='mr-3'>
+                  <RichText nodes={desc} ></RichText>
                 </View>
+
                 <View className='at-row at-row--wrap mt-3 mb-3'>
 
                   {publicMatch_list && publicMatch_list.map((i, key) => key !== 5 ?
@@ -741,7 +738,7 @@ class HouseTypeShow extends Component {
               {
                 types &&
 
-                <View style={ScrollWrapStyle}  >
+                <View style={ScrollWrapStyle} className='mt-4' >
 
                   <ScrollView scrollX>
                     {types.map((i, index) =>
