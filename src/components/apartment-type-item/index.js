@@ -63,7 +63,7 @@ class ApartmentTypeItem extends BaseComponent {
       }
       {
         cover && <Image
-          src={`${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`}
+          src={cover}
           style={{ width: '100%', height: Taro.pxTransform(200)}}
         >
         </Image>

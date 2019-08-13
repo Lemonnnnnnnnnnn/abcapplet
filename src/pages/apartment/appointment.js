@@ -7,6 +7,7 @@ import { AtAvatar, AtIcon, AtButton, AtTag } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
+import * as appointmentActions from '@actions/appointment'
 
 // 自定义变量
 import { PAYLOAD_APPOINTMENT_CREATE } from '@constants/api'
@@ -39,6 +40,7 @@ let payloadH = currentHours + 2
 @connect(state => state, {
   ...userActions,
   ...apartmentActions,
+  ...appointmentActions,
 })
 class AppointmentPost extends Component {
   config = {
@@ -74,6 +76,8 @@ class AppointmentPost extends Component {
     houseTypeList: [],
     currentTime: [],
     secTimeClick: false,
+
+    isNight:false,//夜单时间，false:不是，true:是
   }
 
   async getPhoneNumber(e) {
@@ -232,7 +236,7 @@ class AppointmentPost extends Component {
       judge.flatYear ? dayList_NaN = Array.from({ length: 28 }) : dayList_NaN = Array.from({ length: 29 })
     }
 
-    //填充数据 
+    //填充数据
     let yearList = [nowTime.getFullYear() + "年"]
     let monthList = []
     let dayList = []
@@ -253,9 +257,17 @@ class AppointmentPost extends Component {
     this.setState({ range: finalList })
   }
 
-  // 户型选择
 
+  //判断是否在夜单时间内
+  componentDidShow(){
+    this.props.dispatchAppointmentNight().then((res)=>{
+      this.setState({
+        isNight:res.data.data.is_night
+      })
+    })
+  }
 
+    // 户型选择
   onChoiseHouseType(e, index) {
     const { houseTypeList, Payload } = this.state
     let newTypes = JSON.parse(JSON.stringify(houseTypeList))
@@ -287,7 +299,7 @@ class AppointmentPost extends Component {
 
     if (!secTimeClick) {
       currentMonth = nowTime.getMonth()
-      currentDay = nowTime.getDate() 
+      currentDay = nowTime.getDate()
       currentHours = nowTime.getHours()
 
       let currentHoursIndex = 0
@@ -550,7 +562,7 @@ class AppointmentPost extends Component {
   }
   render() {
     const { houstType, height, users, tel, showInformation, name,
-      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask } = this.state
+      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask ,isNight} = this.state
     // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
 
     const {
@@ -645,6 +657,7 @@ class AppointmentPost extends Component {
                       </View>
                     </View>
                   </View>
+
                   <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
                     <View className='text-normal'>{LOCALE_CHANGE}</View>
                     <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
@@ -674,6 +687,7 @@ class AppointmentPost extends Component {
 
                 <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
                 {/* 下面部分 */}
+                {isNight && <View className='text-normal ml-3 mt-2'>提示：管家休息期间，接单会延迟</View>}
                 <View className='mt-3 at-row ml-3'>
                   <View className='at-col-4 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME}</View>
                   <View className='p-1 mr-4 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>

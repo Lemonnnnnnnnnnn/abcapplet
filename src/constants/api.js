@@ -201,3 +201,6 @@ export const API_APARTMENT_NEARBYPOST = `${HOST}/apartment/nearbyPost`
 // 手机授权
 
 export const API_AUTH_MOBILEPOST = `${HOST}/auth/mobilePost`
+
+//判断是否为夜单时间
+export const API_APPOINTMENT_NIGHTPOST = `${HOST}/appointment/nightPost`

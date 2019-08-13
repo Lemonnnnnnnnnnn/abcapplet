@@ -31,11 +31,8 @@ class BaseList extends BaseComponent {
     const { latitude, longitude } = await Taro.getLocation()
 
     const {is_select} = defaultPayload
-    if(is_select===1 && count === 0){
+    if(is_select===1 ){
       this.onReset({...defaultPayload,latitude,longitude})
-      this.setState({
-        count:1
-      })
     }
     if(!is_select){
       this.onReset()

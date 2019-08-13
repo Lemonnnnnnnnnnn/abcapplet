@@ -7,8 +7,7 @@ import {
   API_INTENTION_ROOM_SHOW,
   PAYLOAD_INTENTION_ROOM_SHOW,
   API_INTENTION_CREATE,
-  API_MESSAGE_CREATE,
-  API_MESSAGE_LIST,
+  API_APPOINTMENT_NIGHTPOST,
 } from '@constants/api'
 
 import{
@@ -17,8 +16,7 @@ import{
   SET_APPOINTMENT_REVELUTION,
   SET_APPOINTMENT_INTENTION_SHOW,
   SET_APPOINTMENT_INTENTION,
-  SET_MESSAGE_CREATE,
-  SET_MESSAGE_LIST,
+  SET_APPOINTMENT_NIGHTPOST,
 }from '@constants/appointment'
 
 /**
@@ -81,3 +79,13 @@ export const dispatchIntentionComment = (payload) => createAction({
   cb: ({ data: { data } }) => ({ ...data })
 })
 
+/**
+ * 判断夜单时间
+ * @param {*} payload
+ */
+export const dispatchAppointmentNight = () => createAction({
+
+  method: 'POST',
+  type: SET_APPOINTMENT_NIGHTPOST,
+  url: API_APPOINTMENT_NIGHTPOST,
+})
