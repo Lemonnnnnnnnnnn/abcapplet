@@ -40,7 +40,7 @@ class ApartmentItem extends BaseComponent {
     width: 573,
     height: 346,
     minWidth: 330,
-    minHeight: 222,
+    minHeight: 200,
     mini: false,
     apartment: { cover: '' },
     className: '',
@@ -122,11 +122,11 @@ class ApartmentItem extends BaseComponent {
     }
 
     const imageStyle = {
-      position : 'absolute',
-      left : '50%',
-      top : '50%',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
       transform: 'translate(-50%,-50%)',
-      width : '100%',
+      width: '100%',
     }
 
 
@@ -158,13 +158,28 @@ class ApartmentItem extends BaseComponent {
       <View className={home === null ? 'apartment-box-shadow-style' : 'apartment-card-margin-style'} onClick={this.onNavigation}>
         {/* 户型头部 */}
         <View className='apartment-header' style={headerStyle}>
-          <View style={{ width: '100%', height: Taro.pxTransform(height) ,overflow :'hidden' , position : 'relative'}}>
-            {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-            {cover
-              ? <Image src={cover} mode='widthFix' style={imageStyle} />
-              : <ImagePlaceholder height={height} />
-            }
-          </View>
+          {
+            nearbyPost ?
+              <View style={{ width: '100%', height: Taro.pxTransform(height), overflow: 'hidden', position: 'relative' }}>
+                {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
+                {cover
+                  ? <Image src={cover}  style={{width : '100%' , height : '100%'}} />
+                  : <ImagePlaceholder height={height} />
+                }
+              </View>
+
+              :
+
+              <View style={{ width: '100%', height: Taro.pxTransform(height), overflow: 'hidden', position: 'relative' }}>
+                {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
+                {cover
+                  ? <Image src={cover} mode='widthFix' style={imageStyle} />
+                  : <ImagePlaceholder height={height} />
+                }
+              </View>
+
+          }
+
 
           {/* 户型 cbd 列表 */}
           {
@@ -224,7 +239,7 @@ class ApartmentItem extends BaseComponent {
             <View className='at-row'>
               {rules.map(i =>
                 <View key={i.id} className='at-col-1 at-col--auto mr-2 mb-1 '>
-                  <Text className={`badge badge-${i.type} text-mini`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                  <Text className={`badge badge-${i.type} text-mini`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
                 </View>
               )}
             </View>

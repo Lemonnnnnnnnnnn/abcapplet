@@ -134,19 +134,6 @@ class TabBar extends BaseComponent {
           </View>
         }
 
-        {/* 拨打电话 */}
-        {/*  */}
-        {/* <AtFloatLayout isOpened={showCallPhoneView} onClose={this.onCloseCallPhoneView} >
-          <View className='at-col mb-3' >
-            <View className='text-secondary text-smail at-row at-row__align--center at-row__justify--center' style={floatLayoutStyle} >0529-5911297</View>
-            <View style={grayLineStyle}></View>
-            <View className=' at-row at-row__align--center at-row__justify--center' style={floatLayoutStyle} onClick={this.onCallPhone}>呼叫</View>
-            <View style={grayRudeLineStyle}></View>
-            <View className=' at-row at-row__align--center at-row__justify--center' style={floatLayoutStyle}>取消</View>
-          </View>
-        </AtFloatLayout> */}
-
-
 
         <View className='tab-bar at-row at-row__align--center p-2'>
 

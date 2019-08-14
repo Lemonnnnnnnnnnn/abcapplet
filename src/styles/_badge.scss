@@ -1,53 +1,53 @@
 @import "overrides";
 
 .badge {
-  background: #FF9C9C;
-  color: #FFFFFF;
+  background: #ff9c9c;
+  color: #ffffff;
   font-size: $font-size-xs;
-  border-radius: 25px;
+  border-radius: 10px;
   width: 19px * $hd;
   height: 19px * $hd;
   text-align: center;
   line-height: 19px * $hd;
-  padding: 11px
+  padding: 4px 14px;
 }
 
 .badge-lian {
-  color: #38c650;
-  background: #cbfdd3;
+  color: #ff7d7d;
+  background: #ffecec;
 }
 
 .badge-tuan {
-  color: rgba(255, 125, 125, 1);
-  background: #fdeeeb;
+  color: #ff7d7d;
+  background: #ffecec;
 }
 
 .badge-xiao {
-  color: #ff9421;
-  background: #fdeebf;
+  color: #ff9f10;
+  background: #fff1dc;
 }
 
 .badge-cu {
-  color: rgba(255, 125, 125, 1);
-  background: #fdeeeb;
+  color: #ff9f10;
+  background: #fff1dc;
 }
 
 .badge-lao {
-  color: rgba(236, 251, 255, 1);
-  background: #CBEEFC;
+  color: #4BBDFF;
+  background: #E6F9FF ;
 }
 
 .badge-shuidian {
-  color: #8b572a;
-  background: #fbdec4;
+  color: #4BBDFF;
+  background: #E6F9FF;
 }
 
 .badge-rentTime {
-  color: #ff9421;
-  background: #faf4db;
+  color: #ffc300;
+  background: #fffadc;
 }
 
 .badge-discount {
-  color: rgba(255, 125, 125, 1);
-  background: #fdeeeb;
+  color: #ffc300;
+  background: #fffadc;
 }

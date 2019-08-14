@@ -19,9 +19,9 @@ class BaseList extends BaseComponent {
     loading: false,
     hasMore: true,
     payload: {},
-    latitude:0,
-    longitude:0,
-    count:0,
+    latitude: 0,
+    longitude: 0,
+    count: 0,
   }
 
 
@@ -30,11 +30,12 @@ class BaseList extends BaseComponent {
     const { count } = this.state
     const { latitude, longitude } = await Taro.getLocation()
 
-    const {is_select} = defaultPayload
-    if(is_select===1 ){
-      this.onReset({...defaultPayload,latitude,longitude})
+    const { is_select } = defaultPayload
+    if (is_select === 1 && count === 0) {
+      this.onReset({ ...defaultPayload, latitude, longitude })
+      this.setState({ count: 1 })
     }
-    if(!is_select){
+    if (!is_select) {
       this.onReset()
     }
   }

@@ -328,8 +328,8 @@ class ApartmentShow extends Component {
               {/* 活动信息 */}
               <View className='mt-2'>
                 {rules.length ? rules.map(i =>
-                  <View key={i.id} className=' mt-2 mr-3 mb-3'>
-                    <Text className={`text-smail badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                  <View key={i.id} className=' mr-3'>
+                    <Text className={`text-smail badge badge-${i.type}`} > {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
                     <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                   </View>
                 ) : <View className='text-secondary'>暂无相关活动信息</View>

@@ -33,7 +33,7 @@ class ApartmentTypeItem extends BaseComponent {
       background: "#000",
       opacity: 0.5,
       width: '100%',
-      height: Taro.pxTransform(200),
+      height: Taro.pxTransform(height),
       position: 'absolute',
       zIndex: 20
     }
@@ -45,15 +45,7 @@ class ApartmentTypeItem extends BaseComponent {
       left: '50%',
       top: '50%',
       transform: 'translate(-50%,-50%)',
-      height: Taro.pxTransform(200)
-    }
-
-    const imageStyle = {
-      position: 'absolute',
-      left: '50%',
-      top: '50%',
-      transform: 'translate(-50%,-50%)',
-      width: '100%',
+      height: Taro.pxTransform(height)
     }
 
     // 格式化价格
@@ -72,8 +64,7 @@ class ApartmentTypeItem extends BaseComponent {
         {
           cover && <Image
             src={cover}
-            mode='widthFix'
-            style={imageStyle}
+            style={{width: '100%',height : '100%'}}
           >
           </Image>
         }

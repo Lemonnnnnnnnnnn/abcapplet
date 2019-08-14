@@ -428,6 +428,7 @@ class HouseTypeShow extends Component {
       height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
     }
 
+
     return (
       <View >
         <TabBar
@@ -530,15 +531,15 @@ class HouseTypeShow extends Component {
               }
 
 
-              <View className='mt-2' style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
+              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
 
 
               {/* 活动信息 */}
 
-              <View className='mt-3'>
+              <View className='mt-1'>
                 {rules && rules.map(i =>
-                  <View key={i.id} className=' mt-2 mr-3 mb-3'>
-                    <Text className={`text-smail badge badge-${i.type}`}> #{ACTIVITY_TYPE_DIST[i.type]['message']}#</Text>
+                  <View key={i.id} className=' mr-1'>
+                    <Text className={`text-smail badge badge-${i.type}`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
                     <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                   </View>
                 )}

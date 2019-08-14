@@ -187,18 +187,6 @@ class CommonHome extends BaseComponent {
       this.setState({ selector, selectorChecked })
     })
   }
-  //分享收藏小程序
-  // onShareAppMessage(res) {
-
-  //   if (res.from === 'button') {
-  //     // 来自页面内转发按钮
-  //   }
-  //   return {
-  //     title: '自定义转发标题',
-  //     path: '/page/user?id=123'
-  //   }
-  // }
-
 
   async componentDidShow() {
     const { payloadApartment  } =this.state
