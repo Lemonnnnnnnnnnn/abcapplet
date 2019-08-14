@@ -26,7 +26,9 @@ import {
   SHOW_HOUSE_TYPE,
   SET_APARTMENT_LIST,
   SET_ARTICLE_APARTMENT_LIST,
+  SET_ACTIVITY_APARTMENT_LIST,
   SET_NEXT_PAGE_APARTMENT_LIST,
+  SET_NEXT_PAGE_ACTIVITY_APARTMENT_LIST,
   SET_APARTMENT_LOOK_LIST,
   SET_CBD_APARTMENT_LIST,
   SET_NEXT_PAGE_CBD_APARTMENT_LIST,
@@ -145,7 +147,7 @@ export const dispatchNextPageCbdApartmentList = payload => createAction({
 export const dispatchActivityApartmentList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_APARTMENT_LIST,
+  type: SET_ACTIVITY_APARTMENT_LIST,
   url: API_ACTIVITY_APARTMENT_LIST,
   cb: ({ data: { data } }) => ({
     list: data.list.list,
@@ -160,7 +162,7 @@ export const dispatchActivityApartmentList = payload => createAction({
 export const dispatchNextPageActivityApartmentList = payload => createAction({
   payload,
   method: 'POST',
-  type: SET_NEXT_PAGE_APARTMENT_LIST,
+  type: SET_NEXT_PAGE_ACTIVITY_APARTMENT_LIST,
   url: API_ACTIVITY_APARTMENT_LIST,
   cb: ({ data: { data } }) => ({
     list: data.list.list,

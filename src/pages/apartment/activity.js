@@ -35,7 +35,7 @@ class ApartmentCbd extends Component {
     // 选择器相关
     selectIsFixed: false,
     selectScrollTop: null,
-    cityCode : 0,
+    cityCode: 0,
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -129,8 +129,8 @@ class ApartmentCbd extends Component {
   }
 
   render() {
-    const { apartments, dists, activities } = this.props
-    const { id, defaultPayload, selectIsFixed , cityCode } = this.state
+    const { dists, activities, activityApartment } = this.props
+    const { id, defaultPayload, selectIsFixed, cityCode } = this.state
 
     const activity = activities.find(i => i.id == id) || {
       title: '',
@@ -140,7 +140,7 @@ class ApartmentCbd extends Component {
 
     activity.title !== '' && Taro.setNavigationBarTitle({ title: activity.title })
 
-    return <View style={{overflow : "hidden"}} className='page-white'>
+    return <View style={{ overflow: "hidden" }} className='page-white'>
 
       {/* 头部 */}
       <View className='mx-2 py-3'>
@@ -173,9 +173,9 @@ class ApartmentCbd extends Component {
       {/* 公寓列表 */}
       <View className='mx-2'>
         <ApartmentList
-          key={apartments.type}
-          type={apartments.type}
-          items={apartments.list}
+          key={activityApartment.type}
+          type={activityApartment.type}
+          items={activityApartment.list}
           ref={this.refApartmentList}
           defaultPayload={defaultPayload}
 

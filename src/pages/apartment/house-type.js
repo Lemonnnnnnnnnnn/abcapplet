@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { AtAvatar, AtIcon } from 'taro-ui'
+import { AtAvatar, AtIcon , AtTag} from 'taro-ui'
 import { View, Map, Image, Text, ScrollView, RichText } from '@tarojs/components'
 
 // Redux 相关
@@ -169,7 +169,7 @@ class HouseTypeShow extends Component {
           appointment_show_num: data.appointment_show_num,
           one_word: data.one_word,
           type_desc: data.type_desc,
-          html: data.html
+          has_room: data.has_room
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -293,11 +293,11 @@ class HouseTypeShow extends Component {
   }
 
   onShareAppMessage() {
-    const { houstType} = this.state
-    const { swipers} = houstType
+    const { houstType } = this.state
+    const { swipers } = houstType
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
-      imageUrl : swipers[0].url
+      imageUrl: swipers[0].url
     }
   }
 
@@ -362,7 +362,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, roomMatch, publicMatch,
-      appointment_show_num, type_desc, html
+      appointment_show_num, type_desc, has_room
     } = houstType
 
 
@@ -410,8 +410,18 @@ class HouseTypeShow extends Component {
     const borderStyle = {
       // backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "6px",
-      boxShadow: "0 1px 5px rgb(200,200,200)",
+      boxShadow: "0 1px 6px rgb(220,220,220)",
       overflow: 'hidden',
+      marginRight : '14px',
+    }
+
+    const hasRoomStyle = {
+      color : '#FFF',
+      backgroundColor: '#FFC919',
+      height : Taro.pxTransform(50),
+      borderRadius : Taro.pxTransform(15),
+      lineHeight : Taro.pxTransform(50),
+      textAlign : 'center'
     }
 
     const navStyle = {
@@ -576,7 +586,12 @@ class HouseTypeShow extends Component {
               {/* 户型简介 */}
               {descList &&
                 <View>
-                  <View className='text-bold text-huge mt-4'>户型简介</View>
+                  <View className='at-row mt-4'>
+                    <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
+                    {
+                      has_room && <View style={hasRoomStyle} className='text-normal at-col at-col-2 at-col__align--center'>有余房</View>
+                    }
+                  </View>
                   <View className='at-row at-row--wrap'>
                     {descList.map((i, index) =>
                       <View key={index} className='at-col-6'>
@@ -702,8 +717,8 @@ class HouseTypeShow extends Component {
                 <View className='at-row at-row__align--center  at-row__justify--between my-2'>
                   <View>
                     <View className='at-row at-row__align--center'>
-                      <View className='at-col'>
-                        <AtAvatar circle image={cover} onClick={this.onNavigationApartment}/>
+                      <View className='at-col'  onClick={this.onNavigationApartment}>
+                        <AtAvatar circle image={cover} />
                       </View>
                       <View>
                         <View className='text-normal ml-2'>{apartmentTitle}</View>
@@ -749,7 +764,7 @@ class HouseTypeShow extends Component {
                     {types.map((i, index) =>
 
                       <View style={imageStyle} key={i.id} className={`${index + 1 != types.length} at-col at-col-5 mt-1 `}>
-                        <View style={borderStyle} className='ml-1 mr-1' >
+                        <View style={borderStyle} className='' >
                           <ApartmentTypeItem item={i} houseType index={index} />
                         </View>
                       </View>)}

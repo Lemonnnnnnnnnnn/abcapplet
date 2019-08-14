@@ -70,7 +70,7 @@ class ApartmentTypeItem extends BaseComponent {
         }
       </View>
 
-      <View style={{ height: '100%' }}>
+      <View className='mt-2' style={{ height: '100%' }}>
         <View >
           <View className='text-normal text-bold ml-2'>{title}</View>
           <View className='text-secondary text-small ml-2'>{desc || '暂无描述'}</View>

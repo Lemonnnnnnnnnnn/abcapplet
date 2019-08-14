@@ -1,6 +1,9 @@
 import Taro from '@tarojs/taro'
 import { clearUserStorage, getUserStorage } from '@actions/user'
 import { LOCALE_ERROR } from '@constants/locale'
+import {
+  PAGE_USER_AUTH,
+} from '@constants/page'
 
 /**
  * 响应状态码
@@ -65,7 +68,14 @@ export default async function fetch({
     switch (response.data.code) {
       case CODE_SUCCESS: return response;
       case CODE_ERROR: throw new Error(response.data.msg)
-      case CODE_AUTH_EXPIRED: clearUserStorage(); break;
+      case CODE_AUTH_EXPIRED: {
+        clearUserStorage();
+        Taro.navigateTo({ url: PAGE_USER_AUTH })
+        break;
+      }
+      // case CODE_AUTH_EXPIRED:  clearUserStorage(); 
+      //   break;
+
       default: throw new Error(LOCALE_ERROR)
     }
   }

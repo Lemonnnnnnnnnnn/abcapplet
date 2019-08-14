@@ -97,8 +97,8 @@ class Select extends BaseComponent {
   }
 
   onPayloadChange({ value }) {
-    const { latitude, longitude, payload } = this.state
-    this.setState({ payload: { ...payload, ...value, latitude, longitude } })
+    const { payload } = this.state
+    this.setState({ payload: { ...payload, ...value } })
   }
 
 
@@ -121,10 +121,11 @@ class Select extends BaseComponent {
 
   async onPayloadChangeAndRefresh({ payload = {} }) {
     // 因为是异步，不要直接用 onPayloadChange ！！！
-    payload = { ...this.state.payload, ...payload }
+    const { latitude, longitude } = this.state
+    payload = { ...this.state.payload, ...payload , longitude, latitude}
+    console.log(payload)
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
-
 
     setTimeout(() => {
       const currentPages = Taro.getCurrentPages()

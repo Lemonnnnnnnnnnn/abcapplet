@@ -20,9 +20,9 @@ class ApartmentList extends BaseList {
     }
 
     const imageStyle = {
-
       height: Taro.pxTransform(346),
-      display: "inline-block"
+      display: "inline-block",
+      marginRight : '14px'
     }
 
 
@@ -41,7 +41,7 @@ class ApartmentList extends BaseList {
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView scrollX>
                 {nearbyPost.map((i) =>
-                  <View style={imageStyle} className='image mr-2' key={i.id}>
+                  <View style={imageStyle} className='image' key={i.id}>
                     <ApartmentItem
                       home={1}
                       nearbyPost

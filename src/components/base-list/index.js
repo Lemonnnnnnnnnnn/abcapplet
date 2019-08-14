@@ -25,20 +25,18 @@ class BaseList extends BaseComponent {
   }
 
 
-  async componentDidShow() {
+  async componentDidMount() {
     const { defaultPayload } = this.props
     const { count } = this.state
     const { latitude, longitude } = await Taro.getLocation()
+    this.onReset({ ...defaultPayload, latitude, longitude })
 
-    const { is_select } = defaultPayload
-    if (is_select === 1 && count === 0) {
-      this.onReset({ ...defaultPayload, latitude, longitude })
-      this.setState({ count: 1 })
-    }
-    if (!is_select) {
-      this.onReset()
-    }
+    // if ( count === 0) {
+    //   this.onReset({ ...defaultPayload, latitude, longitude })
+    //   this.setState({ count: 1 })
+    // }
   }
+
 
   onReset(payload) {
     payload = payload || this.props.defaultPayload
@@ -55,26 +53,34 @@ class BaseList extends BaseComponent {
     let { page, payload, loading, hasMore } = this.state
     let { pageSize } = this.props
 
+
     if (!hasMore || loading || !this.props.dispatchList) return;
 
     this.setState({ loading: true })
 
     payload = { ...payload, current_page: page }
 
-    const onSuccess = res => this.setState({
-      page: page + 1,
-      loading: false,
-      hasMore: res.data.data.total > pageSize * page,
-    })
+
+    const onSuccess = res => {
+      const listNum = res.data.data.total || res.data.data.list.total
+      this.setState({
+        page: page + 1,
+        loading: false,
+        hasMore: listNum > pageSize * page,
+      })
+    }
+
 
     const onFail = () => this.setState({
       loading: false,
       hasMore: false,
     })
 
+
     page === 1
       ? this.props.dispatchList(payload).then(onSuccess).catch(onFail)
       : this.props.dispatchNextPageList(payload).then(onSuccess).catch(onFail)
+
   }
 }
 

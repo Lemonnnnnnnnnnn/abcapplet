@@ -129,6 +129,12 @@ class ApartmentItem extends BaseComponent {
       width: '100%',
     }
 
+    const nearbyPostStyle = {
+      width: '100%',
+      height: '100%',
+      borderRadius : '6px',
+    }
+
 
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
@@ -163,7 +169,7 @@ class ApartmentItem extends BaseComponent {
               <View style={{ width: '100%', height: Taro.pxTransform(height), overflow: 'hidden', position: 'relative' }}>
                 {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
                 {cover
-                  ? <Image src={cover}  style={{width : '100%' , height : '100%'}} />
+                  ? <Image src={cover} style={nearbyPostStyle} />
                   : <ImagePlaceholder height={height} />
                 }
               </View>

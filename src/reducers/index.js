@@ -20,6 +20,7 @@ import articleApartment from './articleApartment'
 import cbdApartment from './cbdApartment'
 import favoriteHouseType from './favoriteHouseType'
 import favoriteApartment from './favoriteApartment'
+import activityApartment from './activityApartment'
 
 export default combineReducers({
   ads,
@@ -42,5 +43,6 @@ export default combineReducers({
   articleApartment,
   cbdApartment,
   favoriteHouseType,
-  favoriteApartment
+  favoriteApartment,
+  activityApartment,
 })

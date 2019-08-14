@@ -67,10 +67,10 @@ class Carousel extends Component {
       top: "8px",
       borderRadius: " 16px",
       padding: " 6px 5px",
-      backgroundColor: "#fff",
+      backgroundColor: "#000",
       width: "50px",
       height: "5px",
-      opacity: "0.8",
+      opacity: "0.5",
     }
 
     const countStyle = {
@@ -162,7 +162,7 @@ class Carousel extends Component {
                     <View style={bgStyle} ></View>
                     <View style={countStyle} className='at-row at-row__align--center'>
                       <View className='at-col at-col-2'>
-                        <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" }}></Image>
+                        <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" , marginBottom : '2px'}}></Image>
                       </View>
                       <View className='at-col at-col-8 text-mini text-yellow ml-1' style={{ marginTop: "1Px", overflow: 'hidden' }}>{item.sum}</View>
                     </View>

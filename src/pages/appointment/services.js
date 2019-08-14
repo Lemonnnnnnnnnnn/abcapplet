@@ -46,7 +46,6 @@ class ServicesHome extends Component {
       }
       )
       this.setState({ payload: { ...payload, current_page: 2 } })
-
   }
 
   componentDidHide() {

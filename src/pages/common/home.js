@@ -144,14 +144,6 @@ class CommonHome extends BaseComponent {
 
   async componentWillMount() {
 
-    // const { payloadApartment,payload } =this.state
-    this.props.dispatchGetUserMsg().then((res)=>{
-      if(!res){
-        this.onLogin()
-      }
-
-    })
-
     const {
       searchScrollTop,
     } = this.state
@@ -192,8 +184,6 @@ class CommonHome extends BaseComponent {
     const { payloadApartment  } =this.state
     const { latitude, longitude } = await Taro.getLocation()
     this.setState({
-          //  latitude ,
-          //  longitude ,
            payloadApartment:{...payloadApartment, latitude:latitude, longitude:longitude,}
         })
 
@@ -359,7 +349,7 @@ class CommonHome extends BaseComponent {
   /**
    * 当选择栏变化时更新公寓数据
    */
-  onApartmentPayloadChange({ payload }) {
+  async onApartmentPayloadChange({ payload }) {
     this.apartmentList.onReset(payload)
   }
 
