@@ -4,7 +4,6 @@ import { View, Image, Text } from '@tarojs/components'
 
 // 自定义组件
 import BaseComponent from '@components/base'
-import { pxTransform } from '../../../dist/npm/taro-ui/dist/weapp/common/utils';
 
 
 
@@ -12,7 +11,7 @@ class ApartmentTypeItem extends BaseComponent {
   static defaultProps = {
     item: { cover: '' },
     width: 117,
-    height: 100,
+    height: 200,
   }
 
   onNavigation() {
@@ -49,6 +48,14 @@ class ApartmentTypeItem extends BaseComponent {
       height: Taro.pxTransform(200)
     }
 
+    const imageStyle = {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%,-50%)',
+      width: '100%',
+    }
+
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
@@ -61,13 +68,16 @@ class ApartmentTypeItem extends BaseComponent {
           <View style={fontStyle} className='text-normal'>您正在浏览此户型</View>
         </View>
       }
-      {
-        cover && <Image
-          src={cover}
-          style={{ width: '100%', height: Taro.pxTransform(200)}}
-        >
-        </Image>
-      }
+      <View style={{ width: '100%', height: Taro.pxTransform(height) ,overflow :'hidden' , position : 'relative'}}>
+        {
+          cover && <Image
+            src={cover}
+            mode='widthFix'
+            style={imageStyle}
+          >
+          </Image>
+        }
+      </View>
 
       <View style={{ height: '100%' }}>
         <View >

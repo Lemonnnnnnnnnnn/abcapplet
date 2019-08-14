@@ -126,8 +126,7 @@ class ApartmentItem extends BaseComponent {
       left : '50%',
       top : '50%',
       transform: 'translate(-50%,-50%)',
-      // width : '100%',
-      objectFit: 'cover'
+      width : '100%',
     }
 
 
@@ -162,7 +161,7 @@ class ApartmentItem extends BaseComponent {
           <View style={{ width: '100%', height: Taro.pxTransform(height) ,overflow :'hidden' , position : 'relative'}}>
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
             {cover
-              ? <Image src={cover} mode='scaleToFill' style={imageStyle} className='' />
+              ? <Image src={cover} mode='widthFix' style={imageStyle} />
               : <ImagePlaceholder height={height} />
             }
           </View>
