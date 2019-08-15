@@ -77,15 +77,18 @@ class AppointmentPost extends Component {
     currentTime: [],
     secTimeClick: false,
 
-    isNight:false,//夜单时间，false:不是，true:是
+    isNight: false,//夜单时间，false:不是，true:是
   }
 
-  async getPhoneNumber(e) {
-    const { code } = await Taro.login()
+
+  async getPhoneNumber(e) {    
+    let code = Taro.getStorageSync('code')
+    // code ? code = code : code =  await Taro.login()
+
     const { encryptedData: encrypt_data, iv } = e.currentTarget
-    const urlCode = decodeURI(code)
-    const urlEncrypt_data = decodeURI(encrypt_data)
-    const urlIv = decodeURI(iv)
+    const urlCode = encodeURIComponent(code)
+    const urlEncrypt_data = encodeURIComponent(encrypt_data)
+    const urlIv = encodeURIComponent(iv)
 
     await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(res => {
       const tel = res.data.data.user.mobile
@@ -99,6 +102,7 @@ class AppointmentPost extends Component {
   onClosePhoneMask() {
     this.setState({ showGetPhoneNumMask: false })
   }
+
 
   async componentDidMount() {
 
@@ -259,15 +263,18 @@ class AppointmentPost extends Component {
 
 
   //判断是否在夜单时间内
-  componentDidShow(){
-    this.props.dispatchAppointmentNight().then((res)=>{
+  async componentDidShow() {
+    const { code } = await Taro.login()
+    Taro.setStorageSync('code' , code)
+
+    this.props.dispatchAppointmentNight().then((res) => {
       this.setState({
-        isNight:res.data.data.is_night
+        isNight: res.data.data.is_night
       })
     })
   }
 
-    // 户型选择
+  // 户型选择
   onChoiseHouseType(e, index) {
     const { houseTypeList, Payload } = this.state
     let newTypes = JSON.parse(JSON.stringify(houseTypeList))
@@ -562,7 +569,7 @@ class AppointmentPost extends Component {
   }
   render() {
     const { houstType, height, users, tel, showInformation, name,
-      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask ,isNight} = this.state
+      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask, isNight } = this.state
     // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
 
     const {

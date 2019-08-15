@@ -123,7 +123,6 @@ class Select extends BaseComponent {
     // 因为是异步，不要直接用 onPayloadChange ！！！
     const { latitude, longitude } = this.state
     payload = { ...this.state.payload, ...payload , longitude, latitude}
-    console.log(payload)
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
 

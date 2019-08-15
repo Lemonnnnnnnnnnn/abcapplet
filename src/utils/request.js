@@ -60,22 +60,30 @@ export default async function fetch({
    * 判断网络请求状态码
    * @param {*} response
    */
-  function handleStatus(response) {
+  async function handleStatus(response) {
     if (!response || !response.data) {
       throw new Error(LOCALE_ERROR);
     }
 
     switch (response.data.code) {
       case CODE_SUCCESS: return response;
-      case CODE_ERROR: throw new Error(response.data.msg)
+      case CODE_ERROR: {
+        const { code } = await Taro.login()
+        Taro.setStorageSync('code', code)
+        
+        throw new Error(response.data.msg)
+      }
       case CODE_AUTH_EXPIRED: {
         clearUserStorage();
-        Taro.navigateTo({ url: PAGE_USER_AUTH })
+        Taro.setStorageSync('code', '')
+
+        const cLength = Taro.getCurrentPages().length
+        const currentPage = Taro.getCurrentPages()[cLength - 1]
+        if (currentPage.route !== 'pages/user/auth') {
+          Taro.navigateTo({ url: PAGE_USER_AUTH })
+        }
         break;
       }
-      // case CODE_AUTH_EXPIRED:  clearUserStorage(); 
-      //   break;
-
       default: throw new Error(LOCALE_ERROR)
     }
   }

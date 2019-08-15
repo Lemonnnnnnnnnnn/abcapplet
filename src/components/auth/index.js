@@ -14,6 +14,11 @@ class Auth extends Component {
     message: '为提供安全且愉悦的使用体验，需要你进行确认微信授权',
   }
 
+  async componentDidShow() {
+    const { code } = await Taro.login()
+    Taro.setStorageSync('code', code)
+  }
+
   render() {
     const imageStyle = {
       width: `${Taro.pxTransform(200)}`,

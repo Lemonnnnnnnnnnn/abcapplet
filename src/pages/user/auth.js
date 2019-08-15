@@ -20,11 +20,17 @@ class UserAuth extends Component {
    * @param {*} event 默认事件
    */
   async onLogin(event) {
-    const { code } = await Taro.login()
+    let code = Taro.getStorageSync('code')
+    // code ? code = code : code =  await Taro.login()
+
     const { encryptedData: encrypt_data, iv } = event.currentTarget
 
+    const urlCode = encodeURIComponent(code)
+    const urlEncrypt_data = encodeURIComponent(encrypt_data)
+    const urlIv = encodeURIComponent(iv)
+
     this.props.dispatchLogin(
-      { iv, code, encrypt_data, },
+      { iv: urlIv, code: urlCode, encrypt_data: urlEncrypt_data, },
       { success: this.onLoginSuccess },
     )
   }
@@ -33,9 +39,10 @@ class UserAuth extends Component {
    * 登录成功后进行页面跳转
    */
   onLoginSuccess() {
-    Taro.getCurrentPages().length > 1
-      ? Taro.navigateBack({ delta: 2 })
-      : Taro.reLaunch({ url: PAGE_HOME })
+    // Taro.getCurrentPages().length > 1
+    //   ? Taro.navigateBack({ delta: 2 })
+    //   : Taro.reLaunch({ url: PAGE_HOME })
+    Taro.reLaunch({ url: PAGE_HOME })
   }
 
   render() {

@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { AtAvatar, AtIcon , AtTag} from 'taro-ui'
+import { AtAvatar, AtIcon, AtTag } from 'taro-ui'
 import { View, Map, Image, Text, ScrollView, RichText } from '@tarojs/components'
 
 // Redux 相关
@@ -292,11 +292,19 @@ class HouseTypeShow extends Component {
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
 
+  insertStr(soure, start, newStr) {
+    return soure.slice(0, start) + newStr + soure.slice(start)
+  }
+
+
   onShareAppMessage() {
     const { houstType } = this.state
-    const { swipers } = houstType
+    let { swipers, title } = houstType
+    if (title.length > 17) {
+      title = this.insertStr(title, 17, '\n')
+    }
     return {
-      title: "我在公寓ABC上发现了一个好\n房源",
+      title: title,
       imageUrl: swipers[0].url
     }
   }
@@ -412,16 +420,16 @@ class HouseTypeShow extends Component {
       borderRadius: "6px",
       boxShadow: "0 1px 6px rgb(220,220,220)",
       overflow: 'hidden',
-      marginRight : '14px',
+      marginRight: '14px',
     }
 
     const hasRoomStyle = {
-      color : '#FFF',
+      color: '#FFF',
       backgroundColor: '#FFC919',
-      height : Taro.pxTransform(50),
-      borderRadius : Taro.pxTransform(15),
-      lineHeight : Taro.pxTransform(50),
-      textAlign : 'center'
+      height: Taro.pxTransform(50),
+      borderRadius: Taro.pxTransform(15),
+      lineHeight: Taro.pxTransform(50),
+      textAlign: 'center'
     }
 
     const navStyle = {
@@ -717,7 +725,7 @@ class HouseTypeShow extends Component {
                 <View className='at-row at-row__align--center  at-row__justify--between my-2'>
                   <View>
                     <View className='at-row at-row__align--center'>
-                      <View className='at-col'  onClick={this.onNavigationApartment}>
+                      <View className='at-col' onClick={this.onNavigationApartment}>
                         <AtAvatar circle image={cover} />
                       </View>
                       <View>

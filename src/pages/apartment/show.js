@@ -206,11 +206,19 @@ class ApartmentShow extends Component {
     })
   }
 
+  insertStr(soure, start, newStr) {
+    return soure.slice(0, start) + newStr + soure.slice(start)
+  }
+
+
   onShareAppMessage() {
     const { apartment } = this.state
-    const { swipers } = apartment
+    let { swipers, title } = apartment
+    if (title.length > 17) {
+      title = this.insertStr(title, 17, '\n')
+    }
     return {
-      title: "我在公寓ABC上发现了一个好\n房源",
+      title: title,
       imageUrl: swipers[0].url
     }
   }
@@ -249,7 +257,7 @@ class ApartmentShow extends Component {
       width: '300px',
       height: Taro.pxTransform(350),
       display: "inline-block",
-      marginRight : Taro.pxTransform(28),
+      marginRight: Taro.pxTransform(28),
     }
 
     const borderStyle = {

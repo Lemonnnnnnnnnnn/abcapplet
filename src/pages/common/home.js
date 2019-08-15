@@ -98,7 +98,7 @@ class CommonHome extends BaseComponent {
     roomList: [],
     floorList: [],
 
-    latitude :'',
+    latitude: '',
     longitude: '',
 
 
@@ -164,8 +164,8 @@ class CommonHome extends BaseComponent {
 
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
-    user && this.onSelectCity(user.citycode)
 
+    user && this.onSelectCity(user.citycode)
     user && this.setState({ cityCode: user.citycode })
 
     // 拉取城市列表
@@ -181,20 +181,20 @@ class CommonHome extends BaseComponent {
   }
 
   async componentDidShow() {
-    const { payloadApartment  } =this.state
+    const { payloadApartment } = this.state
     const { latitude, longitude } = await Taro.getLocation()
     this.setState({
-           payloadApartment:{...payloadApartment, latitude:latitude, longitude:longitude,}
-        })
+      payloadApartment: { ...payloadApartment, latitude: latitude, longitude: longitude, }
+    })
 
 
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res) => {
+      console.log(res)
       if (res && res.data.data.user.is_guide === 0) {
         this.setState({ showCard: true })
       }
     })
-
   }
 
 
