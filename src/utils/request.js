@@ -70,7 +70,7 @@ export default async function fetch({
       case CODE_ERROR: {
         const { code } = await Taro.login()
         Taro.setStorageSync('code', code)
-        
+
         throw new Error(response.data.msg)
       }
       case CODE_AUTH_EXPIRED: {
@@ -80,7 +80,7 @@ export default async function fetch({
         const cLength = Taro.getCurrentPages().length
         const currentPage = Taro.getCurrentPages()[cLength - 1]
         if (currentPage.route !== 'pages/user/auth') {
-          Taro.navigateTo({ url: PAGE_USER_AUTH })
+          Taro.redirectTo({ url: PAGE_USER_AUTH })
         }
         break;
       }

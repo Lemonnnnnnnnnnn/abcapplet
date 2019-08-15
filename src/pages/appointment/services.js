@@ -27,9 +27,9 @@ class ServicesHome extends Component {
     NowCurrentPage: 2,
   }
 
-  refAppointmentList =  (node) => this.appointmentList = node
+  refAppointmentList = (node) => this.appointmentList = node
 
-  componentDidShow(){
+  componentDidShow() {
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
@@ -45,15 +45,16 @@ class ServicesHome extends Component {
         }
       }
       )
-      this.setState({ payload: { ...payload, current_page: 2 } })
+    this.setState({ payload: { ...payload, current_page: 2 } })
   }
 
   componentDidHide() {
     const { payload } = this.state
-    this.props.dispatchAppointmentList({current_page: 100000, page_size: 10}).then(()=>
-    this.setState({
-      NowCurrentPage:2,
-      payload: { ...payload, current_page: 1 } })
+    this.props.dispatchAppointmentList({ current_page: 100000, page_size: 10 }).then(() =>
+      this.setState({
+        NowCurrentPage: 2,
+        payload: { ...payload, current_page: 1 }
+      })
     )
 
   }
@@ -87,21 +88,21 @@ class ServicesHome extends Component {
   //调转到地图找房
   onToLeft() {
     Taro.navigateTo({
-      url:'/pages/appointment/mapHouse/index'
+      url: '/pages/appointment/mapHouse/index'
     })
   }
   //调转到通勤找房
   onToRight() {
     Taro.navigateTo({
-      url:'/pages/appointment/commuteHouse/index'
+      url: '/pages/appointment/commuteHouse/index'
     })
   }
 
   render() {
     const { appointments } = this.props
-    const { time,payload } = this.state
+    const { time, payload } = this.state
 
-   
+
 
     const yellowPointStyle = {
       height: '8px',
@@ -110,46 +111,46 @@ class ServicesHome extends Component {
       backgroundColor: 'rgba(255, 201, 25, 1)'
     }
 
-   const page={
+    const page = {
       backgroundColor: '#FFFFFF',
-      minHeight:'100vh',
+      minHeight: '100vh',
     }
 
     return (
       <View style={page}>
-      <View style={{ overflow: "hidden" }}>
-        <ServicesHeader
-          onClickLeft={this.onToLeft}
-          onClickRight={this.onToRight}
-        />
-        <View className='at-row at-row__align--center  p-2' >
-          <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}>
+        <View style={{ overflow: "hidden" }}>
+          <ServicesHeader
+            onClickLeft={this.onToLeft}
+            onClickRight={this.onToRight}
+          />
+          <View className='at-row at-row__align--center  p-2' >
+            <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}>
 
+            </View>
+            <View className='pl-2 text-bold text-large'>
+              看房行程
           </View>
-          <View className='pl-2 text-bold text-large'>
-            看房行程
           </View>
-        </View>
-        {
-          appointments.list.length ?
-            <View className=' at-col'>
-              <View >
-                <ServicesList
-                  lists={appointments.list}
-                  time={time}
-                  ref={this.refApartmentList}
-                  defaultPayload={payload}
-                  dispatchList={this.props.dispatchApartmentList}
-                  dispatchNextPageList={this.props.dispatchNextPageApartmentList}
-                />
+          {
+            appointments.list.length ?
+              <View className=' at-col'>
+                <View >
+                  <ServicesList
+                    lists={appointments.list}
+                    time={time}
+                    ref={this.refApartmentList}
+                    defaultPayload={payload}
+                    dispatchList={this.props.dispatchApartmentList}
+                    dispatchNextPageList={this.props.dispatchNextPageApartmentList}
+                  />
+                </View>
               </View>
-            </View>
-            :
-            <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
-              <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
-            </View>
-        }
-      </View>
+              :
+              <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
+                <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
+              </View>
+          }
+        </View>
       </View>
     )
   }

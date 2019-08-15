@@ -81,7 +81,7 @@ class AppointmentPost extends Component {
   }
 
 
-  async getPhoneNumber(e) {    
+  async getPhoneNumber(e) {
     let code = Taro.getStorageSync('code')
     // code ? code = code : code =  await Taro.login()
 
@@ -127,9 +127,6 @@ class AppointmentPost extends Component {
           this.setState({ showGetPhoneNumMask: true })
       }
     })
-
-
-
 
     const { payload } = await this.props.dispatchUser()
 
@@ -265,7 +262,7 @@ class AppointmentPost extends Component {
   //判断是否在夜单时间内
   async componentDidShow() {
     const { code } = await Taro.login()
-    Taro.setStorageSync('code' , code)
+    Taro.setStorageSync('code', code)
 
     this.props.dispatchAppointmentNight().then((res) => {
       this.setState({
@@ -613,7 +610,6 @@ class AppointmentPost extends Component {
       left: "40px",
       top: "20px",
       zIndex: 9,
-
     }
 
     const borderRadiusStyle = {
@@ -621,129 +617,135 @@ class AppointmentPost extends Component {
       borderTopRightRadius: "12px",
       backgroundColor: "#fff",
       position: "relative",
+    }
 
+    const page = {
+      backgroundColor: '#FFFFFF',
+      minHeight: '100vh',
     }
 
     return (
-      <View style={{ overflow: "hidden" }}>
-        <View >
+      <View style={page}>
+        <View style={{ overflow: "hidden" }}>
+          <View >
 
-          <View style={imageFontWholeStyle}>
-            <View style={imageFontStyle} className='text-super'>一</View>
-            <View style={imageFontStyle} className='text-super'>提前预约，</View>
-            <View style={imageFontStyle} className='text-super'>不白跑！</View>
-          </View>
-
-          <View style={style}>
-            <Image style={imageStyle} src={swipers}></Image>
-            <View style={blackOpacityStyle}>
+            <View style={imageFontWholeStyle}>
+              <View style={imageFontStyle} className='text-super'>一</View>
+              <View style={imageFontStyle} className='text-super'>提前预约，</View>
+              <View style={imageFontStyle} className='text-super'>不白跑！</View>
             </View>
 
-          </View>
-          {/* 头部 */}
-          <View style={borderRadiusStyle}>
-            <View className='pl-3'>
-              <View className='text-bold text-huge mt-2' >{title}</View>
-              <View className='text-secondary text-normal'>{intro}</View>
+            <View style={style}>
+              <Image style={imageStyle} src={swipers}></Image>
+              <View style={blackOpacityStyle}>
+              </View>
+
             </View>
-            <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
+            {/* 头部 */}
+            <View style={borderRadiusStyle}>
+              <View className='pl-3'>
+                <View className='text-bold text-huge mt-2' >{title}</View>
+                <View className='text-secondary text-normal'>{intro}</View>
+              </View>
+              <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
 
 
-            <View style='width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 ' border='all'>
-              <View className=' mt-2' border='all' >
-                <View className='at-row ml-3 mt-1'>
-                  <View className='at-col-2'>
-                    <AtAvatar circle image={headimgurl}></AtAvatar>
-                  </View>
-                  <View className='at-col-4 ml-1'>
-                    <View>
-                      <View className='text-bold'>{name}</View>
-                      <View className='at-row'>
-                        <AtIcon value='iphone' size='13'></AtIcon>
-                        <View className='text-small mt-1'>{tel}</View>
+              <View style='width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 ' border='all'>
+                <View className=' mt-2' border='all' >
+                  <View className='at-row ml-3 mt-1'>
+                    <View className='at-col-2'>
+                      <AtAvatar circle image={headimgurl}></AtAvatar>
+                    </View>
+                    <View className='at-col-4 ml-1'>
+                      <View>
+                        <View className='text-bold'>{name}</View>
+                        <View className='at-row'>
+                          <AtIcon value='iphone' size='13'></AtIcon>
+                          <View className='text-small mt-1'>{tel}</View>
+                        </View>
                       </View>
                     </View>
+
+                    <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
+                      <View className='text-normal'>{LOCALE_CHANGE}</View>
+                      <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
+                    </View>
+                  </View>
+                  {/* 选择户型 */}
+                  <View className='mt-2 '>
+                    {
+                      houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
+                        <AtTag
+                          type={i.type ? "primary" : ""}
+                          className='ml-3 mt-1 mb-3'
+                          circle
+                          key={key}
+                          size='small'
+                          onClick={(e) => this.onChoiseHouseType(e, key)}
+                          active={i.active}>
+                          <View style={fontStyle}>{i.title}</View>
+                        </AtTag>
+                      ) : <View className='text-secondary ml-3'>暂无可选户型</View>
+                    }
                   </View>
 
-                  <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
-                    <View className='text-normal'>{LOCALE_CHANGE}</View>
-                    <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
-                  </View>
-                </View>
-                {/* 选择户型 */}
-                <View className='mt-2 '>
-                  {
-                    houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
-                      <AtTag
-                        type={i.type ? "primary" : ""}
-                        className='ml-3 mt-1 mb-3'
-                        circle
-                        key={key}
-                        size='small'
-                        onClick={(e) => this.onChoiseHouseType(e, key)}
-                        active={i.active}>
-                        <View style={fontStyle}>{i.title}</View>
-                      </AtTag>
-                    ) : <View className='text-secondary ml-3'>暂无可选户型</View>
-                  }
-                </View>
 
 
+                  {/* 中间横线 */}
 
-                {/* 中间横线 */}
+                  <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
+                  {/* 下面部分 */}
+                  {isNight && <View className='text-normal ml-3 mt-2'>提示：管家休息期间，接单会延迟</View>}
+                  <View className='mt-3 at-row ml-3'>
+                    <View className='at-col-4 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME}</View>
+                    <View className='p-1 mr-4 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
 
-                <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
-                {/* 下面部分 */}
-                {isNight && <View className='text-normal ml-3 mt-2'>提示：管家休息期间，接单会延迟</View>}
-                <View className='mt-3 at-row ml-3'>
-                  <View className='at-col-4 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME}</View>
-                  <View className='p-1 mr-4 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
+                      {/* <View className='text-small '>选择看房日期</View> */}
 
-                    {/* <View className='text-small '>选择看房日期</View> */}
+                      <Picker onClick={this.onClickPicker} value={currentTime} mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
+                        <View className='text-small'>
+                          {this.state.dateSel}
+                        </View>
+                      </Picker>
 
-                    <Picker onClick={this.onClickPicker} value={currentTime} mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
-                      <View className='text-small'>
-                        {this.state.dateSel}
-                      </View>
-                    </Picker>
 
+                    </View>
 
                   </View>
+                  {/* 按钮 */}
+                  <AtButton
+                    circle
+                    className='m-3 btn-yellow active'
+                    onClick={this.onAppointmentPost}
+                  >{LOCALE_APPOINTMENT_POST}</AtButton>
 
                 </View>
-                {/* 按钮 */}
-                <AtButton
-                  circle
-                  className='m-3 btn-yellow active'
-                  onClick={this.onAppointmentPost}
-                >{LOCALE_APPOINTMENT_POST}</AtButton>
-
               </View>
-            </View>
-            <AppointmentPostMask
-              show={showInformation}
-              name={name}
-              tel={tel}
-              onClose={this.onClose}
-              onGetName={this.onGetName}
-              onGetTel={this.onGetTel}
-            />
-            <AppointmentPostNextMask
-              show={showNext}
-              onCloseRequirement={this.onCloseRequirement}
-              secTime={zeroSecTime}
-              minTime={zeroMinTime}
-              serverId={serverId}
-            />
-            <GetPhoneNumMask
-              onClose={this.onClosePhoneMask}
-              show={showGetPhoneNumMask}
-              onFillPhone={this.getPhoneNumber} />
+              <AppointmentPostMask
+                show={showInformation}
+                name={name}
+                tel={tel}
+                onClose={this.onClose}
+                onGetName={this.onGetName}
+                onGetTel={this.onGetTel}
+              />
+              <AppointmentPostNextMask
+                show={showNext}
+                onCloseRequirement={this.onCloseRequirement}
+                secTime={zeroSecTime}
+                minTime={zeroMinTime}
+                serverId={serverId}
+              />
+              <GetPhoneNumMask
+                onClose={this.onClosePhoneMask}
+                show={showGetPhoneNumMask}
+                onFillPhone={this.getPhoneNumber} />
 
+
+            </View>
+            {/* </Board> */}
 
           </View>
-          {/* </Board> */}
-
         </View>
       </View>
     )
