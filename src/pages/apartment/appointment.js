@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View, Image, Picker } from '@tarojs/components'
+import { View, Image, Picker, Text } from '@tarojs/components'
 import { AtAvatar, AtIcon, AtButton, AtTag } from 'taro-ui'
 
 // Redux 相关
@@ -689,16 +689,16 @@ class AppointmentPost extends Component {
                     }
                   </View>
 
-
-
                   {/* 中间横线 */}
 
                   <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
+
                   {/* 下面部分 */}
                   {isNight && <View className='text-normal ml-3 mt-2'>提示：管家休息期间，接单会延迟</View>}
-                  <View className='mt-3 at-row ml-3'>
-                    <View className='at-col-4 text-bold text-large at-row at-row__align--center'>{LOCALE_APPOINTMENT_LOOKTIME}</View>
-                    <View className='p-1 mr-4 at-row at-row__justify--center' style='background:#F8F8F8; border-radius: 30px'>
+                  <View className='mt-3 ml-3 appointment-padding at-row at-row__justify--around ' >
+                    <View className=' text-bold text-large at-col at-col__align--center' >{LOCALE_APPOINTMENT_LOOKTIME}</View>
+                    <View className='p-2 at-col at-col-8' style={{ background: '#F8F8F8', borderRadius: '30px', textAlign: 'center'}} >
+                      
 
                       {/* <View className='text-small '>选择看房日期</View> */}
 
@@ -708,9 +708,8 @@ class AppointmentPost extends Component {
                         </View>
                       </Picker>
 
-
                     </View>
-
+                    <View className='at-col at-col-1'></View> 
                   </View>
                   {/* 按钮 */}
                   <AtButton

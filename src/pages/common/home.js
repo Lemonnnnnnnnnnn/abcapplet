@@ -190,7 +190,6 @@ class CommonHome extends BaseComponent {
 
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res) => {
-      console.log(res)
       if (res && res.data.data.user.is_guide === 0) {
         this.setState({ showCard: true })
       }

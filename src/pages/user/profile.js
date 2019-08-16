@@ -67,7 +67,7 @@ class UserProfile extends Component {
 
           {/* 用户头像信息 */}
           <UserHeader
-            className='mt-4'
+            className='mt-3'
             mobile={mobile}
             username={username}
             onLogin={this.onLogin}
@@ -75,7 +75,7 @@ class UserProfile extends Component {
 
           {/* 用户可选信息 */}
           <UserOptions
-            className='mt-4'
+            className='mt-3'
             lists={optionLists}
           />
 

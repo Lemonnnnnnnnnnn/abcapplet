@@ -423,14 +423,14 @@ class HouseTypeShow extends Component {
       marginRight: '14px',
     }
 
-    const hasRoomStyle = {
-      color: '#FFF',
-      backgroundColor: '#FFC919',
-      height: Taro.pxTransform(50),
-      borderRadius: Taro.pxTransform(15),
-      lineHeight: Taro.pxTransform(50),
-      textAlign: 'center'
-    }
+    // const hasRoomStyle = {
+    //   color: '#FFF',
+    //   backgroundColor: '#FFC919',
+    //   height: Taro.pxTransform(40),
+    //   borderRadius: Taro.pxTransform(15),
+    //   lineHeight: Taro.pxTransform(40),
+    //   textAlign: 'center'
+    // }
 
     const navStyle = {
       height: navHeight ? Taro.pxTransform(navHeight * 2) : Taro.pxTransform(128),
@@ -444,6 +444,14 @@ class HouseTypeShow extends Component {
 
     const titleStyle = {
       height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
+    }
+
+    const hasRoomStyle = {
+      borderRadius: '5px',
+      height: '16px',
+      textAlign: 'center',
+      lineHeight: '16px',
+      padding:' 2px 7px',
     }
 
 
@@ -557,7 +565,7 @@ class HouseTypeShow extends Component {
               <View className='mt-1'>
                 {rules && rules.map(i =>
                   <View key={i.id} className=' mr-1'>
-                    <Text className={`text-smail badge badge-${i.type}`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
+                    <Text className={`text-mini badge badge-${i.type}`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
                     <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                   </View>
                 )}
@@ -568,7 +576,7 @@ class HouseTypeShow extends Component {
                 <Tag className='my-3' active circle>
                   <View className='at-row  at-row__align--center text-secondary'>
 
-                    <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
+                    <Image className='ml-4' src='https://images.gongyuabc.com//image/free_new.png' style='width:18px;height:18px'></Image>
                     <View className='ml-2'>100%免中介费</View>
                     <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
                     <View className='ml-2'>严选厦门3万+房源</View>
@@ -581,7 +589,7 @@ class HouseTypeShow extends Component {
               {
                 position && <View className='at-row '>
                   <View className='at-col at-col-1 '>
-                    <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
+                    <Image src='https://images.gongyuabc.com//image/path_new.png' style='width:12px;height:16px'></Image>
                   </View>
                   <View className=' text-large text-secondary  ml-1' >{position}</View>
                 </View>
@@ -594,11 +602,12 @@ class HouseTypeShow extends Component {
               {/* 户型简介 */}
               {descList &&
                 <View>
-                  <View className='at-row mt-4'>
+                  <View className='at-row at-row__align--end mt-4'>
                     <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
                     {
-                      has_room && <View style={hasRoomStyle} className='text-normal at-col at-col-2 at-col__align--center'>有余房</View>
-                    }
+                      has_room ? <Text className=' text-mini badge-hasRoom mb-1' style={hasRoomStyle}>有余房</Text>
+                        : <Text className=' text-mini badge-hasRoom mb-1' style={hasRoomStyle}>满房</Text>
+                    }  
                   </View>
                   <View className='at-row at-row--wrap'>
                     {descList.map((i, index) =>

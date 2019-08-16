@@ -1,13 +1,13 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, Button ,Image} from '@tarojs/components'
+import { View, Button, Image } from '@tarojs/components'
 import { AtButton, AtFloatLayout } from 'taro-ui'
 
 // 自定义组件
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
 
-import {  PAGE_HOUSE_TYPE_SHOW,PAGE_APARTMENT_SHOW } from '@constants/page'
+import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
 // NPM 包
 import classNames from 'classnames'
 import { format } from 'path';
@@ -28,7 +28,7 @@ class TabBar extends BaseComponent {
 
   state = {
     showCallPhoneView: false,
-    url:'',
+    url: '',
   }
 
   onOpenCallPhoneView() {
@@ -39,7 +39,7 @@ class TabBar extends BaseComponent {
   }
 
 
-  onCloseCallPhoneView(){
+  onCloseCallPhoneView() {
     this.setState({ showCallPhoneView: false })
   }
 
@@ -56,16 +56,11 @@ class TabBar extends BaseComponent {
 
   render() {
     const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,
-      showLittleMask, floatLayoutHeightNum,title ,Id,type} = this.props
+      showLittleMask, floatLayoutHeightNum, title, Id, type } = this.props
 
-    //   const { url } = this.state
+    let { url } = this.state
 
-    //   url = type==='house'? PAGE_HOUSE_TYPE_SHOW : PAGE_APARTMENT_SHOW
-
-    //   console.log(url)
-
-    // console.log(this.props)
-
+    url = type === 'house' ? PAGE_HOUSE_TYPE_SHOW : PAGE_APARTMENT_SHOW
 
     const { showCallPhoneView } = this.state
 
@@ -126,8 +121,8 @@ class TabBar extends BaseComponent {
             <View className='at-row at-row__align--center at-row__justify--center' >
               <Button
                 className='Customer-button'
-                send-message-path={`${PAGE_HOUSE_TYPE_SHOW}?id=${Id}`}
-                open-type='contact' size='mini' plain style={buttonStyle} show-message-card  bindcontact='handleContact' send-message-title={title}>
+                send-message-path={`${url}?id=${Id}`}
+                open-type='contact' size='mini' plain style={buttonStyle} show-message-card bindcontact='handleContact' send-message-title={title}>
                 <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>在线客服</View>
               </Button>
             </View>

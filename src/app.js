@@ -123,8 +123,8 @@ class App extends Component {
     }
   }
 
-  async componentWillMount() {
-    await this.autoUpdate()
+  componentWillMount() {
+    this.autoUpdate()
   }
 
   //自动检测更新
