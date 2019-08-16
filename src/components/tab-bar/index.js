@@ -45,7 +45,6 @@ class TabBar extends BaseComponent {
 
   onCallPhone() {
     Taro.makePhoneCall({ phoneNumber: '0592-5911297' })
-
   }
 
   onShareAppMessage() {
@@ -57,10 +56,6 @@ class TabBar extends BaseComponent {
   render() {
     const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,
       showLittleMask, floatLayoutHeightNum, title, Id, type } = this.props
-
-    let { url } = this.state
-
-    url = type === 'house' ? PAGE_HOUSE_TYPE_SHOW : PAGE_APARTMENT_SHOW
 
     const { showCallPhoneView } = this.state
 
@@ -121,7 +116,8 @@ class TabBar extends BaseComponent {
             <View className='at-row at-row__align--center at-row__justify--center' >
               <Button
                 className='Customer-button'
-                send-message-path={`${url}?id=${Id}`}
+                // send-message-path={`${PAGE_HOUSE_TYPE_SHOW}?id=${Id}`}
+                send-message-path={type === 'house' ? `${PAGE_HOUSE_TYPE_SHOW}?id=${Id}` : `${PAGE_APARTMENT_SHOW}?id=${Id}`}
                 open-type='contact' size='mini' plain style={buttonStyle} show-message-card bindcontact='handleContact' send-message-title={title}>
                 <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>在线客服</View>
               </Button>

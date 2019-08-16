@@ -35,7 +35,7 @@ let currentDay = nowTime.getDate()
 let currentHours = nowTime.getHours()
 let currentYear = nowTime.getFullYear()
 
-let payloadH = currentHours + 2
+let payloadH = currentHours + 2 + ':00'
 
 @connect(state => state, {
   ...userActions,
@@ -337,7 +337,9 @@ class AppointmentPost extends Component {
     const year = (range[0][0]).split("年")[0]
 
     if (column === 1) { currentMonth = value }
-    if (column === 2) { currentDay = value + 1 }
+    if (column === 2) {
+      currentDay = value + 1
+    }
     if (column === 3) {
       if (value % 2 === 0) {
         payloadH = this.onJudgeTen(value / 2 + 9) + ':30'
@@ -697,8 +699,8 @@ class AppointmentPost extends Component {
                   {isNight && <View className='text-normal ml-3 mt-2'>提示：管家休息期间，接单会延迟</View>}
                   <View className='mt-3 ml-3 appointment-padding at-row at-row__justify--around ' >
                     <View className=' text-bold text-large at-col at-col__align--center' >{LOCALE_APPOINTMENT_LOOKTIME}</View>
-                    <View className='p-2 at-col at-col-8' style={{ background: '#F8F8F8', borderRadius: '30px', textAlign: 'center'}} >
-                      
+                    <View className='p-2 at-col at-col-8' style={{ background: '#F8F8F8', borderRadius: '30px', textAlign: 'center' }} >
+
 
                       {/* <View className='text-small '>选择看房日期</View> */}
 
@@ -709,7 +711,7 @@ class AppointmentPost extends Component {
                       </Picker>
 
                     </View>
-                    <View className='at-col at-col-1'></View> 
+                    <View className='at-col at-col-1'></View>
                   </View>
                   {/* 按钮 */}
                   <AtButton

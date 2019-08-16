@@ -27,13 +27,6 @@ class GetPhoneNumMask extends BaseComponent {
         return e.stopPropagation()
     }
 
-    // async getPhoneNumber(e) {
-    //     const { code } = await Taro.login()
-    //     const { encryptedData: encrypt_data, iv } = e.currentTarget
-    //     this.props.onClose()
-    // }
-
-
     render() {
         let { show } = this.props
 

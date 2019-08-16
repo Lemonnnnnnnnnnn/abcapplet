@@ -451,7 +451,7 @@ class HouseTypeShow extends Component {
       height: '16px',
       textAlign: 'center',
       lineHeight: '16px',
-      padding:' 2px 7px',
+      padding: ' 2px 7px',
     }
 
 
@@ -606,8 +606,8 @@ class HouseTypeShow extends Component {
                     <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
                     {
                       has_room ? <Text className=' text-mini badge-hasRoom mb-1' style={hasRoomStyle}>有余房</Text>
-                        : <Text className=' text-mini badge-hasRoom mb-1' style={hasRoomStyle}>满房</Text>
-                    }  
+                        : <Text className=' text-mini badge-hasNoRoom mb-1' style={hasRoomStyle}>满房</Text>
+                    }
                   </View>
                   <View className='at-row at-row--wrap'>
                     {descList.map((i, index) =>
