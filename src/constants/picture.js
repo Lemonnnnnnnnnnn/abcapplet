@@ -11,7 +11,7 @@ export const CALL_PHONE_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-b
 export const COMMENT_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-two.png'
 export const EXPECT_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-three.png'
 
-export const LEAVE_MSG = 'https://images.gongyuabc.com/image/leaveMsgle.png'
-export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone.png'
-export const COMMENT = 'https://images.gongyuabc.com/image/comment.png'
-export const EXPECT = 'https://images.gongyuabc.com/image/expect.png'
+export const LEAVE_MSG = 'https://images.gongyuabc.com/image/leaveMsgle_new.png'
+export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone_new.png'
+export const COMMENT = 'https://images.gongyuabc.com/image/comment_new.png'
+export const EXPECT = 'https://images.gongyuabc.com/image/expect_new.png'

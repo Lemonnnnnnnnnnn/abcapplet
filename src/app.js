@@ -20,13 +20,14 @@ class App extends Component {
       'pages/common/home',
       'pages/common/search',
 
-      'pages/apartment/cbd',
-      'pages/apartment/show',
-      'pages/apartment/activity',
-      'pages/apartment/recommend',
-      'pages/apartment/house-type',
-      'pages/apartment/appointment',
-      'pages/apartment/search-room',
+      // 'pages/apartment/cbd',
+      // 'pages/apartment/show',
+      // 'pages/apartment/activity',
+      // 'pages/apartment/recommend',
+      // 'pages/apartment/house-type',
+      // 'pages/apartment/appointment',
+      // 'pages/apartment/search-room',
+      'pages/recommend/recommend',
 
       'pages/appointment/services',
       'pages/appointment/message',
@@ -39,6 +40,17 @@ class App extends Component {
 
     ],
     subPackages: [
+      {
+        root: 'pages/apartment',
+        pages: [
+          'cbd',
+          'show',
+          'activity',
+          'house-type',
+          'appointment',
+          'search-room',
+        ]
+      },
       {
         root: 'pages/order',
         pages: [
@@ -100,7 +112,7 @@ class App extends Component {
           selectedIconPath: "assets/icons/services-active.png"
         },
         {
-          pagePath: "pages/apartment/recommend",
+          pagePath: "pages/recommend/recommend",
           text: "优选",
           iconPath: "assets/icons/recommend.png",
           selectedIconPath: "assets/icons/recommend-active.png"
