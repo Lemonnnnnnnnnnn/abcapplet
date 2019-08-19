@@ -50,6 +50,8 @@ class UserProfile extends Component {
     roomList: [],
   }
 
+  refRequirementCard = (node) => this.requirementCard = node
+
   componentWillMount() {
     this.initialHouseType()
   }
@@ -66,7 +68,8 @@ class UserProfile extends Component {
   // 打开/关闭需求卡
 
   onOpenCard() {
-    this.setState({ showCard: true })
+    // this.setState({ showCard: true })
+    this.requirementCard.onNextCard()
   }
 
   onCloseCard() {
@@ -133,16 +136,6 @@ class UserProfile extends Component {
             lists={optionLists}
           />
 
-          <RequirementCard
-            show={showCard}
-            onCloseCard={this.onCloseCard}
-            dists={dists}
-
-            initialFloor={floorList}
-            initialRoom={roomList}
-          />
-
-
           {/* 我的订单 */}
           <UserOrderOptions
             className='mt-2'
@@ -183,7 +176,17 @@ class UserProfile extends Component {
         <CustomerServiceMask
           show={showMask}
           onClose={this.onCloseCustomerMask}
-           />
+        />
+
+        <RequirementCard
+          show={showCard}
+          ref={this.refRequirementCard}
+          onCloseCard={this.onCloseCard}
+          dists={dists}
+
+          initialFloor={floorList}
+          initialRoom={roomList}
+        />
 
 
       </View>
