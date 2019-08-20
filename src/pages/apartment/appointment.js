@@ -25,9 +25,6 @@ import {
   PAGE_USER_AUTH
 } from '@constants/page'
 
-// let month = "01"
-// let day = "01"
-// let time = "08:00"
 
 const nowTime = new Date()
 let currentMonth = nowTime.getMonth()
@@ -35,7 +32,17 @@ let currentDay = nowTime.getDate()
 let currentHours = nowTime.getHours()
 let currentYear = nowTime.getFullYear()
 
-let payloadH = currentHours + 2 + ':00'
+let payloadH = 0
+
+if (currentHours >= 0 && currentHours < 8) {
+  payloadH = '09:30'
+} else if (currentHours > 19 && currentHours <= 24) {
+  payloadH = '21:30'
+} else {
+  payloadH = currentHours + 2 + ':00'
+}
+
+// currentHours > 19 ? payloadH = '21:30' : payloadH = currentHours + 2 + ':00'
 
 @connect(state => state, {
   ...userActions,
@@ -306,6 +313,16 @@ class AppointmentPost extends Component {
       currentDay = nowTime.getDate()
       currentHours = nowTime.getHours()
 
+      if (currentHours >= 0 && currentHours < 8) {
+        payloadH = '09:30'
+      } else if (currentHours > 19 && currentHours <= 24) {
+        payloadH = '21:30'
+      } else {
+        payloadH = currentHours + 2 + ':00'
+      }
+
+      // currentHours > 19 ? payloadH = '21:30' : payloadH = currentHours + 2 + ':00'
+
       let currentHoursIndex = 0
       if (currentHours * 2 - 15 > 24) {
         currentHoursIndex = 24
@@ -318,10 +335,14 @@ class AppointmentPost extends Component {
       let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
       this.setState({ currentTime: currentTime })
 
+      let hoursJudge = 0
+
+      currentHours > 19 ? hoursJudge = 21 + ':30' : hoursJudge = this.onJudgeTen(currentHours + 2) + ':00'
+
       const payloadStr = year + "-"
         + this.onJudgeTen(currentMonth + 1)
         + "-" + this.onJudgeTen(currentDay)
-        + " " + this.onJudgeTen(currentHours + 2) + ":00"
+        + " " + payloadH
 
       this.setState({
         dateSel: payloadStr,
@@ -404,8 +425,9 @@ class AppointmentPost extends Component {
 
   onJudgeTen(num) {
     let newNum = parseInt(num)
-    if (newNum < 10) { return "0" + newNum }
-    else {
+    if (newNum < 10) {
+      return "0" + newNum
+    } else {
       return newNum
     }
   }

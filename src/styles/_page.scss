@@ -1,14 +1,12 @@
 @import "overrides";
 
 page {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
-.image{
+.image {
   width: 40vw;
-
 }
 .page {
-
   &-demo {
     font-weight: 200;
     font-size: 16px * $hd;
@@ -25,14 +23,13 @@ page {
   }
 
   &-recommend {
-    background: url('https://images.gongyuabc.com/bg.jpg') center center no-repeat;
+    background: url("https://images.gongyuabc.com/bg.jpg") center center no-repeat;
     background-size: 100% 100%;
     height: 100vh;
-
   }
 
   &-requirement {
-    background: url('https://images.gongyuabc.com/image/icon/requirement-card-one.png') center center no-repeat;
+    background: url("https://images.gongyuabc.com/image/icon/requirement-card-one.png") center center no-repeat;
     background-size: contain;
     position: fixed;
     width: 50vh;
@@ -44,10 +41,10 @@ page {
   }
 
   &-requirementnext {
-    background: url('https://images.gongyuabc.com/image/icon/requirement-card-two.png') center center no-repeat;
+    background: url("https://images.gongyuabc.com/image/icon/requirement-card-two.png") center center no-repeat;
     background-size: contain;
     position: fixed;
-    height:120vw;
+    height: 120vw;
     width: 100vw;
     top: 50%;
     left: 50%;
@@ -56,23 +53,22 @@ page {
   }
 
   &-requirementtop {
-    background: url('https://images.gongyuabc.com/image/icon/card-top.png') center center no-repeat;
+    background: url("https://images.gongyuabc.com/image/icon/card-top.png") center center no-repeat;
     background-size: cover;
     position: fixed;
     width: 40vh;
     height: 10vh;
     top: 5%;
-    transform: translate(230px,-50px)
+    transform: translate(230px, -50px);
   }
 
-
   &-msg {
-    background: #FFFFFF center center no-repeat;
+    background: #ffffff center center no-repeat;
     background-size: cover;
     position: fixed;
     top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
   }
 
   &-mask {
@@ -81,11 +77,11 @@ page {
     width: 100vh;
     height: 100vh;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.6)
+    background: rgba(0, 0, 0, 0.6);
   }
 
-  &-service-bg{
-    background: url('http://images.gongyuabc.com/image/icon/service-bg.png') center center no-repeat;
+  &-service-bg {
+    background: url("http://images.gongyuabc.com/image/icon/service-bg.png") center center no-repeat;
     background-size: cover;
     width: 100%;
     height: 30vh;
@@ -94,20 +90,37 @@ page {
     align-items: center;
     justify-content: center;
   }
-  &-service-left{
-    background: url('http://images.gongyuabc.com/image/icon/service-left.png') center center no-repeat;
+  &-service-left {
+    background: url("http://images.gongyuabc.com/image/icon/service-left.png") center center no-repeat;
     background-size: contain;
     width: 70%;
     height: 70%;
-    border-radius: 10%
+    border-radius: 10%;
   }
 
-  &-service-right{
-    background: url('http://images.gongyuabc.com/image/icon/service-right.png') center center no-repeat;
+  &-service-right {
+    background: url("http://images.gongyuabc.com/image/icon/service-right.png") center center no-repeat;
     background-size: contain;
     width: 70%;
     height: 70%;
-    border-radius: 10%
+    border-radius: 10%;
   }
 }
 
+.default-page {
+  &-background {
+    background-color: #fff;
+    border-radius: 40px;
+  }
+  &-picture {
+    width: 90%;
+    margin-left: 5%;
+  }
+  &-font {
+    color: rgba(178, 178, 178, 1);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: -120px;
+  }
+}

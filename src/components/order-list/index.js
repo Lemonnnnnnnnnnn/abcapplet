@@ -1,19 +1,21 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
 import OrderItem from '@components/order-item'
 
-// 常量
-import { LOCALE_NO_DATA } from '@constants/locale'
 
 class OrderList extends BaseList {
 
   render() {
     const { items, className, show } = this.props
     const { hasMore, loading, page } = this.state
+
+    const pageBgStyle = {
+      marginTop : Taro.pxTransform(180)
+    }
 
     return (show && <View className={className}>
 
@@ -26,7 +28,12 @@ class OrderList extends BaseList {
       {items.length === 0
         && hasMore === false
         && loading === false
-        && <View class='page-demo'>{LOCALE_NO_DATA}</View>}
+        && <View className='pt-4 pb-2 default-page-background' style={pageBgStyle}>
+          <Image mode='widthFix' src='https://images.gongyuabc.com/image/page_order.png' className='default-page-picture' ></Image>
+          <View style={{ position: 'relative' }}>
+            <View className='text-large text-center default-page-font' >您没有申请赔付哦~</View>
+          </View>
+        </View>}
     </View>)
   }
 }

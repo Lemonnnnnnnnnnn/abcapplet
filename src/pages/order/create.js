@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
 import { View, Input, Text } from '@tarojs/components'
-import { AtButton ,AtTag} from 'taro-ui'
+import { AtButton, AtTag } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -39,10 +39,9 @@ import {
   LOCALE_VIEW_SERVICE_AGREEMENT,
 } from '@constants/locale'
 
-
 // NPM 包
-import day from 'dayjs'
-import { threadId } from 'worker_threads';
+// import day from 'dayjs'
+// import { threadId } from 'worker_threads';
 
 @connect(state => state, {
   ...orderActions,
@@ -55,9 +54,9 @@ class OrderCreate extends Component {
   }
 
   state = {
-    signTime: day().format('YYYY-MM-DD'),
+    signTime: '',
 
-    timeList:[],
+    timeList: [],
     disabled: false,
     showRoomList: false,
     room: {
@@ -77,13 +76,14 @@ class OrderCreate extends Component {
 
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
+
     // 初始化表单
     this.setState({
-      timeList:data.tenancy,
+      timeList: data.tenancy,
       // tenancy:data.tenancy,
       room: { ...data.room },
       rooms: [...data.rooms],
-      signTime: day().format('YYYY-MM-DD'),
+      signTime: data.sign_time,
       payload: {
         room_id: data.room.id,
         appointment_id,
@@ -95,27 +95,28 @@ class OrderCreate extends Component {
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { timeList } = this.state
     this.setState({
-      timeList:timeList.map(i =>({...i,active:false}))
+      timeList: timeList.map(i => ({ ...i, active: false }))
     })
   }
 
   // 选择租期
   onTimeChange(id) {
-    const { payload,timeList } = this.state
+    const { payload, timeList } = this.state
     const timeListLength = timeList.length
-    for(var timeSelect=0 ;timeSelect<timeListLength;timeSelect++){
-      if(timeList[timeSelect].id === id){
+    for (var timeSelect = 0; timeSelect < timeListLength; timeSelect++) {
+      if (timeList[timeSelect].id === id) {
         timeList[timeSelect].active = true
-      }else{
+      } else {
         timeList[timeSelect].active = false
       }
     }
     this.setState({
-      timeList ,
-      payload: { ...payload, tenancy: id }})
+      timeList,
+      payload: { ...payload, tenancy: id }
+    })
   }
   // 名字
   onNameInput({ currentTarget: { value } }) {
@@ -163,13 +164,27 @@ class OrderCreate extends Component {
   // 检查数据
   onCheckPayload() {
     const { payload } = this.state
-    const { room_id, name, mobile, id_code, sign_time } = payload
+    const { room_id, name, mobile, id_code, tenancy } = payload
+    let judgeArr = [
+      { title: '姓名', value: name },
+      { title: '电话', value: mobile },
+      { title: '身份证号码', value: id_code },
+      { title: '租期', value: tenancy },
+      { title: '预约公寓', value: room_id },
+    ]
 
-    if (room_id === 0 || name === '' || mobile === '' || id_code === '' || sign_time === '') {
-      Taro.showToast({
-        icon: 'none',
-        title: '亲，请检查您填写的内容是否正确',
+
+    try {
+      judgeArr.forEach(i => {
+        if (!i.value) {
+          Taro.showToast({
+            icon: 'none',
+            title: '亲，您还没有填写' + i.title + '哦',
+          })
+          throw '亲，您还没有填写' + i.title + '哦'
+        }
       })
+    } catch (e) {
       return false
     }
     return true
@@ -191,21 +206,21 @@ class OrderCreate extends Component {
   }
 
   render() {
-    const { payload, room, rooms, showRoomList, disabled ,timeList,signTime} = this.state
-    const { name, mobile, id_code: idCode} = payload
+    const { payload, room, rooms, showRoomList, disabled, timeList, signTime } = this.state
+    const { name, mobile, id_code: idCode } = payload
     const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money: riskMoney, id } = room
 
     return (
       <View>
         {/* 修改房间 */}
 
-          <OrderRoomListMask
-            rooms={rooms}
-            selectId={id}
-            show={showRoomList}
-            onSelectRoom={this.onSelectRoom}
-            onClose={this.onClose}
-          />
+        <OrderRoomListMask
+          rooms={rooms}
+          selectId={id}
+          show={showRoomList}
+          onSelectRoom={this.onSelectRoom}
+          onClose={this.onClose}
+        />
 
         <View className='p-3'>
           {/* 背景底色 */}
@@ -276,18 +291,18 @@ class OrderCreate extends Component {
                 </View>
 
                 <View className='at-col-4 at-row'>
-                     {timeList.map((item,index)=> (
-                          <View className='at-row at-row__justify--around ml-2 '  key={index}>
-                            <AtTag
-                              type='primary'
-                              size='small'
-                              name={item.name}
-                              active={item.active}
-                              circle
-                              onClick={this.onTimeChange.bind(this,item.id)}
-                            >{item.name}</AtTag>
-                        </View>
-                        ))}
+                  {timeList.map((item, index) => (
+                    <View className='at-row at-row__justify--around ml-2 ' key={index}>
+                      <AtTag
+                        type='primary'
+                        size='small'
+                        name={item.name}
+                        active={item.active}
+                        circle
+                        onClick={this.onTimeChange.bind(this, item.id)}
+                      >{item.name}</AtTag>
+                    </View>
+                  ))}
                 </View>
               </View>
             </View>
@@ -306,9 +321,9 @@ class OrderCreate extends Component {
 
                 <View>
 
-                    <View className='picker text-normal'>
-                      {signTime}
-                    </View>
+                  <View className='picker text-normal'>
+                    {signTime}
+                  </View>
 
                 </View>
               </View>
@@ -340,7 +355,7 @@ class OrderCreate extends Component {
                 <View className='at-row at-row__align--center'>
                   <View className='pt-3'>
                     <View className='text-bold text-normal'>{apartmentTitle}{roomNo}</View>
-                    {rooms.length!==0 && <View className='text-small text-yellow mt-2'>
+                    {rooms.length !== 0 && <View className='text-small text-yellow mt-2'>
                       {LOCALE_RENT}{LOCALE_SEMICOLON}
                       <Text className='text-normal'>{discountPrice}</Text>
                       {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
@@ -382,7 +397,7 @@ class OrderCreate extends Component {
           </View>
 
           {/* 立即预订 */}
-         { rooms.length!==0 ? <View className='at-row'>
+          {rooms.length !== 0 ? <View className='at-row'>
             <View className='at-col-12'>
               <AtButton
                 circle
@@ -392,17 +407,17 @@ class OrderCreate extends Component {
               >{LOCALE_SIGN_NOW}</AtButton>
             </View>
           </View>
-          :
-          <View className='at-row'>
-            <View className='at-col-12'>
-              <AtButton
-                circle
-                disabled={disabled}
-                className='btn-grey btn-light-writh'
+            :
+            <View className='at-row'>
+              <View className='at-col-12'>
+                <AtButton
+                  circle
+                  disabled={disabled}
+                  className='btn-grey btn-light-writh'
 
-              >暂无可选房间</AtButton>
-            </View>
-          </View>}
+                >暂无可选房间</AtButton>
+              </View>
+            </View>}
         </View>
       </View>
     )
