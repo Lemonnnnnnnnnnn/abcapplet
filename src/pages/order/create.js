@@ -39,9 +39,7 @@ import {
   LOCALE_VIEW_SERVICE_AGREEMENT,
 } from '@constants/locale'
 
-// NPM 包
-// import day from 'dayjs'
-// import { threadId } from 'worker_threads';
+
 
 @connect(state => state, {
   ...orderActions,
@@ -76,29 +74,36 @@ class OrderCreate extends Component {
 
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
-
     // 初始化表单
     this.setState({
       timeList: data.tenancy,
-      // tenancy:data.tenancy,
       room: { ...data.room },
       rooms: [...data.rooms],
       signTime: data.sign_time,
       payload: {
         room_id: data.room.id,
         appointment_id,
+        tenancy: 12,
         name: data.user_info.name,
         mobile: data.user_info.mobile,
         id_code: data.user_info.id_no,
-
       }
     })
   }
 
   componentDidMount() {
     const { timeList } = this.state
+    let timeListinit = JSON.parse(JSON.stringify(timeList))
+    timeListinit.map(i => {
+      if (i.id === 12) {
+        i.active = true
+      } else {
+        i.active = false
+      }
+    })
+
     this.setState({
-      timeList: timeList.map(i => ({ ...i, active: false }))
+      timeList: timeListinit
     })
   }
 

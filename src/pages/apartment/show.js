@@ -15,6 +15,7 @@ import ABCIcon from '@components/abc-icon'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
+import CustomNav from '@components/custom-nav'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME } from '@constants/page'
@@ -59,7 +60,6 @@ class ApartmentShow extends Component {
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
-    // await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: [] }))
 
     await Taro.getSystemInfo().then(res => {
       this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
@@ -69,8 +69,6 @@ class ApartmentShow extends Component {
         this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
       }
     })
-
-
 
 
     let facilitys = data.facility_list
@@ -267,41 +265,11 @@ class ApartmentShow extends Component {
       overflow: 'hidden',
     }
 
-    const navStyle = {
-      height: navHeight ? Taro.pxTransform(navHeight * 2) : Taro.pxTransform(128),
-    }
-
-    const statusBarStyle = {
-      height: statusBarHeight ? Taro.pxTransform(statusBarHeight * 2) : Taro.pxTransform(40)
-    }
-
-
-    const titleStyle = {
-      height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
-    }
 
     return (
       <View style={{ overflow: "hidden" }}>
 
-        {/* 自定义导航栏 */}
-        <View className='navStyle' style={navStyle}>
-          {/* 状态栏 */}
-          <View style={statusBarStyle}></View>
-          {/* 标题栏 */}
-          <View style={{ position: "relative" }}>
-            <View className='at-row at-row__align--center  ml-2 navStyle-titleStyle' style={titleStyle} >
-              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle' >
-                <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
-                  <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>
-                </View>
-                <View className='grayLineStyle' ></View>
-                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-2' style={{ height: "17px", width: "17px" }}></Image>
-              </View>
-            </View>
-            {/* title */}
-            <View className='text-large navStyle-titleFontStyle text-bold'>公寓详情</View>
-          </View>
-        </View>
+        <CustomNav title='公寓详情' />
 
 
         <TabBar

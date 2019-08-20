@@ -103,9 +103,9 @@ class AppointmentRevolution extends Component {
     }
 
     const textStyle = {
-      wordBreak : 'break-all',
-      textIndent : '15px',
-      height : Taro.pxTransform(300)
+      wordBreak: 'break-all',
+      textIndent: '15px',
+      height: Taro.pxTransform(300)
     }
 
 
@@ -162,7 +162,17 @@ class AppointmentRevolution extends Component {
           <View className='mt-4 '>
             {
               haveEvalution || comment.score ?
-                <View className='text-normal p-3 mt-3' style={textStyle}>{comment.remark || localText}</View>
+                <AtTextarea
+                  fixed
+                  disabled
+                  count={false}
+                  value={comment.remark || localText}
+                  maxLength={200}
+                  className='mt-3 textarea text-normal p-3'
+                  onChange={this.onRemarkChange}
+                  placeholder='评价'
+                />
+                // <View className='text-normal p-3 mt-3' style={textStyle}>{comment.remark || localText}</View>
                 : <AtTextarea
                   fixed
                   count={false}

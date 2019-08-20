@@ -36,7 +36,7 @@ class AppartmentMatchingMask extends BaseComponent {
         return (
             show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
                 <Board fixed='bottom' border='top'>
-                    <AtIcon onClick={onClose} value='close' size='15' className='mt-3 mr-3' color='#888' style='float:right'></AtIcon>
+                    <AtIcon onClick={onClose} value='close' size='15' className='mt-3 mr-3 p-2' color='#888' style='float:right'></AtIcon>
                     <View style={{ textAlign: "center" }} className='text-huge text-bold mt-2'> 全部配套</View>
                     <View className='mt-4 ml-4 mr-4 '>
                         <View >

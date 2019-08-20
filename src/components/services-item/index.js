@@ -247,12 +247,14 @@ class ServiceItem extends BaseComponent {
         { name: 2, src: CALL_PHONE, title: LOCALE_APPOINTMENT_RELUTION },
         {
           name: 3,
-          src: haveEvalution || comment.score ? COMMENT : COMMENT_GRAY,
+          // src: haveEvalution || comment.score ? COMMENT : COMMENT_GRAY,
+          src: status === 3 ? COMMENT : COMMENT_GRAY,
           title: haveEvalution || comment.score ? LOCALE_APPOINTMENT_HAVE_EVALUTION : LOCALE_APPOINTMENT_EVALUTION
         },
         {
           name: 4,
-          src: haveIntention || intention ? EXPECT : EXPECT_GRAY,
+          // src: haveIntention || intention ? EXPECT : EXPECT_GRAY,
+          src: status === 3 ? EXPECT : EXPECT_GRAY,
           title: haveIntention || intention ? LOCALE_APPOINTMENT_HAVE_INTENTION : LOCALE_APPOINTMENT_INTENTION
         },
       ] : buttonList = [

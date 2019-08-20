@@ -19,6 +19,8 @@ import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
 import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
 import AppartmentMatchingMask from '@components/apartment-matching-mask'
+import CustomNav from '@components/custom-nav'
+
 
 // 自定义变量
 import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
@@ -26,7 +28,6 @@ import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
-
 
 
 
@@ -42,7 +43,6 @@ class HouseTypeShow extends Component {
   }
 
   state = {
-    statusBarHeight: 0,
     navHeight: 0,
     showLittleMask: false,
     houseType_id: 83,
@@ -67,6 +67,7 @@ class HouseTypeShow extends Component {
     showMatch: false,
     showApartRoom: true,
     nearbyPost: [],
+    showMap: true,
   }
 
   async componentDidMount() {
@@ -78,11 +79,11 @@ class HouseTypeShow extends Component {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
       await Taro.getSystemInfo().then(res => {
-        this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 72 })
         if (res.model.indexOf('iPhone X') !== -1) {
-          this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+          this.setState({ navHeight: 88 })
         } else if (res.model.indexOf('iPhone') !== -1) {
-          this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+          this.setState({ navHeight: 64 })
         }
       })
 
@@ -211,29 +212,43 @@ class HouseTypeShow extends Component {
 
   onOpenRentDescription() {
     this.setState({ showRentDescription: true })
+    this.onHideMap()
   }
 
   // 关闭租金介绍
 
   onCloseRentDescription() {
     this.setState({ showRentDescription: false })
+    this.onShowMap()
   }
 
   // 打开所有配置弹窗
   onOpenAllMatching() {
     this.setState({ showMatch: true })
+    this.onHideMap()
   }
 
   // 关闭所有配置弹窗
 
   onCloseAllMatching() {
     this.setState({ showMatch: false })
+    this.onShowMap()
   }
 
   onNavigationApartment() {
     const { houstType } = this.state
     const { apartmentId } = houstType
     this.onNavigation(`${PAGE_APARTMENT_SHOW}?id=${apartmentId}`)
+  }
+
+  // 打开弹窗时隐藏地图，关闭弹窗时打开地图
+
+  onHideMap() {
+    this.setState({ showMap: false })
+  }
+
+  onShowMap() {
+    this.setState({ showMap: true })
   }
 
   onOpenMap() {
@@ -343,25 +358,12 @@ class HouseTypeShow extends Component {
     }
   }
 
-
-  onReturn() {
-    Taro.navigateBack()
-  }
-
-  onBackHome() {
-    Taro.switchTab({
-      url: PAGE_HOME
-    })
-  }
-
-
-
   render() {
     const { apartments } = this.props
 
     const { houstType, map, buttons, showRentDescription,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, statusBarHeight } = this.state
+      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -386,7 +388,6 @@ class HouseTypeShow extends Component {
       borderRadius: "12px",
       width: "40px",
       height: "40px"
-      // padding: " 2px 6px"
     }
 
     const deposit = {
@@ -410,40 +411,11 @@ class HouseTypeShow extends Component {
 
     }
 
-    const textDeal = {
-      wordBreak: "break-all",
-      textIndent: "10px"
-    }
-
     const borderStyle = {
-      // backgroundColor: "rgba(248, 248, 248, 1)",
       borderRadius: "6px",
       boxShadow: "0 1px 6px rgb(220,220,220)",
       overflow: 'hidden',
       marginRight: '14px',
-    }
-
-    // const hasRoomStyle = {
-    //   color: '#FFF',
-    //   backgroundColor: '#FFC919',
-    //   height: Taro.pxTransform(40),
-    //   borderRadius: Taro.pxTransform(15),
-    //   lineHeight: Taro.pxTransform(40),
-    //   textAlign: 'center'
-    // }
-
-    const navStyle = {
-      height: navHeight ? Taro.pxTransform(navHeight * 2) : Taro.pxTransform(128),
-    }
-
-    const statusBarStyle = {
-      height: statusBarHeight ? Taro.pxTransform(statusBarHeight * 2) : Taro.pxTransform(40)
-    }
-
-
-
-    const titleStyle = {
-      height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
     }
 
     const hasRoomStyle = {
@@ -458,7 +430,6 @@ class HouseTypeShow extends Component {
     return (
       <View >
         <TabBar
-
           showLittleMask={showLittleMask}
           onOpenLittleMask={this.onOpenLittleMask}
           onCloseLittleMask={this.onCloseLittleMask}
@@ -472,25 +443,7 @@ class HouseTypeShow extends Component {
           type='house'
         />
 
-        {/* 自定义导航栏 */}
-        <View className='navStyle' style={navStyle}>
-          {/* 状态栏 */}
-          <View style={statusBarStyle}></View>
-          {/* 标题栏 */}
-          <View style={{ position: "relative" }}>
-            <View className='at-row at-row__align--center ml-2 navStyle-titleStyle' style={titleStyle} >
-              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle' >
-                <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
-                  <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>
-                </View>
-                <View className='grayLineStyle' ></View>
-                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-2' style={{ height: "17px", width: "17px" }}></Image>
-              </View>
-            </View>
-            {/* title */}
-            <View className='text-large navStyle-titleFontStyle text-bold'>户型详情</View>
-          </View>
-        </View>
+        <CustomNav title='户型详情' />
 
 
         <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
@@ -648,17 +601,19 @@ class HouseTypeShow extends Component {
 
               {/* 位置信息 */}
               <View className='text-bold text-huge mt-5'>位置信息</View>
-              <Map
-                className='mt-2'
-                showLocation
-                markers={markers}
-                latitude={latitude}
-                longitude={longitude}
-                style={{ width: '100%' }}
-                onClick={this.onOpenMap}
-              >
+              {
+                showMap && <Map
+                  className='mt-2'
+                  showLocation
+                  markers={markers}
+                  latitude={latitude}
+                  longitude={longitude}
+                  style={{ width: '100%' }}
+                  onClick={this.onOpenMap}
+                >
+                </Map>
 
-              </Map>
+              }
 
               {/* 周边生活 & 附近交通 */}
               <View className='at-row mt-2'>

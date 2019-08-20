@@ -12,6 +12,7 @@ import * as apartmentActions from '@actions/apartment'
 import TabBar from '@components/tab-bar'
 import RichTextWxParse from '@components/rich-text-wx-parse'
 import ApartmentListMask from '@components/apartment-list-mask'
+import CustomNav from '@components/custom-nav'
 
 // NPM 包
 import day from 'dayjs'
@@ -34,7 +35,6 @@ class ArticleShow extends Component {
   state = {
     showDesc: false,
     article: null,
-    statusBarHeight: 0,
     navHeight: 0,
     buttons: [
       { message: LOCALE_SHOW_DESC, method: 'onShowDescToggle' },
@@ -43,11 +43,11 @@ class ArticleShow extends Component {
 
   async componentDidMount() {
     await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
+      this.setState({ navHeight: 72})
       if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 88})
       } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 64})
       }
     })
   }
@@ -103,22 +103,11 @@ class ArticleShow extends Component {
 
   render() {
     const { articleApartment } = this.props
-    const { article, buttons, showDesc, navHeight, statusBarHeight } = this.state
+    const { article, buttons, showDesc, navHeight } = this.state
 
-    const navStyle = {
-      height: navHeight ? Taro.pxTransform(navHeight * 2) : Taro.pxTransform(128),
-    }
-
-    const statusBarStyle = {
-      height: statusBarHeight ? Taro.pxTransform(statusBarHeight * 2) : Taro.pxTransform(40)
-    }
-
-    const titleStyle = {
-      height: navHeight && statusBarHeight ? Taro.pxTransform((navHeight - statusBarHeight) * 2) : Taro.pxTransform(88),
-    }
 
     let articleChange = ''
-    
+
     if (article) {
       if (article.title.length > 10) {
         articleChange = article.title.substr(0, 10) + "..."
@@ -130,26 +119,9 @@ class ArticleShow extends Component {
 
 
     return (
-      // 自定义导航栏
       <View style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
-        <View className='navStyle' style={navStyle} >
-          {/* 状态栏 */}
-          <View style={statusBarStyle}></View>
-          {/* 标题栏 */}
-          <View style={{ position: "relative" }}>
-            <View className='at-row at-row__align--center  ml-2  navStyle-titleStyle' style={titleStyle} >
-              <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle'>
-                <View className='at-col-6'>
-                  <AtIcon onClick={this.onReturn} value='chevron-left' size='22' className='ml-2' ></AtIcon>
-                </View>
-                <View className='grayLineStyle' ></View>
-                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-2' style={{ height: "17px", width: "17px" }}></Image>
-              </View>
-            </View>
-            {/* title */}
-            <View className='text-normal navStyle-titleFontStyle'>{articleChange}</View>
-          </View>
-        </View>
+
+        <CustomNav title={articleChange} />
 
 
         {article &&
