@@ -31,7 +31,7 @@ class OrderList extends BaseList {
         && <View className='pt-4 pb-2 default-page-background' style={pageBgStyle}>
           <Image mode='widthFix' src='https://images.gongyuabc.com/image/page_order.png' className='default-page-picture' ></Image>
           <View style={{ position: 'relative' }}>
-            <View className='text-large text-center default-page-font' >您没有申请赔付哦~</View>
+            <View className='text-large text-center default-page-font' >您没有订单赔付哦~</View>
           </View>
         </View>}
     </View>)

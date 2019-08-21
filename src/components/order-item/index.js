@@ -1,6 +1,7 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 
 // NPM 包
 import day from 'dayjs'
@@ -35,13 +36,22 @@ class OrderItem extends BaseComponent {
       apartment_title: apartmentTitle,
     } = order
 
-    const { message, isLight } =
+    const { message, isLight, icon, height, width } =
       ORDER_STATUS_DIST[status]
+      // ORDER_STATUS_DIST[3]
       || { message: '', isLight: false }
 
     const boardColor = isLight ? 'white' : 'grey'
     const color = isLight ? 'text-yellow' : 'text-secondary'
     const borderColor = isLight ? 'border-decorate-yellow' : 'border-decorate-grey'
+
+    const hasRoomStyle = {
+      borderRadius: Taro.pxTransform(30),
+      height: Taro.pxTransform(52),
+      textAlign: 'center',
+      lineHeight: Taro.pxTransform(52),
+      padding: '2px 14px',
+    }
 
     return (
       <Board className={classNames('p-3', className)} color={boardColor}>
@@ -65,7 +75,27 @@ class OrderItem extends BaseComponent {
           {/* 右边 */}
           <View>
             <View className='at-row at-row__align--center '>
-              <View className={`text-small ${color}`}>{message}</View>
+              {
+                message === '预定完成' ?
+
+                  <View className=' text-normal badge-hasRoom mr-2 at-row at-row__align--center' style={hasRoomStyle}>
+                    {
+                      icon && <Image style={{ width: Taro.pxTransform(width), height: Taro.pxTransform(height) }} className='mr-1' src={icon}></Image>
+                    }
+                    <Text>{message}</Text>
+                  </View>
+
+                  :
+
+                  <View className='at-row at-row__align--center mr-2'>
+                    {
+                      icon && <Image style={{ width: Taro.pxTransform(width), height: Taro.pxTransform(height) }} className='mr-2' src={icon}></Image>
+                    }
+                    <View className={`text-small ${color}`}>{message}</View>
+                  </View>
+
+              }
+
               <ABCIcon icon='chevron_right' size='20' color={COLOR_GREY_2} />
             </View>
           </View>

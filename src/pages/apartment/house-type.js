@@ -71,8 +71,6 @@ class HouseTypeShow extends Component {
   }
 
   async componentDidMount() {
-
-
     const { id } = this.$router.params
 
     if (id) {
@@ -645,7 +643,10 @@ class HouseTypeShow extends Component {
                     className='text-secondary text-normal mt-2'
                     style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
                 }
-                <View onClick={this.onSearchRoom} className='text-secondary at-row at-row__align--center at-row__justify--end'>
+                <View
+                  style={{ width: '100%', background: 'rgba(248, 248, 248, 1)', borderRadius: Taro.pxTransform(34) }}
+                  onClick={this.onSearchRoom}
+                  className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--center at-row__justify--center'>
                   <AtIcon className='ml-2' value='search' size='13' color={COLOR_GREY_0} />
                   <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
                 </View>

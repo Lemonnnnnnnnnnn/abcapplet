@@ -59,11 +59,11 @@ export default class CustomNav extends BaseComponent {
                     <View style={{ position: "relative" }}>
                         <View className='at-row at-row__align--center ml-2 navStyle-titleStyle' style={titleStyle} >
                             <View className='at-row at-row-3 at-row__align--center at-row__justify--between navStyle-menuButtonStyle' >
-                                <View className='at-col-6 at-col__justify--center at-col__align--center ml-2'>
-                                    <AtIcon onClick={this.onReturn} value='chevron-left' size='22' ></AtIcon>
+                                <View className='at-col-6 at-col__justify--center at-col__align--center'>
+                                    <AtIcon onClick={this.onReturn} className='pl-2 pr-2' value='chevron-left' size='22' ></AtIcon>
                                 </View>
                                 <View className='grayLineStyle' ></View>
-                                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='mr-2' style={{ height: "17px", width: "17px" }}></Image>
+                                <Image onClick={this.onBackHome} src='https://images.gongyuabc.com//image/backHome.png' className='pl-2 pr-2' style={{ height: "17px", width: "17px" }}></Image>
                             </View>
                         </View>
                         {/* title */}

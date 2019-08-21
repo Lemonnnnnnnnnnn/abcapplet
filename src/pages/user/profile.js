@@ -59,6 +59,7 @@ class UserProfile extends Component {
   async componentDidShow() {
     const { payload: user } = await this.props.dispatchUser()
     this.props.dispatchDistList(user.citycode)
+    this.setState({ showMask: false })
   }
 
   onLogin() {
@@ -85,6 +86,7 @@ class UserProfile extends Component {
   onCloseCustomerMask() {
     this.setState({ showMask: false })
   }
+
 
   // 初始化户型列表
 

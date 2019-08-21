@@ -57,34 +57,34 @@ class RoomItem extends BaseComponent {
     Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${id}` })
   }
 
-  onCreateFavorite() {
-    const { room } = this.props
-    const id = room.room_id || room.id
+  // onCreateFavorite() {
+  //   const { room } = this.props
+  //   const id = room.room_id || room.id
 
-    this.props.onCreateFavorite({ payload: { room_id: id } })
-  }
+  //   this.props.onCreateFavorite({ payload: { room_id: id } })
+  // }
 
-  onDeleteFavorite() {
-    const { room } = this.props
-    const id = room.room_id || room.id
+  // onDeleteFavorite() {
+  //   const { room } = this.props
+  //   const id = room.room_id || room.id
 
-    this.props.onDeleteFavorite({ payload: { room_id: id } })
-  }
+  //   this.props.onDeleteFavorite({ payload: { room_id: id } })
+  // }
 
 
-  onViewPic() {
-    const { room, roomList } = this.props
-    const { cover } = room
-    let picList = []
+  // onViewPic() {
+  //   const { room, roomList } = this.props
+  //   const { cover } = room
+  //   let picList = []
 
-    roomList.map((value) => {
-      picList.push(value.cover)
-    })
-    Taro.previewImage({
-      current: cover,
-      urls: picList
-    })
-  }
+  //   roomList.map((value) => {
+  //     picList.push(value.cover)
+  //   })
+  //   Taro.previewImage({
+  //     current: cover,
+  //     urls: picList
+  //   })
+  // }
 
   changeTime(time) {
     const nowDate = new Date()
@@ -97,7 +97,7 @@ class RoomItem extends BaseComponent {
     const releaseDate = monthLease + "月" + dayLease + "日"
 
 
-    if (yearLease != year) {
+    if (yearLease !== year) {
       this.setState({
         showYear: true,
         year: yearLease
@@ -112,15 +112,13 @@ class RoomItem extends BaseComponent {
 
   render() {
     const { className, room, height, type, isSign } = this.props
-    const { status, space, toward, is_collect: isCollect } = room
+    const { status, space, toward, is_collect: isCollect, discount_price } = room
 
     const { showYear, year, releaseDate } = this.state
 
     // 兼容字段代码
-    const hasIsCollect = Object.keys(room).includes('is_collect')
     const roomNo = room.room_no || room.no
     const priceTitle = room.price_title || room.price
-    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     const grayBg = {
       backgroundColor: "#F8F8F8",
@@ -128,7 +126,15 @@ class RoomItem extends BaseComponent {
     }
     const tag = ROOM_STATUS_DIST[status]
 
-    // 设置图片宽高，方便七牛云格式化图片
+
+    const hasRoomStyle = {
+      borderRadius: '5px',
+      height: '16px',
+      textAlign: 'center',
+      lineHeight: '16px',
+      padding: ' 2px 7px',
+      whiteSpace: 'nowrap',
+    }
 
     return (
       <Board
@@ -137,60 +143,59 @@ class RoomItem extends BaseComponent {
       >
         <View className='at-row mt-3' style={grayBg}>
           {/* 左侧 */}
-          {/* 封面 */}
-
-          {/* <View>
-            {cover
-              ? <Image src={src} mode='scaleToFill' style={imageStyle} />
-              : <ImagePlaceholder height={height} />
-            }
-          </View> */}
 
           {/* 右侧 */}
           <View className='mx-3 my-2' style={{ width: '100%' }}>
             {/* 第一行 */}
             <View className='at-row'>
+              {/* 文字和标签 */}
               <View className='at-row  at-row__align--center'>
-                {/* 文字和标签 */}
-                <View className='at-row at-row__justify--between' >
-                  <View >
-                    <Text className='text-bold text-huge mr-2'>
-                      {roomNo}
-                    </Text>
-                    <Text className='text-secondary text-small my-2'>
-                      {toward} {space} {(space === '' && toward === '') ? LOCALE_NO_AWARD_AND_SPACE : ''}
-                    </Text>
-                  </View>
-                  {
-                    status === 2 ? <Tag className='mt-2' type={tag.color} circle small>{showYear ? year + releaseDate + tag.message : releaseDate + tag.message}</Tag> :
-                      <Tag className='mt-2' type={tag.color} circle small>{tag.message}</Tag>
-                  }
-
-                </View>
+                <Text className='text-bold text-huge mr-2'>
+                  {roomNo}
+                </Text>
+                <Text className='text-secondary text-small my-2'>
+                  {toward} {space} {(space === '' && toward === '') ? LOCALE_NO_AWARD_AND_SPACE : ''}
+                </Text>
 
               </View>
             </View>
 
             {/* 第二行 */}
 
-            <View className=' mt-3'>
+            <View >
               <View className='at-row at-row__justify--between  at-row__align--center'>
 
-                {/* 左侧 */}
+                <View className='at-row  at-row__align--center'>
+                  {/* 平台折扣价 */}
+                  {
+                    discount_price ? <Text className=' text-mini badge-hasRoom mr-2' style={hasRoomStyle}>ABC价</Text>
+                      : <Text></Text>
+                  }
+                  {/* 价格 */}
 
-                <View className='at-row  at-row__align--end'>
-                  <Text className='text-huge text-bold text-yellow'>{priceTitle}</Text>
-                  <Text className='text-small text-yellow mb-1'>
-                    {isNaNPrice ? {LOCALE_PRICE_UNIT}/{LOCALE_MONTH} : ""}
-                  </Text>
+                  <Text className='text-large text-bold text-yellow '>{priceTitle}</Text>
+                  <Text className='text-large text-yellow '>{LOCALE_PRICE_UNIT}/{LOCALE_MONTH}</Text>
+
+                  {/* 折扣价 */}
+                  {
+                    discount_price ? <Text className='ml-2 text-small' style={{ textDecoration: 'line-through' }}>{priceTitle}{LOCALE_PRICE_UNIT}/{LOCALE_MONTH}</Text>
+                      : <Text></Text>
+                  }
+
                 </View>
 
-                {/* 右侧 */}
 
-                {/* 爱心按钮，当 type 为 TYPE_NORMAL_ROOM 显示添加、TYPE_FAVORITE_ROOM 显示取消 */}
-                <View className='mr-3'>
+                {/* 图片预览暂时取消 */}
+                {/* <View className='mr-3'>
                   <AtIcon value='image' size='25' color={COLOR_YELLOW} onClick={this.onViewPic} ></AtIcon>
-                </View>
+                </View> */}
+                {
+                  status === 2 ?
+                    <View className='badge-hasNoRoom text-mini' style={hasRoomStyle}>{showYear ? year + releaseDate + tag.message : releaseDate + tag.message}</View>
+                    :
+                    <Text></Text>
+                }
+
 
                 {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'
@@ -198,6 +203,7 @@ class RoomItem extends BaseComponent {
                 >
                   {LOCALE_ABC_SIGN}
                 </AtButton>}
+
 
               </View>
             </View>
