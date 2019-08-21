@@ -112,13 +112,13 @@ class RoomItem extends BaseComponent {
 
   render() {
     const { className, room, height, type, isSign } = this.props
-    const { status, space, toward, is_collect: isCollect, discount_price } = room
+    const { status, space, toward, is_collect: isCollect, discount_price, price } = room
 
     const { showYear, year, releaseDate } = this.state
 
     // 兼容字段代码
     const roomNo = room.room_no || room.no
-    const priceTitle = room.price_title || room.price
+    // const priceTitle = room.price_title || room.price
 
     const grayBg = {
       backgroundColor: "#F8F8F8",
@@ -168,17 +168,17 @@ class RoomItem extends BaseComponent {
                 <View className='at-row  at-row__align--center'>
                   {/* 平台折扣价 */}
                   {
-                    discount_price ? <Text className=' text-mini badge-hasRoom mr-2' style={hasRoomStyle}>ABC价</Text>
+                    discount_price !== price ? <Text className=' text-mini badge-hasRoom mr-2' style={hasRoomStyle}>ABC价</Text>
                       : <Text></Text>
                   }
                   {/* 价格 */}
 
-                  <Text className='text-large text-bold text-yellow '>{priceTitle}</Text>
+                  <Text className='text-large text-bold text-yellow '>{discount_price}</Text>
                   <Text className='text-large text-yellow '>{LOCALE_PRICE_UNIT}/{LOCALE_MONTH}</Text>
 
                   {/* 折扣价 */}
                   {
-                    discount_price ? <Text className='ml-2 text-small' style={{ textDecoration: 'line-through' }}>{priceTitle}{LOCALE_PRICE_UNIT}/{LOCALE_MONTH}</Text>
+                    discount_price !== price ? <Text className='ml-2 text-small' style={{ textDecoration: 'line-through' }}>{price}{LOCALE_PRICE_UNIT}/{LOCALE_MONTH}</Text>
                       : <Text></Text>
                   }
 

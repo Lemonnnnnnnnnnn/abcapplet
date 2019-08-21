@@ -49,6 +49,7 @@ class ApartmentItemMask extends BaseComponent {
 
     render() {
         const { show, cost, cost_info, onClose, isSign } = this.props
+
         let cost_list = []
         for (var i in cost_info) {
             cost_list.push(
@@ -97,15 +98,15 @@ class ApartmentItemMask extends BaseComponent {
                             <View>{LOCALE_RENT_INTRODUCE_TWO}</View>
                         </View>
                     </View>
-                    <View className='at-row mb-4 mt-4 ml-3 mr-3'>
+                    <View className='mb-4 mt-4 ml-3 mr-3'>
                         {
                             isSign ?
-                                <View>
-                                    <View onClick={this.onBookRoom} className='at-col-4 ml-2'>
+                                <View className='at-row at-row__align--center'>
+                                    <View onClick={this.onBookRoom} className='at-col-5 ml-2'>
                                         <AtButton className='btn-yellow active' circle>{LOCALE_RENT_BUTTON}</AtButton>
                                     </View>
-                                    <View className='at-col-1'></View>
-                                    <View className='at-col-6 text-large'>
+                                    {/* <View className='at-col-1'></View> */}
+                                    <View className='at-col-6 text-normal ml-3'>
                                         <View>{LOCALE_RENT_RISK_MONEY_ONE}</View>
                                         <View>{LOCALE_RENT_RISK_MONEY_TWO}</View>
                                     </View>

@@ -17,10 +17,10 @@ function doHttp(path, params, load=true) {
         });
 
         //拦截后续请求
-        if (wx.getStorageSync('interrupt')) {
-            wx.hideLoading();
-            return false;
-        }
+        // if (wx.getStorageSync('interrupt')) {
+        //     wx.hideLoading();
+        //     return false;
+        // }
 
         let data = params;
         if (wx.getStorageSync("token")) {
@@ -56,7 +56,7 @@ function doHttp(path, params, load=true) {
                             break;
                         case 911:
                             //回话过期
-                            wx.setStorageSync('interrupt', 1);
+                            // wx.setStorageSync('interrupt', 1);
                             wx.setStorageSync('token', '');
                             //重新登录
                             doLogin(1);
@@ -126,7 +126,7 @@ function doLogin(param = 0) {
 
                                     wx.setStorageSync('token', data.token);
                                     wx.setStorageSync('user_info', data.user);
-                                    wx.setStorageSync('interrupt', 0);
+                                    // wx.setStorageSync('interrupt', 0);
 
                                     if (param == 1) {
                                         let tabs = getCurrentPages();

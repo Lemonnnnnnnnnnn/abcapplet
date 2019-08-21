@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View,  Image } from '@tarojs/components';
+import { View, Image } from '@tarojs/components';
 import { AtCurtain } from 'taro-ui'
 import RequirementCardMask from '@components/requirement-card-mask'
 import RequirementCardMaskNext from '@components/requirement-card-mask-next'
@@ -67,7 +67,7 @@ export default class requirementCard extends Component {
             { id: 4, name: '3人以上', active: false }
         ],
     }
- 
+
     /**
      * 关闭需求卡1，打开需求卡2
      * @param {*} citycode
@@ -153,15 +153,19 @@ export default class requirementCard extends Component {
         this.onCheckPayload() && this.props.dispatchRequirementCreate(payload).
             then(res => {
                 if (res.data.code === 1) {
-                    this.setState({ isOpenedFinish: true, showNextCard: false })
+                    this.setState({ showNextCard: false })
+                    Taro.showToast({
+                        title: '填写完成',
+                        icon: 'none',
+                    })
                 }
             })
     }
 
-    onCloseCurtion() {
-        this.props.dispatchRequirementCheck()
-        this.setState({ isOpenedFinish: false })
-    }
+    // onCloseCurtion() {
+    //     this.props.dispatchRequirementCheck()
+    //     this.setState({ isOpenedFinish: false })
+    // }
 
     /**
  * 入住时间单选
@@ -407,17 +411,17 @@ export default class requirementCard extends Component {
                 </View>
                 {/* 提交需求卡 幕帘 */}
 
-                <AtCurtain
-                  isOpened={this.state.isOpenedFinish}
-                  onClose={this.onCloseCurtion.bind(this)}
+                {/* <AtCurtain
+                    isOpened={this.state.isOpenedFinish}
+                    onClose={this.onCloseCurtion.bind(this)}
                 >
-                    <View style={{marginLeft:'20%'}}>
+                    <View style={{ marginLeft: '20%' }}>
                         <Image
-                          style='width:50vw;height:58vw'
-                          src='https://images.gongyuabc.com//image/requirement-finish.png'
+                            style='width:50vw;height:58vw'
+                            src='https://images.gongyuabc.com//image/requirement-finish.png'
                         />
                     </View>
-                </AtCurtain>
+                </AtCurtain> */}
 
             </View>
         );

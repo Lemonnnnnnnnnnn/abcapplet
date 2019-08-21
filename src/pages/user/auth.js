@@ -78,10 +78,10 @@ class UserAuth extends Component {
    * 登录成功后进行页面跳转
    */
   onLoginSuccess() {
-    // Taro.getCurrentPages().length > 1
-    //   ? Taro.navigateBack({ delta: 2 })
-    //   : Taro.reLaunch({ url: PAGE_HOME })
-    Taro.reLaunch({ url: PAGE_HOME })
+    Taro.getCurrentPages().length > 1
+      ? Taro.navigateBack()
+      : Taro.reLaunch({ url: PAGE_HOME })
+    // Taro.reLaunch({ url: PAGE_HOME })
   }
 
   render() {

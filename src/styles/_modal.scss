@@ -47,9 +47,11 @@
       height: 33px * $hd;
       line-height: 33px * $hd;
       // width : 60% ;
-
       border: none;
       // border-bottom: 1px solid $color-grey-4;
+    }
+    .at-button{
+      border : 1px solid transparent
     }
   }
 }
