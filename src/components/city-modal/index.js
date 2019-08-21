@@ -1,9 +1,16 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 // import cityModelBackground from '@assets/images/home/city-modal.png'
-import { AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
+import { AtModal, AtModalHeader, AtModalContent, AtButton } from 'taro-ui'
 import { COLOR_YELLOW } from '@constants/styles'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
+
+@connect(state => state, {
+  ...userActions,
+})
 class CityModal extends Component {
   static options = {
     addGlobalClass: true
@@ -12,6 +19,26 @@ class CityModal extends Component {
   static defaultProps = {
     citycode: 0,
     city: [],
+  }
+
+  async componentDidShow() {
+    const {code} = await Taro.login()
+    Taro.setStorageSync('code', code)
+  }
+
+  async getPhoneNumber(cityCode, e) {
+    let code = Taro.getStorageSync('code')
+    // code ? code = code : code =  await Taro.login()
+    console.log(e, cityCode)
+
+    const { encryptedData: encrypt_data, iv } = e.currentTarget
+    const urlCode = encodeURIComponent(code)
+    const urlEncrypt_data = encodeURIComponent(encrypt_data)
+    const urlIv = encodeURIComponent(iv)
+
+    await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv })
+
+    this.props.onSelectCity(cityCode)
   }
 
   render() {
@@ -62,10 +89,15 @@ class CityModal extends Component {
         <AtModalContent className='city-modal-action mb-2'>
           {city.map((item, key) =>
             <View key={item.id}>
-              <View
-                className='city-modal-item text-center p-2 text-secondary'
-                onClick={onSelectCity.bind(this, item.id)}
-              >{item.title}</View>
+              <AtButton
+                openType='getPhoneNumber'
+                onGetPhoneNumber={this.getPhoneNumber.bind(this, item.id)}
+              // onClick={onSelectCity.bind(this, item.id)}
+              >
+                <View className='city-modal-item text-center p-2 text-secondary'>
+                  {item.title}
+                </View>
+              </AtButton>
               <View className='at-row at-row__align--center at-row__justify--center'>
                 <View style={key + 1 === city.length ? '' : greyLine}></View>
               </View>
