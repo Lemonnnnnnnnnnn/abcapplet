@@ -62,7 +62,7 @@ class OrderCreate extends Component {
       apartment_title: "",
       no: '',
       price: '',
-      risk_price: '',
+      risk_money: '',
       discount_price: '',
     },
     rooms: [{}],
@@ -145,11 +145,16 @@ class OrderCreate extends Component {
     })
   }
   // 选择房间
-  onSelectRoom(id) {
-    const { payload, rooms } = this.state
-    const room = rooms.find(i => i.id == id)
+  async onSelectRoom(id) {
+    const { appointment_id = 0, type_id = 0 } = this.$router.params
+    const { data: { data } } = await this.props.dispatchOrderPreview({ room_id: id, appointment_id, type_id })
     this.setState({
-      room,
+      room: { ...data.room },
+      rooms: [...data.rooms],
+    })
+
+    const { payload } = this.state
+    this.setState({
       showRoomList: false,
       payload: { ...payload, room_id: id }
     })
@@ -213,7 +218,9 @@ class OrderCreate extends Component {
   render() {
     const { payload, room, rooms, showRoomList, disabled, timeList, signTime } = this.state
     const { name, mobile, id_code: idCode } = payload
-    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money: riskMoney, id } = room
+    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id } = room
+
+    console.log(room)
 
     return (
       <View>
@@ -383,7 +390,7 @@ class OrderCreate extends Component {
                   </View>
                 </View>
 
-                <View className='ml-2 text-normal'>{riskMoney}{LOCALE_PRICE_UNIT}</View>
+                <View className='ml-2 text-normal'>{risk_money}{LOCALE_PRICE_UNIT}</View>
               </View>
             </View>
           </Board>
