@@ -60,10 +60,10 @@ class ApartmentItemMask extends BaseComponent {
             );
         }
 
-        const divdingLine = {
-            borderBottom: "1Px solid #F8F8F8",
-            lineHeight: "35px"
-        }
+        // const divdingLine = {
+        //     borderBottom: "1Px solid #F8F8F8",
+        //     lineHeight: "35px"
+        // }
 
         const introduceStyle = {
             lineHeight: "25px"
@@ -78,7 +78,7 @@ class ApartmentItemMask extends BaseComponent {
                         <View className='mt-3 mb-3 text-bold text-huge'>{LOCALE_RENT_TYPE}</View>
                         <View className='text-large text-secondary'>{cost}</View>
                     </View>
-                    <View className='ml-3 mr-3'>
+                    {/* <View className='ml-3 mr-3'>
                         <View className='mt-3 mb-3 text-bold text-huge'>{LOCALE_COST_DETAIL}</View>
                         <View className='text-large text-secondary'>
                             {
@@ -90,7 +90,7 @@ class ApartmentItemMask extends BaseComponent {
                                 ))
                             }
                         </View>
-                    </View>
+                    </View> */}
                     <View className='ml-3 mr-3'>
                         <View className='mt-3 mb-3 text-bold text-huge'>{LOCALE_RENT_INTRODUCE}</View>
                         <View style={introduceStyle} className='text-large text-secondary'>
