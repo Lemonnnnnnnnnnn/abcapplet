@@ -307,8 +307,6 @@ class AppointmentPost extends Component {
 
         // i.type === true && i.active === true && newHouseTypeArr.push(i.id)
         this.setState({ houseTypeArr: newHouseTypeArr })
-
-        console.log(newHouseTypeArr)
       }
     })
 
@@ -710,9 +708,14 @@ class AppointmentPost extends Component {
                       <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
                     </View>
                   </View>
+
+
                   {/* 选择户型 */}
                   <View className='mt-2 '>
-                    {
+
+                    {/* 多选提示 */}
+                    <View className='text-secondary text-small ml-3 mt-3 mb-1'>*可多选</View>
+                    { 
                       houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                         <AtTag
                           type={i.type ? "primary" : ""}
