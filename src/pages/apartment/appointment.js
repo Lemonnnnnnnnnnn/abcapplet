@@ -714,8 +714,8 @@ class AppointmentPost extends Component {
                   <View className='mt-2 '>
 
                     {/* 多选提示 */}
-                    <View className='text-secondary text-small ml-3 mt-3 mb-1'>*可多选</View>
-                    { 
+                   { houseTypeList.length !==0 && <View className='text-secondary text-small ml-3 mt-3 mb-1'>*可多选</View>}
+                    {
                       houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                         <AtTag
                           type={i.type ? "primary" : ""}

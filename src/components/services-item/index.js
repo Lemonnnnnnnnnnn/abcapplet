@@ -317,29 +317,32 @@ class ServiceItem extends BaseComponent {
 
           </View>
           {/* 头部 公寓类型以及查看详情 */}
-          <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >
-            <View className='mt-1' style='color:#FFFFFF ;font-size:17px'>
-              <View >{date}</View>
-              <View className='mt-1'>
-                <View className='at-row'>
-                  {apartment_title}
-                  <View className=' mt-2 ml-1 text-small' style='color:#FFFFFF' >{house_type_title}</View>
+          <View>
+            <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >
+              <View className='mt-1' style='color:#FFFFFF ;font-size:17px'>
+                <View >{date}</View>
+                <View className='mt-1'>
+                  <View className='at-row'>
+                    {apartment_title}
+                  </View>
                 </View>
+                {/* 头部，房子户型 */}
+
               </View>
-              {/* 头部，房子户型 */}
-              {/* <View className='at-row p-2 service-house-type' > */}
-              {/* </View> */}
-            </View>
-            <View className=' at-row-5 mt-1 at-row at-row__align--center at-row__justify--end mr-5' >
-              <View className='text-small' style='color:#FFFFFF' onClick={this.onNavigation}>{LOCALE_APPOINTMENT_DETAIL}
-                <AtIcon
-                  value='chevron-right'
-                  size='15'
-                  color='#FFFFFF'
-                />
+              <View className=' at-row-5 mt-1 at-row at-row__align--center at-row__justify--end mr-5' >
+                <View className='text-small' style='color:#FFFFFF' onClick={this.onNavigation}>{LOCALE_APPOINTMENT_DETAIL}
+                  <AtIcon
+                    value='chevron-right'
+                    size='15'
+                    color='#FFFFFF'
+                  />
+                </View>
               </View>
             </View>
           </View>
+          <View className='at-col-8 at-row at-col--wrap ml-3' style='position: absolute;top:16%'>
+              <View className=' mt-2 ml-1 text-small text-white '  >{house_type_title}</View>
+            </View>
 
           {/* 中间，计时框 */}
           <View className='' style={serviceMiddleStyle}>

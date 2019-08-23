@@ -20,6 +20,7 @@ class ServicesHome extends Component {
   config = {
     navigationBarTitleText: '找房·行程',
     backgroundColor: '#FFFFFF',
+    enablePullDownRefresh: true,
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
@@ -30,6 +31,10 @@ class ServicesHome extends Component {
   refAppointmentList = (node) => this.appointmentList = node
 
   componentDidShow() {
+    this.onShow()
+  }
+
+  onShow() {
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
@@ -47,8 +52,22 @@ class ServicesHome extends Component {
       )
     this.setState({ payload: { ...payload, current_page: 2 } })
   }
-
+  async onPullDownRefresh() {
+    await this.onHide()
+    const { payload } = this.state
+    this.props.dispatchAppointmentList({ payload: { ...payload, current_page: 1 } }).
+      then((res) => {
+        this.setState({
+          time: res.data.data.date,
+          NowCurrentPage: 2,
+          payload: { ...payload, current_page: 2 }
+        })
+      })
+  }
   componentDidHide() {
+    this.onHide()
+  }
+  onHide() {
     const { payload } = this.state
     this.props.dispatchAppointmentList({ current_page: 100000, page_size: 10 }).then(() =>
       this.setState({
@@ -56,8 +75,8 @@ class ServicesHome extends Component {
         payload: { ...payload, current_page: 1 }
       })
     )
-
   }
+
 
 
   /**
@@ -124,12 +143,9 @@ class ServicesHome extends Component {
             onClickRight={this.onToRight}
           />
           <View className='at-row at-row__align--center  p-2' >
-            <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}>
+            <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}></View>
+            <View className='pl-2 text-bold text-large'>看房行程</View>
 
-            </View>
-            <View className='pl-2 text-bold text-large'>
-              看房行程
-          </View>
           </View>
           {
             appointments.list.length ?
