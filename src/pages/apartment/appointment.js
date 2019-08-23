@@ -84,6 +84,8 @@ class AppointmentPost extends Component {
     currentTime: [],
     secTimeClick: false,
 
+    houseTypeArr: [],
+
     isNight: false,//夜单时间，false:不是，true:是
   }
 
@@ -179,9 +181,12 @@ class AppointmentPost extends Component {
         i.onlyId = key
         i.type = false
         i.active = false
+
         if (i.id === parseInt(id)) {
           i.type = true
           i.active = true
+
+          this.setState({ houseTypeArr: [i.id] })
         }
         typeList.push(i)
       })
@@ -280,28 +285,38 @@ class AppointmentPost extends Component {
 
   // 户型选择
   onChoiseHouseType(e, index) {
-    const { houseTypeList, Payload } = this.state
+    const { houseTypeList, Payload, houseTypeArr } = this.state
     let newTypes = JSON.parse(JSON.stringify(houseTypeList))
+    let newHouseTypeArr = JSON.parse(JSON.stringify(houseTypeArr))
 
     newTypes.map(i => {
-
       if (i.onlyId === index) {
         i.type = !i.type
         i.active = !i.active
-        // const { id: type_floor } = types[i.id]
+
+
         if (i.type === true && i.active === true) {
-          this.setState({ Payload: { ...Payload, house_type: i.id } })
+          newHouseTypeArr.push(i.id)
         } else {
-          this.setState({ Payload: { ...Payload, house_type: '' } })
+          newHouseTypeArr.forEach((k, key) => {
+            if (k === i.id) {
+              newHouseTypeArr.splice(key, 1)
+            }
+          })
         }
-      } else {
-        i.type = false
-        i.active = false
+
+        // i.type === true && i.active === true && newHouseTypeArr.push(i.id)
+        this.setState({ houseTypeArr: newHouseTypeArr })
+
+        console.log(newHouseTypeArr)
       }
     })
+
     this.setState({
+      Payload: { ...Payload, house_type: newHouseTypeArr.join(',') },
       houseTypeList: [...newTypes]
     })
+
   }
 
   onClickPicker() {
