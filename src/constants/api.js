@@ -140,7 +140,7 @@ export const PAYLOAD_ORDER_PREVIEW = { room_id: 0, appointment_id: 0 }
 
 // 风险金
 export const API_RISK_LIST = `${HOST}/risk/listPost`
-export const PAYLOAD_RISK_LIST = { current_page: 0, page_size: PAGE_SIZE }
+export const PAYLOAD_RISK_LIST = { current_page: 1, page_size: PAGE_SIZE }
 
 // 风险金创建
 export const API_RISK_CREATE = `${HOST}/risk/createPost`

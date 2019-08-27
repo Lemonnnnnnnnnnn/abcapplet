@@ -18,6 +18,7 @@ class ImageUpload extends BaseComponent {
   state = {
     index: 0,
     files: [],
+    picArr: [],
   }
 
   componentDidMount() {
@@ -26,41 +27,80 @@ class ImageUpload extends BaseComponent {
       id: key,
       url: '',
     }))
-
     this.setState({ files })
   }
 
   async onClick() {
-    let { files, index } = this.state
+    let { files, index, picArr } = this.state
     const { placeholer } = this.props
-    const { tempFilePaths } = await Taro.chooseImage({
+    let picArrNew = []
+
+    let picArrClone = JSON.parse(JSON.stringify(picArr))
+    let totalPic = JSON.parse(JSON.stringify(picArr))
+    let indexClone = JSON.parse(JSON.stringify(index))
+    let filesClone = JSON.parse(JSON.stringify(files))
+    let waitAddNum = 0
+
+    picArrClone = []
+
+
+    await Taro.chooseImage({
       count: placeholer - 1,
       sizeType: ['compressed'],
+      success: (res) => {
+        if (indexClone <= placeholer - 1) {
+          picArrNew = picArrClone.concat(res.tempFilePaths)
+          this.setState({ picArr: picArrNew })
+          Taro.showLoading({ title: '正在上传照片' })
+        }
+      }
     })
 
-    Taro.showLoading({ title: '正在上传照片' })
-
-    for (let i = 0; i < tempFilePaths.length; i++) {
-      if (index >= placeholer - 1) return;
-
-      let { data } = await Taro.uploadFile({
-        name: 'risk',
-        url: API_UPLOAD_IMAGE,
-        filePath: tempFilePaths[i],
-      })
-
-      const file = (JSON.parse(data)).data[0]
-
-      files[index++] = {
-        ...files[index],
-        url: file.path,
+    for (let i = 0; i < picArrNew.length; i++) {
+      if (index >= placeholer - 1) {
+        Taro.showToast({
+          title: '上传图片数量达到限制',
+          icon: 'none'
+        })
+        return;
       }
 
-      this.setState({ files, index: index - 1 })
-    }
+      await Taro.uploadFile({
+        name: 'risk',
+        url: API_UPLOAD_IMAGE,
+        filePath: picArrNew[i],
 
-    Taro.hideLoading()
-    this.props.onChange(files.filter(i => i.url !== '').map(i => i.url))
+        success: (res) => {
+          if (indexClone < placeholer - 1) {
+            Taro.showLoading({ title: '正在上传照片' })
+            const file = (JSON.parse(res.data)).data[0]
+            filesClone[indexClone] = {
+              files: filesClone[indexClone],
+              url: file.path,
+            }
+            indexClone += 1
+            waitAddNum += 1
+            this.setState({ files: filesClone, index: indexClone })
+          }
+        },
+
+        complete: () => {
+          if (waitAddNum === picArrNew.length) {
+            Taro.hideLoading()
+            return
+          } else if (indexClone >= 5) {
+            Taro.hideLoading()
+            Taro.showToast({
+              title: '上传图片数量达到限制',
+              icon: 'none'
+            })
+            return
+          }
+        }
+      })
+      const picJsonArr = JSON.stringify(filesClone.filter(i => i.url !== '').map(i => i.url))
+      this.props.onChange(picJsonArr)
+    }
   }
 
   render() {
