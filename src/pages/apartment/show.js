@@ -231,7 +231,7 @@ class ApartmentShow extends Component {
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
-      borderRadius: "12px",
+      borderRadius: "16px",
     }
 
     const textDeal = {
@@ -318,10 +318,15 @@ class ApartmentShow extends Component {
                 <Tag className='my-3' active circle>
                   <View className='at-row  at-row__align--center text-secondary'>
 
-                    <Image className='ml-4' src='https://images.gongyuabc.com//image/free.png' style='width:18px;height:18px'></Image>
-                    <View className='ml-2'>100%免中介费</View>
-                    <Image className='ml-4' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
-                    <View className='ml-2'>严选厦门3万+房源</View>
+                    <View className='at-row  at-row__align--center at-row__justify--center '>
+                      <Image className='mr-1' src='https://images.gongyuabc.com//image/free_new.png' style='width:18px;height:18px'></Image>
+                      <View className='ml-1 '>100%免中介费</View>
+                    </View>
+
+                    <View className='at-row  at-row__align--center at-row__justify--center '>
+                      <Image className='mr-1' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
+                      <View className='ml-1'>严选厦门3万+房源</View>
+                    </View>
 
                   </View>
                 </Tag>
@@ -329,12 +334,12 @@ class ApartmentShow extends Component {
 
 
               {/* 地图 */}
-              <View className='at-row  mb-2'>
-                <View className='at-col at-col-1 '>
-                  <Image src='https://images.gongyuabc.com//image/path.png' style='width:12px;height:16px'></Image>
+              <View className='at-row  at-row__align--center  mb-2'>
+                <View className=''>
+                  <Image src='https://images.gongyuabc.com//image/path_new.png' style='width:12px;height:16px'></Image>
                 </View>
                 {
-                  position ? <View className='text-large text-secondary  ml-1'>{position}</View> : <View className='text-secondary'>暂无相关位置信息</View>
+                  position ? <View className='text-normal text-secondary  ml-2'>{position}</View> : <View className='text-secondary text-normal ml-2'>暂无相关位置信息</View>
                 }
 
               </View>
@@ -347,7 +352,7 @@ class ApartmentShow extends Component {
             <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className={`${index + 1 === types.length ? 'pr-2' : ''} at-col at-col-5 mt-2 `}>
+                  <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-2 '>
                     <View style={borderStyle}>
                       <ApartmentTypeItem item={i} />
                     </View>

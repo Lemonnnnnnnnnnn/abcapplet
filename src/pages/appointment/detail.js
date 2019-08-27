@@ -49,7 +49,7 @@ class AppointmentDetail extends BaseComponent {
 
     isCanReward: 0,//是否能提交签约审核单
 
-    text:'添加合同照片'
+    text: '添加合同照片'
   }
 
   componentWillMount() {
@@ -139,25 +139,38 @@ class AppointmentDetail extends BaseComponent {
   //检查数据
   onCheck() {
     const { payload } = this.state
-    const { appointment_id, room_no, mobile, sign_time, tenancy, file_img } = payload
-    if (appointment_id === ''
-      || room_no === ''
-      || mobile === ''
-      || sign_time === ''
-      || tenancy === ''
-      || file_img === null
-      || file_img === undefined) {
+    const {  room_no, mobile, sign_time, tenancy, file_img } = payload
+    let judgeArr = [
+      { title: '房间号', value: room_no },
+      { title: '签约手机', value: mobile },
+      { title: '签约时间', value: sign_time },
+      { title: '租期', value: tenancy },
+      { title: '合同图片', value: file_img },
+    ]
+
+    try {
+      judgeArr.forEach(i => {
+        if (!i.value) {
+          Taro.showToast({
+            icon: 'none',
+            title: '亲，您还没有填写' + i.title + '哦',
+          })
+          throw '亲，您还没有填写' + i.title + '哦'
+        }
+      })
+    } catch (e) {
       return false
     }
     return true
+
   }
   //提交
   onComfirm() {
-    const { payload, files, isCanReward,text } = this.state
+    const { payload, isCanReward } = this.state
 
     if (isCanReward === 1) {
       this.onCheck()
-        && this.props.dispatchAppointRewordOrder({ ...payload, file_img: files }).then((res) => {
+        && this.props.dispatchAppointRewordOrder(payload).then((res) => {
           Taro.redirectTo({
             url: `${PAGE_APPOINTMENT_AUDIT}?id=${res.data.data.id}`
           })
@@ -181,7 +194,7 @@ class AppointmentDetail extends BaseComponent {
   }
   render() {
 
-    const { timeList, mobile, apartmentTitle, signTime ,text} = this.state
+    const { timeList, mobile, apartmentTitle, signTime, text } = this.state
 
 
 
@@ -263,10 +276,7 @@ class AppointmentDetail extends BaseComponent {
             <ImageUpload
               onChange={this.onChangeImage}
               text='添加合同照片'
-               />
-
-
-
+            />
           </View>
         </Board>
 

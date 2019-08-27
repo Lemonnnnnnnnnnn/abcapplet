@@ -205,7 +205,7 @@ class ApartmentItem extends BaseComponent {
               <View className='apartment-heart-wrap' >
                 <Image className='apartment-heart' src={HEART_YELLOW} ></Image>
               </View>
-              <View className='apartment-heart-num' >{num}</View>
+              <View className='apartment-heart-num text-small' >{num}</View>
 
             </View>
             :
@@ -213,7 +213,7 @@ class ApartmentItem extends BaseComponent {
               <View className='apartment-heart-wrap' >
                 <Image className='apartment-heart' src={HEART_BLACK} ></Image>
               </View>
-              <View className='apartment-heart-num' >{num}</View>
+              <View className='apartment-heart-num text-small' >{num}</View>
 
             </View>)
           }
