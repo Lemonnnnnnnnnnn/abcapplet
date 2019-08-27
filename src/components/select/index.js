@@ -167,7 +167,6 @@ class Select extends BaseComponent {
     } else {
       return Taro.pxTransform(-266)
     }
-
   }
 
 
@@ -204,14 +203,6 @@ class Select extends BaseComponent {
       top: this.onJudge()
     }
 
-    // const hideStyle = {
-    //   top: Taro.pxTransform(-266)
-    // }
-    // const showStyle = {
-    //   top: Taro.pxTransform(92)
-    // }
-
-
     // Header 相关
     let header = []
     let cbdMessage = []
@@ -222,7 +213,6 @@ class Select extends BaseComponent {
 
 
     // 位置
-
     if (showCbd && cbdDist.length) {
 
       if (distance) {

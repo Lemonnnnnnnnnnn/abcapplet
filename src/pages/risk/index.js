@@ -24,6 +24,10 @@ class RiskIndex extends Component {
     navigationBarBackgroundColor: '#FFC919',
   }
 
+  componentDidShow() {
+    this.props.dispatchRiskList(PAYLOAD_RISK_LIST)
+  }
+
   render() {
     const { risks } = this.props
     return (

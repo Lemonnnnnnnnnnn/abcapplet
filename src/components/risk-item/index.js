@@ -88,7 +88,7 @@ class RiskItem extends BaseComponent {
           <AtButton
             circle
             size='small'
-            disabled={RISK_STATUS_DIST[status].disabled}
+            disabled={RISK_STATUS_DIST[status].disable}
             onClick={this.onNavigation}
             className={`${RISK_STATUS_DIST[status].color} active px-4`}
           >{RISK_STATUS_DIST[status].message}</AtButton>
