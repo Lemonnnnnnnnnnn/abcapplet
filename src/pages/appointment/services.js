@@ -63,6 +63,7 @@ class ServicesHome extends Component {
           payload: { ...payload, current_page: 2 }
         })
       })
+      Taro.stopPullDownRefresh()
   }
   componentDidHide() {
     this.onHide()

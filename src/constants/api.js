@@ -204,3 +204,7 @@ export const API_AUTH_MOBILEPOST = `${HOST}/auth/mobilePost`
 
 //判断是否为夜单时间
 export const API_APPOINTMENT_NIGHTPOST = `${HOST}/appointment/nightPost`
+
+//新增行程签约核对单
+export const API_APPOINTMENT_REWARDORDER = `${HOST}/appointment/rewardOrderPost`
+export const PAYLOAD_APPOINTMENT_REWARDORDER = {appointment_id:0,room_no:'',mobile:'',sign_time:'',tenancy:'',file_img:''}

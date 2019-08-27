@@ -12,7 +12,7 @@ import { API_UPLOAD_IMAGE } from '@constants/api'
 
 class ImageUpload extends BaseComponent {
   static defaultProps = {
-    placeholer: 9,
+    placeholer: 6,
   }
 
   state = {

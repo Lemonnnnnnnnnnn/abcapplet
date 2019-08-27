@@ -58,6 +58,7 @@ import BaseComponent from '../../components/base';
 class CommonHome extends BaseComponent {
   config = {
     navigationBarTitleText: '公寓ABC',
+    enablePullDownRefresh: true,
   }
 
   state = {
@@ -90,7 +91,11 @@ class CommonHome extends BaseComponent {
     cityCode: 0,
 
   }
-
+ async onPullDownRefresh(){
+    await this.componentWillMount()
+    await this.componentDidShow()
+    Taro.stopPullDownRefresh()
+  }
   onLogin() {
     Taro.reLaunch({ url: PAGE_USER_AUTH })
   }
@@ -104,7 +109,12 @@ class CommonHome extends BaseComponent {
     } = this.state
 
     // 获取筛选器和搜索框距离顶部的距离
-
+    //判断是否弹出需求卡
+    this.props.dispatchGetUserMsg().then((res) => {
+      if (res && res.data.data.user.is_guide === 0) {
+        this.setState({ showCard: true })
+      }
+    })
     !searchScrollTop
       && Taro.createSelectorQuery()
         .in(this.$scope)
@@ -143,12 +153,7 @@ class CommonHome extends BaseComponent {
     })
 
 
-    //判断是否弹出需求卡
-    this.props.dispatchGetUserMsg().then((res) => {
-      if (res && res.data.data.user.is_guide === 0) {
-        this.setState({ showCard: true })
-      }
-    })
+
   }
 
 
@@ -328,7 +333,7 @@ class CommonHome extends BaseComponent {
     this.props.dispatchRequirementCheck()
     this.setState({ showCard: false })
   }
- 
+
   // 分享
 
   onShareAppMessage() {

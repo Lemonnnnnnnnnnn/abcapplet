@@ -220,8 +220,6 @@ class OrderCreate extends Component {
     const { name, mobile, id_code: idCode } = payload
     const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id } = room
 
-    console.log(room)
-
     return (
       <View>
         {/* 修改房间 */}

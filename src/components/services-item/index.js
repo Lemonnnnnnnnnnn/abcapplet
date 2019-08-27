@@ -12,7 +12,7 @@ import ServiceIntention from '@components/service-intention-mask'
 // NPM 包
 import classNames from 'classnames'
 
-import { PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_MESSAGE, PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_MESSAGE, PAGE_ORDER_CREATE ,PAGE_APPOINTMENT_DETAIL} from '@constants/page'
 import { APPOINTMENT_FOUFUNCTION_DIST } from '@constants/appointment'
 
 import {
@@ -29,6 +29,7 @@ import {
   LOCALE_APPOINTMENT_INTENTION,
   LOCALE_APPOINTMENT_HAVE_EVALUTION,
   LOCALE_APPOINTMENT_HAVE_INTENTION,
+
 } from '@constants/locale'
 
 import {
@@ -79,9 +80,9 @@ class ServiceItem extends BaseComponent {
   //跳转详情
   onNavigation() {
     const { service } = this.props
-    const { house_type_id } = service
+    const { id } = service
     Taro.navigateTo({
-      url: `${PAGE_HOUSE_TYPE_SHOW}?id=${house_type_id}`
+      url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}`
     })
   }
 
