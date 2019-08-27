@@ -36,9 +36,13 @@ class ImageUpload extends BaseComponent {
     let picArrNew = []
 
     let picArrClone = JSON.parse(JSON.stringify(picArr))
-    picArrClone = []
+    let totalPic = JSON.parse(JSON.stringify(picArr))
     let indexClone = JSON.parse(JSON.stringify(index))
     let filesClone = JSON.parse(JSON.stringify(files))
+    let waitAddNum = 0
+
+    picArrClone = []
+
 
     await Taro.chooseImage({
       count: placeholer - 1,
@@ -67,28 +71,29 @@ class ImageUpload extends BaseComponent {
         filePath: picArrNew[i],
 
         success: (res) => {
-          if (indexClone <= placeholer - 1) {
+          if (indexClone < placeholer - 1) {
             Taro.showLoading({ title: '正在上传照片' })
+            const file = (JSON.parse(res.data)).data[0]
+            filesClone[indexClone] = {
+              files: filesClone[indexClone],
+              url: file.path,
+            }
+            indexClone += 1
+            waitAddNum += 1
+            this.setState({ files: filesClone, index: indexClone })
           }
-          const file = (JSON.parse(res.data)).data[0]
-          filesClone[indexClone] = {
-            files: filesClone[indexClone],
-            url: file.path,
-          }
-          indexClone += 1
-          this.setState({ files: filesClone, index: indexClone })
         },
 
         complete: () => {
-          if (indexClone > 5) {
+          if (waitAddNum === picArrNew.length) {
+            Taro.hideLoading()
+            return
+          } else if (indexClone >= 5) {
             Taro.hideLoading()
             Taro.showToast({
               title: '上传图片数量达到限制',
               icon: 'none'
             })
-            return
-          } else if (indexClone === picArrNew.length) {
-            Taro.hideLoading()
             return
           }
         }
