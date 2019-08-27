@@ -157,7 +157,10 @@ class RiskCreate extends Component {
             {/* 图片 */}
             <View className='mt-3'>
               <View className='text-normal text-bold mb-2'>{LOCALE_OFF_APARTMENT_IMAGE}</View>
-              <ImageUpload onChange={this.onChangeImage} />
+              <ImageUpload
+                onChange={this.onChangeImage}
+                text='上传证明'
+              />
             </View>
 
             {/* 文本说明 */}

@@ -71,18 +71,19 @@ class ServiceItem extends BaseComponent {
   //跳转签约下定页面
   onNavigationAgency() {
     const { service } = this.props
-    const { house_type_id } = service
+    const { id } = service
     Taro.navigateTo({
-      url: `${PAGE_ORDER_CREATE}?type_id=${house_type_id}`
+      url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}`
     })
   }
 
   //跳转详情
   onNavigation() {
     const { service } = this.props
-    const { id } = service
+
+    const { house_type_id } = service
     Taro.navigateTo({
-      url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}`
+      url: `${PAGE_HOUSE_TYPE_SHOW}?id=${house_type_id}`
     })
   }
 

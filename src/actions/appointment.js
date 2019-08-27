@@ -9,6 +9,7 @@ import {
   API_INTENTION_CREATE,
   API_APPOINTMENT_NIGHTPOST,
   API_APPOINTMENT_REWARDORDER,
+  API_APPOINTMENT_DETAILREWARD,
 } from '@constants/api'
 
 import{
@@ -18,7 +19,9 @@ import{
   SET_APPOINTMENT_INTENTION_SHOW,
   SET_APPOINTMENT_INTENTION,
   SET_APPOINTMENT_NIGHTPOST,
-  TYPE_APPOINTMENT_REWARDORDER
+  TYPE_APPOINTMENT_REWARDORDER,
+  TYPE_APPOINTMENT_DETAILREWAR,
+
 }from '@constants/appointment'
 
 /**
@@ -102,4 +105,16 @@ export const dispatchAppointRewordOrder = (payload) => createAction({
   method: 'POST',
   type: TYPE_APPOINTMENT_REWARDORDER,
   url: API_APPOINTMENT_REWARDORDER,
+})
+
+
+/**
+ * 新增行程签约审核单
+ * @param {*} payload
+ */
+export const dispatchAppointRewordOrderDetail = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APPOINTMENT_DETAILREWAR,
+  url: API_APPOINTMENT_DETAILREWARD,
 })

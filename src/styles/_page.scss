@@ -124,3 +124,11 @@ page {
     top: -120px;
   }
 }
+
+//单位元素垂直居中
+.page-middile{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -31,3 +31,4 @@ export const PAGE_RISK_CREATE = '/pages/risk/create'
 //行程留言
 export const PAGE_APPOINTMENT_MESSAGE = '/pages/appointment/message'
 export const PAGE_APPOINTMENT_DETAIL = '/pages/appointment/detail'
+export const PAGE_APPOINTMENT_AUDIT='/pages/appointment/audit'

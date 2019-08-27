@@ -3,7 +3,7 @@ import { View, Input, Image, Picker } from '@tarojs/components'
 import Board from '@components/board'
 import { AtTag, AtIcon, AtButton } from 'taro-ui'
 import { PAYLOAD_APPOINTMENT_REWARDORDER, API_UPLOAD_IMAGE } from '@constants/api'
-import { PAGE_ORDER_CREATE} from '@constants/page'
+import { PAGE_ORDER_CREATE, PAGE_APPOINTMENT_AUDIT } from '@constants/page'
 
 // 自定义组件
 import ABCIcon from '@components/abc-icon'
@@ -14,13 +14,14 @@ import { COLOR_GREY_2 } from '@constants/styles'
 
 import Decorate from '@components/decorate'
 
-
+import ImageUpload from '@components/image-upload';
 // Redux 相关
 import { connect } from '@tarojs/redux'
 
 import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
 import BaseComponent from '../../components/base';
+
 
 @connect(state => state, {
   ...apartmentActions,
@@ -42,11 +43,13 @@ class AppointmentDetail extends BaseComponent {
     creatTime: '',
     apartmentTitle: '',
     signTime: '',
-    houseTypeId:'',
+    houseTypeId: '',
     payload: PAYLOAD_APPOINTMENT_REWARDORDER,
     //上传图片相关
-    index: 0,
-    files: [],
+
+    isCanReward: 0,//是否能提交签约审核单
+
+    text:'添加合同照片'
   }
 
   componentWillMount() {
@@ -63,21 +66,15 @@ class AppointmentDetail extends BaseComponent {
     this.props.dispatchAppointmentDetail({ id }).then((res) => {
 
       this.setState({
+        Id: id,
         mobile: res.data.data.mobile,
-        // creatTime: time,
+        isCanReward: res.data.data.is_can_reward,
         apartmentTitle: res.data.data.apartment_title,
-        houseTypeId:res.data.data.house_type_id,
+        houseTypeId: res.data.data.house_type_id,
         payload: { ...payload, appointment_id: res.data.data.id, mobile: res.data.data.mobile, sign_time: signTime }
       })
     })
-    //上传图片相关
-    const { placeholer } = this.props
-    const files = Array.from({ length: placeholer - 1 }).map((i, key) => ({
-      id: key,
-      url: '',
-    }))
 
-    this.setState({ files })
 
   }
 
@@ -109,41 +106,9 @@ class AppointmentDetail extends BaseComponent {
   }
 
   //上传图片
-  async onClick() {
-    let { files, index,paylod } = this.state
-    const { placeholer } = this.props
-    const { tempFilePaths } = await Taro.chooseImage({
-      count: placeholer - 1,
-      sizeType: ['compressed'],
-    })
-
-    Taro.showLoading({ title: '正在上传照片' })
-
-    for (let i = 0; i < tempFilePaths.length; i++) {
-      if (index >= placeholer - 1) return;
-
-      let { data } = await Taro.uploadFile({
-        name: 'risk',
-        url: API_UPLOAD_IMAGE,
-        filePath: tempFilePaths[i],
-      })
-
-      const file = (JSON.parse(data)).data[0]
-
-      files[index++] = {
-        ...files[index],
-        url: file.path,
-      }
-
-      this.setState({
-        files,
-        // payload:{...paylod,file_img:files},
-        index: index - 1 })
-    }
-
-    Taro.hideLoading()
-    // this.props.onChange(files.filter(i => i.url !== '').map(i => i.url))
-
+  onChangeImage(files) {
+    const { payload } = this.state
+    this.setState({ payload: { ...payload, file_img: files } })
   }
   //修改时间
   onDateChange({ currentTarget: { value } }) {
@@ -171,19 +136,44 @@ class AppointmentDetail extends BaseComponent {
       payload: { ...payload, mobile: value }
     })
   }
+  //检查数据
+  onCheck() {
+    const { payload } = this.state
+    const { appointment_id, room_no, mobile, sign_time, tenancy, file_img } = payload
+    if (appointment_id === ''
+      || room_no === ''
+      || mobile === ''
+      || sign_time === ''
+      || tenancy === ''
+      || file_img === null
+      || file_img === undefined) {
+      return false
+    }
+    return true
+  }
   //提交
   onComfirm() {
-    const { payload,files } = this.state
-    console.log(payload)
-    this.props.dispatchAppointRewordOrder({...payload,file_img:files}).then(()=>{
-      Taro.navigateTo(
-        // url:
-      )
+    const { payload, files, isCanReward,text } = this.state
+
+    if (isCanReward === 1) {
+      this.onCheck()
+        && this.props.dispatchAppointRewordOrder({ ...payload, file_img: files }).then((res) => {
+          Taro.redirectTo({
+            url: `${PAGE_APPOINTMENT_AUDIT}?id=${res.data.data.id}`
+          })
+        }
+        )
     }
-    )
+    if (isCanReward === 0) {
+      Taro.showToast({
+        title: '您还不能提交预约审核单',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   }
   //跳转签约下定页面
-  onNavigateTo(){
+  onNavigateTo() {
     const { houseTypeId } = this.state
     Taro.navigateTo({
       url: `${PAGE_ORDER_CREATE}?type_id=${houseTypeId}`
@@ -191,7 +181,7 @@ class AppointmentDetail extends BaseComponent {
   }
   render() {
 
-    const { timeList, mobile, apartmentTitle, signTime, files } = this.state
+    const { timeList, mobile, apartmentTitle, signTime ,text} = this.state
 
 
 
@@ -215,7 +205,7 @@ class AppointmentDetail extends BaseComponent {
               value={this.state.value}
               onInput={this.onInputRoomNo}></Input>
           </View>
-          <View style='width:95%;height:0px;border:1px solid rgba(232,232,232,1);opacity:1;' className='ml-2'></View>
+          <View className='ml-2 appointment-detail-line '></View>
         </Board>
 
         <Board className='py-2 px-3 mx-2 mt-3 '>
@@ -228,7 +218,7 @@ class AppointmentDetail extends BaseComponent {
             <View className='text-large text-secondary ml-2 mt-2 at-col-3'>签约手机:</View>
             {/* <View className='text-large ml-2 mt-2 at-col-4'>{mobile}</View> */}
             <Input
-              type='text'
+              type='number'
               className='text-large mt-2  at-col-4'
               value={mobile}
               placeholder='输入电话号码'
@@ -244,7 +234,7 @@ class AppointmentDetail extends BaseComponent {
               <Picker className='text-large ml-1 mt-2 ' mode='date' onChange={this.onDateChange}>
                 <View className='at-row'>
                   <View className='text-normal at-col-7'>{signTime}</View>
-                  <View className='text-large text-yellow  at-col-3' >修改</View>
+                  <View className='text-large text-yellow ml-1 at-col-3' >修改</View>
                 </View>
               </Picker>
             </View>
@@ -270,27 +260,10 @@ class AppointmentDetail extends BaseComponent {
           <View className='mt-2'>
 
             {/* 上传图片 */}
-            <View className='at-row at-row--wrap'>
-              <View className='at-col at-col-4' onClick={this.onClick}>
-                <View className='upload-image-item at-row at-row__align--center at-row__justify--center'>
-                  <View>
-                    <View className='at-row at-row__justify--center'>
-                      <ABCIcon icon='add' color={COLOR_GREY_2} size='32' />
-                    </View>
-                    <View className='text-normal text-secondary mt-2'>添加合同照片</View>
-                  </View>
-                </View>
-              </View>
-              {
-                files.map(i =>
-                  <View key={i.id} className='at-col at-col-4'>
-                    <View className='upload-image-item at-row at-row__align--center at-row__justify--center'>
-                      <Image src={i.url} style={{ width: '80%', height: '80%' }} />
-                    </View>
-                  </View>
-                )
-              }
-            </View >
+            <ImageUpload
+              onChange={this.onChangeImage}
+              text='添加合同照片'
+               />
 
 
 
@@ -314,10 +287,10 @@ class AppointmentDetail extends BaseComponent {
           </View>
         </Board>
         <View className='mx-2 mt-3 text-muted' onClick={this.onComfirm}>
-          <AtButton type='primary' size='normal' circle >确定提交审核</AtButton>
+          <AtButton className='mx-2 btn-yellow active' size='normal' circle >确定提交审核</AtButton>
         </View>
 
-        <View className=' ml-2 mt-3' style='position:absolute;top:1%;z-index:999;'>
+        <View className='appointment-detail-head'>
           <Image src='https://images.gongyuabc.com/image/appointmenthead.png' className='appointmentHead'></Image>
         </View>
       </View>

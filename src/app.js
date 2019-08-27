@@ -32,6 +32,7 @@ class App extends Component {
       'pages/appointment/services',
       'pages/appointment/message',
       'pages/appointment/detail',
+      'pages/appointment/audit',
       // 'pages/appointment/mapHouse',
       // 'pages/appointment/commuteHouse',
 

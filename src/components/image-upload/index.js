@@ -65,6 +65,7 @@ class ImageUpload extends BaseComponent {
 
   render() {
     const { files } = this.state
+    const {  text } = this.props
     return (
       <View className='at-row at-row--wrap'>
         <View className='at-col at-col-4' onClick={this.onClick}>
@@ -73,7 +74,7 @@ class ImageUpload extends BaseComponent {
               <View className='at-row at-row__justify--center'>
                 <ABCIcon icon='add' color={COLOR_GREY_2} size='32' />
               </View>
-              <View className='text-normal text-secondary mt-2'>上传证明</View>
+              <View className='text-normal text-secondary mt-2'>{text}</View>
             </View>
           </View>
         </View>

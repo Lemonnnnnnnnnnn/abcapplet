@@ -160,8 +160,8 @@ export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
  * 看房服务相关
  */
 
-export const LOCALE_APPOINTMENT_SIGNED  = '签约预订'
-export const LOCALE_APPOINTMENT_CASHPLEDGE  = '押金风险金保障'
+export const LOCALE_APPOINTMENT_SIGNED  = '签约返现'
+export const LOCALE_APPOINTMENT_CASHPLEDGE  = '立得￥50元现金红包'
 export const LOCALE_APPOINTMENT_DETAIL  = '查看详情'
 export const LOCALE_APPOINTMENT_HASLOOK  = '已带看服务'
 export const LOCALE_APPOINTMENT_SUMMON = '正在为你召唤'

@@ -208,3 +208,5 @@ export const API_APPOINTMENT_NIGHTPOST = `${HOST}/appointment/nightPost`
 //新增行程签约核对单
 export const API_APPOINTMENT_REWARDORDER = `${HOST}/appointment/rewardOrderPost`
 export const PAYLOAD_APPOINTMENT_REWARDORDER = {appointment_id:0,room_no:'',mobile:'',sign_time:'',tenancy:'',file_img:''}
+//获取签约审核单详情
+export const API_APPOINTMENT_DETAILREWARD = `${HOST}/appointment/detailRewardOrderPost`

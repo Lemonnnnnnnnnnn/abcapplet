@@ -10,8 +10,8 @@
       border-radius: 45px * $hd;
       text-align: center;
       align-items: center;
-      border-color: #F2F2F2;
-      background: #F2F2F2;
+      border-color: #f2f2f2;
+      background: #f2f2f2;
     }
   }
   &-head {
@@ -56,17 +56,76 @@
   }
 }
 
-.appointment{
+.appointment {
   &-padding {
-    margin-right: 32px
+    margin-right: 32px;
   }
 }
 
-.appointmentHead{
-  height:63px * $hd;
-  width:356px * $hd;
+.appointmentHead {
+  height: 63px * $hd;
+  width: 356px * $hd;
 }
-.appointmentImage{
-  height:15px * $hd;
-  width:15px * $hd;
+.appointmentImage {
+  height: 15px * $hd;
+  width: 15px * $hd;
+}
+
+.appointment-audit {
+  width: 22px * $hd;
+  height: 22px * $hd;
+  background: rgba(255, 201, 25, 1);
+  border: 4px * $hd solid rgba(255, 220, 107, 1);
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.appointment-noaudit {
+  width: 22px * $hd;
+  height: 22px * $hd;
+  background: rgba(210, 210, 210, 1);
+  border: 4px * $hd solid rgba(242, 242, 242, 1);
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.appointment-line {
+  width: 0px * $hd;
+  height: 45px * $hd;
+  border: 3px * $hd solid rgba(255, 220, 107, 1);
+  opacity: 1;
+  margin-left: 13px * $hd;
+}
+
+.appointment-noline {
+  width: 0px * $hd;
+  height: 45px * $hd;
+  border: 3px * $hd solid rgba(242, 242, 242, 1);
+  opacity: 1;
+  margin-left: 13px * $hd;
+}
+
+.appointment-board {
+  position: absolute;
+  top: 4%;
+  z-index: 999;
+  width: 345px * $hd;
+  height: 410px * $hd;
+  background: rgba(255, 255, 255, 1);
+  opacity: 1;
+  border-radius: 12px * $hd;
+}
+
+.appointment-detail-head {
+  position: absolute;
+  top: 3%;
+  left: 10px * $hd;
+  z-index: 999;
+}
+
+.appointment-detail-line {
+  width: 95%;
+  height: 0px * $hd;
+  border: 0.5px * $hd solid rgba(232, 232, 232, 1);
+  opacity: 1;
 }
