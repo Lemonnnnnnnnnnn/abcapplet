@@ -15,6 +15,7 @@ export const dispatchCbdList = payload => createAction({
   cb: (res) => res.data.data.list.map(i => ({ ...i, url: `${PAGE_CBD_APARTMENT}?id=${i.id}` }))
 })
 
+
 /**
  * 获取商圈详情
  */

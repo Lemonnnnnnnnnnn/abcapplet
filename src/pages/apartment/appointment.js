@@ -99,13 +99,14 @@ class AppointmentPost extends Component {
     const urlEncrypt_data = encodeURIComponent(encrypt_data)
     const urlIv = encodeURIComponent(iv)
 
-    await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(res => {
+    iv && encrypt_data && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(res => {
       const tel = res.data.data.user.mobile
       if (res) {
         this.setState({ tel: tel })
       }
       this.onClosePhoneMask()
     })
+
   }
 
   onClosePhoneMask() {
@@ -714,7 +715,7 @@ class AppointmentPost extends Component {
                   <View className='mt-2 '>
 
                     {/* 多选提示 */}
-                   { houseTypeList.length !==0 && <View className='text-secondary text-small ml-3 mt-3 mb-1 text-red'>*可多选</View>}
+                    {houseTypeList.length !== 0 && <View className='text-secondary text-small ml-3 mt-3 mb-1 text-red'>*可多选</View>}
                     {
                       houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
                         <AtTag

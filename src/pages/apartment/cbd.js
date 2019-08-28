@@ -8,6 +8,7 @@ import * as cbdActions from '@actions/cbd'
 import * as userActions from '@actions/user'
 import * as distActions from '@actions/dist'
 import * as apartmentActions from '@actions/apartment'
+import * as homeActions from '@actions/home'
 
 // 自定义组件
 import Select from '@components/select'
@@ -22,7 +23,8 @@ import { PAYLOAD_CBD_APARTMENT_LIST } from '@constants/api'
   ...cbdActions,
   ...userActions,
   ...distActions,
-  ...apartmentActions
+  ...apartmentActions,
+  ...homeActions
 })
 class ApartmentCbd extends Component {
   config = {
@@ -133,10 +135,10 @@ class ApartmentCbd extends Component {
 
 
   render() {
-    const { apartments, dists, cbds, cbdApartment } = this.props
+    const { dists, home, cbdApartment } = this.props
     const { id, defaultPayload, selectIsFixed, cityCode } = this.state
 
-    const cbd = cbds.find(i => i.id == id) || {
+    const cbd = home.hot_cbd.find(i => i.id == id) || {
       title: '',
       cover: '',
       desc: '',

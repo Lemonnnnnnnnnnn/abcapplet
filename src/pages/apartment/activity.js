@@ -6,8 +6,9 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 import * as distActions from '@actions/dist'
-import * as activityActions from '@actions/activity'
+// import * as activityActions from '@actions/activity'
 import * as apartmentActions from '@actions/apartment'
+import * as homeActions from '@actions/home'
 
 // 自定义组件
 import Select from '@components/select'
@@ -21,8 +22,9 @@ import { PAYLOAD_ACTIVITY_APARTMENT_LIST } from '@constants/api'
 @connect(state => state, {
   ...userActions,
   ...distActions,
-  ...activityActions,
+  // ...activityActions,
   ...apartmentActions,
+  ...homeActions,
 })
 class ApartmentCbd extends Component {
   config = {
@@ -129,10 +131,10 @@ class ApartmentCbd extends Component {
   }
 
   render() {
-    const { dists, activities, activityApartment } = this.props
+    const { dists, home, activityApartment } = this.props
     const { id, defaultPayload, selectIsFixed, cityCode } = this.state
 
-    const activity = activities.find(i => i.id == id) || {
+    const activity = home.hot_activity.find(i => i.id == id) || {
       title: '',
       cover: '',
       desc: '',

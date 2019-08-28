@@ -21,20 +21,21 @@ import cbdApartment from './cbdApartment'
 import favoriteHouseType from './favoriteHouseType'
 import favoriteApartment from './favoriteApartment'
 import activityApartment from './activityApartment'
+import home from './home'
 
 export default combineReducers({
   ads,
   user,
-  cbds,
+  // cbds,
   risks,
   dists,
   citys,
   rooms,
   orders,
-  banners,
+  // banners,
   articles,
-  activities,
-  recommends,
+  // activities,
+  // recommends,
   apartments,
   appointments,
   message,
@@ -45,4 +46,5 @@ export default combineReducers({
   favoriteHouseType,
   favoriteApartment,
   activityApartment,
+  home,
 })

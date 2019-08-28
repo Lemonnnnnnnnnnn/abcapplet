@@ -27,6 +27,7 @@ import * as activityActions from '@actions/activity'
 import * as recommendActions from '@actions/recommend'
 import * as apartmentActions from '@actions/apartment'
 import * as apartmentLookActions from '@actions/apartmentlook'
+import * as homeActions from '@actions/home'
 
 // 自定义常量
 import {
@@ -54,6 +55,7 @@ import BaseComponent from '../../components/base';
   ...recommendActions,
   ...apartmentActions,
   ...apartmentLookActions,
+  ...homeActions,
 })
 class CommonHome extends BaseComponent {
   config = {
@@ -91,7 +93,7 @@ class CommonHome extends BaseComponent {
     cityCode: 0,
 
   }
- async onPullDownRefresh(){
+  async onPullDownRefresh() {
     await this.componentWillMount()
     await this.componentDidShow()
     Taro.stopPullDownRefresh()
@@ -151,11 +153,7 @@ class CommonHome extends BaseComponent {
     this.setState({
       payloadApartment: { ...payloadApartment, latitude: latitude, longitude: longitude, }
     })
-
-
-
   }
-
 
   /**
    * 选择城市
@@ -174,22 +172,26 @@ class CommonHome extends BaseComponent {
 
     // 城市
     await this.props.dispatchUserCity(citycode) && overloadData.push(1)
-    // 轮播图
-    await this.props.dispatchBannerList(citycode) && overloadData.push(1)
-    // 商圈
-    await this.props.dispatchCbdList(citycode) && overloadData.push(1)
-    // 广告
+    // 商圈,轮播图,品牌公寓,活动专区
+    await this.props.dispatchHomeMsg(citycode) && overloadData.push(1)
+    //  广告
     await this.props.dispatchAdList(citycode) && overloadData.push(1)
-    // 品牌公寓
-    await this.props.dispatchRecommendList(citycode) && overloadData.push(1)
-    // 活动专区
-    await this.props.dispatchActivityList(citycode) && overloadData.push(1)
     // 字典
     await this.props.dispatchDistList(citycode) && overloadDist.push(1)
 
 
+    // 轮播图
+    //  await this.props.dispatchBannerList(citycode) && overloadData.push(1)
+    // // 商圈
+    // await this.props.dispatchCbdList(citycode) && overloadData.push(1)
+    // // 品牌公寓
+    // await this.props.dispatchRecommendList(citycode) && overloadData.push(1)
+    // // 活动专区
+    // await this.props.dispatchActivityList(citycode) && overloadData.push(1)
+
+
     // 当数据全部加载完成后读取筛选框的位置
-    overloadData.length === 6 && !selectScrollTop && Taro.createSelectorQuery()
+    overloadData.length === 3 && !selectScrollTop && Taro.createSelectorQuery()
       .in(this.$scope)
       .select('.home-select')
       .boundingClientRect()
@@ -355,11 +357,18 @@ class CommonHome extends BaseComponent {
       payloadApartment
     } = this.state
 
+    // const {
+    //   ads, user, cbds, dists,
+    //   citys, banners, recommends,
+    //   activities, apartments, home
+    // } = this.props
+
     const {
-      ads, user, cbds, dists,
-      citys, banners, recommends,
-      activities, apartments
+      ads, user, dists,
+      citys, apartments, home
     } = this.props
+
+    const { banner: banners, hot_activity: activities, hot_cbd: cbds, recommend: recommends } = home
 
     return (
       <View

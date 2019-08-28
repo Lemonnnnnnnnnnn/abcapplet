@@ -68,7 +68,7 @@ class UserAuth extends Component {
     const urlEncrypt_data = encodeURIComponent(encrypt_data)
     const urlIv = encodeURIComponent(iv)
 
-    this.props.dispatchLogin(
+    iv && encrypt_data && this.props.dispatchLogin(
       { iv: urlIv, code: urlCode, encrypt_data: urlEncrypt_data, },
       { success: this.onLoginSuccess },
     )
