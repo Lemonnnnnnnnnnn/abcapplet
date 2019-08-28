@@ -73,7 +73,7 @@ class ServiceItem extends BaseComponent {
     const { service } = this.props
     const { id } = service
     Taro.navigateTo({
-      url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}`
+      url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}&isSign=${this.props.service.is_sign}`
     })
   }
 
@@ -167,13 +167,13 @@ class ServiceItem extends BaseComponent {
     })
   }
 
-  onalert() {
-    Taro.showToast({
-      title: '该公寓暂不支持线上预订',
-      icon: 'none',
-      duration: 2000
-    })
-  }
+  // onalert() {
+  //   Taro.showToast({
+  //     title: '该公寓暂不支持线上预订',
+  //     icon: 'none',
+  //     duration: 2000
+  //   })
+  // }
 
 
   render() {
@@ -303,19 +303,12 @@ class ServiceItem extends BaseComponent {
                 </View>
               )}
             </View>
-            {
-              is_sign
-                ?
+
                 <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
                   <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
                   <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
                 </View>
-                :
-                <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button-gray at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onalert} >
-                  <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
-                  <View style='font-size:10px ;color:#888888'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
-                </View>
-            }
+
 
           </View>
           {/* 头部 公寓类型以及查看详情 */}

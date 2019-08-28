@@ -49,7 +49,8 @@ class AppointmentDetail extends BaseComponent {
 
     isCanReward: 0,//是否能提交签约审核单
 
-    text: '添加合同照片'
+    text: '添加合同照片',
+    isSign:0,
   }
 
   componentWillMount() {
@@ -62,10 +63,11 @@ class AppointmentDetail extends BaseComponent {
     })
 
     const { payload } = this.state
-    const { id } = this.$router.params
+    const { id ,isSign} = this.$router.params
     this.props.dispatchAppointmentDetail({ id }).then((res) => {
 
       this.setState({
+        isSign:parseInt(isSign),
         Id: id,
         mobile: res.data.data.mobile,
         isCanReward: res.data.data.is_can_reward,
@@ -194,9 +196,7 @@ class AppointmentDetail extends BaseComponent {
   }
   render() {
 
-    const { timeList, mobile, apartmentTitle, signTime, text } = this.state
-
-
+    const { timeList, mobile, apartmentTitle, signTime, isSign } = this.state
 
     return (
       <View className='message-background' style={{ 'padding-top': '75px', 'padding-bottom': '30px' }}>
@@ -280,7 +280,7 @@ class AppointmentDetail extends BaseComponent {
           </View>
         </Board>
 
-        <Board className='py-2 px-3 mx-2 mt-3 ' >
+        {isSign === 1 && <Board className='py-2 px-3 mx-2 mt-3 ' >
           <View className='at-row at-row__justify--between ' onClick={this.onNavigateTo}>
             <View className=''>
               <View className='at-row'>
@@ -295,7 +295,8 @@ class AppointmentDetail extends BaseComponent {
               <AtIcon value='chevron-right' size='30' color='#000000'></AtIcon>
             </View>
           </View>
-        </Board>
+        </Board>}
+
         <View className='mx-2 mt-3 text-muted' onClick={this.onComfirm}>
           <AtButton className='mx-2 btn-yellow active' size='normal' circle >确定提交审核</AtButton>
         </View>

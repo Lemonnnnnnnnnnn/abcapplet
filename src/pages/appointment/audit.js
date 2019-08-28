@@ -36,10 +36,10 @@ class AppointmentDetail extends BaseComponent {
     status: 0,
   }
   componentWillMount() {
-    console.log(this.$router.params)
+
     const { id } = this.$router.params
     this.props.dispatchAppointRewordOrderDetail({ id }).then((res) => {
-      console.log(res)
+
       this.setState({
         apartmentTitle: res.data.data.apartment_title,
         roomNo: res.data.data.room_no,
