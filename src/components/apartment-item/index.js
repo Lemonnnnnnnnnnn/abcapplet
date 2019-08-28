@@ -264,7 +264,7 @@ class ApartmentItem extends BaseComponent {
         }
 
         {/* 迷你内容 */}
-        {mini && <View className='apartment-content mx-2 mt-2'>
+        {mini && <View className='apartment-content mx-2 mt-2 mb-2'>
           {/* 价格和公寓名称 */}
           {
             nearbyPost ? <View className='text-normal '>{title}</View> : <View className=' text-normal mt-3'>{apartmentTitle}</View>

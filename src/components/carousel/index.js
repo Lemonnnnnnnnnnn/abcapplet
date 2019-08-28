@@ -66,10 +66,10 @@ class Carousel extends Component {
       left: " 8px",
       top: "8px",
       borderRadius: " 16px",
-      padding: " 6px 5px",
+      // padding: " 6px 5px",
       backgroundColor: "#000",
-      width: "50px",
-      height: "5px",
+      width: Taro.pxTransform(120),
+      height: Taro.pxTransform(35),
       opacity: "0.5",
     }
 
@@ -77,22 +77,22 @@ class Carousel extends Component {
       position: "absolute",
       left: " 8px",
       top: "8px",
-      padding: " 6px 5px",
-      width: "50px",
-      height: "5px",
+      // padding: " 6px 5px",
+      width: Taro.pxTransform(120),
+      height: Taro.pxTransform(35),
       textAlign: "center",
       justifyContent: "center",
       alignItems: "center",
     }
 
     const maskStyle = {
-      position : "absolute",
-      background : 'linear-gradient(to bottom ,rgba(0,0,0,0) 0%,rgba(50,50,50,0.7) 100% )',
-      bottom : 0,
-      left : 0,
-      height : '35%',
-      width : '100%',
-      zIndex: '20'
+      position: "absolute",
+      background: 'linear-gradient(to bottom ,rgba(0,0,0,0) 0%,rgba(50,50,50,0.7) 100% )',
+      bottom: 0,
+      left: 0,
+      height: '35%',
+      width: '100%',
+      zIndex: '20',
     }
 
     /**
@@ -108,7 +108,7 @@ class Carousel extends Component {
 
 
     return (
-      <View className={classNames(className, 'carousel', 'ml-3')}>
+      <View className={classNames(className, 'carousel', 'ml-3')} >
 
         {type === 'banner' &&
           <Swiper
@@ -126,6 +126,7 @@ class Carousel extends Component {
                 <Image
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
+                  className='carousel-image'
                 />
                 <View style={contentStyle}>
                   <View className='mt-1 text-large'>{item.title}</View>
@@ -147,13 +148,14 @@ class Carousel extends Component {
                 className='mr-2 carousel-normal-item'
               >
                 <Image
+                  className='carousel-image'
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                   mode='scaleToFill' style={imageStyle}
                 />
                 {
                   haveText && <View >
                     <Text className='title text-large text-white'>{item.title}</Text>
-                    <View style={maskStyle}></View>
+                    <View style={maskStyle} className='carousel-image'></View>
                   </View>
                 }
 
@@ -161,10 +163,8 @@ class Carousel extends Component {
                   <View>
                     <View style={bgStyle} ></View>
                     <View style={countStyle} className='at-row at-row__align--center'>
-                      <View className='at-col at-col-2'>
-                        <Image src='https://images.gongyuabc.com//image/fire.png' style={{ width: "12px", height: "12px" , marginBottom : '2px'}}></Image>
-                      </View>
-                      <View className='at-col at-col-8 text-mini text-yellow ml-1' style={{ marginTop: "1Px", overflow: 'hidden' }}>{item.sum}</View>
+                      <Image src='https://images.gongyuabc.com//image/fire.png' className='ml-1' style={{ width: Taro.pxTransform(20), height: Taro.pxTransform(20) }}></Image>
+                      <View className='at-col at-col-8 text-mini text-yellow ' style={{ overflow: 'hidden', lineHeight: Taro.pxTransform(40) }}>{item.sum}</View>
                     </View>
                   </View>
                 }

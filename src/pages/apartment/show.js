@@ -231,22 +231,21 @@ class ApartmentShow extends Component {
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
-      borderRadius: "16px",
+      borderRadius: Taro.pxTransform(32),
     }
 
     const textDeal = {
       wordBreak: "break-all",
-      textIndent: "10px"
+      textIndent: Taro.pxTransform(20),
     }
 
     const PublicConfiguration = {
       backgroundColor: "rgba(248, 248, 248, 1)",
-      borderRadius: "12px",
+      borderRadius: Taro.pxTransform(24),
       padding: " 2px 6px"
     }
 
     const ScrollWrapStyle = {
-      height: '210px',
       whiteSpace: "nowrap",
     }
 
@@ -255,14 +254,14 @@ class ApartmentShow extends Component {
       width: '300px',
       height: Taro.pxTransform(350),
       display: "inline-block",
-      marginRight: Taro.pxTransform(28),
+      // marginRight: Taro.pxTransform(28),
     }
 
     const borderStyle = {
-      // backgroundColor: "rgba(248, 248, 248, 1)",
-      borderRadius: "6px",
+      borderRadius: Taro.pxTransform(12),
       boxShadow: "0 1px 6px rgb(220,220,220)",
       overflow: 'hidden',
+      marginRight: Taro.pxTransform(28),
     }
 
 
@@ -349,7 +348,7 @@ class ApartmentShow extends Component {
 
             {/* 公寓列表 */}
 
-            <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
+            {/* <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
               <ScrollView scrollX>
                 {types && types.map((i, index) =>
                   <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-2 '>
@@ -358,7 +357,24 @@ class ApartmentShow extends Component {
                     </View>
                   </View>)}
               </ScrollView>
-            </View>
+            </View> */}
+
+            {
+              types &&
+
+              <View style={ScrollWrapStyle} className='mt-4 ml-3' >
+
+                <ScrollView scrollX>
+                  {types.map((i, index) =>
+
+                    <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-1' >
+                      <View style={borderStyle} className='' >
+                        <ApartmentTypeItem item={i} />
+                      </View>
+                    </View>)}
+                </ScrollView>
+              </View>
+            }
 
             {/* 公寓信息 */}
 
