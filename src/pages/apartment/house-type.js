@@ -378,49 +378,46 @@ class HouseTypeShow extends Component {
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
-      borderRadius: "16px",
+      borderRadius: Taro.pxTransform(32),
     }
 
     const PublicConfiguration = {
       backgroundColor: "rgba(248, 248, 248, 1)",
-      borderRadius: "12px",
-      width: "40px",
-      height: "40px"
+      borderRadius: Taro.pxTransform(24),
+      width: Taro.pxTransform(80),
+      height: Taro.pxTransform(80),
     }
 
     const deposit = {
-      borderRadius: "12px",
+      borderRadius: Taro.pxTransform(24),
       backgroundColor: "rgba(255, 201, 25, 1)",
       color: "#fff",
-      fontSize: "11px",
+      fontSize: Taro.pxTransform(22),
       textAlign: "center",
     }
 
     const ScrollWrapStyle = {
-
       whiteSpace: "nowrap",
-
     }
 
     const imageStyle = {
       width: '300px',
       height: Taro.pxTransform(350),
       display: "inline-block",
-
     }
 
     const borderStyle = {
-      borderRadius: "6px",
+      borderRadius: Taro.pxTransform(12),
       boxShadow: "0 1px 6px rgb(220,220,220)",
       overflow: 'hidden',
-      marginRight: '14px',
+      marginRight: Taro.pxTransform(28),
     }
 
     const hasRoomStyle = {
-      borderRadius: '5px',
-      height: '16px',
+      borderRadius: Taro.pxTransform(10),
+      height: Taro.pxTransform(32),
       textAlign: 'center',
-      lineHeight: '16px',
+      lineHeight: Taro.pxTransform(32),
       padding: ' 2px 7px',
     }
 
@@ -620,7 +617,7 @@ class HouseTypeShow extends Component {
 
               {/* 周边生活 & 附近交通 */}
               <View className='at-row mt-2'>
-                <View className='at-col text-secondary text-normal mr-2'>附近商圈</View>
+                <View className='at-col at-col-2 text-secondary text-normal mr-3'>附近商圈：</View>
                 <View>
                   <View className='text-normal'>{cbds.join('、')}</View>
                 </View>

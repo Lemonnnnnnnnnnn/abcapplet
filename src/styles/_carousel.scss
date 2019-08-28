@@ -1,7 +1,7 @@
 @import "overrides";
 
 .carousel {
-  image {
+  &-image{
     border-radius: 5px * $hd;
   }
 

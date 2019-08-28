@@ -20,21 +20,14 @@ class App extends Component {
       'pages/common/home',
       'pages/common/search',
 
-      // 'pages/apartment/cbd',
-      // 'pages/apartment/show',
-      // 'pages/apartment/activity',
-      // 'pages/apartment/recommend',
-      // 'pages/apartment/house-type',
-      // 'pages/apartment/appointment',
-      // 'pages/apartment/search-room',
       'pages/recommend/recommend',
 
       'pages/appointment/services',
       'pages/appointment/message',
       'pages/appointment/detail',
       'pages/appointment/audit',
-      // 'pages/appointment/mapHouse',
-      // 'pages/appointment/commuteHouse',
+      // 'pages/appointment/maphouse',
+      // 'pages/appointment/commutehouse',
 
       'pages/user/auth',
       'pages/user/profile',

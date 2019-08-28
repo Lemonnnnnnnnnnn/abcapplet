@@ -108,13 +108,13 @@ class ServicesHome extends Component {
   //调转到地图找房
   onToLeft() {
     Taro.navigateTo({
-      url: '/pages/appointment/mapHouse/index'
+      url: '/pages/appointment/maphouse'
     })
   }
   //调转到通勤找房
   onToRight() {
     Taro.navigateTo({
-      url: '/pages/appointment/commuteHouse/index'
+      url: '/pages/appointment/commutehouse'
     })
   }
 

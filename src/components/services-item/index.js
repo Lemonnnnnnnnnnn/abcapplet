@@ -12,7 +12,7 @@ import ServiceIntention from '@components/service-intention-mask'
 // NPM 包
 import classNames from 'classnames'
 
-import { PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_MESSAGE, PAGE_ORDER_CREATE ,PAGE_APPOINTMENT_DETAIL} from '@constants/page'
+import { PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_MESSAGE, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_DETAIL } from '@constants/page'
 import { APPOINTMENT_FOUFUNCTION_DIST } from '@constants/appointment'
 
 import {
@@ -342,9 +342,9 @@ class ServiceItem extends BaseComponent {
               </View>
             </View>
           </View>
-          <View className='at-col-8 at-row at-col--wrap ml-3' style='position: absolute;top:16%'>
-              <View className=' mt-2 ml-1 text-small text-white '  >{house_type_title}</View>
-            </View>
+          <View className='ml-3' style={{ position: 'absolute', top: '18%' }}>
+            <View className=' mt-2 ml-1 text-small text-white'>{house_type_title}</View>
+          </View>
 
           {/* 中间，计时框 */}
           <View className='' style={serviceMiddleStyle}>
