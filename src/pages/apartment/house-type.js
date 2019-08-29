@@ -28,6 +28,7 @@ import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
+import { PATH, HOME, FREE, POING_THREE } from '@constants/picture'
 
 
 
@@ -111,7 +112,7 @@ class HouseTypeShow extends Component {
       let roomMatch_list = roomMatch.slice(0, 5)
       let publicMatch_list = publicMatch.slice(0, 5)
       const loadMore = {
-        icon: 'https://images.gongyuabc.com//image/pointThree.png',
+        icon: POING_THREE,
         title: '更多',
       }
 
@@ -376,52 +377,6 @@ class HouseTypeShow extends Component {
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
-    const BrandingStyle = {
-      backgroundColor: "rgb(248,248,248)",
-      borderRadius: Taro.pxTransform(32),
-    }
-
-    const PublicConfiguration = {
-      backgroundColor: "rgba(248, 248, 248, 1)",
-      borderRadius: Taro.pxTransform(24),
-      width: Taro.pxTransform(80),
-      height: Taro.pxTransform(80),
-    }
-
-    const deposit = {
-      borderRadius: Taro.pxTransform(24),
-      backgroundColor: "rgba(255, 201, 25, 1)",
-      color: "#fff",
-      fontSize: Taro.pxTransform(22),
-      textAlign: "center",
-    }
-
-    const ScrollWrapStyle = {
-      whiteSpace: "nowrap",
-    }
-
-    const imageStyle = {
-      width: '300px',
-      height: Taro.pxTransform(350),
-      display: "inline-block",
-    }
-
-    const borderStyle = {
-      borderRadius: Taro.pxTransform(12),
-      boxShadow: "0 1px 6px rgb(220,220,220)",
-      overflow: 'hidden',
-      marginRight: Taro.pxTransform(28),
-    }
-
-    const hasRoomStyle = {
-      borderRadius: Taro.pxTransform(10),
-      height: Taro.pxTransform(32),
-      textAlign: 'center',
-      lineHeight: Taro.pxTransform(32),
-      padding: ' 2px 7px',
-    }
-
-
     return (
       <View >
         <TabBar
@@ -454,7 +409,6 @@ class HouseTypeShow extends Component {
           >
 
             <View className='ml-3 mr-3'>
-
 
               <ApartmentRentDescriptionMask
                 cost={cost}
@@ -499,7 +453,7 @@ class HouseTypeShow extends Component {
 
               {
                 isSign && <View className='at-row at-row__align--center  '>
-                  <View className='at-col at-col-2 text-normal at-row at-row__align--center' style={deposit}>押金保障</View>
+                  <View className='at-col at-col-2 text-normal at-row at-row__align--center house-type-deposit' style={{fontSize : Taro.pxTransform(22)}}>押金保障</View>
                   <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
                 </View>
               }
@@ -520,17 +474,17 @@ class HouseTypeShow extends Component {
               </View>
 
               {/* 品牌宣传 */}
-              <View style={BrandingStyle}>
+              <View className='house-type-branding'>
                 <Tag className='my-3' active circle>
                   <View className='at-row  at-row__align--center at-row__justify--center text-secondary'>
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
-                      <Image className='mr-1' src='https://images.gongyuabc.com//image/free_new.png' style='width:18px;height:18px'></Image>
+                      <Image className='mr-1' src={FREE} style='width:18px;height:18px'></Image>
                       <View className='ml-1 '>100%免中介费</View>
                     </View>
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
-                      <Image className='mr-1' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
+                      <Image className='mr-1' src={HOME} style='width:18px;height:18px'></Image>
                       <View className='ml-1'>严选厦门3万+房源</View>
                     </View>
 
@@ -542,7 +496,7 @@ class HouseTypeShow extends Component {
               {
                 position && <View className='at-row  at-row__align--center'>
                   <View className='at-col at-col-1 '>
-                    <Image src='https://images.gongyuabc.com//image/path_new.png' style='width:12px;height:16px'></Image>
+                    <Image src={PATH} style='width:12px;height:16px'></Image>
                   </View>
                   <View className=' text-normal text-secondary  ml-2' >{position}</View>
                 </View>
@@ -558,8 +512,8 @@ class HouseTypeShow extends Component {
                   <View className='at-row at-row__align--end mt-4'>
                     <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
                     {
-                      has_room ? <Text className=' text-mini badge-hasRoom mb-1' style={hasRoomStyle}>有余房</Text>
-                        : <Text className=' text-mini badge-hasNoRoom mb-1' style={hasRoomStyle}>满房</Text>
+                      has_room ? <Text className=' text-mini badge-hasRoom mb-1 house-type-has-room-block' >有余房</Text>
+                        : <Text className=' text-mini badge-hasNoRoom mb-1 house-type-has-room-block' >满房</Text>
                     }
                   </View>
                   <View className='at-row at-row--wrap'>
@@ -581,7 +535,7 @@ class HouseTypeShow extends Component {
 
                 {roomMatch_list && roomMatch_list.map((i, key) => key !== 5 ?
                   <View key={i.title} className='at-col' style={{ position: "relative" }}>
-                    <View style={PublicConfiguration}></View>
+                    <View className='house-type-public-configuration' ></View>
                     <View style={{ position: "absolute", top: "5px", left: "5px" }}>
                       <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                       <View className='text-small text-center' >{i.title}</View>
@@ -589,7 +543,7 @@ class HouseTypeShow extends Component {
                   </View>
                   :
                   <View onClick={this.onOpenAllMatching} key={i.title} className='at-col ' style={{ position: "relative" }}>
-                    <View style={PublicConfiguration}></View>
+                    <View className='house-type-public-configuration' ></View>
                     <View style={{ position: "absolute", top: "5px", left: "5px" }}>
                       <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                       <View className='text-small text-center'>{i.title}</View>
@@ -624,36 +578,46 @@ class HouseTypeShow extends Component {
               </View>
 
               {/* 可租房间 */}
-              {roomList.length !== 0 && <View >
-                <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
-                {
-                  isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
-                }
-                {roomList && roomList.map((i, index) =>
-                  <RoomItem
-                    key={i.id}
-                    room={i}
-                    roomList={roomList}
-                    isSign={isSign}
-                    onCreateFavorite={this.onRoomCreateFavorite}
-                    onDeleteFavorite={this.onRoomDeleteFavorite}
-                    className={`${index + 1 !== roomList.length && 'border-bottom'} pt-1`}
-                  />)}
-                {
-                  showApartRoom && roomList.length > 5 && <View
-                    onClick={this.onshowMorePic}
-                    className='text-secondary text-normal mt-2'
-                    style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
-                }
-                <View
-                  style={{ width: '100%', background: 'rgba(248, 248, 248, 1)', borderRadius: Taro.pxTransform(34) }}
-                  onClick={this.onSearchRoom}
-                  className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--center at-row__justify--center'>
-                  <AtIcon className='ml-2' value='search' size='13' color={COLOR_GREY_0} />
-                  <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
-                </View>
 
-              </View>}
+              {roomList.length !== 0 &&
+                <View>
+                  <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
+                  {/* 快速锁定&&赔付权益 */}
+                  {
+                    isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
+                  }
+
+                  {/* 列表 */}
+
+                  <View className='mt-3 house-type-gray-background'>
+                    {roomList && roomList.map((i, index) =>
+                      <RoomItem
+                        key={i.id}
+                        room={i}
+                        roomList={roomList}
+                        isSign={isSign}
+                        onCreateFavorite={this.onRoomCreateFavorite}
+                        onDeleteFavorite={this.onRoomDeleteFavorite}
+                        className={`${index + 1 !== roomList.length && 'border-bottom'}`}
+                      />)}
+                    {
+                      showApartRoom && roomList.length > 5 && <View
+                        onClick={this.onshowMorePic}
+                        className='text-secondary text-normal mt-2'
+                        style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
+                    }
+                  </View>
+
+                  {/* 搜索房间 */}
+                  <View
+                    style={{ width: '100%', background: 'rgba(248, 248, 248, 1)', borderRadius: Taro.pxTransform(34) }}
+                    onClick={this.onSearchRoom}
+                    className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--center at-row__justify--center'>
+                    <AtIcon className='ml-2' value='search' size='13' color={COLOR_GREY_0} />
+                    <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
+                  </View>
+                </View>
+              }
 
 
               {/* 用户须知 */}
@@ -711,7 +675,7 @@ class HouseTypeShow extends Component {
 
                   {publicMatch_list && publicMatch_list.map((i, key) => key !== 5 ?
                     <View key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
-                      <View style={PublicConfiguration}></View>
+                      <View className='house-type-public-configuration' ></View>
                       <View style={{ position: "absolute", top: "5px", left: "5px" }}>
                         <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px', }} />
                         <View className='text-small text-center' >{i.title}</View>
@@ -719,7 +683,7 @@ class HouseTypeShow extends Component {
                     </View>
                     :
                     <View onClick={this.onOpenAllMatching} key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
-                      <View style={PublicConfiguration}></View>
+                      <View className='house-type-public-configuration' ></View>
                       <View style={{ position: "absolute", top: "5px", left: "5px" }}>
                         <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                         <View className='text-small text-center'>{i.title}</View>
@@ -733,13 +697,13 @@ class HouseTypeShow extends Component {
               {
                 types &&
 
-                <View style={ScrollWrapStyle} className='mt-4' >
+                <View style={{ whiteSpace: "nowrap" }} className='mt-4' >
 
                   <ScrollView scrollX>
                     {types.map((i, index) =>
 
-                      <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-1' >
-                        <View style={borderStyle} className='' >
+                      <View key={i.id} className='at-col at-col-5 mt-1 house-type-image' >
+                        <View className='house-type-apartment-type-border' >
                           <ApartmentTypeItem item={i} houseType index={index} />
                         </View>
                       </View>)}

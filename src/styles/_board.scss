@@ -5,12 +5,12 @@
   z-index: -1;
   left: 0;
   top: 0;
-  right:0;
+  right: 0;
 
   height: 350px;
   width: 100%;
   border-radius: 100% 100% 100% 100% / 0% 0% 50% 50%;
-  background: #FFC919;
+  background: #ffc919;
 }
 
 .board {
@@ -25,8 +25,8 @@
   }
 
   &--bottom {
-    box-shadow: 0px 3px * $hd 6px * $hd rgba(37,91,255,0.08);
-    border-radius:  0 0 12px * $hd 12px * $hd;
+    box-shadow: 0px 3px * $hd 6px * $hd rgba(37, 91, 255, 0.08);
+    border-radius: 0 0 12px * $hd 12px * $hd;
   }
 
   &--white {
@@ -34,21 +34,21 @@
   }
 
   &--grey {
-    background: #F2F2F2;
+    background: #f2f2f2;
   }
 
   &--light-grey {
-    background: #F8F8F8;
+    background: #f8f8f8;
   }
 
   &--black {
-    background:linear-gradient(9deg,rgba(0,0,0,1) 0%,rgba(84,84,84,1) 100%);
+    background: linear-gradient(9deg, rgba(0, 0, 0, 1) 0%, rgba(84, 84, 84, 1) 100%);
   }
 
   &--danger {
     color: #ffffff;
-    background:#FF6161;
-    box-shadow:0px 3px 6px #FF3434;
+    background: #ff6161;
+    box-shadow: 0px 3px 6px #ff3434;
   }
 
   &--fixed {
@@ -66,5 +66,8 @@
     left: 0;
     right: 0;
     z-index: 9999;
+  }
+  &--black-shadow {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
   }
 }

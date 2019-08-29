@@ -36,13 +36,13 @@ class CityModal extends Component {
     const urlEncrypt_data = encodeURIComponent(encrypt_data)
     const urlIv = encodeURIComponent(iv)
 
-    await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv })
+    encrypt_data && iv &&  await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv })
 
     this.props.onSelectCity(cityCode)
   }
 
   render() {
-    const { citycode, city, onSelectCity } = this.props
+    const { citycode, city } = this.props
 
     const cityModalHeaderstyle = {
       width: '100%',

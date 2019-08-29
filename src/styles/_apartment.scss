@@ -5,34 +5,34 @@
   box-shadow: 0px 0px 5px * $hd 0px rgba(222, 222, 222, 1);
   border-radius: 6px * $hd;
 
-  &-image{
+  &-image {
     width: 100%;
     height: 100%;
     border-top-left-radius: 6px * $hd;
-    border-top-right-radius:6px * $hd;
+    border-top-right-radius: 6px * $hd;
   }
 
-  &-heart{
-    width : 70px;
-    height : 60px;
+  &-heart {
+    width: 70px;
+    height: 60px;
 
-    &-wrap{
+    &-wrap {
       padding: 10px;
     }
 
-    &-num{
+    &-num {
       top: 0;
       position: absolute;
       text-align: center;
       font-size: 28px;
       left: 50%;
       top: 42%;
-      transform: translate(-50%,-50%);
-      color: #FFC919
+      transform: translate(-50%, -50%);
+      color: #ffc919;
     }
   }
 
-  &-header-type{
+  &-header-type {
     position: absolute;
     left: 6%;
     bottom: 0;
@@ -41,18 +41,15 @@
     border-radius: 12px;
     background: #ffc919;
   }
-  &-box-shadow-style{
+  &-box-shadow-style {
     border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    margin-bottom : 40px;
+    margin-bottom: 40px;
   }
-  &-card-margin-style{
-    margin-bottom : 40px;
+  &-card-margin-style {
+    margin-bottom: 40px;
   }
-
-
-
 
   &-header {
     position: relative;
@@ -80,7 +77,7 @@
       border-radius: 6px * $hd;
       background: #ffc919;
 
-      &-item{
+      &-item {
         border-radius: 24px;
         overflow: hidden;
       }
@@ -171,12 +168,53 @@
     font-size: 24px;
     left: 50%;
     top: 45%;
-    transform: translate(-50%,-50%);
-    color: #FFC919;
+    transform: translate(-50%, -50%);
+    color: #ffc919;
   }
 
-  &-heart{
+  &-heart {
     width: 60px;
-    height: 52px ;
+    height: 52px;
+  }
+}
+
+.house-type {
+  &-branding {
+    background-color: rgb(248, 248, 248);
+    border-radius: 32px;
+  }
+  &-public-configuration {
+    background-color: rgba(248, 248, 248, 1);
+    border-radius: 24px;
+    width: 80px;
+    height: 80px;
+  }
+  &-deposit {
+    border-radius: 24px;
+    background-color: rgba(255, 201, 25, 1);
+    color: #fff;
+    text-align: center;
+  }
+  &-image {
+    height: 350px;
+    display: inline-block;
+  }
+
+  &-apartment-type-border {
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgb(220, 220, 220);
+    overflow: hidden;
+    margin-right: 28px;
+  }
+  &-has-room-block {
+    border-radius: 10px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    padding: 4px 14px;
+  }
+  &-gray-background{
+    background-color: #F8F8F8;
+    border-radius: 24px;
   }
 }

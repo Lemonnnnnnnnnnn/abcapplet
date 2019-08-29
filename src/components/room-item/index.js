@@ -120,18 +120,19 @@ class RoomItem extends BaseComponent {
     const roomNo = room.room_no || room.no
     // const priceTitle = room.price_title || room.price
 
-    const grayBg = {
+    const whiteBorderStyle = {
       backgroundColor: "#F8F8F8",
-      borderRadius: "12px"
+      borderRadius: Taro.pxTransform(24),
+      borderBottom: '1px solid #fff',
     }
     const tag = ROOM_STATUS_DIST[status]
 
 
     const hasRoomStyle = {
-      borderRadius: '5px',
-      height: '16px',
+      borderRadius: Taro.pxTransform(10),
+      height: Taro.pxTransform(32),
       textAlign: 'center',
-      lineHeight: '16px',
+      lineHeight: Taro.pxTransform(32),
       padding: ' 2px 7px',
       whiteSpace: 'nowrap',
     }
@@ -141,10 +142,8 @@ class RoomItem extends BaseComponent {
         className={classNames('room', className)}
         styleName={{ height: Taro.pxTransform(height) }}
       >
-        <View className='at-row mt-3' style={grayBg}>
-          {/* 左侧 */}
+        <View className='at-row' style={whiteBorderStyle} >
 
-          {/* 右侧 */}
           <View className='mx-3 my-2' style={{ width: '100%' }}>
             {/* 第一行 */}
             <View className='at-row'>
@@ -184,7 +183,6 @@ class RoomItem extends BaseComponent {
 
                 </View>
 
-
                 {/* 图片预览暂时取消 */}
                 {/* <View className='mr-3'>
                   <AtIcon value='image' size='25' color={COLOR_YELLOW} onClick={this.onViewPic} ></AtIcon>
@@ -195,7 +193,6 @@ class RoomItem extends BaseComponent {
                     :
                     <Text></Text>
                 }
-
 
                 {status === 1 && isSign && <AtButton
                   circle className='btn-yellow active' size='small'

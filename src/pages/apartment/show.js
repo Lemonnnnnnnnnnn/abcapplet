@@ -361,7 +361,6 @@ class ApartmentShow extends Component {
 
             {
               types &&
-
               <View style={ScrollWrapStyle} className='mt-4 ml-3' >
 
                 <ScrollView scrollX>

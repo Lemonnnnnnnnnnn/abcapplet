@@ -26,12 +26,14 @@ class Board extends BaseComponent {
       border,
       className,
       customStyle,
+      shadow,
     } = this.props
 
     const rootClassName = [
       'board',
       `board--${border}`,
-      `board--${color}`
+      `board--${color}`,
+      `board--${shadow}`
     ]
 
     const classObject = {
