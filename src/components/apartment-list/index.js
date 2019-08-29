@@ -4,15 +4,23 @@ import { View, ScrollView } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
-import Placeholder from '@components/placeholder'
+// import Placeholder from '@components/placeholder'
 import ApartmentItem from '@components/apartment-item'
 
 // 常量
-import { LOCALE_NO_DATA } from '@constants/locale'
+// import { LOCALE_NO_DATA } from '@constants/locale'
+
+
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as apartmentActions from '@actions/apartment'
+
+
+@connect(state => state, {
+  ...apartmentActions,
+})
 
 class ApartmentList extends BaseList {
-
-
 
   render() {
     const ScrollWrapStyle = {
@@ -26,7 +34,7 @@ class ApartmentList extends BaseList {
     }
 
 
-    const { items, className, type, mini, show, nearbyPost ,defaultPayload} = this.props
+    const { items, className, type, mini, show, nearbyPost , defaultPayload} = this.props
     const { hasMore, loading, page } = this.state
 
 
@@ -36,7 +44,7 @@ class ApartmentList extends BaseList {
       {/* 渲染 公寓列表 */}
       <View className='at-row at-row--wrap mb-3 '>
         {
-          nearbyPost
+          nearbyPost 
             ?
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView scrollX>

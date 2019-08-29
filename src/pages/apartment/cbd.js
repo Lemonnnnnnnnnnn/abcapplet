@@ -109,11 +109,9 @@ class ApartmentCbd extends Component {
     this.apartmentList.onReset({ ...defaultPayload, ...payload })
   }
 
-
   // onApartmentPayloadChange({ payload }) {
   //   this.apartmentList.onReset(payload)
   // }
-
 
   /**
    * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
@@ -189,7 +187,6 @@ class ApartmentCbd extends Component {
           items={cbdApartment.list}
           ref={this.refApartmentList}
           defaultPayload={defaultPayload}
-          Itemtitle='cbdApartment'
 
           onCreateFavorite={this.onCreateFavorite}
           onDeleteFavorite={this.onDeleteFavorite}

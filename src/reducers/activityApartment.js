@@ -3,6 +3,7 @@ import {
     SET_NEXT_PAGE_ACTIVITY_APARTMENT_LIST,
     APARTMENT_URL_DIST,
     SET_ACTIVITY_APARTMENT_LIST,
+    UPDATE_APARTMENT_FAVORITE,
 } from '@constants/apartment'
 
 const formatList = (list, type) => {
@@ -27,6 +28,15 @@ export default function apartment(state = APARTMENT_DEFAULT, action) {
             const { list: oldList } = state
             const { list, total, type } = action.payload
             return { list: [...oldList, ...list], total, type }
+        }
+
+        case UPDATE_APARTMENT_FAVORITE: {
+            let { list } = state
+            const { id } = action.payload
+            list = list.map(i =>
+                i.id === id ? { ...i, is_collect: !i.is_collect } : i
+            )
+            return { ...state, list }
         }
 
         default: {

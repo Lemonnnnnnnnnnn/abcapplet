@@ -32,8 +32,6 @@ import {
   LOCALE_QI,
 } from '@constants/locale'
 
-
-
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
     type: '',
@@ -64,9 +62,9 @@ class ApartmentItem extends BaseComponent {
     const { id } = apartment
 
     switch (type) {
-      case TYPE_CBD_APARTMENT:
-      case TYPE_SEARCH_APARTMENT:
-      case TYPE_ACTIVITY_APARTMENT:
+      case TYPE_CBD_APARTMENT: return { type_id: id }
+      case TYPE_SEARCH_APARTMENT: return { type_id: id }
+      case TYPE_ACTIVITY_APARTMENT: return { type_id: id }
       case TYPE_FAVORITE_HOUSE_TYPE:
       case TYPE_NORMAL_APARTMENT: return { type_id: id }
       case TYPE_FAVORITE_APARTMENT: return { id: id }
@@ -85,7 +83,7 @@ class ApartmentItem extends BaseComponent {
 
 
   render() {
-    let { width, height, minWidth, minHeight, mini, nearbyPost, home, } = this.props
+    let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
     const { apartment, type } = this.props
 
 
@@ -101,7 +99,6 @@ class ApartmentItem extends BaseComponent {
       apartment_title: apartmentTitle,
       num, is_sign, sub_title, one_word
     } = apartment
-
 
     const headerStyle = {
       width: '100%',
@@ -132,7 +129,7 @@ class ApartmentItem extends BaseComponent {
     const nearbyPostStyle = {
       width: '100%',
       height: '100%',
-      borderRadius : '6px',
+      borderRadius: '6px',
     }
 
 
