@@ -254,7 +254,6 @@ class ApartmentShow extends Component {
       width: '300px',
       height: Taro.pxTransform(350),
       display: "inline-block",
-      // marginRight: Taro.pxTransform(28),
     }
 
     const borderStyle = {
@@ -347,17 +346,6 @@ class ApartmentShow extends Component {
 
 
             {/* 公寓列表 */}
-
-            {/* <View style={ScrollWrapStyle} className='at-col ml-3 mb-1'  >
-              <ScrollView scrollX>
-                {types && types.map((i, index) =>
-                  <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-2 '>
-                    <View style={borderStyle}>
-                      <ApartmentTypeItem item={i} />
-                    </View>
-                  </View>)}
-              </ScrollView>
-            </View> */}
 
             {
               types &&
@@ -479,9 +467,8 @@ class ApartmentShow extends Component {
                 <ApartmentList
                   nearbyPost={nearbyPost}
                   mini
-                  key={apartments.type}
                   type={TYPE_FAVORITE_APARTMENT}
-                  items={apartments.list}
+                  // items={apartments.list}
                   defaultPayload={{ city }}
                   dispatchList={this.props.dispatchRecommendHouseType}
                 />
