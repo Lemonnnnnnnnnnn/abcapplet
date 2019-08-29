@@ -20,7 +20,7 @@ import { PAGE_HOME } from '@constants/page'
 import { PAYLOAD_CBD_APARTMENT_LIST } from '@constants/api'
 
 @connect(state => state, {
-  ...cbdActions,
+  // ...cbdActions,
   ...userActions,
   ...distActions,
   ...apartmentActions,
@@ -38,6 +38,7 @@ class ApartmentCbd extends Component {
     selectIsFixed: false,
     selectScrollTop: null,
     cityCode: 0,
+    apartment_num: 0,
   }
 
   refApartmentList = (node) => this.apartmentList = node
@@ -70,7 +71,10 @@ class ApartmentCbd extends Component {
 
     // 获取活动详情
     this.props.dispatchCbdShow(defaultPayload)
-      .catch(() => Taro.reLaunch({ url: PAGE_HOME }))
+      .then((res) => {
+        this.setState({ apartment_num: res.data.data.cbd.apartment_num })
+      })
+    // .catch(() => Taro.reLaunch({ url: PAGE_HOME }))
 
     // 设置状态
     this.setState({ id, defaultPayload })
@@ -136,7 +140,7 @@ class ApartmentCbd extends Component {
 
   render() {
     const { dists, home, cbdApartment } = this.props
-    const { id, defaultPayload, selectIsFixed, cityCode } = this.state
+    const { id, defaultPayload, selectIsFixed, cityCode, apartment_num } = this.state
 
     const cbd = home.hot_cbd.find(i => i.id == id) || {
       title: '',
@@ -154,7 +158,7 @@ class ApartmentCbd extends Component {
           title={cbd.title}
           cover={cbd.cover}
           desc={cbd.desc}
-          total={cbd.apartment_num}
+          total={apartment_num}
         />
       </View>
 
@@ -185,6 +189,7 @@ class ApartmentCbd extends Component {
           items={cbdApartment.list}
           ref={this.refApartmentList}
           defaultPayload={defaultPayload}
+          Itemtitle='cbdApartment'
 
           onCreateFavorite={this.onCreateFavorite}
           onDeleteFavorite={this.onDeleteFavorite}

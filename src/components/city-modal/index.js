@@ -29,7 +29,6 @@ class CityModal extends Component {
   async getPhoneNumber(cityCode, e) {
     let code = Taro.getStorageSync('code')
     // code ? code = code : code =  await Taro.login()
-    console.log(e, cityCode)
 
     const { encryptedData: encrypt_data, iv } = e.currentTarget
     const urlCode = encodeURIComponent(code)
