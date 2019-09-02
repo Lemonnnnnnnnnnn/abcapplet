@@ -129,3 +129,11 @@
   border: 0.5px * $hd solid rgba(232, 232, 232, 1);
   opacity: 1;
 }
+
+.appointment-envolpe {
+  width: 45px * $hd;
+  height: 45px * $hd;
+  position: absolute;
+  left: 54%;
+  bottom: 14%;
+}

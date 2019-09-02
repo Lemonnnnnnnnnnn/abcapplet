@@ -12,8 +12,8 @@ import ServiceIntention from '@components/service-intention-mask'
 // NPM 包
 import classNames from 'classnames'
 
-import { PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_MESSAGE, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_DETAIL } from '@constants/page'
-import { APPOINTMENT_FOUFUNCTION_DIST } from '@constants/appointment'
+import { PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_MESSAGE, PAGE_APPOINTMENT_AUDIT, PAGE_APPOINTMENT_DETAIL } from '@constants/page'
+
 
 import {
   LOCALE_APPOINTMENT_SIGNED,
@@ -23,7 +23,7 @@ import {
   LOCALE_APPOINTMENT_SUMMON,
   LOCALE_APPOINTMENT_BELONG,
 
-  LOCALE_APPOINTMENT_MESSAGE,
+
   LOCALE_APPOINTMENT_RELUTION,
   LOCALE_APPOINTMENT_EVALUTION,
   LOCALE_APPOINTMENT_INTENTION,
@@ -33,11 +33,10 @@ import {
 } from '@constants/locale'
 
 import {
-  LEAVE_MSG_GRAY,
+
   CALL_PHONE_GRAY,
   COMMENT_GRAY,
   EXPECT_GRAY,
-  LEAVE_MSG,
   CALL_PHONE,
   COMMENT,
   EXPECT
@@ -71,10 +70,18 @@ class ServiceItem extends BaseComponent {
   //跳转签约下定页面
   onNavigationAgency() {
     const { service } = this.props
-    const { id } = service
-    Taro.navigateTo({
-      url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}&isSign=${this.props.service.is_sign}`
-    })
+    const { id, is_can_reward, reward_id } = service
+    if (is_can_reward === 0) {
+      Taro.navigateTo({
+        url: `${PAGE_APPOINTMENT_AUDIT}?id=${reward_id}`
+      })
+    }
+    else {
+      Taro.navigateTo({
+        url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}&isSign=${this.props.service.is_sign}`
+      })
+    }
+
   }
 
   //跳转详情
@@ -290,7 +297,7 @@ class ServiceItem extends BaseComponent {
             }
           </View>
           <View className='at-row at-row__justify--around' >
-            <View className='at-row at-row-6 mb-2 ml-2' style={{ marginTop: "55px" }}>
+            <View className='at-row at-row-7 mb-2 ml-2' style={{ marginTop: "55px" }}>
               {/* 下面四个按钮 */}
               {buttonList.map(i =>
                 <View key={i.id} className='at-col' onClick={this.onFourClick.bind(this, i.name)}>
@@ -304,10 +311,20 @@ class ServiceItem extends BaseComponent {
               )}
             </View>
 
-                <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
+            {
+              is_sign
+                ?
+                <View className='mb-3 mr-3 at-col at-col-5 py-2 px-2 service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
+                  <Image src='https://images.gongyuabc.com/image/redEnvelope.gif' className='appointment-envolpe'></Image>
                   <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
                   <View style='font-size:10px ;color:#FFFFFF'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
                 </View>
+                :
+                <View className='mb-3 mr-3 at-col at-col-4 p-2  service-button-gray at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onalert} >
+                  <View className='text-normal'>{LOCALE_APPOINTMENT_SIGNED}</View>
+                  <View style='font-size:10px ;color:#888888'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
+                </View>
+            }
 
 
           </View>
