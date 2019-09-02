@@ -190,7 +190,7 @@ class ServiceItem extends BaseComponent {
     const { haveIntention, haveEvalution, showIntention, showEvalution } = this.state
 
     const { id, cover, apartment_title, house_type_title,
-      order_time, server_id, server_user, comment, look_time, intention, remark, date, status, is_sign } = service
+      order_time, server_id, server_user, comment, look_time, intention, remark, date, status, is_sign,is_can_reward } = service
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -312,7 +312,7 @@ class ServiceItem extends BaseComponent {
             </View>
 
             {
-              is_sign
+              is_can_reward
                 ?
                 <View className='mb-3 mr-3 at-col at-col-5 py-2 px-2 service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
                   <Image src='https://images.gongyuabc.com/image/redEnvelope.gif' className='appointment-envolpe'></Image>
