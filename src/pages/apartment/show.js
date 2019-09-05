@@ -55,7 +55,7 @@ class ApartmentShow extends Component {
   }
 
   async componentDidMount() {
-    const { id = 255 } = this.$router.params
+    const { id } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
@@ -109,6 +109,7 @@ class ApartmentShow extends Component {
         swipers: data.extend_info.pictures,
         appointment_show_num: data.appointment_show_num,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
+        num: data.num
       },
       map: {
         latitude: parseFloat(data.latitude),
@@ -222,12 +223,11 @@ class ApartmentShow extends Component {
   }
 
   render() {
-    const { apartments } = this.props
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, statusBarHeight } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight } = this.state
     const { latitude, longitude, markers } = map
     const {
-      title, swipers, isCollect, special, types, apartmentTitle, tags, desc,
-      notices, cbds, intro, rules, facilitys, position, cover, appointment_show_num } = apartment
+      title, swipers, isCollect, special, types, tags, desc,
+      notices, cbds, intro, rules, position, cover,num } = apartment
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
@@ -288,7 +288,7 @@ class ApartmentShow extends Component {
           <ApartmentContainer
             swipers={swipers}
             isCollect={isCollect}
-            appointment_show_num={appointment_show_num}
+            num={num}
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
           >

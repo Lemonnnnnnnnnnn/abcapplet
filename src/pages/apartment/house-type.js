@@ -169,7 +169,8 @@ class HouseTypeShow extends Component {
           appointment_show_num: data.appointment_show_num,
           one_word: data.one_word,
           type_desc: data.type_desc,
-          has_room: data.has_room
+          has_room: data.has_room,
+          num: data.num
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -370,8 +371,7 @@ class HouseTypeShow extends Component {
       title, swipers, isCollect, cost, types, priceTitle,
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
-      position, tags, cost_info, id, roomMatch, publicMatch,
-      appointment_show_num, type_desc, has_room
+      position, tags, cost_info, id, type_desc, has_room, num
     } = houstType
 
 
@@ -403,7 +403,7 @@ class HouseTypeShow extends Component {
             swipers={swipers}
             show={false}
             isCollect={isCollect}
-            appointment_show_num={appointment_show_num}
+            num={num}
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
           >
@@ -453,7 +453,7 @@ class HouseTypeShow extends Component {
 
               {
                 isSign && <View className='at-row at-row__align--center  '>
-                  <View className='at-col at-col-2 text-normal at-row at-row__align--center house-type-deposit' style={{fontSize : Taro.pxTransform(22)}}>押金保障</View>
+                  <View className='at-col at-col-2 text-normal at-row at-row__align--center house-type-deposit' style={{ fontSize: Taro.pxTransform(22) }}>押金保障</View>
                   <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
                 </View>
               }

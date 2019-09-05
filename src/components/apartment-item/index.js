@@ -48,12 +48,17 @@ class ApartmentItem extends BaseComponent {
     e.stopPropagation()
     const payload = this.getFavoritePayload()
 
+    const user_info = Taro.getStorageSync('user_info')
+    user_info.token && 
     this.props.onCreateFavorite({ payload })
   }
 
   onDeleteFavorite(e) {
     e.stopPropagation()
     const payload = this.getFavoritePayload()
+
+    const user_info = Taro.getStorageSync('user_info')
+    user_info.token && 
     this.props.onDeleteFavorite({ payload })
   }
 

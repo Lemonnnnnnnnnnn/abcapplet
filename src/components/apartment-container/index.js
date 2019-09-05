@@ -48,7 +48,7 @@ class ApartmentContainer extends BaseComponent {
   }
 
   render() {
-    const { swipers, height, width, isCollect, show, appointment_show_num } = this.props
+    const { swipers, height, width, isCollect, show, num } = this.props
 
     const { current } = this.state
 
@@ -120,12 +120,12 @@ class ApartmentContainer extends BaseComponent {
               ?
               <View className='at-row at-row__justify--center at-row__align--center' style={{ marginTop: '1px' }} onClick={this.props.onDeleteFavorite}>
                 <Image src={HEART_YELLOW} className='apartment-container-heart'></Image>
-                <View className='apartment-container-heartNum' >{appointment_show_num}</View>
+                <View className='apartment-container-heartNum' >{num}</View>
               </View>
               :
               <View className='at-row at-row__justify--center at-row__align--center' style={{ marginTop: '1px' }} onClick={this.props.onCreateFavorite}>
                 <Image src={HEART_YELLOW_EMPTY} className='apartment-container-heart' ></Image>
-                <View className='apartment-container-heartNum' >{appointment_show_num}</View>
+                <View className='apartment-container-heartNum' >{num}</View>
               </View>
             }
           </View>

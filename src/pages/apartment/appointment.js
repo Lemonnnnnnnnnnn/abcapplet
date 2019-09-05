@@ -117,7 +117,7 @@ class AppointmentPost extends Component {
 
   async componentDidMount() {
 
-    const { id = 83, apartmentId } = this.$router.params
+    const { id , apartmentId } = this.$router.params
     const { Payload } = this.state
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
@@ -228,13 +228,14 @@ class AppointmentPost extends Component {
     let judge = { "bigMonth": true, "flatYear": true }
 
     bigMonth.forEach(i => {
-      if (i === currentMonth) {
+      if (i === currentMonth + 1) {
         judge.bigMonth = true
       }
     })
+    // console.log(judge)
 
     smailMonth.forEach(i => {
-      if (i === currentMonth) {
+      if (i === currentMonth + 1) {
         judge.bigMonth = false
       }
     })
@@ -245,9 +246,9 @@ class AppointmentPost extends Component {
       judge.flatYear = true
     }
 
-    if (currentMonth !== 2) {
+    if (currentMonth !== 1) {
       judge.bigMonth ? dayList_NaN = Array.from({ length: 31 }) : dayList_NaN = Array.from({ length: 30 })
-    } else if (currentMonth === 2) {
+    } else if (currentMonth === 1) {
       judge.flatYear ? dayList_NaN = Array.from({ length: 28 }) : dayList_NaN = Array.from({ length: 29 })
     }
 
