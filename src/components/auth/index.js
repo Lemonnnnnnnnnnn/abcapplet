@@ -19,6 +19,10 @@ class Auth extends Component {
     Taro.setStorageSync('code', code)
   }
 
+  onNavigation() {
+    Taro.switchTab({ url: '/pages/common/home' })
+  }
+
   render() {
     const imageStyle = {
       width: `${Taro.pxTransform(200)}`,
@@ -41,6 +45,7 @@ class Auth extends Component {
         {/* 确认按钮 */}
         <View>
           <AtButton className='btn-green' openType='getUserInfo' onGetUserInfo={onLogin} >{text}</AtButton>
+          <AtButton className='btn-grey mt-3' onClick={this.onNavigation}>取消</AtButton>
         </View>
       </View>
     )

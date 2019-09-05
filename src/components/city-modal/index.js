@@ -22,26 +22,26 @@ class CityModal extends Component {
   }
 
   async componentDidShow() {
-    const {code} = await Taro.login()
+    const { code } = await Taro.login()
     Taro.setStorageSync('code', code)
   }
 
-  async getPhoneNumber(cityCode, e) {
-    let code = Taro.getStorageSync('code')
-    // code ? code = code : code =  await Taro.login()
+  // async getPhoneNumber(cityCode, e) {
+  //   let code = Taro.getStorageSync('code')
+  //   // code ? code = code : code =  await Taro.login()
 
-    const { encryptedData: encrypt_data, iv } = e.currentTarget
-    const urlCode = encodeURIComponent(code)
-    const urlEncrypt_data = encodeURIComponent(encrypt_data)
-    const urlIv = encodeURIComponent(iv)
+  //   const { encryptedData: encrypt_data, iv } = e.currentTarget
+  //   const urlCode = encodeURIComponent(code)
+  //   const urlEncrypt_data = encodeURIComponent(encrypt_data)
+  //   const urlIv = encodeURIComponent(iv)
 
-    encrypt_data && iv &&  await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv })
+  //   encrypt_data && iv && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv })
 
-    this.props.onSelectCity(cityCode)
-  }
+  //   this.props.onSelectCity(cityCode)
+  // }
 
   render() {
-    const { citycode, city } = this.props
+    const { citycode, city , onSelectCity } = this.props
 
     const cityModalHeaderstyle = {
       width: '100%',
@@ -89,9 +89,9 @@ class CityModal extends Component {
           {city.map((item, key) =>
             <View key={item.id}>
               <AtButton
-                openType='getPhoneNumber'
-                onGetPhoneNumber={this.getPhoneNumber.bind(this, item.id)}
-              // onClick={onSelectCity.bind(this, item.id)}
+                // openType='getPhoneNumber'
+                // onGetPhoneNumber={this.getPhoneNumber.bind(this, item.id)}
+                onClick={onSelectCity.bind(this, item.id)}
               >
                 <View className='city-modal-item text-center p-2 text-secondary'>
                   {item.title}

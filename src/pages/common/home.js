@@ -105,7 +105,6 @@ class CommonHome extends BaseComponent {
   refApartmentList = (node) => this.apartmentList = node
 
   async componentWillMount() {
-
     const {
       searchScrollTop,
     } = this.state
@@ -178,17 +177,6 @@ class CommonHome extends BaseComponent {
     await this.props.dispatchAdList(citycode) && overloadData.push(1)
     // 字典
     await this.props.dispatchDistList(citycode) && overloadDist.push(1)
-
-
-    // 轮播图
-    //  await this.props.dispatchBannerList(citycode) && overloadData.push(1)
-    // // 商圈
-    // await this.props.dispatchCbdList(citycode) && overloadData.push(1)
-    // // 品牌公寓
-    // await this.props.dispatchRecommendList(citycode) && overloadData.push(1)
-    // // 活动专区
-    // await this.props.dispatchActivityList(citycode) && overloadData.push(1)
-
 
     // 当数据全部加载完成后读取筛选框的位置
     overloadData.length === 3 && !selectScrollTop && Taro.createSelectorQuery()
@@ -357,11 +345,6 @@ class CommonHome extends BaseComponent {
       payloadApartment
     } = this.state
 
-    // const {
-    //   ads, user, cbds, dists,
-    //   citys, banners, recommends,
-    //   activities, apartments, home
-    // } = this.props
 
     const {
       ads, user, dists,
