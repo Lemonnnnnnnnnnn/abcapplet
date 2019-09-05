@@ -75,8 +75,8 @@ export default async function fetch({
       }
       case CODE_AUTH_EXPIRED: {
         // clearUserStorage();
-        const user_info = Taro.getStorageSync('user_info')
-        Taro.setStorageSync('user_info', { ...user_info, token: '' })
+        // const user_info = Taro.getStorageSync('user_info')
+        // Taro.setStorageSync('user_info', { ...user_info, token: '' })
         Taro.setStorageSync('code', '')
 
 
