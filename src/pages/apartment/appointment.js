@@ -20,6 +20,7 @@ import {
 import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
 import GetPhoneNumMask from '@components/get-phoneNum-mask'
+import MaskTop from '@components/maskTop'
 
 import {
   PAGE_USER_AUTH
@@ -605,7 +606,6 @@ class AppointmentPost extends Component {
   render() {
     const { houstType, height, users, tel, showInformation, name,
       showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask, isNight } = this.state
-    // const allStyle = { height: screenHeight + 'px', width: screenWidth + 'px' }
 
     const {
       title, swipers, priceTitle, intro,
@@ -649,9 +649,9 @@ class AppointmentPost extends Component {
       postion: "absolute",
       width: Taro.pxTransform(100),
       height: Taro.pxTransform(10),
-      backgroundColor : '#fff',
-      marginBottom : Taro.pxTransform(20),
-      borderRadius : Taro.pxTransform(10),
+      backgroundColor: '#fff',
+      marginBottom: Taro.pxTransform(20),
+      borderRadius: Taro.pxTransform(10),
     }
 
     const imageFontWholeStyle = {
@@ -691,6 +691,9 @@ class AppointmentPost extends Component {
 
             </View>
             {/* 头部 */}
+
+            <MaskTop />
+
             <View style={borderRadiusStyle}>
               <View className='pl-3'>
                 <View className='text-bold text-huge mt-2' >{title}</View>

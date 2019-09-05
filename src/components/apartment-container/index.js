@@ -6,7 +6,7 @@ import { View, Swiper, SwiperItem, Image, Text } from '@tarojs/components'
 
 // 自定义组件
 import BaseComponent from '@components/base'
-
+import MaskTop from '@components/maskTop'
 
 // 自定义常量
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
@@ -41,8 +41,6 @@ class ApartmentContainer extends BaseComponent {
       current: currentPic
     })
   }
-
-
 
   changePicIndex(e) {
     const current = e.detail.current
@@ -104,6 +102,8 @@ class ApartmentContainer extends BaseComponent {
               </Image>
           }
         </View>}
+        <MaskTop />
+
 
         {/* index */}
         <View className='apartment-container-picIndexStyle' style={picIndexStyle}>
@@ -114,7 +114,7 @@ class ApartmentContainer extends BaseComponent {
           <Text className='text-white'>/{swipers.length}</Text>
         </View>
 
-        <View className='page-white apartment-container pt-3 pb-3' >
+        <View className='page-white apartment-container pt-1 pb-3' >
           <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>
             {isCollect
               ?
