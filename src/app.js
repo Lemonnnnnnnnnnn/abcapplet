@@ -60,6 +60,7 @@ class App extends Component {
         pages: [
           'index',
           'create',
+          'landing-page'
         ]
       },
       {

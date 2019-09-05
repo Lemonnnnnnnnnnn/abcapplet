@@ -13,12 +13,15 @@ class RiskHeader extends BaseComponent {
   static defaultProps = {
     items: [],
   }
+  onNavigetion() {
+    Taro.navigateTo({ url: '/pages/risk/landing-page' })
+  }
 
   render() {
     const { items, className } = this.props
     return (
       <Borad color='black' className={className}>
-        <View className='px-4 py-4'>
+        <View className='px-4 py-4' onClick={this.onNavigetion}>
           <View className='at-row at-row__justify--between '>
             {items.map(i => <View key={i.id}>
               <View className='at-row  at-row__align--center'>

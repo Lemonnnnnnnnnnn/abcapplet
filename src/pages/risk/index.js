@@ -20,7 +20,7 @@ import { PAYLOAD_RISK_LIST } from '@constants/api'
 })
 class RiskIndex extends Component {
   config = {
-    navigationBarTitleText: '风险金',
+    navigationBarTitleText: '退租险',
     navigationBarBackgroundColor: '#FFC919',
   }
 

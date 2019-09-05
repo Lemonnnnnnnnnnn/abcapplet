@@ -27,7 +27,7 @@ export const LOCALE_USER_FAVORITE = '我的心愿卡'
 export const LOCALE_USER_FAVORITE_EXTRA_TEXT = '多个房源'
 export const LOCALE_ORDER_LIST = '预定订单'
 export const LOCALE_DOWN_PAYMENT_RULE = '定金协议'
-export const LOCALE_RISK_FUND = '风险金'
+export const LOCALE_RISK_FUND = '退租险'
 export const LOCALE_MY_ORDER = '我的订单'
 export const LOCALE_NO_DATA = '暂无数据'
 

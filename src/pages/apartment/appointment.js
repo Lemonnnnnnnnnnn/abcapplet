@@ -640,13 +640,24 @@ class AppointmentPost extends Component {
     const imageFontStyle = {
       color: "#fff",
       fontWeight: "700",
-      postion: "absolute"
+      postion: "absolute",
+      fontSize: Taro.pxTransform(54),
+      letterSpacing: Taro.pxTransform(4),
+    }
+
+    const whiteLineStyle = {
+      postion: "absolute",
+      width: Taro.pxTransform(100),
+      height: Taro.pxTransform(10),
+      backgroundColor : '#fff',
+      marginBottom : Taro.pxTransform(20),
+      borderRadius : Taro.pxTransform(10),
     }
 
     const imageFontWholeStyle = {
       position: "absolute",
-      left: "40px",
-      top: "20px",
+      left: Taro.pxTransform(60),
+      top: Taro.pxTransform(100),
       zIndex: 9,
     }
 
@@ -668,9 +679,9 @@ class AppointmentPost extends Component {
           <View >
 
             <View style={imageFontWholeStyle}>
-              <View style={imageFontStyle} className='text-super'>一</View>
-              <View style={imageFontStyle} className='text-super'>提前预约，</View>
-              <View style={imageFontStyle} className='text-super'>不白跑！</View>
+              <View style={whiteLineStyle} ></View>
+              <View style={imageFontStyle} className='text-super'>即刻预约看房,</View>
+              <View style={imageFontStyle} className='text-super'>线上签约0元享退租险！</View>
             </View>
 
             <View style={style}>

@@ -16,6 +16,10 @@ class OrderHeader extends BaseComponent {
     size: 'normal',
   }
 
+  onNavigetion() {
+    Taro.navigateTo({url:'/pages/risk/landing-page'})
+  }
+
   render() {
     const { items, className, size } = this.props
     const grayline = {
@@ -32,7 +36,7 @@ class OrderHeader extends BaseComponent {
     return (
       <Borad color='black' shadow='black-shadow' className={className}>
         {size === 'normal' &&
-          <View className='px-3 py-3' >
+          <View className='px-3 py-3' onClick={this.onNavigetion}>
             <View className='at-row at-row__justify--center'>
               <View className='text-small text-secondary mb-2'>{LOCALE_LOCK_NOTICE}</View>
             </View>
@@ -56,7 +60,7 @@ class OrderHeader extends BaseComponent {
         }
 
         {size === 'small' &&
-          <View className='px-3 py-3' >
+          <View className='px-3 py-3' onClick={this.onNavigetion}>
             <View className='at-row at-row__justify--around'>
               {items.map(i => <View key={i.id}>
                 <View className='at-row at-row__align--center'>

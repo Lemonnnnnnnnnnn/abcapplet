@@ -206,9 +206,9 @@ class AppointmentDetail extends BaseComponent {
         </View>
 
         <Board className='py-2 px-3 mx-2 mt-4 '>
-          <View className='at-row'>
+          <View className='at-row' style={{marginTop : Taro.pxTransform(200)}}>
             <View className='border-decorate border-decorate-yellow' style={{ height: '20px' }}></View>
-            <View className='text-normal text-bold ml-2'>预约看房公寓</View>
+            <View className='text-normal text-bold ml-2'>签约公寓</View>
           </View>
           <View className='text-huge text-bold ml-2 mt-2'>{apartmentTitle}</View>
           <View className='text-small ml-2 mt-2'>
@@ -302,7 +302,7 @@ class AppointmentDetail extends BaseComponent {
         </View>
 
         <View className='appointment-detail-head'>
-          <Image src='https://images.gongyuabc.com/image/appointmenthead.png' className='appointmentHead'></Image>
+          <Image src='https://images.gongyuabc.com/image/signCashBack.png' mode='widthFix'   className='appointmentHead'></Image>
         </View>
       </View>
 

@@ -190,7 +190,7 @@ class ServiceItem extends BaseComponent {
     const { haveIntention, haveEvalution, showIntention, showEvalution } = this.state
 
     const { id, cover, apartment_title, house_type_title,
-      order_time, server_id, server_user, comment, look_time, intention, remark, date, status, is_sign,is_can_reward } = service
+      order_time, server_id, server_user, comment, look_time, intention, remark, date, status, is_sign, is_can_reward, reward_id } = service
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -217,17 +217,17 @@ class ServiceItem extends BaseComponent {
       position: 'absolute',
       left: "50%",
       top: '43%',
-      height: "69px",
+      height: Taro.pxTransform(138),
       transform: "translate( -50% , 30%)",
-      borderRadius: '12px',
+      borderRadius: Taro.pxTransform(24),
       width: '90%',
       background: 'rgba(255,255,255,1)',
       boxShadow: '0px 3px 6px rgba(0,0,0,0.04)',
     }
 
     const ImageCenteredStyle = {
-      width: "60px",
-      height: "60px",
+      width: Taro.pxTransform(120),
+      height: Taro.pxTransform(120),
       position: "absolute",
       left: "16%",
       top: '50%',
@@ -312,7 +312,7 @@ class ServiceItem extends BaseComponent {
             </View>
 
             {
-              is_can_reward
+              is_can_reward || reward_id
                 ?
                 <View className='mb-3 mr-3 at-col at-col-5 py-2 px-2 service-button at-col__align--center' style={{ marginTop: "55px" }} onClick={this.onNavigationAgency}>
                   <Image src='https://images.gongyuabc.com/image/redEnvelope.gif' className='appointment-envolpe'></Image>
@@ -325,7 +325,6 @@ class ServiceItem extends BaseComponent {
                   <View style='font-size:10px ;color:#888888'>{LOCALE_APPOINTMENT_CASHPLEDGE}</View>
                 </View>
             }
-
 
           </View>
           {/* 头部 公寓类型以及查看详情 */}
