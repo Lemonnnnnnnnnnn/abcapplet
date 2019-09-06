@@ -174,6 +174,12 @@ class CommonHome extends BaseComponent {
   // 关闭获取授权弹窗
   onCloseAuthorizationMask() {
     this.setState({ showAuthorizationMask: false })
+    this.onRefreshPage()
+  }
+
+  // 刷新页面
+  onRefreshPage() {
+    Taro.reLaunch({url : '/pages/common/home'})
   }
 
   /**

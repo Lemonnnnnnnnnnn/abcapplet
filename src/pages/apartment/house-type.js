@@ -531,21 +531,21 @@ class HouseTypeShow extends Component {
 
 
               {/* 公共配置 */}
-              <View className='at-row at-row__justify--around mt-4 '>
+              <View className='at-row at-row__justify--center mt-4 '>
 
                 {roomMatch_list && roomMatch_list.map((i, key) => key !== 5 ?
-                  <View key={i.title} className='at-col' style={{ position: "relative" }}>
+                  <View key={i.title} className='at-col' style={{ position: "relative", left: Taro.pxTransform(13) }}>
                     <View className='house-type-public-configuration' ></View>
-                    <View style={{ position: "absolute", top: "5px", left: "5px" }}>
-                      <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                    <View style={{ position: "absolute", top: Taro.pxTransform(10), left: Taro.pxTransform(13) }}>
+                      <Image src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
                       <View className='text-small text-center' >{i.title}</View>
                     </View>
                   </View>
                   :
                   <View onClick={this.onOpenAllMatching} key={i.title} className='at-col ' style={{ position: "relative" }}>
-                    <View className='house-type-public-configuration' ></View>
-                    <View style={{ position: "absolute", top: "5px", left: "5px" }}>
-                      <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                    <View className='house-type-public-configuration' style={{ left: Taro.pxTransform(13), position: 'absolute' }}></View>
+                    <View style={{ position: "absolute", top: Taro.pxTransform(10), left: Taro.pxTransform(23) }}>
+                      <Image src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
                       <View className='text-small text-center'>{i.title}</View>
                     </View>
                   </View>
