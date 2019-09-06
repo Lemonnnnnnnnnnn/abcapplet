@@ -19,7 +19,7 @@ import {
 // 自定义组件
 import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
-import GetPhoneNumMask from '@components/get-phoneNum-mask'
+import GetAuthorizationMask from '@components/get-authorization-mask'
 import MaskTop from '@components/maskTop'
 
 import {
@@ -793,7 +793,8 @@ class AppointmentPost extends Component {
                 minTime={zeroMinTime}
                 serverId={serverId}
               />
-              <GetPhoneNumMask
+              <GetAuthorizationMask
+                type='getPhoneNumber'
                 onClose={this.onClosePhoneMask}
                 show={showGetPhoneNumMask}
                 onFillPhone={this.getPhoneNumber} />

@@ -27,14 +27,10 @@ class BaseList extends BaseComponent {
 
   async componentDidMount() {
     const { defaultPayload } = this.props
-    const { count } = this.state
-    const { latitude, longitude } = await Taro.getLocation()
-    this.onReset({ ...defaultPayload, latitude, longitude })
-
-    // if ( count === 0) {
-    //   this.onReset({ ...defaultPayload, latitude, longitude })
-    //   this.setState({ count: 1 })
-    // }
+    await Taro.getLocation({
+      success: (res) => { this.onReset({ ...defaultPayload, latitude: res.latitude, longitude: res.longitude }) },
+      fail: () => { this.onReset({ ...defaultPayload, latitude: 0, longitude: 0 }) }
+    }).catch((err) => { console.log(err) })
   }
 
 

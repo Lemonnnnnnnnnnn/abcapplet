@@ -10,6 +10,7 @@ import Header from '@components/header'
 import Select from '@components/select'
 import ApartmentList from '@components/apartment-list'
 import RequirementCard from '@components/requirement-card'
+import GetAuthorizationMask from '@components/get-authorization-mask'
 
 import {
   PAGE_USER_AUTH
@@ -65,7 +66,9 @@ class CommonHome extends BaseComponent {
 
   state = {
     payloadApartment: PAYLOAD_APARTMENT_LIST,
+    // 弹窗相关
     showCard: false,//显示需求卡1
+    showAuthorizationMask: false,
 
     roomList: [],
     floorList: [],
@@ -148,10 +151,29 @@ class CommonHome extends BaseComponent {
 
   async componentDidShow() {
     const { payloadApartment } = this.state
-    const { latitude, longitude } = await Taro.getLocation()
-    this.setState({
-      payloadApartment: { ...payloadApartment, latitude: latitude, longitude: longitude, }
-    })
+    await Taro.getLocation({
+      success: res => { this.setState({ payloadApartment: { ...payloadApartment, latitude: res.latitude, longitude: res.longitude, } }) },
+      fail: () => {
+        this.setState({ payloadApartment: { ...payloadApartment, latitude: 0, longitude: 0 } })
+
+        Taro.getSetting().then(res => {
+          const index = Taro.getStorageSync('haveLocationPower')
+          Taro.setStorageSync('haveLocationPower', parseInt(index) + 1)
+
+          if (parseInt(index) === 1) {
+            const haveLocationPower = res.authSetting['scope.userLocation']
+            !haveLocationPower && this.setState({ showAuthorizationMask: true })
+          }
+
+        })
+      }
+    }).catch(err => { console.log(err) })
+
+  }
+
+  // 关闭获取授权弹窗
+  onCloseAuthorizationMask() {
+    this.setState({ showAuthorizationMask: false })
   }
 
   /**
@@ -333,17 +355,21 @@ class CommonHome extends BaseComponent {
     }
   }
 
+
   render() {
 
     const {
-      showCard, showSelect, showSearch, floorList, roomList,
+      showSelect, showSearch, floorList, roomList,
       searchIsFixed,
       searchScrollTop,
       selector,
       selectorChecked,
       selectIsFixed,
       cityCode,
-      payloadApartment
+      payloadApartment,
+
+      showCard,
+      showAuthorizationMask
     } = this.state
 
 
@@ -358,7 +384,6 @@ class CommonHome extends BaseComponent {
       <View
         className='page-white'
         style={{ overflow: "hidden" }} >
-
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
@@ -509,6 +534,12 @@ class CommonHome extends BaseComponent {
 
           initialFloor={floorList}
           initialRoom={roomList}
+        />
+
+        <GetAuthorizationMask
+          type='getLocation'
+          onClose={this.onCloseAuthorizationMask}
+          show={showAuthorizationMask}
         />
       </View>
     )

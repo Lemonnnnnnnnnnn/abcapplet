@@ -1,8 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 
+// 自定义组件
 import ServicesHeader from '@components/services-header'
 import ServicesList from '@components/services-list'
+import GetAuthorizationMask from '@components/get-authorization-mask'
 
 import {
   PAYLOAD_APPOINTMENT_LIST
@@ -26,6 +28,7 @@ class ServicesHome extends Component {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
     NowCurrentPage: 2,
+    showAuthorizationMask: false,
   }
 
   refAppointmentList = (node) => this.appointmentList = node
@@ -63,7 +66,7 @@ class ServicesHome extends Component {
           payload: { ...payload, current_page: 2 }
         })
       })
-      Taro.stopPullDownRefresh()
+    Taro.stopPullDownRefresh()
   }
   componentDidHide() {
     this.onHide()
@@ -118,15 +121,20 @@ class ServicesHome extends Component {
     })
   }
 
+   // 关闭获取授权弹窗
+   onCloseAuthorizationMask() {
+    this.setState({ showAuthorizationMask: false })
+  }
+
   render() {
     const { appointments } = this.props
-    const { time, payload } = this.state
+    const { time, payload , showAuthorizationMask} = this.state
 
 
 
     const yellowPointStyle = {
-      height: '8px',
-      width: '8px',
+      height: Taro.pxTransform(16),
+      width: Taro.pxTransform(16),
       borderRadius: '50%',
       backgroundColor: 'rgba(255, 201, 25, 1)'
     }
@@ -168,6 +176,11 @@ class ServicesHome extends Component {
               </View>
           }
         </View>
+        <GetAuthorizationMask
+          type='getLocation'
+          onClose={this.onCloseAuthorizationMask}
+          show={showAuthorizationMask}
+        />
       </View>
     )
   }

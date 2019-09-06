@@ -77,12 +77,6 @@ class App extends Component {
       },
     ],
 
-    "permission": {
-      "scope.userLocation": {
-        "desc": "你的位置信息将用于小程序位置接口的效果展示"
-      }
-    },
-
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -133,6 +127,7 @@ class App extends Component {
 
   componentWillMount() {
     this.autoUpdate()
+    Taro.setStorageSync('haveLocationPower', 0)
   }
 
   //自动检测更新

@@ -122,7 +122,7 @@ class Select extends BaseComponent {
   async onPayloadChangeAndRefresh({ payload = {} }) {
     // 因为是异步，不要直接用 onPayloadChange ！！！
     const { latitude, longitude } = this.state
-    payload = { ...this.state.payload, ...payload , longitude, latitude}
+    payload = { ...this.state.payload, ...payload, longitude, latitude }
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
 
@@ -143,10 +143,15 @@ class Select extends BaseComponent {
   }
 
   async componentWillMount() {
-    const { latitude, longitude } = await Taro.getLocation()
+
     const { payload } = this.state
     const { cityCode } = this.props
-    this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
+
+    await Taro.getLocation({
+      success: (res) => { this.setState({ payload: { ...payload, city: cityCode }, latitude: res.latitude, longitude: res.longitude }) },
+      fail: () => { this.setState({ payload: { ...payload, city: cityCode }, latitude: 0, longitude: 0 }) }
+    }).catch((err)=>{console.log(err)})
+    // this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
   }
 
   //筛选器选择下拉
