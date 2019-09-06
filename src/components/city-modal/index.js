@@ -41,7 +41,7 @@ class CityModal extends Component {
   // }
 
   render() {
-    const { citycode, city , onSelectCity } = this.props
+    const { citycode, city, onSelectCity } = this.props
 
     const cityModalHeaderstyle = {
       width: '100%',
@@ -91,7 +91,7 @@ class CityModal extends Component {
               <AtButton
                 // openType='getPhoneNumber'
                 // onGetPhoneNumber={this.getPhoneNumber.bind(this, item.id)}
-                onClick={onSelectCity.bind(this, item.id)}
+                onClick={onSelectCity.bind(this, item.id, item.title)}
               >
                 <View className='city-modal-item text-center p-2 text-secondary'>
                   {item.title}

@@ -157,7 +157,7 @@ class CommonHome extends BaseComponent {
   /**
    * 选择城市
    */
-  async onSelectCity(citycode) {
+  async onSelectCity(citycode, title) {
 
     const {
       selectScrollTop,
@@ -185,6 +185,7 @@ class CommonHome extends BaseComponent {
       .boundingClientRect()
       .exec(res => this.setState({ selectScrollTop: res[0].top, }))
 
+    this.setState({ selectorChecked: title })
 
     overloadDist.length === 1 && this.initialHouseType()
 
@@ -463,7 +464,7 @@ class CommonHome extends BaseComponent {
                   showSelect={showSelect}
                   top={searchScrollTop}
 
-                  cityCode={cityCode}
+                  cityCode={Taro.getStorageSync('user_info').citycode}
                   autoSortDist={[]}
                   cbdDist={dists.cbd_list}
                   priceDist={dists.price_list}
