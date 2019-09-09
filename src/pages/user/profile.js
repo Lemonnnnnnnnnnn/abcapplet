@@ -57,13 +57,13 @@ class UserProfile extends Component {
   }
 
   async componentDidShow() {
-    const { payload: user } = await this.props.dispatchUser()
-    this.props.dispatchDistList(user.citycode)
+    // const { payload: user } = await this.props.dispatchUser()
+    // this.props.dispatchDistList(user.citycode)
     this.setState({ showMask: false })
   }
 
   onLogin() {
-    Taro.reLaunch({ url: PAGE_USER_AUTH })
+    Taro.navigateTo({ url: PAGE_USER_AUTH })
   }
 
   // 打开/关闭需求卡
@@ -119,9 +119,9 @@ class UserProfile extends Component {
     const maskStyle = {
       position: 'absolute',
       height: '80vh',
-      width : '100%',
+      width: '100%',
       top: '20vh',
-      zIndex : 99,
+      zIndex: 99,
     }
 
 
