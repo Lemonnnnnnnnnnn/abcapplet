@@ -116,6 +116,14 @@ class UserProfile extends Component {
     const { optionLists, orderOptionLists, showCard, floorList, roomList, showMask } = this.state
     const { user: { username, mobile }, dists } = this.props
 
+    const maskStyle = {
+      position: 'absolute',
+      height: '80vh',
+      width : '100%',
+      top: '20vh',
+      zIndex : 99,
+    }
+
 
     return (
       <View className='page-grey'>
@@ -189,6 +197,10 @@ class UserProfile extends Component {
           initialFloor={floorList}
           initialRoom={roomList}
         />
+
+        {
+          !Taro.getStorageSync('user_info').token && <View style={maskStyle}></View>
+        }
 
 
       </View>

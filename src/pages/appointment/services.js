@@ -1,10 +1,11 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 
+
 // 自定义组件
 import ServicesHeader from '@components/services-header'
 import ServicesList from '@components/services-list'
-import GetAuthorizationMask from '@components/get-authorization-mask'
+import loginButton from '@components/login-button'
 
 import {
   PAYLOAD_APPOINTMENT_LIST
@@ -28,7 +29,6 @@ class ServicesHome extends Component {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
     NowCurrentPage: 2,
-    showAuthorizationMask: false,
   }
 
   refAppointmentList = (node) => this.appointmentList = node
@@ -121,14 +121,17 @@ class ServicesHome extends Component {
     })
   }
 
-   // 关闭获取授权弹窗
-   onCloseAuthorizationMask() {
-    this.setState({ showAuthorizationMask: false })
-  }
+  // 关闭获取授权弹窗
+  //  onCloseAuthorizationMask() {
+  //   this.setState({ showAuthorizationMask: false })
+  // }
+
+
+
 
   render() {
     const { appointments } = this.props
-    const { time, payload , showAuthorizationMask} = this.state
+    const { time, payload } = this.state
 
 
 
@@ -156,31 +159,39 @@ class ServicesHome extends Component {
             <View className='pl-2 text-bold text-large'>看房行程</View>
 
           </View>
+
           {
-            appointments.list.length ?
-              <View className=' at-col'>
-                <View >
-                  <ServicesList
-                    lists={appointments.list}
-                    time={time}
-                    ref={this.refApartmentList}
-                    defaultPayload={payload}
-                    dispatchList={this.props.dispatchApartmentList}
-                    dispatchNextPageList={this.props.dispatchNextPageApartmentList}
-                  />
-                </View>
-              </View>
+            Taro.getStorageSync('user_info').token ? <View>
+              {
+                appointments.list.length ?
+                  <View className=' at-col'>
+                    <View >
+                      <ServicesList
+                        lists={appointments.list}
+                        time={time}
+                        ref={this.refApartmentList}
+                        defaultPayload={payload}
+                        dispatchList={this.props.dispatchApartmentList}
+                        dispatchNextPageList={this.props.dispatchNextPageApartmentList}
+                      />
+                    </View>
+                  </View>
+                  :
+                  <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
+                    <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
+                  </View>
+              }
+            </View>
               :
-              <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
-                <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
+              <View className='mt-5'>
+                <loginButton  message='请登录后查看行程' />
               </View>
           }
+
+
+
         </View>
-        <GetAuthorizationMask
-          type='getLocation'
-          onClose={this.onCloseAuthorizationMask}
-          show={showAuthorizationMask}
-        />
+
       </View>
     )
   }

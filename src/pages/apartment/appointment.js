@@ -21,10 +21,9 @@ import AppointmentPostMask from '@components/appointment-post-mask'
 import AppointmentPostNextMask from '@components/appointment-post-next-mask'
 import GetAuthorizationMask from '@components/get-authorization-mask'
 import MaskTop from '@components/maskTop'
+import loginButton from '@components/login-button'
 
-import {
-  PAGE_USER_AUTH
-} from '@constants/page'
+
 
 
 const nowTime = new Date()
@@ -117,7 +116,7 @@ class AppointmentPost extends Component {
 
   async componentDidMount() {
 
-    const { id , apartmentId } = this.$router.params
+    const { id, apartmentId } = this.$router.params
     const { Payload } = this.state
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
@@ -602,8 +601,19 @@ class AppointmentPost extends Component {
           })
         }
       })
-
   }
+
+  // 跳转登录页
+
+  // onNavigation() {
+  //   const cLength = Taro.getCurrentPages().length
+  //   const currentPage = Taro.getCurrentPages()[cLength - 1].route
+  //   Taro.setStorageSync('lastPage', '/' + currentPage)
+
+  //   Taro.redirectTo({ url: PAGE_USER_AUTH })
+
+  // }
+
   render() {
     const { houstType, height, users, tel, showInformation, name,
       showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask, isNight } = this.state
@@ -705,25 +715,34 @@ class AppointmentPost extends Component {
 
               <View style='width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 ' border='all'>
                 <View className=' mt-2' border='all' >
-                  <View className='at-row ml-3 mt-1'>
-                    <View className='at-col-2'>
-                      <AtAvatar circle image={headimgurl}></AtAvatar>
-                    </View>
-                    <View className='at-col-4 ml-1'>
-                      <View>
-                        <View className='text-bold'>{name}</View>
-                        <View className='at-row'>
-                          <AtIcon value='iphone' size='13'></AtIcon>
-                          <View className='text-small mt-1'>{tel}</View>
+
+                  {/* 姓名 电话 */}
+                  {
+                    Taro.getStorageSync('user_info').token ?
+                      <View className='at-row ml-3 mt-1'>
+                        <View className='at-col-2'>
+                          <AtAvatar circle image={headimgurl}></AtAvatar>
+                        </View>
+                        <View className='at-col-4 ml-1'>
+                          <View>
+                            <View className='text-bold'>{name}</View>
+                            <View className='at-row'>
+                              <AtIcon value='iphone' size='13'></AtIcon>
+                              <View className='text-small mt-1'>{tel}</View>
+                            </View>
+                          </View>
+                        </View>
+
+                        <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
+                          <View className='text-normal'>{LOCALE_CHANGE}</View>
+                          <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
                         </View>
                       </View>
-                    </View>
+                      :
+                      <loginButton message='请登录后预约' />
 
-                    <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onClose}>
-                      <View className='text-normal'>{LOCALE_CHANGE}</View>
-                      <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
-                    </View>
-                  </View>
+                  }
+
 
 
                   {/* 选择户型 */}
@@ -770,11 +789,20 @@ class AppointmentPost extends Component {
                     <View className='at-col at-col-1'></View>
                   </View>
                   {/* 按钮 */}
-                  <AtButton
-                    circle
-                    className='m-3 btn-yellow active'
-                    onClick={this.onAppointmentPost}
-                  >{LOCALE_APPOINTMENT_POST}</AtButton>
+                  {
+                    Taro.getStorageSync('user_info').token ?
+                      <AtButton
+                        circle
+                        className='m-3 btn-yellow active'
+                        onClick={this.onAppointmentPost}
+                      >{LOCALE_APPOINTMENT_POST}</AtButton>
+                      :
+                      <AtButton
+                        circle
+                        className='m-3 btn-grey active'
+                      >{LOCALE_APPOINTMENT_POST}</AtButton>
+                  }
+
 
                 </View>
               </View>

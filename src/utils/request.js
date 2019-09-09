@@ -74,18 +74,17 @@ export default async function fetch({
         throw new Error(response.data.msg)
       }
       case CODE_AUTH_EXPIRED: {
-        // clearUserStorage();
         const user_info = Taro.getStorageSync('user_info')
         Taro.setStorageSync('user_info', { ...user_info, token: '' })
         Taro.setStorageSync('code', '')
 
 
-        const cLength = Taro.getCurrentPages().length
-        const currentPage = Taro.getCurrentPages()[cLength - 1]
-        if (currentPage.route === 'pages/common/home') { }
-        else if (currentPage.route !== 'pages/user/auth') {
-          Taro.redirectTo({ url: PAGE_USER_AUTH })
-        }
+        // const cLength = Taro.getCurrentPages().length
+        // const currentPage = Taro.getCurrentPages()[cLength - 1]
+        // if (currentPage.route === 'pages/common/home') { }
+        // else if (currentPage.route !== 'pages/user/auth') {
+        //   Taro.redirectTo({ url: PAGE_USER_AUTH })
+        // }
 
         break;
       }

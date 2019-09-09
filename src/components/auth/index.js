@@ -20,7 +20,8 @@ class Auth extends Component {
   }
 
   onNavigation() {
-    Taro.switchTab({ url: '/pages/common/home' })
+    Taro.navigateBack()
+
   }
 
   render() {

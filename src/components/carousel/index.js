@@ -63,9 +63,9 @@ class Carousel extends Component {
 
     const bgStyle = {
       position: "absolute",
-      left: " 8px",
-      top: "8px",
-      borderRadius: " 16px",
+      left: Taro.pxTransform(16),
+      top: Taro.pxTransform(16),
+      borderRadius: Taro.pxTransform(32),
       // padding: " 6px 5px",
       backgroundColor: "#000",
       width: Taro.pxTransform(120),
@@ -75,8 +75,8 @@ class Carousel extends Component {
 
     const countStyle = {
       position: "absolute",
-      left: " 8px",
-      top: "8px",
+      left: Taro.pxTransform(16),
+      top: Taro.pxTransform(16),
       // padding: " 6px 5px",
       width: Taro.pxTransform(120),
       height: Taro.pxTransform(35),

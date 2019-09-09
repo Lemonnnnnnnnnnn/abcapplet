@@ -14,6 +14,7 @@ import Decorate from '@components/decorate'
 import OrderHeader from '@components/order-header'
 import OrderRoomListMask from '@components/order-room-list-mask'
 import ABCIcon from '@components/abc-icon'
+import loginButton from '@components/login-button'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
@@ -241,6 +242,14 @@ class OrderCreate extends Component {
             className='mb-3'
             items={ORDER_HEADERS}
           />
+
+          {/* 如果用户没有登录 */}
+          {!Taro.getStorageSync('user_info').token &&
+            <View className='mb-3'>
+              <loginButton color='black' message='您暂未登录，无法签约下定' />
+            </View>
+          }
+
           <View className='mb-2'>
             <Text className='text-bold text-huge'>{LOCALE_SCHEDULED_MESSAGE}</Text>
             <View onClick={this.onNavigation} className='text-normal text-secondary' style='float:right'>
@@ -411,8 +420,8 @@ class OrderCreate extends Component {
             <View className='at-col-12'>
               <AtButton
                 circle
-                disabled={disabled}
-                className='btn-yellow active'
+                disabled={Taro.getStorageSync('user_info').token ? disabled : true} 
+                className={Taro.getStorageSync('user_info').token ? 'btn-yellow active' : 'btn-grey btn-light-writh'}
                 onClick={this.onOrderCreate}
               >{LOCALE_SIGN_NOW}</AtButton>
             </View>
