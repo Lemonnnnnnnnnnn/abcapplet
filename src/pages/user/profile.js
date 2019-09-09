@@ -57,8 +57,8 @@ class UserProfile extends Component {
   }
 
   async componentDidShow() {
-    // const { payload: user } = await this.props.dispatchUser()
-    // this.props.dispatchDistList(user.citycode)
+    const { payload: user } = await this.props.dispatchUser()
+    this.props.dispatchDistList(user.citycode)
     this.setState({ showMask: false })
   }
 
