@@ -102,6 +102,7 @@ class ApartmentContainer extends BaseComponent {
               </Image>
           }
         </View>}
+
         <MaskTop />
 
 
@@ -114,7 +115,7 @@ class ApartmentContainer extends BaseComponent {
           <Text className='text-white'>/{swipers.length}</Text>
         </View>
 
-        <View className='page-white apartment-container pt-1 pb-3' >
+        <View className='page-white apartment-container pb-3' >
           <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>
             {isCollect
               ?

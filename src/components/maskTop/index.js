@@ -1,7 +1,8 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import BaseComponent from '@components/base'
 
-class Mask extends Taro.Component {
+class MaskTop extends BaseComponent {
 
     render() {
         const maskTopStyle = {
@@ -10,15 +11,14 @@ class Mask extends Taro.Component {
             height: Taro.pxTransform(24),
             width: '100%',
             position: 'absolute',
-            top: Taro.pxTransform(-24),
+            top: Taro.pxTransform(-23),
             background: '#fff',
-
         }
         return <View style={{ position: 'relative' }}>
-            <View style={maskTopStyle}></View>
+            <View className='mask-top' ></View>
 
         </View>
     }
 }
 
-export default Mask
+export default MaskTop

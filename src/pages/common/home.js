@@ -101,6 +101,7 @@ class CommonHome extends BaseComponent {
     await this.componentDidShow()
     Taro.stopPullDownRefresh()
   }
+
   onLogin() {
     Taro.reLaunch({ url: PAGE_USER_AUTH })
   }
@@ -114,11 +115,7 @@ class CommonHome extends BaseComponent {
 
     // 获取筛选器和搜索框距离顶部的距离
     //判断是否弹出需求卡
-    this.props.dispatchGetUserMsg().then((res) => {
-      if (res && res.data.data.user.is_guide === 0) {
-        this.setState({ showCard: true })
-      }
-    })
+
     !searchScrollTop
       && Taro.createSelectorQuery()
         .in(this.$scope)
@@ -151,6 +148,13 @@ class CommonHome extends BaseComponent {
 
   async componentDidShow() {
     const { payloadApartment } = this.state
+
+    this.props.dispatchGetUserMsg().then((res) => {
+      if (res && res.data.data.user.is_guide === 0) {
+        this.setState({ showCard: true })
+      }
+    })
+
     await Taro.getLocation({
       success: res => { this.setState({ payloadApartment: { ...payloadApartment, latitude: res.latitude, longitude: res.longitude, } }) },
       fail: () => {
@@ -179,7 +183,7 @@ class CommonHome extends BaseComponent {
 
   // 刷新页面
   onRefreshPage() {
-    Taro.reLaunch({url : '/pages/common/home'})
+    Taro.reLaunch({ url: '/pages/common/home' })
   }
 
   /**
@@ -506,10 +510,8 @@ class CommonHome extends BaseComponent {
               }
             </View>
 
-            {/* <View style={selectIsFixed ? { height: Taro.pxTransform(174) } : {}}></View> */}
-
             <View className='home-apartment ml-3 mr-3'>
-              <ApartmentList
+              {banners.length > 0 && <ApartmentList
                 key={apartments.type}
                 type={apartments.type}
                 items={apartments.list}
@@ -520,6 +522,8 @@ class CommonHome extends BaseComponent {
                 dispatchList={this.props.dispatchApartmentList}
                 dispatchNextPageList={this.props.dispatchNextPageApartmentList}
               />
+              }
+
             </View>
           </View>
 

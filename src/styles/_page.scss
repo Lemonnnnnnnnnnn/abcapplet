@@ -126,9 +126,20 @@ page {
 }
 
 //单位元素垂直居中
-.page-middile{
+.page-middile {
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+// maskTop 样式
+.mask-top {
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  height: 24px;
+  width: 100%;
+  position: absolute;
+  top: -22px;
+  background: #fff;
 }

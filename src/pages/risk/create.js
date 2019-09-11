@@ -168,7 +168,7 @@ class RiskCreate extends Component {
               <View className='text-normal text-secondary mb-2'>退租审核流程：预计24小时内受理完成</View>
               <View className='text-small text-secondary'>1.受到退租申请及信息凭证，凭证要求：租房合同及其作废证明、身份证照片等。</View>
               <View className='text-small text-secondary'>2.客服审核申请，预计3个工作日。</View>
-              <View className='text-small text-secondary'>3.审核通过则进入赔付流程，风险金预计1-3个工作日内到账。</View>
+              <View className='text-small text-secondary'>3.审核通过则进入赔付流程，退租险预计1-3个工作日内到账。</View>
             </View>
           </Board>
         </View>
@@ -177,7 +177,7 @@ class RiskCreate extends Component {
           <View className='at-row'>
             <View className='at-col-6 text-normal at-row at-row__align--center at-row__justify--center'>
               <View>
-                风险金赔付金额 {riskPrice}
+                退租险赔付金额 {riskPrice}
               </View>
             </View>
             <View className='at-col-6'>

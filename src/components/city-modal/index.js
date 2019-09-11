@@ -62,7 +62,7 @@ class CityModal extends Component {
     const iconWeight = Taro.pxTransform(30)
     const iconHeight = Taro.pxTransform(36)
 
-    return (citycode === 0 &&
+    return (!citycode &&
       <AtModal
         isOpened
         className='city-modal'
