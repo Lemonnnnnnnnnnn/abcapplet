@@ -673,8 +673,8 @@ class AppointmentPost extends Component {
     }
 
     const borderRadiusStyle = {
-      borderTopLeftRadius: "12px",
-      borderTopRightRadius: "12px",
+      borderTopLeftRadius: Taro.pxTransform(24),
+      borderTopRightRadius: Taro.pxTransform(24),
       backgroundColor: "#fff",
       position: "relative",
     }
@@ -739,7 +739,7 @@ class AppointmentPost extends Component {
                         </View>
                       </View>
                       :
-                      <loginButton message='请登录后预约' />
+                      <loginButton backTwo message='请登录后预约' />
 
                   }
 
@@ -833,6 +833,7 @@ class AppointmentPost extends Component {
 
           </View>
         </View>
+
       </View>
     )
   }

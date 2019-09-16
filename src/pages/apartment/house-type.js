@@ -329,18 +329,18 @@ class HouseTypeShow extends Component {
     Taro.navigateTo({ url: `/pages/apartment/search-room?id=${id}` })
   }
 
-  async onshowMorePic() {
-    this.setState({ showApartRoom: false })
-    const { id } = this.$router.params
-    const { houstType } = this.state
+  // async onshowMorePic() {
+  //   this.setState({ showApartRoom: false })
+  //   const { id } = this.$router.params
+  //   const { houstType } = this.state
 
-    const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
+  //   const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
-    const roomList = data.room_list
+  //   const roomList = data.room_list
 
-    this.setState({ houstType: { ...houstType, roomList: roomList } })
+  //   this.setState({ houstType: { ...houstType, roomList: roomList } })
 
-  }
+  // }
 
   /**
    * 点击 预约看房,查看订单
@@ -600,22 +600,28 @@ class HouseTypeShow extends Component {
                         onDeleteFavorite={this.onRoomDeleteFavorite}
                         className={`${index + 1 !== roomList.length && 'border-bottom'}`}
                       />)}
-                    {
+                    {/* {
                       showApartRoom && roomList.length > 5 && <View
                         onClick={this.onshowMorePic}
                         className='text-secondary text-normal mt-2'
                         style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
-                    }
+                    } */}
                   </View>
 
                   {/* 搜索房间 */}
-                  <View
-                    style={{ width: '100%', background: 'rgba(248, 248, 248, 1)', borderRadius: Taro.pxTransform(34) }}
-                    onClick={this.onSearchRoom}
-                    className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--center at-row__justify--center'>
-                    <AtIcon className='ml-2' value='search' size='13' color={COLOR_GREY_0} />
-                    <Text className='ml-2 text-normal text-muted'>搜索房间</Text>
-                  </View>
+                  {
+                    showApartRoom && roomList.length > 5 && <View
+                      style={{ width: '100%' }}
+                      onClick={this.onSearchRoom}
+                      className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--end at-row__justify--center'>
+                      <Text className='ml-2 text-normal text-muted'>查看更多房间</Text>
+                      <View className=''>
+                        <AtIcon className='ml-2' value='chevron-right' size='18' color={COLOR_GREY_2} />
+                      </View>
+
+                    </View>
+                  }
+
                 </View>
               }
 
@@ -721,8 +727,8 @@ class HouseTypeShow extends Component {
                     key={apartments.type}
                     type={TYPE_FAVORITE_APARTMENT}
                     items={apartments.list}
-                    defaultPayload={{ city }}
-                    dispatchList={this.props.dispatchRecommendHouseType}
+                  // defaultPayload={{ city }}
+                  // dispatchList={this.props.dispatchRecommendHouseType} 
                   />
                 </View>
               }

@@ -15,6 +15,7 @@ export const PAGE_EXTERNAL_INDEX = '/pages/external/index'
 
 // 用户相关
 export const PAGE_USER_AUTH = '/pages/user/auth'
+export const PAGE_USER_PROFILE = '/pages/user/profile'
 export const PAGE_USER_CARD = '/pages/user/card'
 export const PAGE_USER_FAVORITE = '/pages/user/favorite'
 
@@ -32,3 +33,9 @@ export const PAGE_RISK_CREATE = '/pages/risk/create'
 export const PAGE_APPOINTMENT_MESSAGE = '/pages/appointment/message'
 export const PAGE_APPOINTMENT_DETAIL = '/pages/appointment/detail'
 export const PAGE_APPOINTMENT_AUDIT='/pages/appointment/audit'
+export const PAGE_APPOINTMENT_SERVICES='/pages/appointment/services'
+
+// 优选页面
+export const PAGE_RECOMMEND_RECOMMEND = '/pages/recommend/recommend'
+
+

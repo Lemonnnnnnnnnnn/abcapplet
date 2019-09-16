@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { LOCALE_AUTH } from '@constants/locale'
-import { PAGE_HOME } from '@constants/page'
+import { PAGE_HOME, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
 import Auth from '@components/auth'
 import logo from '@assets/icons/logo.png'
@@ -78,9 +78,8 @@ class UserAuth extends Component {
    * 登录成功后进行页面跳转
    */
   onLoginSuccess() {
-    Taro.getCurrentPages().length > 1
-      ? Taro.navigateBack()
-      : Taro.reLaunch({ url: PAGE_HOME })
+    const lastPage = Taro.getStorageSync('lastPage')
+    lastPage === PAGE_ORDER_CREATE || PAGE_APPOINTMENT_CREATE ? Taro.navigateBack({ delta: 2 }) : Taro.navigateBack()
   }
 
   render() {

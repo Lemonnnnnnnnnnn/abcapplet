@@ -35,7 +35,6 @@ import {
   LOCALE_PRICE_UNIT,
   LOCALE_RISK_NOTICE,
   LOCALE_SIGN_APARTMENT,
-  LOCALE_SIGN_TIME_RANGE,
   LOCALE_SIGN_NOW,
   LOCALE_VIEW_SERVICE_AGREEMENT,
 } from '@constants/locale'
@@ -72,6 +71,7 @@ class OrderCreate extends Component {
 
   async componentWillMount() {
     const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
+    
 
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
@@ -246,7 +246,7 @@ class OrderCreate extends Component {
           {/* 如果用户没有登录 */}
           {!Taro.getStorageSync('user_info').token &&
             <View className='mb-3'>
-              <loginButton color='black' message='您暂未登录，无法签约下定' />
+              <loginButton backTwo color='black' message='您暂未登录，无法签约下定' />
             </View>
           }
 
@@ -275,7 +275,7 @@ class OrderCreate extends Component {
                   姓名
               </View>
                 <View class='at-col-9'>
-                  <Input className='pl-2 text-normal' value={name} placeholder='姓名与身份证必需一致' onInput={this.onNameInput} />
+                  <Input className='pl-2 text-normal' value={name} placeholder='请输入您的姓名' onInput={this.onNameInput} />
                 </View>
               </View>
               <View className='at-row at-row__align--center pt-2'>
@@ -283,7 +283,7 @@ class OrderCreate extends Component {
                   电话
               </View>
                 <View class='at-col-9'>
-                  <Input className='pl-2 text-normal' value={mobile} placeholder='请输入电话' onInput={this.onMobileInput} />
+                  <Input className='pl-2 text-normal' value={mobile} placeholder='请输入您的电话号码' onInput={this.onMobileInput} />
                 </View>
               </View>
               <View className='at-row at-row__align--center pt-2'>
@@ -291,7 +291,7 @@ class OrderCreate extends Component {
                   身份证号码
               </View>
                 <View class='at-col-9'>
-                  <Input className='pl-2 text-normal' value={idCode} placeholder='姓名与身份证必需一致' onInput={this.onIdCodeInput} />
+                  <Input className='pl-2 text-normal' value={idCode} placeholder='请输入您的身份证号码' onInput={this.onIdCodeInput} />
                 </View>
               </View>
             </View>

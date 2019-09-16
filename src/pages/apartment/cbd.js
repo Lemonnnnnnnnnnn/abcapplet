@@ -4,7 +4,6 @@ import { View } from '@tarojs/components'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
-import * as cbdActions from '@actions/cbd'
 import * as userActions from '@actions/user'
 import * as distActions from '@actions/dist'
 import * as apartmentActions from '@actions/apartment'
@@ -16,11 +15,9 @@ import ApartmentList from '@components/apartment-list'
 import ApartmentHeader from '@components/apartment-header'
 
 // 自定义常量
-import { PAGE_HOME } from '@constants/page'
 import { PAYLOAD_CBD_APARTMENT_LIST } from '@constants/api'
 
 @connect(state => state, {
-  // ...cbdActions,
   ...userActions,
   ...distActions,
   ...apartmentActions,

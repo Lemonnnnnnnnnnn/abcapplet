@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Input, Image, Picker } from '@tarojs/components'
+import { View, Input, Image, Picker, Button } from '@tarojs/components'
 import Board from '@components/board'
 import { AtTag, AtIcon, AtButton } from 'taro-ui'
 import { PAYLOAD_APPOINTMENT_REWARDORDER, API_UPLOAD_IMAGE } from '@constants/api'
@@ -50,7 +50,7 @@ class AppointmentDetail extends BaseComponent {
     isCanReward: 0,//是否能提交签约审核单
 
     text: '添加合同照片',
-    isSign:0,
+    isSign: 0,
   }
 
   componentWillMount() {
@@ -63,11 +63,11 @@ class AppointmentDetail extends BaseComponent {
     })
 
     const { payload } = this.state
-    const { id ,isSign} = this.$router.params
+    const { id, isSign } = this.$router.params
     this.props.dispatchAppointmentDetail({ id }).then((res) => {
 
       this.setState({
-        isSign:parseInt(isSign),
+        isSign: parseInt(isSign),
         Id: id,
         mobile: res.data.data.mobile,
         isCanReward: res.data.data.is_can_reward,
@@ -141,7 +141,7 @@ class AppointmentDetail extends BaseComponent {
   //检查数据
   onCheck() {
     const { payload } = this.state
-    const {  room_no, mobile, sign_time, tenancy, file_img } = payload
+    const { room_no, mobile, sign_time, tenancy, file_img } = payload
     let judgeArr = [
       { title: '房间号', value: room_no },
       { title: '签约手机', value: mobile },
@@ -195,18 +195,28 @@ class AppointmentDetail extends BaseComponent {
     })
   }
   render() {
-
     const { timeList, mobile, apartmentTitle, signTime, isSign } = this.state
+    const fixStyle = {
+      width: '7vw',
+      height: '7vw',
+      position: 'fixed',
+      bottom: Taro.pxTransform(50),
+      right: Taro.pxTransform(50),
+      background: '#fff',
+      borderRadius: '50%',
+      padding: Taro.pxTransform(20),
+      boxShadow: '0px 2px 7px rgba(0,0,0,0.2)',
+    }
 
     return (
       <View className='message-background' style={{ 'padding-top': '75px', 'padding-bottom': '30px' }}>
         {/* 头部 */}
         <View class='board--grey board--fixed-top ' style='position:absolute;z-index:9' >
           <Decorate height='126' />
-        </View>
+        </View >
 
         <Board className='py-2 px-3 mx-2 mt-4 '>
-          <View className='at-row' style={{marginTop : Taro.pxTransform(200)}}>
+          <View className='at-row' style={{ marginTop: Taro.pxTransform(200) }}>
             <View className='border-decorate border-decorate-yellow' style={{ height: '20px' }}></View>
             <View className='text-normal text-bold ml-2'>签约公寓</View>
           </View>
@@ -280,31 +290,38 @@ class AppointmentDetail extends BaseComponent {
           </View>
         </Board>
 
-        {isSign === 1 && <Board className='py-2 px-3 mx-2 mt-3 ' >
-          <View className='at-row at-row__justify--between ' onClick={this.onNavigateTo}>
-            <View className=''>
-              <View className='at-row'>
-                <Image className='mt-1 appointmentImage' src='https://images.gongyuabc.com/image/appointmentdetail.png'></Image>
-                <View className='text-bold text-large ml-2'>还没签约？选择ABC待预定服务</View>
+        {
+          isSign === 1 && <Board className='py-2 px-3 mx-2 mt-3 ' >
+            <View className='at-row at-row__justify--between ' onClick={this.onNavigateTo}>
+              <View className=''>
+                <View className='at-row'>
+                  <Image className='mt-1 appointmentImage' src='https://images.gongyuabc.com/image/appointmentdetail.png'></Image>
+                  <View className='text-bold text-large ml-2'>还没签约？选择ABC待预定服务</View>
+                </View>
+                <View className='text-small mt-1'>
+                  快速锁定房间，还可以获得最高￥800元退租押金赔付
+          </View>
               </View>
-              <View className='text-small mt-1'>
-                快速锁定房间，还可以获得最高￥800元退租押金赔付
-          </View>
+              <View className='mt-2'>
+                <AtIcon value='chevron-right' size='30' color='#000000'></AtIcon>
+              </View>
             </View>
-            <View className='mt-2'>
-              <AtIcon value='chevron-right' size='30' color='#000000'></AtIcon>
-            </View>
-          </View>
-        </Board>}
+          </Board>
+        }
 
         <View className='mx-2 mt-3 text-muted' onClick={this.onComfirm}>
           <AtButton className='mx-2 btn-yellow active' size='normal' circle >确定提交审核</AtButton>
         </View>
 
         <View className='appointment-detail-head'>
-          <Image src='https://images.gongyuabc.com/image/signCashBack.png' mode='widthFix'   className='appointmentHead'></Image>
+          <Image src='https://images.gongyuabc.com/image/signCashBack.png' mode='widthFix' className='appointmentHead'></Image>
         </View>
-      </View>
+
+        {/* 客服悬浮入口 */}
+        <Button open-type='contact' >
+          <Image style={fixStyle} src='https://images.gongyuabc.com/image/call.png'></Image>
+        </Button>
+      </View >
 
 
 

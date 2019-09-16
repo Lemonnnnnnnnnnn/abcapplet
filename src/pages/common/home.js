@@ -1,5 +1,5 @@
 // Taro 相关
-import Taro, { Component } from '@tarojs/taro'
+import Taro, { Component, setStorage } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 
 // 自定义组件
@@ -19,13 +19,9 @@ import {
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as adActions from '@actions/ad'
-import * as cbdActions from '@actions/cbd'
 import * as distActions from '@actions/dist'
 import * as cityActions from '@actions/city'
 import * as userActions from '@actions/user'
-import * as bannerActions from '@actions/banner'
-import * as activityActions from '@actions/activity'
-import * as recommendActions from '@actions/recommend'
 import * as apartmentActions from '@actions/apartment'
 import * as apartmentLookActions from '@actions/apartmentlook'
 import * as homeActions from '@actions/home'
@@ -47,13 +43,9 @@ import BaseComponent from '../../components/base';
 
 @connect(state => state, {
   ...adActions,
-  ...cbdActions,
   ...cityActions,
   ...distActions,
   ...userActions,
-  ...bannerActions,
-  ...activityActions,
-  ...recommendActions,
   ...apartmentActions,
   ...apartmentLookActions,
   ...homeActions,
@@ -73,8 +65,8 @@ class CommonHome extends BaseComponent {
     roomList: [],
     floorList: [],
 
-    latitude: '',
-    longitude: '',
+    latitude: 0,
+    longitude: 0,
 
 
     // 搜索相关
@@ -98,7 +90,6 @@ class CommonHome extends BaseComponent {
   }
   async onPullDownRefresh() {
     await this.componentWillMount()
-    await this.componentDidShow()
     Taro.stopPullDownRefresh()
   }
 
@@ -113,9 +104,14 @@ class CommonHome extends BaseComponent {
       searchScrollTop,
     } = this.state
 
-    // 获取筛选器和搜索框距离顶部的距离
     //判断是否弹出需求卡
+    this.props.dispatchGetUserMsg().then((res) => {
+      if (res && res.data.data.user.is_guide === 0) {
+        this.setState({ showCard: true })
+      }
+    })
 
+    // 获取筛选器和搜索框距离顶部的距离
     !searchScrollTop
       && Taro.createSelectorQuery()
         .in(this.$scope)
@@ -146,19 +142,26 @@ class CommonHome extends BaseComponent {
     })
   }
 
-  async componentDidShow() {
+  // 获取经纬度
+  async onGetLocation() {
     const { payloadApartment } = this.state
 
-    this.props.dispatchGetUserMsg().then((res) => {
-      if (res && res.data.data.user.is_guide === 0) {
-        this.setState({ showCard: true })
-      }
-    })
-
     await Taro.getLocation({
-      success: res => { this.setState({ payloadApartment: { ...payloadApartment, latitude: res.latitude, longitude: res.longitude, } }) },
+      success: res => {
+        this.setState({
+          payloadApartment: { ...payloadApartment, latitude: res.latitude, longitude: res.longitude, },
+        })
+
+        Taro.setStorageSync('latitude', res.latitude)
+        Taro.setStorageSync('longitude', res.longitude)
+      },
       fail: () => {
-        this.setState({ payloadApartment: { ...payloadApartment, latitude: 0, longitude: 0 } })
+        this.setState({
+          payloadApartment: { ...payloadApartment, latitude: 0, longitude: 0 },
+        })
+
+        Taro.setStorageSync('latitude', 0)
+        Taro.setStorageSync('longitude', 0)
 
         Taro.getSetting().then(res => {
           const index = Taro.getStorageSync('haveLocationPower')
@@ -172,7 +175,6 @@ class CommonHome extends BaseComponent {
         })
       }
     }).catch(err => { console.log(err) })
-
   }
 
   // 关闭获取授权弹窗
@@ -193,6 +195,8 @@ class CommonHome extends BaseComponent {
 
     const {
       selectScrollTop,
+      // latitude,
+      // longitude
     } = this.state
 
     const overloadData = []
@@ -203,6 +207,10 @@ class CommonHome extends BaseComponent {
 
     // 城市
     await this.props.dispatchUserCity(citycode) && overloadData.push(1)
+
+    // 在展示list之前获取经纬度
+    await this.onGetLocation()
+
     // 商圈,轮播图,品牌公寓,活动专区
     await this.props.dispatchHomeMsg(citycode) && overloadData.push(1)
     //  广告
@@ -220,6 +228,12 @@ class CommonHome extends BaseComponent {
     this.setState({ selectorChecked: title })
 
     overloadDist.length === 1 && this.initialHouseType()
+
+    this.apartmentList.onReset({
+      city: Taro.getStorageSync('user_info').citycode,
+      latitude: Taro.getStorageSync('latitude'),
+      longitude: Taro.getStorageSync('longitude')
+    })
 
   }
 
@@ -257,7 +271,7 @@ class CommonHome extends BaseComponent {
     const selectorChecked = selector[value]
     const newCity = citys.filter(i => i.title === selectorChecked)[0]
 
-    this.setState({ selectorChecked, })
+    this.setState({ selectorChecked })
     this.onSelectCity(newCity.id)
   }
 
@@ -364,7 +378,6 @@ class CommonHome extends BaseComponent {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
   }
-
 
   render() {
 

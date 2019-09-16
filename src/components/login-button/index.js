@@ -13,6 +13,9 @@ export default class loginButton extends BaseComponent {
 
     // 跳转登录
     onNavigation() {
+        const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1]
+        const lastPagePath = lastPage.route
+        Taro.setStorageSync('lastPage',lastPagePath)
         Taro.navigateTo({ url: PAGE_USER_AUTH })
     }
     render() {
