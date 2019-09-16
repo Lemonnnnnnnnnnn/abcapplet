@@ -374,6 +374,8 @@ class HouseTypeShow extends Component {
       position, tags, cost_info, id, type_desc, has_room, num
     } = houstType
 
+    console.log(roomList)
+
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
@@ -610,7 +612,7 @@ class HouseTypeShow extends Component {
 
                   {/* 搜索房间 */}
                   {
-                    showApartRoom && roomList.length > 5 && <View
+                    showApartRoom && roomList.length >= 5 && <View
                       style={{ width: '100%' }}
                       onClick={this.onSearchRoom}
                       className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--end at-row__justify--center'>

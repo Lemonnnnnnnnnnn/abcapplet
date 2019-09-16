@@ -78,6 +78,7 @@ class OrderCreate extends Component {
     // 初始化表单
     this.setState({
       timeList: data.tenancy,
+      cost_deposit : data.cost_deposit,
       room: { ...data.room },
       rooms: [...data.rooms],
       signTime: data.sign_time,
@@ -217,9 +218,9 @@ class OrderCreate extends Component {
   }
 
   render() {
-    const { payload, room, rooms, showRoomList, disabled, timeList, signTime } = this.state
+    const { payload, room, rooms, showRoomList, disabled, timeList, signTime , cost_deposit } = this.state
     const { name, mobile, id_code: idCode } = payload
-    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id } = room
+    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id  } = room
 
     return (
       <View>
@@ -407,7 +408,10 @@ class OrderCreate extends Component {
             <View className='at-row at-row__align--start at-row__justify--between '>
               <View>
                 <View className='text-brand text-super text-bold'>{LOCALE_DOWN_PAYMENT}</View>
-                <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>
+                {
+                  !cost_deposit && <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>
+                }
+                
 
               </View>
 
