@@ -27,11 +27,11 @@ class OrderRoomItem extends BaseComponent {
 
   render() {
     const { room, className, selectId } = this.props
-    const { no: roomNo, apartment_title: apartmentTitle, id } = room
+    const { no: roomNo, apartment_title: apartmentTitle, id ,  discount_price} = room
     
     // 从后台获取的数据是定金，将其乘以2以租金的形式呈现在目标位置上较为合理
-    let { price } = room
-    price = price * 2
+    // let { price } = room
+    // price = price * 2
     
 
     return (
@@ -48,7 +48,7 @@ class OrderRoomItem extends BaseComponent {
                 <View className='text-bold text-normal'>{apartmentTitle}{roomNo}</View>
                 <View className='text-small text-yellow mt-2'>
                   {LOCALE_RENT}{LOCALE_SEMICOLON}
-                  <Text className='text-normal'>{price}</Text>
+                  <Text className='text-normal'>{discount_price}</Text>
                   {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
                 </View>
               </View>

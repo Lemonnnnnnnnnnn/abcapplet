@@ -283,6 +283,7 @@ class AppointmentPost extends Component {
         isNight: res.data.data.is_night
       })
     })
+
   }
 
   // 户型选择

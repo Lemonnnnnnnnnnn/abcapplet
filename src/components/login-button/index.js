@@ -5,7 +5,8 @@ import { AtTag } from 'taro-ui'
 import BaseComponent from '@components/base'
 // 自定义常量
 import {
-    PAGE_USER_AUTH
+    PAGE_USER_AUTH,
+    PAGE_ORDER_CREATE
 } from '@constants/page'
 
 
@@ -13,10 +14,15 @@ export default class loginButton extends BaseComponent {
 
     // 跳转登录
     onNavigation() {
+        const {params} = this.props
+        let lastPagePath = ''
         const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1]
-        const lastPagePath = lastPage.route
-        Taro.setStorageSync('lastPage',lastPagePath)
-        Taro.navigateTo({ url: PAGE_USER_AUTH })
+        for(var i in params){
+            lastPagePath = '/' + lastPage.route + '?' + i + '=' + params[i]
+        }
+        Taro.setStorageSync('lastPagePath',lastPagePath)
+        '/' + lastPage.route === PAGE_ORDER_CREATE ? Taro.redirectTo({ url: PAGE_USER_AUTH }) : Taro.navigateTo({ url: PAGE_USER_AUTH })
+        // Taro.navigateTo({ url: PAGE_USER_AUTH })
     }
     render() {
         const { message , color } = this.props

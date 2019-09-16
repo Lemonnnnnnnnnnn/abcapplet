@@ -69,10 +69,10 @@ class OrderCreate extends Component {
     payload: PAYLOAD_ORDER_CREATE
   }
 
+
   async componentWillMount() {
     const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
     
-
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
     // 初始化表单
@@ -246,7 +246,7 @@ class OrderCreate extends Component {
           {/* 如果用户没有登录 */}
           {!Taro.getStorageSync('user_info').token &&
             <View className='mb-3'>
-              <loginButton backTwo color='black' message='您暂未登录，无法签约下定' />
+              <loginButton params={this.$router.params} color='black' message='您暂未登录，无法签约下定' />
             </View>
           }
 

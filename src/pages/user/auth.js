@@ -78,8 +78,8 @@ class UserAuth extends Component {
    * 登录成功后进行页面跳转
    */
   onLoginSuccess() {
-    const lastPage = Taro.getStorageSync('lastPage')
-    lastPage === PAGE_ORDER_CREATE || PAGE_APPOINTMENT_CREATE ? Taro.navigateBack({ delta: 2 }) : Taro.navigateBack()
+    const lastPagePath = Taro.getStorageSync('lastPagePath')
+    lastPagePath ? Taro.redirectTo({ url: lastPagePath }) : Taro.navigateBack()
   }
 
   render() {
