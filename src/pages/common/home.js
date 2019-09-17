@@ -114,7 +114,7 @@ class CommonHome extends BaseComponent {
       searchScrollTop,
       payloadApartment,
     } = this.state
-    
+
     this.setState({ payloadApartment: { ...payloadApartment, city: Taro.getStorageSync('user_info').citycode, } })
 
     // 获取筛选器和搜索框距离顶部的距离
@@ -419,6 +419,10 @@ class CommonHome extends BaseComponent {
 
     const { banner: banners, hot_activity: activities, hot_cbd: cbds, recommend: recommends } = home
 
+    const citycode = Taro.getStorageSync('user_info').citycode
+    let current = 0
+    if (citycode === 350200) { current = 0 } else { current = 1 }
+
     return (
       <View
         className='page-white'
@@ -431,6 +435,7 @@ class CommonHome extends BaseComponent {
                 className='mb-2'
                 isFixed={searchIsFixed}
                 showSearch={showSearch}
+                current={current}
 
 
                 selector={selector}
