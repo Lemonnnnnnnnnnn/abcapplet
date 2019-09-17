@@ -72,23 +72,28 @@ class OrderCreate extends Component {
 
   async componentWillMount() {
     const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
-    
-    const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
 
-    // 初始化表单
-    this.setState({
-      timeList: data.tenancy,
-      cost_deposit : data.cost_deposit,
-      room: { ...data.room },
-      rooms: [...data.rooms],
-      signTime: data.sign_time,
-      payload: {
-        room_id: data.room.id,
-        appointment_id,
-        tenancy: 12,
-        name: data.user_info.name,
-        mobile: data.user_info.mobile,
-        id_code: data.user_info.id_no,
+    let data = ''
+    // const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
+    await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id }).then(res => {
+      if (res) {
+        data = res.data.data
+        // 初始化表单
+        this.setState({
+          timeList: data.tenancy,
+          cost_deposit: data.cost_deposit,
+          room: { ...data.room },
+          rooms: [...data.rooms],
+          signTime: data.sign_time,
+          payload: {
+            room_id: data.room.id,
+            appointment_id,
+            tenancy: 12,
+            name: data.user_info.name,
+            mobile: data.user_info.mobile,
+            id_code: data.user_info.id_no,
+          }
+        })
       }
     })
   }
@@ -218,9 +223,9 @@ class OrderCreate extends Component {
   }
 
   render() {
-    const { payload, room, rooms, showRoomList, disabled, timeList, signTime , cost_deposit } = this.state
+    const { payload, room, rooms, showRoomList, disabled, timeList, signTime, cost_deposit } = this.state
     const { name, mobile, id_code: idCode } = payload
-    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id  } = room
+    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id } = room
 
     return (
       <View>
@@ -411,7 +416,7 @@ class OrderCreate extends Component {
                 {
                   !cost_deposit && <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>
                 }
-                
+
 
               </View>
 
@@ -424,7 +429,7 @@ class OrderCreate extends Component {
             <View className='at-col-12'>
               <AtButton
                 circle
-                disabled={Taro.getStorageSync('user_info').token ? disabled : true} 
+                disabled={Taro.getStorageSync('user_info').token ? disabled : true}
                 className={Taro.getStorageSync('user_info').token ? 'btn-yellow active' : 'btn-grey btn-light-writh'}
                 onClick={this.onOrderCreate}
               >{LOCALE_SIGN_NOW}</AtButton>

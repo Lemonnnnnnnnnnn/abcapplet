@@ -33,7 +33,10 @@ export const dispatchAppointmentList = payload => createAction({
   method: 'POST',
   type: SET_APPOINTMENT_LIST,
   url: API_APPOINTMENT_LIST,
-  cb: ({ data: { data } }) => ({ ...data })
+  // cb: ({ data: { data } }) => ({ ...data })
+  cb:res=>{
+    if(res) return {...res.data.data}
+  }
 })
 
 /**
@@ -45,7 +48,10 @@ export const dispatchNextPageApartmentList = payload => createAction({
   method: 'POST',
   type: SET_NEXT_PAGE_APPOINTMENT_LIST,
   url: API_APPOINTMENT_LIST,
-  cb: ({ data: { data } }) => ({ ...data })
+  // cb: ({ data: { data } }) => ({ ...data })
+  cb:res=>{
+    if(res) return {...res.data.data}
+  }
 })
 
 /**

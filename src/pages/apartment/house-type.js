@@ -374,8 +374,6 @@ class HouseTypeShow extends Component {
       position, tags, cost_info, id, type_desc, has_room, num
     } = houstType
 
-    console.log(roomList)
-
 
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 

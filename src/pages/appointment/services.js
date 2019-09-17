@@ -41,17 +41,16 @@ class ServicesHome extends Component {
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
-        this.setState({
+        res && this.setState({
           time: res.data.data.date
         })
-        if (res.data.data.total === 0) {
+        res && res.data.data.total === 0 &&
           Taro.showToast({
             title: '今天暂无行程',
             icon: 'none',
             duration: 2000
           })
         }
-      }
       )
     this.setState({ payload: { ...payload, current_page: 2 } })
   }
@@ -60,7 +59,7 @@ class ServicesHome extends Component {
     const { payload } = this.state
     this.props.dispatchAppointmentList({ payload: { ...payload, current_page: 1 } }).
       then((res) => {
-        this.setState({
+        res && this.setState({
           time: res.data.data.date,
           NowCurrentPage: 2,
           payload: { ...payload, current_page: 2 }
@@ -97,14 +96,13 @@ class ServicesHome extends Component {
     })
     this.props.dispatchNextPageApartmentList(payload).
       then((res) => {
-        if (res.data.data.list.length === 0) {
+        res && res.data.data.list.length === 0 && 
           Taro.showToast({
             title: '加载完毕',
             icon: 'none',
             duration: 2000
           })
         }
-      }
 
       )
   }
@@ -125,9 +123,6 @@ class ServicesHome extends Component {
   //  onCloseAuthorizationMask() {
   //   this.setState({ showAuthorizationMask: false })
   // }
-
-
-
 
   render() {
     const { appointments } = this.props
