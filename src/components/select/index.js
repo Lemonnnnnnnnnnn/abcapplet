@@ -126,20 +126,20 @@ class Select extends BaseComponent {
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
 
-    setTimeout(() => {
-      const currentPages = Taro.getCurrentPages()
-      if (currentPages[currentPages.length - 1].route === 'pages/common/home') {
-        Taro.createSelectorQuery()
-          .in(this.$scope)
-          .select('.selectTab')
-          .boundingClientRect(rect =>
-            Taro.pageScrollTo({
-              scrollTop: parseInt(rect.right) * 2.27,
-              duration: 0
-            })
-          ).exec()
-      }
-    }, 500)
+    // setTimeout(() => {
+    //   const currentPages = Taro.getCurrentPages()
+    //   if (currentPages[currentPages.length - 1].route === 'pages/common/home') {
+    //     Taro.createSelectorQuery()
+    //       .in(this.$scope)
+    //       .select('.selectTab')
+    //       .boundingClientRect(rect =>
+    //         Taro.pageScrollTo({
+    //           scrollTop: parseInt(rect.right) * 2.27,
+    //           duration: 0
+    //         })
+    //       ).exec()
+    //   }
+    // }, 500)
   }
 
   async componentWillMount() {

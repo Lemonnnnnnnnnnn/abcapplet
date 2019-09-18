@@ -426,7 +426,7 @@ class CommonHome extends BaseComponent {
     return (
       <View
         className='page-white'
-        style={{ overflow: "hidden" }} >
+        style={{ overflow: "hidden",minHeight : '300vh' }} >
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
