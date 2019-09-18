@@ -16,7 +16,7 @@ import day from 'dayjs'
 export default class DepositBar extends BaseComponent {
 
     config = {
-        navigationBarTitleText: '定金条',
+        navigationBarTitleText: '定金凭证',
         navigationBarBackgroundColor: '#FFE07A',
     }
 

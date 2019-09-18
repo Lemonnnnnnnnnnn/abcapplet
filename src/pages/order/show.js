@@ -334,7 +334,7 @@ class OrderShow extends Component {
     </View>
 
     return (
-      <View className='px-3' hidden={Object.keys(order).length === 0}>
+      <View className='px-3' style={{overflow:'hidden'}} hidden={Object.keys(order).length === 0}>
         {/* 签约码 */}
         <OrderSignCode show={showSignCode} code={appCode} />
 
