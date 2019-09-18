@@ -380,7 +380,7 @@ class OrderShow extends Component {
           ORDER_STATUS_LOCK_FAIL != status
           && ORDER_STATUS_CANCEL != status
           && !!order.sign_time
-          && <OrderDesc roomId={roomId} detailId={id} order={order} className='pb-2' />
+          && <OrderDesc detailId={id} order={order} className='pb-2' />
         }
 
         {/* 预订房源 */}

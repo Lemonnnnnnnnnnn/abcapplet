@@ -40,8 +40,11 @@ class OrderDesc extends BaseComponent {
     Taro.navigateTo({ url: PAGE_ORDER_DOWN_PAYMENT })
   }
   onNaviDeposit() {
-    const { detailId, roomId } = this.props
-    Taro.navigateTo({ url: PAGE_ORDER_DEPOSIT_BAR + '?id=' + detailId + '&roomId=' + roomId })
+    const { detailId, order } = this.props
+    const {
+      room_no: roomNo,
+    } = order
+    Taro.navigateTo({ url: PAGE_ORDER_DEPOSIT_BAR + '?id=' + detailId + '&roomId=' + roomNo })
   }
 
   render() {
@@ -60,6 +63,7 @@ class OrderDesc extends BaseComponent {
       amount_total: amountTotal,
       apartment_title: apartmentTitle,
     } = order
+    console.log(order)
 
     const { message } =
       ORDER_STATUS_DIST[status]

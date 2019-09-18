@@ -32,7 +32,7 @@ export default class DepositBar extends BaseComponent {
     }
 
     async componentWillMount() {
-        const { id, roomId } = this.$router.params
+        const { id, roomId  } = this.$router.params
 
         const { data: { data } } = await this.props.dispatchOrderShow({ id })
 
@@ -49,7 +49,7 @@ export default class DepositBar extends BaseComponent {
             customerPhone: data.mobile,
             apartmentPhone: server_user_mobile,
             roomNum: roomId,
-            price: data.price,
+            price: data.amount_total,
             time: signTime
         })
 
