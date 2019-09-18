@@ -38,7 +38,7 @@ export default class DepositBar extends BaseComponent {
 
         let signTime = day.unix(data.sign_time).format('YYYY年MM月DD日')
 
-        let server_user_mobile = ''
+        let server_user_mobile = '正在等待管家确认'
         if(data.server_user){
             server_user_mobile = data.server_user.mobile
         }
