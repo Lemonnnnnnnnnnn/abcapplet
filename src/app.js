@@ -53,6 +53,7 @@ class App extends Component {
           'show',
           'create',
           'down-payment',
+          'deposit-bar',
         ]
       },
       {

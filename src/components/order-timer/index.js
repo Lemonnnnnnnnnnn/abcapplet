@@ -166,7 +166,7 @@ class OrderTimer extends BaseComponent {
           </View>
           <View className='at-col'>
             <View className={`mt-1 text-small ${isFail ? 'text-red' : 'text-white'}`}>
-              {isFail ? LOCALE_ORDER_LOCK_FAIL : LOCALE_ORDER_LOCK_SUCCESS}
+              {isFail ? LOCALE_ORDER_LOCK_FAIL : '预定成功'}
             </View>
           </View>
         </View>
@@ -180,6 +180,7 @@ class OrderTimer extends BaseComponent {
       <View>
         {status === ORDER_STATUS_PAY_WAITING && pay}
         {status === ORDER_STATUS_LOCK_WAITING && lock}
+        {status === ORDER_STATUS_LOCK_SUCCESS && lock}
       </View>
     )
   }

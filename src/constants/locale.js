@@ -52,7 +52,7 @@ export const LOCALE_RECOMMEND_SEARCH = '看了又看'
 // order
 export const LOCALE_ORDER_STATUS_CANCEL = '已取消'
 export const LOCALE_ORDER_STATUS_LOCK_WAITING = '待锁定'
-export const LOCALE_ORDER_STATUS_LOCK_SUCCESS = '锁定成功'
+export const LOCALE_ORDER_STATUS_LOCK_SUCCESS = '已锁定'
 export const LOCALE_ORDER_STATUS_LOCK_FAIL = '锁定失败'
 export const LOCALE_ORDER_STATUS_SUCCESS = '预定完成'
 export const LOCALE_ORDER_STATUS_PAY_WAITING = '待支付'

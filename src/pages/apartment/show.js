@@ -323,7 +323,7 @@ class ApartmentShow extends Component {
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
                       <Image className='mr-1' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
-                      <View className='ml-1'>严选厦门3万+房源</View>
+                      <View className='ml-1'>100%真实房源</View>
                     </View>
 
                   </View>

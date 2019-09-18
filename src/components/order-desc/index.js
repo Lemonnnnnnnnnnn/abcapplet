@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, Button } from '@tarojs/components'
+import { View, Button, Image } from '@tarojs/components'
 
 // NPM 包
 import day from 'dayjs'
@@ -12,7 +12,7 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ORDER_DOWN_PAYMENT } from '@constants/page'
+import { PAGE_ORDER_DOWN_PAYMENT, PAGE_ORDER_DEPOSIT_BAR } from '@constants/page'
 import { ORDER_STATUS_DIST } from '@constants/order'
 
 import {
@@ -39,12 +39,17 @@ class OrderDesc extends BaseComponent {
   onNavigation() {
     Taro.navigateTo({ url: PAGE_ORDER_DOWN_PAYMENT })
   }
+  onNaviDeposit() {
+    const { detailId, roomId } = this.props
+    Taro.navigateTo({ url: PAGE_ORDER_DEPOSIT_BAR + '?id=' + detailId + '&roomId=' + roomId })
+  }
 
   render() {
     const { order, className } = this.props
     const {
       name,
       price,
+      paid,
       mobile,
       status,
       room_no: roomNo,
@@ -59,6 +64,11 @@ class OrderDesc extends BaseComponent {
     const { message } =
       ORDER_STATUS_DIST[status]
       || { message: '', isLight: false }
+
+    const depositBarStyle = {
+      background: '#fff',
+      borderRadius: Taro.pxTransform(24),
+    }
 
     return (
       <View className={className}>
@@ -124,6 +134,27 @@ class OrderDesc extends BaseComponent {
             </View>
           </View>
         </Board>
+        {
+          status === 3 && paid === 1 &&
+          <View
+            style={depositBarStyle}
+            onClick={this.onNaviDeposit}
+            className='mt-2 py-2 at-row at-row__justify--center at-row__align--center text-normal'>
+            <Image className='mr-2' src='https://images.gongyuabc.com/image/deposit-bar.png' style={{ width: Taro.pxTransform(34), height: Taro.pxTransform(38) }}></Image>
+            定金凭证
+            </View>
+        }
+        {
+          status === 1 && paid === 1 &&
+          <View
+            style={depositBarStyle}
+            onClick={this.onNaviDeposit}
+            className='mt-2 py-2 at-row at-row__justify--center at-row__align--center text-normal'>
+            <Image className='mr-2' src='https://images.gongyuabc.com/image/deposit-bar.png' style={{ width: Taro.pxTransform(34), height: Taro.pxTransform(38) }}></Image>
+            定金凭证
+          </View>
+        }
+
       </View>
     )
   }

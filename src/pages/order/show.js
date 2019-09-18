@@ -192,7 +192,7 @@ class OrderShow extends Component {
 
   render() {
     const { apartmentlook } = this.props
-    const { order, city, roomId, showSignCode } = this.state
+    const { order, city, roomId, showSignCode , id } = this.state
     let { status, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
 
     signTime = day.unix(signTime).format('YYYY年MM月DD日')
@@ -297,7 +297,7 @@ class OrderShow extends Component {
     const statusLockSuccess = <View>
       {/* 背景底色 */}
       <Decorate height='330' />
-
+        
       {/* 计时器  */}
       <OrderTimer
         status={status}
@@ -380,7 +380,7 @@ class OrderShow extends Component {
           ORDER_STATUS_LOCK_FAIL != status
           && ORDER_STATUS_CANCEL != status
           && !!order.sign_time
-          && <OrderDesc order={order} className='pb-2' />
+          && <OrderDesc roomId={roomId} detailId={id} order={order} className='pb-2' />
         }
 
         {/* 预订房源 */}

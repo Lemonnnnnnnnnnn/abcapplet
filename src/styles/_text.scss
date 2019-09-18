@@ -64,6 +64,9 @@
     line-height: $font-size-xs * 1.5;
     font-size: $font-size-xs;
   }
+  &-indent{
+    text-indent: 2em;
+  }
 }
 //文字超出省略
 .overtext{

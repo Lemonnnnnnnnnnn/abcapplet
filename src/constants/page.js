@@ -24,6 +24,7 @@ export const PAGE_ORDER_INDEX = '/pages/order/index'
 export const PAGE_ORDER_SHOW = '/pages/order/show'
 export const PAGE_ORDER_CREATE = '/pages/order/create'
 export const PAGE_ORDER_DOWN_PAYMENT = '/pages/order/down-payment'
+export const PAGE_ORDER_DEPOSIT_BAR = '/pages/order/deposit-bar'
 
 // 风险金相关
 export const PAGE_RISK_INDEX = '/pages/risk/index'

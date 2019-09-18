@@ -78,8 +78,6 @@ class AppointmentPost extends Component {
     houstType: {
       swipers: [],
     },
-    screenHeight: '',
-    screenWidth: '',
     houseTypeList: [],
     currentTime: [],
     secTimeClick: false,
@@ -156,13 +154,6 @@ class AppointmentPost extends Component {
         priceTitle: data.price_title,
       },
     })
-    Taro.getSystemInfo()
-      .then(res => {
-        this.setState({
-          screenHeight: res.screenHeight - 140,
-          screenWidth: res.screenWidth,
-        })
-      })
 
     // 初始化户型列表
 
@@ -740,7 +731,7 @@ class AppointmentPost extends Component {
                         </View>
                       </View>
                       :
-                      <loginButton backTwo message='请登录后预约' />
+                      <loginButton params={this.$router.params} backTwo message='请登录后预约' />
 
                   }
 
