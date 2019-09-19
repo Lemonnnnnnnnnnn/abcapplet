@@ -20,3 +20,9 @@ export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone_new.png'
 export const COMMENT = 'https://images.gongyuabc.com/image/comment_new.png'
 export const EXPECT = 'https://images.gongyuabc.com/image/expect_new.png'
 
+// 签约返现
+
+export const SIGN_CASH_BACK = 'https://images.gongyuabc.com/image/signCashBack.png'
+export const CALL = 'https://images.gongyuabc.com/image/call.png'
+export const APPOINTMENT_DETAIL = 'https://images.gongyuabc.com/image/appointmentdetail.png'
+

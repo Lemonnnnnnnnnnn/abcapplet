@@ -27,17 +27,6 @@
   }
 }
 
-// .service-middle{
-//   position:absolute ;
-//   left:9px ;
-//   // top:44%;
-//   border-radius:12px * $hd;
-//   width:293px * $hd;
-//   height:45px * $hd;
-//   background:rgba(255,255,255,1);
-//   box-shadow:0px 3px 6px rgba(0,0,0,0.04);
-// }
-
 .font-center {
   text-align: center;
   align-items: center;
@@ -60,80 +49,100 @@
   &-padding {
     margin-right: 32px;
   }
-}
+  &-fix-icon {
+    width: 7vw;
+    height: 7vw;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 20px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.2);
+  }
+  &-audit {
+    width: 22px * $hd;
+    height: 22px * $hd;
+    background: rgba(255, 201, 25, 1);
+    border: 4px * $hd solid rgba(255, 220, 107, 1);
+    border-radius: 50%;
+    opacity: 1;
+  }
+  &-noaudit {
+    width: 22px * $hd;
+    height: 22px * $hd;
+    background: rgba(210, 210, 210, 1);
+    border: 4px * $hd solid rgba(242, 242, 242, 1);
+    border-radius: 50%;
+    opacity: 1;
+  }
+  &-line {
+    width: 0px * $hd;
+    height: 45px * $hd;
+    border: 3px * $hd solid rgba(255, 220, 107, 1);
+    opacity: 1;
+    margin-left: 13px * $hd;
+  }
+  &-noline {
+    width: 0px * $hd;
+    height: 45px * $hd;
+    border: 3px * $hd solid rgba(242, 242, 242, 1);
+    opacity: 1;
+    margin-left: 13px * $hd;
+  }
+  &-board {
+    position: absolute;
+    top: 4%;
+    z-index: 999;
+    width: 345px * $hd;
+    height: 410px * $hd;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-radius: 12px * $hd;
+  }
 
-.appointmentHead {
-  height: 63px * $hd;
-  width: 356px * $hd;
-}
-.appointmentImage {
-  height: 15px * $hd;
-  width: 15px * $hd;
-}
+  &-envolpe {
+    width: 45px * $hd;
+    height: 45px * $hd;
+    position: absolute;
+    left: 54%;
+    bottom: 14%;
+  }
 
-.appointment-audit {
-  width: 22px * $hd;
-  height: 22px * $hd;
-  background: rgba(255, 201, 25, 1);
-  border: 4px * $hd solid rgba(255, 220, 107, 1);
-  border-radius: 50%;
-  opacity: 1;
-}
+  &-head {
+    height: 63px * $hd;
+    width: 356px * $hd;
+  }
 
-.appointment-noaudit {
-  width: 22px * $hd;
-  height: 22px * $hd;
-  background: rgba(210, 210, 210, 1);
-  border: 4px * $hd solid rgba(242, 242, 242, 1);
-  border-radius: 50%;
-  opacity: 1;
-}
+  &-image {
+    height: 15px * $hd;
+    width: 15px * $hd;
+  }
+  &-detail {
 
-.appointment-line {
-  width: 0px * $hd;
-  height: 45px * $hd;
-  border: 3px * $hd solid rgba(255, 220, 107, 1);
-  opacity: 1;
-  margin-left: 13px * $hd;
-}
+    &-head {
+      position: absolute;
+      top: 3%;
+      left: 10px * $hd;
+      z-index: 999;
+    }
 
-.appointment-noline {
-  width: 0px * $hd;
-  height: 45px * $hd;
-  border: 3px * $hd solid rgba(242, 242, 242, 1);
-  opacity: 1;
-  margin-left: 13px * $hd;
-}
-
-.appointment-board {
-  position: absolute;
-  top: 4%;
-  z-index: 999;
-  width: 345px * $hd;
-  height: 410px * $hd;
-  background: rgba(255, 255, 255, 1);
-  opacity: 1;
-  border-radius: 12px * $hd;
-}
-
-.appointment-detail-head {
-  position: absolute;
-  top: 3%;
-  left: 10px * $hd;
-  z-index: 999;
-}
-
-.appointment-detail-line {
-  width: 95%;
-  height: 0px * $hd;
-  border: 0.5px * $hd solid rgba(232, 232, 232, 1);
-  opacity: 1;
-}
-
-.appointment-envolpe {
-  width: 45px * $hd;
-  height: 45px * $hd;
-  position: absolute;
-  left: 54%;
-  bottom: 14%;
+    &-line {
+      width: 95%;
+      height: 0px * $hd;
+      border: 0.5px * $hd solid rgba(232, 232, 232, 1);
+      opacity: 1;
+    }
+    .at-tag{
+      width : 17%;
+      background-color: rgba(0,0,0,0.1);
+      color: rgba(0,0,0,0.6);
+      white-space:nowrap;
+    }
+    .at-tag--small{
+      height : 50px;
+      line-height: 50px;
+      font-size: 30px;
+    }
+  }
 }

@@ -288,7 +288,6 @@ class AppointmentPost extends Component {
         i.type = !i.type
         i.active = !i.active
 
-
         if (i.type === true && i.active === true) {
           newHouseTypeArr.push(i.id)
         } else {
@@ -299,7 +298,6 @@ class AppointmentPost extends Component {
           })
         }
 
-        // i.type === true && i.active === true && newHouseTypeArr.push(i.id)
         this.setState({ houseTypeArr: newHouseTypeArr })
       }
     })

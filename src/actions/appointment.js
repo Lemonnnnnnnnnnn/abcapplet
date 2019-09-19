@@ -10,6 +10,7 @@ import {
   API_APPOINTMENT_NIGHTPOST,
   API_APPOINTMENT_REWARDORDER,
   API_APPOINTMENT_DETAILREWARD,
+  API_APPOINTMENT_REWARD_ORDER_ROOM_POST,
 } from '@constants/api'
 
 import{
@@ -21,6 +22,7 @@ import{
   SET_APPOINTMENT_NIGHTPOST,
   TYPE_APPOINTMENT_REWARDORDER,
   TYPE_APPOINTMENT_DETAILREWAR,
+  TYPE_APPOINTMENT_REWARD_ORDERROOM,
 
 }from '@constants/appointment'
 
@@ -123,4 +125,12 @@ export const dispatchAppointRewordOrderDetail = (payload) => createAction({
   method: 'POST',
   type: TYPE_APPOINTMENT_DETAILREWAR,
   url: API_APPOINTMENT_DETAILREWARD,
+})
+
+// 查询签约审核单可选的房间列表
+export const dispatchAppointRewordOrderRoomPost = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APPOINTMENT_REWARD_ORDERROOM,
+  url: API_APPOINTMENT_REWARD_ORDER_ROOM_POST,
 })

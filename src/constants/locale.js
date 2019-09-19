@@ -160,10 +160,10 @@ export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
  * 看房服务相关
  */
 
-export const LOCALE_APPOINTMENT_SIGNED  = '签约返现'
-export const LOCALE_APPOINTMENT_CASHPLEDGE  = '立得￥50元现金红包'
-export const LOCALE_APPOINTMENT_DETAIL  = '查看详情'
-export const LOCALE_APPOINTMENT_HASLOOK  = '已带看服务'
+export const LOCALE_APPOINTMENT_SIGNED = '签约返现'
+export const LOCALE_APPOINTMENT_CASHPLEDGE = '立得￥50元现金红包'
+export const LOCALE_APPOINTMENT_DETAIL = '查看详情'
+export const LOCALE_APPOINTMENT_HASLOOK = '已带看服务'
 export const LOCALE_APPOINTMENT_SUMMON = '正在为你召唤'
 export const LOCALE_APPOINTMENT_BELONG = '专属管家...'
 //找房服务看房评价
@@ -175,11 +175,11 @@ export const LOCALE_BUSINESS_LIKEABILITY_SIGNING = '非常满意'
 
 //找房服务下面四个功能块
 export const LOCALE_APPOINTMENT_MESSAGE = '行程留言'
-export const LOCALE_APPOINTMENT_RELUTION  = '联系管家'
-export const LOCALE_APPOINTMENT_EVALUTION  = '服务评价'
-export const LOCALE_APPOINTMENT_INTENTION  = '看房意向'
+export const LOCALE_APPOINTMENT_RELUTION = '联系管家'
+export const LOCALE_APPOINTMENT_EVALUTION = '服务评价'
+export const LOCALE_APPOINTMENT_INTENTION = '看房意向'
 export const LOCALE_APPOINTMENT_HAVE_EVALUTION = '查看评价'
-export const LOCALE_APPOINTMENT_HAVE_INTENTION  = '查看意向'
+export const LOCALE_APPOINTMENT_HAVE_INTENTION = '查看意向'
 
 //找房服务订房意向
 export const LOCALE_APPOINTMENT_LIKEABILITY_NONE = '无意向'
@@ -190,7 +190,7 @@ export const LOCALE_APPOINTMENT_LIKEABILITY_SIGNING = '马上预定'
 
 //服务评价
 
-export const LOCALE_APPOINTMENT_SERVICE= '已带看服务'
+export const LOCALE_APPOINTMENT_SERVICE = '已带看服务'
 export const LOCALE_APPOINTMENT_SERVICE_EVALUTION = "管家服务评价"
 
 //看房意向
@@ -200,18 +200,41 @@ export const LOCALE_APPOINTMENT_INTENTION_FIND = "搜索"
 export const LOCALE_APPOINTMENT_INTENTION_LOOKROOM = "您可能看过的房间："
 
 export const LOCALE_APPOINTMENT_MESSAGE_LIU = '仅针对以下行程发起留言沟通'
+
+// 签约返现
+export const LOCALE_ADVERTISING_WORD_WU = '还没签约？选择ABC待预定服务'
+export const LOCALE_ADVERTISING_WORD_FU = '快速锁定房间，还可以获得最高￥800元退租押金赔付'
+export const LOCALE_APPOINTMENT_DETAIL_REVIEW = '确定提交审核'
+export const LOCALE_APPOINTMENT_DETAIL_RENT_PRICE = '租金'
+export const LOCALE_APPOINTMENT_DETAIL_RENT_TIME = '租期'
+export const LOCALE_APPOINTMENT_DETAIL_SIGN_TIME = '签约时间'
+export const LOCALE_APPOINTMENT_DETAIL_SIGN_PHONE = '签约手机'
+export const LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM = '房间号'
+export const LOCALE_APPOINTMENT_DETAIL_SIGN_PICTURE = '合同图片'
+export const LOCALE_APPOINTMENT_DETAIL_INPUT_PHONE = '输入电话号码'
+export const LOCALE_APPOINTMENT_DETAIL_INPUT_RENT = '请填写租金'
+export const LOCALE_APPOINTMENT_DETAIL_SIGN_APARTMENT = '签约公寓'
+export const LOCALE_APPOINTMENT_DETAIL_SIGN_MESSAGE = '签约信息'
+export const LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM = '暂无可选房间'
+export const LOCALE_APPOINTMENT_DETAIL_MODIFY = '修改'
+export const LOCALE_APPOINTMENT_DETAIL_ADD_PICTURE = '添加合同照片'
+export const LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT='您还不能提交预约审核单'
+
+
+
+
 //预约看房
-export const LOCALE_APPOINTMENT_LOOKTIME =  "看房时间："
-export const LOCALE_APPOINTMENT_POST =  "提交预约"
+export const LOCALE_APPOINTMENT_LOOKTIME = "看房时间："
+export const LOCALE_APPOINTMENT_POST = "提交预约"
 export const LOCALE_APPOINTMENT_SUCCESS = '预约成功!'
 export const LOCALE_APPOINTMENT_WATING = "柠小檬火速处理中，请耐心等待!"
-export const LOCALE_APPOINTMENT_ACCEPT= '管家已接单！'
+export const LOCALE_APPOINTMENT_ACCEPT = '管家已接单！'
 export const LOCALE_APPOINTMENT_ACCEPT_PHONE = '稍后管家将与您电话联系'
-export const LOCALE_APPOINTMENT_ACCEPT_ORDER ='1.预约接单'
+export const LOCALE_APPOINTMENT_ACCEPT_ORDER = '1.预约接单'
 export const LOCALE_APPOINTMENT_CALL = '2.正在为您召唤管家...'
 export const LOCALE_APPOINTMENT_LOOK = '3.看房行程'
 export const LOCALE_APPOINTMENT_FINISH_REQUIRE = '确定'
-export const LOCALE_APPOINTMENT_HELP='预约结果将会通过消息推送告知您'
+export const LOCALE_APPOINTMENT_HELP = '预约结果将会通过消息推送告知您'
 // 租金详解
 export const LOCALE_RENT_TYPE = '租约方式'
 export const LOCALE_COST_DETAIL = '费用说明'

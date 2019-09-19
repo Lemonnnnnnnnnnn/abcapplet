@@ -32,7 +32,7 @@ export const API_HOT_CBD_LIST = `${HOST}/dict/listHotCbdPost`
 
 // 商圈详情
 export const API_CBD_SHOW = `${HOST}/cbd/getPost`
-export const PAYLOAD_CBD_SHOW = { cbd: '', type_id: 0, type_room : 0 , type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_CBD_SHOW = { cbd: '', type_id: 0, type_room: 0, type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************
@@ -44,7 +44,7 @@ export const API_ACTIVITY_LIST = `${HOST}/article/listHotActivityPost`
 
 // 活动详情
 export const API_ACTIVITY_SHOW = `${HOST}/article/getHotActivityPost`
-export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: '', type_room : 0 , type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_ACTIVITY_SHOW = { id: 0, city: 0, cbd: '', type_room: 0, type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************
@@ -63,12 +63,12 @@ export const API_RECOMMEND_APARTMENT = `${HOST}/apartment/lookPost`
 
 // 搜索列表
 export const API_SEARCH_APARTMENT = `${HOST}/apartment/searchPost`
-export const PAYLOAD_SEARCH_APARTMENT = { id: 0, city: 350200, search_key: '', cbd: '', type_id: 0 , type_room : 0 , type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_SEARCH_APARTMENT = { id: 0, city: 350200, search_key: '', cbd: '', type_id: 0, type_room: 0, type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 // 公寓列表
 export const API_APARTMENT_LIST = `${HOST}/apartment/listPost`
 //is_select字段只是用来判断解决首页刷新问题。
-export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, type_room : 0 , type_floor: 0, latitude: 0, longitude: 0, current_page: 1, page_size: PAGE_SIZE ,is_select:1,isNew:2}
+export const PAYLOAD_APARTMENT_LIST = { city: 350200, cbd: "", tags: "", distance: 0, price_low: 0, price_high: 0, type_room: 0, type_floor: 0, latitude: 0, longitude: 0, current_page: 1, page_size: PAGE_SIZE, is_select: 1, isNew: 2 }
 
 // 心愿单公寓列表
 export const API_FAVORITE_APARTMENT_LIST = `${HOST}/user/listCollectPost`
@@ -80,11 +80,11 @@ export const PAYLOAD_FAVORITE_HOUSE_TYPE_LIST = { current_page: 1, page_size: PA
 
 // 商圈合集公寓
 export const API_CBD_APARTMENT_LIST = `${HOST}/cbd/getPost`
-export const PAYLOAD_CBD_APARTMENT_LIST = { cbd: '', type_id: 0, type_room : 0 , type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_CBD_APARTMENT_LIST = { cbd: '', type_id: 0, type_room: 0, type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 // 活动合集公寓
 export const API_ACTIVITY_APARTMENT_LIST = `${HOST}/article/getHotActivityPost`
-export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: '', type_room : 0 , type_room : 0 , type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
+export const PAYLOAD_ACTIVITY_APARTMENT_LIST = { id: 0, city: 0, cbd: '', type_room: 0, type_room: 0, type_floor: 0, price_low: 0, price_high: 0, current_page: 1, page_size: PAGE_SIZE, latitude: 0, longitude: 0, distance: 0, tags: '' }
 
 /**
  ************************
@@ -159,37 +159,37 @@ export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
  */
 //获取看房行程信息
 export const API_APPOINTMENT_LIST = `${HOST}/appointment/listPost`
-export const PAYLOAD_APPOINTMENT_LIST = { current_page: 1, page_size: PAGE_SIZE}
+export const PAYLOAD_APPOINTMENT_LIST = { current_page: 1, page_size: PAGE_SIZE }
 
 //添加评价
 export const API_REVULUTION_CREAT = `${HOST}/appointment/commentPost`
-export const PAYLOAD_REVULUTION_CREAT = { appointment_id: 0, score: 1, comment:''}
+export const PAYLOAD_REVULUTION_CREAT = { appointment_id: 0, score: 1, comment: '' }
 
 //添加看房评价
 export const API_INTENTION_CREATE = `${HOST}/appointment/intentionPost`
-export const PAYLOAD_INTENTION_CREATE = { appointment_id: '', score: '', room_ids:''}
+export const PAYLOAD_INTENTION_CREATE = { appointment_id: '', score: '', room_ids: '' }
 
 //获取行程下相关的房间列表
 export const API_INTENTION_ROOM_SHOW = `${HOST}/appointment/roomPost`
-export const PAYLOAD_INTENTION_ROOM_SHOW = { appointment_id: 0, room_no:''}
+export const PAYLOAD_INTENTION_ROOM_SHOW = { appointment_id: 0, room_no: '' }
 
 //行程留言,新增一条留言
 export const API_MESSAGE_CREATE = `${HOST}/appointment/addMessagePost`
-export const PAYLOAD_MESSAGE_CREATE  = { appointment_id: 0, content:''}
+export const PAYLOAD_MESSAGE_CREATE = { appointment_id: 0, content: '' }
 
 //获取行程留言
 export const API_MESSAGE_LIST = `${HOST}/appointment/listMessagePost`
-export const PAYLOAD_MESSAGE_LIST  = { appointment_id: 0}
+export const PAYLOAD_MESSAGE_LIST = { appointment_id: 0 }
 //提交需求卡
 export const API_DEMAND_CREATE = `${HOST}/user/addDemandPost`
-export const PAYLOAD_CREATE_DEMAND = { budget:'',cbd:'',living_time:'',people:'',type_room: 0 , type_floor : 0 }
+export const PAYLOAD_CREATE_DEMAND = { budget: '', cbd: '', living_time: '', people: '', type_room: 0, type_floor: 0 }
 
 //判断用户是否弹过引导框
 export const API_DEMAND_CHECK = `${HOST}/user/changeUserGuidePost`
 
 //新增预约行程
 export const API_APPOINTMENT_CREATE = `${HOST}/apartment/addappointmentpost`
-export const PAYLOAD_APPOINTMENT_CREATE = { apartment:'', house_type:'', order_time:'', name:'',mobile:'',form_id:''}
+export const PAYLOAD_APPOINTMENT_CREATE = { apartment: '', house_type: '', order_time: '', name: '', mobile: '', form_id: '' }
 
 //获取行程详情
 export const API_APPOINTMENT_SHOW = `${HOST}/appointment/detailPost`
@@ -206,9 +206,11 @@ export const API_APPOINTMENT_NIGHTPOST = `${HOST}/appointment/nightPost`
 
 //新增行程签约核对单
 export const API_APPOINTMENT_REWARDORDER = `${HOST}/appointment/rewardOrderPost`
-export const PAYLOAD_APPOINTMENT_REWARDORDER = {appointment_id:0,room_no:'',mobile:'',sign_time:'',tenancy:'',file_img:''}
+export const PAYLOAD_APPOINTMENT_REWARDORDER = { appointment_id: 0, apartment_room_id: '', mobile: '', sign_time: '', tenancy: '', file_img: '', price: '' }
 //获取签约审核单详情
 export const API_APPOINTMENT_DETAILREWARD = `${HOST}/appointment/detailRewardOrderPost`
+// 查询签约审核单可选的房间列表
+export const API_APPOINTMENT_REWARD_ORDER_ROOM_POST = `${HOST}/appointment/rewardOrderRoomPost`
 
 // 首页数据接口
 export const API_INDEXPOST = `${HOST}/index/indexPost`

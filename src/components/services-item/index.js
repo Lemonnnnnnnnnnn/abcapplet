@@ -71,7 +71,7 @@ class ServiceItem extends BaseComponent {
   onNavigationAgency() {
     const { service } = this.props
     const { id, is_can_reward, reward_id } = service
-    if (is_can_reward === 0) {
+    if (!is_can_reward) {
       Taro.navigateTo({
         url: `${PAGE_APPOINTMENT_AUDIT}?id=${reward_id}`
       })

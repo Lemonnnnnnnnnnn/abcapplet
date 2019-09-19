@@ -4,23 +4,38 @@ import Board from '@components/board'
 import { AtTag, AtIcon, AtButton } from 'taro-ui'
 import { PAYLOAD_APPOINTMENT_REWARDORDER, API_UPLOAD_IMAGE } from '@constants/api'
 import { PAGE_ORDER_CREATE, PAGE_APPOINTMENT_AUDIT } from '@constants/page'
-
-// 自定义组件
-import ABCIcon from '@components/abc-icon'
-
-
-// 自定义常量
-import { COLOR_GREY_2 } from '@constants/styles'
+import { SIGN_CASH_BACK, CALL,APPOINTMENT_DETAIL } from '@constants/picture'
+import {
+  LOCALE_ADVERTISING_WORD_WU,
+  LOCALE_ADVERTISING_WORD_FU,
+  LOCALE_APPOINTMENT_DETAIL_REVIEW,
+  LOCALE_APPOINTMENT_DETAIL_RENT_PRICE,
+  LOCALE_APPOINTMENT_DETAIL_RENT_TIME,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_TIME,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_PHONE,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_APARTMENT,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_MESSAGE,
+  LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM,
+  LOCALE_APPOINTMENT_DETAIL_MODIFY,
+  LOCALE_APPOINTMENT_DETAIL_ADD_PICTURE,
+  LOCALE_APPOINTMENT_DETAIL_INPUT_RENT,
+  LOCALE_APPOINTMENT_DETAIL_INPUT_PHONE,
+  LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_PICTURE
+} from '@constants/locale'
 
 import Decorate from '@components/decorate'
 
-import ImageUpload from '@components/image-upload';
+import ImageUpload from '@components/image-upload'
 // Redux 相关
 import { connect } from '@tarojs/redux'
 
 import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
-import BaseComponent from '../../components/base';
+import BaseComponent from '../../components/base'
+
+import '../../styles/_appointment.scss'
 
 
 @connect(state => state, {
@@ -40,10 +55,14 @@ class AppointmentDetail extends BaseComponent {
   state = {
     timeList: [{ id: 6, name: "半  年" }, { id: 12, name: "一  年" }],
     mobile: '',
+    mobileChecked : false,
+    price: LOCALE_APPOINTMENT_DETAIL_INPUT_RENT,
+    priceChecked : false,
     creatTime: '',
     apartmentTitle: '',
     signTime: '',
     houseTypeId: '',
+    roomList: [],
     payload: PAYLOAD_APPOINTMENT_REWARDORDER,
     //上传图片相关
 
@@ -77,18 +96,36 @@ class AppointmentDetail extends BaseComponent {
       })
     })
 
-
-  }
-
-  //输入房号
-  onInputRoomNo({ currentTarget: { value } }) {
-
-    const { payload } = this.state
-    this.setState({
-      payload: { ...payload, room_no: value }
+    this.props.dispatchAppointRewordOrderRoomPost({ appointment_id: parseInt(id) }).then(res => {
+      let roomList = res.data.data
+      roomList.map(i => ({ i, active: false, type: false }))
+      this.setState({ roomList })
     })
-
   }
+
+  //选择房间
+  onChoiseRoom(e, index, id) {
+    const { roomList, payload } = this.state
+    const roomListClone = JSON.parse(JSON.stringify(roomList))
+    let choiseRoom = 0
+    roomListClone.map(i => {
+      if (i.id === id) {
+        i.active = !i.active
+        i.type = !i.type
+
+        if (i.active && i.type) {
+          choiseRoom = parseInt(id)
+        } else { choiseRoom = 0 }
+
+      } else {
+        i.active = false
+        i.type = false
+      }
+    })
+    this.setState({ roomList: roomListClone, payload: { ...payload, apartment_room_id: choiseRoom } })
+  }
+
+
 
   // 选择租期
   onTimeChange(id) {
@@ -126,7 +163,15 @@ class AppointmentDetail extends BaseComponent {
   //修改电话号码
   onClearMobile() {
     this.setState({
-      mobile: ''
+      mobile: '',
+      mobileChecked : true
+    })
+  }
+
+  onClearPrice(){
+    this.setState({
+      price: '',
+      priceChecked : true
     })
   }
 
@@ -138,16 +183,27 @@ class AppointmentDetail extends BaseComponent {
       payload: { ...payload, mobile: value }
     })
   }
+
+  // 输入租金
+  onChangePrice({ currentTarget: { value } }) {
+    const { payload } = this.state
+    this.setState({
+      price: value,
+      payload: { ...payload, price: value }
+    })
+  }
+
   //检查数据
   onCheck() {
     const { payload } = this.state
-    const { room_no, mobile, sign_time, tenancy, file_img } = payload
+    const { apartment_room_id, mobile, sign_time, tenancy, file_img, price } = payload
     let judgeArr = [
-      { title: '房间号', value: room_no },
-      { title: '签约手机', value: mobile },
-      { title: '签约时间', value: sign_time },
-      { title: '租期', value: tenancy },
-      { title: '合同图片', value: file_img },
+      { title: LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM, value: apartment_room_id },
+      { title: LOCALE_APPOINTMENT_DETAIL_SIGN_PHONE, value: mobile },
+      { title: LOCALE_APPOINTMENT_DETAIL_SIGN_TIME, value: sign_time },
+      { title: LOCALE_APPOINTMENT_DETAIL_RENT_TIME, value: tenancy },
+      { title: LOCALE_APPOINTMENT_DETAIL_SIGN_PICTURE, value: file_img },
+      { title: LOCALE_APPOINTMENT_DETAIL_RENT_PRICE, value: price }
     ]
 
     try {
@@ -170,7 +226,7 @@ class AppointmentDetail extends BaseComponent {
   onComfirm() {
     const { payload, isCanReward } = this.state
 
-    if (isCanReward === 1) {
+    if (isCanReward) {
       this.onCheck()
         && this.props.dispatchAppointRewordOrder(payload).then((res) => {
           Taro.redirectTo({
@@ -178,14 +234,14 @@ class AppointmentDetail extends BaseComponent {
           })
         }
         )
-    }
-    if (isCanReward === 0) {
+    } else {
       Taro.showToast({
-        title: '您还不能提交预约审核单',
+        title: LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT,
         icon: 'none',
         duration: 2000
       })
     }
+
   }
   //跳转签约下定页面
   onNavigateTo() {
@@ -195,21 +251,10 @@ class AppointmentDetail extends BaseComponent {
     })
   }
   render() {
-    const { timeList, mobile, apartmentTitle, signTime, isSign } = this.state
-    const fixStyle = {
-      width: '7vw',
-      height: '7vw',
-      position: 'fixed',
-      bottom: Taro.pxTransform(50),
-      right: Taro.pxTransform(50),
-      background: '#fff',
-      borderRadius: '50%',
-      padding: Taro.pxTransform(20),
-      boxShadow: '0px 2px 7px rgba(0,0,0,0.2)',
-    }
+    const { timeList, mobile, apartmentTitle, signTime, isSign, roomList , price , priceChecked, mobileChecked } = this.state
 
     return (
-      <View className='message-background' style={{ 'padding-top': '75px', 'padding-bottom': '30px' }}>
+      <View className='message-background appointment-detail' style={{ paddingTop: Taro.pxTransform(150), paddingBottom: Taro.pxTransform(60) }}>
         {/* 头部 */}
         <View class='board--grey board--fixed-top ' style='position:absolute;z-index:9' >
           <Decorate height='126' />
@@ -217,54 +262,79 @@ class AppointmentDetail extends BaseComponent {
 
         <Board className='py-2 px-3 mx-2 mt-4 '>
           <View className='at-row' style={{ marginTop: Taro.pxTransform(200) }}>
-            <View className='border-decorate border-decorate-yellow' style={{ height: '20px' }}></View>
-            <View className='text-normal text-bold ml-2'>签约公寓</View>
+            <View className='border-decorate border-decorate-yellow' style={{ height: Taro.pxTransform(40) }}></View>
+            <View className='text-normal text-bold ml-2'>{LOCALE_APPOINTMENT_DETAIL_SIGN_APARTMENT}</View>
           </View>
           <View className='text-huge text-bold ml-2 mt-2'>{apartmentTitle}</View>
-          <View className='text-small ml-2 mt-2'>
-            <Input name='value'
-              type='text'
-              placeholder='请输入签约房号，支持字母、数字1-9、 “-”破折号'
-              value={this.state.value}
-              onInput={this.onInputRoomNo}></Input>
+
+          {/* 可选房间 */}
+          <View className='my-2'>
+            {
+              roomList.length ? roomList.map((i, key) =>
+                <AtTag
+                  type={i.type ? "primary" : ""}
+                  active={i.active}
+                  className='my-1 mx-1'
+                  circle
+                  key={i}
+                  size='small'
+                  onClick={(e) => this.onChoiseRoom(e, key, i.id)} >
+                  <View>{i.no}</View>
+                </AtTag>
+              ) : <View className='text-normal text-secondary ml-2 '>{LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM}</View>
+            }
           </View>
+
           <View className='ml-2 appointment-detail-line '></View>
         </Board>
 
         <Board className='py-2 px-3 mx-2 mt-3 '>
           <View className='at-row'>
-            <View className='border-decorate border-decorate-yellow' style={{ height: '20px' }}></View>
-            <View className='text-normal text-bold ml-2'>签约信息</View>
+            <View className='border-decorate border-decorate-yellow' style={{ height: Taro.pxTransform(40) }}></View>
+            <View className='text-normal text-bold ml-2'>{LOCALE_APPOINTMENT_DETAIL_SIGN_MESSAGE}</View>
           </View>
 
           <View className='at-row'>
-            <View className='text-large text-secondary ml-2 mt-2 at-col-3'>签约手机:</View>
-            {/* <View className='text-large ml-2 mt-2 at-col-4'>{mobile}</View> */}
+            <View className='text-large text-secondary ml-2 mt-2 at-col-3'>{LOCALE_APPOINTMENT_DETAIL_SIGN_PHONE}</View>
             <Input
               type='number'
+              focus={mobileChecked}
               className='text-large mt-2  at-col-4'
               value={mobile}
-              placeholder='输入电话号码'
+              placeholder={LOCALE_APPOINTMENT_DETAIL_INPUT_PHONE}
               onInput={this.onChangeMobile}
             />
-            <View className='text-large text-yellow ml-4 mt-2 at-col-3' onClick={this.onClearMobile}>修改</View>
+            <View className='text-large text-yellow ml-4 mt-2 at-col-3' onClick={this.onClearMobile}>{LOCALE_APPOINTMENT_DETAIL_MODIFY}</View>
           </View>
 
           <View className='at-row'>
-            <View className='text-large text-secondary ml-2 mt-2 at-col-3'>签约时间：</View>
-            {/* <View className='text-large ml-2 mt-2 at-col-4'>{signTime}</View> */}
+            <View className='text-large text-secondary ml-2 mt-2 at-col-3'>{LOCALE_APPOINTMENT_DETAIL_SIGN_TIME}</View>
             <View className='at-col-8'>
               <Picker className='text-large ml-1 mt-2 ' mode='date' onChange={this.onDateChange}>
                 <View className='at-row'>
                   <View className='text-normal at-col-7'>{signTime}</View>
-                  <View className='text-large text-yellow ml-1 at-col-3' >修改</View>
+                  <View className='text-large text-yellow ml-1 at-col-3' >{LOCALE_APPOINTMENT_DETAIL_MODIFY}</View>
                 </View>
               </Picker>
             </View>
           </View>
 
+          {/* 签约价格 */}
+          <View className='at-row'>
+            <View className='text-large text-secondary ml-2 mt-2 at-col-3'>{LOCALE_APPOINTMENT_DETAIL_RENT_PRICE}</View>
+            <Input
+              type='number'
+              className='text-normal text-secondary mt-2 at-col-4'
+              value={price}
+              focus={priceChecked}
+              placeholder={LOCALE_APPOINTMENT_DETAIL_INPUT_RENT}
+              onInput={this.onChangePrice}
+            />
+            <View className='text-large text-yellow ml-4 mt-2 at-col-3' onClick={this.onClearPrice}>{LOCALE_APPOINTMENT_DETAIL_MODIFY}</View>
+          </View>
+
           <View className='at-row mt-2'>
-            <View className='text-large text-secondary ml-2 mt-2 at-col-2'>租期：</View>
+            <View className='text-large text-secondary ml-2 mt-2 at-col-2'>{LOCALE_APPOINTMENT_DETAIL_RENT_TIME}</View>
             <View className='at-col-6 at-row'>
               {timeList.map((item) => (
                 <View className='at-row ml-2 ' key={item.id}>
@@ -285,7 +355,7 @@ class AppointmentDetail extends BaseComponent {
             {/* 上传图片 */}
             <ImageUpload
               onChange={this.onChangeImage}
-              text='添加合同照片'
+              text={LOCALE_APPOINTMENT_DETAIL_ADD_PICTURE}
             />
           </View>
         </Board>
@@ -295,12 +365,12 @@ class AppointmentDetail extends BaseComponent {
             <View className='at-row at-row__justify--between ' onClick={this.onNavigateTo}>
               <View className=''>
                 <View className='at-row'>
-                  <Image className='mt-1 appointmentImage' src='https://images.gongyuabc.com/image/appointmentdetail.png'></Image>
-                  <View className='text-bold text-large ml-2'>还没签约？选择ABC待预定服务</View>
+                  <Image className='mt-1 appointment-image' src={APPOINTMENT_DETAIL}></Image>
+                  <View className='text-bold text-large ml-2'>{LOCALE_ADVERTISING_WORD_WU}</View>
                 </View>
                 <View className='text-small mt-1'>
-                  快速锁定房间，还可以获得最高￥800元退租押金赔付
-          </View>
+                  {LOCALE_ADVERTISING_WORD_FU}
+                </View>
               </View>
               <View className='mt-2'>
                 <AtIcon value='chevron-right' size='30' color='#000000'></AtIcon>
@@ -310,16 +380,16 @@ class AppointmentDetail extends BaseComponent {
         }
 
         <View className='mx-2 mt-3 text-muted' onClick={this.onComfirm}>
-          <AtButton className='mx-2 btn-yellow active' size='normal' circle >确定提交审核</AtButton>
+          <AtButton className='mx-2 btn-yellow active' size='normal' circle >{LOCALE_APPOINTMENT_DETAIL_REVIEW}</AtButton>
         </View>
 
         <View className='appointment-detail-head'>
-          <Image src='https://images.gongyuabc.com/image/signCashBack.png' mode='widthFix' className='appointmentHead'></Image>
+          <Image src={SIGN_CASH_BACK} mode='widthFix' className='appointment-head'></Image>
         </View>
 
         {/* 客服悬浮入口 */}
         <Button open-type='contact' >
-          <Image style={fixStyle} src='https://images.gongyuabc.com/image/call.png'></Image>
+          <Image className='appointment-fix-icon' src={CALL}></Image>
         </Button>
       </View >
 
