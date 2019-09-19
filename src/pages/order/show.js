@@ -26,7 +26,7 @@ import OrderRoomList from '@components/order-room-list'
 import OrderSignCode from '@components/order-sign-code'
 
 // 自定义常量
-import { PAGE_HOME } from '@constants/page'
+import { PAGE_HOME ,PAGE_ORDER_CREATE, PAGE_ORDER_SHOW ,PAGE_HOUSE_TYPE_SHOW ,PAGE_APARTMENT_SHOW } from '@constants/page'
 import { COLOR_WHITE } from '@constants/styles'
 
 import {
@@ -87,6 +87,19 @@ class OrderShow extends Component {
   }
 
   componentWillMount() {
+
+    const currentRoute = Taro.getCurrentPages()
+    const routeArr = []
+    currentRoute.map(i => {
+      routeArr.push('/' + i.route)
+    })
+    routeArr[0] === PAGE_APARTMENT_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW 
+    && console.log('公寓详情页——签约下定——立即预订')
+
+    routeArr[0] === PAGE_HOUSE_TYPE_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW 
+    && console.log('户型详情页——签约下定——立即预订')
+
+
     const { id = 176 } = this.$router.params
 
     // 获取用户数据

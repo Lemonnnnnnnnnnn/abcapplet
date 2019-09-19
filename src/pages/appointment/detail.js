@@ -35,8 +35,6 @@ import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
 import BaseComponent from '../../components/base'
 
-import '../../styles/_appointment.scss'
-
 
 @connect(state => state, {
   ...apartmentActions,
@@ -260,7 +258,7 @@ class AppointmentDetail extends BaseComponent {
           <Decorate height='126' />
         </View >
 
-        <Board className='py-2 px-3 mx-2 mt-4 '>
+        <Board className='py-2 px-1 mx-2 mt-4 '>
           <View className='at-row' style={{ marginTop: Taro.pxTransform(200) }}>
             <View className='border-decorate border-decorate-yellow' style={{ height: Taro.pxTransform(40) }}></View>
             <View className='text-normal text-bold ml-2'>{LOCALE_APPOINTMENT_DETAIL_SIGN_APARTMENT}</View>

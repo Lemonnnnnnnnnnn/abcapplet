@@ -11,6 +11,8 @@ import * as appointmentActions from '@actions/appointment'
 
 // 自定义变量
 import { PAYLOAD_APPOINTMENT_CREATE } from '@constants/api'
+import { PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE } from '@constants/page'
+
 import {
   LOCALE_CHANGE,
   LOCALE_APPOINTMENT_LOOKTIME,
@@ -113,6 +115,18 @@ class AppointmentPost extends Component {
 
 
   async componentDidMount() {
+
+    const currentRoute = Taro.getCurrentPages()
+    const routeArr = []
+    currentRoute.map(i => {
+      routeArr.push('/' + i.route)
+    })
+    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE 
+    && console.log('进入首页——进入公寓详情——点击预约')
+
+    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE 
+    && console.log('进入首页——进入户型详情——点击预约')
+
 
     const { id, apartmentId } = this.$router.params
     const { Payload } = this.state

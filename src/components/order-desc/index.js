@@ -63,7 +63,6 @@ class OrderDesc extends BaseComponent {
       amount_total: amountTotal,
       apartment_title: apartmentTitle,
     } = order
-    console.log(order)
 
     const { message } =
       ORDER_STATUS_DIST[status]
