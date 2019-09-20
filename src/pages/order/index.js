@@ -31,6 +31,10 @@ class OrderIndex extends Component {
     this.orderList.onNextPage()
   }
 
+  componentDidShow(){
+    this.orderList.onReset(null)
+  }
+
   render() {
     const { orders } = this.props
 
