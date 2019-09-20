@@ -45,6 +45,7 @@ class OrderTimer extends BaseComponent {
     status === ORDER_STATUS_PAY_WAITING && this.setPayTimer(initTimer)
   }
 
+
   setTimer(timer) {
     const { status } = this.props
     if (status === ORDER_STATUS_LOCK_WAITING) {

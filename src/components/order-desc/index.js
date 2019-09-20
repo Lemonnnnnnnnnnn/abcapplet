@@ -147,16 +147,6 @@ class OrderDesc extends BaseComponent {
             定金凭证
             </View>
         }
-        {
-          status === 1 && paid === 1 &&
-          <View
-            style={depositBarStyle}
-            onClick={this.onNaviDeposit}
-            className='mt-2 py-2 at-row at-row__justify--center at-row__align--center text-normal'>
-            <Image className='mr-2' src='https://images.gongyuabc.com/image/deposit-bar.png' style={{ width: Taro.pxTransform(34), height: Taro.pxTransform(38) }}></Image>
-            定金凭证
-          </View>
-        }
 
       </View>
     )

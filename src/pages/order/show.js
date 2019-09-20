@@ -26,7 +26,7 @@ import OrderRoomList from '@components/order-room-list'
 import OrderSignCode from '@components/order-sign-code'
 
 // 自定义常量
-import { PAGE_HOME ,PAGE_ORDER_CREATE, PAGE_ORDER_SHOW ,PAGE_HOUSE_TYPE_SHOW ,PAGE_APARTMENT_SHOW } from '@constants/page'
+import { PAGE_HOME, PAGE_ORDER_CREATE, PAGE_ORDER_SHOW, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
 import { COLOR_WHITE } from '@constants/styles'
 
 import {
@@ -87,24 +87,33 @@ class OrderShow extends Component {
   }
 
   componentWillMount() {
-
     const currentRoute = Taro.getCurrentPages()
     const routeArr = []
     currentRoute.map(i => {
       routeArr.push('/' + i.route)
     })
-    routeArr[0] === PAGE_APARTMENT_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW 
-    && console.log('公寓详情页——签约下定——立即预订')
+    routeArr[0] === PAGE_APARTMENT_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW
+      && console.log('公寓详情页——签约下定——立即预订')
 
-    routeArr[0] === PAGE_HOUSE_TYPE_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW 
-    && console.log('户型详情页——签约下定——立即预订')
-
+    routeArr[0] === PAGE_HOUSE_TYPE_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW
+      && console.log('户型详情页——签约下定——立即预订')
 
     const { id = 176 } = this.$router.params
 
     // 获取用户数据
     const { payload: user } = this.props.dispatchUser()
     this.setState({ city: user.citycode, id }, () => this.onReset())
+  }
+
+
+  componentDidUpdate(){
+    const { order } = this.state
+    const { status } = order
+    status === ORDER_STATUS_LOCK_SUCCESS && clearInterval(this.timer)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   // 获取订单数据
@@ -117,6 +126,9 @@ class OrderShow extends Component {
 
         // 设置订单
         this.setState({ order })
+
+        const { status } = order
+        status === ORDER_STATUS_LOCK_WAITING && this.onOpenTimer()
 
         // 设置标题
         const { message } = ORDER_STATUS_DIST[order.status]
@@ -139,7 +151,7 @@ class OrderShow extends Component {
       this.timer = setInterval(() => {
         this.onReset()
         this.timerCount++
-        this.timerCount === 5 && clearInterval(this.timer)
+        this.timerCount === 12 && clearInterval(this.timer)
       }, 10000)
     }
   }
@@ -205,7 +217,7 @@ class OrderShow extends Component {
 
   render() {
     const { apartmentlook } = this.props
-    const { order, city, roomId, showSignCode , id } = this.state
+    const { order, city, roomId, showSignCode, id } = this.state
     let { status, sign_time: signTime, app_code: appCode, countdown_time: countdownTime } = order
 
     signTime = day.unix(signTime).format('YYYY年MM月DD日')
@@ -221,13 +233,13 @@ class OrderShow extends Component {
       <Decorate height='250' />
 
       {/* 计时器 */}
-      <View className='at-row at-row__justify--center'  style={signSeccessStyle}>
+      <View className='at-row at-row__justify--center' style={signSeccessStyle}>
         <ABCIcon className='mt-2' icon='check_circle_outline' color={COLOR_WHITE} size='46' />
       </View>
 
       {/* 签约完成 */}
       <View className='at-row at-row__justify--center '>
-        <View className='text-huge text-bold' style={{marginTop : "61px"}}>{LOCALE_ORDER_STATUS_SUCCESS}</View>
+        <View className='text-huge text-bold' style={{ marginTop: "61px" }}>{LOCALE_ORDER_STATUS_SUCCESS}</View>
       </View>
 
       {/* 提示词 */}
@@ -291,6 +303,8 @@ class OrderShow extends Component {
       {/* 计时器  */}
       {/* TODO 需要和宝哥沟通倒计时时间 */}
       <OrderTimer
+        onOpenTimer={this.onOpenTimer}
+        test={1}
         status={status}
         initTimer={countdownTime}
         onTimeOut={this.onReset}
@@ -310,7 +324,7 @@ class OrderShow extends Component {
     const statusLockSuccess = <View>
       {/* 背景底色 */}
       <Decorate height='330' />
-        
+
       {/* 计时器  */}
       <OrderTimer
         status={status}
@@ -347,7 +361,7 @@ class OrderShow extends Component {
     </View>
 
     return (
-      <View className='px-3' style={{overflow:'hidden'}} hidden={Object.keys(order).length === 0}>
+      <View className='px-3' style={{ overflow: 'hidden' }} hidden={Object.keys(order).length === 0}>
         {/* 签约码 */}
         <OrderSignCode show={showSignCode} code={appCode} />
 
