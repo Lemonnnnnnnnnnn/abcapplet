@@ -46,7 +46,6 @@ class AppointmentDetail extends BaseComponent {
         tenancy: res.data.data.tenancy,
         status:res.data.data.status,
       })
-
     }
     )
   }

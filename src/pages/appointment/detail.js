@@ -4,7 +4,7 @@ import Board from '@components/board'
 import { AtTag, AtIcon, AtButton } from 'taro-ui'
 import { PAYLOAD_APPOINTMENT_REWARDORDER, API_UPLOAD_IMAGE } from '@constants/api'
 import { PAGE_ORDER_CREATE, PAGE_APPOINTMENT_AUDIT } from '@constants/page'
-import { SIGN_CASH_BACK, CALL,APPOINTMENT_DETAIL } from '@constants/picture'
+import { SIGN_CASH_BACK, CALL, APPOINTMENT_DETAIL } from '@constants/picture'
 import {
   LOCALE_ADVERTISING_WORD_WU,
   LOCALE_ADVERTISING_WORD_FU,
@@ -51,16 +51,18 @@ class AppointmentDetail extends BaseComponent {
     navigationBarBackgroundColor: '#FFC919',
   }
   state = {
-    timeList: [{ id: 6, name: "半  年" }, { id: 12, name: "一  年" }],
+    timeList: [{ id: 6, name: "半年" }, { id: 12, name: "一年" }],
     mobile: '',
-    mobileChecked : false,
+    mobileChecked: false,
     price: LOCALE_APPOINTMENT_DETAIL_INPUT_RENT,
-    priceChecked : false,
+    priceChecked: false,
     creatTime: '',
     apartmentTitle: '',
     signTime: '',
     houseTypeId: '',
     roomList: [],
+    roomListArr: [],
+    roomChoise: '',
     payload: PAYLOAD_APPOINTMENT_REWARDORDER,
     //上传图片相关
 
@@ -71,56 +73,43 @@ class AppointmentDetail extends BaseComponent {
   }
 
   componentWillMount() {
-
+    let roomListArr = []
+    let roomList = ''
     const myDate = new Date()
     const month = myDate.getMonth() + 1
     const signTime = myDate.getFullYear() + '-' + month + '-' + myDate.getDate()
-    this.setState({
-      signTime
-    })
+    this.setState({ signTime })
 
     const { payload } = this.state
     const { id, isSign } = this.$router.params
-    this.props.dispatchAppointmentDetail({ id }).then((res) => {
+    this.props.dispatchAppointRewordOrderRoomPost({ appointment_id: parseInt(id) }).then(res => {
+      roomList = res.data.data
+      roomList.map(i => {
+        roomListArr.push(i.no)
+      })
+    })
 
+    this.props.dispatchAppointmentDetail({ id }).then((res) => {
       this.setState({
+        roomList,
+        roomListArr,
+        roomChoise: '请选择房间号',
         isSign: parseInt(isSign),
         Id: id,
         mobile: res.data.data.mobile,
         isCanReward: res.data.data.is_can_reward,
         apartmentTitle: res.data.data.apartment_title,
         houseTypeId: res.data.data.house_type_id,
-        payload: { ...payload, appointment_id: res.data.data.id, mobile: res.data.data.mobile, sign_time: signTime }
+        payload: { ...payload, appointment_id: res.data.data.id, mobile: res.data.data.mobile, sign_time: signTime}
       })
-    })
-
-    this.props.dispatchAppointRewordOrderRoomPost({ appointment_id: parseInt(id) }).then(res => {
-      let roomList = res.data.data
-      roomList.map(i => ({ i, active: false, type: false }))
-      this.setState({ roomList })
     })
   }
 
   //选择房间
-  onChoiseRoom(e, index, id) {
+  onChoiseRoom = e => {
     const { roomList, payload } = this.state
-    const roomListClone = JSON.parse(JSON.stringify(roomList))
-    let choiseRoom = 0
-    roomListClone.map(i => {
-      if (i.id === id) {
-        i.active = !i.active
-        i.type = !i.type
-
-        if (i.active && i.type) {
-          choiseRoom = parseInt(id)
-        } else { choiseRoom = 0 }
-
-      } else {
-        i.active = false
-        i.type = false
-      }
-    })
-    this.setState({ roomList: roomListClone, payload: { ...payload, apartment_room_id: choiseRoom } })
+    const { value } = e.detail
+    this.setState({ payload: { ...payload, apartment_room_id: roomList[value].id }, roomChoise: roomList[value].no })
   }
 
 
@@ -162,14 +151,14 @@ class AppointmentDetail extends BaseComponent {
   onClearMobile() {
     this.setState({
       mobile: '',
-      mobileChecked : true
+      mobileChecked: true
     })
   }
 
-  onClearPrice(){
+  onClearPrice() {
     this.setState({
       price: '',
-      priceChecked : true
+      priceChecked: true
     })
   }
 
@@ -249,7 +238,7 @@ class AppointmentDetail extends BaseComponent {
     })
   }
   render() {
-    const { timeList, mobile, apartmentTitle, signTime, isSign, roomList , price , priceChecked, mobileChecked } = this.state
+    const { timeList, mobile, apartmentTitle, signTime, isSign, priceChecked, mobileChecked, roomListArr, roomChoise } = this.state
 
     return (
       <View className='message-background appointment-detail' style={{ paddingTop: Taro.pxTransform(150), paddingBottom: Taro.pxTransform(60) }}>
@@ -266,24 +255,14 @@ class AppointmentDetail extends BaseComponent {
           <View className='text-huge text-bold ml-2 mt-2'>{apartmentTitle}</View>
 
           {/* 可选房间 */}
-          <View className='my-2'>
-            {
-              roomList.length ? roomList.map((i, key) =>
-                <AtTag
-                  type={i.type ? "primary" : ""}
-                  active={i.active}
-                  className='my-1 mx-1'
-                  circle
-                  key={i}
-                  size='small'
-                  onClick={(e) => this.onChoiseRoom(e, key, i.id)} >
-                  <View>{i.no}</View>
-                </AtTag>
-              ) : <View className='text-normal text-secondary ml-2 '>{LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM}</View>
-            }
+          <View className='my-2 at-row at-row__align--center'>
+            <View className='ml-2 text-large '>房间号：</View>
+            <View className='p-1 at-col at-col-4 text-small' style={{ background: '#F7F7F7', borderRadius: '30px', textAlign: 'center' }} >
+              <Picker range={roomListArr} onChange={this.onChoiseRoom}>{roomChoise}</Picker>
+
+            </View>
           </View>
 
-          <View className='ml-2 appointment-detail-line '></View>
         </Board>
 
         <Board className='py-2 px-3 mx-2 mt-3 '>
@@ -322,8 +301,7 @@ class AppointmentDetail extends BaseComponent {
             <View className='text-large text-secondary ml-2 mt-2 at-col-3'>{LOCALE_APPOINTMENT_DETAIL_RENT_PRICE}</View>
             <Input
               type='number'
-              className='text-normal text-secondary mt-2 at-col-4'
-              value={price}
+              className='text-normal mt-2 at-col-4'
               focus={priceChecked}
               placeholder={LOCALE_APPOINTMENT_DETAIL_INPUT_RENT}
               onInput={this.onChangePrice}

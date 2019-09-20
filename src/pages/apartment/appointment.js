@@ -236,7 +236,6 @@ class AppointmentPost extends Component {
         judge.bigMonth = true
       }
     })
-    // console.log(judge)
 
     smailMonth.forEach(i => {
       if (i === currentMonth + 1) {
