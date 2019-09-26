@@ -14,6 +14,7 @@ class ServiceList extends Component {
   render() {
     const { hasMore, loading, page } = this.state
     const {  mini , lists ,time} = this.props
+
     return (
     <View className>
 

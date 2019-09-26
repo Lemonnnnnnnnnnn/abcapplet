@@ -67,26 +67,24 @@ class Search extends BaseComponent {
   }
 
 
-
-
   render() {
     const { isInput, value } = this.state
-    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel , showSearch , current,isInputSub} = this.props
+    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel, showSearch, current, isInputSub ,inputValue} = this.props
 
     const hideStyle = {
-      top : Taro.pxTransform(-92)
+      top: Taro.pxTransform(-92)
     }
 
     const showStyle = {
-      top : 0
+      top: 0
     }
 
     return (
-      <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={showSearch ? showStyle : hideStyle } >
+      <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={showSearch ? showStyle : hideStyle} >
         <View className='search-box'>
           <View className='search-content at-row at-row__align--center'>
             <View className='at-col at-col-3'>
-              <Picker mode='selector' range={selector} value={current}  onChange={onChangeSelector}>
+              <Picker mode='selector' range={selector} value={current} onChange={onChangeSelector}>
                 <View className='picker text-normal ml-3 at-row at-row__align--center'>
                   <Text>{selectorChecked}</Text>
                   <AtIcon prefixClass='iconfont icon' value='down' size={size} color={COLOR_BLACK} />
@@ -95,7 +93,7 @@ class Search extends BaseComponent {
             </View>
 
             {/* 带样式的输入框，点击后跳转搜索页 */}
-           {!isInputSub && <View className='at-col at-col-9' onClick={this.onNavigation}>
+            {!isInputSub && <View className='at-col at-col-9' onClick={this.onNavigation}>
               {!isInput
                 ? <View className='at-row at-row__align--center text-normal text-muted' >
                   <AtIcon className='ml-2' value='search' size={size} color={COLOR_GREY_0} />
@@ -116,18 +114,17 @@ class Search extends BaseComponent {
             </View>}
             {/* 搜索转租 */}
             {isInputSub && <View className='at-col at-col-9'>
-
-                 <View className='at-row at-row__align--center at-row__justify--between text-normal' >
-                  <Input className='ml-3'
-                    focus
-                    value={value}
-                    confirmType='确定'
-                    placeholder='搜索公寓/户型等关键词'
-                    onInput={this.onInputValue}
-                    onConfirm={this.onInputConfirm}
-                  />
-
-                </View>
+              <View className='at-row at-row__align--center at-row__justify--between text-normal' >
+                <Input className='ml-3'
+                  focus
+                  value={inputValue}
+                  confirmType='确定'
+                  placeholder='搜索公寓/户型等关键词'
+                  onInput={this.props.onInputValue}
+                  onConfirm={this.props.onInputConfirm}
+                />
+                {showCancel && <View className='mr-3 text-muted' onClick={this.props.onInputCancel}>取消</View>}
+              </View>
 
             </View>}
 

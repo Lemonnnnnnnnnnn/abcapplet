@@ -28,8 +28,8 @@ class BaseListSublet extends BaseComponent {
   async componentDidMount() {
     const { defaultPayload } = this.props
     await Taro.getLocation({
-      success: (res) => { this.onReset({ ...defaultPayload, latitude: res.latitude, longitude: res.longitude }) },
-      fail: () => { this.onReset({ ...defaultPayload, latitude: 0, longitude: 0 }) }
+      success: (res) => { this.onReset({ ...defaultPayload,  }) },
+      fail: () => { this.onReset({ ...defaultPayload,}) }
     }).catch((err) => { console.log(err) })
   }
 

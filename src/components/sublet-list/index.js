@@ -11,6 +11,18 @@ import SubletItem from '@components/sublet-item'
 import { LOCALE_NO_DATA } from '@constants/locale'
 import BaseListSublet from '@components/base-list-sublet'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as subletActions from '@actions/subleat'
+import * as cityActions from '@actions/city'
+import * as userActions from '@actions/user'
+
+@connect(state => state, {
+  ...subletActions,
+  ...cityActions,
+  ...userActions,
+})
+
 class SubletList extends BaseListSublet {
   state = {
     page: 1,
@@ -19,38 +31,40 @@ class SubletList extends BaseListSublet {
     payload: {},
     selected: [],
   }
-  openMiniProgram(value){
+  openMiniProgram(value) {
     Taro.navigateToMiniProgram({
       appId: 'wx798afaa9c187b6ae', // 要跳转的小程序的appid
-      path:' pages/home/index', // 跳转的目标页面
+      path: ' pages/home/index', // 跳转的目标页面
       extarData: {
-        id:parseInt(value.id)
+        id: parseInt(value.id)
       },
       success(res) {
         // 打开成功
         console.log(res)
       },
-      fail(res){
+      fail(res) {
         console.log(res)
       }
 
-})
+    })
   }
   render() {
     const { hasMore, loading, page } = this.state
-    const { mini, items } = this.props
+    const { mini, sublet, home } = this.props
 
+
+    console.log(home)
 
     return (
       <View className>
 
         {/* 渲染 行程列表 */}
         <View className='at-col at-col__justify--center' >
-          {page != 1 && items.map(i =>
+          {page != 1 && sublet.list.map(i =>
             <SubletItem key={i.id}
               item={i}
               onNavicatSublet={this.openMiniProgram}
-             />
+            />
           )}
         </View>
 
@@ -62,7 +76,7 @@ class SubletList extends BaseListSublet {
         />
 
         {/* 无数据 */}
-        {items.length === 0
+        {sublet.list.length === 0
           && hasMore === false
           && loading === false
           && <View class='page-demo'>{LOCALE_NO_DATA}</View>}

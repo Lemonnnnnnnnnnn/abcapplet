@@ -153,7 +153,7 @@ class RoomItem extends BaseComponent {
                   {roomNo}
                 </Text>
                 <Text className='text-secondary text-small my-2'>
-                  {toward} {space} {(space === '' && toward === '') ? LOCALE_NO_AWARD_AND_SPACE : ''}
+                  {toward}, {space} ㎡  {(space === '' && toward === '') ? LOCALE_NO_AWARD_AND_SPACE : ''}
                 </Text>
 
               </View>

@@ -45,8 +45,9 @@ import BaseComponent from '../../components/base';
 @connect(state => state, {
   ...adActions,
   ...cityActions,
-  ...distActions,
   ...userActions,
+  ...distActions,
+
   ...apartmentActions,
   ...apartmentLookActions,
   ...homeActions,

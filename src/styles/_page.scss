@@ -118,11 +118,11 @@ page {
     border-radius: 12px * $hd 0px * $hd 0px * $hd 12px * $hd;
   }
   &-house {
-    width: 75px  * $hd;
-    height: 22px  * $hd;
+    width: 75px * $hd;
+    height: 22px * $hd;
     background: rgba(255, 201, 25, 1);
     opacity: 1;
-    border-radius: 5px  * $hd;
+    border-radius: 5px * $hd;
     color: #ffffff;
   }
 }
@@ -162,4 +162,22 @@ page {
   position: absolute;
   top: -22px;
   background: #fff;
+}
+.sublet-back {
+  width: 115px * $hd;
+  height: 40px * $hd;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 6px * $hd rgba(0, 0, 0, 0.21);
+  opacity: 1;
+  border-radius: 22px * $hd;
+  position: fixed;
+  bottom: 4%;
+  right: 4%;
+}
+.sublet-button {
+  width: 25px * $hd;
+  height: 25px * $hd;
+  background: rgba(255, 201, 25, 1);
+  border-radius: 50%;
+  opacity: 1;
 }

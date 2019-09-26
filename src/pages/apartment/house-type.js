@@ -728,7 +728,7 @@ class HouseTypeShow extends Component {
                     type={TYPE_FAVORITE_APARTMENT}
                     items={apartments.list}
                   // defaultPayload={{ city }}
-                  // dispatchList={this.props.dispatchRecommendHouseType} 
+                  // dispatchList={this.props.dispatchRecommendHouseType}
                   />
                 </View>
               }

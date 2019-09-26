@@ -9,9 +9,15 @@ import SubletList from '@components/sublet-list'
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as subletActions from '@actions/subleat'
+import * as cityActions from '@actions/city'
+import * as userActions from '@actions/user'
+import { relative } from 'path'
+import { AtIcon } from 'taro-ui'
 
 @connect(state => state, {
   ...subletActions,
+  ...cityActions,
+  ...userActions,
 })
 
 class ApartmentRecommend extends Component {
@@ -25,9 +31,13 @@ class ApartmentRecommend extends Component {
   state = {
     selector: ['厦门市'],
     selectorChecked: '厦门市',
+    citys: [],
     isInput: 1,
-    payload:PAYLOAD_SUB_LIST,
-    count:false,
+    payload: PAYLOAD_SUB_LIST,
+    count: false,
+    inputValue: '',
+    showCancel: false,
+    selectorCheckedId: 0,
   }
 
   /**
@@ -37,23 +47,91 @@ class ApartmentRecommend extends Component {
     this.SubletList.onNextPage(1)
   }
 
+  componentDidHide() {
+    this.setState({
+      inputValue: '',
+      showCancel: false,
+    })
+  }
+//前往转租创建页面
+  openMiniProgramCreate() {
+    Taro.navigateToMiniProgram({
+      appId: 'wx798afaa9c187b6ae', // 要跳转的小程序的appid
+      path: ' pages/postsublet/index', // 跳转的目标页面
+      extarData: {
 
-  componentDidShow(){
+      },
+      success(res) {
+        // 打开成功
+        console.log(res)
+      },
+      fail(res) {
+        console.log(res)
+      }
+
+    })
+  }
+  async componentDidShow() {
+    // 获取用户数据 和 刷新页面数据
+    const { payload: user } = await this.props.dispatchUser()
+
+
+    this.props.dispatchCityList().then((res) => {
+      const citys = res.data.data.list
+
+      // 设置城市选择器
+      const selector = citys.map(i => i.title)
+      const selectorCity = citys.filter(i => i.id === user.citycode)[0]
+      const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
+      const selectorCheckedId = res.data.data.list[0].id
+
+      this.setState({ selector, selectorChecked, citys, selectorCheckedId })
+    })
+
     const { count } = this.state
     count && this.SubletList.onReset(null)
     this.setState({
-      count:true
+      count: true
     })
   }
 
+  //下拉选择
+  async onChangeSelector({ currentTarget: { value } }) {
+    const { selector, citys, payload } = this.state
+    this.setState({
+      selectorChecked: selector[value],
+      selectorCheckedId: citys[value].id,
+      inputValue: '',
+      showCancel: false,
+    })
+    await this.SubletList.onReset({ ...payload, city_id: citys[value].id })
+    await this.props.dispatchSubList({ ...payload, city_id: citys[value].id })
+
+  }
+  //用户输入
+  onInputValue({ currentTarget: { value } }) {
+    this.setState({ inputValue: value })
+  }
+  //搜索
+  async onInputConfirm() {
+    const { inputValue, payload, selectorCheckedId } = this.state
+    this.setState({ showCancel: true })
+    await this.SubletList.onReset({ ...payload, keyword: inputValue, city_id: selectorCheckedId })
+    await this.props.dispatchSubList({ ...payload, keyword: inputValue, city_id: selectorCheckedId })
+
+  }
+  onInputCancel() {
+    this.setState({ showCancel: false, inputValue: '' })
+  }
 
   render() {
-    const { selector, selectorChecked, isInput,payload } = this.state
+    const { selector, selectorChecked, isInput, payload, showCancel, inputValue } = this.state
     const { sublet } = this.props
 
     const page = {
       backgroundColor: '#FFFFFF',
-      minHeight: '',
+      minHeight: '100vh',
+
     }
     return (
       <View style={page}>
@@ -64,6 +142,12 @@ class ApartmentRecommend extends Component {
               selector={selector}
               selectorChecked={selectorChecked}
               isInputSub={isInput}
+              showCancel={showCancel}
+              inputValue={inputValue}
+              onInputValue={this.onInputValue}
+              onChangeSelector={this.onChangeSelector}
+              onInputCancel={this.onInputCancel}
+              onInputConfirm={this.onInputConfirm}
             />
           }
         </View>
@@ -74,8 +158,16 @@ class ApartmentRecommend extends Component {
           defaultPayload={payload}
           dispatchList={this.props.dispatchSubList}
           dispatchNextPageList={this.props.dispatchNextPageSubList}
-
         />
+
+        <View  className='page-middile at-row sublet-back ' onClick={this.openMiniProgramCreate}>
+          <View className='sublet-button'>
+            <AtIcon value='add' size='20' color='#FFFFFF'></AtIcon>
+          </View>
+          <View className='text-normal ml-2'>发起转租</View>
+
+        </View>
+
       </View>
     )
   }
