@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import { PAYLOAD_SUB_LIST } from '@constants/api'
+import ABCIcon from '@components/abc-icon'
 
 import Search from '@components/search'
 import SubletList from '@components/sublet-list'
@@ -11,8 +12,7 @@ import { connect } from '@tarojs/redux'
 import * as subletActions from '@actions/subleat'
 import * as cityActions from '@actions/city'
 import * as userActions from '@actions/user'
-import { relative } from 'path'
-import { AtIcon } from 'taro-ui'
+
 
 @connect(state => state, {
   ...subletActions,
@@ -161,8 +161,8 @@ class ApartmentRecommend extends Component {
         />
 
         <View  className='page-middile at-row sublet-back ' onClick={this.openMiniProgramCreate}>
-          <View className='sublet-button'>
-            <AtIcon value='add' size='20' color='#FFFFFF'></AtIcon>
+          <View className='sublet-button page-middile'>
+            <ABCIcon icon='add'size='20' color='#FFFFFF'  />
           </View>
           <View className='text-normal ml-2'>发起转租</View>
 

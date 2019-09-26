@@ -36,7 +36,7 @@ export const PAGE_APPOINTMENT_DETAIL = '/pages/appointment/detail'
 export const PAGE_APPOINTMENT_AUDIT='/pages/appointment/audit'
 export const PAGE_APPOINTMENT_SERVICES='/pages/appointment/services'
 
-// 优选页面
+// 转租页面
 export const PAGE_RECOMMEND_RECOMMEND = '/pages/recommend/recommend'
 
 
