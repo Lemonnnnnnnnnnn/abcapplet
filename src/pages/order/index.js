@@ -22,6 +22,9 @@ class OrderIndex extends Component {
     navigationBarBackgroundColor: '#FFC919',
   }
 
+  state={
+    count:false
+  }
   refOrderList = node => this.orderList = node
 
   /**
@@ -32,7 +35,11 @@ class OrderIndex extends Component {
   }
 
   componentDidShow(){
-    this.orderList.onReset(null)
+    const { count } = this.state
+    count && this.orderList.onReset(null)
+    this.setState({
+      count:true
+    })
   }
 
   render() {

@@ -104,7 +104,7 @@ class App extends Component {
         },
         {
           pagePath: "pages/recommend/recommend",
-          text: "优选",
+          text: "转租",
           iconPath: "assets/icons/recommend.png",
           selectedIconPath: "assets/icons/recommend-active.png"
         },
@@ -117,7 +117,7 @@ class App extends Component {
       ],
     },
     navigateToMiniProgramAppIdList: [
-      "wxd3537ccb429de3b4"
+      "wx798afaa9c187b6ae"
     ],
     "permission": {
       "scope.userLocation": {

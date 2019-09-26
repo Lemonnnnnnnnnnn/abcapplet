@@ -2,14 +2,14 @@ import BaseComponent from '@components/base'
 import { PAGE_SIZE } from '@constants/api'
 import Taro from '@tarojs/taro'
 
-class BaseList extends BaseComponent {
+class BaseListSublet extends BaseComponent {
   static defaultProps = {
     items: [],
     show: true,
     message: '暂无数据',
     defaultPayload: {},
     dispatchList: null,
-    pageSize: PAGE_SIZE,
+    size: 6,
     dispatchNextPageList: null,
     initReset: true,
   }
@@ -35,6 +35,7 @@ class BaseList extends BaseComponent {
 
 
   onReset(payload) {
+
     payload = payload || this.props.defaultPayload
 
     this.setState({
@@ -48,13 +49,13 @@ class BaseList extends BaseComponent {
   onNextPage() {
 
     let { page, payload, loading, hasMore } = this.state
-    let { pageSize } = this.props
+    let { size } = this.props
 
     if (!hasMore || loading || !this.props.dispatchList) return;
 
     this.setState({ loading: true })
 
-    payload = { ...payload, current_page: page }
+    payload = { ...payload, page: page }
 
 
     const onSuccess = res => {
@@ -62,7 +63,7 @@ class BaseList extends BaseComponent {
       this.setState({
         page: page + 1,
         loading: false,
-        hasMore: listNum > pageSize * page,
+        hasMore: listNum > size * page,
       })
     }
 
@@ -80,4 +81,4 @@ class BaseList extends BaseComponent {
   }
 }
 
-export default BaseList
+export default BaseListSublet

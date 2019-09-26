@@ -66,12 +66,12 @@ class Search extends BaseComponent {
     })
   }
 
-  
+
 
 
   render() {
     const { isInput, value } = this.state
-    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel , showSearch , current} = this.props
+    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel , showSearch , current,isInputSub} = this.props
 
     const hideStyle = {
       top : Taro.pxTransform(-92)
@@ -83,7 +83,7 @@ class Search extends BaseComponent {
 
     return (
       <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={showSearch ? showStyle : hideStyle } >
-        <View className='search-box'> 
+        <View className='search-box'>
           <View className='search-content at-row at-row__align--center'>
             <View className='at-col at-col-3'>
               <Picker mode='selector' range={selector} value={current}  onChange={onChangeSelector}>
@@ -95,7 +95,7 @@ class Search extends BaseComponent {
             </View>
 
             {/* 带样式的输入框，点击后跳转搜索页 */}
-            <View className='at-col at-col-9' onClick={this.onNavigation}>
+           {!isInputSub && <View className='at-col at-col-9' onClick={this.onNavigation}>
               {!isInput
                 ? <View className='at-row at-row__align--center text-normal text-muted' >
                   <AtIcon className='ml-2' value='search' size={size} color={COLOR_GREY_0} />
@@ -113,7 +113,25 @@ class Search extends BaseComponent {
                   {showCancel && <View className='mr-3 text-muted' onClick={this.onInputCancel}>取消</View>}
                 </View>
               }
-            </View>
+            </View>}
+            {/* 搜索转租 */}
+            {isInputSub && <View className='at-col at-col-9'>
+
+                 <View className='at-row at-row__align--center at-row__justify--between text-normal' >
+                  <Input className='ml-3'
+                    focus
+                    value={value}
+                    confirmType='确定'
+                    placeholder='搜索公寓/户型等关键词'
+                    onInput={this.onInputValue}
+                    onConfirm={this.onInputConfirm}
+                  />
+
+                </View>
+
+            </View>}
+
+
           </View>
         </View>
       </View>

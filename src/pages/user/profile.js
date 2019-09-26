@@ -95,13 +95,14 @@ class UserProfile extends Component {
     const initialRoom = [{ id: 0, title: "不限" }]
     const { dists } = this.props
 
-    const room = dists.housetype_list.room
-    const floor = dists.housetype_list.floor
+
+    const room = dists ? dists.housetype_list.room :''
+    const floor = dists ? dists.housetype_list.floor:''
 
     floor.map(i => {
       initialFloor.push(i)
     })
-    room.map(i => {
+    room && room.map(i => {
       initialRoom.push(i)
     })
 

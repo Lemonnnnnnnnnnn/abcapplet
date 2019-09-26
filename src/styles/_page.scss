@@ -105,6 +105,26 @@ page {
     height: 70%;
     border-radius: 10%;
   }
+  &-sublet {
+    width: 343px * $hd;
+    height: 104px * $hd;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 12px * $hd;
+  }
+  &-sublet-image {
+    height: 104px * $hd;
+    width: 140px * $hd;
+    border-radius: 12px * $hd 0px * $hd 0px * $hd 12px * $hd;
+  }
+  &-house {
+    width: 75px  * $hd;
+    height: 22px  * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: 5px  * $hd;
+    color: #ffffff;
+  }
 }
 
 .default-page {

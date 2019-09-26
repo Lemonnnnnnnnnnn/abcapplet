@@ -35,14 +35,23 @@ export default async function fetch({
 }) {
   // 初始化头部数据
   const header = {}
-  const { token } = getUserStorage()
-  const data = { ...payload, token }
+
+let data=''
 
   /**
    * 修改请求头
    */
   if (method === 'POST') {
+    const { token } = getUserStorage()
+     data = { ...payload, token }
     header['Content-Type'] = 'application/json'
+  }
+
+  if (method === 'GET') {
+
+    data = { ...payload }
+    header['Content-Type'] = 'application/json'
+    header['Accept'] = 'application/json'
   }
 
   /**
@@ -61,21 +70,30 @@ export default async function fetch({
    * @param {*} response
    */
   async function handleStatus(response) {
+
+
     if (!response || !response.data) {
+
       throw new Error(LOCALE_ERROR);
     }
 
     switch (response.data.code) {
-      case CODE_SUCCESS: return response;
+      case CODE_SUCCESS:
+
+      return response;
       case CODE_ERROR: {
         const { code } = await Taro.login()
         Taro.setStorageSync('code', code)
 
         throw new Error(response.data.msg)
       }
+      case 200 :{
+        return response;
+
+      }
       case CODE_AUTH_EXPIRED: {
         const user_info = Taro.getStorageSync('user_info')
-        Taro.setStorageSync('user_info', { ...user_info, token: '' , username : '' , mobile : ''})
+        Taro.setStorageSync('user_info', { ...user_info, token: '', username: '', mobile: '' })
         Taro.setStorageSync('code', '')
 
 
@@ -98,6 +116,7 @@ export default async function fetch({
    * @param {*} error
    */
   function handleError(error) {
+
     if (error.code === CODE_AUTH_EXPIRED && autoLogin) {
       Taro.navigateTo({
         url: '/pages/user-login/user-login'
