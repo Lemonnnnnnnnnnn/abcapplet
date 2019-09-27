@@ -5,3 +5,5 @@ export const HOME_DEFAULT = {
     hot_activity: [],
     recommend: [],
 }
+
+export const TYPE_HOME_INDEXDATAPOAT = 'TYPE_HOME_INDEXDATAPOAT'

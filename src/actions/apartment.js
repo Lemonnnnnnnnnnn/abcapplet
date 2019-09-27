@@ -16,8 +16,10 @@ import {
 
   API_APPOINTMENT_CREATE,
   API_APPOINTMENT_SHOW,
-
-  API_APARTMENT_NEARBYPOST
+  API_APARTMENT_NEARBYPOST,
+  API_APARTMENT_INDEXDATAPOAT,
+  API_HOUSETYPE_INDEXDATAPOAT,
+  API_APARTMENT_REMAINTIME,
 } from '@constants/api'
 
 import {
@@ -47,6 +49,9 @@ import {
   TYPE_APARTMENT_NEARBYPOST,
   SET_FAVORITE_APARTMENT_LIST,
   SET_NEXT_PAGE_FAVORITE_APARTMENT_LIST,
+  TYPE_APARTMENT_INDEXDATAPOAT,
+  TYPE_HOUSETYPE_INDEXDATAPOAT,
+  TYPE_APARTMENT_REMAINTIME,
 } from '@constants/apartment'
 
 
@@ -260,3 +265,31 @@ export const dispatchAppointmentNearbyPost = payload => createAction({
   type: TYPE_APARTMENT_NEARBYPOST,
   url: API_APARTMENT_NEARBYPOST ,
 })
+
+
+// 获取公寓详情页面数据统计
+export const dispatchApartmentDataPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APARTMENT_INDEXDATAPOAT,
+  url: API_APARTMENT_INDEXDATAPOAT ,
+})
+// 获取户型详情页面数据统计
+export const dispatchApartmentHouseDataPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_HOUSETYPE_INDEXDATAPOAT,
+  url: API_HOUSETYPE_INDEXDATAPOAT ,
+})
+
+// 获取签约下定页面停留的时间
+export const dispatchApartmentRemainTime = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APARTMENT_REMAINTIME,
+  url: API_APARTMENT_REMAINTIME ,
+})
+
+
+
+

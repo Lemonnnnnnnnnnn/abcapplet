@@ -134,6 +134,7 @@ class ApartmentShow extends Component {
   // 电话客服/在线客服
 
   onOpenLittleMask() {
+    this.props.dispatchApartmentDataPost({type:1})
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -147,6 +148,7 @@ class ApartmentShow extends Component {
   }
 
   onOpenMap() {
+    this.props.dispatchApartmentDataPost({type:5})
     const { apartment, map } = this.state
     const { latitude, longitude } = map
     const { address } = apartment
@@ -176,6 +178,7 @@ class ApartmentShow extends Component {
   }
 
   onShareAppMessage() {
+    this.props.dispatchApartmentDataPost({type:2})
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
@@ -183,6 +186,7 @@ class ApartmentShow extends Component {
 
   onClick(method) {
     if (method === 'onCreateBusiness') {
+      this.props.dispatchApartmentDataPost({type:3})
       const { apartment } = this.state
       const { id, types } = apartment
       // const { apartmentId, id } = houstType
@@ -191,6 +195,7 @@ class ApartmentShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
+      this.props.dispatchApartmentDataPost({type:4})
       this[method]()
     }
   }
@@ -211,6 +216,7 @@ class ApartmentShow extends Component {
 
 
   onShareAppMessage() {
+    this.props.dispatchApartmentDataPost({type:2})
     const { apartment } = this.state
     let { swipers, title } = apartment
     if (title.length > 17) {
@@ -345,7 +351,7 @@ class ApartmentShow extends Component {
             </View>
 
 
-            {/* 公寓列表 */}
+            {/* 户型列表 */}
 
             {
               types &&

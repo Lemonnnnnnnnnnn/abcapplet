@@ -87,6 +87,7 @@ class OrderShow extends Component {
   }
 
   componentWillMount() {
+
     const currentRoute = Taro.getCurrentPages()
     const routeArr = []
     currentRoute.map(i => {

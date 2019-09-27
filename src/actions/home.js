@@ -1,8 +1,17 @@
 import { createAction } from '@utils/redux'
 
-import { GET_HOME_MESSAGE } from '@constants/home'
-import { API_INDEXPOST , API_CBD_SHOW  , API_ACTIVITY_SHOW} from '@constants/api'
-import { PAGE_CBD_APARTMENT, PAGE_ACTIVITY_APARTMENT, PAGE_ARTICLE_SHOW } from '@constants/page'
+import { GET_HOME_MESSAGE,TYPE_HOME_INDEXDATAPOAT } from '@constants/home'
+import {
+  API_INDEXPOST ,
+  API_CBD_SHOW  ,
+  API_ACTIVITY_SHOW,
+  API_HOME_INDEXDATAPOAT,
+} from '@constants/api'
+import {
+  PAGE_CBD_APARTMENT,
+  PAGE_ACTIVITY_APARTMENT,
+  PAGE_ARTICLE_SHOW ,
+  } from '@constants/page'
 
 // cbd
 import { SHOW_CBD } from '@constants/cbd'
@@ -43,7 +52,7 @@ export const dispatchCbdShow = payload => createAction({
     // cb: ({ data: { data } }) => ({ ...data.cbd, id: payload.cbd, url: `${PAGE_CBD_APARTMENT}?id=${payload.cbd}` })
   })
 
-  
+
 /**
  * 获取活动详情
  */
@@ -54,5 +63,16 @@ export const dispatchActivityShow = payload => createAction({
     url: API_ACTIVITY_SHOW,
     cb: ({ data: { data } }) => ({ ...data.hot_rule, url: `${PAGE_ACTIVITY_APARTMENT}?id=${payload.id}` })
   })
-  
+
+
+/**
+ * 获取首页数据统计
+ */
+export const dispatchHomeIndexData= payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_HOME_INDEXDATAPOAT,
+  url:  API_HOME_INDEXDATAPOAT,
+
+})
 

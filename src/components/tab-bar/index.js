@@ -10,7 +10,14 @@ import BaseComponent from '@components/base'
 import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
 // NPM 包
 import classNames from 'classnames'
-import { format } from 'path';
+
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as apartmentActions from '@actions/apartment'
+
+@connect(state => state, {
+  ...apartmentActions,
+})
 
 class TabBar extends BaseComponent {
 
@@ -44,10 +51,12 @@ class TabBar extends BaseComponent {
   }
 
   onCallPhone() {
+
     Taro.makePhoneCall({ phoneNumber: '0592-5911297' })
   }
 
   onShareAppMessage() {
+
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
     }

@@ -26,8 +26,6 @@ import MaskTop from '@components/maskTop'
 import loginButton from '@components/login-button'
 
 
-
-
 const nowTime = new Date()
 let currentMonth = nowTime.getMonth()
 let currentDay = nowTime.getDate()
@@ -87,6 +85,7 @@ class AppointmentPost extends Component {
     houseTypeArr: [],
 
     isNight: false,//夜单时间，false:不是，true:是
+    beginTime:'',//进入页面的时间
   }
 
 
@@ -114,18 +113,24 @@ class AppointmentPost extends Component {
   }
 
 
+
   async componentDidMount() {
 
+    //获取进入这个页面的时间
+    const beginTime = new Date()
+    this.setState({beginTime})
+
+    console.log(Taro.getCurrentPages())
     const currentRoute = Taro.getCurrentPages()
     const routeArr = []
     currentRoute.map(i => {
       routeArr.push('/' + i.route)
     })
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE 
-    && console.log('进入首页——进入公寓详情——点击预约')
+    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
+      && console.log('进入首页——进入公寓详情——点击预约')
 
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE 
-    && console.log('进入首页——进入户型详情——点击预约')
+    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
+      && console.log('进入首页——进入户型详情——点击预约')
 
 
     const { id, apartmentId } = this.$router.params
@@ -616,6 +621,14 @@ class AppointmentPost extends Component {
   //   Taro.redirectTo({ url: PAGE_USER_AUTH })
 
   // }
+  componentWillUnmount() {
+    //获取离开这个页面的时间
+    const { beginTime } = this.state
+    const OutTime = new Date()
+    const remainTime = ((  OutTime.getMinutes()-beginTime.getMinutes())*60 )+ (OutTime.getSeconds() -beginTime.getSeconds())
+    this.props.dispatchApartmentRemainTime({time:remainTime})
+
+  }
 
   render() {
     const { houstType, height, users, tel, showInformation, name,
@@ -759,7 +772,7 @@ class AppointmentPost extends Component {
                           type={i.type ? "primary" : ""}
                           className='ml-3 mt-1 mb-3'
                           circle
-                          key={key}
+                          key={i.id}
                           size='small'
                           onClick={(e) => this.onChoiseHouseType(e, key)}
                           active={i.active}>

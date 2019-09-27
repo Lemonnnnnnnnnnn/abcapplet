@@ -4,8 +4,13 @@ import { View, Image, Text } from '@tarojs/components'
 
 // 自定义组件
 import BaseComponent from '@components/base'
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as apartmentActions from '@actions/apartment'
 
-
+@connect(state => state, {
+  ...apartmentActions,
+})
 
 class ApartmentTypeItem extends BaseComponent {
   static defaultProps = {
@@ -15,6 +20,9 @@ class ApartmentTypeItem extends BaseComponent {
   }
 
   onNavigation() {
+    console.log(this.props.type)
+    const { type } =this.props
+    type==='HouseType' ? this.props.dispatchApartmentHouseDataPost({type:4}):this.props.dispatchApartmentDataPost({type:4})
     const { item: { url } } = this.props
     Taro.navigateTo({ url })
   }

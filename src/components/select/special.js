@@ -85,7 +85,7 @@ class SelectSpecial extends BaseComponent {
               className='ml-2 mr-1 mt-2 mb-3'
               circle
               onClick={(e) => this.onSelectedItemsChange(e, key)}
-              key={key}
+              key={i.id}
               active={i.active} >
               <View style={fontStyle}>{i.title}</View>
             </AtTag>)

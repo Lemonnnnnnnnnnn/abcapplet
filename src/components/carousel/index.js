@@ -4,7 +4,17 @@ import classNames from 'classnames'
 import { Image, Swiper, SwiperItem, View, ScrollView, Text } from '@tarojs/components'
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 import { PAGE_EXTERNAL_INDEX, PAGE_ARTICLE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
+import { PAYLOAD_HOME_INDEXDATAPOAT } from '@constants/api'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+
+import * as homeActions from '@actions/home'
+
+@connect(state => state, {
+
+  ...homeActions,
+})
 class Carousel extends Component {
   static options = {
     addGlobalClass: true
@@ -20,8 +30,19 @@ class Carousel extends Component {
     displayMultipleItems: 1,
     haveText: true
   }
+  state = {
+    payload : PAYLOAD_HOME_INDEXDATAPOAT
+  }
 
-  onNavigation({ url, title }) {
+  onNavigation({ url, title,id }) {
+    console.log(this.props.type)
+    const { type } = this.props
+    const { payload } = this.state
+    console.log(id)
+
+    type==='banner' && this.props.dispatchHomeIndexData({...payload,type:1,origin_id:id})
+    type==='normal' && this.props.dispatchHomeIndexData({...payload,type:2,origin_id:id})
+    type==='cbd' && this.props.dispatchHomeIndexData({...payload,type:3,origin_id:id})
     let newUrl = url
 
     if (url === '') return;
@@ -142,7 +163,7 @@ class Carousel extends Component {
         }
 
 
-        {type === 'normal' &&
+        {(type === 'normal' || type === 'cbd') &&
           <ScrollView scrollX className='carousel-normal' style={swiperStyle}>
             {carousel.map(item =>
               <View

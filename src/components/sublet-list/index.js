@@ -53,7 +53,6 @@ class SubletList extends BaseListSublet {
     const { mini, sublet, home } = this.props
 
 
-    console.log(home)
 
     return (
       <View className>

@@ -463,7 +463,7 @@ class CommonHome extends BaseComponent {
                 title={LOCALE_HOT_CBD}
               />
               <Carousel
-                type='normal'
+                type='cbd'
                 imageHeight='176'
                 imageWidth='312'
                 carousel={cbds}

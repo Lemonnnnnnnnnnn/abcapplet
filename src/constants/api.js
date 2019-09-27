@@ -214,6 +214,21 @@ export const API_APPOINTMENT_REWARD_ORDER_ROOM_POST = `${HOST}/appointment/rewar
 
 // 首页数据接口
 export const API_INDEXPOST = `${HOST}/index/indexPost`
+
+//首页数据统计接口
+export const API_HOME_INDEXDATAPOAT = `${HOST}/index/indexDataPost`
+export const PAYLOAD_HOME_INDEXDATAPOAT = { type:0,origin_id:0 }
+
+//公寓详情页数据统计
+export const API_APARTMENT_INDEXDATAPOAT = `${HOST}/apartment/apartmentDetailDataPost`
+
+//户型详情页数据统计
+export const API_HOUSETYPE_INDEXDATAPOAT = `${HOST}/apartment/typeDetailDataPost`
+
+//签约下定停留时间
+export const API_APARTMENT_REMAINTIME = `${HOST}/apartment/remainTimePost`
+
 //获取转租单列表
 export const API_SUB_LIST = 'http://sub.abc.411er.cn/api/v1/sublease/orders/index'
 export const PAYLOAD_SUB_LIST = { city_id:350200,page: 1, size: 6  }
+

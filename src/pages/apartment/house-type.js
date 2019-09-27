@@ -196,6 +196,7 @@ class HouseTypeShow extends Component {
   // 电话客服/在线客服
 
   onOpenLittleMask() {
+    this.props.dispatchApartmentHouseDataPost({ type: 1 })
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -252,6 +253,7 @@ class HouseTypeShow extends Component {
   }
 
   onOpenMap() {
+    this.props.dispatchApartmentHouseDataPost({ type: 5 })
     const { houstType, map } = this.state
     const { latitude, longitude } = map
     const { address } = houstType
@@ -313,6 +315,7 @@ class HouseTypeShow extends Component {
 
 
   onShareAppMessage() {
+    this.props.dispatchApartmentHouseDataPost({ type: 2 })
     const { houstType } = this.state
     let { swipers, title } = houstType
     if (title.length > 17) {
@@ -347,6 +350,7 @@ class HouseTypeShow extends Component {
    */
   onClick(method) {
     if (method === 'onCreateBusiness') {
+      this.props.dispatchApartmentHouseDataPost({ type: 3 })
       const { houstType } = this.state
       const { apartmentId, id } = houstType
       Taro.navigateTo({
@@ -710,7 +714,11 @@ class HouseTypeShow extends Component {
 
                       <View key={i.id} className='at-col at-col-5 mt-1 house-type-image' >
                         <View className='house-type-apartment-type-border' >
-                          <ApartmentTypeItem item={i} houseType index={index} />
+                          <ApartmentTypeItem
+                            item={i}
+                            houseType
+                            type='HouseType'
+                            index={index} />
                         </View>
                       </View>)}
                   </ScrollView>
