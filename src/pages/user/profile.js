@@ -63,6 +63,7 @@ class UserProfile extends Component {
   }
 
   onLogin() {
+    Taro.clearStorage('lastPagePath')
     Taro.navigateTo({ url: PAGE_USER_AUTH })
   }
 

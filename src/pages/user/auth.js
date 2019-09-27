@@ -15,8 +15,15 @@ class UserAuth extends Component {
     navigationBarTitleText: '授权登录',
   }
 
+  status={
+    lastPagePath:''
+  }
+
   componentDidMount() {
+
     this.autoUpdate()
+
+
   }
 
   autoUpdate() {
@@ -79,6 +86,7 @@ class UserAuth extends Component {
    */
   onLoginSuccess() {
     const lastPagePath = Taro.getStorageSync('lastPagePath')
+
     lastPagePath ? Taro.redirectTo({ url: lastPagePath }) : Taro.navigateBack()
   }
 

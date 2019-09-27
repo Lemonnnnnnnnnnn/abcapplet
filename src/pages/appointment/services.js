@@ -96,7 +96,7 @@ class ServicesHome extends Component {
     })
     this.props.dispatchNextPageApartmentList(payload).
       then((res) => {
-        res && res.data.data.list.length === 0 && 
+        res && res.data.data.list.length === 0 &&
           Taro.showToast({
             title: '加载完毕',
             icon: 'none',

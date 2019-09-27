@@ -121,6 +121,8 @@ class ApartmentRecommend extends Component {
 
   }
   onInputCancel() {
+    const { payload,selectorCheckedId } = this.state
+   this.SubletList.onReset({ ...payload,  city_id: selectorCheckedId })
     this.setState({ showCancel: false, inputValue: '' })
   }
 

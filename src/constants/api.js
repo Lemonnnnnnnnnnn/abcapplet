@@ -2,6 +2,8 @@
 const isDev = process.env.NODE_ENV === 'development'
 export const DEV_HOST = "http://test.abc.411er.cn/mini"
 export const PROD_HOST = "http://test.abc.411er.cn/mini"
+//http://test.abc.411er.cn/mini  测试环境
+//https://api.gongyuabc.com/mini  线上环境
 export const HOST = isDev ? DEV_HOST : PROD_HOST
 export const PAGE_SIZE = 10
 
@@ -229,6 +231,8 @@ export const API_HOUSETYPE_INDEXDATAPOAT = `${HOST}/apartment/typeDetailDataPost
 export const API_APARTMENT_REMAINTIME = `${HOST}/apartment/remainTimePost`
 
 //获取转租单列表
+// https://sub.gongyuabc.com/api/v1/sublease/orders/index  //线上接口
+// http://sub.abc.411er.cn/api/v1/sublease/orders/index     //测试接口
 export const API_SUB_LIST = 'http://sub.abc.411er.cn/api/v1/sublease/orders/index'
 export const PAYLOAD_SUB_LIST = { city_id:350200,page: 1, size: 6  }
 
