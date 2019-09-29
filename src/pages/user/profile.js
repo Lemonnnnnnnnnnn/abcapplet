@@ -1,7 +1,7 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image, Button } from '@tarojs/components'
-import { AtIcon, AtFloatLayout } from 'taro-ui'
+import { View, Image } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'

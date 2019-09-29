@@ -130,7 +130,7 @@ class SelectHouseType extends Component {
         <View style={{ marginLeft: "10px", fontSize: "16px", marginTop: "25px" }} >户型选择</View>
         {
           room.map((i, key) =>
-            <AtTag type={i.type ? "primary" : ""} className='ml-3 mr-1 mt-3 mb-3' circle onClick={(e) => this.onTabRoomChange(e, key)} key={key} active={i.active}>
+            <AtTag type={i.type ? "primary" : ""} className='ml-3 mr-1 mt-3 mb-3' circle onClick={(e) => this.onTabRoomChange(e, key)} key={i.id} active={i.active}>
               <View style={fontStyle}>{i.title}</View>
             </AtTag>)
         }
@@ -139,7 +139,7 @@ class SelectHouseType extends Component {
         <View style={{ marginLeft: "10px", fontSize: "16px", marginTop: "15px" }}>类型选择</View>
         {
           floor.map((i, key) =>
-            <AtTag type={i.type ? "primary" : ""} className='ml-3 mr-1 mt-3 mb-3' circle onClick={(e) => this.onTabFloorChange(e, key)} key={key} active={i.active}>
+            <AtTag type={i.type ? "primary" : ""} className='ml-3 mr-1 mt-3 mb-3' circle onClick={(e) => this.onTabFloorChange(e, key)} key={i.id} active={i.active}>
               <View style={{ fontSize: "15px", padding: "0 5px" }}>{i.title}</View>
             </AtTag>)
         }

@@ -230,6 +230,12 @@ export const API_HOUSETYPE_INDEXDATAPOAT = `${HOST}/apartment/typeDetailDataPost
 //签约下定停留时间
 export const API_APARTMENT_REMAINTIME = `${HOST}/apartment/remainTimePost`
 
+//预约转化率(漏斗A,B)
+export const API_FUNNEL = `${HOST}/index/funnelAppointmentPost`
+
+//线上交易情况(漏斗D,E)
+export const API_FUNNEL_ORDER = `${HOST}/index/funnelOrderPost`
+
 //获取转租单列表
 // https://sub.gongyuabc.com/api/v1/sublease/orders/index  //线上接口
 // http://sub.abc.411er.cn/api/v1/sublease/orders/index     //测试接口

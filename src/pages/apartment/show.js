@@ -18,7 +18,7 @@ import ApartmentContainer from '@components/apartment-container'
 import CustomNav from '@components/custom-nav'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
@@ -35,6 +35,7 @@ class ApartmentShow extends Component {
   state = {
     showLittleMask: false,
     apartment: {
+      Id:0,
       cbds: [],
       rules: [],
       swipers: [],
@@ -56,6 +57,23 @@ class ApartmentShow extends Component {
 
   async componentDidMount() {
     const { id } = this.$router.params
+
+    // D漏斗：公寓详情页——签约下定——立即预订
+    this.props.dispatchOrderFunnel({type:1,origin_id:id,step:1})
+
+    this.setState({Id:id})
+    const currentRoute = Taro.getCurrentPages()
+    const routeArr = []
+    currentRoute.map(i => {
+      routeArr.push('/' + i.route)
+    })
+    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW
+      && this.props.dispatchFunnel({ type: 1, step: 2, origin_id: id })
+
+
+    //调用D漏斗详情接口
+    //------------------------------------
+
 
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
@@ -134,7 +152,7 @@ class ApartmentShow extends Component {
   // 电话客服/在线客服
 
   onOpenLittleMask() {
-    this.props.dispatchApartmentDataPost({type:1})
+    this.props.dispatchApartmentDataPost({ type: 1 })
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -148,7 +166,7 @@ class ApartmentShow extends Component {
   }
 
   onOpenMap() {
-    this.props.dispatchApartmentDataPost({type:5})
+    this.props.dispatchApartmentDataPost({ type: 5 })
     const { apartment, map } = this.state
     const { latitude, longitude } = map
     const { address } = apartment
@@ -178,24 +196,37 @@ class ApartmentShow extends Component {
   }
 
   onShareAppMessage() {
-    this.props.dispatchApartmentDataPost({type:2})
+    this.props.dispatchApartmentDataPost({ type: 2 })
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
   }
 
   onClick(method) {
+    const { Id } = this.state
     if (method === 'onCreateBusiness') {
-      this.props.dispatchApartmentDataPost({type:3})
+      this.props.dispatchApartmentDataPost({ type: 3 })
+
+      const currentRoute = Taro.getCurrentPages()
+      const routeArr = []
+      currentRoute.map(i => {
+        routeArr.push('/' + i.route)
+      })
+      routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW
+        && this.props.dispatchFunnel({ type: 1, step: 3, origin_id: Id })
+
       const { apartment } = this.state
       const { id, types } = apartment
-      // const { apartmentId, id } = houstType
+
       Taro.navigateTo({
         url: `${PAGE_APPOINTMENT_CREATE}?id=${types[0].id}&apartmentId=${id}`
       })
     }
     if (method === 'onCreateOrder') {
-      this.props.dispatchApartmentDataPost({type:4})
+       // D漏斗：公寓详情页——签约下定——立即预订
+      this.props.dispatchOrderFunnel({type:1,origin_id:Id,step:2})
+
+      this.props.dispatchApartmentDataPost({ type: 4 })
       this[method]()
     }
   }
@@ -216,7 +247,7 @@ class ApartmentShow extends Component {
 
 
   onShareAppMessage() {
-    this.props.dispatchApartmentDataPost({type:2})
+    this.props.dispatchApartmentDataPost({ type: 2 })
     const { apartment } = this.state
     let { swipers, title } = apartment
     if (title.length > 17) {
@@ -233,7 +264,7 @@ class ApartmentShow extends Component {
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, tags, desc,
-      notices, cbds, intro, rules, position, cover,num } = apartment
+      notices, cbds, intro, rules, position, cover, num } = apartment
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",

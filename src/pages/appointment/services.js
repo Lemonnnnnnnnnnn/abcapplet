@@ -50,7 +50,7 @@ class ServicesHome extends Component {
             icon: 'none',
             duration: 2000
           })
-        }
+      }
       )
     this.setState({ payload: { ...payload, current_page: 2 } })
   }
@@ -102,7 +102,7 @@ class ServicesHome extends Component {
             icon: 'none',
             duration: 2000
           })
-        }
+      }
 
       )
   }
@@ -149,9 +149,13 @@ class ServicesHome extends Component {
             onClickLeft={this.onToLeft}
             onClickRight={this.onToRight}
           />
+          <View className='page-middile mt-2'>
+            <Image src='https://images.gongyuabc.com/image/appointmentAdNew.png' className='appointment-ad'></Image>
+          </View>
           <View className='at-row at-row__align--center  p-2' >
             <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}></View>
             <View className='pl-2 text-bold text-large'>看房行程</View>
+
 
           </View>
 
@@ -179,7 +183,7 @@ class ServicesHome extends Component {
             </View>
               :
               <View className='mt-5'>
-                <loginButton  message='请登录后查看行程' />
+                <loginButton message='请登录后查看行程' />
               </View>
           }
 

@@ -120,18 +120,6 @@ class AppointmentPost extends Component {
     const beginTime = new Date()
     this.setState({beginTime})
 
-    console.log(Taro.getCurrentPages())
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
-      && console.log('进入首页——进入公寓详情——点击预约')
-
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
-      && console.log('进入首页——进入户型详情——点击预约')
-
 
     const { id, apartmentId } = this.$router.params
     const { Payload } = this.state
@@ -552,6 +540,19 @@ class AppointmentPost extends Component {
   //提交预约
   onAppointmentPost() {
     const { Payload, showNext } = this.state
+
+    // console.log(Taro.getCurrentPages())
+    // const currentRoute = Taro.getCurrentPages()
+    // const routeArr = []
+    // currentRoute.map(i => {
+    //   routeArr.push('/' + i.route)
+    // })
+    // routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
+    //   && console.log('进入首页——进入公寓详情——点击预约')
+
+    // routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
+    //   && console.log('进入首页——进入户型详情——点击预约')
+
 
     this.onChenkPayload() &&
       this.props.dispatchAppointmentCreate(Payload).then(res => {

@@ -148,7 +148,7 @@ class RequirementHouseMask extends BaseComponent {
             <View style={{ marginLeft: "10px", fontSize: "14px", fontWeight: "bold" }} >户型选择</View>
             {
               room.map((i, key) =>
-                <AtTag type='primary' className='ml-3 mr-2 mt-3 mb-3' circle onClick={(e) => this.onTabRoomChange(e, key)} key={key} active={i.active}>
+                <AtTag type='primary' className='ml-3 mr-2 mt-3 mb-3' circle onClick={(e) => this.onTabRoomChange(e, key)} key={i.id} active={i.active}>
                   {i.title}
                 </AtTag>)
             }
@@ -157,7 +157,7 @@ class RequirementHouseMask extends BaseComponent {
             <View style={{ marginLeft: "10px", fontSize: "14px", fontWeight: "bold" }}>类型选择</View>
             {
               floor.map((i, key) =>
-                <AtTag type='primary' className='ml-3 mr-2 mt-3 mb-3' circle onClick={(e) => this.onTabFloorChange(e, key)} key={key} active={i.active}>
+                <AtTag type='primary' className='ml-3 mr-2 mt-3 mb-3' circle onClick={(e) => this.onTabFloorChange(e, key)} key={i.id} active={i.active}>
                   {i.title}
                 </AtTag>)
             }

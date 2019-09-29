@@ -35,10 +35,9 @@ class Carousel extends Component {
   }
 
   onNavigation({ url, title,id }) {
-    console.log(this.props.type)
     const { type } = this.props
     const { payload } = this.state
-    console.log(id)
+
 
     type==='banner' && this.props.dispatchHomeIndexData({...payload,type:1,origin_id:id})
     type==='normal' && this.props.dispatchHomeIndexData({...payload,type:2,origin_id:id})

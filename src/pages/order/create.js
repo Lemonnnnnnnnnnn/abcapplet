@@ -21,7 +21,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 
 // 自定义变量相关
 import { ORDER_HEADERS } from '@constants/order'
-import { PAGE_ORDER_SHOW } from '@constants/page'
+import { PAGE_ORDER_SHOW, PAGE_APARTMENT_SHOW, PAGE_HOUSE_TYPE_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 import { PAYLOAD_ORDER_CREATE } from '@constants/api'
 import {
   LOCALE_SCHEDULED_MESSAGE,
@@ -66,12 +66,18 @@ class OrderCreate extends Component {
       discount_price: '',
     },
     rooms: [{}],
-    payload: PAYLOAD_ORDER_CREATE
+    payload: PAYLOAD_ORDER_CREATE,
+    typeId: 0,
+
   }
 
 
   async componentWillMount() {
+    console.log(this.$router.params)
     const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
+    this.setState({ typeId: type_id })
+
+
 
     let data = ''
     // const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
@@ -97,6 +103,7 @@ class OrderCreate extends Component {
       }
     })
   }
+
 
   componentDidMount() {
     const { timeList } = this.state
@@ -207,9 +214,21 @@ class OrderCreate extends Component {
     return true
   }
 
-  // 创建
+  // 创建(立即预定)
   onOrderCreate() {
-    const { payload } = this.state
+    const { payload, typeId } = this.state
+
+    const currentRoute = Taro.getCurrentPages()
+    const routeArr = []
+    currentRoute.map(i => {
+      routeArr.push('/' + i.route)
+    })
+    routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_ORDER_CREATE// D漏斗：公寓详情页——签约下定——立即预订
+      &&
+      this.props.dispatchOrderFunnel({type:1,origin_id: typeId,step:3})
+
+    routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_ORDER_CREATE//E漏斗：户型详情页——签约下定——立即预订
+      && this.props.dispatchOrderFunnel({ type: 2, origin_id: typeId, step: 3 })
     if (!this.onCheckPayload()) return;
 
     this.props.dispatchOrderCreate(payload).then(({ data: { data } }) => {
