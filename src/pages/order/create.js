@@ -74,14 +74,14 @@ class OrderCreate extends Component {
 
   async componentWillMount() {
     console.log(this.$router.params)
-    const { room_id = 0, appointment_id = 0, type_id = 0 } = this.$router.params
+    const { room_id = 0, appointment_id = 0, type_id = 0,apartment_id = 0 } = this.$router.params
     this.setState({ typeId: type_id })
 
 
 
     let data = ''
     // const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
-    await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id }).then(res => {
+    await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id,apartment_id }).then(res => {
       if (res) {
         data = res.data.data
         // 初始化表单

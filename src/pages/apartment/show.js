@@ -18,7 +18,7 @@ import ApartmentContainer from '@components/apartment-container'
 import CustomNav from '@components/custom-nav'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW,PAGE_ORDER_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
@@ -204,6 +204,7 @@ class ApartmentShow extends Component {
 
   onClick(method) {
     const { Id } = this.state
+    console.log(Id)
     if (method === 'onCreateBusiness') {
       this.props.dispatchApartmentDataPost({ type: 3 })
 
@@ -227,7 +228,13 @@ class ApartmentShow extends Component {
       this.props.dispatchOrderFunnel({type:1,origin_id:Id,step:2})
 
       this.props.dispatchApartmentDataPost({ type: 4 })
-      this[method]()
+
+      // this[method]()
+      const { apartment, } = this.state
+
+      Taro.navigateTo({
+        url: `${PAGE_ORDER_CREATE}?apartment_id=${Id}`
+      })
     }
   }
 
