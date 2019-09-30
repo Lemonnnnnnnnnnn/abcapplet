@@ -34,10 +34,8 @@ class SubletList extends BaseListSublet {
   openMiniProgram(value) {
     Taro.navigateToMiniProgram({
       appId: 'wx798afaa9c187b6ae', // 要跳转的小程序的appid
-      path: ' pages/home/index', // 跳转的目标页面
-      extarData: {
-        id: parseInt(value.id)
-      },
+      path: `pages/home/index?id=${value.id}`, // 跳转的目标页面
+
       success(res) {
         // 打开成功
         console.log(res)

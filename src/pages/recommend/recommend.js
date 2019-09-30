@@ -24,6 +24,7 @@ class ApartmentRecommend extends Component {
   config = {
     navigationBarTitleText: '转租列表',
     backgroundColor: '#FFFFFF',
+    enablePullDownRefresh: true,
   }
 
   refSubletList = (node) => this.SubletList = node
@@ -40,11 +41,20 @@ class ApartmentRecommend extends Component {
     selectorCheckedId: 0,
   }
 
+  async  onPullDownRefresh() {
+    await await this.SubletList.onReset(null)
+    this.setState({
+      inputValue: '',
+      showCancel: false,
+
+    })
+    Taro.stopPullDownRefresh()
+  }
   /**
  * 到底部加载公寓下一页
  */
   onReachBottom() {
-    this.SubletList.onNextPage(1)
+    this.SubletList.onNextPage()
   }
 
   componentDidHide() {
@@ -53,14 +63,12 @@ class ApartmentRecommend extends Component {
       showCancel: false,
     })
   }
-//前往转租创建页面
+  //前往转租创建页面
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({
       appId: 'wx798afaa9c187b6ae', // 要跳转的小程序的appid
       path: ' pages/postsublet/index', // 跳转的目标页面
-      extarData: {
 
-      },
       success(res) {
         // 打开成功
         console.log(res)
@@ -71,7 +79,7 @@ class ApartmentRecommend extends Component {
 
     })
   }
-  async componentDidShow() {
+  async componentWillMount() {
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
 
@@ -121,8 +129,8 @@ class ApartmentRecommend extends Component {
 
   }
   onInputCancel() {
-    const { payload,selectorCheckedId } = this.state
-   this.SubletList.onReset({ ...payload,  city_id: selectorCheckedId })
+    const { payload, selectorCheckedId } = this.state
+    this.SubletList.onReset({ ...payload, city_id: selectorCheckedId })
     this.setState({ showCancel: false, inputValue: '' })
   }
 
@@ -162,9 +170,9 @@ class ApartmentRecommend extends Component {
           dispatchNextPageList={this.props.dispatchNextPageSubList}
         />
 
-        <View  className='page-middile at-row sublet-back ' onClick={this.openMiniProgramCreate}>
+        <View className='page-middile at-row sublet-back ' onClick={this.openMiniProgramCreate}>
           <View className='sublet-button page-middile'>
-            <ABCIcon icon='add'size='20' color='#FFFFFF'  />
+            <ABCIcon icon='add' size='20' color='#FFFFFF' />
           </View>
           <View className='text-normal ml-2'>发起转租</View>
 
