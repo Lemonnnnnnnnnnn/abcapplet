@@ -72,9 +72,9 @@ class AppointmentDetail extends BaseComponent {
     isSign: 0,
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     let roomListArr = []
-    let roomList = ''
+
     const myDate = new Date()
     const month = myDate.getMonth() + 1
     const signTime = myDate.getFullYear() + '-' + month + '-' + myDate.getDate()
@@ -82,17 +82,21 @@ class AppointmentDetail extends BaseComponent {
 
     const { payload } = this.state
     const { id, isSign } = this.$router.params
-    this.props.dispatchAppointRewordOrderRoomPost({ appointment_id: parseInt(id) }).then(res => {
-      roomList = res.data.data
-      roomList.map(i => {
+    await this.props.dispatchAppointRewordOrderRoomPost({ appointment_id: parseInt(id) }).then(res => {
+
+      const { data } = res.data
+      data.map(i => {
         roomListArr.push(i.no)
+      })
+      this.setState({
+        roomListArr,
+        roomList:data
       })
     })
 
-    this.props.dispatchAppointmentDetail({ id }).then((res) => {
+
+   await  this.props.dispatchAppointmentDetail({ id }).then((res) => {
       this.setState({
-        roomList,
-        roomListArr,
         roomChoise: '请选择房间号',
         isSign: parseInt(isSign),
         Id: id,
@@ -106,10 +110,13 @@ class AppointmentDetail extends BaseComponent {
   }
 
   //选择房间
-  onChoiseRoom = e => {
+  onChoiseRoom ({currentTarget:{value}}) {
     const { roomList, payload } = this.state
-    const { value } = e.detail
-    this.setState({ payload: { ...payload, apartment_room_id: roomList[value].id }, roomChoise: roomList[value].no })
+    this.setState({
+      roomChoise: roomList[value].no,
+      payload: { ...payload, apartment_room_id: roomList[value].id }
+
+     })
   }
 
 
