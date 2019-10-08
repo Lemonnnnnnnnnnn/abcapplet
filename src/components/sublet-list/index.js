@@ -66,11 +66,6 @@ class SubletList extends BaseListSublet {
         </View>
 
         {/* 记载效果 */}
-        <Placeholder
-          className='mt-1'
-          show={loading && !mini}
-          quantity={5}
-        />
 
         {/* 无数据 */}
         {sublet.list.length === 0

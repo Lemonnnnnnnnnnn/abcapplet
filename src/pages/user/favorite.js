@@ -10,14 +10,12 @@ import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
 
 // 自定义组件
-import RoomList from '@components/room-list'
 import ApartmentList from '@components/apartment-list'
 
 // 常量
 import {
   PAYLOAD_FAVORITE_APARTMENT_LIST,
   PAYLOAD_FAVORITE_HOUSE_TYPE_LIST,
-  PAYLOAD_FAVORITE_ROOM_LIST,
 } from '@constants/api'
 
 @connect(state => state, {
@@ -35,11 +33,10 @@ class UserFavorite extends Component {
     tabList: [
       { title: '户型', ref: 'houseTypeList' },
       { title: '公寓', ref: 'apartmentList' },
-      // { title: '房间', ref: 'roomList' },
     ]
   }
 
-  // refRoomList = (node) => this.roomList = node
+
   refHouseTypeList = (node) => this.houseTypeList = node
   refApartmentList = (node) => this.apartmentList = node
 
@@ -88,7 +85,7 @@ class UserFavorite extends Component {
   }
 
   render() {
-    const { apartments, rooms , favoriteApartment ,favoriteHouseType} = this.props
+    const { favoriteApartment ,favoriteHouseType} = this.props
 
 
     return (

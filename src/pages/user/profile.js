@@ -97,8 +97,8 @@ class UserProfile extends Component {
     const { dists } = this.props
 
 
-    const room = dists ? dists.housetype_list.room :''
-    const floor = dists ? dists.housetype_list.floor:''
+    const room = dists ? dists.housetype_list.room : ''
+    const floor = dists ? dists.housetype_list.floor : ''
 
     floor.map(i => {
       initialFloor.push(i)
@@ -112,7 +112,21 @@ class UserProfile extends Component {
       roomList: [...initialRoom],
     })
   }
+  //前往橘子公社小程序
+  openMiniProgramCreate() {
+    Taro.navigateToMiniProgram({
+      appId: 'wxd3537ccb429de3b4', // 要跳转的小程序的appid
 
+      success(res) {
+        // 打开成功
+        console.log(res)
+      },
+      fail(res) {
+        console.log(res)
+      }
+
+    })
+  }
 
   render() {
     const { optionLists, orderOptionLists, showCard, floorList, roomList, showMask } = this.state
@@ -129,34 +143,41 @@ class UserProfile extends Component {
 
     return (
       <View className='page-grey'>
-        <View className='page mx-3' >
+        <View className='page ' >
           {/* 背景底色 */}
           <Decorate height='300' />
 
           {/* 用户头像信息 */}
           <UserHeader
-            className='mt-3'
+            className='mt-3 mx-3'
             mobile={mobile}
             username={username}
             onLogin={this.onLogin}
           />
+          {/* https://images.gongyuabc.com/image/recommed.png */}
+
 
           {/* 用户可选信息 */}
           <UserOptions
-            className='mt-3'
+            className='mt-3 mx-3'
             onOpenCard={this.onOpenCard}
             lists={optionLists}
           />
 
+          {/* 优选入口 */}
+          <View className='mx-2' onClick={this.openMiniProgramCreate}>
+            <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
+          </View>
+
           {/* 我的订单 */}
           <UserOrderOptions
-            className='mt-2'
+            className=' mx-3'
             lists={orderOptionLists}
           />
 
 
           {/* 联系客服 */}
-          <Board className='mt-2'>
+          <Board className='mt-2 mx-3'>
             {/* <Button style={buttonStyle} open-type='contact' size='mini' plain bindcontact='handleContact' > */}
             <View className=' p-3 mt-2' onClick={this.onshowCustomerMask} style={{ marginTop: Taro.pxTransform(8) }}>
               <View className='at-row at-row__justify--between'>

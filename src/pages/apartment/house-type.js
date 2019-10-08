@@ -44,7 +44,7 @@ class HouseTypeShow extends Component {
   }
 
   state = {
-    Id:0,
+    Id: 0,
     navHeight: 0,
     showLittleMask: false,
     houseType_id: 83,
@@ -76,11 +76,11 @@ class HouseTypeShow extends Component {
 
     const { id } = this.$router.params
 
-     // E漏斗：户型详情页——签约下定——立即预订
-     this.props.dispatchOrderFunnel({type:2,origin_id:id,step:1})
+    // E漏斗：户型详情页——签约下定——立即预订
+    this.props.dispatchOrderFunnel({ type: 2, origin_id: id, step: 1 })
 
     this.setState({
-      Id:id
+      Id: id
     })
 
     //漏斗  进入首页——进入户型详情——点击预约
@@ -90,7 +90,7 @@ class HouseTypeShow extends Component {
       routeArr.push('/' + i.route)
     })
     routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
-      &&  this.props.dispatchFunnel({type:2,step:2,origin_id:id})
+      && this.props.dispatchFunnel({ type: 2, step: 2, origin_id: id })
 
 
 
@@ -379,14 +379,14 @@ class HouseTypeShow extends Component {
     const { Id } = this.state
     if (method === 'onCreateBusiness') {
 
-    //漏斗  进入首页——进入户型详情——点击预约
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
-      &&  this.props.dispatchFunnel({type:2,step:3,origin_id:Id})
+      //漏斗  进入首页——进入户型详情——点击预约
+      const currentRoute = Taro.getCurrentPages()
+      const routeArr = []
+      currentRoute.map(i => {
+        routeArr.push('/' + i.route)
+      })
+      routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
+        && this.props.dispatchFunnel({ type: 2, step: 3, origin_id: Id })
 
       this.props.dispatchApartmentHouseDataPost({ type: 3 })
       const { houstType } = this.state
@@ -396,8 +396,8 @@ class HouseTypeShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
-       // E漏斗：户型详情页——签约下定——立即预订
-       this.props.dispatchOrderFunnel({type:2,origin_id:Id,step:2})
+      // E漏斗：户型详情页——签约下定——立即预订
+      this.props.dispatchOrderFunnel({ type: 2, origin_id: Id, step: 2 })
       this[method]()
     }
   }
@@ -502,8 +502,8 @@ class HouseTypeShow extends Component {
                 </View>
               }
 
-              <View className='page-middile mt-2'>
-                <Image src='https://images.gongyuabc.com/image/detailAd.png' className='appointment-detail-ad'></Image>
+              <View className='at-row at-row__align--center  '>
+                <View className='appointment-detail-ad mr-2'></View>
               </View>
 
               <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
