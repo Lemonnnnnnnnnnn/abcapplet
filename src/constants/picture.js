@@ -8,6 +8,7 @@ export const PATH = 'https://images.gongyuabc.com//image/path_new.png'
 export const HOME = 'https://images.gongyuabc.com//image/home.png'
 export const FREE = 'https://images.gongyuabc.com//image/free_new.png'
 export const POING_THREE = 'https://images.gongyuabc.com//image/pointThree.png'
+export const DETAIL_AD = 'https://images.gongyuabc.com/image/detailAd.png'
 
 // 行程相关
 export const LEAVE_MSG_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-one.png'

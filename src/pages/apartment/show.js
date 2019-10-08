@@ -18,7 +18,7 @@ import ApartmentContainer from '@components/apartment-container'
 import CustomNav from '@components/custom-nav'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW,PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 
 const city = userActions.dispatchUser().payload.citycode
@@ -35,7 +35,7 @@ class ApartmentShow extends Component {
   state = {
     showLittleMask: false,
     apartment: {
-      Id:0,
+      Id: 0,
       cbds: [],
       rules: [],
       swipers: [],
@@ -59,9 +59,9 @@ class ApartmentShow extends Component {
     const { id } = this.$router.params
 
     // D漏斗：公寓详情页——签约下定——立即预订
-    this.props.dispatchOrderFunnel({type:1,origin_id:id,step:1})
+    this.props.dispatchOrderFunnel({ type: 1, origin_id: id, step: 1 })
 
-    this.setState({Id:id})
+    this.setState({ Id: id })
     const currentRoute = Taro.getCurrentPages()
     const routeArr = []
     currentRoute.map(i => {
@@ -224,8 +224,8 @@ class ApartmentShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
-       // D漏斗：公寓详情页——签约下定——立即预订
-      this.props.dispatchOrderFunnel({type:1,origin_id:Id,step:2})
+      // D漏斗：公寓详情页——签约下定——立即预订
+      this.props.dispatchOrderFunnel({ type: 1, origin_id: Id, step: 2 })
 
       this.props.dispatchApartmentDataPost({ type: 4 })
 
@@ -295,7 +295,7 @@ class ApartmentShow extends Component {
 
 
     const imageStyle = {
-      width: '300px',
+      width: Taro.pxTransform(600),
       height: Taro.pxTransform(350),
       display: "inline-block",
     }
@@ -327,7 +327,7 @@ class ApartmentShow extends Component {
           type='apart'
         />
 
-        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
+        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: Taro.pxTransform(navHeight ? navHeight * 2 : 128) }}>
 
           <ApartmentContainer
             swipers={swipers}
@@ -341,8 +341,8 @@ class ApartmentShow extends Component {
             <View className='ml-3 mr-3'>
 
               {/* 头部 */}
-              <View className='text-bold text-huge'>{title}</View>
-              <View className='text-secondary text-normal'>{intro}</View>
+              <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32) }}>{title}</View>
+              <View className='text-secondary text-large mt-1' style={{ minHeight: Taro.pxTransform(24) }}>{intro}</View>
 
               {/* 活动信息 */}
               <View className='mt-2'>
@@ -351,7 +351,7 @@ class ApartmentShow extends Component {
                     <Text className={`text-smail badge badge-${i.type}`} > {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
                     <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                   </View>
-                ) : <View className='text-secondary'>暂无相关活动信息</View>
+                ) : <View className='text-secondary text-small'>暂无相关活动信息</View>
                 }
               </View>
 

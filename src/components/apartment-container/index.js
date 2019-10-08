@@ -35,7 +35,6 @@ class ApartmentContainer extends BaseComponent {
     })
     const currentPic = picList[current + 1]
 
-
     Taro.previewImage({
       urls: picList,
       current: currentPic
@@ -44,7 +43,7 @@ class ApartmentContainer extends BaseComponent {
 
   changePicIndex(e) {
     const current = e.detail.current
-    this.setState({ current })
+    this.setState({ current : current - 1 })
   }
 
   render() {
@@ -64,14 +63,14 @@ class ApartmentContainer extends BaseComponent {
 
 
     const fontStyle = {
-      borderRadius: "12px",
+      borderRadius: Taro.pxTransform(24),
       left: Taro.pxTransform(40),
       top: Taro.pxTransform(height - 75),
     }
 
     return (
       <View className='position-relative' >
-        {swipers !== undefined && swipers !== null && swipers.length !== 0 && <View>
+        {swipers && swipers.length ? <View>
           {
             swipers.length > 1 ?
               <Swiper
@@ -101,7 +100,9 @@ class ApartmentContainer extends BaseComponent {
                 src={swipers.length ? `${swipers[0].url}` : ''} >
               </Image>
           }
-        </View>}
+        </View>
+          : <View style={{ height: Taro.pxTransform(500) }}></View>
+        }
 
         <MaskTop />
 
@@ -111,7 +112,7 @@ class ApartmentContainer extends BaseComponent {
           <View className='apartment-container-opacityBgStyle'></View>
         </View>
         <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle' style={fontStyle}>
-          <Text className='text-yellow'>{current + 1}</Text>
+          <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
           <Text className='text-white'>/{swipers.length}</Text>
         </View>
 

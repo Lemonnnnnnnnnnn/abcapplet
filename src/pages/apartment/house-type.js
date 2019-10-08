@@ -23,12 +23,12 @@ import CustomNav from '@components/custom-nav'
 
 
 // 自定义变量
-import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
+import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
-import { PATH, HOME, FREE, POING_THREE } from '@constants/picture'
+import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
 
 
@@ -44,7 +44,7 @@ class HouseTypeShow extends Component {
   }
 
   state = {
-    Id:0,
+    Id: 0,
     navHeight: 0,
     showLittleMask: false,
     houseType_id: 83,
@@ -76,11 +76,11 @@ class HouseTypeShow extends Component {
 
     const { id } = this.$router.params
 
-     // E漏斗：户型详情页——签约下定——立即预订
-     this.props.dispatchOrderFunnel({type:2,origin_id:id,step:1})
+    // E漏斗：户型详情页——签约下定——立即预订
+    this.props.dispatchOrderFunnel({ type: 2, origin_id: id, step: 1 })
 
     this.setState({
-      Id:id
+      Id: id
     })
 
     //漏斗  进入首页——进入户型详情——点击预约
@@ -90,7 +90,7 @@ class HouseTypeShow extends Component {
       routeArr.push('/' + i.route)
     })
     routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
-      &&  this.props.dispatchFunnel({type:2,step:2,origin_id:id})
+      && this.props.dispatchFunnel({ type: 2, step: 2, origin_id: id })
 
 
 
@@ -359,18 +359,6 @@ class HouseTypeShow extends Component {
     Taro.navigateTo({ url: `/pages/apartment/search-room?id=${id}` })
   }
 
-  // async onshowMorePic() {
-  //   this.setState({ showApartRoom: false })
-  //   const { id } = this.$router.params
-  //   const { houstType } = this.state
-
-  //   const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-
-  //   const roomList = data.room_list
-
-  //   this.setState({ houstType: { ...houstType, roomList: roomList } })
-
-  // }
 
   /**
    * 点击 预约看房,查看订单
@@ -379,14 +367,14 @@ class HouseTypeShow extends Component {
     const { Id } = this.state
     if (method === 'onCreateBusiness') {
 
-    //漏斗  进入首页——进入户型详情——点击预约
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
-      &&  this.props.dispatchFunnel({type:2,step:3,origin_id:Id})
+      //漏斗  进入首页——进入户型详情——点击预约
+      const currentRoute = Taro.getCurrentPages()
+      const routeArr = []
+      currentRoute.map(i => {
+        routeArr.push('/' + i.route)
+      })
+      routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
+        && this.props.dispatchFunnel({ type: 2, step: 3, origin_id: Id })
 
       this.props.dispatchApartmentHouseDataPost({ type: 3 })
       const { houstType } = this.state
@@ -396,8 +384,8 @@ class HouseTypeShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
-       // E漏斗：户型详情页——签约下定——立即预订
-       this.props.dispatchOrderFunnel({type:2,origin_id:Id,step:2})
+      // E漏斗：户型详情页——签约下定——立即预订
+      this.props.dispatchOrderFunnel({ type: 2, origin_id: Id, step: 2 })
       this[method]()
     }
   }
@@ -439,8 +427,9 @@ class HouseTypeShow extends Component {
 
         <CustomNav title='户型详情' />
 
-
-        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
+        <View
+          onClick={this.onCloseLittleMask}
+          style={{ paddingBottom: Taro.pxTransform(120), paddingTop: Taro.pxTransform(navHeight ? navHeight * 2 : 128) }}>
 
           <ApartmentContainer
             houseType_id={houseType_id}
@@ -473,13 +462,16 @@ class HouseTypeShow extends Component {
 
 
               {/* 头部 */}
-              <View style={{ fontSize: '20px' }}>{title}</View>
-              <View className='text-secondary text-large mt-1'>{intro}</View>
+              <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32) }}>{title}</View>
+
+              <View className='text-secondary text-large mt-1' style={{ minHeight: Taro.pxTransform(24) }}>{intro}</View>
+
 
               {/* 价格相关 */}
-              <View className='at-row at-row__justify--between at-row__align--center  mt-2'>
-                <View className='text-yellow at-col'>
-                  <Text className='text-super ' style={{ fontSize: '18px' }}>
+              <View className='at-row at-row__justify--between at-row__align--center mt-2' >
+
+                <View className='text-yellow at-col' >
+                  <Text style={{ fontSize: Taro.pxTransform(36) }}>
                     {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${priceTitle}`}
                   </Text>
                   <Text className='text-normal'>{LOCALE_PRICE_START}</Text>
@@ -503,7 +495,7 @@ class HouseTypeShow extends Component {
               }
 
               <View className='page-middile mt-2'>
-                <Image src='https://images.gongyuabc.com/image/detailAd.png' className='appointment-detail-ad'></Image>
+                <Image src={DETAIL_AD} className='appointment-detail-ad'></Image>
               </View>
 
               <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
@@ -554,15 +546,16 @@ class HouseTypeShow extends Component {
 
 
               {/* 户型简介 */}
-              {descList &&
-                <View>
-                  <View className='at-row at-row__align--end mt-4'>
-                    <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
-                    {
-                      has_room ? <Text className=' text-mini badge-hasRoom mb-1 house-type-has-room-block' >有余房</Text>
-                        : <Text className=' text-mini badge-hasNoRoom mb-1 house-type-has-room-block' >满房</Text>
-                    }
-                  </View>
+              <View>
+                <View className='at-row at-row__align--end mt-4'>
+                  <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
+                  {
+                    has_room ? <Text className=' text-mini badge-hasRoom mb-1 house-type-has-room-block' >有余房</Text>
+                      : <Text className=' text-mini badge-hasNoRoom mb-1 house-type-has-room-block' >满房</Text>
+                  }
+                </View>
+
+                {descList &&
                   <View className='at-row at-row--wrap'>
                     {descList.map((i, index) =>
                       <View key={index} className='at-col-6'>
@@ -571,14 +564,14 @@ class HouseTypeShow extends Component {
                       </View>
                     )}
                   </View>
-                </View>
-              }
-              {/* 一句话描述 */}
-              <View className='text-secondary text-small mt-2' style={{ textIndent: "10px" }}>{type_desc}</View>
+                }
 
+              </View>
+              {/* 一句话描述 */}
+              <View className='text-secondary text-small mt-2' style={{ textIndent: Taro.pxTransform(20), minHeight: Taro.pxTransform(36) }}>{type_desc}</View>
 
               {/* 公共配置 */}
-              <View className='at-row at-row__justify--center mt-4 '>
+              <View className='at-row at-row__justify--center mt-4 ' style={{ minHeight: Taro.pxTransform(120) }}>
 
                 {roomMatch_list && roomMatch_list.map((i, key) => key !== 5 ?
                   <View key={i.title} className='at-col' style={{ position: "relative", left: Taro.pxTransform(13) }}>
@@ -601,7 +594,7 @@ class HouseTypeShow extends Component {
               </View>
 
               {/* 位置信息 */}
-              <View className='text-bold text-huge mt-5'>位置信息</View>
+              <View className='text-bold text-huge mt-2'>位置信息</View>
               {
                 showMap && <Map
                   className='mt-2'

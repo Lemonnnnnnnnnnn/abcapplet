@@ -556,7 +556,7 @@ class AppointmentPost extends Component {
 
     this.onChenkPayload() &&
       this.props.dispatchAppointmentCreate(Payload).then(res => {
-        if (res.data.msg === '预约成功') {
+        if (res.data && res.data.msg === '预约成功') {
           //倒计时，需要优化
           const { appointment } = res.data.data
           let that = this

@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component, setStorage } from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, ScrollView } from '@tarojs/components'
 
 // 自定义组件
 import CityModal from '@components/city-modal'
@@ -104,9 +104,9 @@ class CommonHome extends BaseComponent {
   async componentDidShow() {
 
     //A漏斗  进入首页——进入公寓详情——点击预约
-     this.props.dispatchFunnel({type:1,step:1,origin_id:0})
-     //B漏斗  进入首页——进入户型详情——点击预约
-     this.props.dispatchFunnel({type:2,step:1,origin_id:0})
+    this.props.dispatchFunnel({ type: 1, step: 1, origin_id: 0 })
+    //B漏斗  进入首页——进入户型详情——点击预约
+    this.props.dispatchFunnel({ type: 2, step: 1, origin_id: 0 })
 
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res) => {
@@ -411,7 +411,6 @@ class CommonHome extends BaseComponent {
       selector,
       selectorChecked,
       selectIsFixed,
-      cityCode,
       payloadApartment,
 
       showCard,
@@ -433,7 +432,7 @@ class CommonHome extends BaseComponent {
     return (
       <View
         className='page-white'
-        style={{ overflow: "hidden",minHeight : '300vh' }} >
+        style={{ overflow: "hidden", minHeight: '300vh' }} >
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
@@ -453,80 +452,90 @@ class CommonHome extends BaseComponent {
             <View style={searchIsFixed ? { height: Taro.pxTransform(92) } : {}}></View>
           </View>
           {/* 轮播 */}
-          {banners.length > 0 &&
-            <Carousel
-              className='mt-2'
-              type='banner'
-              carousel={banners}
-            />
-          }
+          <View style={{ minHeight: Taro.pxTransform(530) }}>
+            {banners.length > 0 &&
+              <Carousel
+                className='mt-2'
+                type='banner'
+                carousel={banners}
+              />
+            }
+          </View>
 
           {/* 热门租房商圈 */}
-          {cbds.length > 0 &&
-            <View >
-              <Header
-                className='mb-2'
-                title={LOCALE_HOT_CBD}
-              />
-              <Carousel
-                type='cbd'
-                imageHeight='176'
-                imageWidth='312'
-                carousel={cbds}
-                hasContent={false}
-                haveText={false}
-              />
-            </View>
-          }
+          <View style={{ minHeight: Taro.pxTransform(176) }}>
+            {cbds.length > 0 &&
+              <View >
+                <Header
+                  className='mb-2'
+                  title={LOCALE_HOT_CBD}
+                />
+                <Carousel
+                  type='cbd'
+                  imageHeight='176'
+                  imageWidth='312'
+                  carousel={cbds}
+                  hasContent={false}
+                  haveText={false}
+                />
+              </View>
+            }
+          </View>
 
           {/* 广告 */}
-          {ads.length > 0 &&
-            <Carousel
-              className='mt-2'
-              type='normal'
-              imageHeight='126'
-              imageWidth='686'
-              carousel={ads}
-              hasContent={false}
-              haveText={false}
-            />
-          }
-
-          {/* 推荐品牌公寓 */}
-          {recommends.length > 0 &&
-            <View>
-              <Header
-                className='mt-4 mb-2'
-                title={LOCALE_RECOMMEND_APARTMENT}
-              />
+          <View>
+            {ads.length > 0 &&
               <Carousel
+                className='mt-2'
                 type='normal'
-                imageHeight='275'
-                imageWidth='642'
-                carousel={recommends}
-                hasContent={false}
-              />
-            </View>
-          }
-
-          {/* 活动专区 */}
-          {activities.length > 0 &&
-            <View>
-              <Header
-                className='mt-4 mb-2'
-                title={LOCALE_ACTIVITY}
-                hasExtra={false}
-              />
-              <Carousel
-                type='normal'
-                imageHeight='240'
-                imageWidth='414'
-                carousel={activities}
+                imageHeight='126'
+                imageWidth='686'
+                carousel={ads}
                 hasContent={false}
                 haveText={false}
               />
-            </View>
-          }
+            }
+          </View>
+
+          {/* 推荐品牌公寓 */}
+          <View style={{ minHeight: Taro.pxTransform(275) }}>
+            {recommends.length > 0 &&
+              <View>
+                <Header
+                  className='mt-4 mb-2'
+                  title={LOCALE_RECOMMEND_APARTMENT}
+                />
+                <Carousel
+                  type='normal'
+                  imageHeight='275'
+                  imageWidth='642'
+                  carousel={recommends}
+                  hasContent={false}
+                />
+              </View>
+            }
+          </View>
+
+          {/* 活动专区 */}
+          <View style={{ minHeight: Taro.pxTransform(240) }}>
+            {activities.length > 0 &&
+              <View>
+                <Header
+                  className='mt-4 mb-2'
+                  title={LOCALE_ACTIVITY}
+                  hasExtra={false}
+                />
+                <Carousel
+                  type='normal'
+                  imageHeight='240'
+                  imageWidth='414'
+                  carousel={activities}
+                  hasContent={false}
+                  haveText={false}
+                />
+              </View>
+            }
+          </View>
 
           {/* 严选公寓 */}
           <View className='selectTab'>

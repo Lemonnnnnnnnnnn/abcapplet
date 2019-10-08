@@ -114,8 +114,6 @@ class ApartmentItem extends BaseComponent {
 
     const fontSize = mini ? "10px" : "15px"
     const padding = mini ? "0 10px" : "2px 12px"
-    // const left = mini ? '4%' : '5%'
-    // const borderRadius = mini ? "6px" : "12px"
 
     const apartmentHeaderType = {
       padding: padding,
@@ -134,7 +132,7 @@ class ApartmentItem extends BaseComponent {
     const nearbyPostStyle = {
       width: '100%',
       height: '100%',
-      borderRadius: '6px',
+      borderRadius: Taro.pxTransform(12),
     }
 
 
