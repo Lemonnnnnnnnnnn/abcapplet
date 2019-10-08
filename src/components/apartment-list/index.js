@@ -4,11 +4,11 @@ import { View, ScrollView } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
-// import Placeholder from '@components/placeholder'
+import Placeholder from '@components/placeholder'
 import ApartmentItem from '@components/apartment-item'
 
 // 常量
-// import { LOCALE_NO_DATA } from '@constants/locale'
+import { LOCALE_NO_DATA } from '@constants/locale'
 
 
 // Redux 相关
@@ -44,7 +44,7 @@ class ApartmentList extends BaseList {
       {/* 渲染 公寓列表 */}
       <View className='at-row at-row--wrap mb-3 '>
         {
-          nearbyPost 
+          nearbyPost
             ?
             <View style={ScrollWrapStyle} className='at-col'>
               <ScrollView scrollX>
@@ -78,18 +78,12 @@ class ApartmentList extends BaseList {
         }
       </View>
 
-      {/* 记载效果 */}
-      {/* <Placeholder
-        className='mt-2'
-        show={loading && !mini}
-        quantity={5}
-      /> */}
 
       {/* 无数据 */}
-      {/* {items.length === 0
+      {items.length === 0
         && hasMore === false
         && loading === false
-        && <View class='page-demo'>{LOCALE_NO_DATA}</View>} */}
+        && <View class='page-demo'>{LOCALE_NO_DATA}</View>}
     </View>)
   }
 }

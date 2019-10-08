@@ -401,7 +401,21 @@ class CommonHome extends BaseComponent {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
   }
+  //前往橘子公社小程序
+  openMiniProgramCreate() {
+    Taro.navigateToMiniProgram({
+      appId: 'wxd3537ccb429de3b4', // 要跳转的小程序的appid
 
+      success(res) {
+        // 打开成功
+        console.log(res)
+      },
+      fail(res) {
+        console.log(res)
+      }
+
+    })
+  }
   render() {
 
     const {
@@ -536,6 +550,12 @@ class CommonHome extends BaseComponent {
               </View>
             }
           </View>
+
+          {/* 优选入口 */}
+          <View className='mx-1' onClick={this.openMiniProgramCreate}>
+            <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-home-image'></Image>
+          </View>
+
 
           {/* 严选公寓 */}
           <View className='selectTab'>

@@ -117,6 +117,7 @@ class App extends Component {
       ],
     },
     navigateToMiniProgramAppIdList: [
+      "wxd3537ccb429de3b4",
       "wx798afaa9c187b6ae"
     ],
     "permission": {

@@ -33,11 +33,11 @@ class ServiceList extends Component {
       </View>
 
       {/* 记载效果 */}
-      <Placeholder
+      {/* <Placeholder
         className='mt-1'
         show={loading && !mini}
         quantity={5}
-      />
+      /> */}
 
       {/* 无数据 */}
       {lists.length === 0

@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 
 import { PAYLOAD_SUB_LIST } from '@constants/api'
 import ABCIcon from '@components/abc-icon'
@@ -23,7 +23,8 @@ import * as userActions from '@actions/user'
 class ApartmentRecommend extends Component {
   config = {
     navigationBarTitleText: '转租列表',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#eeeeee',
+    backgroundTextStyle: 'light',
     enablePullDownRefresh: true,
   }
 
@@ -135,16 +136,11 @@ class ApartmentRecommend extends Component {
   }
 
   render() {
-    const { selector, selectorChecked, isInput, payload, showCancel, inputValue } = this.state
+    const { selector, selectorChecked, isInput, payload, showCancel, inputValue, count } = this.state
     const { sublet } = this.props
 
-    const page = {
-      backgroundColor: '#FFFFFF',
-      minHeight: '100vh',
-
-    }
     return (
-      <View style={page}>
+      <View style={{ background: '#FFFFFF', minHeight: '100vh', display: 'block',overflowY:'auto' }}>
         <View className='home-search pl-3 pr-3 pt-2'>
           {
             <Search
@@ -161,6 +157,7 @@ class ApartmentRecommend extends Component {
             />
           }
         </View>
+
 
         <SubletList
           items={sublet.list}

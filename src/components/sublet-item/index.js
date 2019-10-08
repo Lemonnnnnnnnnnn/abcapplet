@@ -31,7 +31,7 @@ class SunletItem extends BaseComponent {
 
 
     return (
-      <View className='at-row at-row__justify--center my-3 '  style='width:100%' >
+      <View className='at-row at-row__justify--center py-2'  style='width:100%' >
         {item && <View className='at-row page-sublet' onClick={this.props.onNavicatSublet.bind(this,item)}>
           <View className='at-col-5'>
             <Image src={item.url} className='page-sublet-image' mode='aspectFill'></Image>
