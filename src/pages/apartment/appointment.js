@@ -622,14 +622,6 @@ class AppointmentPost extends Component {
   //   Taro.redirectTo({ url: PAGE_USER_AUTH })
 
   // }
-  componentWillUnmount() {
-    //获取离开这个页面的时间
-    const { beginTime } = this.state
-    const OutTime = new Date()
-    const remainTime = ((  OutTime.getMinutes()-beginTime.getMinutes())*60 )+ (OutTime.getSeconds() -beginTime.getSeconds())
-    this.props.dispatchApartmentRemainTime({time:remainTime})
-
-  }
 
   render() {
     const { houstType, height, users, tel, showInformation, name,

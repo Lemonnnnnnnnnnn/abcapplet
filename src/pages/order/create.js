@@ -68,20 +68,23 @@ class OrderCreate extends Component {
     rooms: [{}],
     payload: PAYLOAD_ORDER_CREATE,
     typeId: 0,
+    beginTime: '',//进入页面的时间
+    userSign: false, //用户是否下定
 
   }
 
 
   async componentWillMount() {
-    console.log(this.$router.params)
-    const { room_id = 0, appointment_id = 0, type_id = 0,apartment_id = 0 } = this.$router.params
+    const { room_id = 0, appointment_id = 0, type_id = 0, apartment_id = 0 } = this.$router.params
     this.setState({ typeId: type_id })
 
-
+    // 将进入页面的时间存进状态里
+    const beginTime = new Date()
+    this.setState({ beginTime })
 
     let data = ''
     // const { data: { data } } = await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id })
-    await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id,apartment_id }).then(res => {
+    await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id, apartment_id }).then(res => {
       if (res) {
         data = res.data.data
         // 初始化表单
@@ -119,6 +122,16 @@ class OrderCreate extends Component {
     this.setState({
       timeList: timeListinit
     })
+  }
+
+  componentWillUnmount() {
+    // //获取离开这个页面的时间
+    const { beginTime, userSign } = this.state
+    if (!userSign) {
+      const OutTime = new Date()
+      const remainTime = ((OutTime.getMinutes() - beginTime.getMinutes()) * 60) + (OutTime.getSeconds() - beginTime.getSeconds())
+      this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 0 })
+    }
   }
 
   // 选择租期
@@ -225,12 +238,20 @@ class OrderCreate extends Component {
     })
     routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_ORDER_CREATE// D漏斗：公寓详情页——签约下定——立即预订
       &&
-      this.props.dispatchOrderFunnel({type:1,origin_id: typeId,step:3})
+      this.props.dispatchOrderFunnel({ type: 1, origin_id: typeId, step: 3 })
 
     routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_ORDER_CREATE//E漏斗：户型详情页——签约下定——立即预订
       && this.props.dispatchOrderFunnel({ type: 2, origin_id: typeId, step: 3 })
     if (!this.onCheckPayload()) return;
 
+    //获取离开这个页面的时间
+    const { beginTime } = this.state
+    const OutTime = new Date()
+    const remainTime = ((OutTime.getMinutes() - beginTime.getMinutes()) * 60) + (OutTime.getSeconds() - beginTime.getSeconds())
+    this.setState({ userSign: true })
+    this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 1 })
+
+    // 执行下定操作并进行跳转 
     this.props.dispatchOrderCreate(payload).then(({ data: { data } }) => {
       this.setState({ disabled: true })
       Taro.navigateTo({ url: `${PAGE_ORDER_SHOW}?id=${data.order.id}` })

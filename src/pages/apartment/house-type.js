@@ -26,7 +26,7 @@ import CustomNav from '@components/custom-nav'
 import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
-import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON } from '@constants/locale'
+import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
@@ -195,7 +195,8 @@ class HouseTypeShow extends Component {
           one_word: data.one_word,
           type_desc: data.type_desc,
           has_room: data.has_room,
-          num: data.num
+          num: data.num,
+          discount_price_title: data.discount_price_title
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -400,14 +401,18 @@ class HouseTypeShow extends Component {
     const { latitude, longitude, markers } = map
 
     const {
-      title, swipers, isCollect, cost, types, priceTitle,
+      title, swipers, isCollect, cost, types,
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
-      position, tags, cost_info, id, type_desc, has_room, num
+      position, tags, cost_info, id, type_desc, has_room, num,
+      discount_price_title
     } = houstType
 
+    let { priceTitle } = houstType
+    let showPrice = 0
+    if (priceTitle) { showPrice = priceTitle }
 
-    const isNaNPrice = Number.isNaN(parseInt(priceTitle))
+    // const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     return (
       <View >
@@ -468,27 +473,55 @@ class HouseTypeShow extends Component {
 
 
               {/* 价格相关 */}
-              <View className='at-row at-row__justify--between at-row__align--center mt-2' >
+              {
+                discount_price_title ?
+                  <View>
+                    <View className='text-yellow at-col' >
+                      {/* 折扣价独立出来显示 */}
+                      <Text style={{ fontSize: Taro.pxTransform(36) }}>
+                        {LOCALE_PRICE_SEMICOLON + discount_price_title}
+                      </Text>
+                      <Text className='text-normal'>{LOCALE_PRICE_START + LOCALE_PRICE_ACTIVITY}</Text>
+                    </View>
+                    {/* 原价和{押一付一，半年期，免中介费}换行显示 */}
+                    <View className='at-row at-row__justify--between at-row__align--center mt-2' >
 
-                <View className='text-yellow at-col' >
-                  <Text style={{ fontSize: Taro.pxTransform(36) }}>
-                    {isNaNPrice ? priceTitle : `${LOCALE_PRICE_SEMICOLON}${priceTitle}`}
-                  </Text>
-                  <Text className='text-normal'>{LOCALE_PRICE_START}</Text>
-                </View>
+                      <View className='at-col text-normal text-secondary' >
+                        {LOCALE_PRICE_SEMICOLON + LOCALE_PRICE_START + showPrice + LOCALE_PRICE_ORIGIN}
+                      </View>
 
-                <View className='at-col '>
-                  <View className='at-row at-row__align--center at-row__justify--end '>
-                    <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
-                    <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
+                      <View className='at-col '>
+                        <View className='at-row at-row__align--center at-row__justify--end '>
+                          <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
+                          <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
+                        </View>
+                      </View>
+
+                    </View>
                   </View>
-                </View>
-              </View>
+                  :
+
+                  <View className='at-row at-row__justify--between at-row__align--center mt-2' >
+                    <View className='text-yellow at-col' >
+                      <Text style={{ fontSize: Taro.pxTransform(36) }}>
+                        {LOCALE_PRICE_SEMICOLON + showPrice}
+                      </Text>
+                      <Text className='text-normal'>{LOCALE_PRICE_START}</Text>
+                    </View>
+
+                    <View className='at-col '>
+                      <View className='at-row at-row__align--center at-row__justify--end '>
+                        <View onClick={this.onOpenRentDescription} className='text-small text-secondary'>{cost}</View>
+                        <ABCIcon icon='chevron_right' color={COLOR_GREY_2} size='17' />
+                      </View>
+                    </View>
+                  </View>
+              }
 
               {/* 押金保障 */}
 
               {
-                isSign && <View className='at-row at-row__align--center  '>
+                isSign && <View className='at-row at-row__align--center  mt-1'>
                   <View className='at-col at-col-2 text-normal at-row at-row__align--center house-type-deposit' style={{ fontSize: Taro.pxTransform(22) }}>押金保障</View>
                   <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
                 </View>
