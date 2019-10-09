@@ -19,6 +19,7 @@ import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
 import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
 import AppartmentMatchingMask from '@components/apartment-matching-mask'
+import ApartmentCouponMask from '@components/apartment-coupon-mask'
 import CustomNav from '@components/custom-nav'
 
 
@@ -27,9 +28,10 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
-import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
+import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
+import '../../styles/_apartment.scss'
 
 
 const city = userActions.dispatchUser().payload.citycode
@@ -70,6 +72,7 @@ class HouseTypeShow extends Component {
     showApartRoom: true,
     nearbyPost: [],
     showMap: true,
+    showCouponMask: false,
   }
 
   async componentDidMount() {
@@ -96,8 +99,6 @@ class HouseTypeShow extends Component {
 
     //E接口漏斗
     //------------------------------------
-
-
 
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
@@ -237,6 +238,10 @@ class HouseTypeShow extends Component {
     Taro.navigateTo({ url })
   }
 
+  onNavigateToRisk() {
+    Taro.navigateTo({ url: PAGE_RISK_LANDING })
+  }
+
   // 打开租金介绍
 
   onOpenRentDescription() {
@@ -261,6 +266,17 @@ class HouseTypeShow extends Component {
 
   onCloseAllMatching() {
     this.setState({ showMatch: false })
+    this.onShowMap()
+  }
+
+  // 打开租房优惠券
+  onOpenCoupon() {
+    this.setState({ showCouponMask: true })
+    this.onHideMap()
+  }
+  // 关闭租房优惠券
+  onCloseCoupon() {
+    this.setState({ showCouponMask: false })
     this.onShowMap()
   }
 
@@ -396,7 +412,7 @@ class HouseTypeShow extends Component {
 
     const { houstType, map, buttons, showRentDescription,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap } = this.state
+      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -464,6 +480,12 @@ class HouseTypeShow extends Component {
                 onClose={this.onCloseAllMatching}
               />
 
+              <ApartmentCouponMask
+                facilitys={facilitys}
+                show={showCouponMask}
+                onClose={this.onCloseCoupon}
+              />
+
 
 
               {/* 头部 */}
@@ -528,21 +550,31 @@ class HouseTypeShow extends Component {
               }
 
               <View className='page-middile mt-2'>
-                <Image src={DETAIL_AD} className='appointment-detail-ad'></Image>
+                <Image onClick={this.onNavigateToRisk} src={DETAIL_AD} className='appointment-detail-ad'></Image>
               </View>
 
-              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
+              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>  
 
 
               {/* 活动信息 */}
 
-              <View className='mt-1'>
-                {rules && rules.map(i =>
-                  <View key={i.id} className=' mr-1'>
-                    <Text className={`text-mini badge badge-${i.type}`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
-                    <Text className='text-secondary text-small ml-2'>{i.content}</Text>
+              <View className='mt-1 at-row at-row__align--center at-row__justify--between'>
+                <View>
+                  {rules && rules.map(i =>
+                    <View key={i.id} className=' mr-1'>
+                      <Text className={`text-mini badge badge-${i.type}`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
+                      <Text className='text-secondary text-small ml-2'>{i.content}</Text>
+                    </View>
+                  )}
+                </View>
+
+                {/* 领优惠券小Tag */}
+                <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1'>
+                  <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
+                    <Text>领优惠券</Text>
+                    <ABCIcon icon='chevron_right' size='22' />
                   </View>
-                )}
+                </View>
               </View>
 
               {/* 品牌宣传 */}
@@ -570,7 +602,7 @@ class HouseTypeShow extends Component {
                   <View className='at-col at-col-1 '>
                     <Image src={PATH} style='width:12px;height:16px'></Image>
                   </View>
-                  <View className=' text-normal text-secondary  ml-2' >{position}</View>
+                  <View className=' text-normal text-secondary ' >{position}</View>
                 </View>
               }
 
@@ -673,12 +705,6 @@ class HouseTypeShow extends Component {
                         onDeleteFavorite={this.onRoomDeleteFavorite}
                         className={`${index + 1 !== roomList.length && 'border-bottom'}`}
                       />)}
-                    {/* {
-                      showApartRoom && roomList.length > 5 && <View
-                        onClick={this.onshowMorePic}
-                        className='text-secondary text-normal mt-2'
-                        style={{ textAlign: "center" }} >显示更多<AtIcon value='chevron-down' size='20' color='#888888'></AtIcon></View>
-                    } */}
                   </View>
 
                   {/* 搜索房间 */}
@@ -719,13 +745,6 @@ class HouseTypeShow extends Component {
                 </View>
               )}
 
-              {/* 看房指南 */}
-              {/* <View>
-        <View className='text-bold text-huge mt-4'>看房指南</View>
-        <View className='text-secondary text-normal mt-2'>{lookTime}</View>
-        {lookTips !== '' && <View className='text-secondary text-normal mt-2'>{lookTips}</View>}
-      </View> */}
-
             </View>
             <View className='ml-3'>
 
@@ -740,7 +759,7 @@ class HouseTypeShow extends Component {
                       </View>
                       <View>
                         <View className='text-normal ml-2'>{apartmentTitle}</View>
-                        <View className='text-normal text-secondary ml-2'>{tags}</View>
+                        <View className='text-normal text-secondary ml-2 mr-2'>{tags}</View>
                       </View>
                     </View>
 

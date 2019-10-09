@@ -18,6 +18,7 @@ export const PAGE_USER_AUTH = '/pages/user/auth'
 export const PAGE_USER_PROFILE = '/pages/user/profile'
 export const PAGE_USER_CARD = '/pages/user/card'
 export const PAGE_USER_FAVORITE = '/pages/user/favorite'
+export const PAGE_USER_COUPON = '/pages/user/coupon'
 
 // 订单相关
 export const PAGE_ORDER_INDEX = '/pages/order/index'
@@ -29,6 +30,7 @@ export const PAGE_ORDER_DEPOSIT_BAR = '/pages/order/deposit-bar'
 // 风险金相关
 export const PAGE_RISK_INDEX = '/pages/risk/index'
 export const PAGE_RISK_CREATE = '/pages/risk/create'
+export const PAGE_RISK_LANDING = '/pages/risk/landing-page'
 
 //行程留言
 export const PAGE_APPOINTMENT_MESSAGE = '/pages/appointment/message'

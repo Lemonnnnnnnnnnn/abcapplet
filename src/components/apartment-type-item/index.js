@@ -20,7 +20,6 @@ class ApartmentTypeItem extends BaseComponent {
   }
 
   onNavigation() {
-    console.log(this.props.type)
     const { type } =this.props
     type==='HouseType' ? this.props.dispatchApartmentHouseDataPost({type:4}):this.props.dispatchApartmentDataPost({type:4})
     const { item: { url } } = this.props

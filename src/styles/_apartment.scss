@@ -11,6 +11,29 @@
     border-top-left-radius: 6px * $hd;
     border-top-right-radius: 6px * $hd;
   }
+  &-coupon {
+    position: relative;
+    right: -16px * $hd;
+    background: linear-gradient(to right, #ffc919, #feb013);
+    border-top-left-radius: 16px * $hd;
+    border-bottom-left-radius: 16px * $hd;
+    padding: 5px * $hd 6px * $hd 5px * $hd 12px * $hd;
+    min-width: 75px * $hd;
+    &-item {
+      width: 90%;
+      margin-left: 5%;
+      height: 84px * $hd;
+      border-radius: 12px * $hd;
+      position: relative;
+      background: linear-gradient(to right, #ffc919, #feb013);
+      &-angle{
+        width: 12px * $hd;
+        height : 12px * $hd;
+        background: #fff;
+        border-radius: 50%;
+      }
+    }
+  }
 
   &-heart {
     width: 70px;
@@ -213,8 +236,8 @@
     line-height: 32px;
     padding: 4px 14px;
   }
-  &-gray-background{
-    background-color: #F8F8F8;
+  &-gray-background {
+    background-color: #f8f8f8;
     border-radius: 24px;
   }
 }

@@ -27,3 +27,6 @@ export const SIGN_CASH_BACK = 'https://images.gongyuabc.com/image/signCashBack.p
 export const CALL = 'https://images.gongyuabc.com/image/call.png'
 export const APPOINTMENT_DETAIL = 'https://images.gongyuabc.com/image/appointmentdetail.png'
 
+// 个人中心
+export const REQUIREMENT_CARD = 'https://images.gongyuabc.com/image/requirementCard.png'
+

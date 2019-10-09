@@ -13,6 +13,10 @@ import {
 import {
   LOCALE_USER_FAVORITE,
   LOCALE_USER_FAVORITE_EXTRA_TEXT,
+  LOCALE_USER_NEED,
+  LOCALE_USER_NEED_EXTRA_TEXT,
+  LOCALE_USER_COUPON,
+  LOCALE_USER_COUPON_EXTRA_TEXT,
   LOCALE_ORDER_LIST,
   LOCALE_DOWN_PAYMENT_RULE,
   LOCALE_RISK_FUND,
@@ -21,6 +25,8 @@ import {
   // LOCALE_USER_CARD,
   // LOCALE_USER_CARD_EXTRA_TEXT,
 } from '@constants/locale'
+
+import { HEART_YELLOW, REQUIREMENT_CARD } from '@constants/picture'
 
 export const USER_DEFAULT = {
   // 城市数据
@@ -55,22 +61,26 @@ export const TYPE_DEMAND_CHECK = 'TYPE_DEMAND_CHECK'
 export const APPOINTMENT_RESERVATION = 'https://images.gongyuabc.com//image/appointment.png'
 export const RISK_MONEY = 'https://images.gongyuabc.com//image/risk.png'
 
-export const USER_OPTIONS_LISTS = {
-  // TODO 小黄卡先不做
-  //   {
-  //   id: 1,
-  //   icon: 'credit-card',
-  //   url: PAGE_USER_CARD,
-  //   title: LOCALE_USER_CARD,
-  //   extraText: LOCALE_USER_CARD_EXTRA_TEXT,
-  // },
-
-  id: 2,
-  icon: 'heart-2',
-  url: PAGE_USER_FAVORITE,
-  title: LOCALE_USER_FAVORITE,
-  extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
-}
+export const USER_OPTIONS_LISTS = [
+  {
+    id: 1,
+    icon: HEART_YELLOW,
+    title: LOCALE_USER_FAVORITE,
+    extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
+  },
+  {
+    id: 2,
+    icon: REQUIREMENT_CARD,
+    title: LOCALE_USER_NEED,
+    extraText: LOCALE_USER_NEED_EXTRA_TEXT,
+  },
+  {
+    id: 3,
+    icon: REQUIREMENT_CARD,
+    title: LOCALE_USER_COUPON,
+    extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
+  }
+]
 
 
 export const USER_ORDER_OPTIONS_LISTS = [

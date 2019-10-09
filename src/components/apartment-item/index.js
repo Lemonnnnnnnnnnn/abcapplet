@@ -112,7 +112,7 @@ class ApartmentItem extends BaseComponent {
 
 
 
-    const fontSize = mini ? "10px" : "15px"
+    const fontSize = mini ? Taro.pxTransform(20) : Taro.pxTransform(30)
     const padding = mini ? "0 10px" : "2px 12px"
 
     const apartmentHeaderType = {

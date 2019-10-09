@@ -161,3 +161,10 @@ export const HOUSE_TYPE_DESC = {
   jrz: '几人住',
 }
 
+// 优惠券
+export const APARTMENT_COUPON_DIST = {
+  1:{message : '领取'},
+  2:{message : '已领取'},
+  3:{message : '已使用'},
+  4:{message : '已过期'},
+}

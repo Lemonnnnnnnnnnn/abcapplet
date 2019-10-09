@@ -6,6 +6,8 @@ import { AtIcon } from 'taro-ui'
 // 自定义组件
 import Board from '@components/board'
 import BaseComponent from '@components/base'
+
+// 自定义常量
 import { COLOR_YELLOW, COLOR_GREY_0 } from '@constants/styles'
 
 class UserOptions extends BaseComponent {
@@ -14,49 +16,34 @@ class UserOptions extends BaseComponent {
     size: 17,
   }
 
-  onNavigation({ url }) {
-    Taro.navigateTo({ url })
+  onOptionClick(value) {
+    switch (value) {
+      case 1: { this.props.onNavigateToFavorite() } break
+      case 2: { this.props.onOpenCard() } break
+      case 3: { this.props.onNavigateToCoupon() } break
+    }
   }
-
   render() {
-    const { lists, size, className , onOpenCard } = this.props
+    const { lists, size, className } = this.props
 
     return (
       <Board className={className}>
+        {
+          lists.map(i =>
+            <View className='user-list-item py-3 mx-3' onClick={this.onOptionClick.bind(this, i.id)} key={i}>
+              <View className='at-row at-row__justify--around'>
+                {/* 左 */}
+                <View className='at-col'>
+                  <Image className='mr-2' src={i.icon} style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32) }} />
 
-        {/* 我的心愿卡 */}
-        <View className='user-list-item py-3 mx-3'
-          onClick={this.onNavigation.bind(this, lists)}
-        >
-          <View className='at-row at-row__justify--around'>
-            {/* 左侧内容 */}
-            <View className='at-col'>
-              {/* 左侧图标 */}
-              <AtIcon className='mr-2' value={lists.icon} color={COLOR_YELLOW} size={size} />
-
-              {/* 文本内容 */}
-              <Text className='mr-2 text-normal'>{lists.title}</Text>
-              <Text className='text-small text-muted'>{lists.extraText}</Text>
-            </View>
-
-            {/* 右侧图片 */}
-            <AtIcon value='chevron-right' color={COLOR_GREY_0} size={size} />
-          </View>
-        </View>
-
-        {/* 我的需求卡 */}
-
-        <View className='user-list-item py-3 mx-3' onClick={onOpenCard}>
-          <View className='at-row at-row__justify--around'>
-            <View className='at-row at-row__align--center'>
-              <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32) }} src='https://images.gongyuabc.com/image/requirementCard.png'></Image>
-              <Text className='mr-2 text-normal ml-2'>我的需求卡</Text>
-            </View>
-
-            <AtIcon value='chevron-right' color={COLOR_GREY_0} size={17} />
-          </View>
-
-        </View>
+                  <Text className='mr-2 text-normal'>{i.title}</Text>
+                  <Text className='text-small text-muted'>{i.extraText}</Text>
+                </View>
+                {/* 右 */}
+                <AtIcon value='chevron-right' color={COLOR_GREY_0} size={size} />
+              </View>
+            </View>)
+        }
 
       </Board>
     )

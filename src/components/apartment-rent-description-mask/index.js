@@ -78,19 +78,6 @@ class ApartmentItemMask extends BaseComponent {
                         <View className='mt-3 mb-3 text-bold text-huge'>{LOCALE_RENT_TYPE}</View>
                         <View className='text-large text-secondary'>{cost}</View>
                     </View>
-                    {/* <View className='ml-3 mr-3'>
-                        <View className='mt-3 mb-3 text-bold text-huge'>{LOCALE_COST_DETAIL}</View>
-                        <View className='text-large text-secondary'>
-                            {
-                                cost_list.map((value, key) => (
-                                    <View style={divdingLine} className='at-row at-row__justify--between text-large text-secondary' key={key}>
-                                        <Text >{value.name}</Text>
-                                        <Text >{value.price}</Text>
-                                    </View>
-                                ))
-                            }
-                        </View>
-                    </View> */}
                     <View className='ml-3 mr-3'>
                         <View className='mt-3 mb-3 text-bold text-huge'>{LOCALE_RENT_INTRODUCE}</View>
                         <View style={introduceStyle} className='text-large text-secondary'>

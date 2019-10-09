@@ -23,10 +23,13 @@ import {
   USER_ORDER_OPTIONS_LISTS,
 } from '@constants/user'
 
-import { COLOR_YELLOW, COLOR_GREY_0, COLOR_GREY_2 } from '@constants/styles'
+import { COLOR_GREY_2 } from '@constants/styles'
+
 
 import {
-  PAGE_USER_AUTH
+  PAGE_USER_AUTH,
+  PAGE_USER_FAVORITE,
+  PAGE_USER_COUPON
 } from '@constants/page'
 
 @connect(state => state, {
@@ -67,6 +70,15 @@ class UserProfile extends Component {
     Taro.navigateTo({ url: PAGE_USER_AUTH })
   }
 
+  // 跳转我的心愿卡页面
+  onNavigateToFavorite() {
+    Taro.navigateTo({ url: PAGE_USER_FAVORITE })
+  }
+  // 跳转我的优惠券页面
+  onNavigateToCoupon() {
+    Taro.navigateTo({ url: PAGE_USER_COUPON })
+  }
+  
   // 打开/关闭需求卡
 
   onOpenCard() {
@@ -128,6 +140,7 @@ class UserProfile extends Component {
     })
   }
 
+
   render() {
     const { optionLists, orderOptionLists, showCard, floorList, roomList, showMask } = this.state
     const { user: { username, mobile }, dists } = this.props
@@ -161,6 +174,8 @@ class UserProfile extends Component {
           <UserOptions
             className='mt-3 mx-3'
             onOpenCard={this.onOpenCard}
+            onNavigateToFavorite={this.onNavigateToFavorite}
+            onNavigateToCoupon={this.onNavigateToCoupon}
             lists={optionLists}
           />
 
