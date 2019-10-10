@@ -55,19 +55,6 @@ class Carousel extends Component {
       newUrl = `${url}&title=${title}`
     }
 
-    // // 判断是否为 后端传递的文章链接
-    // const artileLink = '/pages/home/article/detail/index'
-    // const isBackendArtile = url.search(artileLink) !== -1
-    // if (isBackendArtile) newUrl = `${url.replace(artileLink, PAGE_ARTICLE_SHOW)}&title=${title}`
-
-    // // 判断是否为公寓详情
-    // const apartmentLink = '/pages/home/detail/index'
-    // const isBackendApartment = url.search(apartmentLink) !== -1
-    // if (isBackendApartment) newUrl = `${url.replace(apartmentLink, PAGE_APARTMENT_SHOW)}`
-
-    // // 判断是否 本身就是文章链接
-    // const isArtile = url.search(PAGE_ARTICLE_SHOW) !== -1
-    // if (isArtile) newUrl = `${url}&title=${title}`
 
     return Taro.navigateTo({ url: newUrl })
   }

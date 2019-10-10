@@ -7,7 +7,6 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { APARTMENT_COUPON_DIST } from '@constants/apartment'
-import '../../styles/_apartment.scss'
 
 
 class ApartmentCouponItem extends BaseComponent {

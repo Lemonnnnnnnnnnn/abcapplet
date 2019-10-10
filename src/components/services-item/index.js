@@ -174,13 +174,13 @@ class ServiceItem extends BaseComponent {
     })
   }
 
-  // onalert() {
-  //   Taro.showToast({
-  //     title: '该公寓暂不支持线上预订',
-  //     icon: 'none',
-  //     duration: 2000
-  //   })
-  // }
+  onalert() {
+    Taro.showToast({
+      title: '该公寓暂不支持线上预订',
+      icon: 'none',
+      duration: 2000
+    })
+  }
 
 
   render() {

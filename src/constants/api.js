@@ -208,7 +208,7 @@ export const API_APPOINTMENT_NIGHTPOST = `${HOST}/appointment/nightPost`
 
 //新增行程签约核对单
 export const API_APPOINTMENT_REWARDORDER = `${HOST}/appointment/rewardOrderPost`
-export const PAYLOAD_APPOINTMENT_REWARDORDER = { appointment_id: 0, apartment_room_id: '', mobile: '', sign_time: '', tenancy: '', file_img: '', price: '' }
+export const PAYLOAD_APPOINTMENT_REWARDORDER = { appointment_id: 0, mobile: '', sign_time: '', tenancy: '', file_img: '', price: '' , type : 0 }
 //获取签约审核单详情
 export const API_APPOINTMENT_DETAILREWARD = `${HOST}/appointment/detailRewardOrderPost`
 // 查询签约审核单可选的房间列表

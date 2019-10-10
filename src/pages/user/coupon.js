@@ -7,8 +7,6 @@ import { AtButton } from 'taro-ui'
 import Decorate from '@components/decorate'
 import ApartmentCouponItem from '@components/apartment-coupon-item'
 
-import '../../styles/_page.scss'
-
 
 class UserFavorite extends Component {
   config = {

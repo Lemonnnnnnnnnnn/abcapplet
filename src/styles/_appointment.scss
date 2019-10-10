@@ -139,9 +139,31 @@
     &-line {
       width: 95%;
       height: 0px * $hd;
-      border: 0.5px * $hd solid rgba(232, 232, 232, 1);
+      border: 0.5px * $hd solid #f8f8f8;
       opacity: 1;
     }
-
+    &-picker {
+      background: #f7f7f7;
+      border-radius: 30px;
+      text-align: center;
+      &-text{
+        color: #b4b4b4;
+      }
+    }
+    &-board{
+      position: relative;
+      top: 100px * $hd;
+    }
+    &-roomBoard{
+      // input{
+      //   background: #F8F8F8;
+      //   border-radius: 5px * $hd;
+      // }
+      &-input{
+        background: #F8F8F8;
+        border-radius: 5px * $hd;
+        height: 52.5px;
+      }
+    }
   }
 }

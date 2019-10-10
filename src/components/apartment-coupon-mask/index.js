@@ -36,8 +36,8 @@ class ApartmentCouponMask extends BaseComponent {
         return (
             show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
                 <Board fixed='bottom' border='top'>
-                    <AtIcon onClick={onClose} value='close' size='15' className='mt-3 mr-3 p-2' color='#888' style='float:right'></AtIcon>
-                    <View className='text-huge text-bold mt-2 text-center'> 租房优惠券</View>
+                    <AtIcon onClick={onClose} value='close' size='15' className='p-2 mr-1 mt-1' color='#888' style='position : absolute ; right : 0'></AtIcon>
+                    <View className='text-huge text-bold mt-2 text-center pb-2'> 租房优惠券</View>
                     {
                         AnalogArr.map(i =>
                             <ApartmentCouponItem
@@ -49,7 +49,7 @@ class ApartmentCouponMask extends BaseComponent {
                             />)
                     }
 
-                    <View style={{ height: "20vw" }}></View>
+                    <View style={{ height: Taro.pxTransform(170) }}></View>
                 </Board>
                 <Masks show={show} />
 
