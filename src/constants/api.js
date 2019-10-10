@@ -242,3 +242,6 @@ export const API_FUNNEL_ORDER = `${HOST}/index/funnelOrderPost`
 export const API_SUB_LIST = 'https://sub.gongyuabc.com/api/v1/sublease/orders/index'
 export const PAYLOAD_SUB_LIST = { city_id:350200,page: 1, size: 6  }
 
+//用户反馈接口
+export const API_USER_FEEDBACK = `${HOST}/user/setFeedbackPost`
+

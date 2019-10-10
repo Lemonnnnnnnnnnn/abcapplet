@@ -57,6 +57,7 @@ export const CREATE_USER_FAVORITE = 'CREATE_USER_FAVORITE'
 export const DELETE_USER_FAVORITE = 'DELETE_USER_FAVORITE'
 export const TYPE_DEMAND_CREATE = 'TYPE_DEMAND_CREATE'
 export const TYPE_DEMAND_CHECK = 'TYPE_DEMAND_CHECK'
+export const TYPE_USER_FEEDBACK = 'TYPE_USER_FEEDBACK'
 
 export const APPOINTMENT_RESERVATION = 'https://images.gongyuabc.com//image/appointment.png'
 export const RISK_MONEY = 'https://images.gongyuabc.com//image/risk.png'

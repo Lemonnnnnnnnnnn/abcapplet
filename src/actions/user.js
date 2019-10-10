@@ -8,7 +8,8 @@ import {
   API_DEMAND_CREATE,
   API_DEMAND_CHECK,
   API_USER_MSG,
-  API_AUTH_MOBILEPOST
+  API_AUTH_MOBILEPOST,
+  API_USER_FEEDBACK
 } from '@constants/api'
 
 import {
@@ -20,7 +21,7 @@ import {
   TYPE_DEMAND_CREATE,
   TYPE_DEMAND_CHECK,
   GET_USER_PHONE,
-
+  TYPE_USER_FEEDBACK,
 } from '@constants/user'
 
 import {
@@ -197,4 +198,13 @@ export const dispatchUserPhone = (payload) =>createAction({
   type : GET_USER_PHONE,
   url : API_AUTH_MOBILEPOST,
 })
+//用户反馈意见
+export const dispatchFeedBack = (payload) => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_USER_FEEDBACK,
+  url: API_USER_FEEDBACK
+})
+
+
 

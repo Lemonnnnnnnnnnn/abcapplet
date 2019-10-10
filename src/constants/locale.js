@@ -498,3 +498,9 @@ export const LOCALE_PROVACY_POLICY_CONTENT = [
         ]
     },
 ]
+
+//反馈意见
+export const LOCALE_FEEDBACK_QUESTION = "您的问题或建议"
+export const LOCALE_FEEDBACK_TEL  = '您的联系方式'
+export const LOCALE_FEEDBACK_DETAIL =  "留下您的联系方式，以便我们了解问题后及时反馈，紧急问题请联系客服"
+export const LOCALE_FEEDBACK_COMFIRE = '提交建议'
