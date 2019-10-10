@@ -12,7 +12,6 @@ import { connect } from '@tarojs/redux'
 import * as homeActions from '@actions/home'
 
 @connect(state => state, {
-
   ...homeActions,
 })
 class Carousel extends Component {
@@ -26,22 +25,22 @@ class Carousel extends Component {
     imageHeight: 344,
     imageWidth: 626,
     hasContent: true,
-    contentHeight: 170,
+    contentHeight: 200,
     displayMultipleItems: 1,
     haveText: true
   }
   state = {
-    payload : PAYLOAD_HOME_INDEXDATAPOAT
+    payload: PAYLOAD_HOME_INDEXDATAPOAT
   }
 
-  onNavigation({ url, title,id }) {
+  onNavigation({ url, title, id }) {
     const { type } = this.props
     const { payload } = this.state
 
 
-    type==='banner' && this.props.dispatchHomeIndexData({...payload,type:1,origin_id:id})
-    type==='normal' && this.props.dispatchHomeIndexData({...payload,type:2,origin_id:id})
-    type==='cbd' && this.props.dispatchHomeIndexData({...payload,type:3,origin_id:id})
+    type === 'banner' && this.props.dispatchHomeIndexData({ ...payload, type: 1, origin_id: id })
+    type === 'normal' && this.props.dispatchHomeIndexData({ ...payload, type: 2, origin_id: id })
+    type === 'cbd' && this.props.dispatchHomeIndexData({ ...payload, type: 3, origin_id: id })
     let newUrl = url
 
     if (url === '') return;
@@ -77,7 +76,6 @@ class Carousel extends Component {
       left: Taro.pxTransform(16),
       top: Taro.pxTransform(16),
       borderRadius: Taro.pxTransform(32),
-      // padding: " 6px 5px",
       backgroundColor: "#000",
       width: Taro.pxTransform(120),
       height: Taro.pxTransform(35),
@@ -88,7 +86,6 @@ class Carousel extends Component {
       position: "absolute",
       left: Taro.pxTransform(16),
       top: Taro.pxTransform(16),
-      // padding: " 6px 5px",
       width: Taro.pxTransform(120),
       height: Taro.pxTransform(35),
       textAlign: "center",
@@ -117,6 +114,11 @@ class Carousel extends Component {
       width: hasContent ? '100%' : `${Taro.pxTransform(imageWidth)}`,
     }
 
+    const bannerStyle = {
+      width : '100%',
+      height : '100%',
+    }
+
 
     return (
       <View className={classNames(className, 'carousel', 'ml-3')} >
@@ -124,7 +126,7 @@ class Carousel extends Component {
         {type === 'banner' &&
           <Swiper
             className='mr-3'
-            autoplay
+            // autoplay
             circular
             indicatorDots
             style={swiperStyle}
@@ -133,12 +135,15 @@ class Carousel extends Component {
             displayMultipleItems={displayMultipleItems}
           >
             {carousel.map(item =>
-              <SwiperItem key={item.id} onClick={this.onNavigation.bind(this, item)}>
-                <Image
-                  src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
-                  mode='scaleToFill' style={imageStyle}
-                  className='carousel-image'
-                />
+              <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
+                <View style={{ height: Taro.pxTransform(380), overflow: 'hidden' ,position:'relative'}}>
+                  <Image
+                    src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                    mode='withfix'
+                    style={bannerStyle}
+                    className='carousel-image vertical-level-center'
+                  />
+                </View>
                 <View style={contentStyle}>
                   <View className='mt-1 text-large'>{item.title}</View>
                   <View className='mt-2 text-small text-muted'>{item.subtitle ? item.subtitle : ' '}</View>
@@ -161,7 +166,8 @@ class Carousel extends Component {
                 <Image
                   className='carousel-image'
                   src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
-                  mode='scaleToFill' style={imageStyle}
+                  mode='withfix'
+                  style={imageStyle}
                 />
                 {
                   haveText && <View >

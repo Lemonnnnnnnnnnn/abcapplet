@@ -43,6 +43,7 @@ class ApartmentItem extends BaseComponent {
     apartment: { cover: '' },
     className: '',
   }
+  
 
   onCreateFavorite(e) {
     e.stopPropagation()
@@ -107,9 +108,8 @@ class ApartmentItem extends BaseComponent {
 
     const headerStyle = {
       width: '100%',
-      height: Taro.pxTransform(height),
+      height: Taro.pxTransform(414),
     }
-
 
 
     const fontSize = mini ? Taro.pxTransform(20) : Taro.pxTransform(30)
@@ -122,10 +122,6 @@ class ApartmentItem extends BaseComponent {
     }
 
     const imageStyle = {
-      position: 'absolute',
-      left: '50%',
-      top: '50%',
-      transform: 'translate(-50%,-50%)',
       width: '100%',
     }
 
@@ -166,20 +162,20 @@ class ApartmentItem extends BaseComponent {
         <View className='apartment-header' style={headerStyle}>
           {
             nearbyPost ?
-              <View style={{ width: '100%', height: Taro.pxTransform(height), overflow: 'hidden', position: 'relative' }}>
+              <View style={{ width: '100%', height: Taro.pxTransform(414), overflow: 'hidden', position: 'relative' }}>
                 {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-                {cover
-                  ? <Image src={cover} style={nearbyPostStyle} />
+                {src
+                  ? <Image src={src} style={nearbyPostStyle} />
                   : <ImagePlaceholder height={height} />
                 }
               </View>
 
               :
 
-              <View style={{ width: '100%', height: Taro.pxTransform(height), overflow: 'hidden', position: 'relative' }}>
+              <View style={{ width: '100%', height: Taro.pxTransform(414), overflow: 'hidden', position: 'relative' }}>
                 {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-                {cover
-                  ? <Image src={cover} mode='widthFix' style={imageStyle} />
+                {src
+                  ? <Image src={src} style={{width : '100%'}} mode='widthFix' className='vertical-level-center' />
                   : <ImagePlaceholder height={height} />
                 }
               </View>
