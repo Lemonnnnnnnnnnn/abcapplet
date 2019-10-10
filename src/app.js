@@ -32,7 +32,8 @@ class App extends Component {
       'pages/user/auth',
       'pages/user/profile',
       'pages/user/favorite',
-      'pages/user/coupon'
+      'pages/user/coupon',
+      'pages/user/feedback',
 
     ],
     subPackages: [

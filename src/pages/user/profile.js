@@ -29,7 +29,8 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import {
   PAGE_USER_AUTH,
   PAGE_USER_FAVORITE,
-  PAGE_USER_COUPON
+  PAGE_USER_COUPON,
+  PAGE_USER_FEEDBACK
 } from '@constants/page'
 
 @connect(state => state, {
@@ -78,7 +79,7 @@ class UserProfile extends Component {
   onNavigateToCoupon() {
     Taro.navigateTo({ url: PAGE_USER_COUPON })
   }
-  
+
   // 打开/关闭需求卡
 
   onOpenCard() {
@@ -139,6 +140,12 @@ class UserProfile extends Component {
 
     })
   }
+  //前往意见反馈
+  onFeedback(){
+    Taro.navigateTo({
+      url:PAGE_USER_FEEDBACK
+    })
+  }
 
 
   render() {
@@ -180,7 +187,7 @@ class UserProfile extends Component {
           />
 
           {/* 优选入口 */}
-          <View className='mx-2' onClick={this.openMiniProgramCreate}>
+          <View className='mx-2' onClick={this.openMiniProgramCreate} style={{ overflow: 'hidden' }}>
             <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
           </View>
 
@@ -193,7 +200,6 @@ class UserProfile extends Component {
 
           {/* 联系客服 */}
           <Board className='mt-2 mx-3'>
-            {/* <Button style={buttonStyle} open-type='contact' size='mini' plain bindcontact='handleContact' > */}
             <View className=' p-3 mt-2' onClick={this.onshowCustomerMask} style={{ marginTop: Taro.pxTransform(8) }}>
               <View className='at-row at-row__justify--between'>
                 {/* 左侧内容 */}
@@ -216,7 +222,30 @@ class UserProfile extends Component {
 
               </View>
             </View>
-            {/* </Button> */}
+          </Board>
+
+          {/* 意见反馈 */}
+          <Board className='mt-2 mx-3'>
+            <View className=' p-3 mt-2' onClick={this.onFeedback} style={{ marginTop: Taro.pxTransform(8) }}>
+              <View className='at-row at-row__justify--between'>
+                {/* 左侧内容 */}
+                <View className='at-row at-row__align--center ml-2'>
+                  {/* 左侧图标 */}
+                  <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src='https://images.gongyuabc.com/image/feedback.png'></Image>
+                  {/* 文本内容 */}
+                  <View className='ml-2 text-normal' style={{ color: '#000' }}>意见反馈</View>
+                </View>
+
+                {/* 右侧图片 */}
+                <View className='at-col at-col-1'>
+                  <View style={{ marginBottom: Taro.pxTransform(4) }} className='ml-3'>
+                    <AtIcon value='chevron-right' color={COLOR_GREY_2} size={17} />
+                  </View>
+                </View>
+
+              </View>
+            </View>
+
           </Board>
 
         </View >
