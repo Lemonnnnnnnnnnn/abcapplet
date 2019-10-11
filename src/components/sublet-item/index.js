@@ -18,8 +18,6 @@ import {
   LOCALE_SEMICOLON,
 } from '@constants/locale'
 
-
-
 class SunletItem extends BaseComponent {
   static defaultProps = {
 

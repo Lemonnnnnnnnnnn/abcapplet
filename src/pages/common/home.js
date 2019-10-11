@@ -583,6 +583,7 @@ class CommonHome extends BaseComponent {
                 key={apartments.type}
                 type={apartments.type}
                 items={apartments.list}
+                imgHeight={414}
                 ref={this.refApartmentList}
                 defaultPayload={payloadApartment}
                 onCreateFavorite={this.onCreateFavorite}

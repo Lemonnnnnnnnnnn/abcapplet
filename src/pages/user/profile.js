@@ -158,7 +158,7 @@ class UserProfile extends Component {
 
     const maskStyle = {
       position: 'absolute',
-      height: '80vh',
+      height: '100vh',
       width: '100%',
       top: '20vh',
       zIndex: 99,
