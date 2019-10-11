@@ -89,16 +89,6 @@ class OrderShow extends Component {
 
   componentWillMount() {
     buryPoint()
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[0] === PAGE_APARTMENT_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW
-      && console.log('公寓详情页——签约下定——立即预订')
-
-    routeArr[0] === PAGE_HOUSE_TYPE_SHOW && routeArr[1] === PAGE_ORDER_CREATE && routeArr[2] === PAGE_ORDER_SHOW
-      && console.log('户型详情页——签约下定——立即预订')
 
     const { id = 176 } = this.$router.params
 

@@ -21,7 +21,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 
 // 自定义变量相关
 import { ORDER_HEADERS } from '@constants/order'
-import { PAGE_ORDER_SHOW, PAGE_APARTMENT_SHOW, PAGE_HOUSE_TYPE_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_ORDER_SHOW } from '@constants/page'
 import { PAYLOAD_ORDER_CREATE } from '@constants/api'
 import {
   LOCALE_SCHEDULED_MESSAGE,
