@@ -24,7 +24,7 @@ import {
   // LOCALE_USER_CARD_EXTRA_TEXT,
 } from '@constants/locale'
 
-import { HEART_YELLOW, REQUIREMENT_CARD } from '@constants/picture'
+import { USER_WISH , REQUIREMENT_CARD ,PREFERENTIAL} from '@constants/picture'
 
 export const USER_DEFAULT = {
   // 城市数据
@@ -63,7 +63,7 @@ export const RISK_MONEY = 'https://images.gongyuabc.com//image/risk.png'
 export const USER_OPTIONS_LISTS = [
   {
     id: 1,
-    icon: HEART_YELLOW,
+    icon: USER_WISH ,
     title: LOCALE_USER_FAVORITE,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
   },
@@ -75,7 +75,7 @@ export const USER_OPTIONS_LISTS = [
   },
   // {
   //   id: 3,
-  //   icon: REQUIREMENT_CARD,
+  //   icon: PREFERENTIAL,
   //   title: LOCALE_USER_COUPON,
   //   extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
   // }

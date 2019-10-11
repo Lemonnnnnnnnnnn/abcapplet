@@ -121,7 +121,7 @@ class ApartmentItem extends BaseComponent {
     // const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
-    //封面图高度 
+    //封面图高度
     const imgWrapHeight = imgHeight ? imgHeight : height
 
     // 是否已收藏

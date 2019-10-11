@@ -34,7 +34,7 @@ class UserOptions extends BaseComponent {
               <View className='at-row at-row__justify--around'>
                 {/* 左 */}
                 <View className='at-row'>
-                  <Image className='mr-2 page-middile mt-1' src={i.icon} style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32) }} />
+                  <Image className='mr-2 page-middile mt-1' src={i.icon} style={{ width: Taro.pxTransform(43), height: Taro.pxTransform(32) }} />
                   <View className='at-row at-row__align--center'>
                     <Text className='mr-2 text-normal'>{i.title}</Text>
                     <Text className='text-small text-muted'>{i.extraText}</Text>

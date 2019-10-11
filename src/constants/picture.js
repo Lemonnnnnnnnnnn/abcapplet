@@ -2,7 +2,7 @@
 // 公寓相关
 export const HEART_YELLOW = 'https://images.gongyuabc.com//image/heart-yellow.png'
 export const HEART_YELLOW_EMPTY = 'https://images.gongyuabc.com//image/heart-yellow-empty.png'
-export const HEART_BLACK = 'https://images.gongyuabc.com//image/heart-black.png' 
+export const HEART_BLACK = 'https://images.gongyuabc.com//image/heart-black.png'
 export const SIGN = 'https://images.gongyuabc.com//image/signing.png'
 export const PATH = 'https://images.gongyuabc.com//image/path_new.png'
 export const HOME = 'https://images.gongyuabc.com//image/home.png'
@@ -28,5 +28,7 @@ export const CALL = 'https://images.gongyuabc.com/image/call.png'
 export const APPOINTMENT_DETAIL = 'https://images.gongyuabc.com/image/appointmentdetail.png'
 
 // 个人中心
-export const REQUIREMENT_CARD = 'https://images.gongyuabc.com/image/requirementCard.png'
+export const USER_WISH  ='https://images.gongyuabc.com/image/wish.png' //心愿单
+export const REQUIREMENT_CARD = 'https://images.gongyuabc.com/image/requirement-card.png'  //需求卡
+export const PREFERENTIAL = 'https://images.gongyuabc.com/image/Preferential.png'  //优惠卷
 

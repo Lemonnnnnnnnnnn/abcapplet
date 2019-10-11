@@ -28,12 +28,7 @@ class App extends Component {
       'pages/appointment/audit',
       // 'pages/appointment/maphouse',
       // 'pages/appointment/commutehouse',
-
-      'pages/user/auth',
-      'pages/user/profile',
-      'pages/user/favorite',
-      'pages/user/coupon',
-      'pages/user/feedback',
+      'pages/owner/profile',
 
     ],
     subPackages: [
@@ -46,6 +41,16 @@ class App extends Component {
           'house-type',
           'appointment',
           'search-room',
+        ]
+      },
+      {
+        root: 'pages/user',
+        pages: [
+          'auth',
+          'favorite',
+          'coupon',
+          'feedback',
+
         ]
       },
       {
@@ -111,7 +116,7 @@ class App extends Component {
           selectedIconPath: "assets/icons/recommend-active.png"
         },
         {
-          pagePath: "pages/user/profile",
+          pagePath: "pages/owner/profile",
           text: "我的",
           iconPath: "assets/icons/profile.png",
           selectedIconPath: "assets/icons/profile-active.png"
