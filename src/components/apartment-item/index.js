@@ -118,6 +118,7 @@ class ApartmentItem extends BaseComponent {
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     // 设置图片宽高，方便七牛云格式化图片
+    // const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     //封面图高度 
@@ -148,7 +149,7 @@ class ApartmentItem extends BaseComponent {
 
           <View style={{ width: '100%', height: Taro.pxTransform(imgWrapHeight), overflow: 'hidden', position: 'relative' }}>
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-            {src
+            {cover
               ? <Image src={src} style={{ width: '100%', height: '100%', borderRadius: Taro.pxTransform(12) }} mode='widthFix' className='vertical-level-center' />
               : <ImagePlaceholder height={height} />
             }
