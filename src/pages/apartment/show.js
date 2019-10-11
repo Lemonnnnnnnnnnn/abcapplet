@@ -45,6 +45,7 @@ class ApartmentShow extends Component {
       notices: [],
       hotRules: [],
       facilitys: [],
+      num: 0
     },
     map: {
       latitude: 0,
@@ -53,7 +54,6 @@ class ApartmentShow extends Component {
     },
     buttons: [],
     nearbyPost: [],
-    statusBarHeight: 0,
     navHeight: 0,
   }
 
@@ -69,11 +69,11 @@ class ApartmentShow extends Component {
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
 
     await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 72, statusBarHeight: res.statusBarHeight })
+      this.setState({ navHeight: 72 })
       if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 88 })
       } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64, statusBarHeight: res.statusBarHeight })
+        this.setState({ navHeight: 64 })
       }
     })
 
@@ -208,7 +208,6 @@ class ApartmentShow extends Component {
       this.props.dispatchApartmentDataPost({ type: 4 })
 
       // this[method]()
-      const { apartment, } = this.state
 
       Taro.navigateTo({
         url: `${PAGE_ORDER_CREATE}?apartment_id=${Id}`
@@ -374,7 +373,7 @@ class ApartmentShow extends Component {
               <View style={ScrollWrapStyle} className='mt-4 ml-3' >
 
                 <ScrollView scrollX>
-                  {types.map((i, index) =>
+                  {types.map(i =>
 
                     <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-1' >
                       <View style={borderStyle} className='' >

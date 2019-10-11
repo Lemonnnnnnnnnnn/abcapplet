@@ -110,6 +110,8 @@ class UserFavorite extends Component {
               items={favoriteHouseType.list}
               ref={this.refHouseTypeList}
               defaultPayload={PAYLOAD_FAVORITE_HOUSE_TYPE_LIST}
+              imgHeight={432}
+
 
               onDeleteFavorite={this.onDeleteFavorite}
               dispatchList={this.props.dispatchFavoriteHouseTypeList}
@@ -119,7 +121,8 @@ class UserFavorite extends Component {
 
           {/* 公寓 */}
           <AtTabsPane current={this.state.current} index={1} >
-            <ApartmentList className='mx-2'
+            <ApartmentList
+              className='mx-2'
               isapartment='apartmrnt'
               initReset={false}
               key={favoriteApartment.type}
@@ -127,6 +130,8 @@ class UserFavorite extends Component {
               items={favoriteApartment.list}
               ref={this.refApartmentList}
               defaultPayload={PAYLOAD_FAVORITE_APARTMENT_LIST}
+              imgHeight={432}
+
 
               onDeleteFavorite={this.onDeleteFavorite}
               dispatchList={this.props.dispatchFavoriteApartmentList}

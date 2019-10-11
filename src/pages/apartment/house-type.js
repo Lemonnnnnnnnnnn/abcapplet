@@ -59,6 +59,7 @@ class HouseTypeShow extends Component {
       facilitys: [],
       roomList: [],
       appointment_show_num: 0,
+      num : 0,
     },
     map: {
       latitude: 0,

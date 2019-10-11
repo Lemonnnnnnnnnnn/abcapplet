@@ -184,6 +184,7 @@ class ApartmentCbd extends Component {
           items={activityApartment.list}
           ref={this.refApartmentList}
           defaultPayload={defaultPayload}
+          imgHeight={432}
 
           onCreateFavorite={this.onCreateFavorite}
           onDeleteFavorite={this.onDeleteFavorite}

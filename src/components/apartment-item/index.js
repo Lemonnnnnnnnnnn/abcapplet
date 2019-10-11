@@ -51,7 +51,7 @@ class ApartmentItem extends BaseComponent {
 
     const user_info = Taro.getStorageSync('user_info')
     user_info.token &&
-    this.props.onCreateFavorite({ payload })
+      this.props.onCreateFavorite({ payload })
   }
 
   onDeleteFavorite(e) {
@@ -60,7 +60,7 @@ class ApartmentItem extends BaseComponent {
 
     const user_info = Taro.getStorageSync('user_info')
     user_info.token &&
-    this.props.onDeleteFavorite({ payload })
+      this.props.onDeleteFavorite({ payload })
   }
 
   getFavoritePayload() {
@@ -89,9 +89,8 @@ class ApartmentItem extends BaseComponent {
 
 
   render() {
-    let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
+    let { width, height, minWidth, minHeight, mini, nearbyPost, imgHeight } = this.props
     const { apartment, type } = this.props
-
 
     // 重置宽高
     width = mini ? minWidth : width
@@ -106,12 +105,6 @@ class ApartmentItem extends BaseComponent {
       num, is_sign, sub_title, one_word
     } = apartment
 
-    const headerStyle = {
-      width: '100%',
-      height: Taro.pxTransform(414),
-    }
-
-
     const fontSize = mini ? Taro.pxTransform(20) : Taro.pxTransform(30)
     const padding = mini ? "0 10px" : "2px 12px"
 
@@ -121,22 +114,14 @@ class ApartmentItem extends BaseComponent {
       left: '5%'
     }
 
-    const imageStyle = {
-      width: '100%',
-    }
-
-    const nearbyPostStyle = {
-      width: '100%',
-      height: '100%',
-      borderRadius: Taro.pxTransform(12),
-    }
-
-
     // 格式化价格
     const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     // 设置图片宽高，方便七牛云格式化图片
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
+
+    //封面图高度 
+    const imgWrapHeight = imgHeight ? imgHeight : height
 
     // 是否已收藏
     // 当 type 为 favorite-house-type、favorite-apartment 时显示，isCollect为ture时显示
@@ -157,31 +142,17 @@ class ApartmentItem extends BaseComponent {
 
 
     return (
-      <View className={home === null ? 'apartment-box-shadow-style' : 'apartment-card-margin-style'} onClick={this.onNavigation}>
+      <View className='apartment-box-shadow-style' onClick={this.onNavigation}>
         {/* 户型头部 */}
-        <View className='apartment-header' style={headerStyle}>
-          {
-            nearbyPost ?
-              <View style={{ width: '100%', height: Taro.pxTransform(414), overflow: 'hidden', position: 'relative' }}>
-                {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-                {src
-                  ? <Image src={src} style={nearbyPostStyle} />
-                  : <ImagePlaceholder height={height} />
-                }
-              </View>
+        <View className='apartment-header'>
 
-              :
-
-              <View style={{ width: '100%', height: Taro.pxTransform(414), overflow: 'hidden', position: 'relative' }}>
-                {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-                {src
-                  ? <Image src={src} style={{width : '100%'}} mode='widthFix' className='vertical-level-center' />
-                  : <ImagePlaceholder height={height} />
-                }
-              </View>
-
-          }
-
+          <View style={{ width: '100%', height: Taro.pxTransform(imgWrapHeight), overflow: 'hidden', position: 'relative' }}>
+            {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
+            {src
+              ? <Image src={src} style={{ width: '100%', height: '100%', borderRadius: Taro.pxTransform(12) }} mode='widthFix' className='vertical-level-center' />
+              : <ImagePlaceholder height={height} />
+            }
+          </View>
 
           {/* 户型 cbd 列表 */}
           {
