@@ -3,11 +3,17 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Input } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 
+// Redux相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
+
 // 自定义组件
 import Decorate from '@components/decorate'
 import ApartmentCouponItem from '@components/apartment-coupon-item'
 
-
+@connect(state => state, {
+  ...userActions
+})
 class UserFavorite extends Component {
   config = {
     navigationBarTitleText: '我的优惠券',
@@ -16,15 +22,11 @@ class UserFavorite extends Component {
   }
   state = {
     code: '',
-    navList: [
-      { id: 1, title: '可使用', active: true , status : 1 },
-      { id: 2, title: '已使用', active: false ,status : 2},
-      { id: 3, title: '已过期', active: false ,status : 4},
-    ],
   }
 
   onInputValue(e) {
-    this.setState({ code: e.detail.value })
+    const code = e.detail.value
+    this.props.dispatchCouponReceiveCode({ code }).then(this.setState({ code }))
   }
   onChangeBlock(value) {
     const { navList } = this.state
@@ -72,7 +74,7 @@ class UserFavorite extends Component {
             <View>
               {
                 navList.map(i => i.active && <View>
-                  {AnalogArr.map(j =>j.status ===i.status &&
+                  {AnalogArr.map(j => j.status === i.status &&
                     <ApartmentCouponItem
                       key={j.voucher}
                       voucher={j.voucher}

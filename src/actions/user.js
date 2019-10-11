@@ -5,11 +5,16 @@ import {
   API_USER_LOGIN,
   API_USER_FAVORITE_DELETE,
   API_USER_FAVORITE_CREATE,
+  API_USER_MSG,
+  API_USER_FEEDBACK,
+
   API_DEMAND_CREATE,
   API_DEMAND_CHECK,
-  API_USER_MSG,
+
   API_AUTH_MOBILEPOST,
-  API_USER_FEEDBACK
+  
+  API_COUPON_RECEIVECODE,
+  API_COUPON_USER
 } from '@constants/api'
 
 import {
@@ -20,8 +25,13 @@ import {
   USER_CITY_CODE,
   TYPE_DEMAND_CREATE,
   TYPE_DEMAND_CHECK,
-  GET_USER_PHONE,
   TYPE_USER_FEEDBACK,
+
+  GET_USER_PHONE,
+
+  TYPE_COUPON_RECEIVECODEPOST,
+  TYPE_COUPON_USERPOST
+  
 } from '@constants/user'
 
 import {
@@ -206,5 +216,20 @@ export const dispatchFeedBack = (payload) => createAction({
   url: API_USER_FEEDBACK
 })
 
+// 兑换码获取优惠券
+export const dispatchCouponReceiveCode = payload =>createAction({
+  payload,
+  method:'POST',
+  type:TYPE_COUPON_RECEIVECODEPOST,
+  url : API_COUPON_RECEIVECODE
+})
+
+// 获取用户名下优惠券
+export const dispatchCouponUser = payload =>createAction({
+  payload,
+  method:'POST',
+  type:TYPE_COUPON_USERPOST,
+  url : API_COUPON_USER
+})
 
 

@@ -25,26 +25,20 @@ class ApartmentCouponMask extends BaseComponent {
 
 
     render() {
-        const { show, onClose } = this.props
-        const AnalogArr = [
-            { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 1 },
-            { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 1 },
-            { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 2 },
-            { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 3 },
-        ]
-
+        const { show, onClose ,couponList} = this.props
         return (
             show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
                 <Board fixed='bottom' border='top'>
                     <AtIcon onClick={onClose} value='close' size='15' className='p-2 mr-1 mt-1' color='#888' style='position : absolute ; right : 0'></AtIcon>
                     <View className='text-huge text-bold mt-2 text-center pb-2'> 租房优惠券</View>
                     {
-                        AnalogArr.map(i =>
+                        couponList.map(i =>
                             <ApartmentCouponItem
-                                key={i.voucher}
-                                voucher={i.voucher}
-                                orderAmount={i.orderAmount}
-                                validityPeriod={i.validityPeriod}
+                                key={i}
+                                couponId={i.id}
+                                worth={i.worth}
+                                receive_num={i.receive_num}
+                                validity_period_time={i.validity_period_time}
                                 status={i.status}
                             />)
                     }

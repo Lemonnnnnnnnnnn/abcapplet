@@ -28,6 +28,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
+import { PAYLOAD_COUPON_LIST } from '@constants/api'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
@@ -72,18 +73,29 @@ class HouseTypeShow extends Component {
     nearbyPost: [],
     showMap: true,
     showCouponMask: false,
+    payload: PAYLOAD_COUPON_LIST,
+    couponList: [],
   }
 
   async componentDidMount() {
+    let { payload } = this.state
+
+    // 获取该设备的导航栏信息，以快速生成自定义导航栏
+    await Taro.getSystemInfo().then(res => {
+      this.setState({ navHeight: 72 })
+      if (res.model.indexOf('iPhone X') !== -1) {
+        this.setState({ navHeight: 88 })
+      } else if (res.model.indexOf('iPhone') !== -1) {
+        this.setState({ navHeight: 64 })
+      }
+    })
+
 
     const { id } = this.$router.params
 
     // E漏斗：户型详情页——签约下定——立即预订
     this.props.dispatchOrderFunnel({ type: 2, origin_id: id, step: 1 })
-
-    this.setState({
-      Id: id
-    })
+    this.setState({ Id: id })
 
     //漏斗  进入首页——进入户型详情——点击预约
     const currentRoute = Taro.getCurrentPages()
@@ -94,28 +106,16 @@ class HouseTypeShow extends Component {
     routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
       && this.props.dispatchFunnel({ type: 2, step: 2, origin_id: id })
 
-
-
-    //E接口漏斗
-    //------------------------------------
-
+    // 获取户型详情信息
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-
-      await Taro.getSystemInfo().then(res => {
-        this.setState({ navHeight: 72 })
-        if (res.model.indexOf('iPhone X') !== -1) {
-          this.setState({ navHeight: 88 })
-        } else if (res.model.indexOf('iPhone') !== -1) {
-          this.setState({ navHeight: 64 })
-        }
-      })
-
       const apartmentID = data.apartment_id
 
-
+      // 获取附近公寓列表
       await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
 
+      // 获取优惠券列表
+      await this.props.dispatchCouponListPost({ payload }).then(res => this.setState({ couponList: res.data.data }))
 
       const buttons = !data.is_sign
         ? [{ message: '预约看房', method: 'onCreateBusiness' }]
@@ -156,6 +156,7 @@ class HouseTypeShow extends Component {
       })
       const currentHouseType = allHouseType.splice(firstIndex, 1)
       const all_houseType = currentHouseType.concat(allHouseType)
+
 
 
       data && this.setState({
@@ -409,9 +410,9 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription,
-      houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch,
+      roomMatch_list, publicMatch_list, showApartRoom, nearbyPost, showLittleMask,
+      navHeight, showMap, showCouponMask, couponList } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -483,6 +484,7 @@ class HouseTypeShow extends Component {
                 facilitys={facilitys}
                 show={showCouponMask}
                 onClose={this.onCloseCoupon}
+                couponList={couponList}
               />
 
 
@@ -552,7 +554,7 @@ class HouseTypeShow extends Component {
                 <Image onClick={this.onNavigateToRisk} src={DETAIL_AD} className='appointment-detail-ad'></Image>
               </View>
 
-              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>  
+              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
 
 
               {/* 活动信息 */}
