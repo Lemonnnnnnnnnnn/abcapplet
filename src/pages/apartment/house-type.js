@@ -541,12 +541,12 @@ class HouseTypeShow extends Component {
                 </View>
 
                 {/* 领优惠券小Tag */}
-                <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1'>
+                {/* <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1'>
                   <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
                     <Text>领优惠券</Text>
                     <ABCIcon icon='chevron_right' size='22' />
                   </View>
-                </View>
+                </View> */}
               </View>
 
               {/* 品牌宣传 */}

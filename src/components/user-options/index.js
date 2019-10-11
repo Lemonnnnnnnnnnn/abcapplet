@@ -33,11 +33,12 @@ class UserOptions extends BaseComponent {
             <View className='user-list-item py-3 mx-3' onClick={this.onOptionClick.bind(this, i.id)} key={i}>
               <View className='at-row at-row__justify--around'>
                 {/* 左 */}
-                <View className='at-col'>
-                  <Image className='mr-2' src={i.icon} style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32) }} />
-
-                  <Text className='mr-2 text-normal'>{i.title}</Text>
-                  <Text className='text-small text-muted'>{i.extraText}</Text>
+                <View className='at-row'>
+                  <Image className='mr-2 page-middile mt-1' src={i.icon} style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32) }} />
+                  <View className='at-row at-row__align--center'>
+                    <Text className='mr-2 text-normal'>{i.title}</Text>
+                    <Text className='text-small text-muted'>{i.extraText}</Text>
+                  </View>
                 </View>
                 {/* 右 */}
                 <AtIcon value='chevron-right' color={COLOR_GREY_0} size={size} />

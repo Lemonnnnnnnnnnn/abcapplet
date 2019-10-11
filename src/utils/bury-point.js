@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import {API_INDEX_FUNNELDATAPOAT  } from '@constants/api'
 /**
  * 埋点请求封装
  * @param {*} options
@@ -14,7 +15,7 @@ export default async function buryPoint() {
   //测试 http://test.abc.411er.cn/mini/index/funnelDataPost
 
   route.length >=2 && Taro.request({
-    url:'https://api.gongyuabc.com/mini/index/funnelDataPost',
+    url:API_INDEX_FUNNELDATAPOAT,
     method:'POST',
     data:{
       city_id:Taro.getStorageSync('user_info').citycode,

@@ -75,12 +75,12 @@ export const USER_OPTIONS_LISTS = [
     title: LOCALE_USER_NEED,
     extraText: LOCALE_USER_NEED_EXTRA_TEXT,
   },
-  {
-    id: 3,
-    icon: REQUIREMENT_CARD,
-    title: LOCALE_USER_COUPON,
-    extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
-  }
+  // {
+  //   id: 3,
+  //   icon: REQUIREMENT_CARD,
+  //   title: LOCALE_USER_COUPON,
+  //   extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
+  // }
 ]
 
 
