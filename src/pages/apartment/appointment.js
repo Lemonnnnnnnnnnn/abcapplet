@@ -25,6 +25,7 @@ import GetAuthorizationMask from '@components/get-authorization-mask'
 import MaskTop from '@components/maskTop'
 import loginButton from '@components/login-button'
 
+import buryPoint from '../../utils/bury-point'
 
 const nowTime = new Date()
 let currentMonth = nowTime.getMonth()
@@ -85,7 +86,7 @@ class AppointmentPost extends Component {
     houseTypeArr: [],
 
     isNight: false,//夜单时间，false:不是，true:是
-    beginTime:'',//进入页面的时间
+    beginTime: '',//进入页面的时间
   }
 
 
@@ -116,9 +117,10 @@ class AppointmentPost extends Component {
 
   async componentDidMount() {
 
+    buryPoint()
     //获取进入这个页面的时间
     const beginTime = new Date()
-    this.setState({beginTime})
+    this.setState({ beginTime })
 
 
     const { id, apartmentId } = this.$router.params
@@ -541,19 +543,6 @@ class AppointmentPost extends Component {
   onAppointmentPost() {
     const { Payload, showNext } = this.state
 
-    // console.log(Taro.getCurrentPages())
-    // const currentRoute = Taro.getCurrentPages()
-    // const routeArr = []
-    // currentRoute.map(i => {
-    //   routeArr.push('/' + i.route)
-    // })
-    // routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
-    //   && console.log('进入首页——进入公寓详情——点击预约')
-
-    // routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_APPOINTMENT_CREATE
-    //   && console.log('进入首页——进入户型详情——点击预约')
-
-
     this.onChenkPayload() &&
       this.props.dispatchAppointmentCreate(Payload).then(res => {
         if (res.data && res.data.msg === '预约成功') {
@@ -612,16 +601,6 @@ class AppointmentPost extends Component {
       })
   }
 
-  // 跳转登录页
-
-  // onNavigation() {
-  //   const cLength = Taro.getCurrentPages().length
-  //   const currentPage = Taro.getCurrentPages()[cLength - 1].route
-  //   Taro.setStorageSync('lastPage', '/' + currentPage)
-
-  //   Taro.redirectTo({ url: PAGE_USER_AUTH })
-
-  // }
 
   render() {
     const { houstType, height, users, tel, showInformation, name,

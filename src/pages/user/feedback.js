@@ -12,6 +12,8 @@ import {
 import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...userActions,
 })
@@ -27,6 +29,9 @@ class feedback extends Component {
     feedbackTitle: '',
     telValue: '',
     weiValue: '',
+  }
+  componentWillMount() {
+    buryPoint()
   }
   //输入反馈意见
   onFeedback({ currentTarget: { value } }) {

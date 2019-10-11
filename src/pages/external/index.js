@@ -1,6 +1,9 @@
 import Taro, { Component } from '@tarojs/taro'
 import { WebView } from '@tarojs/components'
 
+import buryPoint from '../../utils/bury-point'
+
+
 class ExternalIndex extends Component {
   config = {
     navigationBarTitleText: '访问外部链接',
@@ -10,6 +13,7 @@ class ExternalIndex extends Component {
   state = { src: '' }
 
   componentWillMount() {
+    buryPoint()
     const { title = '', src = '' } = this.$router.params
 
     // 设置网页

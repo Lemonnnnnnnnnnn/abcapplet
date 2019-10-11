@@ -15,6 +15,8 @@ import RiskHeader from '@components/risk-header'
 import { RISK_HEADERS } from '@constants/risk'
 import { PAYLOAD_RISK_LIST } from '@constants/api'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...riskActions,
 })
@@ -25,6 +27,7 @@ class RiskIndex extends Component {
   }
 
   componentDidShow() {
+    buryPoint()
     this.props.dispatchRiskList(PAYLOAD_RISK_LIST)
   }
 

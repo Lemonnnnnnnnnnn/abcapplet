@@ -21,6 +21,8 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 
+import buryPoint from '../../utils/bury-point'
+
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
   ...userActions,
@@ -57,23 +59,10 @@ class ApartmentShow extends Component {
 
   async componentDidMount() {
     const { id } = this.$router.params
+    buryPoint()
 
-    // D漏斗：公寓详情页——签约下定——立即预订
-    this.props.dispatchOrderFunnel({ type: 1, origin_id: id, step: 1 })
 
     this.setState({ Id: id })
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW
-      && this.props.dispatchFunnel({ type: 1, step: 2, origin_id: id })
-
-
-    //调用D漏斗详情接口
-    //------------------------------------
-
 
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
@@ -204,17 +193,8 @@ class ApartmentShow extends Component {
 
   onClick(method) {
     const { Id } = this.state
-    console.log(Id)
     if (method === 'onCreateBusiness') {
       this.props.dispatchApartmentDataPost({ type: 3 })
-
-      const currentRoute = Taro.getCurrentPages()
-      const routeArr = []
-      currentRoute.map(i => {
-        routeArr.push('/' + i.route)
-      })
-      routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_APARTMENT_SHOW
-        && this.props.dispatchFunnel({ type: 1, step: 3, origin_id: Id })
 
       const { apartment } = this.state
       const { id, types } = apartment
@@ -224,8 +204,6 @@ class ApartmentShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
-      // D漏斗：公寓详情页——签约下定——立即预订
-      this.props.dispatchOrderFunnel({ type: 1, origin_id: Id, step: 2 })
 
       this.props.dispatchApartmentDataPost({ type: 4 })
 

@@ -33,6 +33,8 @@ import {
   PAGE_USER_FEEDBACK
 } from '@constants/page'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...distActions,
   ...userActions,
@@ -57,10 +59,12 @@ class UserProfile extends Component {
   refRequirementCard = (node) => this.requirementCard = node
 
   componentWillMount() {
+
     this.initialHouseType()
   }
 
   async componentDidShow() {
+    buryPoint()
     const { payload: user } = await this.props.dispatchUser()
     this.props.dispatchDistList(user.citycode)
     this.setState({ showMask: false })
@@ -141,9 +145,9 @@ class UserProfile extends Component {
     })
   }
   //前往意见反馈
-  onFeedback(){
+  onFeedback() {
     Taro.navigateTo({
-      url:PAGE_USER_FEEDBACK
+      url: PAGE_USER_FEEDBACK
     })
   }
 
@@ -162,7 +166,7 @@ class UserProfile extends Component {
 
 
     return (
-      <View className='page-grey'>
+      <View className='page-grey' style={{ overflow: 'hidden' }}>
         <View className='page ' >
           {/* 背景底色 */}
           <Decorate height='300' />
@@ -187,7 +191,7 @@ class UserProfile extends Component {
           />
 
           {/* 优选入口 */}
-          <View className='mx-2' onClick={this.openMiniProgramCreate} style={{ overflow: 'hidden' }}>
+          <View className='mx-2' onClick={this.openMiniProgramCreate} >
             <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
           </View>
 

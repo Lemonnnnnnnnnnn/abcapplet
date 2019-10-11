@@ -24,6 +24,8 @@ import {
   LOCALE_OFF_APARTMENT_IMAGE,
 } from '@constants/locale'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...riskActions,
 })
@@ -49,6 +51,7 @@ class RiskCreate extends Component {
   }
 
   componentDidMount() {
+    buryPoint()
     const { id } = this.$router.params
     const { payload } = this.state
     const { risks } = this.props

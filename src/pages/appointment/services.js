@@ -15,6 +15,8 @@ import {
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...appointmentActions,
 })
@@ -34,6 +36,7 @@ class ServicesHome extends Component {
   refAppointmentList = (node) => this.appointmentList = node
 
   componentDidShow() {
+    buryPoint()
     this.onShow()
   }
 

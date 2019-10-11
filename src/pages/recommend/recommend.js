@@ -13,6 +13,7 @@ import * as subletActions from '@actions/subleat'
 import * as cityActions from '@actions/city'
 import * as userActions from '@actions/user'
 
+import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
   ...subletActions,
@@ -81,6 +82,7 @@ class ApartmentRecommend extends Component {
     })
   }
   async componentWillMount() {
+    buryPoint()
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
 
@@ -140,7 +142,7 @@ class ApartmentRecommend extends Component {
     const { sublet } = this.props
 
     return (
-      <View style={{ background: '#FFFFFF', minHeight: '100vh', display: 'block',overflowY:'auto' }}>
+      <View style={{ background: '#FFFFFF', minHeight: '100vh', display: 'block', overflowY: 'auto' }}>
         <View className='home-search pl-3 pr-3 pt-2'>
           {
             <Search

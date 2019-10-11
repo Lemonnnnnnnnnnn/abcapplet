@@ -7,6 +7,7 @@ import { AtButton } from 'taro-ui'
 import Decorate from '@components/decorate'
 import ApartmentCouponItem from '@components/apartment-coupon-item'
 
+import buryPoint from '../../utils/bury-point'
 
 class UserFavorite extends Component {
   config = {
@@ -17,10 +18,14 @@ class UserFavorite extends Component {
   state = {
     code: '',
     navList: [
-      { id: 1, title: '可使用', active: true , status : 1 },
-      { id: 2, title: '已使用', active: false ,status : 2},
-      { id: 3, title: '已过期', active: false ,status : 4},
+      { id: 1, title: '可使用', active: true, status: 1 },
+      { id: 2, title: '已使用', active: false, status: 2 },
+      { id: 3, title: '已过期', active: false, status: 4 },
     ],
+  }
+
+  componentWillMount() {
+    buryPoint()
   }
 
   onInputValue(e) {
@@ -72,7 +77,7 @@ class UserFavorite extends Component {
             <View>
               {
                 navList.map(i => i.active && <View>
-                  {AnalogArr.map(j =>j.status ===i.status &&
+                  {AnalogArr.map(j => j.status === i.status &&
                     <ApartmentCouponItem
                       key={j.voucher}
                       voucher={j.voucher}

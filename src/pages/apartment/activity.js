@@ -19,6 +19,8 @@ import ApartmentHeader from '@components/apartment-header'
 import { PAGE_HOME } from '@constants/page'
 import { PAYLOAD_ACTIVITY_APARTMENT_LIST } from '@constants/api'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...userActions,
   ...distActions,
@@ -45,6 +47,8 @@ class ApartmentCbd extends Component {
   componentWillMount() {
     const { id } = this.$router.params
     const { payload: user } = this.props.dispatchUser()
+
+    buryPoint()
 
     this.setState({ cityCode: user.citycode })
 

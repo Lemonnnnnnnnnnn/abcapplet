@@ -35,6 +35,8 @@ import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
 import BaseComponent from '../../components/base'
 
+import buryPoint from '../../utils/bury-point'
+
 
 @connect(state => state, {
   ...apartmentActions,
@@ -76,6 +78,7 @@ class AppointmentDetail extends BaseComponent {
   }
 
   async componentWillMount() {
+    buryPoint()
     let roomListArr = []
     let type = 0
 

@@ -1,12 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-
-
 import Decorate from '@components/decorate'
 
-// 自定义变量
-import {  PAGE_APPOINTMENT_AUDIT, PAGE_APPOINTMENT_SERVICES } from '@constants/page'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -14,6 +10,8 @@ import { connect } from '@tarojs/redux'
 import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
 import BaseComponent from '../../components/base';
+
+import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
   ...apartmentActions,
@@ -37,6 +35,8 @@ class AppointmentDetail extends BaseComponent {
     status: 0,
   }
   componentWillMount() {
+
+    buryPoint()
     const { id } = this.$router.params
     this.props.dispatchAppointRewordOrderDetail({ id }).then((res) => {
 
@@ -44,7 +44,7 @@ class AppointmentDetail extends BaseComponent {
         apartmentTitle: res.data.data.apartment_title,
         roomNo: res.data.data.room_no,
         tenancy: res.data.data.tenancy,
-        status:res.data.data.status,
+        status: res.data.data.status,
       })
     }
     )

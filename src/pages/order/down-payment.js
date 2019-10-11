@@ -14,11 +14,16 @@ import {
   LOCALE_PROVACY_POLICY_CONTENT
 } from '@constants/locale'
 
+import buryPoint from '../../utils/bury-point'
 
 class OrderDownPayment extends Component {
   config = {
     navigationBarTitleText: '定金协议',
     navigationBarBackgroundColor: '#FFC919',
+  }
+
+  componentWillMount() {
+    buryPoint()
   }
 
   render() {

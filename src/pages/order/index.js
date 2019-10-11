@@ -13,6 +13,8 @@ import OrderList from '@components/order-list'
 // 自定义常量
 import { PAYLOAD_ORDER_LIST } from '@constants/api'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...orderActions,
 })
@@ -22,8 +24,8 @@ class OrderIndex extends Component {
     navigationBarBackgroundColor: '#FFC919',
   }
 
-  state={
-    count:false
+  state = {
+    count: false
   }
   refOrderList = node => this.orderList = node
 
@@ -34,11 +36,12 @@ class OrderIndex extends Component {
     this.orderList.onNextPage()
   }
 
-  componentDidShow(){
+  componentDidShow() {
+    buryPoint()
     const { count } = this.state
     count && this.orderList.onReset(null)
     this.setState({
-      count:true
+      count: true
     })
   }
 

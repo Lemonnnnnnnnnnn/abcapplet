@@ -17,6 +17,8 @@ import ApartmentHeader from '@components/apartment-header'
 // 自定义常量
 import { PAYLOAD_CBD_APARTMENT_LIST } from '@constants/api'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...userActions,
   ...distActions,
@@ -43,7 +45,7 @@ class ApartmentCbd extends Component {
   componentWillMount() {
     const { id } = this.$router.params
     const { payload: user } = this.props.dispatchUser()
-
+    buryPoint()
     const {
       selectScrollTop,
     } = this.state

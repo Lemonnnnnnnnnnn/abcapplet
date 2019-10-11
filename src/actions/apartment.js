@@ -293,19 +293,6 @@ export const dispatchApartmentRemainTime = payload => createAction({
   type: TYPE_APARTMENT_REMAINTIME,
   url: API_APARTMENT_REMAINTIME ,
 })
-//预约转化率(漏斗A,B)
-export const dispatchFunnel = payload => createAction({
-  payload,
-  method: 'POST',
-  type: TYPE_FUNNEL,
-  url: API_FUNNEL ,
-})
 
-//线上交易情况(漏斗D,E)
-export const dispatchOrderFunnel = payload => createAction({
-  payload,
-  method: 'POST',
-  type: TYPE_FUNNEL_ORDER,
-  url: API_FUNNEL_ORDER ,
-})
+
 

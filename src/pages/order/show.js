@@ -65,6 +65,7 @@ import {
   LOCALE_SIGNED_CODE_SHOW,
 } from '@constants/locale'
 
+import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
   ...userActions,
@@ -87,7 +88,7 @@ class OrderShow extends Component {
   }
 
   componentWillMount() {
-
+    buryPoint()
     const currentRoute = Taro.getCurrentPages()
     const routeArr = []
     currentRoute.map(i => {

@@ -21,6 +21,8 @@ import day from 'dayjs'
 import { LOCALE_SHOW_DESC } from '@constants/locale'
 import { PAGE_HOME, PAGE_ARTICLE_SHOW } from '@constants/page'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...articleActions,
   ...apartmentActions,
@@ -42,12 +44,14 @@ class ArticleShow extends Component {
   }
 
   async componentDidMount() {
+
+    buryPoint()
     await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 72})
+      this.setState({ navHeight: 72 })
       if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88})
+        this.setState({ navHeight: 88 })
       } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64})
+        this.setState({ navHeight: 64 })
       }
     })
   }

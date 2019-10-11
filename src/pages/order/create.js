@@ -39,7 +39,7 @@ import {
   LOCALE_VIEW_SERVICE_AGREEMENT,
 } from '@constants/locale'
 
-
+import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
   ...orderActions,
@@ -75,6 +75,7 @@ class OrderCreate extends Component {
 
 
   async componentWillMount() {
+    buryPoint()
     const { room_id = 0, appointment_id = 0, type_id = 0, apartment_id = 0 } = this.$router.params
     this.setState({ typeId: type_id })
 
@@ -231,17 +232,6 @@ class OrderCreate extends Component {
   onOrderCreate() {
     const { payload, typeId } = this.state
 
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[1] === PAGE_APARTMENT_SHOW && routeArr[2] === PAGE_ORDER_CREATE// D漏斗：公寓详情页——签约下定——立即预订
-      &&
-      this.props.dispatchOrderFunnel({ type: 1, origin_id: typeId, step: 3 })
-
-    routeArr[1] === PAGE_HOUSE_TYPE_SHOW && routeArr[2] === PAGE_ORDER_CREATE//E漏斗：户型详情页——签约下定——立即预订
-      && this.props.dispatchOrderFunnel({ type: 2, origin_id: typeId, step: 3 })
     if (!this.onCheckPayload()) return;
 
     //获取离开这个页面的时间
@@ -251,7 +241,7 @@ class OrderCreate extends Component {
     this.setState({ userSign: true })
     this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 1 })
 
-    // 执行下定操作并进行跳转 
+    // 执行下定操作并进行跳转
     this.props.dispatchOrderCreate(payload).then(({ data: { data } }) => {
       this.setState({ disabled: true })
       Taro.navigateTo({ url: `${PAGE_ORDER_SHOW}?id=${data.order.id}` })

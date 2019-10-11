@@ -31,7 +31,7 @@ import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_PR
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
-
+import buryPoint from '../../utils/bury-point'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -75,30 +75,13 @@ class HouseTypeShow extends Component {
   }
 
   async componentDidMount() {
-
+    buryPoint()
     const { id } = this.$router.params
 
-    // E漏斗：户型详情页——签约下定——立即预订
-    this.props.dispatchOrderFunnel({ type: 2, origin_id: id, step: 1 })
 
     this.setState({
       Id: id
     })
-
-    //漏斗  进入首页——进入户型详情——点击预约
-    const currentRoute = Taro.getCurrentPages()
-    const routeArr = []
-    currentRoute.map(i => {
-      routeArr.push('/' + i.route)
-    })
-    routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
-      && this.props.dispatchFunnel({ type: 2, step: 2, origin_id: id })
-
-
-
-    //E接口漏斗
-    //------------------------------------
-
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
@@ -383,15 +366,6 @@ class HouseTypeShow extends Component {
     const { Id } = this.state
     if (method === 'onCreateBusiness') {
 
-      //漏斗  进入首页——进入户型详情——点击预约
-      const currentRoute = Taro.getCurrentPages()
-      const routeArr = []
-      currentRoute.map(i => {
-        routeArr.push('/' + i.route)
-      })
-      routeArr[0] === PAGE_HOME && routeArr[1] === PAGE_HOUSE_TYPE_SHOW
-        && this.props.dispatchFunnel({ type: 2, step: 3, origin_id: Id })
-
       this.props.dispatchApartmentHouseDataPost({ type: 3 })
       const { houstType } = this.state
       const { apartmentId, id } = houstType
@@ -400,8 +374,7 @@ class HouseTypeShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
-      // E漏斗：户型详情页——签约下定——立即预订
-      this.props.dispatchOrderFunnel({ type: 2, origin_id: Id, step: 2 })
+
       this[method]()
     }
   }
@@ -552,7 +525,7 @@ class HouseTypeShow extends Component {
                 <Image onClick={this.onNavigateToRisk} src={DETAIL_AD} className='appointment-detail-ad'></Image>
               </View>
 
-              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>  
+              <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
 
 
               {/* 活动信息 */}

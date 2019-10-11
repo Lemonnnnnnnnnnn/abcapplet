@@ -8,6 +8,8 @@ import logo from '@assets/icons/logo.png'
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/user'
 
+import buryPoint from '../../utils/bury-point'
+
 
 @connect(state => state.user, actions)
 class UserAuth extends Component {
@@ -15,12 +17,13 @@ class UserAuth extends Component {
     navigationBarTitleText: '授权登录',
   }
 
-  status={
-    lastPagePath:''
+  status = {
+    lastPagePath: ''
   }
 
   componentDidMount() {
 
+    buryPoint()
     this.autoUpdate()
 
 

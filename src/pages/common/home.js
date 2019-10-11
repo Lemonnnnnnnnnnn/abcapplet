@@ -1,6 +1,9 @@
+
 // Taro 相关
 import Taro, { Component, setStorage } from '@tarojs/taro'
 import { View, Image, ScrollView } from '@tarojs/components'
+
+
 
 // 自定义组件
 import CityModal from '@components/city-modal'
@@ -40,7 +43,7 @@ import {
   LOCALE_APARTMENT,
   LOCALE_RECOMMEND_APARTMENT,
 } from '@constants/locale'
-import BaseComponent from '../../components/base';
+import BaseComponent from '../../components/base'
 
 @connect(state => state, {
   ...adActions,
@@ -52,6 +55,7 @@ import BaseComponent from '../../components/base';
   ...apartmentLookActions,
   ...homeActions,
 })
+
 class CommonHome extends BaseComponent {
   config = {
     navigationBarTitleText: '公寓ABC',
@@ -102,12 +106,6 @@ class CommonHome extends BaseComponent {
   refApartmentList = (node) => this.apartmentList = node
 
   async componentDidShow() {
-
-    //A漏斗  进入首页——进入公寓详情——点击预约
-    this.props.dispatchFunnel({ type: 1, step: 1, origin_id: 0 })
-    //B漏斗  进入首页——进入户型详情——点击预约
-    this.props.dispatchFunnel({ type: 2, step: 1, origin_id: 0 })
-
     //判断是否弹出需求卡
     this.props.dispatchGetUserMsg().then((res) => {
       if (res && res.data.data.user.is_guide === 0) {

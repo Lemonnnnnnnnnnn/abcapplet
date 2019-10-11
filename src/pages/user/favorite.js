@@ -18,6 +18,8 @@ import {
   PAYLOAD_FAVORITE_HOUSE_TYPE_LIST,
 } from '@constants/api'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...roomActions,
   ...userActions,
@@ -49,10 +51,12 @@ class UserFavorite extends Component {
   }
 
   componentDidMount() {
+
     this.houseTypeList.onReset(null)
   }
 
   componentDidShow() {
+    buryPoint()
     this.onReset()
   }
 
@@ -85,7 +89,7 @@ class UserFavorite extends Component {
   }
 
   render() {
-    const { favoriteApartment ,favoriteHouseType} = this.props
+    const { favoriteApartment, favoriteHouseType } = this.props
 
 
     return (
