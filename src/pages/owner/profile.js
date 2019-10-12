@@ -64,6 +64,9 @@ class UserProfile extends Component {
   }
 
   async componentDidShow() {
+    Taro.showTabBarRedDot({
+      index:2
+    })
     buryPoint()
     const { payload: user } = await this.props.dispatchUser()
     this.props.dispatchDistList(user.citycode)

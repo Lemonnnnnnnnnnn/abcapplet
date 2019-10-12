@@ -32,7 +32,10 @@ export const dispatchHomeMsg = payload => createAction({
         let homeArr = {
             hot_cbd : res.data.data.hot_cbd.map(i => ({ ...i, url: `${PAGE_CBD_APARTMENT}?id=${i.id}` })),
             banner : res.data.data.banner,
-            hot_activity : res.data.data.hot_activity.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
+            hot_activity: res.data.data.hot_activity.map(i => {
+                      if (!i.url) return { ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` }
+                      else return i
+                    }),
             recommend : res.data.data.recommend.map(i => ({ ...i, url: `${PAGE_ARTICLE_SHOW}?id=${i.article_id}` }))
         }
         return homeArr

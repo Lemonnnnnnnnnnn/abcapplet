@@ -83,6 +83,7 @@ class ApartmentRecommend extends Component {
   }
   async componentWillMount() {
     buryPoint()
+
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
 
@@ -106,6 +107,11 @@ class ApartmentRecommend extends Component {
     })
   }
 
+  componentDidShow(){
+    Taro.hideTabBarRedDot({
+      index:2
+    })
+  }
   //下拉选择
   async onChangeSelector({ currentTarget: { value } }) {
     const { selector, citys, payload } = this.state

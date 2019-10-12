@@ -136,9 +136,7 @@ class App extends Component {
   componentWillMount() {
     this.autoUpdate()
     Taro.setStorageSync('haveLocationPower', 0)
-    Taro.showTabBarRedDot({
-      index:2
-    })
+
   }
 
   // componentDidMount() {

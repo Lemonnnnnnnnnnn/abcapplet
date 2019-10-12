@@ -115,6 +115,7 @@ class CommonHome extends BaseComponent {
   }
 
   async componentWillMount() {
+
     const {
       searchScrollTop,
       payloadApartment,
@@ -252,7 +253,11 @@ class CommonHome extends BaseComponent {
   }
 
   // 初始化户型的数据，供筛选项使用
-
+  componentDidShow() {
+    Taro.showTabBarRedDot({
+      index: 2
+    })
+  }
   initialHouseType() {
     const initialFloor = [{ id: 0, title: "不限" }]
     const initialRoom = [{ id: 0, title: "不限" }]
