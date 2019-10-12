@@ -102,7 +102,7 @@ class ApartmentItem extends BaseComponent {
       cover, rules, title,
       price_title: priceTitle,
       apartment_title: apartmentTitle,
-      num, is_sign, sub_title, one_word
+      num, is_sign, sub_title, one_word, discount_price_title,
     } = apartment
 
     const fontSize = mini ? Taro.pxTransform(20) : Taro.pxTransform(30)
@@ -208,8 +208,8 @@ class ApartmentItem extends BaseComponent {
           </View>
 
           {/* 优惠活动 */}
-
-          <View className='at-row at-row__align--center'>
+          {/* 没有折扣价格的样式 */}
+          {!discount_price_title && <View className='at-row at-row__align--center'>
             <View className='at-row'>
               {rules.map(i =>
                 <View key={i.id} className='at-col-1 at-col--auto mr-2 mb-1 '>
@@ -227,17 +227,69 @@ class ApartmentItem extends BaseComponent {
               <Text className='text-normal'>{LOCALE_QI}</Text>
             </View>
 
-          </View>
+          </View>}
+
+          {/* 有折扣价格的样式 */}
+          {discount_price_title && <View >
+            {/* 价格 */}
+            <View className='at-row at-row__justify--between'>
+
+              <View className=' at-row at-col-5'>
+                <View className='text-yellow text-small mt-1' >活动价：</View>
+                <Text className='text-bold text-large text-yellow '>
+                  {discount_price_title ? discount_price_title : `${LOCALE_MONEY}${priceTitle}`}
+                </Text>
+                <Text className='text-small mt-1 text-yellow'>{LOCALE_QI}</Text>
+              </View>
+
+              <View className='mt-1 at-row ml-4 at-col-5  page-middile' style='text-decoration:line-through;' >
+                <View className='text-muted text-mini' style={{ marginTop: Taro.pxTransform(5) }}>原价：</View>
+                <Text className=' text-small text-muted'>
+                  {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${priceTitle}`}
+                </Text>
+                <Text className='text-mini text-muted ' style={{ marginTop: Taro.pxTransform(5) }}>{LOCALE_QI}</Text>
+              </View>
+            </View>
+
+            <View className='at-row'>
+              {rules.map(i =>
+                <View key={i.id} className='at-col-1 at-col--auto mr-2 mb-1 '>
+                  <Text className={`badge badge-${i.type} text-mini`}> {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
+                </View>
+              )}
+            </View>
+
+
+          </View>}
         </View>
         }
 
-        {/* 迷你内容 */}
+
+
+
+
+        {/* 迷你内容 ,公寓列表*/}
         {mini && <View className='apartment-content mx-2 mt-2 mb-2'>
           {/* 价格和公寓名称 */}
           {
             nearbyPost ? <View className='text-normal '>{title}</View> : <View className=' text-normal mt-3'>{apartmentTitle}</View>
           }
-          <View className='text-yellow text-normal'>{isNaNPrice ? priceTitle : `${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
+          {/* 优惠价 */}
+          {
+            discount_price_title ?
+              <View className='text-yellow text-normal ml-1 ' style={{ marginTop: Taro.pxTransform(5) }} >{`${LOCALE_MONEY}${discount_price_title}${LOCALE_QI}`}</View> :
+              <View className='text-yellow text-normal mt-3 mb-2  ml-1'>{`${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
+          }
+          {/* 原价 */}
+          {discount_price_title && <View className='at-row  at-row__align--center  mb-2' style='text-decoration:line-through;' >
+            <View className='text-muted text-mini' style={{ marginTop: Taro.pxTransform(5) }}>原价：</View>
+            <Text className=' text-small text-muted'>
+              {priceTitle ? priceTitle : `${LOCALE_MONEY}${priceTitle}`}元
+            </Text>
+            <Text className='text-mini text-muted ' style={{ marginTop: Taro.pxTransform(5) }}>{LOCALE_QI}</Text>
+          </View>}
+
+
         </View>
         }
       </View>
