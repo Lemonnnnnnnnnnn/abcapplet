@@ -2,6 +2,8 @@ import Taro, { Component } from '@tarojs/taro';
 import { AtButton } from 'taro-ui'
 import { View, Textarea, Input, } from '@tarojs/components'
 
+import { PAGE_USER_PROFILE } from '@constants/page'
+
 import {
   LOCALE_FEEDBACK_QUESTION,
   LOCALE_FEEDBACK_TEL,
@@ -68,7 +70,18 @@ class feedback extends Component {
         icon: 'none',
         duration: 2000
       })
-      feedbackTitle && this.props.dispatchFeedBack({ content: feedbackTitle, mobile: telValue, wechat_id: weiValue })
+      feedbackTitle && this.props.dispatchFeedBack({ content: feedbackTitle, mobile: telValue, wechat_id: weiValue }).then((res)=>{
+        Taro.showToast({
+          title:'谢谢您的反馈，我们将尽快处理',
+          icon:'none',
+          duration:2000,
+        })
+        setTimeout(()=>{
+          Taro.switchTab({
+            url:PAGE_USER_PROFILE
+          })
+        },2000)
+      })
     }
 
   }
@@ -95,7 +108,7 @@ class feedback extends Component {
         <View className='text-normal at-row at-row__align--center  mt-3  input-tel ' >
           <Input
             type='number'
-            className='ml-3'
+            className='ml-3 at-col-10'
             placeholder='输入电话号码（选填）'
             value={telValue}
             onInput={this.onTel}
@@ -104,7 +117,7 @@ class feedback extends Component {
         <View className='text-normal at-row at-row__align--center  mt-3 input-tel  ' >
           <Input
             type='text'
-            className='ml-3'
+            className='ml-3 at-col-10'
             placeholder='输入微信号（选填）'
             value={weiValue}
             onInput={this.onWeiTel}

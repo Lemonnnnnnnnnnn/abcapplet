@@ -15,7 +15,7 @@ export const PAGE_EXTERNAL_INDEX = '/pages/external/index'
 
 // 用户相关
 export const PAGE_USER_AUTH = '/pages/user/auth'
-export const PAGE_USER_PROFILE = 'pages/owner/profile'
+export const PAGE_USER_PROFILE = '/pages/owner/profile'
 export const PAGE_USER_CARD = '/pages/user/card'
 export const PAGE_USER_FAVORITE = '/pages/user/favorite'
 export const PAGE_USER_COUPON = '/pages/user/coupon'
