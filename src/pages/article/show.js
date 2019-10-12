@@ -123,7 +123,7 @@ class ArticleShow extends Component {
 
 
     return (
-      <View style={{ paddingBottom: Taro.pxTransform(120), paddingTop: navHeight + "px" }}>
+      <View style={{ paddingBottom: Taro.pxTransform(120),  }}>
 
         <CustomNav title={articleChange} />
 

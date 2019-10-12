@@ -21,7 +21,6 @@ class App extends Component {
       'pages/common/search',
 
       'pages/recommend/recommend',
-
       'pages/appointment/services',
       'pages/appointment/message',
       'pages/appointment/detail',
@@ -137,7 +136,26 @@ class App extends Component {
   componentWillMount() {
     this.autoUpdate()
     Taro.setStorageSync('haveLocationPower', 0)
+    Taro.showTabBarRedDot({
+      index:2
+    })
   }
+
+  // componentDidMount() {
+  //   const apartment = getApartmentStorage()
+  //   if (Object.keys(apartment).length === 0) {
+  //     Taro.navigateTo({ url: PAGE_USER_AUTH })
+  //   }
+
+  //   // 增加行程消息的角标
+  //   const path = this.$router.params.path
+  //   if ([PAGE_DASHBOARD_INDEX, PAGE_BRAND_INDEX].includes(path)) {
+  //     const actions = dispatchBusinessList(PAYLOAD_BUSINESS_LIST_UNCHECK)
+  //     actions(() => { }).then(({ data: { data: { no_check } } }) =>
+  //       no_check > 0 && Taro.setTabBarBadge({ index: 1, text: String(no_check) })
+  //     )
+  //   }
+  // }
 
   //自动检测更新
   autoUpdate() {

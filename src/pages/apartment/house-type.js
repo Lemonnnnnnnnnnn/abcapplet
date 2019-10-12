@@ -8,6 +8,7 @@ import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
 
+
 // 自定义组件
 import Tag from '@components/tag'
 import TabBar from '@components/tab-bar'
@@ -59,7 +60,7 @@ class HouseTypeShow extends Component {
       facilitys: [],
       roomList: [],
       appointment_show_num: 0,
-      num : 0,
+      num: 0,
     },
     map: {
       latitude: 0,
@@ -380,6 +381,15 @@ class HouseTypeShow extends Component {
     }
   }
 
+  onReturn() {
+    Taro.navigateBack()
+  }
+
+  onBackHome() {
+    Taro.switchTab({
+      url: PAGE_HOME
+    })
+  }
   render() {
     const { apartments } = this.props
 
@@ -421,9 +431,10 @@ class HouseTypeShow extends Component {
 
         <CustomNav title='户型详情' />
 
+
         <View
           onClick={this.onCloseLittleMask}
-          style={{ paddingBottom: Taro.pxTransform(120), paddingTop: Taro.pxTransform(navHeight ? navHeight * 2 : 128) }}>
+          style={{ paddingBottom: Taro.pxTransform(120) }}>
 
           <ApartmentContainer
             houseType_id={houseType_id}

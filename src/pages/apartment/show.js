@@ -304,7 +304,7 @@ class ApartmentShow extends Component {
           type='apart'
         />
 
-        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120), paddingTop: Taro.pxTransform(navHeight ? navHeight * 2 : 128) }}>
+        <View onClick={this.onCloseLittleMask}   style={{ paddingBottom: Taro.pxTransform(120) }}>
 
           <ApartmentContainer
             swipers={swipers}

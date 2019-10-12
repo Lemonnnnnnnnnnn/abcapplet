@@ -107,7 +107,7 @@ class CommonHome extends BaseComponent {
 
   async componentDidShow() {
     //判断是否弹出需求卡
-    this.props.dispatchGetUserMsg().then((res) => {
+    await this.props.dispatchGetUserMsg().then((res) => {
       if (res && res.data.data.user.is_guide === 0) {
         this.setState({ showCard: true })
       }
@@ -142,7 +142,7 @@ class CommonHome extends BaseComponent {
     user && this.setState({ cityCode: user.citycode })
 
     // 拉取城市列表
-    this.props.dispatchCityList().then((res) => {
+    await this.props.dispatchCityList().then((res) => {
       const citys = res.data.data.list
       // 设置城市选择器
       const selector = citys.map(i => i.title)
