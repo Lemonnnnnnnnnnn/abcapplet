@@ -68,6 +68,8 @@
 
 在taro-navigationbar/node_modules/index.js,为了整个项目的样式美观
 lxy-nav-bar__button 中的font-size改为13PX
+lxy-nav-bar__buttons 中的border改为none
+lxy-nav-bar__buttons.android 中的border改为none
 
 返回上一页的图片地址改为(https://images.gongyuabc.com//image/chevron-leftNew.png)
 返回首页的图片地址改为(https://images.gongyuabc.com//image/backHome.png)
