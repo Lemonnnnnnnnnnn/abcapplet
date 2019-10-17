@@ -37,7 +37,7 @@ export default function cbdApartment(state = APARTMENT_DEFAULT, action) {
       )
       return { ...state, list }
     }
-    
+
     default: {
       return state
     }

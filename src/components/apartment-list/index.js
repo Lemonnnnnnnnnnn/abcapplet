@@ -30,7 +30,7 @@ class ApartmentList extends BaseList {
     const imageStyle = {
       height: Taro.pxTransform(346),
       display: "inline-block",
-      marginRight : '14px'
+      marginRight : Taro.pxTransform(28)
     }
 
 

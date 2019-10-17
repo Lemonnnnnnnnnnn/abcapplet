@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 import Taro, { Component } from '@tarojs/taro'
 import { View, Input, Button } from '@tarojs/components'
 import { AtButton, AtInput, AtIcon } from 'taro-ui'

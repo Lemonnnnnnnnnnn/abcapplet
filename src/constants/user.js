@@ -56,6 +56,10 @@ export const DELETE_USER_FAVORITE = 'DELETE_USER_FAVORITE'
 export const TYPE_DEMAND_CREATE = 'TYPE_DEMAND_CREATE'
 export const TYPE_DEMAND_CHECK = 'TYPE_DEMAND_CHECK'
 export const TYPE_USER_FEEDBACK = 'TYPE_USER_FEEDBACK'
+export const TYPE_COUPON_USERPOST = 'TYPE_COUPON_USERPOST'
+export const TYPE_NEXTPAGE_COUPON_USERPOST = 'TYPE_NEXTPAGE_COUPON_USERPOST'
+export const TYPE_COUPON_RECEIVECODEPOST = 'TYPE_COUPON_RECEIVECODEPOST'
+
 
 export const APPOINTMENT_RESERVATION = 'https://images.gongyuabc.com//image/appointment.png'
 export const RISK_MONEY = 'https://images.gongyuabc.com//image/risk.png'
@@ -117,3 +121,10 @@ export const PEOPLETTAGLIST = {
 
 
 export const GET_USER_PHONE = 'getUserPhone'
+
+// 优惠券
+export const USER_COUPON_DIST = [
+  { title: '可使用', active: true, status: 0, ref: 'CouponListCanUsed' },
+  { title: '已使用', active: false, status: 1, ref: 'CouponListHaveBeenUsed' },
+  { title: '已过期', active: false, status: 2, ref: 'CouponListExpired' },
+]

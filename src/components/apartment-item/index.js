@@ -7,8 +7,6 @@ import { View, Image, Text } from '@tarojs/components'
 import BaseComponent from '@components/base'
 import ImagePlaceholder from '@components/image-placeholder'
 
-
-
 // 自定义常量
 import {
   TYPE_CBD_APARTMENT,

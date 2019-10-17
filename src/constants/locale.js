@@ -6,6 +6,12 @@ export const LOCALE_HOT_CBD = '热门租房商圈'
 export const LOCALE_RECOMMEND_APARTMENT = '推荐品牌公寓'
 export const LOCALE_ACTIVITY = '活动专区'
 export const LOCALE_APARTMENT = '严选公寓'
+export const LOCALE_RECEIVE = '领取'
+export const LOCALE_RECEIVE_CANT = '无法领取'
+export const LOCALE_RECEIVE_HAVE = '已领取'
+export const LOCALE_VOUCHER = '券'
+export const LOCALE_FIRST_MONTH_ONLY = '仅限首月'
+
 
 export const LOCALE_RENT = '租金'
 export const LOCALE_SEMICOLON = '：'
@@ -69,7 +75,7 @@ export const LOCALE_ORDER_USERNAME = '预订人'
 export const LOCALE_ORDER_MOBILE = '电话号码'
 export const LOCALE_ORDER_ID_CARD = '身份证号'
 export const LOCALE_ORDER_APARTMENT = '预订公寓'
-export const LOCALE_DOWN_PAYMENT = '定金'
+export const LOCALE_DOWN_PAYMENT = '定金：'
 export const LOCALE_SHOW_DOWN_PAYMENT_RULE = '查看完整定金协议'
 
 export const LOCALE_ORDER_STATUS_SUCCESS_NOTICE = '恭喜您成功签约，祝您租后生活愉快'
@@ -88,6 +94,18 @@ export const LOCALE_ORDER_CANCEL_CONFIRM = '确认取消订单'
 export const LOCALE_NOTICE = '提示'
 export const LOCALE_ORDER_SIGN = '预订'
 export const LOCALE_CONTACT_HOUSEKEEPER = '联系管家'
+export const LOCALE_ORDER_STEP_ONE = 'Step1. 支付定金'
+export const LOCALE_ORDER_STEP_ONE_SIMPLE = '立即预定'
+export const LOCALE_ORDER_STEP_TWO = 'Step2. 管家确定,锁定房间,获得签约码'
+export const LOCALE_ORDER_STEP_TWO_SIMPLE = '管家确认'
+export const LOCALE_ORDER_STEP_THREE = 'Step3. 签约码核销,确定签约'
+export const LOCALE_ORDER_STEP_THREE_SIMPLE = '签约成功'
+export const LOCALE_ORDER_PROCESS_GUIDE = '签约预定流程'
+export const LOCALE_ORDER_VIEW_AGREEMENT = '查看公寓*ABC*预定服务协议'
+export const LOCALE_ORDER_VIEW_PROCESS_GUIDE = '进入完整签约流程引导'
+export const LOCALE_ORDER_CHOISE_COUPON = ''
+export const LOCALE_ORDER_RENTAL_COUPON = '租房优惠券'
+export const LOCALE_UNIVERSAL_COUPON = '全场通用券'
 
 // 签约码
 export const LOCALE_SIGNED_CODE = '签约码'
@@ -225,7 +243,7 @@ export const LOCALE_APPOINTMENT_DETAIL_SIGN_MESSAGE = '签约信息'
 export const LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM = '暂无可选房间'
 export const LOCALE_APPOINTMENT_DETAIL_MODIFY = '修改'
 export const LOCALE_APPOINTMENT_DETAIL_ADD_PICTURE = '添加合同照片'
-export const LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT='您还不能提交预约审核单'
+export const LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT = '您还不能提交预约审核单'
 
 
 
@@ -501,6 +519,6 @@ export const LOCALE_PROVACY_POLICY_CONTENT = [
 
 //反馈意见
 export const LOCALE_FEEDBACK_QUESTION = "您的问题或建议"
-export const LOCALE_FEEDBACK_TEL  = '您的联系方式'
-export const LOCALE_FEEDBACK_DETAIL =  "留下您的联系方式，以便我们了解问题后及时反馈，紧急问题请联系客服"
+export const LOCALE_FEEDBACK_TEL = '您的联系方式'
+export const LOCALE_FEEDBACK_DETAIL = "留下您的联系方式，以便我们了解问题后及时反馈，紧急问题请联系客服"
 export const LOCALE_FEEDBACK_COMFIRE = '提交建议'

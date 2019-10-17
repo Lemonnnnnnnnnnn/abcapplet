@@ -11,7 +11,6 @@ import {
   API_HOT_SEARCH,
   API_APARTMENT_SHOW,
   API_HOUSE_TYPE_SHOW,
-  API_SEARCH_APARTMENT,
   API_RECOMMEND_APARTMENT,
 
   API_APPOINTMENT_CREATE,
@@ -22,6 +21,9 @@ import {
   API_APARTMENT_REMAINTIME,
   API_FUNNEL,
   API_FUNNEL_ORDER,
+
+  API_COUPON_LIST,
+  API_COUPON_RECEIVE,
 } from '@constants/api'
 
 import {
@@ -37,7 +39,6 @@ import {
   SET_CBD_APARTMENT_LIST,
   SET_NEXT_PAGE_CBD_APARTMENT_LIST,
   TYPE_CBD_APARTMENT,
-  TYPE_SEARCH_APARTMENT,
   SET_NEXT_PAGE_FAVORITE_HOUSETYPE_LIST,
   TYPE_NORMAL_APARTMENT,
   TYPE_FAVORITE_APARTMENT,
@@ -56,6 +57,9 @@ import {
   TYPE_APARTMENT_REMAINTIME,
   TYPE_FUNNEL,
   TYPE_FUNNEL_ORDER,
+  TYPE_COUPON_LISTPOST,
+  TYPE_NEXTPAGE_COUPON_LISTPOST,
+  TYPE_COUPON_RECEIVEPOST,
 } from '@constants/apartment'
 
 
@@ -247,7 +251,7 @@ export const dispatchAppointmentCreate = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_APPOINTMENT_CREATE,
-  url: API_APPOINTMENT_CREATE ,
+  url: API_APPOINTMENT_CREATE,
   // cb: ({ data: { data } }) => ({ ...data })
 })
 
@@ -258,7 +262,7 @@ export const dispatchAppointmentDetail = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_APPOINTMENT_SHOW,
-  url: API_APPOINTMENT_SHOW ,
+  url: API_APPOINTMENT_SHOW,
 })
 
 
@@ -267,7 +271,7 @@ export const dispatchAppointmentNearbyPost = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_APARTMENT_NEARBYPOST,
-  url: API_APARTMENT_NEARBYPOST ,
+  url: API_APARTMENT_NEARBYPOST,
 })
 
 
@@ -276,14 +280,14 @@ export const dispatchApartmentDataPost = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_APARTMENT_INDEXDATAPOAT,
-  url: API_APARTMENT_INDEXDATAPOAT ,
+  url: API_APARTMENT_INDEXDATAPOAT,
 })
 // 获取户型详情页面数据统计
 export const dispatchApartmentHouseDataPost = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_HOUSETYPE_INDEXDATAPOAT,
-  url: API_HOUSETYPE_INDEXDATAPOAT ,
+  url: API_HOUSETYPE_INDEXDATAPOAT,
 })
 
 // 获取签约下定页面停留的时间
@@ -291,8 +295,46 @@ export const dispatchApartmentRemainTime = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_APARTMENT_REMAINTIME,
-  url: API_APARTMENT_REMAINTIME ,
+  url: API_APARTMENT_REMAINTIME,
+})
+//预约转化率(漏斗A,B)
+export const dispatchFunnel = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_FUNNEL,
+  url: API_FUNNEL,
 })
 
+//线上交易情况(漏斗D,E)
+export const dispatchOrderFunnel = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_FUNNEL_ORDER,
+  url: API_FUNNEL_ORDER,
+})
 
+// 获取优惠券列表
+export const dispatchCouponListPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_COUPON_LISTPOST,
+  url: API_COUPON_LIST,
+  cb: ({ data: { data } }) => data
+})
 
+// 获取优惠券列表下一页
+export const dispatchNextPageCouponListPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_NEXTPAGE_COUPON_LISTPOST,
+  url: API_COUPON_LIST,
+  cb: ({ data: { data } }) => data
+})
+
+// 领取优惠券
+export const dispatchCouponReceive = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_COUPON_RECEIVEPOST,
+  url: API_COUPON_RECEIVE
+})

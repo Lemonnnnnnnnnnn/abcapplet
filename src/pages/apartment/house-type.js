@@ -29,6 +29,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
+import { PAYLOAD_COUPON_LIST } from '@constants/api'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
@@ -74,6 +75,7 @@ class HouseTypeShow extends Component {
     nearbyPost: [],
     showMap: true,
     showCouponMask: false,
+    payload: PAYLOAD_COUPON_LIST,
   }
 
   async componentDidMount() {
@@ -86,21 +88,10 @@ class HouseTypeShow extends Component {
     })
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-
-      await Taro.getSystemInfo().then(res => {
-        this.setState({ navHeight: 72 })
-        if (res.model.indexOf('iPhone X') !== -1) {
-          this.setState({ navHeight: 88 })
-        } else if (res.model.indexOf('iPhone') !== -1) {
-          this.setState({ navHeight: 64 })
-        }
-      })
-
       const apartmentID = data.apartment_id
 
-
+      // 获取附近公寓列表
       await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
-
 
       const buttons = !data.is_sign
         ? [{ message: '预约看房', method: 'onCreateBusiness' }]
@@ -143,6 +134,7 @@ class HouseTypeShow extends Component {
       const all_houseType = currentHouseType.concat(allHouseType)
 
 
+
       data && this.setState({
         roomMatch_list: roomMatch_list,
         publicMatch_list: publicMatch_list,
@@ -173,6 +165,7 @@ class HouseTypeShow extends Component {
           lookTips: data.look_guide.tips || '',
           swipers: data.pictures.map(i => ({ url: i })),
           title: `${data.title} · ${data.apartment_title}`,
+          partTitle: data.title,
           priceTitle: data.price_title,
           hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
           types: all_houseType,
@@ -393,9 +386,9 @@ class HouseTypeShow extends Component {
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription,
-      houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask } = this.state
+    const { houstType, map, buttons, showRentDescription, houseType_id, showMatch,
+      roomMatch_list, publicMatch_list, showApartRoom, nearbyPost, showLittleMask,
+      navHeight, showMap, showCouponMask } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -404,7 +397,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
-      discount_price_title
+      discount_price_title, partTitle
     } = houstType
 
     let { priceTitle } = houstType
@@ -465,12 +458,9 @@ class HouseTypeShow extends Component {
               />
 
               <ApartmentCouponMask
-                facilitys={facilitys}
                 show={showCouponMask}
                 onClose={this.onCloseCoupon}
               />
-
-
 
               {/* 头部 */}
               <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32) }}>{title}</View>

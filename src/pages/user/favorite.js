@@ -91,7 +91,6 @@ class UserFavorite extends Component {
   render() {
     const { favoriteApartment, favoriteHouseType } = this.props
 
-
     return (
       <View class='favorite'>
         <AtTabs

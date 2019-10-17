@@ -12,5 +12,5 @@ export const dispatchAdList = payload => createAction({
   type: SET_AD_LIST,
   url: API_AD_LIST,
   // TODO 格式化 url
-  cb: (res) => res.data.data.list,
+  cb: (res) => (res.data ? res.data.data.list : []),
 })

@@ -208,7 +208,7 @@ export const API_APPOINTMENT_NIGHTPOST = `${HOST}/appointment/nightPost`
 
 //新增行程签约核对单
 export const API_APPOINTMENT_REWARDORDER = `${HOST}/appointment/rewardOrderPost`
-export const PAYLOAD_APPOINTMENT_REWARDORDER = { appointment_id: 0, mobile: '', sign_time: '', tenancy: '', file_img: '', price: '' , type : 0 }
+export const PAYLOAD_APPOINTMENT_REWARDORDER = { appointment_id: 0, mobile: '', sign_time: '', tenancy: '', file_img: '', price: '', type: 0 }
 //获取签约审核单详情
 export const API_APPOINTMENT_DETAILREWARD = `${HOST}/appointment/detailRewardOrderPost`
 // 查询签约审核单可选的房间列表
@@ -219,7 +219,7 @@ export const API_INDEXPOST = `${HOST}/index/indexPost`
 
 //首页数据统计接口
 export const API_HOME_INDEXDATAPOAT = `${HOST}/index/indexDataPost`
-export const PAYLOAD_HOME_INDEXDATAPOAT = { type:0,origin_id:0 }
+export const PAYLOAD_HOME_INDEXDATAPOAT = { type: 0, origin_id: 0 }
 
 //公寓详情页数据统计
 export const API_APARTMENT_INDEXDATAPOAT = `${HOST}/apartment/apartmentDetailDataPost`
@@ -240,10 +240,30 @@ export const API_FUNNEL_ORDER = `${HOST}/index/funnelOrderPost`
 // https://sub.gongyuabc.com/api/v1/sublease/orders/index  //线上接口
 // http://sub.abc.411er.cn/api/v1/sublease/orders/index     //测试接口
 export const API_SUB_LIST = 'https://sub.gongyuabc.com/api/v1/sublease/orders/index'
-export const PAYLOAD_SUB_LIST = { city_id:350200,page: 1, size: 6  }
+export const PAYLOAD_SUB_LIST = { city_id: 350200, page: 1, size: 6 }
 
 //用户反馈接口
 export const API_USER_FEEDBACK = `${HOST}/user/setFeedbackPost`
 //用户漏斗接口
 export const API_INDEX_FUNNELDATAPOAT = `${HOST}/index/funnelDataPost`
+
+
+//优惠券相关
+
+// 获取优惠券列表
+export const API_COUPON_LIST = `${HOST}/coupon/listPost`
+export const PAYLOAD_COUPON_LIST = { current_page: 1, page_size: 10 }
+
+// 领取优惠券
+export const API_COUPON_RECEIVE = `${HOST}/coupon/receivePost`
+
+// 兑换码获取优惠券
+export const API_COUPON_RECEIVECODE = `${HOST}/coupon/receiveCodePost`
+
+// 获取用户名下优惠券
+export const API_COUPON_USER = `${HOST}/coupon/userPost`
+export const PAYLOAD_COUPON_ALL = { current_page: 1, page_size: 10 }
+export const PAYLOAD_COUPON_CAN_USED = { current_page: 1, page_size: 10, status: 0 }
+export const PAYLOAD_COUPON_HAVE_BEEN_USED = { current_page: 1, page_size: 10, status: 1 }
+export const PAYLOAD_COUPON_USER_EXPIRED = { current_page: 1, page_size: 10, status: 2 }
 

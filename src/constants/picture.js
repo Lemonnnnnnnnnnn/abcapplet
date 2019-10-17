@@ -32,3 +32,10 @@ export const USER_WISH  ='https://images.gongyuabc.com/image/wish.png' //心愿�
 export const REQUIREMENT_CARD = 'https://images.gongyuabc.com/image/requirement-card.png'  //需求卡
 export const PREFERENTIAL = 'https://images.gongyuabc.com/image/Preferential.png'  //优惠卷
 
+// 签约下定
+export const ORDER_SIGN = 'https://images.gongyuabc.com/image/order-sign.png'
+export const MANAGER_CONFIRM = 'https://images.gongyuabc.com/image/manager-confirm.png'
+export const SIGN_SUCCESS = 'https://images.gongyuabc.com/image/sign-success.png'
+export const ORDER_STEP_ONE = 'https://images.gongyuabc.com/image/order-step1.png'
+export const ORDER_STEP_TWO = 'https://images.gongyuabc.com/image/order-step2.png'
+export const ORDER_STEP_THREE = 'https://images.gongyuabc.com/image/order-step3.png'

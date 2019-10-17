@@ -1,6 +1,7 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
-import { View, ScrollView } from '@tarojs/components'
+import { View, ScrollView, Input } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 
 // 自定义组件
 import Board from '@components/board'
@@ -10,7 +11,7 @@ import BaseComponent from '@components/base'
 import OrderRoomItem from '@components/order-room-item'
 
 // 自定义常量
-import { COLOR_GREY_2 } from '@constants/styles'
+import { COLOR_GREY_2, COLOR_GREY_0 } from '@constants/styles'
 
 class OrderRoomListMask extends BaseComponent {
 
@@ -19,40 +20,72 @@ class OrderRoomListMask extends BaseComponent {
     rooms: [],
     selectId: 0,
   }
+  state = {
+    bottom: 0
+  }
 
-  
+
   onMaskTouchMove(e) {
     return e.stopPropagation()
   }
 
+  onInputBegin() {
+    this.setState({
+      bottom: Taro.pxTransform(200)
+    })
+  }
+
+  onInputOver() {
+    this.setState({
+      bottom: Taro.pxTransform(0)
+    })
+  }
+
   render() {
     const { className, show, rooms, selectId } = this.props
-    const height = rooms.length < 3 ? rooms.length * 90 : 270
-    return (show && <View className={className} onTouchMove={this.onMaskTouchMove}>
-      <Board fixed='bottom' border='top' color='light-grey'>
-        <View className='m-3'>
+    const { bottom } = this.state
+
+    return (show && <View className={className} onTouchMove={this.onMaskTouchMove} >
+      <Board fixed='bottom' border='top' color='light-grey' customStyle={{ bottom }}>
+        <View className='m-3' style={{ minHeight: Taro.pxTransform(900) }}>
           {/* 公寓头部 */}
           <View className='at-row at-row__justify--between mb-3'>
-            <View className='text-bold'>查看公寓详情</View>
+            <View className='text-bold'>修改房间号</View>
             <View onClick={this.props.onClose}>
-              <ABCIcon icon='close' color={COLOR_GREY_2}  />
+              <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>
           </View>
 
-          <ScrollView scrollY style={{ height: `${height}px` }}>
-            {rooms.map(i =>
-              <OrderRoomItem
-                room={i}
-                key={i.id}
-                className='mb-3'
-                selectId={selectId}
-                onSelectRoom={this.props.onSelectRoom}
+          {/* 搜索房间号 */}
+          <View className='at-row at-row__justify--center  '>
+            <View className='search-box at-row  at-row__align--center '>
+              <AtIcon className='ml-3 at-row' value='search' size={15} color={COLOR_GREY_0} />
+              <Input
+                placeholder='请输入您要查找的房间号'
+                onFocus={this.onInputBegin}
+                onBlur={this.onInputOver}
+                onInput={this.props.onSearchRoom}
+                className='ml-3 at-row text-normal'
               />
+            </View>
+          </View>
+
+          {/* 无公寓详情 */}
+          {rooms.length === 0 && <View className='ml-3 text-secondary text-large mt-3 text-center'>无可选房间</View>}
+
+          <ScrollView scrollY style={{ height: Taro.pxTransform(700) }}>
+            {rooms.map(i =>
+              <View className='apartment-order-room-item' key={i.id}>
+                <OrderRoomItem
+                  room={i}
+                  selectId={selectId}
+                  onSelectRoom={this.props.onSelectRoom}
+                />
+              </View>
             )}
           </ScrollView>
 
-          {/* 无公寓详情 */}
-          {rooms.length === 0 && <View>无可选房间</View>}
+
         </View>
       </Board>
 

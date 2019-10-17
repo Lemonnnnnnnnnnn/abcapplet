@@ -19,6 +19,8 @@ import favoriteApartment from './favoriteApartment'
 import activityApartment from './activityApartment'
 import home from './home'
 import sublet from './sublet'
+import userCouponList from './userCoupon'
+import apartmentCouponList from './apartmentCoupon'
 
 export default combineReducers({
   ads,
@@ -41,4 +43,6 @@ export default combineReducers({
   activityApartment,
   home,
   sublet,
+  userCouponList,
+  apartmentCouponList,
 })

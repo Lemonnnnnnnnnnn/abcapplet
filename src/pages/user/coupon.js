@@ -3,12 +3,27 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Input } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 
+// Redux相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
+
+// 自定义变量
+import {
+  PAYLOAD_COUPON_CAN_USED,
+  PAYLOAD_COUPON_HAVE_BEEN_USED,
+  PAYLOAD_COUPON_USER_EXPIRED
+} from '@constants/api'
+import { USER_COUPON_DIST } from '@constants/user'
+
 // 自定义组件
 import Decorate from '@components/decorate'
-import ApartmentCouponItem from '@components/apartment-coupon-item'
+import ApartmentCouponList from '@components/apartment-coupon-list'
 
 import buryPoint from '../../utils/bury-point'
 
+@connect(state => state, {
+  ...userActions
+})
 class UserFavorite extends Component {
   config = {
     navigationBarTitleText: '我的优惠券',
@@ -17,38 +32,74 @@ class UserFavorite extends Component {
   }
   state = {
     code: '',
-    navList: [
-      { id: 1, title: '可使用', active: true, status: 1 },
-      { id: 2, title: '已使用', active: false, status: 2 },
-      { id: 3, title: '已过期', active: false, status: 4 },
-    ],
+    navList: USER_COUPON_DIST,
+    current: 0,
   }
+
+  refCouponListCanUsed = node => this.CouponListCanUsed = node
+  refCouponListHaveBeenUsed = node => this.CouponListHaveBeenUsed = node
+  refCouponListExpired = node => this.CouponListExpired = node
 
   componentWillMount() {
     buryPoint()
   }
-
+  
   onInputValue(e) {
-    this.setState({ code: e.detail.value })
+    const code = e.detail.value
+    this.setState({ code })
   }
+
+  onSubmit() {
+    const { code } = this.state
+    this.props.dispatchCouponReceiveCode({ code }).then(res => {
+      res.data &&
+        (Taro.showToast({ title: res.data.msg, icon: 'none' }),
+          this.onPullDownRefresh())
+    })
+      .catch(err => console.log(err))
+  }
+
   onChangeBlock(value) {
     const { navList } = this.state
     let navListClone = JSON.parse(JSON.stringify(navList))
+
     navListClone.map(i => {
-      if (i.id === value) { i.active = true } else { i.active = false }
+      if (i.status === value) { i.active = true } else { i.active = false }
     })
-    this.setState({ navList: navListClone })
+    this.setState({ navList: navListClone, current: value })
+  }
+
+
+  // 加载下一页
+  onReachBottom() {
+    const { navList, current } = this.state
+    const { ref } = navList[current]
+    this[ref].onNextPage()
+  }
+
+  // 刷新页面
+  onPullDownRefresh() {
+    const { navList, current } = this.state
+    const { ref } = navList[current]
+    this[ref] && this[ref].onReset(null)
+    Taro.stopPullDownRefresh()
   }
 
 
   render() {
-    const { code, navList } = this.state
-    const AnalogArr = [
-      { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 1 },
-      { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 1 },
-      { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 2 },
-      { voucher: '￥100', orderAmount: '￥1500', validityPeriod: '2019/09/09-2019/12/12', status: 4 },
-    ]
+    const { code, navList, current } = this.state
+    const { userCouponList } = this.props
+    const { list } = userCouponList
+
+    let couponList = []
+
+    list && list.length && list.map(i => couponList.push({
+      status: i.status,
+      list: i.coupon,
+      validity_period_time: i.end_time,
+      coupon_id: i.coupon_id
+    }))
+
     return (
       <View >
         {/* 背景底色 */}
@@ -63,7 +114,7 @@ class UserFavorite extends Component {
               </View>
             </View>
             <View className='at-col at-col-3' >
-              <AtButton className='btn-yellow active' circle>领取</AtButton>
+              <AtButton className='btn-yellow active' onClick={this.onSubmit} circle>领取</AtButton>
             </View>
           </View>
 
@@ -71,23 +122,51 @@ class UserFavorite extends Component {
           <View className='mt-4'>
             {/* 导航栏 */}
             <View className='at-row at-row__justify--around'>
-              {navList.map(i => <View onClick={this.onChangeBlock.bind(this, i.id)} className={i.active ? 'text-large text-bold user-coupon-nav-active' : 'text-normal text-secondary'} key={i}>{i.title}</View>)}
+              {navList.map(i => <View onClick={this.onChangeBlock.bind(this, i.status)} className={i.active ? 'text-large text-bold user-coupon-nav-active' : 'text-normal text-secondary'} key={i}>{i.title}</View>)}
             </View>
             {/* 内容 */}
+
             <View>
+              {/* 可使用板块 */}
               {
-                navList.map(i => i.active && <View>
-                  {AnalogArr.map(j => j.status === i.status &&
-                    <ApartmentCouponItem
-                      key={j.voucher}
-                      voucher={j.voucher}
-                      orderAmount={j.orderAmount}
-                      validityPeriod={j.validityPeriod}
-                      status={j.status}
-                    />
-                  )
-                  }
-                </View>)
+                current === 0 && <ApartmentCouponList
+                  ref={this.refCouponListCanUsed}
+                  blockStatus={current}
+                  block='user'
+                  couponList={couponList}
+
+                  defaultPayload={PAYLOAD_COUPON_CAN_USED}
+                  dispatchList={this.props.dispatchCouponUser}
+                  dispatchNextPageList={this.props.dispatchNextPageCouponUser}
+                />
+              }
+
+              {/* 已使用板块 */}
+              {
+                current === 1 && <ApartmentCouponList
+                  ref={this.refCouponListHaveBeenUsed}
+                  blockStatus={current}
+                  block='user'
+                  couponList={couponList}
+
+                  defaultPayload={PAYLOAD_COUPON_HAVE_BEEN_USED}
+                  dispatchList={this.props.dispatchCouponUser}
+                  dispatchNextPageList={this.props.dispatchNextPageCouponUser}
+                />
+              }
+
+              {/* 已过期板块 */}
+              {
+                current === 2 && <ApartmentCouponList
+                  ref={this.refCouponListExpired}
+                  blockStatus={current}
+                  block='user'
+                  couponList={couponList}
+
+                  defaultPayload={PAYLOAD_COUPON_USER_EXPIRED}
+                  dispatchList={this.props.dispatchCouponUser}
+                  dispatchNextPageList={this.props.dispatchNextPageCouponUser}
+                />
               }
             </View>
           </View>
