@@ -74,7 +74,6 @@ class HouseTypeShow extends Component {
     showMap: true,
     showCouponMask: false,
     payload: PAYLOAD_COUPON_LIST,
-    couponList: [],
   }
 
   async componentDidMount() {
@@ -113,9 +112,6 @@ class HouseTypeShow extends Component {
 
       // 获取附近公寓列表
       await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
-
-      // 获取优惠券列表
-      await this.props.dispatchCouponListPost({ payload }).then(res => this.setState({ couponList: res.data.data }))
 
       const buttons = !data.is_sign
         ? [{ message: '预约看房', method: 'onCreateBusiness' }]
@@ -189,6 +185,7 @@ class HouseTypeShow extends Component {
           lookTips: data.look_guide.tips || '',
           swipers: data.pictures.map(i => ({ url: i })),
           title: `${data.title} · ${data.apartment_title}`,
+          partTitle: data.title,
           priceTitle: data.price_title,
           hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
           types: all_houseType,
@@ -412,7 +409,7 @@ class HouseTypeShow extends Component {
 
     const { houstType, map, buttons, showRentDescription, houseType_id, showMatch,
       roomMatch_list, publicMatch_list, showApartRoom, nearbyPost, showLittleMask,
-      navHeight, showMap, showCouponMask, couponList } = this.state
+      navHeight, showMap, showCouponMask } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -421,7 +418,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
-      discount_price_title
+      discount_price_title, partTitle
     } = houstType
 
     let { priceTitle } = houstType
@@ -481,13 +478,9 @@ class HouseTypeShow extends Component {
               />
 
               <ApartmentCouponMask
-                facilitys={facilitys}
                 show={showCouponMask}
                 onClose={this.onCloseCoupon}
-                couponList={couponList}
               />
-
-
 
               {/* 头部 */}
               <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32) }}>{title}</View>

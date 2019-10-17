@@ -50,9 +50,8 @@ export const TYPE_APARTMENT_REMAINTIME = 'TYPE_APARTMENT_REMAINTIME'
 export const TYPE_FUNNEL = 'TYPE_FUNNEL'
 export const TYPE_FUNNEL_ORDER = 'TYPE_FUNNEL_ORDER'
 export const TYPE_COUPON_LISTPOST = 'TYPE_COUPON_LISTPOST'
+export const TYPE_NEXTPAGE_COUPON_LISTPOST = 'TYPE_NEXTPAGE_COUPON_LISTPOST'
 export const TYPE_COUPON_RECEIVEPOST = 'TYPE_COUPON_RECEIVEPOST'
-export const TYPE_COUPON_RECEIVECODEPOST = 'TYPE_COUPON_RECEIVECODEPOST'
-export const TYPE_COUPON_USERPOST = 'TYPE_COUPON_USERPOST'
 
 /**
  * 公寓类型
@@ -167,8 +166,11 @@ export const HOUSE_TYPE_DESC = {
 
 // 优惠券
 export const APARTMENT_COUPON_DIST = {
-  0: { message: '已领取' },
-  1: { message: '领取' },
-  // 3: { message: '已使用' },
-  // 4: { message: '已过期' },
+  0: { message: '无法领取' },
+  1: { message: '未领取' },
+}
+
+export const ORDER_COUPON_DIST = {
+  0: { message: '使用' },
+  1: { message: '无法使用' }
 }

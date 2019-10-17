@@ -43,7 +43,7 @@ class ApartmentRecommend extends Component {
   }
 
   async  onPullDownRefresh() {
-    await await this.SubletList.onReset(null)
+    await this.SubletList.onReset(null)
     this.setState({
       inputValue: '',
       showCancel: false,

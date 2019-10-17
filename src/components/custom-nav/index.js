@@ -22,13 +22,13 @@ export default class CustomNav extends BaseComponent {
 
 
     onReturn() {
-        Taro.navigateBack()
+        const currentRoute = Taro.getCurrentPages()
+        currentRoute.length > 1 ? Taro.navigateBack() : Taro.switchTab({ url: PAGE_HOME })
+
     }
 
     onBackHome() {
-        Taro.switchTab({
-            url: PAGE_HOME
-        })
+        Taro.switchTab({ url: PAGE_HOME })
     }
 
     render() {

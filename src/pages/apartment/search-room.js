@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 import Taro, { Component } from '@tarojs/taro'
 import { View, Input, Button } from '@tarojs/components'
 import { AtButton, AtInput, AtIcon } from 'taro-ui'
@@ -55,19 +56,19 @@ class ApartmentSearchRoom extends Component {
 
     render() {
         const { isSign, inputValue, matchRoomList } = this.state
-        
+
         return (
-            <View style={{background:"#fff"}}>
-                <View  className='at-row at-row__justify--center  '>
+            <View style={{ background: "#fff" }}>
+                <View className='at-row at-row__justify--center  '>
                     <View className='search-box at-row  at-row__align--center at-col-8 '>
                         <AtIcon className='ml-3 at-row' value='search' size={15} color={COLOR_GREY_0} />
-                        <Input  placeholder='请输入您要查找的房间号' onInput={this.onHandleInput} className='ml-3 at-row text-normal' ></Input>
+                        <Input placeholder='请输入您要查找的房间号' onInput={this.onHandleInput} className='ml-3 at-row text-normal' ></Input>
                     </View>
-                    <View onClick={this.onSearch}  className='at-row at-col-3  at-row__align--center at-row__justify--center  ml-2  search-box text-normal  '>
+                    <View onClick={this.onSearch} className='at-row at-col-3  at-row__align--center at-row__justify--center  ml-2  search-box text-normal  '>
                         搜索
                     </View>
                 </View>
-                <View   className='mt-2'>
+                <View className='mt-2'>
                     {matchRoomList.length ? matchRoomList.map((i, index) =>
                         <RoomItem
                             key={i.id}

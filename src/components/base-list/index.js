@@ -24,7 +24,6 @@ class BaseList extends BaseComponent {
     count: 0,
   }
 
-
   async componentDidMount() {
     const { defaultPayload } = this.props
     await Taro.getLocation({
@@ -46,12 +45,10 @@ class BaseList extends BaseComponent {
   }
 
   onNextPage() {
-
     let { page, payload, loading, hasMore } = this.state
     let { pageSize } = this.props
 
     if (!hasMore || loading || !this.props.dispatchList) return;
-
     this.setState({ loading: true })
 
     payload = { ...payload, current_page: page }
@@ -59,6 +56,7 @@ class BaseList extends BaseComponent {
 
     const onSuccess = res => {
       const listNum = res.data.data.total || res.data.data.list.total
+
       this.setState({
         page: page + 1,
         loading: false,
@@ -67,11 +65,12 @@ class BaseList extends BaseComponent {
     }
 
 
-    const onFail = () => this.setState({
-      loading: false,
-      hasMore: false,
-    })
-
+    const onFail = () => {
+      this.setState({
+        loading: false,
+        hasMore: false,
+      })
+    }
 
     page === 1
       ? this.props.dispatchList(payload).then(onSuccess).catch(onFail)

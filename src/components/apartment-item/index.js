@@ -7,8 +7,6 @@ import { View, Image, Text } from '@tarojs/components'
 import BaseComponent from '@components/base'
 import ImagePlaceholder from '@components/image-placeholder'
 
-
-
 // 自定义常量
 import {
   TYPE_CBD_APARTMENT,
@@ -91,7 +89,6 @@ class ApartmentItem extends BaseComponent {
   render() {
     let { width, height, minWidth, minHeight, mini, nearbyPost, home } = this.props
     const { apartment, type } = this.props
-
 
     // 重置宽高
     width = mini ? minWidth : width

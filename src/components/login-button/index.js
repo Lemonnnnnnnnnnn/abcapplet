@@ -28,8 +28,6 @@ export default class loginButton extends BaseComponent {
 
     const route = '/' + lastPage.route
 
-    console.log(route)
-
     if (route === PAGE_ORDER_CREATE || route === PAGE_APPOINTMENT_CREATE) {
       Taro.setStorageSync('lastPagePath', lastPagePath)
       Taro.redirectTo({ url: `${PAGE_USER_AUTH}` })

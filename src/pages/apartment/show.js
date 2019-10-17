@@ -204,7 +204,6 @@ class ApartmentShow extends Component {
 
   onClick(method) {
     const { Id } = this.state
-    console.log(Id)
     if (method === 'onCreateBusiness') {
       this.props.dispatchApartmentDataPost({ type: 3 })
 

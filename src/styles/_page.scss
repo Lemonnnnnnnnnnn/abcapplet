@@ -198,17 +198,17 @@ page {
     border-top-right-radius: 12px * $hd;
     background: #fff;
     min-height: 100vh;
-    
-    .at-button{
-      height : 37px * $hd;
+
+    .at-button {
+      height: 37px * $hd;
       line-height: 37px * $hd;
     }
-    &-input{
+    &-input {
       width: 90%;
       margin-left: 5%;
     }
-    &-nav-active{
-      border-bottom: 2px * $hd solid #FFC919;
+    &-nav-active {
+      border-bottom: 2px * $hd solid #ffc919;
     }
   }
 }
@@ -231,4 +231,9 @@ page {
   transform: translate(-50%, 0);
   left: 50%;
   top: 0;
+}
+
+// 继承父元素高度
+.inherit-Height {
+  height: 100%;
 }

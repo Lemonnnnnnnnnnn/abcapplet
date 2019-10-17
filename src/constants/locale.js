@@ -69,7 +69,7 @@ export const LOCALE_ORDER_USERNAME = '预订人'
 export const LOCALE_ORDER_MOBILE = '电话号码'
 export const LOCALE_ORDER_ID_CARD = '身份证号'
 export const LOCALE_ORDER_APARTMENT = '预订公寓'
-export const LOCALE_DOWN_PAYMENT = '定金'
+export const LOCALE_DOWN_PAYMENT = '定金：'
 export const LOCALE_SHOW_DOWN_PAYMENT_RULE = '查看完整定金协议'
 
 export const LOCALE_ORDER_STATUS_SUCCESS_NOTICE = '恭喜您成功签约，祝您租后生活愉快'

@@ -126,7 +126,7 @@ class Carousel extends Component {
         {type === 'banner' &&
           <Swiper
             className='mr-3'
-            // autoplay
+            autoplay
             circular
             indicatorDots
             style={swiperStyle}

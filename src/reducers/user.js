@@ -4,7 +4,8 @@ import {
   USER_LOGIN,
   USER_LOGOUT,
   USER_DEFAULT,
-  GET_USER_PHONE
+  TYPE_COUPON_USERPOST,
+  TYPE_NEXTPAGE_COUPON_USERPOST
 } from '@constants/user'
 
 export default function user(state = USER_DEFAULT, action) {

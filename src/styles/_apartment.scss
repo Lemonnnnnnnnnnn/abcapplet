@@ -5,6 +5,62 @@
   box-shadow: 0px 0px 5px * $hd 0px rgba(222, 222, 222, 1);
   border-radius: 6px * $hd;
 
+  &-order {
+    &-step-mask {
+      width: 80%;
+      z-index: 200;
+      background: #fff;
+      border-radius: 12px * $hd;
+      .at-button {
+        height: 37px * $hd;
+        line-height: 37px * $hd;
+      }
+    }
+    &-lease-insurance {
+      background: linear-gradient(to right, #ffd447, #f8ecd0);
+      .picture {
+        width: 104px * $hd;
+        height: 36px * $hd;
+      }
+    }
+    &-deal-banner-picture {
+      width: 344px * $hd;
+      height: 64px * $hd;
+    }
+    &-coupon {
+      &-icon {
+        background: linear-gradient(to right, #ffc919, #fba700);
+        padding: 5px * $hd 15px * $hd;
+        border-radius: 6px * $hd;
+        position: relative;
+        color: #fff;
+        &-angle {
+          background: #fff;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+    &-room {
+      width: 100%;
+      &-item {
+        border-bottom: 1px solid rgb(240, 240, 240);
+      }
+      &-item:last-child {
+        border: none;
+      }
+      .at-button {
+        height: 37px * $hd;
+        line-height: 37px * $hd;
+        width: 136px * $hd;
+      }
+    }
+    &-mask {
+      background: #fff;
+    }
+  }
+
   &-image {
     width: 100%;
     height: 100%;
@@ -19,18 +75,62 @@
     border-bottom-left-radius: 16px * $hd;
     padding: 5px * $hd 6px * $hd 5px * $hd 12px * $hd;
     min-width: 75px * $hd;
+
     &-item {
       width: 90%;
       margin-left: 5%;
       height: 84px * $hd;
       border-radius: 12px * $hd;
       position: relative;
-      background: linear-gradient(to right, #ffc919, #feb013);
-      &-angle{
+      // background: #fff;
+      &.background {
+        &-gray {
+          background: #c8c8c8;
+        }
+        &-white {
+          background: #fff;
+        }
+      }
+
+      &.shadow {
+        &-yellow {
+          box-shadow: 0 1px 6px #ffc919;
+          border: 1px solid #ffe284;
+        }
+        &-black {
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      &-expired {
+        width: 90%;
+        margin-left: 5%;
+        height: 84px * $hd;
+        border-radius: 12px * $hd;
+        position: relative;
+        background: #c8c8c8;
+      }
+
+      &-angle {
         width: 12px * $hd;
-        height : 12px * $hd;
-        background: #fff;
-        border-radius: 50%;
+        height: 8px * $hd;
+        background: #f8f8f8;
+        position: absolute;
+        left: 68%;
+        &.top {
+          border-radius: 0 0 12px 12px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          &-active {
+            border-bottom: 1px solid #ffe284;
+          }
+        }
+        &.bottom {
+          border-radius: 12px 12px 0 0;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          &-active {
+            border-top: 1px solid #ffe284;
+          }
+        }
       }
     }
   }

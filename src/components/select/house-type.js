@@ -38,19 +38,19 @@ class SelectHouseType extends Component {
     initialFloor: [],
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { items } = this.props
 
     const floorList = [{ id: 0, title: "不限", active: true, type: true }]
     const roomList = [{ id: 0, title: "不限", active: true, type: true }]
 
-    items.floor.map(i => {
+    items && items.floor.map(i => {
       i.type = false
       i.active = true
 
       floorList.push(i)
     })
-    items.room.map(i => {
+    items && items.room.map(i => {
       i.type = false
       i.active = true
       roomList.push(i)

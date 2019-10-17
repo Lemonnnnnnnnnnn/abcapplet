@@ -25,8 +25,20 @@
     color: #888888 !important;
   }
 
+  &-gray {
+    color: #5d5d5d !important ;
+  }
+
+  &-gray--1 {
+    color: #dfdfdf !important;
+  }
+
   &-red {
-    color: #FF6161 !important;
+    color: #ff6161 !important;
+  }
+
+  &-black {
+    color : #000000 !important;
   }
 
   // 字体粗细
@@ -64,14 +76,13 @@
     line-height: $font-size-xs * 1.5;
     font-size: $font-size-xs;
   }
-  &-indent{
+  &-indent {
     text-indent: 2em;
   }
 }
 //文字超出省略
-.overtext{
-  overflow:hidden;
-  text-overflow:
-  ellipsis;white-space:nowrap;
+.overtext {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-

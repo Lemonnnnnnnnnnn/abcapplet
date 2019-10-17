@@ -260,4 +260,8 @@ export const API_COUPON_RECEIVECODE = `${HOST}/coupon/receiveCodePost`
 
 // 获取用户名下优惠券
 export const API_COUPON_USER = `${HOST}/coupon/userPost`
-export const PAYLOAD_COUPON_USER = { current_page: 1, page_size: 10 }
+export const PAYLOAD_COUPON_ALL = { current_page: 1, page_size: 10 }
+export const PAYLOAD_COUPON_CAN_USED = { current_page: 1, page_size: 10, status: 0 }
+export const PAYLOAD_COUPON_HAVE_BEEN_USED = { current_page: 1, page_size: 10, status: 1 }
+export const PAYLOAD_COUPON_USER_EXPIRED = { current_page: 1, page_size: 10, status: 2 }
+

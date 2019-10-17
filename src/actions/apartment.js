@@ -58,6 +58,7 @@ import {
   TYPE_FUNNEL,
   TYPE_FUNNEL_ORDER,
   TYPE_COUPON_LISTPOST,
+  TYPE_NEXTPAGE_COUPON_LISTPOST,
   TYPE_COUPON_RECEIVEPOST,
 } from '@constants/apartment'
 
@@ -313,11 +314,21 @@ export const dispatchOrderFunnel = payload => createAction({
 })
 
 // 获取优惠券列表
-export const dispatchCouponListPost = ({payload}) => createAction({
+export const dispatchCouponListPost = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_COUPON_LISTPOST,
-  url: API_COUPON_LIST
+  url: API_COUPON_LIST,
+  cb: ({ data: { data } }) => data
+})
+
+// 获取优惠券列表下一页
+export const dispatchNextPageCouponListPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_NEXTPAGE_COUPON_LISTPOST,
+  url: API_COUPON_LIST,
+  cb: ({ data: { data } }) => data
 })
 
 // 领取优惠券
