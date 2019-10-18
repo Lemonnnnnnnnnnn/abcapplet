@@ -18,8 +18,8 @@ export const LOCALE_SEMICOLON = '：'
 export const LOCALE_PRICE_SEMICOLON = '￥'
 export const LOCALE_PRICE_UNIT = '元'
 export const LOCALE_PRICE_START = '/月起'
-export const LOCALE_PRICE_ACTIVITY = '(活动价)'
-export const LOCALE_PRICE_ORIGIN = '(原价)'
+export const LOCALE_PRICE_ACTIVITY = '(余房活动价)'
+export const LOCALE_PRICE_ORIGIN = '(余房原价)'
 export const LOCALE_LOCATION = '位置'
 export const LOCALE_HOUSE_TYPE = '户型'
 export const LOCALE_AUTO_SORT = '智能排序'
@@ -523,3 +523,9 @@ export const LOCALE_FEEDBACK_QUESTION = "您的问题或建议"
 export const LOCALE_FEEDBACK_TEL = '您的联系方式'
 export const LOCALE_FEEDBACK_DETAIL = "留下您的联系方式，以便我们了解问题后及时反馈，紧急问题请联系客服"
 export const LOCALE_FEEDBACK_COMFIRE = '提交建议'
+
+//找房行程
+export const LOCAL_APPOINTMENT_APPOINT = "预约"
+export const LOCAL_APPOINTMENT_LOOKROOM = "看房"
+export const LOCAL_APPOINTMENT_AGENCY = "签约"
+

@@ -8,10 +8,11 @@ import { View, Swiper, SwiperItem, Image, Text } from '@tarojs/components'
 import BaseComponent from '@components/base'
 import MaskTop from '@components/maskTop'
 
+
 // 自定义常量
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 import { HEART_YELLOW, HEART_YELLOW_EMPTY } from '@constants/picture'
-
+import { APARTMENT_AVATAR_DIST } from '@constants/apartment'
 class ApartmentContainer extends BaseComponent {
 
   static defaultProps = {
@@ -23,9 +24,10 @@ class ApartmentContainer extends BaseComponent {
   }
 
   state = {
-    current: 0
+    current: 0,
+    showPhotos: false,
   }
-
+  //展示样板房
   onShowPic() {
     const picList = []
     const { swipers } = this.props
@@ -40,81 +42,140 @@ class ApartmentContainer extends BaseComponent {
       current: currentPic
     })
   }
+  //展示清水房
+  onShowPicPhoto() {
+    const picList = []
+    const { qsf_picture } = this.props
+    const { current } = this.state
+    qsf_picture.map(i => {
+      picList.push(i.url)
+    })
+    const currentPic = picList[current + 1]
 
+    Taro.previewImage({
+      urls: picList,
+      current: currentPic
+    })
+  }
   changePicIndex(e) {
     const current = e.detail.current
-    this.setState({ current : current - 1 })
+    this.setState({ current: current - 1 })
+  }
+  //展示清水房照片
+  onShowPhoto() {
+    const { showPhotos } = this.state
+    this.setState({
+      showPhotos: !showPhotos
+    })
   }
 
   render() {
-    const { swipers, height, width, isCollect, show, num } = this.props
+    const { swipers, height, width, isCollect, show, num, type,qsf_picture } = this.props
 
-    const { current } = this.state
+    const { current, showPhotos } = this.state
 
     const style = {
       width: '100%',
       height: Taro.pxTransform(height),
     }
 
-    const picIndexStyle = {
-      left: Taro.pxTransform(40),
-      top: Taro.pxTransform(height - 75),
-    }
-
-
-    const fontStyle = {
-      borderRadius: Taro.pxTransform(24),
-      left: Taro.pxTransform(40),
-      top: Taro.pxTransform(height - 75),
-    }
 
     return (
       <View className='position-relative' >
-        {swipers && swipers.length ? <View>
-          {
-            swipers.length > 1 ?
-              <Swiper
-                className='swiper'
-                autoplay
-                circular
-                current
-                onChange={this.changePicIndex}
-                style={style}
-                displayMultipleItems={1}
-                indicatorActiveColor={COLOR_YELLOW}
-                indicatorColor={COLOR_DOATS_CAROUSEL}
-                onClick={this.onShowPic}
-              >
-                {swipers.map(i => <SwiperItem key={i.url}>
-                  <Image
-                    style={style}
-                    mode='scaleToFill'
-                    src={i.url}
-                  />
-                </SwiperItem>)}
-              </Swiper>
-              :
-              <Image
-                style={style}
-                mode='scaleToFill'
-                src={swipers.length ? `${swipers[0].url}` : ''} >
-              </Image>
+        {type && qsf_picture.length? <View>
+          {showPhotos ?   <View>
+              <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看样板房照片</View>
+              <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
+                <Text className='text-yellow'>{current + 1 ? current + 1 : qsf_picture.length}</Text>
+                <Text className='text-white'>/{qsf_picture.length}</Text>
+              </View>
+            </View>
+            :
+            <View>
+            <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看清水房照片</View>
+            <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
+              <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
+              <Text className='text-white'>/{swipers.length}</Text>
+            </View>
+          </View>
           }
         </View>
-          : <View style={{ height: Taro.pxTransform(500) }}></View>
-        }
-
-        <MaskTop />
-
-
-        {/* index */}
-        <View className='apartment-container-picIndexStyle' style={picIndexStyle}>
-          <View className='apartment-container-opacityBgStyle'></View>
-        </View>
-        <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle' style={fontStyle}>
+        :
+          <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
           <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
           <Text className='text-white'>/{swipers.length}</Text>
         </View>
+        }
+
+        {!showPhotos ? <View>
+          {swipers && swipers.length ? <View>
+            {
+              swipers.length > 1 ?
+                <Swiper
+                  className='swiper'
+                  autoplay
+                  circular
+                  current
+                  onChange={this.changePicIndex}
+                  style={style}
+                  displayMultipleItems={1}
+                  indicatorActiveColor={COLOR_YELLOW}
+                  indicatorColor={COLOR_DOATS_CAROUSEL}
+                  onClick={this.onShowPic}
+                >
+                  {swipers.map(i => <SwiperItem key={i.url}>
+                    <Image
+                      style={style}
+                      mode='scaleToFill'
+                      src={i.url}
+                    />
+                  </SwiperItem>)}
+                </Swiper>
+                :
+                <Image
+                  style={style}
+                  mode='scaleToFill'
+                  src={swipers.length ? `${swipers[0].url}` : ''} >
+                </Image>
+            }
+          </View>
+            : <View style={{ height: Taro.pxTransform(500) }}></View>
+          }</View>
+          : <View>{qsf_picture && qsf_picture.length ? <View>
+            {
+              qsf_picture && qsf_picture.length > 1 ?
+                <Swiper
+                  className='swiper'
+                  autoplay
+                  circular
+                  current
+                  onChange={this.changePicIndex}
+                  style={style}
+                  displayMultipleItems={1}
+                  indicatorActiveColor={COLOR_YELLOW}
+                  indicatorColor={COLOR_DOATS_CAROUSEL}
+                  onClick={this.onShowPicPhoto}
+                >
+                  {qsf_picture.map(i => <SwiperItem key={i.url}>
+                    <Image
+                      style={style}
+                      mode='aspectFill'
+                      src={i.url}
+                    />
+                  </SwiperItem>)}
+                </Swiper>
+                :
+                <Image
+                  style={style}
+                  mode='aspectFill'
+                  src={qsf_picture.length ? `${qsf_picture[0].url}` : ''} >
+                </Image>
+            }
+          </View>
+            : <View style={{ height: Taro.pxTransform(500) }}></View>
+          }</View>}
+
+        <MaskTop />
 
         <View className='page-white apartment-container pb-3' >
           <View className='apartment-container-favorite at-row at-row__justify--center at-row__align--center' hidden={show === true ? true : false}>

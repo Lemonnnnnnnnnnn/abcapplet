@@ -266,4 +266,6 @@ export const PAYLOAD_COUPON_ALL = { current_page: 1, page_size: 10 }
 export const PAYLOAD_COUPON_CAN_USED = { current_page: 1, page_size: 10, status: 0 }
 export const PAYLOAD_COUPON_HAVE_BEEN_USED = { current_page: 1, page_size: 10, status: 1 }
 export const PAYLOAD_COUPON_USER_EXPIRED = { current_page: 1, page_size: 10, status: 2 }
+//看房行程 看房不满意
+export const API_APPOINTMENT_UNSATIS = `${HOST}/appointment/unsatisfactoryPost`
 

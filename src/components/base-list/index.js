@@ -34,6 +34,7 @@ class BaseList extends BaseComponent {
 
 
   onReset(payload) {
+
     payload = payload || this.props.defaultPayload
 
     this.setState({

@@ -39,7 +39,7 @@ export default class CustomNav extends BaseComponent {
           onHome={this.onBackHome}
         />
       </View>
-     
+
     )
   }
 }

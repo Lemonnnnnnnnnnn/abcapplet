@@ -146,24 +146,33 @@
       background: #f7f7f7;
       border-radius: 30px;
       text-align: center;
-      &-text{
+      &-text {
         color: #b4b4b4;
       }
     }
-    &-board{
+    &-board {
       position: relative;
       top: 100px * $hd;
     }
-    &-roomBoard{
+    &-roomBoard {
       // input{
       //   background: #F8F8F8;
       //   border-radius: 5px * $hd;
       // }
-      &-input{
-        background: #F8F8F8;
+      &-input {
+        background: #f8f8f8;
         border-radius: 5px * $hd;
         height: 52.5px;
       }
     }
+  }
+}
+
+.appointment {
+  &-yellowbot {
+    height: 16px * $hd;
+    width: 16px * $hd;
+    border-radius: 8px * $hd;
+    background-color: rgba(255, 201, 25, 1);
   }
 }

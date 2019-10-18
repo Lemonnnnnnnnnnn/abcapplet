@@ -71,3 +71,9 @@
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
   }
 }
+.line {
+  width: 302px * $hd;
+  height: 0px * $hd;
+  border: 1px * $hd solid rgba(248, 248, 248, 1);
+  opacity: 1;
+}

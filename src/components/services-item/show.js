@@ -1,0 +1,206 @@
+// Taro 组件
+import Taro from '@tarojs/taro'
+import { View, Image, Button } from '@tarojs/components'
+import { AtIcon, AtButton } from 'taro-ui'
+
+import { PAGE_ORDER_CREATE, PAGE_ORDER_SHOW,PAGE_APPOINTMENT_DETAIL ,PAGE_APPOINTMENT_AUDIT} from '@constants/page'
+import {
+  LOCAL_APPOINTMENT_APPOINT,
+  LOCAL_APPOINTMENT_LOOKROOM ,
+  LOCAL_APPOINTMENT_AGENCY,
+
+ } from '@constants/locale'
+
+// 自定义组件
+import BaseComponent from '@components/base'
+import CustomerMask from '@components/customer-mask'
+
+class ServiceItem extends BaseComponent {
+
+  state = {
+    showCustomer:false,
+
+
+  }
+  //打开客服弹窗
+  onOpenCustom(){
+    this.setState({
+      showCustomer:true
+    })
+  }
+  //打开客服弹窗
+  onCloseCustom(){
+    this.setState({
+      showCustomer:false
+    })
+  }
+  //已签约，前往签约下定
+  onAgency(){
+    const { item } = this.props
+    console.log(item)
+    const { id, is_can_reward, reward_id } = item
+    if (!is_can_reward) {
+      Taro.navigateTo({
+        url: `${PAGE_APPOINTMENT_AUDIT}?id=${reward_id}`
+      })
+    }
+    else {
+      Taro.navigateTo({
+        url: `${PAGE_APPOINTMENT_DETAIL}?id=${id}&isSign=${this.props.item.is_sign}`
+      })
+    }
+  }
+  //预定房间
+  onBookRoom(){
+    const { item } = this.props
+    console.log(item)
+    Taro.navigateTo({
+      url:`${PAGE_ORDER_CREATE}?appointment_id=${item.id}`
+    })
+  }
+  //去签约
+  onGoAgency(){
+    const { item } = this.props
+    console.log(item)
+    Taro.navigateTo({
+      url: `${PAGE_ORDER_SHOW}?id=${item.order_id}`
+    })
+
+  }
+
+  render() {
+    const { status, step,item } = this.props
+    const { showCustomer } = this.state
+
+    return (<View className='mb-2' >
+      <View className='at-row at-row__align--center page-middile ml-1' >
+        <View className='at-col-2'>
+          <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >
+            {LOCAL_APPOINTMENT_APPOINT}
+        </View>
+        </View>
+
+        {status !== 1 ? <View className='at-row at-col-2'>
+          {[1, 2, 3].map(i =>
+            <View key={i.id}>
+              {/* 黄色 */}
+              <AtIcon value='chevron-right' size='15' color=' #FFC919' />
+            </View>)}
+        </View>
+          :
+          <View className='at-row at-col-2'>
+            {[1, 2, 3].map(i =>
+              <View key={i.id}>
+                <AtIcon value='chevron-right' size='15' color='#D2D2D2' />
+              </View>)}
+          </View>}
+
+        {status === 3 || status === 4 || status === 5 || status === 6  || status === 7 ||status === 8 || status === 9? <View className=' at-col-2'>
+          <View className='page-middile text-normal  text-yellow apartment-item-noaAppoint' >
+            看房
+        </View>
+        </View>
+          :
+
+          <View className=' at-col-2'>
+            <View className='page-middile text-normal text-muted apartment-item-haveAppoint' >
+            看房
+        </View>
+          </View>
+        }
+
+        {status === 4 || status === 5 ||  status === 6|| status === 7 ||status === 8 || status === 9 ? <View className='at-row at-col-2'>
+          {[1, 2, 3].map(i =>
+            <View key={i.id}>
+              <AtIcon value='chevron-right' size='15' color='#FFC919' />
+            </View>)}
+        </View>
+          :
+          <View className='at-row at-col-2'>
+            {[1, 2, 3].map(i =>
+              <View key={i.id}>
+                <AtIcon value='chevron-right' size='15' color=' #D2D2D2' />
+              </View>)}
+          </View>}
+
+
+        {status === 5 || status === 6 || status === 7 ||status === 8 || status === 9? <View className=' at-col-2'>
+          <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >
+            {LOCAL_APPOINTMENT_AGENCY}
+        </View>
+        </View>
+          :
+
+          <View className=' at-col-2'>
+            <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+              {LOCAL_APPOINTMENT_AGENCY}
+        </View>
+          </View>
+        }
+      </View>
+
+
+
+      <View className=' page-middile mt-2'>
+        <View className='line'></View>
+      </View>
+
+
+      {status === 1 && <View className='at-row at-row__justify--between page-middile mt-3 pb-3'>
+        <View className='text-normal page-middile text-white apartment-item-buttonGrey' >联系管家</View>
+        <View className='text-normal page-middile  ml-4 apartment-item-buttonYellow' onClick={this.onOpenCustom}>联系客服</View>
+      </View>}
+
+      {status === 2 && <View className='at-row at-row__justify--between page-middile mt-3 pb-3'>
+        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.props.onContact}>联系管家</View>
+        <View className='text-normal page-middile  ml-4 apartment-item-buttonYellow' onClick={this.onOpenCustom}>联系客服</View>
+      </View>}
+
+      {(status === 3 || status === 4 ) && step !== 7 && <View className='at-row at-row__justify--between page-middile mt-3 pb-3'>
+        <View>
+          <View className='text-mini page-middile  text-secondary'>获得退租险及返现</View>
+          <View className='text-normal page-middile mt-1 apartment-item-buttonYellowBo' onClick={this.onBookRoom}>预定房间</View>
+        </View>
+        <View >
+          <View className='text-mini ml-3 page-middile text-secondary'>获得返现红包</View>
+          <View className='text-normal page-middile  ml-3 mt-1 apartment-item-buttonYellowBo' onClick={this.onAgency}>线下已签约</View>
+        </View>
+        <View className='mt-3'>
+          <View className='text-normal page-middile  ml-3 mt-1 apartment-item-buttonYellowBo' onClick={this.props.onDisLike.bind(this,item)}>不满意</View>
+        </View>
+      </View>}
+
+      {(status === 3 || status === 4) && step === 7 && <View className='at-row page-middile mt-3 pb-3'>
+        <View className='text-bold text-normal '>“将为您提供更好的服务”</View>
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>服务评价</View>
+      </View>}
+
+      {status === 5 && <View className='at-row page-middile mt-3 pb-3'>
+        <View className='text-bold text-normal'>“已预定成功”</View>
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>去签约</View>
+        <View className='text-normal page-middile ml-3 apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>服务评价</View>
+      </View>}
+
+      {(status === 6 || status === 7 ||status === 8 || status === 9) && <View className='at-row page-middile mt-3 pb-3'>
+         {status === 6 && <View className='text-bold '>“已签约返现”</View>}
+         {status === 7 && <View className='text-bold text-normal'>“已签约返现并获得退租险”</View>}
+         {status === 8 && <View className='text-bold '>“签约审核中”</View>}
+         {status === 9 && <View className='text-bold '>“已签约返现”</View>}
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>服务评价</View>
+      </View>}
+
+
+      <CustomerMask
+        show={showCustomer}
+        onClose={this.onCloseCustom}
+      />
+
+    </View>
+
+
+    )
+
+  }
+}
+
+export default ServiceItem

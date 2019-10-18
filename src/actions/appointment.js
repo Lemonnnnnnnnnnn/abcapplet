@@ -11,6 +11,7 @@ import {
   API_APPOINTMENT_REWARDORDER,
   API_APPOINTMENT_DETAILREWARD,
   API_APPOINTMENT_REWARD_ORDER_ROOM_POST,
+  API_APPOINTMENT_UNSATIS,
 } from '@constants/api'
 
 import{
@@ -23,7 +24,7 @@ import{
   TYPE_APPOINTMENT_REWARDORDER,
   TYPE_APPOINTMENT_DETAILREWAR,
   TYPE_APPOINTMENT_REWARD_ORDERROOM,
-
+  TYPE_APPOINTMENT_UNSATIS,
 }from '@constants/appointment'
 
 /**
@@ -133,4 +134,12 @@ export const dispatchAppointRewordOrderRoomPost = (payload) => createAction({
   method: 'POST',
   type: TYPE_APPOINTMENT_REWARD_ORDERROOM,
   url: API_APPOINTMENT_REWARD_ORDER_ROOM_POST,
+})
+
+//看房行程 看房不满意
+export const dispatchAppointUnsatis= (payload) => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_APPOINTMENT_UNSATIS,
+  url: API_APPOINTMENT_UNSATIS,
 })
