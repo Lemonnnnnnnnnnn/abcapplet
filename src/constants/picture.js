@@ -39,3 +39,4 @@ export const SIGN_SUCCESS = 'https://images.gongyuabc.com/image/sign-success.png
 export const ORDER_STEP_ONE = 'https://images.gongyuabc.com/image/order-step1.png'
 export const ORDER_STEP_TWO = 'https://images.gongyuabc.com/image/order-step2.png'
 export const ORDER_STEP_THREE = 'https://images.gongyuabc.com/image/order-step3.png'
+export const ORDER_STEP_FOUR = 'https://images.gongyuabc.com/image/order-step4.png'
