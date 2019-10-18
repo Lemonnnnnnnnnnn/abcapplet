@@ -30,18 +30,16 @@ class ServicesHome extends Component {
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
-    NowCurrentPage: 2,
+    count: true
   }
 
-  refAppointmentList = (node) => this.appointmentList = node
+  refserviceList = (node) => this.ServiceList = node
 
   componentDidShow() {
+    console.log(1111)
+    const { count } = this.state
     buryPoint()
-    this.onShow()
-
-    Taro.showTabBarRedDot({
-      index: 2
-    })
+     this.onShow()
   }
 
   onShow() {
@@ -59,59 +57,29 @@ class ServicesHome extends Component {
           })
       }
       )
-    this.setState({ payload: { ...payload, current_page: 2 } })
+
   }
   async onPullDownRefresh() {
-    await this.onHide()
-    const { payload } = this.state
-    this.props.dispatchAppointmentList({ payload: { ...payload, current_page: 1 } }).
-      then((res) => {
-        res && this.setState({
-          time: res.data.data.date,
-          NowCurrentPage: 2,
-          payload: { ...payload, current_page: 2 }
-        })
-      })
+    this.ServiceList.onReset(null)
+
     Taro.stopPullDownRefresh()
   }
-  componentDidHide() {
-    this.onHide()
-  }
-  onHide() {
-    const { payload } = this.state
-    this.props.dispatchAppointmentList({ current_page: 100000, page_size: 10 }).then(() =>
-      this.setState({
-        NowCurrentPage: 2,
-        payload: { ...payload, current_page: 1 }
-      })
-    )
+
+  onSetReset() {
+    this.ServiceList.onReset(null)
   }
 
+componentDidHide(){
 
+    this.ServiceList.onReset(null)
+  }
 
   /**
    * 到底部加载行程下一页
    */
   onReachBottom() {
-    const { payload, NowCurrentPage } = this.state
-    const currentPageNow = NowCurrentPage + 1
-    this.setState({
-      NowCurrentPage: currentPageNow,
-      payload: {
-        ...payload, current_page: currentPageNow
-      }
-    })
-    this.props.dispatchNextPageApartmentList(payload).
-      then((res) => {
-        res && res.data.data.list.length === 0 &&
-          Taro.showToast({
-            title: '加载完毕',
-            icon: 'none',
-            duration: 2000
-          })
-      }
+    this.ServiceList.onNextPage()
 
-      )
   }
   //调转到地图找房
   onToLeft() {
@@ -126,23 +94,9 @@ class ServicesHome extends Component {
     })
   }
 
-  // 关闭获取授权弹窗
-  //  onCloseAuthorizationMask() {
-  //   this.setState({ showAuthorizationMask: false })
-  // }
-
   render() {
     const { appointments } = this.props
     const { time, payload } = this.state
-
-
-
-    const yellowPointStyle = {
-      height: Taro.pxTransform(16),
-      width: Taro.pxTransform(16),
-      borderRadius: '50%',
-      backgroundColor: 'rgba(255, 201, 25, 1)'
-    }
 
     const page = {
       backgroundColor: '#FFFFFF',
@@ -160,9 +114,8 @@ class ServicesHome extends Component {
             <Image src='https://images.gongyuabc.com/image/appointmentAdNew.png' className='appointment-ad'></Image>
           </View>
           <View className='at-row at-row__align--center  p-2' >
-            <View className='at-row at-row__align--center at-row__justify--center ml-2' style={yellowPointStyle}></View>
+            <View className='at-row at-row__align--center at-row__justify--center ml-2 appointment-yellowbot' ></View>
             <View className='pl-2 text-bold text-large'>看房行程</View>
-
 
           </View>
 
@@ -174,10 +127,10 @@ class ServicesHome extends Component {
                     <View >
                       <ServicesList
                         lists={appointments.list}
-                        time={time}
-                        ref={this.refApartmentList}
+                        ref={this.refserviceList}
                         defaultPayload={payload}
-                        dispatchList={this.props.dispatchApartmentList}
+                        onSetReset={this.onSetReset}
+                        dispatchList={this.props.dispatchAppointmentList}
                         dispatchNextPageList={this.props.dispatchNextPageApartmentList}
                       />
                     </View>

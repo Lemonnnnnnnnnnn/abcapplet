@@ -79,10 +79,10 @@ class AppointmentRevolution extends Component {
         this.onComment()
         onEvalution()
         onClose()
+       this.props.onSetReset()
       })
     }
   }
-
 
   onMaskTouchMove(e) {
     return e.stopPropagation()

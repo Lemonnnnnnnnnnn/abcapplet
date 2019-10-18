@@ -86,16 +86,16 @@ class ApartmentTypeItem extends BaseComponent {
         <View className=''>
           {
             discount_price_title ?
-              <View className='text-yellow text-normal ml-1 ' style={{ marginTop: Taro.pxTransform(5) }} >{`${LOCALE_MONEY}${discount_price_title}${LOCALE_QI}`}</View> :
+              <View className='text-yellow text-mini ml-1 ' >{`${LOCALE_MONEY}${discount_price_title}${LOCALE_QI}`}</View> :
               <View className='text-yellow text-normal mt-3 mb-2  ml-1'>{`${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
           }
           {/* 原价 */}
           {discount_price_title && <View className='at-row  at-row__align--center ml-2 mb-1'  style='text-decoration:line-through;' >
-            <View className='text-muted text-mini' style={{ marginTop: Taro.pxTransform(7) }}>原价：</View>
-            <Text className=' text-small text-muted'>
+            <View className='text-muted text-mini' >原价：</View>
+            <Text className=' text-mini text-muted'>
               {priceTitle ? priceTitle : `${LOCALE_MONEY}${priceTitle}`}元
             </Text>
-            <Text className='text-mini text-muted ' style={{ marginTop: Taro.pxTransform(7) }}>{LOCALE_QI}</Text>
+            <Text className='text-mini text-muted '>{LOCALE_QI}</Text>
           </View>}
         </View>
       </View>

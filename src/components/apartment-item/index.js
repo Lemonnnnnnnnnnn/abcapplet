@@ -243,11 +243,11 @@ class ApartmentItem extends BaseComponent {
               </View>
 
               <View className='mt-1 at-row ml-4 at-col-5  page-middile' style='text-decoration:line-through;' >
-                <View className='text-muted text-mini' style={{ marginTop: Taro.pxTransform(5) }}>原价：</View>
-                <Text className=' text-small text-muted'>
+                <View className='text-muted text-mini' >原价：</View>
+                <Text className=' text-mini text-muted'>
                   {isNaNPrice ? priceTitle : `${LOCALE_MONEY}${priceTitle}`}
                 </Text>
-                <Text className='text-mini text-muted ' style={{ marginTop: Taro.pxTransform(5) }}>{LOCALE_QI}</Text>
+                <Text className='text-mini text-muted ' >{LOCALE_QI}</Text>
               </View>
             </View>
 
@@ -282,11 +282,11 @@ class ApartmentItem extends BaseComponent {
           }
           {/* 原价 */}
           {discount_price_title && <View className='at-row  at-row__align--center  mb-2' style='text-decoration:line-through;' >
-            <View className='text-muted text-mini' style={{ marginTop: Taro.pxTransform(5) }}>原价：</View>
-            <Text className=' text-small text-muted'>
+            <View className='text-muted text-mini'>原价：</View>
+            <Text className=' text-mini text-muted'>
               {priceTitle ? priceTitle : `${LOCALE_MONEY}${priceTitle}`}元
             </Text>
-            <Text className='text-mini text-muted ' style={{ marginTop: Taro.pxTransform(5) }}>{LOCALE_QI}</Text>
+            <Text className='text-mini text-muted '>{LOCALE_QI}</Text>
           </View>}
 
 

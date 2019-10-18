@@ -198,7 +198,7 @@ page {
     border-top-right-radius: 12px * $hd;
     background: #fff;
     min-height: 100vh;
-    
+
     .at-button{
       height : 37px * $hd;
       line-height: 37px * $hd;
@@ -231,4 +231,13 @@ page {
   transform: translate(-50%, 0);
   left: 50%;
   top: 0;
+}
+.risk-ad{
+  background: url("https://images.gongyuabc.com/image/risk-ad.png") center center no-repeat;
+  background-size: contain;
+
+  width: 343px * $hd;
+  height:47px * $hd;
+
+
 }

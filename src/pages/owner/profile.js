@@ -65,7 +65,7 @@ class UserProfile extends Component {
 
   async componentDidShow() {
     Taro.showTabBarRedDot({
-      index:2
+      index: 2
     })
     buryPoint()
     const { payload: user } = await this.props.dispatchUser()
@@ -194,7 +194,8 @@ class UserProfile extends Component {
           />
 
           {/* 优选入口 */}
-          <View className='mx-2' onClick={this.openMiniProgramCreate} >
+
+          <View className='mx-2' onClick={this.openMiniProgramCreate} style={{ position: 'relative', zIndex: 100 }}>
             <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
           </View>
 

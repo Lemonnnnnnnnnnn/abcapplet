@@ -21,13 +21,15 @@ import ApartmentContainer from '@components/apartment-container'
 import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
 import AppartmentMatchingMask from '@components/apartment-matching-mask'
 import ApartmentCouponMask from '@components/apartment-coupon-mask'
+import HouseTypeAvatar from '@components/house-type-avatar'
 import CustomNav from '@components/custom-nav'
 
 
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { ORDER_HEADERS } from '@constants/order'
-import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
+
+import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT, APARTMENT_AVATAR_DIST } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
@@ -54,6 +56,7 @@ class HouseTypeShow extends Component {
       cbds: [],
       rules: [],
       swipers: [],
+      qsfPicture:[],
       special: [],
       notices: [],
       hotRules: [],
@@ -129,8 +132,6 @@ class HouseTypeShow extends Component {
       roomMatch_list.length >= 5 && roomMatch_list.push(loadMore)
       publicMatch_list.length >= 5 && publicMatch_list.push(loadMore)
 
-      let roomList = (data.room_list).slice(0, 5)
-
       // 生成当前户型位于other_houseType数组第一位的新数组
 
       allHouseType = data.other_house_type.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` }))
@@ -141,6 +142,7 @@ class HouseTypeShow extends Component {
       })
       const currentHouseType = allHouseType.splice(firstIndex, 1)
       const all_houseType = currentHouseType.concat(allHouseType)
+
 
 
       data && this.setState({
@@ -163,7 +165,7 @@ class HouseTypeShow extends Component {
           isSign: data.is_sign,
           notices: data.notices,
           descList: data.desc_list,
-          roomList: roomList,
+
           isCollect: data.is_collect,
           facilitys: data.facility_list,
           tags: data.tags,
@@ -172,6 +174,7 @@ class HouseTypeShow extends Component {
           apartmentTitle: data.apartment_title,
           lookTips: data.look_guide.tips || '',
           swipers: data.pictures.map(i => ({ url: i })),
+          qsfPicture: data.qsf_picture.map(i => ({ url: i })),
           title: `${data.title} · ${data.apartment_title}`,
           priceTitle: data.price_title,
           hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
@@ -221,7 +224,7 @@ class HouseTypeShow extends Component {
   onNavigation(url) {
     Taro.navigateTo({ url })
   }
-
+  //前往退租险页面
   onNavigateToRisk() {
     Taro.navigateTo({ url: PAGE_RISK_LANDING })
   }
@@ -395,12 +398,13 @@ class HouseTypeShow extends Component {
 
     const { houstType, map, buttons, showRentDescription,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask } = this.state
+      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask ,} = this.state
+
 
     const { latitude, longitude, markers } = map
 
     const {
-      title, swipers, isCollect, cost, types,
+      title, swipers, isCollect, cost, types,qsfPicture,
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
@@ -434,9 +438,12 @@ class HouseTypeShow extends Component {
 
         <View
           onClick={this.onCloseLittleMask}
-          style={{ paddingBottom: Taro.pxTransform(120) }}>
+          style={{ paddingBottom: Taro.pxTransform(120) }}
+        >
 
           <ApartmentContainer
+            type={true}
+            qsf_picture={qsfPicture}
             houseType_id={houseType_id}
             swipers={swipers}
             show={false}
@@ -493,7 +500,7 @@ class HouseTypeShow extends Component {
                     <View className='at-row at-row__justify--between at-row__align--center mt-2' >
 
                       <View className='at-col text-normal text-secondary' >
-                        {LOCALE_PRICE_SEMICOLON + LOCALE_PRICE_START + showPrice + LOCALE_PRICE_ORIGIN}
+                        {LOCALE_PRICE_SEMICOLON + showPrice + LOCALE_PRICE_START + LOCALE_PRICE_ORIGIN}
                       </View>
 
                       <View className='at-col '>
@@ -532,10 +539,18 @@ class HouseTypeShow extends Component {
                   <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
                 </View>
               }
-
+              {/* 广告位 */}
               <View className='page-middile mt-2'>
                 <Image onClick={this.onNavigateToRisk} src={DETAIL_AD} className='appointment-detail-ad'></Image>
               </View>
+
+              {/* 已有多少人获得转租金 */}
+              <View style={{ height: Taro.pxTransform(60) }} className='my-1'>
+                <View className='page-middile text-normal text-secondary'>已有50人获得转租险</View>
+
+              </View>
+
+
 
               <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
 
@@ -666,47 +681,7 @@ class HouseTypeShow extends Component {
                 </View>
               </View>
 
-              {/* 可租房间 */}
 
-              {roomList.length !== 0 &&
-                <View>
-                  <View className='text-bold text-huge mt-4 mb-2'>可租房间</View>
-                  {/* 快速锁定&&赔付权益 */}
-                  {
-                    isSign && <OrderHeader items={ORDER_HEADERS} ></OrderHeader>
-                  }
-
-                  {/* 列表 */}
-
-                  <View className='mt-3 house-type-gray-background'>
-                    {roomList && roomList.map((i, index) =>
-                      <RoomItem
-                        key={i.id}
-                        room={i}
-                        roomList={roomList}
-                        isSign={isSign}
-                        onCreateFavorite={this.onRoomCreateFavorite}
-                        onDeleteFavorite={this.onRoomDeleteFavorite}
-                        className={`${index + 1 !== roomList.length && 'border-bottom'}`}
-                      />)}
-                  </View>
-
-                  {/* 搜索房间 */}
-                  {
-                    showApartRoom && roomList.length >= 5 && <View
-                      style={{ width: '100%' }}
-                      onClick={this.onSearchRoom}
-                      className='mt-2 pt-1 pb-1 text-secondary at-row at-row__align--end at-row__justify--center'>
-                      <Text className='ml-2 text-normal text-muted'>查看更多房间</Text>
-                      <View className=''>
-                        <AtIcon className='ml-2' value='chevron-right' size='18' color={COLOR_GREY_2} />
-                      </View>
-
-                    </View>
-                  }
-
-                </View>
-              }
 
 
               {/* 用户须知 */}

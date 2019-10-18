@@ -247,3 +247,6 @@ export const API_USER_FEEDBACK = `${HOST}/user/setFeedbackPost`
 //用户漏斗接口
 export const API_INDEX_FUNNELDATAPOAT = `${HOST}/index/funnelDataPost`
 
+//看房行程 看房不满意
+export const API_APPOINTMENT_UNSATIS = `${HOST}/appointment/unsatisfactoryPost`
+

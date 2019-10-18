@@ -19,7 +19,7 @@ class RiskHeader extends BaseComponent {
 
   render() {
     const { items, className } = this.props
-    return (
+    return (<View>
       <Borad color='black' className={className}>
         <View className='px-4 py-4' onClick={this.onNavigetion}>
           <View className='at-row at-row__justify--between '>
@@ -38,6 +38,10 @@ class RiskHeader extends BaseComponent {
           </View>
         </View>
       </Borad>
+      <View className='risk-ad  page-middile mb-3'>
+        <View className='text-small' style={{marginLeft:Taro.pxTransform(200)}}> 已有50人获得退租险  共赔付￥10000</View>
+      </View>
+    </View>
     )
   }
 }

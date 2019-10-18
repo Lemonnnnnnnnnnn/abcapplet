@@ -9,8 +9,9 @@ import ServiceItem from '@components/services-item'
 
 // 常量
 import { LOCALE_NO_DATA } from '@constants/locale'
+import BaseList from '../base-list'
 
-class ServiceList extends Component {
+class ServiceList extends BaseList {
   render() {
     const { hasMore, loading, page } = this.state
     const {  mini , lists ,time} = this.props
@@ -27,17 +28,12 @@ class ServiceList extends Component {
               service={i}
               time={time}
               className='mt-1'
+              onSetReset={this.props.onSetReset}
             />
           </View>
         )}
       </View>
 
-      {/* 记载效果 */}
-      {/* <Placeholder
-        className='mt-1'
-        show={loading && !mini}
-        quantity={5}
-      /> */}
 
       {/* 无数据 */}
       {lists.length === 0

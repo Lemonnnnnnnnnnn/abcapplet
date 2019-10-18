@@ -35,11 +35,11 @@ export const SET_APARTMENT_LIST = 'SET_APARTMENT_LIST'
 export const SET_RECOMMEND_APARTMENT = 'SET_RECOMMEND_APARTMENT'
 export const UPDATE_APARTMENT_FAVORITE = 'UPDATE_APARTMENT_FAVORITE'
 export const SET_NEXT_PAGE_APARTMENT_LIST = 'SET_NEXT_PAGE_APARTMENT_LIST'
-export const SET_APARTMENT_LIST_TWO='SET_APARTMENT_LIST_TWO'
-export const SET_NEXT_PAGE_APARTMENT_LIST_TWO='SET_NEXT_PAGE_APARTMENT_LIST_TWO'
+export const SET_APARTMENT_LIST_TWO = 'SET_APARTMENT_LIST_TWO'
+export const SET_NEXT_PAGE_APARTMENT_LIST_TWO = 'SET_NEXT_PAGE_APARTMENT_LIST_TWO'
 export const SET_ARTICLE_APARTMENT_LIST = 'SET_ARTICLE_APARTMENT_LIST'
 export const SET_FAVORITE_APARTMENT_LIST = 'SET_FAVORITE_APARTMENT_LIST'
-export const SET_FAVORITE_HOUSETYPE_LIST='SET_FAVORITE_HOUSETYPE_LIST'
+export const SET_FAVORITE_HOUSETYPE_LIST = 'SET_FAVORITE_HOUSETYPE_LIST'
 export const SET_NEXT_PAGE_FAVORITE_HOUSETYPE_LIST = 'SET_NEXT_PAGE_FAVORITE_HOUSETYPE_LIST'
 export const SET_NEXT_PAGE_FAVORITE_APARTMENT_LIST = 'SET_NEXT_PAGE_FAVORITE_APARTMENT_LIST'
 export const SET_ACTIVITY_APARTMENT_LIST = 'SET_ACTIVITY_APARTMENT_LIST'
@@ -72,7 +72,7 @@ export const TYPE_APARTMENT_NEARBYPOST = 'TYPE_APARTMENT_NEARBYPOST'
 export const TYPE_CBD_APARTMENT = 'TYPE_CBD_APARTMENT'
 export const TYPE_NORMAL_APARTMENT = 'TYPE_NORMAL_APARTMENT'
 
-export const SET_APARTMENT_LOOK_LIST='SET_APARTMENT_LOOK_LIST'
+export const SET_APARTMENT_LOOK_LIST = 'SET_APARTMENT_LOOK_LIST'
 export const SET_CBD_APARTMENT_LIST = 'SET_CBD_APARTMENT_LIST'
 export const SET_NEXT_PAGE_CBD_APARTMENT_LIST = 'SET_NEXT_PAGE_CBD_APARTMENT_LIST'
 
@@ -163,8 +163,19 @@ export const HOUSE_TYPE_DESC = {
 
 // 优惠券
 export const APARTMENT_COUPON_DIST = {
-  1:{message : '领取'},
-  2:{message : '已领取'},
-  3:{message : '已使用'},
-  4:{message : '已过期'},
+  1: { message: '领取' },
+  2: { message: '已领取' },
+  3: { message: '已使用' },
+  4: { message: '已过期' },
 }
+
+// 优惠券
+export const APARTMENT_AVATAR_DIST = [
+  { username: "尽管如此世界依然美丽.", headimgurl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIloF6bxw87Db8sggW1vvNzjqiauRp5mpS9Ww1qgHgsemAXb6wsW0rPQouZ31IMPqCuTqbU5PFBPuA/132" },
+  { username: "(｢･ω･)｢嘿", headimgurl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIloF6bxw87Db8sggW1vvNzjqiauRp5mpS9Ww1qgHgsemAXb6wsW0rPQouZ31IMPqCuTqbU5PFBPuA/132" },
+  { username: "尽管如此世界依然美丽.", headimgurl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIloF6bxw87Db8sggW1vvNzjqiauRp5mpS9Ww1qgHgsemAXb6wsW0rPQouZ31IMPqCuTqbU5PFBPuA/132" },
+  { username: "(｢･ω･)｢嘿", headimgurl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIloF6bxw87Db8sggW1vvNzjqiauRp5mpS9Ww1qgHgsemAXb6wsW0rPQouZ31IMPqCuTqbU5PFBPuA/132" },
+  { username: "尽管如此世界依然美丽.", headimgurl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIloF6bxw87Db8sggW1vvNzjqiauRp5mpS9Ww1qgHgsemAXb6wsW0rPQouZ31IMPqCuTqbU5PFBPuA/132" },
+
+]
+

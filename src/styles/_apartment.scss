@@ -11,6 +11,7 @@
     border-top-left-radius: 6px * $hd;
     border-top-right-radius: 6px * $hd;
   }
+
   &-coupon {
     position: relative;
     right: -16px * $hd;
@@ -26,9 +27,9 @@
       border-radius: 12px * $hd;
       position: relative;
       background: linear-gradient(to right, #ffc919, #feb013);
-      &-angle{
+      &-angle {
         width: 12px * $hd;
-        height : 12px * $hd;
+        height: 12px * $hd;
         background: #fff;
         border-radius: 50%;
       }
@@ -152,7 +153,17 @@
 
 .apartment-container {
   position: relative;
-
+  &-opactyRoom {
+    width: 115px * $hd;
+    height: 26px * $hd;
+    background: rgba(0, 0, 0, 1);
+    opacity: 0.5;
+    border-radius: 13px * $hd;
+    position: absolute;
+    z-index: 99;
+    top: 200px * $hd;
+    left: 75px * $hd;
+  }
   &-favorite {
     position: absolute;
     right: 25px * $hd;
@@ -180,9 +191,15 @@
   }
 
   &-picIndexStyle {
+    width: 50px * $hd;
+    height: 26px * $hd;
+    background: rgba(0, 0, 0, 1);
+    opacity: 0.5;
+    border-radius: 13px * $hd;
     position: absolute;
-    height: 50px;
-    width: 140px;
+    z-index: 99;
+    top: 200px * $hd;
+    left: 15px * $hd;
   }
 
   &-heartNum {
@@ -239,5 +256,69 @@
   &-gray-background {
     background-color: #f8f8f8;
     border-radius: 24px;
+  }
+}
+
+.image-list {
+  position: absolute;
+  height: 27px * $hd;
+  width: 27px * $hd;
+  border-radius: 50%;
+
+  border-style: solid;
+  border-width: 2px * $hd;
+  border-color: #ffffff;
+}
+
+.apartment-item {
+  &-risk {
+    width: 85px * $hd;
+    height: 23px * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: 9px * $hd;
+  }
+  &-noaAppoint {
+    width: 44px * $hd;
+    height: 22px * $hd;
+    opacity: 1;
+    border-radius: 8px * $hd;
+    border: 1px * $hd solid rgba(255, 201, 25, 1);
+  }
+  &-haveAppoint {
+    width: 44px * $hd;
+    height: 22px * $hd;
+    opacity: 1;
+    border-radius: 8px * $hd;
+    border: 1px * $hd solid rgba(216, 216, 216, 1);
+  }
+  &-buttonYellow {
+    width: 98px * $hd;
+    height: 30px * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: 23px * $hd;
+  }
+  &-buttonGrey {
+    width: 98px * $hd;
+    height: 30px * $hd;
+    background: rgba(216, 216, 216, 1);
+    opacity: 1;
+    border-radius: 23px * $hd;
+  }
+
+  &-buttonYellowBo {
+    width: 84px * $hd;
+    height: 30px * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: 23px * $hd;
+  }
+}
+.appointment {
+  &-image {
+    width:343px * $hd;
+    height:292px * $hd;
+    border-radius:  10px  * $hd 10px  * $hd 0 0;
   }
 }
