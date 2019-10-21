@@ -65,7 +65,8 @@ class ApartmentContainer extends BaseComponent {
   onShowPhoto() {
     const { showPhotos } = this.state
     this.setState({
-      showPhotos: !showPhotos
+      showPhotos: !showPhotos,
+      current:0
     })
   }
 
@@ -126,7 +127,7 @@ class ApartmentContainer extends BaseComponent {
                   {swipers.map(i => <SwiperItem key={i.url}>
                     <Image
                       style={style}
-                      mode='scaleToFill'
+                      mode='aspectFill'
                       src={i.url}
                     />
                   </SwiperItem>)}
@@ -134,7 +135,7 @@ class ApartmentContainer extends BaseComponent {
                 :
                 <Image
                   style={style}
-                  mode='scaleToFill'
+                  mode='aspectFill'
                   src={swipers.length ? `${swipers[0].url}` : ''} >
                 </Image>
             }

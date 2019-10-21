@@ -37,7 +37,7 @@ export const PAGE_RISK_LANDING = '/pages/risk/landing-page'
 export const PAGE_APPOINTMENT_MESSAGE = '/pages/appointment/message'
 export const PAGE_APPOINTMENT_DETAIL = '/pages/appointment/detail'
 export const PAGE_APPOINTMENT_AUDIT='/pages/appointment/audit'
-export const PAGE_APPOINTMENT_SERVICES='/pages/appointment/services'
+export const PAGE_APPOINTMENT_SERVICES='/pages/appoint/services'
 
 // 转租页面
 export const PAGE_RECOMMEND_RECOMMEND = '/pages/recommend/recommend'

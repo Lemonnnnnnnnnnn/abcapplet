@@ -13,7 +13,7 @@ import ServiceItemShow from '@components/services-item/show'
 // NPM 包
 import classNames from 'classnames'
 
-import { PAGE_HOUSE_TYPE_SHOW,} from '@constants/page'
+import { PAGE_HOUSE_TYPE_SHOW, } from '@constants/page'
 
 
 import {
@@ -48,8 +48,23 @@ class ServiceItem extends BaseComponent {
     showIntention: false,//看房意向
     haveEvalution: false,//是否已经评价
     haveIntention: false,//是否已有意向
-    step: 1
+    step: 1,
+    middileTop: 0
   }
+
+
+  // componentDidMount() {
+  //   Taro.createSelectorQuery()
+  //     .in(this.$scope)
+  //     .select('.home')
+  //     .boundingClientRect()
+  //     .exec(res => {
+  //       console.log(res[0].height)
+  //       this.setState({
+  //         middileTop:res[0].height*0.75
+  //       })
+  //     })
+  // }
 
   onIntention() {
     this.setState({ haveIntention: true })
@@ -71,280 +86,280 @@ class ServiceItem extends BaseComponent {
   //不满意
   onDisLike(value) {
 
-    this.props.dispatchAppointUnsatis({id:value.id}).then(()=>{
+    this.props.dispatchAppointUnsatis({ id: value.id }).then(() => {
       this.props.onSetReset()
     })
 
   }
   //服务评价
-  onEvalution(){
+  onEvalution() {
     this.setState({
       showEvalution: true
     })
   }
 
-// 关闭服务评价
-onCloseEvalution() {
-  this.setState({
-    showEvalution: false
-  })
-}
-// 关闭看房意向
-onCloseIntention() {
-  this.setState({
-    showIntention: false
-  })
-}
-
-onalert() {
-  Taro.showToast({
-    title: '该公寓暂不支持线上预订',
-    icon: 'none',
-    duration: 2000
-  })
-}
-//联系管家
-onContact(){
-
-  const { service } = this.props
-  const { server_user } = service
-  Taro.makePhoneCall({ phoneNumber: server_user.mobile })
-}
-
-render() {
-  let { width, height, minWidth, minHeight, mini } = this.props
-  const { service } = this.props
-
-  const { haveIntention, haveEvalution, showIntention, showEvalution, step } = this.state
-
-
-  const { id, cover, apartment_title, house_type_title,
-    order_time, server_id, server_user, comment, look_time, intention, remark, date, status,appointment_status } = service
-
-  // 重置宽高
-  width = mini ? minWidth : width
-  height = mini ? minHeight : height
-
-  const imageStyle = {
-    width: '100%',
-    height: '100%',
+  // 关闭服务评价
+  onCloseEvalution() {
+    this.setState({
+      showEvalution: false
+    })
+  }
+  // 关闭看房意向
+  onCloseIntention() {
+    this.setState({
+      showIntention: false
+    })
   }
 
-  const imageStyleMask = {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    opacity: "0.2",
-    backgroundColor: "#000"
+  onalert() {
+    Taro.showToast({
+      title: '该公寓暂不支持线上预订',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  //联系管家
+  onContact() {
+
+    const { service } = this.props
+    const { server_user } = service
+    Taro.makePhoneCall({ phoneNumber: server_user.mobile })
   }
 
-  const headerStyle = {
-    width: '100%',
-  }
+  render() {
+    let { width, height, minWidth, minHeight, mini } = this.props
+    const { service } = this.props
 
-  const serviceMiddleStyle = {
-    position: 'absolute',
-    left: "50%",
-    top: Taro.pxTransform(290),
-    height: Taro.pxTransform(138),
-    transform: "translate( -50% , 30%)",
-    borderRadius: Taro.pxTransform(24),
-    width: '90%',
-    background: 'rgba(255,255,255,1)',
-    boxShadow: '0px 3px 6px rgba(0,0,0,0.04)',
-  }
-
-  const ImageCenteredStyle = {
-    width: Taro.pxTransform(120),
-    height: Taro.pxTransform(120),
-    position: "absolute",
-    left: "16%",
-    top: '50%',
-    transform: "translate( -50% , -50%)",
-  }
-
-  const CenterStyle = {
-    position: "absolute",
-    left: "16%",
-    top: '50%',
-    transform: "translate( -50% , -50%)",
-  }
-
-  const rightStyle = {
-    position: "absolute",
-    top: '50%',
-    left: "39%",
-    transform: "translate( 0 , -50%)",
-  }
+    const { haveIntention, haveEvalution, showIntention, showEvalution, step, middileTop } = this.state
 
 
+    const { id, cover, apartment_title, house_type_title,
+      order_time, server_id, server_user, comment, look_time, intention, remark, date, status, appointment_status } = service
 
-  // 设置图片宽高，方便七牛云格式化图片
-  const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
+    // 重置宽高
+    width = mini ? minWidth : width
+    height = mini ? minHeight : height
 
-  return (
-    <View className='pl-2 pr-2 pb-3 mt-1 m-2 ' style='position:relative ;' >
-      <View className={classNames('apartment')} >
-        {/* 头部 */}
-        <View className='apartment-header' style={headerStyle}>
+    const imageStyle = {
+      width: '100%',
+      height: Taro.pxTransform(364),
+    }
 
-          {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
-          {cover
-            ?
-            <View style={{ height: "200px" }}>
-              <View style={imageStyleMask}></View>
+    const imageStyleMask = {
+      width: "100%",
+      height: Taro.pxTransform(364),
+      position: "absolute",
+      opacity: "0.2",
+      backgroundColor: "#000"
+    }
 
-              <Image src={src} mode='scaleToFill' style={imageStyle} />
+    const headerStyle = {
+      width: '100%',
+    }
 
-            </View>
-            : <ImagePlaceholder height={height} />
-          }
-        </View>
-        <View style={{ marginTop: Taro.pxTransform(90) }}>
-          <ServiceItemShow
-            status={service.appointment_status}
-            item={service}
-            step={service.status}
-            onContact={this.onContact}
-            onDisLike={this.onDisLike}
-            onEvalution={this.onEvalution}
-          />
-        </View>
+    const serviceMiddleStyle = {
+      position: 'absolute',
+      left: "50%",
+      top: Taro.pxTransform(260),
+      height: Taro.pxTransform(138),
+      transform: "translate( -50% , 30%)",
+      borderRadius: Taro.pxTransform(24),
+      width: '90%',
+      background: 'rgba(255,255,255,1)',
+      boxShadow: '0px 3px 6px rgba(0,0,0,0.04)',
+    }
 
-        {/* 头部 公寓类型以及查看详情 */}
-        <View>
-          <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >
-            <View className='mt-1' style='color:#FFFFFF ;font-size:17px'>
-              <View >{date}</View>
-              <View className='mt-1'>
-                <View className='at-row'>
-                  {apartment_title}
-                </View>
+    const ImageCenteredStyle = {
+      width: Taro.pxTransform(120),
+      height: Taro.pxTransform(120),
+      position: "absolute",
+      left: "16%",
+      top: '50%',
+      transform: "translate( -50% , -50%)",
+    }
+
+    const CenterStyle = {
+      position: "absolute",
+      left: "16%",
+      top: '50%',
+      transform: "translate( -50% , -50%)",
+    }
+
+    const rightStyle = {
+      position: "absolute",
+      top: '50%',
+      left: "39%",
+      transform: "translate( 0 , -50%)",
+    }
+
+
+
+    // 设置图片宽高，方便七牛云格式化图片
+    const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
+
+    return (
+      <View className='pl-2 pr-2 pb-3 mt-1 m-2  home' style='position:relative ;' >
+        <View className={classNames('apartment')} >
+          {/* 头部 */}
+          <View className='apartment-header' style={headerStyle}>
+
+            {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
+            {cover
+              ?
+              <View>
+                <View style={imageStyleMask}></View>
+
+                <Image src={src} mode='scaleToFill' style={imageStyle} />
+
               </View>
-              {/* 头部，房子户型 */}
-
-            </View>
-            <View className=' at-row-5 mt-1 at-row at-row__align--center at-row__justify--end mr-5' >
-              <View className='text-small' style='color:#FFFFFF' onClick={this.onNavigation}>{LOCALE_APPOINTMENT_DETAIL}
-                <AtIcon
-                  value='chevron-right'
-                  size='15'
-                  color='#FFFFFF'
-                />
-              </View>
-            </View>
-            <View className='apartment-item-risk text-normal page-middile ' style={{ position: 'absolute', top: '75%', left: '63%' }}>支持退租险</View>
-          </View>
-        </View>
-        <View className='ml-3' style={{ position: 'absolute', top: '18%' }}>
-          <View className=' mt-2 ml-1 text-small text-white'>{house_type_title}</View>
-        </View>
-
-
-        {/* 中间，计时框 */}
-        <View className='' style={serviceMiddleStyle}>
-          <View className='at-row at-row__justify--between'>
-            {/* 左边 */}
-
-            {
-              appointment_status >= 3 ?
-                <View className='at-col at-col-3' style={{ postion: "relative" }}>
-                  <Image src='https://images.gongyuabc.com//image/appointmentOver.png' style={ImageCenteredStyle}></Image>
-                </View>
-                :
-                <View className='at-col at-col-3 ' style={CenterStyle}>
-                  <View className='at-row at-row__justify--center text-bold' style='font-size:22px;'>
-                    {order_time}
-                  </View>
-                  <View className='at-row at-row__justify--center text-muted mt-1' style='font-size:10px'>
-                    {look_time}
-                  </View>
-                </View>
+              : <ImagePlaceholder height={height} />
             }
+          </View>
+          <View  style={{marginTop:Taro.pxTransform(100) }} >
+            <ServiceItemShow
+              status={service.appointment_status}
+              item={service}
+              step={service.status}
+              onContact={this.onContact}
+              onDisLike={this.onDisLike}
+              onEvalution={this.onEvalution}
+            />
+          </View>
 
-            {/* 中间竖线 */}
-            <View className='at-col at-col-0' style={{ position: "absolute", left: '32%', top: "50%", transform: "translate(0,-50%)" }}>
-              <View className='service-line'></View>
-            </View>
-
-            {/* 右边 server_id===0时*/}
-            <View hidden={server_id === 0 ? true : false} style={rightStyle} className='at-col at-col-9 at-row at-row__justify--center '>
-              <View className='at-row at-row__justify--between' >
-                <View className='at-col at-col-0'>
-                  <image src={server_user.headimgurl} style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
+          {/* 头部 公寓类型以及查看详情 */}
+          <View>
+            <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >
+              <View className='mt-1' style='color:#FFFFFF ;font-size:17px'>
+                <View >{date}</View>
+                <View className='mt-1'>
+                  <View className='at-row'>
+                    {apartment_title}
+                  </View>
                 </View>
-                <View className='at-col at-col-9 ml-2' >
-                  <View className='at-row mt-1 at-row__align--end'>
-                    <View className='at-col at-col-4 text-bold at-col__align--center' style='font-size:14px'>{server_user.name}</View>
-                    <View className='at-col at-col-6 at-col__align--center'>
-                      <View className='at-row at-row__align--center mb-1'>
-                        <View className='at-col at-col-3 ml-2 '>
-                          <AtIcon
-                            value='star-2'
-                            size='15'
-                            color='#FFCB1F'
-                          />
-                        </View>
-                        <View className='at-col at-col-7 text-small text-muted mt-1' >{server_user.comment_score}分</View>
-                      </View>
+                {/* 头部，房子户型 */}
+
+              </View>
+              <View className=' at-row-5 mt-1 at-row at-row__align--center at-row__justify--end mr-5' >
+                <View className='text-small' style='color:#FFFFFF' onClick={this.onNavigation}>{LOCALE_APPOINTMENT_DETAIL}
+                  <AtIcon
+                    value='chevron-right'
+                    size='15'
+                    color='#FFFFFF'
+                  />
+                </View>
+              </View>
+              <View className='apartment-item-risk text-normal page-middile ' style={{ position: 'absolute', top: '75%', left: '63%' }}>支持退租险</View>
+            </View>
+          </View>
+          <View className='ml-3' style={{ position: 'absolute', top: '18%' }}>
+            <View className=' mt-2 ml-1 text-small text-white'>{house_type_title}</View>
+          </View>
+
+
+          {/* 中间，计时框 */}
+          <View className='' style={serviceMiddleStyle}>
+            <View className='at-row at-row__justify--between'>
+              {/* 左边 */}
+
+              {
+                appointment_status >= 3 ?
+                  <View className='at-col at-col-3' style={{ postion: "relative" }}>
+                    <Image src='https://images.gongyuabc.com//image/appointmentOver.png' style={ImageCenteredStyle}></Image>
+                  </View>
+                  :
+                  <View className='at-col at-col-3 ' style={CenterStyle}>
+                    <View className='at-row at-row__justify--center text-bold' style='font-size:22px;'>
+                      {order_time}
+                    </View>
+                    <View className='at-row at-row__justify--center text-muted mt-1' style='font-size:10px'>
+                      {look_time}
                     </View>
                   </View>
-                  <View className='text-muted ' style='font-size:10px'>{LOCALE_APPOINTMENT_HASLOOK}{server_user.service_num}次</View>
+              }
+
+              {/* 中间竖线 */}
+              <View className='at-col at-col-0' style={{ position: "absolute", left: '32%', top: "50%", transform: "translate(0,-50%)" }}>
+                <View className='service-line'></View>
+              </View>
+
+              {/* 右边 server_id===0时*/}
+              <View hidden={server_id === 0 ? true : false} style={rightStyle} className='at-col at-col-9 at-row at-row__justify--center '>
+                <View className='at-row at-row__justify--between' >
+                  <View className='at-col at-col-0'>
+                    <Image src={server_user.headimgurl} style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
+                  </View>
+                  <View className='at-col at-col-9 ml-2' >
+                    <View className='at-row mt-1 at-row__align--end'>
+                      <View className='at-col at-col-4 text-bold at-col__align--center' style='font-size:14px'>{server_user.name}</View>
+                      <View className='at-col at-col-6 at-col__align--center'>
+                        <View className='at-row at-row__align--center mb-1'>
+                          <View className='at-col at-col-3 ml-2 '>
+                            <AtIcon
+                              value='star-2'
+                              size='15'
+                              color='#FFCB1F'
+                            />
+                          </View>
+                          <View className='at-col at-col-7 text-small text-muted mt-1' >{server_user.comment_score}分</View>
+                        </View>
+                      </View>
+                    </View>
+                    <View className='text-muted ' style='font-size:10px'>{LOCALE_APPOINTMENT_HASLOOK}{server_user.service_num}次</View>
+                  </View>
                 </View>
               </View>
-            </View>
-            {/* 右边 server_id!==0时*/}
-            <View hidden={server_id === 0 ? false : true} style={rightStyle} className='at-col at-col-8 at-row at-row__justify--center'>
-              <View className='at-row at-row__justify--between ' >
-                <View className='at-col at-col-2'>
-                  <image src='http://images.gongyuabc.com/image/icon/head-no.png' style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
-                </View>
-                <View className='at-col at-col-9 mr-4'>
-                  <View className='text-small at-col font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>
-                  <View className='text-small at-col font-center mt-2' >{LOCALE_APPOINTMENT_BELONG}</View>
+              {/* 右边 server_id!==0时*/}
+              <View hidden={server_id === 0 ? false : true} style={rightStyle} className='at-col at-col-8 at-row at-row__justify--center'>
+                <View className='at-row at-row__justify--between ' >
+                  <View className='at-col at-col-2'>
+                    <image src='http://images.gongyuabc.com/image/icon/head-no.png' style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
+                  </View>
+                  <View className='at-col at-col-9 mr-4'>
+                    <View className='text-small at-col font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>
+                    <View className='text-small at-col font-center mt-2' >{LOCALE_APPOINTMENT_BELONG}</View>
 
+                  </View>
                 </View>
               </View>
-            </View>
 
+            </View>
           </View>
         </View>
+        {/* 服务评价 */}
+        <ServiceEvalution
+          show={showEvalution}
+          haveEvalution={haveEvalution}
+          onEvalution={this.onEvalution}
+          onSetReset={this.props.onSetReset}
+          comment={comment}
+          appointment_id={id}
+          name={server_user.name}
+          headimgurl={server_user.headimgurl}
+          service_num={server_user.service_num}
+          comment_score={server_user.comment_score}
+          onClose={this.onCloseEvalution}
+        />
+
+
+        {/* 看房意向 */}
+
+        <ServiceIntention
+          show={showIntention}
+          onIntention={this.onIntention}
+          haveIntention={haveIntention}
+
+          intention={intention}
+          apartment_title={apartment_title}
+          house_type_title={house_type_title}
+          remark={remark}
+          appointment_id={id}
+          onClose={this.onCloseIntention}
+        />
+
+
       </View>
-      {/* 服务评价 */}
-      <ServiceEvalution
-        show={showEvalution}
-        haveEvalution={haveEvalution}
-        onEvalution={this.onEvalution}
-        onSetReset={this.props.onSetReset}
-        comment={comment}
-        appointment_id={id}
-        name={server_user.name}
-        headimgurl={server_user.headimgurl}
-        service_num={server_user.service_num}
-        comment_score={server_user.comment_score}
-        onClose={this.onCloseEvalution}
-      />
-
-
-      {/* 看房意向 */}
-
-      <ServiceIntention
-        show={showIntention}
-        onIntention={this.onIntention}
-        haveIntention={haveIntention}
-
-        intention={intention}
-        apartment_title={apartment_title}
-        house_type_title={house_type_title}
-        remark={remark}
-        appointment_id={id}
-        onClose={this.onCloseIntention}
-      />
-
-
-    </View>
-  )
-}
+    )
+  }
 }
 
 export default ServiceItem

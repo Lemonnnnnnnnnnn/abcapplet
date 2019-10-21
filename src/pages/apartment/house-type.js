@@ -389,18 +389,17 @@ class HouseTypeShow extends Component {
     const { apartments } = this.props
 
     const { houstType, map, buttons, showRentDescription,
-      houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask ,} = this.state
+      houseType_id, showMatch, roomMatch_list, publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask ,} = this.state
 
 
     const { latitude, longitude, markers } = map
 
     const {
       title, swipers, isCollect, cost, types,qsfPicture,
-      descList, desc, roomList, isSign, cover,
+      descList, desc, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
-      discount_price_title, partTitle
+      discount_price_title
     } = houstType
 
     let { priceTitle } = houstType

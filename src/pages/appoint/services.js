@@ -36,7 +36,7 @@ class ServicesHome extends Component {
   refserviceList = (node) => this.ServiceList = node
 
   componentDidShow() {
-    console.log(1111)
+
     const { count } = this.state
     buryPoint()
     this.onShow()

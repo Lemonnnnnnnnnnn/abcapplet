@@ -21,10 +21,7 @@ class App extends Component {
       'pages/common/search',
 
       'pages/recommend/recommend',
-      'pages/appointment/services',
-      'pages/appointment/message',
-      'pages/appointment/detail',
-      'pages/appointment/audit',
+      'pages/appoint/services',
       // 'pages/appointment/maphouse',
       // 'pages/appointment/commutehouse',
       'pages/owner/profile',
@@ -40,6 +37,15 @@ class App extends Component {
           'house-type',
           'appointment',
           'search-room',
+        ]
+      },
+       {
+        root: 'pages/appointment',
+        pages: [
+          'message',
+          'detail',
+          'audit',
+
         ]
       },
       {
@@ -103,7 +109,7 @@ class App extends Component {
           selectedIconPath: "assets/icons/home-active.png"
         },
         {
-          pagePath: "pages/appointment/services",
+          pagePath: "pages/appoint/services",
           text: "找房·行程",
           iconPath: "assets/icons/services.png",
           selectedIconPath: "assets/icons/services-active.png"
@@ -139,21 +145,6 @@ class App extends Component {
 
   }
 
-  // componentDidMount() {
-  //   const apartment = getApartmentStorage()
-  //   if (Object.keys(apartment).length === 0) {
-  //     Taro.navigateTo({ url: PAGE_USER_AUTH })
-  //   }
-
-  //   // 增加行程消息的角标
-  //   const path = this.$router.params.path
-  //   if ([PAGE_DASHBOARD_INDEX, PAGE_BRAND_INDEX].includes(path)) {
-  //     const actions = dispatchBusinessList(PAYLOAD_BUSINESS_LIST_UNCHECK)
-  //     actions(() => { }).then(({ data: { data: { no_check } } }) =>
-  //       no_check > 0 && Taro.setTabBarBadge({ index: 1, text: String(no_check) })
-  //     )
-  //   }
-  // }
 
   //自动检测更新
   autoUpdate() {
