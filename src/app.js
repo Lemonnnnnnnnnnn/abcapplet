@@ -23,7 +23,6 @@ class App extends Component {
       // 'pages/appointment/maphouse',
       // 'pages/appointment/commutehouse',
       'pages/owner/profile',
-
     ],
     subPackages: [
       {
