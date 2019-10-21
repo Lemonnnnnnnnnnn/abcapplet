@@ -385,6 +385,10 @@ class HouseTypeShow extends Component {
       url: PAGE_HOME
     })
   }
+
+  onTest(){
+    Taro.showToast({ title: 'res.data.msg', icon: 'none' })
+  }
   render() {
     const { apartments } = this.props
 
@@ -400,7 +404,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
-      discount_price_title
+      discount_price_title, apartmentId
     } = houstType
 
     let { priceTitle } = houstType
@@ -466,6 +470,9 @@ class HouseTypeShow extends Component {
               <ApartmentCouponMask
                 show={showCouponMask}
                 onClose={this.onCloseCoupon}
+                apartment_id={apartmentId}
+                params={this.$router.params}
+                onTest={this.onTest}
               />
 
               {/* 头部 */}

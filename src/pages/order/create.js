@@ -120,7 +120,7 @@ class OrderCreate extends BaseComponent {
             id_code: data.user_info.id_no,
           }
         })
-      } else this.setState({ couponTotal: 0 + '个可用' })
+      } else this.setState({ couponTotal: '暂无可用优惠券' })
     })
 
   }
@@ -264,7 +264,9 @@ class OrderCreate extends BaseComponent {
 
   // 显示优惠券列表
   onShowCouponList() {
-    this.setState({ showCouponList: true })
+    const { payload: { room_id } } = this.state
+
+    room_id ? this.setState({ showCouponList: true }) : Taro.showToast({ title: '请先选择房间', icon: 'none' })
   }
 
   // 打开流程引导窗口

@@ -30,7 +30,7 @@ class UserOptions extends BaseComponent {
       <Board className={className}>
         {
           lists.map(i =>
-            <View className='user-list-item py-3 mx-3' onClick={this.onOptionClick.bind(this, i.id)} key={i}>
+            <View className='user-list-item py-3 mx-3' onClick={this.onOptionClick.bind(this, i.id)} key={i.id}>
               <View className='at-row at-row__justify--around'>
                 {/* 左 */}
                 <View className='at-row'>

@@ -96,14 +96,6 @@ let data=''
         Taro.setStorageSync('user_info', { ...user_info, token: '', username: '', mobile: '' })
         Taro.setStorageSync('code', '')
 
-
-        // const cLength = Taro.getCurrentPages().length
-        // const currentPage = Taro.getCurrentPages()[cLength - 1]
-        // if (currentPage.route === 'pages/common/home') { }
-        // else if (currentPage.route !== 'pages/user/auth') {
-        //   Taro.redirectTo({ url: PAGE_USER_AUTH })
-        // }
-
         break;
       }
       default: throw new Error(LOCALE_ERROR)

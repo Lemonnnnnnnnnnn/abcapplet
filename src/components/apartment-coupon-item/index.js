@@ -20,6 +20,7 @@ import {
   LOCALE_FIRST_MONTH_ONLY,
   LOCALE_PRICE_SEMICOLON
 } from '@constants/locale'
+import { PAGE_USER_AUTH } from '@constants/page'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -31,23 +32,44 @@ import * as apartmentActions from '@actions/apartment'
 })
 class ApartmentCouponItem extends BaseComponent {
 
-  state = {
-    statusTextLocal: '',
-  }
-
   onCouponReceive() {
-    const { couponId, can_receive, receive_reason, block } = this.props
-    let { statusTextLocal } = this.state
-    let statusTextLocalClone = statusTextLocal
+    // 判断登录状态 如果用户没有登录，优先执行跳转操作，引导用户登录
+    const { params } = this.props
+    let index = 0
+    const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1]
+    let lastPagePath = '/' + lastPage.route
 
-    !statusTextLocal && can_receive ?
+    for (var i in params) {
+      index += 1
+      index === 1 ? lastPagePath += '?' + i + '=' + params[i] : lastPagePath += '&' + i + '=' + params[i]
+    }
+
+    !Taro.getStorageSync('user_info').token && (
+      Taro.setStorageSync('lastPagePath', lastPagePath),
+      Taro.navigateTo({ url: PAGE_USER_AUTH })
+    )
+
+
+    const { couponId, can_receive, receive_reason, block } = this.props
+
+    // 如果状态为可领取，发送请求，请求成功提示服务器传回的信息
+    can_receive &&
       (
-        statusTextLocalClone = LOCALE_RECEIVE_HAVE,
-        this.props.dispatchCouponReceive({ id: couponId }).then(this.setState({ statusTextLocal: statusTextLocalClone }))
+        this.props.dispatchCouponReceive({ id: couponId }).then((res) => {
+          res.data.code === 1 && (
+            this.props.onListRefresh(),
+            setTimeout(() => {
+              Taro.showToast({ title: res.data.msg, icon: 'none' })
+            },200)
+          )
+
+        })
       )
-      : block === 'apartment' && !statusTextLocalClone && Taro.showToast({ title: receive_reason, icon: 'none' })
+    // 如果当前item所处板块为详情页，状态为不可领取，提示不可领取原因
+    block === 'apartment' && !can_receive && Taro.showToast({ title: receive_reason, icon: 'none' })
   }
 
+  // order页面的选择优惠券，把信息传回上级页面
   onSelectCoupon(id, price, block) {
     switch (block) {
       case 'order': this.props.onSelectCoupon(id, price)
@@ -56,16 +78,15 @@ class ApartmentCouponItem extends BaseComponent {
 
   render() {
     const { status, worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no,
-      validity_period_time, couponId, block, active, can_receive } = this.props
-    const { statusTextLocal } = this.state
+      validity_period_time, couponId, block, active, can_receive, max_receive_num } = this.props
 
+    // 对后台传过来的数值进行判断再赋值
 
     let [statusText, couponName, worthText, couponPrice, backgroundColor, textColorGlobal, textColorPrice, textColorName, textColorStaus] =
       ['', '', '', '', '', '', '', '', '']
 
     // 券类
-    if (type === 1) couponName = LOCALE_UNIVERSAL_COUPON
-    else couponName = apartment_title + LOCALE_VOUCHER
+    type === 1 ? couponName = LOCALE_UNIVERSAL_COUPON : couponName = apartment_title + LOCALE_VOUCHER
     // 价格
     if (coupon_type === 1) {
       worthText = worth * 100
@@ -79,9 +100,11 @@ class ApartmentCouponItem extends BaseComponent {
       couponPrice = LOCALE_PRICE_SEMICOLON + worthText
     }
 
+
+    // 对三种不同外观的优惠券样式进行class赋值
     switch (block) {
       case 'user': {
-        statusText = status !== undefined && USER_COUPON_DIST[0].title
+        statusText = status !== undefined && USER_COUPON_DIST[status].title
         backgroundColor = status === 2 ? 'background-gray' : 'background-white'
         textColorGlobal = status === 2 ? 'text-white' : 'text-secondary'
         textColorPrice = status !== 2 && 'text-yellow'
@@ -98,20 +121,23 @@ class ApartmentCouponItem extends BaseComponent {
       } break
       case 'apartment': {
         statusText = can_receive ? LOCALE_RECEIVE : LOCALE_RECEIVE_CANT
+        statusText = !Taro.getStorageSync('user_info').token ? '登录领取' : statusText
+
         backgroundColor = 'background-white'
         textColorGlobal = can_receive ? 'text-secondary' : 'text-gray--1'
         textColorPrice = can_receive && 'text-yellow'
         textColorName = can_receive && 'text-black'
-        textColorStaus = can_receive && !statusTextLocal ? 'text-yellow' : 'text-gary'
+        textColorStaus = can_receive || !Taro.getStorageSync('user_info').token ? 'text-yellow' : 'text-gary'
 
       } break
     }
 
     return (
       <View
-        className={`${active ? 'shadow-yellow' : 'shadow-black'} ${backgroundColor} apartment-coupon-item  mt-2`}
-        onClick={this.onSelectCoupon.bind(this, couponId, couponPrice, block)} >
-        <View className={`at-row inherit-Height ${textColorGlobal}`}  >
+        className={`${backgroundColor} ${active ? 'shadow-yellow' : 'shadow-black'} apartment-coupon-item  mt-2 `}
+        onClick={this.onSelectCoupon.bind(this, couponId, couponPrice, block)}
+      >
+        <View className={`${textColorGlobal} at-row inherit-Height `}  >
           {/* 左 价格 */}
           <View style={{ width: '30%' }} >
             <View className={`${textColorPrice} at-row at-row__justify--center at-row__align--center inherit-Height `} >
@@ -135,20 +161,22 @@ class ApartmentCouponItem extends BaseComponent {
           </View>
           {/* 右 减免类型 状态文本*/}
           <View className='text-normal ' onClick={this.onCouponReceive} style={{ width: '30%' }}>
-            <View className=' at-row at-row__justify--center at-row__align--center inherit-Height' style={{ color: statusTextLocal ? '#5D5D5D !important' : '' }}>
+            <View className=' at-row at-row__justify--center at-row__align--center inherit-Height' >
               <View>
                 <View className='at-row at-row__justify--center at-row__align--center'>
-                  <View className={`${textColorStaus}`}>{statusTextLocal || statusText}</View>
+                  <View className={`${textColorStaus}`}>{statusText}</View>
                   {!can_receive && block === 'apartment' && <AtIcon value='help' size='14' color='#88888'></AtIcon>}
                 </View>
-                {use_type === 1 && <View className='text-mini text-center'>{LOCALE_FIRST_MONTH_ONLY}</View>}
+                {use_type === 1 && <View className='text-mini text-center'>
+                  {LOCALE_FIRST_MONTH_ONLY},最高可领{max_receive_num === -1 ? '无限次' : max_receive_num}
+                </View>}
               </View>
 
             </View>
           </View>
         </View>
-        <View className={`${active && 'top-active'} apartment-coupon-item-angle top`} style={{ top: Taro.pxTransform(-6) }}></View>
-        <View className={`${active && 'bottom-active'} apartment-coupon-item-angle bottom`} style={{ bottom: Taro.pxTransform(-6) }}></View>
+        <View className={`${active && 'top-active'} top apartment-coupon-item-angle `} style={{ top: Taro.pxTransform(-6) }}></View>
+        <View className={`${active && 'bottom-active'} bottom apartment-coupon-item-angle `} style={{ bottom: Taro.pxTransform(-6) }}></View>
       </View>
 
     )

@@ -9,64 +9,79 @@ import Board from '@components/board'
 // 自定义组件
 import BaseComponent from '@components/base'
 import ApartmentCouponList from '@components/apartment-coupon-list'
+import loginButton from '@components/login-button'
 
 // 自定义常量
 import { PAYLOAD_COUPON_LIST } from '@constants/api'
-import {LOCALE_ORDER_RENTAL_COUPON} from '@constants/locale'
+import { LOCALE_ORDER_RENTAL_COUPON } from '@constants/locale'
 
 // redux相关
 import { connect } from '@tarojs/redux'
 import * as apartmentActions from '@actions/apartment'
 
 @connect(state => state, {
-    ...apartmentActions,
+  ...apartmentActions,
 })
 
 class ApartmentCouponMask extends BaseComponent {
 
-    static defaultProps = {
-        show: false,
-    }
+  static defaultProps = {
+    show: false,
+    apartment_id: 0,
+  }
 
-    CouponList = node => this.ApartmentCouponList = node
+  CouponList = node => this.ApartmentCouponList = node
 
-    onMaskTouchMove(e) {
-        return e.stopPropagation()
-    }
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
 
-    onBottomOut() {
-        this.ApartmentCouponList.onNextPage()
-    }
+  onBottomOut() {
+    this.ApartmentCouponList.onNextPage()
+  }
 
-    render() {
-        const { show, onClose, apartmentCouponList } = this.props
-        const { list } = apartmentCouponList
+  onListRefresh(){
+    this.ApartmentCouponList.onReset(null)
+  }
 
-        return (
-            show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
-                <Board fixed='bottom' border='top'>
-                    <AtIcon onClick={onClose} value='close' size='15' className='p-2 mr-1 mt-1' color='#888' style='position : absolute ; right : 0'></AtIcon>
-                    <View className='text-huge  mt-2 text-center pb-2'> {LOCALE_ORDER_RENTAL_COUPON}</View>
-                    <ScrollView style={{ height: Taro.pxTransform(950) }} scrollY onScrollToLower={this.onBottomOut}>
+  onTest(){
+    Taro.showToast({ title: '领取成功', icon: 'none' })
+  }
 
-                        <ApartmentCouponList
-                            block='apartment'
-                            couponList={list}
-                            ref={this.CouponList}
+  render() {
+    const { show, onClose, apartmentCouponList, apartment_id } = this.props
+    const { list } = apartmentCouponList
 
-                            defaultPayload={PAYLOAD_COUPON_LIST}
-                            dispatchList={this.props.dispatchCouponListPost}
-                            dispatchNextPageList={this.props.dispatchNextPageCouponListPost}
-                        />
-                    </ScrollView>
-                    <View style={{ height: Taro.pxTransform(170) }}></View>
-                </Board>
-                <Masks show={show} />
+    return (
+      show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
+        <Board fixed='bottom' border='top'>
+          <AtIcon onClick={onClose} value='close' size='15' className='p-2 mr-1 mt-1' color='#888' style='position : absolute ; right : 0'></AtIcon>
+          <View className='text-huge  mt-2 text-center pb-2'> {LOCALE_ORDER_RENTAL_COUPON}</View>
+          <ScrollView style={{ height: Taro.pxTransform(list && list.length && 750) }} scrollY onScrollToLower={this.onBottomOut}>
 
-            </View>
+            <ApartmentCouponList
+              block='apartment'
+              couponList={list}
+              ref={this.CouponList}
+              params={this.props.params}
+              onListRefresh={this.onListRefresh}
 
-        )
-    }
+              defaultPayload={{ ...PAYLOAD_COUPON_LIST, apartment_id }}
+              dispatchList={this.props.dispatchCouponListPost}
+              dispatchNextPageList={this.props.dispatchNextPageCouponListPost}
+            />
+          </ScrollView>
+
+          {list && !list.length && <View className='mt-2 text-secondary text-center text-large p-4'>暂无可领取优惠券</View>}
+
+          <View style={{ height: Taro.pxTransform(170) }}></View>
+        </Board>
+        <Masks show={show} />
+
+      </View>
+
+    )
+  }
 }
 
 export default ApartmentCouponMask
