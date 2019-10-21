@@ -18,9 +18,6 @@ import RoomItem from '@components/room-item'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import ApartmentContainer from '@components/apartment-container'
-import ApartmentRentDescriptionMask from '@components/apartment-rent-description-mask'
-import AppartmentMatchingMask from '@components/apartment-matching-mask'
-import ApartmentCouponMask from '@components/apartment-coupon-mask'
 import HouseTypeAvatar from '@components/house-type-avatar'
 import CustomNav from '@components/custom-nav'
 
@@ -36,6 +33,9 @@ import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMEN
 import { PATH, HOME, FREE, POING_THREE, DETAIL_AD } from '@constants/picture'
 
 import buryPoint from '../../utils/bury-point'
+import ApartmentRentDescriptionMask from './components/apartment-rent-description-mask'
+import AppartmentMatchingMask from './components/apartment-matching-mask'
+import ApartmentCouponMask from './components/apartment-coupon-mask'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -386,7 +386,7 @@ class HouseTypeShow extends Component {
     })
   }
 
-  onTest(){
+  onTest() {
     Taro.showToast({ title: 'res.data.msg', icon: 'none' })
   }
   render() {

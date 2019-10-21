@@ -60,7 +60,7 @@ class ApartmentCouponItem extends BaseComponent {
             this.props.onListRefresh(),
             setTimeout(() => {
               Taro.showToast({ title: res.data.msg, icon: 'none' })
-            },200)
+            }, 200)
           )
 
         })
@@ -168,7 +168,8 @@ class ApartmentCouponItem extends BaseComponent {
                   {!can_receive && block === 'apartment' && <AtIcon value='help' size='14' color='#88888'></AtIcon>}
                 </View>
                 {use_type === 1 && <View className='text-mini text-center'>
-                  {LOCALE_FIRST_MONTH_ONLY},最高可领{max_receive_num === -1 ? '无限次' : max_receive_num}
+                  {LOCALE_FIRST_MONTH_ONLY}
+                  {max_receive_num && <Text>,最高可领{max_receive_num === -1 ? '无限次' : max_receive_num}</Text>}
                 </View>}
               </View>
 
