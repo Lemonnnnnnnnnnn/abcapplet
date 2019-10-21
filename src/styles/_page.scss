@@ -145,14 +145,6 @@ page {
   }
 }
 
-//单位元素垂直居中
-.page-middile {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 // maskTop 样式
 .mask-top {
   border-top-left-radius: 24px;
@@ -233,7 +225,17 @@ page {
   top: 0;
 }
 
+//单位元素垂直居中
+.page-middile {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 // 继承父元素高度
 .inherit-Height {
   height: 100%;
 }
+
+

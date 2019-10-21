@@ -65,7 +65,7 @@ class UserProfile extends Component {
 
   async componentDidShow() {
     Taro.showTabBarRedDot({
-      index:2
+      index: 2
     })
     buryPoint()
     const { payload: user } = await this.props.dispatchUser()
@@ -136,16 +136,7 @@ class UserProfile extends Component {
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({
       appId: 'wxd3537ccb429de3b4', // 要跳转的小程序的appid
-
-      success(res) {
-        // 打开成功
-        console.log(res)
-      },
-      fail(res) {
-        console.log(res)
-      }
-
-    })
+    }).catch(err => console.log(err))
   }
   //前往意见反馈
   onFeedback() {
@@ -194,7 +185,7 @@ class UserProfile extends Component {
           />
 
           {/* 优选入口 */}
-          <View className='mx-2' onClick={this.openMiniProgramCreate} >
+          <View className='mx-2' onClick={this.openMiniProgramCreate} style={{ position: 'relative', zIndex: 100 }}>
             <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
           </View>
 

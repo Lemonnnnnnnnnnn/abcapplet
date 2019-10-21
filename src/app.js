@@ -82,6 +82,13 @@ class App extends Component {
           'index',
         ]
       },
+      {
+        root: 'pages/bargain',
+        pages: [
+          'bargain-list',
+          'bargain-detail'
+        ]
+      },
     ],
 
     window: {

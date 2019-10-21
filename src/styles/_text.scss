@@ -33,12 +33,20 @@
     color: #dfdfdf !important;
   }
 
+  &-gray--2 {
+    color: rgb(53, 53, 53) !important;
+  }
+
   &-red {
     color: #ff6161 !important;
   }
 
+  &-orange {
+    color: #ff6b29 !important;
+  }
+
   &-black {
-    color : #000000 !important;
+    color: #000000 !important;
   }
 
   // 字体粗细
@@ -78,6 +86,9 @@
   }
   &-indent {
     text-indent: 2em;
+  }
+  &-line-through {
+    text-decoration: line-through;
   }
 }
 //文字超出省略
