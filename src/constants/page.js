@@ -1,5 +1,5 @@
 // 通用页面
-export const PAGE_HOME = '/pages/common/home'
+export const PAGE_HOME = '/pages/home/home'
 export const PAGE_SEARCH = '/pages/common/search'
 
 // 公寓列表相关

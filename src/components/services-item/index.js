@@ -13,7 +13,7 @@ import ServiceItemShow from '@components/services-item/show'
 // NPM 包
 import classNames from 'classnames'
 
-import { PAGE_HOUSE_TYPE_SHOW, } from '@constants/page'
+import { PAGE_HOUSE_TYPE_SHOW,PAGE_APPOINTMENT_AUDIT } from '@constants/page'
 
 
 import {
@@ -120,10 +120,18 @@ class ServiceItem extends BaseComponent {
   }
   //联系管家
   onContact() {
-
     const { service } = this.props
     const { server_user } = service
     Taro.makePhoneCall({ phoneNumber: server_user.mobile })
+  }
+  //查看审核状态
+  onGudit(){
+    const { service } = this.props
+
+    Taro.navigateTo({
+      url:`${PAGE_APPOINTMENT_AUDIT}?id=${service.reward_id}`
+    })
+
   }
 
   render() {
@@ -223,6 +231,8 @@ class ServiceItem extends BaseComponent {
               onContact={this.onContact}
               onDisLike={this.onDisLike}
               onEvalution={this.onEvalution}
+              comment={comment}
+              onGudit={this.onGudit}
             />
           </View>
 

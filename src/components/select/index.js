@@ -70,6 +70,7 @@ class Select extends BaseComponent {
     latitude: 0,
     longitude: 0,
     headerIndex: '',
+    cbdIndex:0
   }
 
   // 创建子组件关联，用于重置数据
@@ -97,6 +98,7 @@ class Select extends BaseComponent {
   }
 
   onPayloadChange({ value }) {
+    console.log(value)
     const { payload } = this.state
     this.setState({ payload: { ...payload, ...value } })
   }
@@ -136,7 +138,7 @@ class Select extends BaseComponent {
     await Taro.getLocation({
       success: (res) => { this.setState({ payload: { ...payload, city: cityCode }, latitude: res.latitude, longitude: res.longitude }) },
       fail: () => { this.setState({ payload: { ...payload, city: cityCode }, latitude: 0, longitude: 0 }) }
-    }).catch((err)=>{console.log(err)})
+    }).catch((err) => { console.log(err) })
     // this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
   }
 
@@ -160,9 +162,13 @@ class Select extends BaseComponent {
     }
   }
 
+  //选择商圈
+  onCbdChange(cbdIndex) {
+    this.setState({ cbdIndex })
+  }
 
   render() {
-    const { headerIndex, payload } = this.state
+    const { headerIndex, payload,cbdIndex } = this.state
     const { distance, cbd, price_high, price_low, type_floor, type_room } = payload
     const {
       // 选项控制
@@ -206,39 +212,43 @@ class Select extends BaseComponent {
     // 位置
     if (showCbd && cbdDist.length) {
 
-      if (distance) {
-        cbdDist[0].list.map(i => {
-          if (i.id === distance) {
-            cbdMessage.push(i.title)
-            header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+          if(cbd){
+            console.log(distance)
           }
-        })
-      } else if (cbd) {
-        cbdDist.map(i => {
-          i.list.map(v => {
-            v.list && v.list.map(k => {
-              if (k.id === parseInt(cbd)) {
+      // if (distance) {
+      //   console.log('111111'+distance)
+      //   cbdDist[0].list.map(i => {
+      //     if (i.id === distance) {
+      //       cbdMessage.push(i.title)
+      //       header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+      //     }
+      //   })
+      // } else if (cbd) {
+      //   console.log('33333')
+      //   cbdDist.map(i => {
+      //     i.list.map(v => {
+      //       v.list && v.list.map(k => {
+      //         if (k.id === parseInt(cbd)) {
 
+      //           if (k.title.length > 5) {
+      //             cbdStr = k.title.substring(0, 5) + "..."
+      //           } else {
+      //             cbdStr = k.title
+      //           }
 
-                if (k.title.length > 5) {
-                  cbdStr = k.title.substring(0, 5) + "..."
-                } else {
-                  cbdStr = k.title
-                }
-
-                if (cbd.length > 3) {
-                  cbdStr = k.title + "..."
-                }
-                cbdMessage.push(cbdStr)
-                header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
-              }
-              return false
-            })
-          })
-        })
-      } else {
+      //           if (cbd.length > 3) {
+      //             cbdStr = k.title + "..."
+      //           }
+      //           cbdMessage.push(cbdStr)
+      //           header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+      //         }
+      //         return false
+      //       })
+      //     })
+      //   })
+      // } else {
         header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
-      }
+      // }
     }
 
     // 户型
@@ -287,11 +297,12 @@ class Select extends BaseComponent {
       <View className='selectTab' style={{ height: Taro.pxTransform(174) }} onTouchMove={this.onMaskTouchMove}>
         <View className={classNames(rootClassName, className, classObject)} style={cbdSelect ? '' : posiStyle} >
           {/* 头部 */}
-          < SelectHeader
+          <SelectHeader
             className='mb-2'
             items={header}
             index={headerIndex}
             onClick={this.onHeaderClick}
+            onCbdChange={this.onCbdChange}
           />
           {/* 对应内容(想住的区域) */}
           <SelectCbd

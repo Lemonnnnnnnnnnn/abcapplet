@@ -17,9 +17,7 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/common/home',
-      'pages/common/search',
-
+      'pages/home/home',
       'pages/recommend/recommend',
       'pages/appoint/services',
       // 'pages/appointment/maphouse',
@@ -37,6 +35,12 @@ class App extends Component {
           'house-type',
           'appointment',
           'search-room',
+        ]
+      },
+      {
+        root: 'pages/common',
+        pages: [
+          'search',
         ]
       },
        {
@@ -103,7 +107,7 @@ class App extends Component {
       borderStyle: "black",
       list: [
         {
-          pagePath: "pages/common/home",
+          pagePath: "pages/home/home",
           text: "首页",
           iconPath: "assets/icons/home.png",
           selectedIconPath: "assets/icons/home-active.png"

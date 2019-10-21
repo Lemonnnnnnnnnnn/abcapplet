@@ -14,9 +14,9 @@ import { TABS_SELECT_ITEM_HEIGHT } from '@constants/styles'
  */
 
 const KEYWORD_FJ = 'FJ' // 附近
-// const KEYWORD_XZQ = 'XZQ' // 行政区
-// const KEYWORD_DT = 'DT' // 地铁
-// const KEYWORD_BRT = 'BRT' // BRT
+const KEYWORD_XZQ = 'XZQ' // 行政区
+const KEYWORD_DT = 'DT' // 地铁
+const KEYWORD_BRT = 'BRT' // BRT
 
 class SelectCbd extends BaseComponent {
   static defaultProps = {
@@ -35,6 +35,7 @@ class SelectCbd extends BaseComponent {
     areaIndexs: [],
     placeIndex: [],
     tabItemHeight: 100,
+    cbdIndexItem:0
   }
 
   state = { ...SelectCbd.defaultState }
@@ -44,22 +45,28 @@ class SelectCbd extends BaseComponent {
   }
 
   onCbdChange(cbdIndex) {
+    const { items } = this.props
+    console.log(items)
+    console.log('start'+ cbdIndex)
     this.setState({ cbdIndex })
+    console.log(this.props.dists)
+    // console.log(this.props.dists.cbd_list[cbdIndex])
   }
 
   onAreaChange(areaIndex) {
     const { items } = this.props
     const { cbdIndex, areaIndexs } = this.state
     const item = items[cbdIndex]
+
     const id = items[cbdIndex].list[areaIndex].id
 
     areaIndexs[cbdIndex] = areaIndex
     this.setState({ areaIndexs })
 
-    if (item.keyword === KEYWORD_FJ) {
-      this.setState({ areaSelected: id })
+    // if (item.keyword === KEYWORD_FJ || item.keyword === KEYWORD_XZQ) {
+      this.setState({ areaSelected: id,cbdIndexItem:item.id })
       this.onPropsOnChange({ areaSelected: id })
-    }
+    // }
   }
 
   onPropsOnChange({ areaSelected = null, placeSelected = null }) {
@@ -67,11 +74,21 @@ class SelectCbd extends BaseComponent {
     areaSelected = areaSelected || this.state.areaSelected
     placeSelected = placeSelected || this.state.placeSelected
 
+    placeSelected.length?
     this.props.onChange({
       value:
       {
+        cbdIndex:this.state.cbdIndexItem,
         distance: areaSelected,
         cbd: [...placeSelected,].toString()
+      }
+    }):
+    this.props.onChange({
+      value:
+      {
+        cbdIndex:this.state.cbdIndexItem,
+        distance: areaSelected,
+        cbd: areaSelected.toString()
       }
     })
   }
@@ -109,7 +126,7 @@ class SelectCbd extends BaseComponent {
           tabList={cbd || []}
           current={cbdIndex}
           height={tabsHeight}
-          onClick={this.onCbdChange}
+          onClick={ this.onCbdChange}
         />
         }
       </View>
