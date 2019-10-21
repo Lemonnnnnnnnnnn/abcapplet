@@ -8,6 +8,7 @@ import BargainContainer from '@components/bargain-container'
 import BargainTab from '@components/bargain-tab'
 import BargainDetailMainBlock from '@components/bargain-detail-main-block'
 import BargainDetailSecBlock from '@components/bargain-detail-sec-block'
+import BargainingBlock from '@components/bargaining-block'
 
 import '../../styles/_bargain.scss'
 
@@ -38,12 +39,15 @@ export default class bargainDetail extends Component {
 
   render() {
     return (
-      <View>
+      <View className='bargain'>
         <BargainContainer />
         <View className='bargain-background'>
           {/* 第一个板块 */}
           <View className='bargain-main-block '>
             <BargainDetailMainBlock />
+            {/* 砍价状态 */}
+            <BargainingBlock />
+
             {/* 第二个板块 */}
             <BargainDetailSecBlock />
           </View>

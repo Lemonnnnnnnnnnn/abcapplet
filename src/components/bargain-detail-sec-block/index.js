@@ -7,11 +7,6 @@ import { BARGAIN_NAV_DIST } from '@constants/bargain'
 
 
 export default class BargainDetailMainBlock extends BaseComponent {
-
-  config = {
-    navigationBarTitleText: ''
-  }
-
   state = {
     navList: BARGAIN_NAV_DIST,
     current: 1,
