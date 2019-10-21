@@ -57,7 +57,7 @@ class HouseTypeShow extends Component {
       cbds: [],
       rules: [],
       swipers: [],
-      qsfPicture:[],
+      qsfPicture: [],
       special: [],
       notices: [],
       hotRules: [],
@@ -390,13 +390,13 @@ class HouseTypeShow extends Component {
 
     const { houstType, map, buttons, showRentDescription,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask ,} = this.state
+      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask, } = this.state
 
 
     const { latitude, longitude, markers } = map
 
     const {
-      title, swipers, isCollect, cost, types,qsfPicture,
+      title, swipers, isCollect, cost, types, qsfPicture,
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
@@ -557,12 +557,12 @@ class HouseTypeShow extends Component {
                 </View>
 
                 {/* 领优惠券小Tag */}
-                {/* <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1'>
+                <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1'>
                   <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
                     <Text>领优惠券</Text>
                     <ABCIcon icon='chevron_right' size='22' />
                   </View>
-                </View> */}
+                </View>
               </View>
 
               {/* 品牌宣传 */}

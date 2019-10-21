@@ -19,12 +19,11 @@ import {
   LOCALE_ORDER_LIST,
   LOCALE_RISK_FUND,
 
-  // TODO 小黄卡先不做
-  // LOCALE_USER_CARD,
-  // LOCALE_USER_CARD_EXTRA_TEXT,
+  LOCALE_USER_COUPON,
+  LOCALE_USER_COUPON_EXTRA_TEXT,
 } from '@constants/locale'
 
-import { USER_WISH , REQUIREMENT_CARD ,PREFERENTIAL} from '@constants/picture'
+import { USER_WISH, REQUIREMENT_CARD, PREFERENTIAL } from '@constants/picture'
 
 export const USER_DEFAULT = {
   // 城市数据
@@ -67,7 +66,7 @@ export const RISK_MONEY = 'https://images.gongyuabc.com//image/risk.png'
 export const USER_OPTIONS_LISTS = [
   {
     id: 1,
-    icon: USER_WISH ,
+    icon: USER_WISH,
     title: LOCALE_USER_FAVORITE,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
   },
@@ -77,12 +76,12 @@ export const USER_OPTIONS_LISTS = [
     title: LOCALE_USER_NEED,
     extraText: LOCALE_USER_NEED_EXTRA_TEXT,
   },
-  // {
-  //   id: 3,
-  //   icon: PREFERENTIAL,
-  //   title: LOCALE_USER_COUPON,
-  //   extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
-  // }
+  {
+    id: 3,
+    icon: PREFERENTIAL,
+    title: LOCALE_USER_COUPON,
+    extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
+  }
 ]
 
 
