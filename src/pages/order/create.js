@@ -42,6 +42,8 @@ import {
   LOCALE_SIGN_APARTMENT,
   LOCALE_SIGN_NOW,
   LOCALE_VIEW_SERVICE_AGREEMENT,
+  LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT,
+  LOCALE_PRICE_SEMICOLON
 } from '@constants/locale'
 
 import buryPoint from '../../utils/bury-point'
@@ -100,23 +102,6 @@ class OrderCreate extends BaseComponent {
       if (res) {
         data = res.data.data
 
-        // const checkCoupon = data.coupon.find(i => i.is_select === true)
-        // const { worth, coupon_type } = checkCoupon
-        // let [worthText, couponPrice] = ['', '']
-
-        // if (coupon_type === 1) {
-        //   worthText = worth * 100
-        //   worthText = worthText.toString()
-        //   if (worthText[worthText.length - 1] === '0') {
-        //     worthText = worthText[0]
-        //   }
-        //   couponPrice = worthText + '折'
-        // } else {
-        //   worthText = parseFloat(worth)
-        //   couponPrice = '￥' + worthText
-        // }
-
-
         // 初始化表单
         this.setState({
           timeList: data.tenancy,
@@ -135,7 +120,7 @@ class OrderCreate extends BaseComponent {
             id_code: data.user_info.id_no,
           }
         })
-      }
+      } else this.setState({ couponTotal: 0 + '个可用' })
     })
 
   }
@@ -206,6 +191,31 @@ class OrderCreate extends BaseComponent {
   }
   // 选择房间
   async onSelectRoom(id) {
+
+    const { coupon } = this.state
+    let [worthText, couponPrice] = ['', '']
+
+    for (let i = 0; i < coupon.length; i++) {
+      if (coupon[i].is_select) {
+        if (coupon[i].coupon_type === 1) {
+          worthText = coupon[i].worth * 100
+          worthText = worthText.toString()
+          if (worthText[worthText.length - 1] === '0') {
+            worthText = worthText[0]
+          }
+          couponPrice = worthText + LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT
+        } else {
+          worthText = parseFloat(coupon[i].worth)
+          couponPrice = LOCALE_PRICE_SEMICOLON + worthText
+        }
+      }
+      break
+
+    }
+
+    this.setState({ couponPrice: couponPrice })
+
+
     const { appointment_id = 0, type_id = 0 } = this.$router.params
     const { data: { data } } = await this.props.dispatchOrderPreview({ room_id: id, appointment_id, type_id })
     this.setState({
@@ -261,12 +271,12 @@ class OrderCreate extends BaseComponent {
   onShowProcessMask() {
     this.setState({ showProcessMask: true })
   }
- 
+
   // 关闭弹窗
   onCloseMask() {
     this.setState({ showProcessMask: false, showCouponList: false, showRoomList: false })
   }
-  
+
   // 检查数据
   onCheckPayload() {
     const { payload } = this.state
@@ -323,6 +333,7 @@ class OrderCreate extends BaseComponent {
   onNavigateToRisk() {
     Taro.navigateTo({ url: PAGE_RISK_LANDING })
   }
+
 
   render() {
     const { payload, room, rooms, showRoomList, disabled, timeList, cost_deposit,
@@ -557,7 +568,7 @@ class OrderCreate extends BaseComponent {
               </View>
               <View>
                 <View className='text-brand text-super text-bold'>￥{room_id ? price : 0}</View>
-                {room_id && <View className='text-normal text-secondary mt-1'>优惠券：-￥{parseInt(coupon_money)}</View>}
+                {room_id && coupon_money && <View className='text-normal text-secondary mt-1'>优惠券：-￥{parseInt(coupon_money)}</View>}
               </View>
             </View>
           </View>

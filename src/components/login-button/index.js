@@ -21,6 +21,7 @@ export default class loginButton extends BaseComponent {
 
     let lastPagePath = '/' + lastPage.route
 
+
     for (var i in params) {
       index += 1
       index === 1 ? lastPagePath += '?' + i + '=' + params[i] : lastPagePath += '&' + i + '=' + params[i]
