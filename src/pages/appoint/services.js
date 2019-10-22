@@ -6,10 +6,9 @@ import { View, Image } from '@tarojs/components'
 import ServicesHeader from '@components/services-header'
 import ServicesList from '@components/services-list'
 import loginButton from '@components/login-button'
+import Carousel from '@components/carousel'
 
-import {
-  PAYLOAD_APPOINTMENT_LIST
-} from '@constants/api'
+import { PAYLOAD_APPOINTMENT_LIST } from '@constants/api'
 
 import { RISK_MONEY_BANNER, NONE_TRAVE } from '@constants/picture'
 import { PAGE_RISK_LANDING } from '@constants/page'
@@ -39,6 +38,7 @@ class ServicesHome extends Component {
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
+    adList: [],
   }
 
   refserviceList = (node) => this.ServiceList = node
@@ -49,14 +49,12 @@ class ServicesHome extends Component {
   }
 
   async componentWillMount() {
-    // const { payload: user } = await this.props.dispatchUser()
-    // const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
-    // AD_DISPATCH_DIST.find(i => i.url === lastPage &&
-    //   this.props.dispatchAdList({ city: user.citycode, type: i.type }).then(
-    //     ({ data: { data } }) => {
-    //       console.log(data)
-    //     })
-    // )
+    const { payload: user } = await this.props.dispatchUser()
+    const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
+    AD_DISPATCH_DIST.find(i => i.url === lastPage &&
+      this.props.dispatchAdList({ city: user.citycode, type: i.type }).then(
+        ({ data: { data } }) => { this.setState({ adList: data.list }) })
+    )
   }
 
   onShow() {
@@ -119,7 +117,7 @@ class ServicesHome extends Component {
 
   render() {
     const { appointments } = this.props
-    const { time, payload } = this.state
+    const { time, payload, adList } = this.state
 
     const page = {
       backgroundColor: '#FFFFFF',
@@ -133,6 +131,16 @@ class ServicesHome extends Component {
             onClickLeft={this.onToLeft}
             onClickRight={this.onToRight}
           />
+          {/* {
+            <Carousel
+              type='ad'
+              imageHeight='176'
+              imageWidth='312'
+              carousel={adList}
+              hasContent={false}
+              haveText={false}
+            />
+          } */}
           <View className='page-middile mt-2' onClick={this.onNavigateToRisk}>
             <Image src={RISK_MONEY_BANNER} className='appointment-ad'></Image>
           </View>

@@ -42,6 +42,12 @@ class ApartmentContainer extends BaseComponent {
     })
   }
 
+  changePicIndex(e) {
+    const current = e.detail.current
+    this.setState({ current: current - 1 })
+  }
+
+
   //展示清水房照片
   onShowPhoto() {
     const picList = []

@@ -101,6 +101,8 @@ class OrderCreate extends BaseComponent {
     await this.props.dispatchOrderPreview({ room_id, appointment_id, type_id, apartment_id }).then(res => {
       if (res) {
         data = res.data.data
+        const selectedCoupon = data.coupon.find(i => i.is_select)
+        selectedCoupon && this.setState({ payload: { coupon_user_id: selectedCoupon.id } })
 
         // 初始化表单
         this.setState({
@@ -118,9 +120,9 @@ class OrderCreate extends BaseComponent {
             name: data.user_info.name,
             mobile: data.user_info.mobile,
             id_code: data.user_info.id_no,
-            coupon_user_id: data.coupon.find(i => i.is_select).id
           }
         })
+
       } else this.setState({ couponTotal: '暂无可用优惠券' })
     })
 
@@ -216,13 +218,15 @@ class OrderCreate extends BaseComponent {
       }
     }
 
+    const selectedCoupon = data.coupon.find(i => i.is_select)
+    selectedCoupon && this.setState({ payload: { coupon_user_id: selectedCoupon.id } })
+
     this.setState({
       couponPrice,
       showRoomList: false,
       payload: {
         ...payload,
         room_id: id,
-        coupon_user_id: data.coupon.find(i => i.is_select).id
       },
       room: { ...data.room },
       rooms: [...data.rooms],
@@ -343,7 +347,6 @@ class OrderCreate extends BaseComponent {
       showCouponList, couponTotal, couponPrice, coupon, showProcessMask } = this.state
     const { name, mobile, id_code: idCode, room_id } = payload
     const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id, coupon_money } = room
-    console.log(payload)
 
     return (
       <View>

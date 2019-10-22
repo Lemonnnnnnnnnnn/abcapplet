@@ -115,8 +115,8 @@ class Carousel extends Component {
     }
 
     const bannerStyle = {
-      width : '100%',
-      height : '100%',
+      width: '100%',
+      height: '100%',
     }
 
 
@@ -136,7 +136,7 @@ class Carousel extends Component {
           >
             {carousel.map(item =>
               <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
-                <View style={{ height: Taro.pxTransform(380), overflow: 'hidden' ,position:'relative'}}>
+                <View style={{ height: Taro.pxTransform(380), overflow: 'hidden', position: 'relative' }}>
                   <Image
                     src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                     mode='withfix'
@@ -188,8 +188,16 @@ class Carousel extends Component {
               </View>
             )}
           </ScrollView>
-
         }
+
+        {/* {(type === 'ad') && <ScrollView scrollX className='carousel-normal' style={swiperStyle}>
+          {carousel.map(i =>
+            <View key={i.id}>
+              <Image src={i.cover} onClick={this.onNavigation}></Image>
+            </View>
+          )}
+        </ScrollView>
+        } */}
       </View>
     )
   }
