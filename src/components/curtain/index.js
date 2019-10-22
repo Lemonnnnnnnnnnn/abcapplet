@@ -6,6 +6,7 @@ import { AtCurtain } from 'taro-ui'
 import BaseComponent from '@components/base'
 
 // 自定义变量
+import { PAGE_EXTERNAL_INDEX } from '@constants/page'
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 
 import '../../styles/_curtain.scss'
@@ -15,8 +16,21 @@ export default class Curtain extends BaseComponent {
     swiperHeight: 800,
   }
 
-  onNavigation({ url }) {
-    Taro.navigateTo({ url })
+  onNavigation(url) {
+    let newUrl = url
+
+    if (url === '') return;
+
+    // 判断是否为外链
+    const externalLink = /(http|https):\/\/([\w.]+\/?)\S*/
+    const isExternal = url.search(externalLink) !== -1
+    if (isExternal) {
+      newUrl = `${PAGE_EXTERNAL_INDEX}?src=${url}`
+    } else {
+      newUrl = `${url}`
+    }
+
+    return Taro.navigateTo({ url: newUrl })
   }
 
   render() {
@@ -24,7 +38,7 @@ export default class Curtain extends BaseComponent {
 
     // 轮播高度
     const swiperStyle = { height: `${Taro.pxTransform(swiperHeight)}` }
-    const imageStyle = { width: '100%' }
+    const imageStyle = { width: '80%' }
 
     return (isOpened &&
       <View>
@@ -32,11 +46,14 @@ export default class Curtain extends BaseComponent {
           <Swiper
             autoplay
             circular
+            indicatorDots
+            indicatorActiveColor={COLOR_YELLOW}
+            indicatorColor={COLOR_DOATS_CAROUSEL}
             style={swiperStyle}
           >
             {
               adList.map(i =>
-                <SwiperItem key={i.id} onClick={this.onNavigation.bind(i)}>
+                <SwiperItem key={i.id} onClick={this.onNavigation.bind(this, i.url)}>
                   <View className='curtain-wrap'>
                     <Image src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
                   </View>

@@ -405,6 +405,7 @@ class CommonHome extends BaseComponent {
     this.props.dispatchClosePopupAdPost().then(() =>
       this.setState({ showCurtain: false })
     )
+    // this.setState({ showCurtain: false })
   }
 
   // 分享
