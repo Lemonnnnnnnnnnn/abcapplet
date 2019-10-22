@@ -1,8 +1,6 @@
 @import "overrides";
 
 .bargain {
-  // background: #fc8f4b;
-  // min-height: 100vh;
   &-background {
     height: 900px * $hd;
     background: linear-gradient(to bottom, #fa624a, #ffca4e);
@@ -71,10 +69,11 @@
     padding: 4px * $hd 8px * $hd;
   }
 
-  &.bargaining{
+  &-bargaining{
     &-image{
       width: 48px * $hd;
       height: 48px * $hd;
+      border-radius: 50%;
     }
   }
 }

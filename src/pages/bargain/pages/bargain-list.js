@@ -3,9 +3,8 @@ import { View, Text, Button } from '@tarojs/components';
 
 // 自定义组件
 import Board from '@components/board'
-import ApartmentBargainList from '@components/apartment-bargain-list'
+import ApartmentBargainList from '../components/apartment-bargain-list'
 
-import '../../styles/_apartment.scss'
 
 export default class BargainList extends Component {
 

@@ -4,13 +4,12 @@ import { View, Text, Button, Image } from '@tarojs/components';
 import Board from '@components/board'
 
 // 自定义组件
-import BargainContainer from '@components/bargain-container'
-import BargainTab from '@components/bargain-tab'
-import BargainDetailMainBlock from '@components/bargain-detail-main-block'
-import BargainDetailSecBlock from '@components/bargain-detail-sec-block'
-import BargainingBlock from '@components/bargaining-block'
+import BargainContainer from '../components/bargain-container'
+import BargainTab from '../components/bargain-tab'
+import BargainDetailMainBlock from '../components/bargain-detail-main-block'
+import BargainDetailSecBlock from '../components/bargain-detail-sec-block'
+import BargainingBlock from '../components/bargaining-block'
 
-import '../../styles/_bargain.scss'
 
 // 自定义常量
 

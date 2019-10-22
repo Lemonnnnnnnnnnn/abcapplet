@@ -85,8 +85,8 @@ class App extends Component {
       {
         root: 'pages/bargain',
         pages: [
-          'bargain-list',
-          'bargain-detail'
+          'pages/bargain-list',
+          'pages/bargain-detail'
         ]
       },
     ],

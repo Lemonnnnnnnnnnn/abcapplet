@@ -4,7 +4,7 @@ import { View } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
-import ApartmentBargainItem from '@components/apartment-bargain-item'
+import ApartmentBargainItem from '../apartment-bargain-item'
 
 
 class ApartmentBargainList extends BaseList {
