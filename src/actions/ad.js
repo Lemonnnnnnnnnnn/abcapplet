@@ -7,7 +7,7 @@ import { SET_AD_LIST } from '@constants/ad'
  * @param {*} payload
  */
 export const dispatchAdList = payload => createAction({
-  payload: { city: payload },
+  payload ,
   method: 'POST',
   type: SET_AD_LIST,
   url: API_AD_LIST,

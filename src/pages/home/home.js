@@ -20,6 +20,8 @@ import {
   PAGE_USER_AUTH
 } from '@constants/page'
 
+import { AD_DISPATCH_DIST } from '@constants/ad'
+
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as adActions from '@actions/ad'
@@ -236,7 +238,7 @@ class CommonHome extends BaseComponent {
     // 商圈,轮播图,品牌公寓,活动专区
     await this.props.dispatchHomeMsg(citycode) && overloadData.push(1)
     //  广告
-    await this.props.dispatchAdList(citycode) && overloadData.push(1)
+    await this.props.dispatchAdList({ city: citycode, type: 0 }) && overloadData.push(1)
     // 字典
     await this.props.dispatchDistList(citycode) && overloadDist.push(1)
 

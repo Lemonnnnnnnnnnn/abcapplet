@@ -13,17 +13,19 @@ import ServiceItemShow from '@components/services-item/show'
 // NPM 包
 import classNames from 'classnames'
 
-import { PAGE_HOUSE_TYPE_SHOW,PAGE_APPOINTMENT_AUDIT } from '@constants/page'
+import {
+  PAGE_HOUSE_TYPE_SHOW,
+  PAGE_APPOINTMENT_AUDIT,
+  PAGE_RISK_LANDING
+} from '@constants/page'
 
 
 import {
-
   LOCALE_APPOINTMENT_DETAIL,
   LOCALE_APPOINTMENT_HASLOOK,
   LOCALE_APPOINTMENT_SUMMON,
   LOCALE_APPOINTMENT_BELONG,
 } from '@constants/locale'
-
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -125,14 +127,19 @@ class ServiceItem extends BaseComponent {
     Taro.makePhoneCall({ phoneNumber: server_user.mobile })
   }
   //查看审核状态
-  onGudit(){
+  onGudit() {
     const { service } = this.props
 
     Taro.navigateTo({
-      url:`${PAGE_APPOINTMENT_AUDIT}?id=${service.reward_id}`
+      url: `${PAGE_APPOINTMENT_AUDIT}?id=${service.reward_id}`
     })
 
   }
+
+  onNavigateToRisk() {
+    Taro.navigateTo({ url: PAGE_RISK_LANDING })
+  }
+
 
   render() {
     let { width, height, minWidth, minHeight, mini } = this.props
@@ -223,7 +230,7 @@ class ServiceItem extends BaseComponent {
               : <ImagePlaceholder height={height} />
             }
           </View>
-          <View  style={{marginTop:Taro.pxTransform(100) }} >
+          <View style={{ marginTop: Taro.pxTransform(100) }} >
             <ServiceItemShow
               status={service.appointment_status}
               item={service}
@@ -258,7 +265,7 @@ class ServiceItem extends BaseComponent {
                   />
                 </View>
               </View>
-              <View className='apartment-item-risk text-normal page-middile ' style={{ position: 'absolute', top: '75%', left: '63%' }}>支持退租险</View>
+              <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile ' style={{ position: 'absolute', top: '75%', left: '63%' }}>支持退租险</View>
             </View>
           </View>
           <View className='ml-3' style={{ position: 'absolute', top: '18%' }}>

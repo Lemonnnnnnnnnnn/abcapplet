@@ -43,7 +43,7 @@ class OrderCouponMask extends BaseComponent {
         <Board fixed='bottom' border='top'>
           <AtIcon onClick={onClose} value='close' size='15' className='p-2 mr-1 mt-1' color='#888' style='position : absolute ; right : 0'></AtIcon>
           <View className='text-huge  mt-2 text-center pb-2'> 选择优惠券</View>
-          <ScrollView style={{ height: Taro.pxTransform(950) }} scrollY onScrollToLower={this.onBottomOut}>
+          <ScrollView style={{ height: Taro.pxTransform(couponList && couponList.length && 750) }} scrollY onScrollToLower={this.onBottomOut}>
             {
               couponList.map(i =>
                 <ApartmentCouponItem
@@ -66,7 +66,9 @@ class OrderCouponMask extends BaseComponent {
             }
 
           </ScrollView>
-          {/* <View style={{ height: Taro.pxTransform(170) }}></View> */}
+
+          {couponList && !couponList.length && <View className='mt-2 text-secondary text-center text-large p-4'>暂无可用优惠券</View>}
+          <View style={{ height: Taro.pxTransform(170) }}></View>
         </Board>
         <Masks show={show} />
 

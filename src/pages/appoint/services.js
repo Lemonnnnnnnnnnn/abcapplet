@@ -11,14 +11,19 @@ import {
   PAYLOAD_APPOINTMENT_LIST
 } from '@constants/api'
 
+import { RISK_MONEY_BANNER, NONE_TRAVE } from '@constants/picture'
+import { PAGE_RISK_LANDING } from '@constants/page'
+
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
+import * as userActions from '@actions/user'
 
 import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
   ...appointmentActions,
+  ...userActions
 })
 
 class ServicesHome extends Component {
@@ -36,10 +41,14 @@ class ServicesHome extends Component {
   refserviceList = (node) => this.ServiceList = node
 
   componentDidShow() {
-
     const { count } = this.state
     buryPoint()
     this.onShow()
+  }
+
+  async componentWillMount() {
+    // const { payload: user } = await this.props.dispatchUser()
+    // user && this.props.dispatchAdList({ city: user.citycode, type: 1 })
   }
 
   onShow() {
@@ -94,6 +103,12 @@ class ServicesHome extends Component {
     })
   }
 
+  onNavigateToRisk() {
+    Taro.navigateTo({ url: PAGE_RISK_LANDING })
+  }
+
+
+
   render() {
     const { appointments } = this.props
     const { time, payload } = this.state
@@ -110,8 +125,8 @@ class ServicesHome extends Component {
             onClickLeft={this.onToLeft}
             onClickRight={this.onToRight}
           />
-          <View className='page-middile mt-2'>
-            <Image src='https://images.gongyuabc.com/image/appointmentAdNew.png' className='appointment-ad'></Image>
+          <View className='page-middile mt-2' onClick={this.onNavigateToRisk}>
+            <Image src={RISK_MONEY_BANNER} className='appointment-ad'></Image>
           </View>
           <View className='at-row at-row__align--center  p-2' >
             <View className='at-row at-row__align--center at-row__justify--center ml-2 appointment-yellowbot' ></View>
@@ -137,7 +152,7 @@ class ServicesHome extends Component {
                   </View>
                   :
                   <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
-                    <Image src='https://images.gongyuabc.com/image/noneTravelOne.png'></Image>
+                    <Image src={NONE_TRAVE}></Image>
                   </View>
               }
             </View>

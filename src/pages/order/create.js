@@ -208,12 +208,11 @@ class OrderCreate extends BaseComponent {
           worthText = parseFloat(coupon[i].worth)
           couponPrice = LOCALE_PRICE_SEMICOLON + worthText
         }
+        break
       }
-      break
-
     }
 
-    this.setState({ couponPrice: couponPrice })
+    this.setState({ couponPrice })
 
 
     const { appointment_id = 0, type_id = 0 } = this.$router.params
@@ -233,7 +232,9 @@ class OrderCreate extends BaseComponent {
   // 选择优惠券
   onSelectCoupon(id, price) {
     const { payload } = this.state
-    const { room_id = 0, appointment_id = 0, type_id = 0, apartment_id = 0 } = this.$router.params
+    const { appointment_id = 0, type_id = 0, apartment_id = 0 } = this.$router.params
+    const { room_id } = payload
+    console.log(price)
 
 
     this.setState({

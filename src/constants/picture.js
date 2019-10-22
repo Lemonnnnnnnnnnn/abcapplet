@@ -15,6 +15,7 @@ export const LEAVE_MSG_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bo
 export const CALL_PHONE_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-four.png'
 export const COMMENT_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-two.png'
 export const EXPECT_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-three.png'
+export const NONE_TRAVE = 'https://images.gongyuabc.com/image/noneTravelOne.png'
 
 export const LEAVE_MSG = 'https://images.gongyuabc.com/image/leaveMsgle_new.png'
 export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone_new.png'
@@ -28,7 +29,7 @@ export const CALL = 'https://images.gongyuabc.com/image/call.png'
 export const APPOINTMENT_DETAIL = 'https://images.gongyuabc.com/image/appointmentdetail.png'
 
 // 个人中心
-export const USER_WISH  ='https://images.gongyuabc.com/image/wish.png' //心愿单
+export const USER_WISH = 'https://images.gongyuabc.com/image/wish.png' //心愿单
 export const REQUIREMENT_CARD = 'https://images.gongyuabc.com/image/requirement-card.png'  //需求卡
 export const PREFERENTIAL = 'https://images.gongyuabc.com/image/Preferential.png'  //优惠卷
 
@@ -40,3 +41,9 @@ export const ORDER_STEP_ONE = 'https://images.gongyuabc.com/image/order-step1.pn
 export const ORDER_STEP_TWO = 'https://images.gongyuabc.com/image/order-step2.png'
 export const ORDER_STEP_THREE = 'https://images.gongyuabc.com/image/order-step3.png'
 export const ORDER_STEP_FOUR = 'https://images.gongyuabc.com/image/order-step4.png'
+
+// 预约看房
+export const APARTMENT_APPOINTMENT_ACCEPT = 'https://images.gongyuabc.com//image/accept.png'
+
+// 风险金相关
+export const RISK_MONEY_BANNER = 'https://images.gongyuabc.com/image/riskMoneyBanner.png'

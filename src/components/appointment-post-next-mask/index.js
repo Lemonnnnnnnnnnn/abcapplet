@@ -25,12 +25,19 @@ import {
   LOCALE_APPOINTMENT_FINISH_REQUIRE,
   LOCALE_APPOINTMENT_HELP
 } from '@constants/locale'
+import { RISK_MONEY_BANNER, APARTMENT_APPOINTMENT_ACCEPT } from '@constants/picture'
+import { PAGE_RISK_LANDING } from '@constants/page'
 
 
 class AppointPostNextMask extends BaseComponent {
   static defaultProps = {
     show: false,
   }
+
+  onNavigateToRisk() {
+    Taro.navigateTo({ url: PAGE_RISK_LANDING })
+  }
+
 
   render() {
     const { show, secTime, minTime, serverId } = this.props
@@ -63,8 +70,8 @@ class AppointPostNextMask extends BaseComponent {
               </View>}
 
               {serverId !== 0 && <View className='mb-5'>
-                <View className='at-row at-row__justify--center'>
-                  <image src='https://images.gongyuabc.com//image/accept.png' style='height:45px;width:40px'></image>
+                <View className='at-row at-row__justify--center' onClick={this.onNavigateToRisk}>
+                  <Image src={APARTMENT_APPOINTMENT_ACCEPT} style='height:45px;width:40px'></Image>
                 </View>
                 <View className='at-row at-row__justify--center mt-2'>
                   <View className='text-bold text-super '>{LOCALE_APPOINTMENT_ACCEPT}</View>
@@ -88,7 +95,7 @@ class AppointPostNextMask extends BaseComponent {
                 </View>
               </View>
 
-              <Image className='mt-2' src='https://images.gongyuabc.com/image/riskMoneyBanner.png' mode='widthFix' style={{ width: '100%' }}></Image>
+              <Image className='mt-2' src={RISK_MONEY_BANNER} mode='widthFix' style={{ width: '100%' }}></Image>
 
 
               <View className='at-row at-row__justify--center mt-1' style='width:100%;height:1px;background:#F8F8F8'></View>
