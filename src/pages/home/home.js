@@ -107,14 +107,6 @@ class CommonHome extends BaseComponent {
 
   refApartmentList = (node) => this.apartmentList = node
 
-  async componentDidShow() {
-    //判断是否弹出需求卡
-    await this.props.dispatchGetUserMsg().then((res) => {
-      if (res && res.data.data.user.is_guide === 0) {
-        this.setState({ showCard: true })
-      }
-    })
-  }
 
   async componentWillMount() {
 
@@ -255,7 +247,13 @@ class CommonHome extends BaseComponent {
   }
 
   // 初始化户型的数据，供筛选项使用
-  componentDidShow() {
+  async componentDidShow() {
+     //判断是否弹出需求卡
+     await this.props.dispatchGetUserMsg().then((res) => {
+       if (res && res.data.data.user.is_guide === 0) {
+         this.setState({ showCard: true })
+       }
+     })
     Taro.showTabBarRedDot({
       index: 2
     })

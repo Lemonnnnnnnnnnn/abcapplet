@@ -29,13 +29,15 @@ class SelectCbd extends BaseComponent {
   static defaultState = {
     areaSelected: 0,
     placeSelected: [],
-
+    cbdIndex: 0,
+    distance: 0,
     // AtTabs 相关
     cbdIndex: -1,
     areaIndexs: [],
     placeIndex: [],
     tabItemHeight: 100,
-    cbdIndexItem:0
+    cbdIndexItem: 0,
+
   }
 
   state = { ...SelectCbd.defaultState }
@@ -45,12 +47,7 @@ class SelectCbd extends BaseComponent {
   }
 
   onCbdChange(cbdIndex) {
-    const { items } = this.props
-    console.log(items)
-    console.log('start'+ cbdIndex)
     this.setState({ cbdIndex })
-    console.log(this.props.dists)
-    // console.log(this.props.dists.cbd_list[cbdIndex])
   }
 
   onAreaChange(areaIndex) {
@@ -63,34 +60,48 @@ class SelectCbd extends BaseComponent {
     areaIndexs[cbdIndex] = areaIndex
     this.setState({ areaIndexs })
 
-    // if (item.keyword === KEYWORD_FJ || item.keyword === KEYWORD_XZQ) {
-      this.setState({ areaSelected: id,cbdIndexItem:item.id })
-      this.onPropsOnChange({ areaSelected: id })
-    // }
+    if (item.keyword === KEYWORD_FJ) {
+      this.setState({ areaSelected: id, cbdIndexItem: item.id })
+      this.onPropsOnChange({ areaSelected: id, isDis: true })
+    } else {
+      this.setState({ areaSelected: id, cbdIndexItem: item.id })
+      this.onPropsOnChange({ areaSelected: id, })
+    }
   }
 
-  onPropsOnChange({ areaSelected = null, placeSelected = null }) {
+  onPropsOnChange({ areaSelected = null, placeSelected = null, isDis = null,isThree=null }) {
 
     areaSelected = areaSelected || this.state.areaSelected
     placeSelected = placeSelected || this.state.placeSelected
-
-    placeSelected.length?
-    this.props.onChange({
-      value:
-      {
-        cbdIndex:this.state.cbdIndexItem,
-        distance: areaSelected,
-        cbd: [...placeSelected,].toString()
-      }
-    }):
-    this.props.onChange({
-      value:
-      {
-        cbdIndex:this.state.cbdIndexItem,
-        distance: areaSelected,
-        cbd: areaSelected.toString()
-      }
-    })
+    isDis ?
+      this.props.onChange({
+        value:
+        {
+          cbdIndex: this.state.cbdIndex,
+          distance: areaSelected,
+          cbd: [...placeSelected,].toString(),
+        }
+      })
+      :
+      isThree?
+      this.props.onChange({
+        value:
+        {
+          cbdIndex: this.state.cbdIndex,
+          distance: 0,
+          cbd: [...placeSelected,].toString(),
+          level:3
+        }
+      }):
+      this.props.onChange({
+        value:
+        {
+          cbdIndex: this.state.cbdIndex,
+          distance: 0,
+          cbd: areaSelected.toString(),
+          level:2
+        }
+      })
   }
 
   onPlaceChange(id) {
@@ -101,14 +112,14 @@ class SelectCbd extends BaseComponent {
       : [...placeSelected, id]
 
     this.setState({ placeSelected })
-    this.onPropsOnChange({ placeSelected })
+    this.onPropsOnChange({ placeSelected, isThree:true})
   }
 
   render() {
     const { cbdIndex, areaIndexs, tabItemHeight, placeSelected } = this.state
     const { show, items, className } = this.props
 
-    const rootClassName = ['at-row', 'select-cbd' ,'mb-3']
+    const rootClassName = ['at-row', 'select-cbd', 'mb-3']
     const classObject = {}
     const tabsHeight = Taro.pxTransform(tabItemHeight * items.length)
 
@@ -126,11 +137,11 @@ class SelectCbd extends BaseComponent {
           tabList={cbd || []}
           current={cbdIndex}
           height={tabsHeight}
-          onClick={ this.onCbdChange}
+          onClick={this.onCbdChange}
         />
         }
       </View>
-{/* 位置二级选择框 */}
+      {/* 位置二级选择框 */}
       <View className='select-cbd-item'>
         {cbdIndex != -1 && <AtTabs
           scroll
@@ -146,13 +157,13 @@ class SelectCbd extends BaseComponent {
       <View className='select-cbd-item ml-2'>
         {plase &&
           <ScrollView scrollY style={{ height: tabsHeight }}>{plase.map(i =>
-            <View  key={i.id}
+            <View key={i.id}
               onClick={this.onPlaceChange.bind(this, i.id)}
               className={`ml-3 mt-3 multi-${placeSelected.includes(i.id) ? 'selected' : 'unselect'}`}
             >
               <View className='at-row'>
                 <View>
-                  <Icon  />
+                  <Icon />
                 </View>
                 <View>
                   <Text className='mt-1 text-small'>{i.title}</Text>

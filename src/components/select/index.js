@@ -70,7 +70,10 @@ class Select extends BaseComponent {
     latitude: 0,
     longitude: 0,
     headerIndex: '',
-    cbdIndex:0
+    cbdIndex: 0,
+    level: 0,
+
+
   }
 
   // 创建子组件关联，用于重置数据
@@ -98,9 +101,12 @@ class Select extends BaseComponent {
   }
 
   onPayloadChange({ value }) {
-    console.log(value)
+
     const { payload } = this.state
-    this.setState({ payload: { ...payload, ...value } })
+    this.setState({
+      payload: { ...payload, ...value },
+
+    })
   }
 
 
@@ -162,14 +168,12 @@ class Select extends BaseComponent {
     }
   }
 
-  //选择商圈
-  onCbdChange(cbdIndex) {
-    this.setState({ cbdIndex })
-  }
+
 
   render() {
-    const { headerIndex, payload,cbdIndex } = this.state
-    const { distance, cbd, price_high, price_low, type_floor, type_room } = payload
+    const { headerIndex, payload, } = this.state
+
+    const { distance, cbd, price_high, price_low, type_floor, type_room,cbdIndex, level } = payload
     const {
       // 选项控制
       show,
@@ -212,43 +216,52 @@ class Select extends BaseComponent {
     // 位置
     if (showCbd && cbdDist.length) {
 
-          if(cbd){
-            console.log(distance)
+      if (distance) {
+        cbdDist[0].list.map(i => {
+          if (i.id === distance) {
+            cbdMessage.push(i.title)
+            header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
           }
-      // if (distance) {
-      //   console.log('111111'+distance)
-      //   cbdDist[0].list.map(i => {
-      //     if (i.id === distance) {
-      //       cbdMessage.push(i.title)
-      //       header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
-      //     }
-      //   })
-      // } else if (cbd) {
-      //   console.log('33333')
-      //   cbdDist.map(i => {
-      //     i.list.map(v => {
-      //       v.list && v.list.map(k => {
-      //         if (k.id === parseInt(cbd)) {
+        })
+      } else {
 
-      //           if (k.title.length > 5) {
-      //             cbdStr = k.title.substring(0, 5) + "..."
-      //           } else {
-      //             cbdStr = k.title
-      //           }
+        if (level === 3) {
 
-      //           if (cbd.length > 3) {
-      //             cbdStr = k.title + "..."
-      //           }
-      //           cbdMessage.push(cbdStr)
-      //           header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
-      //         }
-      //         return false
-      //       })
-      //     })
-      //   })
-      // } else {
-        header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
-      // }
+          cbdDist[cbdIndex].list.map(v => {
+            v.list && v.list.map(k => {
+              if (k.id === parseInt(cbd)) {
+
+                if (k.title.length > 5) {
+                  cbdStr = k.title.substring(0, 5) + "..."
+                } else {
+                  cbdStr = k.title
+                }
+
+                if (cbd.length > 3) {
+                  cbdStr = k.title + "..."
+                }
+
+                cbdMessage.push(cbdStr)
+                header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+              }
+              return false
+            })
+          })
+
+        } if (level === 2) {
+
+
+          cbdDist[cbdIndex].list.map(i => {
+            if (i.id === parseInt(cbd)) {
+              cbdMessage.push(i.title)
+              header.push({ message: cbdMessage, show: cbdDist.length > 0, index: 'cbd' })
+            }
+          })
+        } if (level !== 2 && level !== 3) {
+
+          header.push({ message: LOCALE_LOCATION, show: cbdDist.length > 0, index: 'cbd' })
+        }
+      }
     }
 
     // 户型
