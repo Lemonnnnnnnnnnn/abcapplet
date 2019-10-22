@@ -118,6 +118,7 @@ class OrderCreate extends BaseComponent {
             name: data.user_info.name,
             mobile: data.user_info.mobile,
             id_code: data.user_info.id_no,
+            coupon_user_id: data.coupon.find(i => i.is_select).id
           }
         })
       } else this.setState({ couponTotal: '暂无可用优惠券' })
@@ -218,7 +219,11 @@ class OrderCreate extends BaseComponent {
     this.setState({
       couponPrice,
       showRoomList: false,
-      payload: { ...payload, room_id: id },
+      payload: {
+        ...payload,
+        room_id: id,
+        coupon_user_id: data.coupon.find(i => i.is_select).id
+      },
       room: { ...data.room },
       rooms: [...data.rooms],
       coupon: [...data.coupon]
@@ -231,8 +236,6 @@ class OrderCreate extends BaseComponent {
     const { payload } = this.state
     const { appointment_id = 0, type_id = 0, apartment_id = 0 } = this.$router.params
     const { room_id } = payload
-    console.log(price)
-
 
     this.setState({
       showCouponList: false,
@@ -340,7 +343,7 @@ class OrderCreate extends BaseComponent {
       showCouponList, couponTotal, couponPrice, coupon, showProcessMask } = this.state
     const { name, mobile, id_code: idCode, room_id } = payload
     const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, id, coupon_money } = room
-
+    console.log(payload)
 
     return (
       <View>

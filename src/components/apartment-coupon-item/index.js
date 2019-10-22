@@ -153,7 +153,7 @@ class ApartmentCouponItem extends BaseComponent {
                 <View className={`${textColorName} text-small text-bold`}>{couponName}</View>
                 <View className={`${textColorName} text-mini `}>
                   {apartment_type && <Text>{apartment_type} </Text>}
-                  {apartment_no && <Text> {apartment_no}</Text>}
+                  {apartment_no && <Text className='ml-1'>房间号:{apartment_no}</Text>}
                 </View>
                 <View className='text-mini '>{validity_period_time}</View>
               </View>

@@ -51,7 +51,12 @@ class ServicesHome extends Component {
   async componentWillMount() {
     // const { payload: user } = await this.props.dispatchUser()
     // const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
-    // AD_DISPATCH_DIST.find(i => i.url === lastPage && this.props.dispatchAdList({ city: user.citycode, type: i.type }))
+    // AD_DISPATCH_DIST.find(i => i.url === lastPage &&
+    //   this.props.dispatchAdList({ city: user.citycode, type: i.type }).then(
+    //     ({ data: { data } }) => {
+    //       console.log(data)
+    //     })
+    // )
   }
 
   onShow() {
