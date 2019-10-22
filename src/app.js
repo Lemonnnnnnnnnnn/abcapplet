@@ -34,6 +34,7 @@ class App extends Component {
           'house-type',
           'appointment',
           'search-room',
+
         ]
       },
       {

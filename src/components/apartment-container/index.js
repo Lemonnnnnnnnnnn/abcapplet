@@ -1,6 +1,5 @@
 // Taro 组件
 import Taro from '@tarojs/taro'
-import { AtIcon } from 'taro-ui'
 import { View, Swiper, SwiperItem, Image, Text } from '@tarojs/components'
 
 
@@ -12,7 +11,7 @@ import MaskTop from '@components/maskTop'
 // 自定义常量
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 import { HEART_YELLOW, HEART_YELLOW_EMPTY } from '@constants/picture'
-import { APARTMENT_AVATAR_DIST } from '@constants/apartment'
+
 class ApartmentContainer extends BaseComponent {
 
   static defaultProps = {
@@ -42,8 +41,9 @@ class ApartmentContainer extends BaseComponent {
       current: currentPic
     })
   }
-  //展示清水房
-  onShowPicPhoto() {
+
+  //展示清水房照片
+  onShowPhoto() {
     const picList = []
     const { qsf_picture } = this.props
     const { current } = this.state
@@ -57,21 +57,9 @@ class ApartmentContainer extends BaseComponent {
       current: currentPic
     })
   }
-  changePicIndex(e) {
-    const current = e.detail.current
-    this.setState({ current: current - 1 })
-  }
-  //展示清水房照片
-  onShowPhoto() {
-    const { showPhotos } = this.state
-    this.setState({
-      showPhotos: !showPhotos,
-      current:0
-    })
-  }
 
   render() {
-    const { swipers, height, width, isCollect, show, num, type,qsf_picture } = this.props
+    const { swipers, height, isCollect, show, num, type, qsf_picture } = this.props
 
     const { current, showPhotos } = this.state
 
@@ -83,29 +71,29 @@ class ApartmentContainer extends BaseComponent {
 
     return (
       <View className='position-relative' >
-        {type && qsf_picture.length? <View>
-          {showPhotos ?   <View>
-              <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看样板房照片</View>
-              <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
-                <Text className='text-yellow'>{current + 1 ? current + 1 : qsf_picture.length}</Text>
-                <Text className='text-white'>/{qsf_picture.length}</Text>
-              </View>
-            </View>
-            :
-            <View>
-            <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看清水房照片</View>
+        {type && qsf_picture.length ? <View>
+          {showPhotos ? <View>
+            <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看样板房照片</View>
             <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
-              <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
-              <Text className='text-white'>/{swipers.length}</Text>
+              <Text className='text-yellow'>{current + 1 ? current + 1 : qsf_picture.length}</Text>
+              <Text className='text-white'>/{qsf_picture.length}</Text>
             </View>
           </View>
+            :
+            <View>
+              <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看清水房照片</View>
+              <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
+                <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
+                <Text className='text-white'>/{swipers.length}</Text>
+              </View>
+            </View>
           }
         </View>
-        :
+          :
           <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
-          <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
-          <Text className='text-white'>/{swipers.length}</Text>
-        </View>
+            <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
+            <Text className='text-white'>/{swipers.length}</Text>
+          </View>
         }
 
         {!showPhotos ? <View>
@@ -136,7 +124,8 @@ class ApartmentContainer extends BaseComponent {
                 <Image
                   style={style}
                   mode='aspectFill'
-                  src={swipers.length ? `${swipers[0].url}` : ''} >
+                  src={swipers.length ? `${swipers[0].url}` : ''}
+                >
                 </Image>
             }
           </View>
@@ -169,7 +158,8 @@ class ApartmentContainer extends BaseComponent {
                 <Image
                   style={style}
                   mode='aspectFill'
-                  src={qsf_picture.length ? `${qsf_picture[0].url}` : ''} >
+                  src={qsf_picture.length ? `${qsf_picture[0].url}` : ''}
+                >
                 </Image>
             }
           </View>

@@ -9,6 +9,7 @@ export const PAGE_ACTIVITY_APARTMENT = '/pages/apartment/activity'
 export const PAGE_HOUSE_TYPE_SHOW = '/pages/apartment/house-type'
 export const PAGE_APPOINTMENT_CREATE = '/pages/apartment/appointment'
 
+
 // 文章和外链
 export const PAGE_ARTICLE_SHOW = '/pages/article/show'
 export const PAGE_EXTERNAL_INDEX = '/pages/external/index'
