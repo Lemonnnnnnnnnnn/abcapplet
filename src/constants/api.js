@@ -9,6 +9,8 @@ export const PAGE_SIZE = 10
 
 // 广告
 export const API_AD_LIST = `${HOST}/ad/adPost`
+export const API_AD_POPUP_LIST = `${HOST}/index/popupAdPost`
+export const API_AD_POPUP_LIST_CLOSE = `${HOST}/index/closePopupAdPost`
 
 /**
  *  字典相关

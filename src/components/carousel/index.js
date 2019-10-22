@@ -11,6 +11,8 @@ import { connect } from '@tarojs/redux'
 
 import * as homeActions from '@actions/home'
 
+import '../../styles/_carousel.scss'
+
 @connect(state => state, {
   ...homeActions,
 })
@@ -71,38 +73,6 @@ class Carousel extends Component {
       haveText,
     } = this.props
 
-    const bgStyle = {
-      position: "absolute",
-      left: Taro.pxTransform(16),
-      top: Taro.pxTransform(16),
-      borderRadius: Taro.pxTransform(32),
-      backgroundColor: "#000",
-      width: Taro.pxTransform(120),
-      height: Taro.pxTransform(35),
-      opacity: "0.5",
-    }
-
-    const countStyle = {
-      position: "absolute",
-      left: Taro.pxTransform(16),
-      top: Taro.pxTransform(16),
-      width: Taro.pxTransform(120),
-      height: Taro.pxTransform(35),
-      textAlign: "center",
-      justifyContent: "center",
-      alignItems: "center",
-    }
-
-    const maskStyle = {
-      position: "absolute",
-      background: 'linear-gradient(to bottom ,rgba(0,0,0,0) 0%,rgba(50,50,50,0.7) 100% )',
-      bottom: 0,
-      left: 0,
-      height: '35%',
-      width: '100%',
-      zIndex: '20',
-    }
-
     /**
      * 计算轮播高度
      */
@@ -114,90 +84,75 @@ class Carousel extends Component {
       width: hasContent ? '100%' : `${Taro.pxTransform(imageWidth)}`,
     }
 
-    const bannerStyle = {
-      width: '100%',
-      height: '100%',
-    }
+    // 轮播图
+    const bannerCarousel = type === 'banner' &&
+      <Swiper
+        className='mr-3'
+        autoplay
+        circular
+        indicatorDots
+        style={swiperStyle}
+        indicatorActiveColor={COLOR_YELLOW}
+        indicatorColor={COLOR_DOATS_CAROUSEL}
+        displayMultipleItems={displayMultipleItems}
+      >
+        {carousel.map(item =>
+          <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
+            <View style={{ height: Taro.pxTransform(380), overflow: 'hidden', position: 'relative' }}>
+              <Image
+                src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                mode='withfix'
+                className='carousel-image vertical-level-center carousel-banner'
+              />
+            </View>
+            <View style={contentStyle}>
+              <View className='mt-1 text-large'>{item.title}</View>
+              <View className='mt-2 text-small text-muted'>{item.subtitle ? item.subtitle : ' '}</View>
+            </View>
+          </SwiperItem>
+        )}
+      </Swiper>
 
+    // 可滑动模块
+    const normalCarousel = (type === 'normal' || type === 'cbd') &&
+      <ScrollView scrollX className='carousel-normal' style={swiperStyle}>
+        {carousel.map(item =>
+          <View
+            key={item.id}
+            style={imageStyle}
+            onClick={this.onNavigation.bind(this, item)}
+            className='mr-2 carousel-normal-item'
+          >
+            <Image
+              className='carousel-image'
+              src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+              mode='withfix'
+              style={imageStyle}
+            />
+            {
+              haveText && <View >
+                <Text className='title text-large text-white'>{item.title}</Text>
+                <View className='carousel-image carousel-normal-item-mask'></View>
+              </View>
+            }
+
+            {item.sum &&
+              <View>
+                <View className='count-bg'></View>
+                <View className='at-row at-row__align--center count-text'>
+                  <Image src='https://images.gongyuabc.com//image/fire.png' className='ml-1' style={{ width: Taro.pxTransform(20), height: Taro.pxTransform(20) }}></Image>
+                  <View className='at-col at-col-8 text-mini text-yellow ' style={{ overflow: 'hidden', lineHeight: Taro.pxTransform(40) }}>{item.sum}</View>
+                </View>
+              </View>
+            }
+          </View>
+        )}
+      </ScrollView>
 
     return (
       <View className={classNames(className, 'carousel', 'ml-3')} >
-
-        {type === 'banner' &&
-          <Swiper
-            className='mr-3'
-            autoplay
-            circular
-            indicatorDots
-            style={swiperStyle}
-            indicatorActiveColor={COLOR_YELLOW}
-            indicatorColor={COLOR_DOATS_CAROUSEL}
-            displayMultipleItems={displayMultipleItems}
-          >
-            {carousel.map(item =>
-              <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
-                <View style={{ height: Taro.pxTransform(380), overflow: 'hidden', position: 'relative' }}>
-                  <Image
-                    src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
-                    mode='withfix'
-                    style={bannerStyle}
-                    className='carousel-image vertical-level-center'
-                  />
-                </View>
-                <View style={contentStyle}>
-                  <View className='mt-1 text-large'>{item.title}</View>
-                  <View className='mt-2 text-small text-muted'>{item.subtitle ? item.subtitle : ' '}</View>
-                </View>
-              </SwiperItem>
-            )}
-          </Swiper>
-        }
-
-
-        {(type === 'normal' || type === 'cbd') &&
-          <ScrollView scrollX className='carousel-normal' style={swiperStyle}>
-            {carousel.map(item =>
-              <View
-                key={item.id}
-                style={imageStyle}
-                onClick={this.onNavigation.bind(this, item)}
-                className='mr-2 carousel-normal-item'
-              >
-                <Image
-                  className='carousel-image'
-                  src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
-                  mode='withfix'
-                  style={imageStyle}
-                />
-                {
-                  haveText && <View >
-                    <Text className='title text-large text-white'>{item.title}</Text>
-                    <View style={maskStyle} className='carousel-image'></View>
-                  </View>
-                }
-
-                {item.sum &&
-                  <View>
-                    <View style={bgStyle} ></View>
-                    <View style={countStyle} className='at-row at-row__align--center'>
-                      <Image src='https://images.gongyuabc.com//image/fire.png' className='ml-1' style={{ width: Taro.pxTransform(20), height: Taro.pxTransform(20) }}></Image>
-                      <View className='at-col at-col-8 text-mini text-yellow ' style={{ overflow: 'hidden', lineHeight: Taro.pxTransform(40) }}>{item.sum}</View>
-                    </View>
-                  </View>
-                }
-              </View>
-            )}
-          </ScrollView>
-        }
-
-        {/* {(type === 'ad') && <ScrollView scrollX className='carousel-normal' style={swiperStyle}>
-          {carousel.map(i =>
-            <View key={i.id}>
-              <Image src={i.cover} onClick={this.onNavigation}></Image>
-            </View>
-          )}
-        </ScrollView>
-        } */}
+        {bannerCarousel}
+        {normalCarousel}
       </View>
     )
   }

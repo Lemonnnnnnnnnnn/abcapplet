@@ -1,0 +1,9 @@
+@import "overrides";
+
+.curtain-wrap{
+  width: 100%;
+  height: 100%;
+  border-radius: 12px * $hd ;
+  overflow: hidden;
+  position: relative;
+}

@@ -28,6 +28,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 
 // 自定义变量相关
 import { ORDER_HEADERS } from '@constants/order'
+import { ORDER_LEASE_INSURANCE } from '@constants/picture'
 import { PAGE_ORDER_SHOW, PAGE_APARTMENT_SHOW, PAGE_HOUSE_TYPE_SHOW, PAGE_ORDER_CREATE, PAGE_RISK_LANDING, PAGE_ORDER_DOWN_PAYMENT } from '@constants/page'
 import { PAYLOAD_ORDER_CREATE } from '@constants/api'
 import {
@@ -43,7 +44,31 @@ import {
   LOCALE_SIGN_NOW,
   LOCALE_VIEW_SERVICE_AGREEMENT,
   LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT,
-  LOCALE_PRICE_SEMICOLON
+  LOCALE_PRICE_SEMICOLON,
+  LOCALE_CHANGE,
+  LOCALE_ROOM_CHOISE,
+  LOCALE_LOCA_ORDER_NOTICE,
+  LOCALE_COUPON,
+  LOCALE_COUPON_NONE,
+  LOCALE_CHOISE_ROOM_FIRST,
+  LOCALE_NAME,
+  LOCALE_TEL,
+  LOCALE_IDCARD,
+  LOCALE_RENT_DATE,
+  LOCALE_APPOINTMENT_APARTMENT,
+  LOCALE_COUPON_CAN_USED,
+  LOCALE_USER_HAVENT_INPUT,
+  LOCALE_OH,
+  LOCALE_ORDER_LOGIN_NOT,
+  LOCALE_ORDER_RISK,
+  LOCALE_CHOISE,
+  LOCALE_INPUT_NAME,
+  LOCALE_INPUT_TEL,
+  LOCALE_INPUT_IDCARD,
+  LOCALE_COLON,
+  LOCALE_MINUS,
+  LOCALE_MONEY,
+  LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM
 } from '@constants/locale'
 
 import buryPoint from '../../utils/bury-point'
@@ -112,7 +137,7 @@ class OrderCreate extends BaseComponent {
           rooms: [...data.rooms],
           signTime: data.sign_time,
           coupon: data.coupon,
-          couponTotal: data.coupon.length + '个可用',
+          couponTotal: data.coupon.length + LOCALE_COUPON_CAN_USED,
           payload: {
             room_id: room_id && data.room.id,
             appointment_id,
@@ -123,7 +148,7 @@ class OrderCreate extends BaseComponent {
           }
         })
 
-      } else this.setState({ couponTotal: '暂无可用优惠券' })
+      } else this.setState({ couponTotal: LOCALE_COUPON_NONE })
     })
 
   }
@@ -271,7 +296,7 @@ class OrderCreate extends BaseComponent {
   onShowCouponList() {
     const { payload: { room_id } } = this.state
 
-    room_id ? this.setState({ showCouponList: true }) : Taro.showToast({ title: '请先选择房间', icon: 'none' })
+    room_id ? this.setState({ showCouponList: true }) : Taro.showToast({ title: LOCALE_CHOISE_ROOM_FIRST, icon: 'none' })
   }
 
   // 打开流程引导窗口
@@ -289,11 +314,11 @@ class OrderCreate extends BaseComponent {
     const { payload } = this.state
     const { room_id, name, mobile, id_code, tenancy } = payload
     let judgeArr = [
-      { title: '姓名', value: name },
-      { title: '电话', value: mobile },
-      { title: '身份证号码', value: id_code },
-      { title: '租期', value: tenancy },
-      { title: '预约公寓', value: room_id },
+      { title: LOCALE_NAME, value: name },
+      { title: LOCALE_TEL, value: mobile },
+      { title: LOCALE_IDCARD, value: id_code },
+      { title: LOCALE_RENT_DATE, value: tenancy },
+      { title: LOCALE_APPOINTMENT_APARTMENT, value: room_id },
     ]
 
 
@@ -302,9 +327,9 @@ class OrderCreate extends BaseComponent {
         if (!i.value) {
           Taro.showToast({
             icon: 'none',
-            title: '亲，您还没有填写' + i.title + '哦',
+            title: LOCALE_USER_HAVENT_INPUT + i.title + LOCALE_OH,
           })
-          throw '亲，您还没有填写' + i.title + '哦'
+          throw LOCALE_USER_HAVENT_INPUT + i.title + LOCALE_OH
         }
       })
     } catch (e) {
@@ -382,7 +407,7 @@ class OrderCreate extends BaseComponent {
           {/* 如果用户没有登录 */}
           {!Taro.getStorageSync('user_info').token &&
             <View className='mb-3'>
-              <loginButton params={this.$router.params} color='black' message='您暂未登录，无法签约下定' />
+              <loginButton params={this.$router.params} color='black' message={LOCALE_ORDER_LOGIN_NOT} />
             </View>
           }
 
@@ -404,7 +429,7 @@ class OrderCreate extends BaseComponent {
               {
                 room_id && <View onClick={this.onShowRoomList} className='at-col at-col-3' style={{ height: '100%' }}>
                   <View className='at-row at-row__align--center at-row__justify--end'>
-                    <View className='text-secondary text-small'>修改</View>
+                    <View className='text-secondary text-small'>{LOCALE_CHANGE}</View>
                     <AtIcon value='chevron-right' size='14' color='#888888'></AtIcon>
                   </View>
                 </View>
@@ -424,7 +449,7 @@ class OrderCreate extends BaseComponent {
                         <View className=' text-normal'>{apartmentTitle}{roomNo}</View>
                         {rooms.length !== 0 && <View className='text-normal  mt-1'>
                           {LOCALE_RENT}{LOCALE_SEMICOLON}
-                          <Text className='text-normal'>￥</Text>
+                          <Text className='text-normal'>{LOCALE_PRICE_SEMICOLON}</Text>
                           <Text className='text-huge'>{discountPrice}</Text>
                           {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
                         </View>}
@@ -434,13 +459,13 @@ class OrderCreate extends BaseComponent {
                 </View>
 
                 : <View className='apartment-order-room'>
-                  <View className='text-center text-large mt-2'>看完房后，您想签约的是哪间房间？</View>
+                  <View className='text-center text-large mt-2'>{LOCALE_ROOM_CHOISE}</View>
                   <View className='mt-3 at-row at-row__justify--center mb-2' style={{ width: '100%' }}>
                     <AtButton
                       circle
                       className='btn-yellow active'
                       onClick={this.onShowRoomList}
-                    >选择</AtButton>
+                    >{LOCALE_CHOISE}</AtButton>
                   </View>
                 </View>
             }
@@ -457,7 +482,7 @@ class OrderCreate extends BaseComponent {
                 <View >
                   <View className='at-row'>
                     <View className='border-decorate border-decorate-yellow' style={{ height: '18px' }}></View>
-                    <View className='ml-2 text-normal text-secondary'>租期</View>
+                    <View className='ml-2 text-normal text-secondary'>{LOCALE_RENT_DATE}</View>
                   </View>
                 </View>
 
@@ -493,26 +518,26 @@ class OrderCreate extends BaseComponent {
             <View>
               <View className='at-row at-row__align--center pt-2'>
                 <View class='at-col-3 text-normal text-secondary'>
-                  姓名
-              </View>
+                  {LOCALE_NAME}
+                </View>
                 <View class='at-col-9'>
-                  <Input className='pl-2 text-normal' value={name} placeholder='请输入您的姓名' onInput={this.onNameInput} />
+                  <Input className='pl-2 text-normal' value={name} placeholder={LOCALE_INPUT_NAME} onInput={this.onNameInput} />
                 </View>
               </View>
               <View className='at-row at-row__align--center pt-2'>
                 <View class='at-col-3 text-normal text-secondary'>
-                  电话
-              </View>
+                  {LOCALE_TEL}
+                </View>
                 <View class='at-col-9'>
-                  <Input className='pl-2 text-normal' value={mobile} placeholder='请输入您的电话号码' onInput={this.onMobileInput} />
+                  <Input className='pl-2 text-normal' value={mobile} placeholder={LOCALE_INPUT_TEL} onInput={this.onMobileInput} />
                 </View>
               </View>
               <View className='at-row at-row__align--center pt-2'>
                 <View class='at-col-3 text-normal text-secondary'>
-                  身份证号码
-              </View>
+                  {LOCALE_IDCARD}
+                </View>
                 <View class='at-col-9'>
-                  <Input className='pl-2 text-normal' value={idCode} placeholder='请输入您的身份证号码' onInput={this.onIdCodeInput} />
+                  <Input className='pl-2 text-normal' value={idCode} placeholder={LOCALE_INPUT_IDCARD} onInput={this.onIdCodeInput} />
                 </View>
               </View>
             </View>
@@ -525,7 +550,7 @@ class OrderCreate extends BaseComponent {
                 <View>
                   <View className='at-row'>
                     <View className='border-decorate border-decorate-yellow' style={{ height: '18px' }}></View>
-                    <View className='ml-2 text-normal text-secondary'>优惠券</View>
+                    <View className='ml-2 text-normal text-secondary'>{LOCALE_COUPON}</View>
                   </View>
                 </View>
 
@@ -551,19 +576,16 @@ class OrderCreate extends BaseComponent {
           {/* 风险金 */}
           <Board className='px-3 py-2 mb-3 apartment-order-lease-insurance'>
             <View onClick={this.onNavigateToRisk} className='at-row at-row__justify--between at-row__align--center'>
-              <Image src='https://images.gongyuabc.com/image/lease-insurance.png' className='picture' ></Image>
-              <View className='text-small'>本单可享受退租险赔付： </View>
+              <Image src={ORDER_LEASE_INSURANCE} className='picture' ></Image>
+              <View className='text-small'>{LOCALE_ORDER_RISK}</View>
               <View className='text-bold '>
                 <View className='at-row at-row__align--end'>
-                  <View className='text-small mb-1'>￥</View>
+                  <View className='text-small mb-1'>{LOCALE_PRICE_SEMICOLON}</View>
                   <View className='text-huge'>{room_id && risk_money}</View>
                 </View>
               </View>
             </View>
           </Board>
-
-          {/* 交易banner */}
-          <Image className='apartment-order-deal-banner-picture ' src='https://images.gongyuabc.com/image/deal-banner.png'></Image>
 
           {/* 定金 */}
           <View className='my-3'>
@@ -573,14 +595,14 @@ class OrderCreate extends BaseComponent {
                 {!cost_deposit && <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>}
               </View>
               <View>
-                <View className='text-brand text-super text-bold'>￥{room_id ? price : 0}</View>
-                {room_id && coupon_money && <View className='text-normal text-secondary mt-1'>优惠券：-￥{parseInt(coupon_money)}</View>}
+                <View className='text-brand text-super text-bold'>{LOCALE_PRICE_SEMICOLON}{room_id ? price : 0}</View>
+                {room_id && coupon_money && <View className='text-normal text-secondary mt-1'>{LOCALE_COUPON}{LOCALE_COLON}{LOCALE_MINUS}{LOCALE_MONEY}{parseInt(coupon_money)}</View>}
               </View>
             </View>
           </View>
 
           {/* 提示信息 */}
-          <View className='text-secondary text-normal text-center mt-5 mb-3'>房源锁定成功前取消订单可急速退款</View>
+          <View className='text-secondary text-normal text-center mt-5 mb-3'>{LOCALE_LOCA_ORDER_NOTICE}</View>
 
           {/* 立即预订 */}
           {rooms.length !== 0 ? <View className='at-row'>
@@ -601,7 +623,7 @@ class OrderCreate extends BaseComponent {
                   disabled={disabled}
                   className='btn-grey btn-light-writh'
 
-                >暂无可选房间</AtButton>
+                >{LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM}</AtButton>
               </View>
             </View>}
         </View>

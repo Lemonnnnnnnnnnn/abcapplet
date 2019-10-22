@@ -48,14 +48,14 @@ class ServicesHome extends Component {
     this.onShow()
   }
 
-  async componentWillMount() {
-    const { payload: user } = await this.props.dispatchUser()
-    const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
-    AD_DISPATCH_DIST.find(i => i.url === lastPage &&
-      this.props.dispatchAdList({ city: user.citycode, type: i.type }).then(
-        ({ data: { data } }) => { this.setState({ adList: data.list }) })
-    )
-  }
+  // async componentWillMount() {
+  //   const { payload: user } = await this.props.dispatchUser()
+  //   const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
+  //   AD_DISPATCH_DIST.find(i => i.url === lastPage &&
+  //     this.props.dispatchAdList({ city: user.citycode, type: i.type }).then(
+  //       ({ data: { data } }) => { this.setState({ adList: data.list }) })
+  //   )
+  // }
 
   onShow() {
     const { payload } = this.state
@@ -131,16 +131,7 @@ class ServicesHome extends Component {
             onClickLeft={this.onToLeft}
             onClickRight={this.onToRight}
           />
-          {/* {
-            <Carousel
-              type='ad'
-              imageHeight='176'
-              imageWidth='312'
-              carousel={adList}
-              hasContent={false}
-              haveText={false}
-            />
-          } */}
+
           <View className='page-middile mt-2' onClick={this.onNavigateToRisk}>
             <Image src={RISK_MONEY_BANNER} className='appointment-ad'></Image>
           </View>

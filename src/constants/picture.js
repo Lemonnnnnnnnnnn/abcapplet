@@ -41,6 +41,7 @@ export const ORDER_STEP_ONE = 'https://images.gongyuabc.com/image/order-step1.pn
 export const ORDER_STEP_TWO = 'https://images.gongyuabc.com/image/order-step2.png'
 export const ORDER_STEP_THREE = 'https://images.gongyuabc.com/image/order-step3.png'
 export const ORDER_STEP_FOUR = 'https://images.gongyuabc.com/image/order-step4.png'
+export const ORDER_LEASE_INSURANCE='https://images.gongyuabc.com/image/lease-insurance.png'
 
 // 预约看房
 export const APARTMENT_APPOINTMENT_ACCEPT = 'https://images.gongyuabc.com//image/accept.png'

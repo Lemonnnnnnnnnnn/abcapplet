@@ -4,7 +4,6 @@ import Taro, { Component, setStorage } from '@tarojs/taro'
 import { View, Image, ScrollView } from '@tarojs/components'
 
 
-
 // 自定义组件
 import CityModal from '@components/city-modal'
 import Carousel from '@components/carousel'
@@ -14,6 +13,7 @@ import Select from '@components/select'
 import ApartmentList from '@components/apartment-list'
 import RequirementCard from '@components/requirement-card'
 import GetAuthorizationMask from '@components/get-authorization-mask'
+import Curtain from '@components/curtain'
 
 import {
   PAGE_HOME,
@@ -69,9 +69,11 @@ class CommonHome extends BaseComponent {
     // 弹窗相关
     showCard: false,//显示需求卡1
     showAuthorizationMask: false,
+    showCurtain: true,
 
     roomList: [],
     floorList: [],
+    adList: [],
 
     latitude: 0,
     longitude: 0,
@@ -109,6 +111,8 @@ class CommonHome extends BaseComponent {
 
 
   async componentWillMount() {
+
+    this.props.dispatchPopupAdPost().then(({ data: { data } }) => this.setState({ adList: data }))
 
     const {
       searchScrollTop,
@@ -193,12 +197,6 @@ class CommonHome extends BaseComponent {
     }).catch(err => { console.log(err) })
   }
 
-  // 关闭获取授权弹窗
-  onCloseAuthorizationMask() {
-    this.setState({ showAuthorizationMask: false })
-    this.onRefreshPage()
-  }
-
   // 刷新页面
   onRefreshPage() {
     Taro.reLaunch({ url: '/pages/common/home' })
@@ -248,12 +246,12 @@ class CommonHome extends BaseComponent {
 
   // 初始化户型的数据，供筛选项使用
   async componentDidShow() {
-     //判断是否弹出需求卡
-     await this.props.dispatchGetUserMsg().then((res) => {
-       if (res && res.data.data.user.is_guide === 0) {
-         this.setState({ showCard: true })
-       }
-     })
+    //判断是否弹出需求卡
+    await this.props.dispatchGetUserMsg().then((res) => {
+      if (res && res.data.data.user.is_guide === 0) {
+        this.setState({ showCard: true })
+      }
+    })
     Taro.showTabBarRedDot({
       index: 2
     })
@@ -297,7 +295,6 @@ class CommonHome extends BaseComponent {
     this.onSelectCity(newCity.id)
 
     this.onRefreshPage()
-
 
   }
 
@@ -397,6 +394,19 @@ class CommonHome extends BaseComponent {
     this.setState({ showCard: false })
   }
 
+  // 关闭获取授权弹窗
+  onCloseAuthorizationMask() {
+    this.setState({ showAuthorizationMask: false })
+    this.onRefreshPage()
+  }
+
+  // 关闭幕帘
+  onCloseCurtain() {
+    this.props.dispatchClosePopupAdPost().then(() =>
+      this.setState({ showCurtain: false })
+    )
+  }
+
   // 分享
 
   onShareAppMessage() {
@@ -431,7 +441,10 @@ class CommonHome extends BaseComponent {
       payloadApartment,
 
       showCard,
-      showAuthorizationMask
+      showAuthorizationMask,
+      showCurtain,
+
+      adList
     } = this.state
 
 
@@ -625,6 +638,8 @@ class CommonHome extends BaseComponent {
           onClose={this.onCloseAuthorizationMask}
           show={showAuthorizationMask}
         />
+
+        {adList.length && <Curtain adList={adList} onClose={this.onCloseCurtain} isOpened={showCurtain} />}
       </View>
     )
   }

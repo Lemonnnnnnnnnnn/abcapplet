@@ -9,6 +9,9 @@ import {
 
 export const AD_DEFAULT = []
 export const SET_AD_LIST = 'SET_AD_LIST'
+export const SET_POPUP_AD_LIST = 'SET_POPUP_AD_POST'
+export const CLOSE_POPUP_AD_LIST = 'CLOSE_POPUP_AD_LIST'
+
 
 export const SUB_DEFAULT = { list: [], total: 0 }
 export const TYPE_SUB_LIST = 'TYPE_SUB_LIST'

@@ -509,7 +509,6 @@ class HouseTypeShow extends Component {
                     </View>
                   </View>
                   :
-
                   <View className='at-row at-row__justify--between at-row__align--center mt-2' >
                     <View className='text-yellow at-col' >
                       <Text style={{ fontSize: Taro.pxTransform(36) }}>
@@ -529,12 +528,13 @@ class HouseTypeShow extends Component {
 
               {/* 押金保障 */}
 
-              {
-                isSign && <View className='at-row at-row__align--center  mt-1'>
+              {/* {
+                <View className='at-row at-row__align--center  mt-1'>
                   <View className='at-col at-col-2 text-normal at-row at-row__align--center house-type-deposit' style={{ fontSize: Taro.pxTransform(22) }}>押金保障</View>
                   <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
                 </View>
-              }
+              } */}
+
               {/* 广告位 */}
               <View className='page-middile mt-2'>
                 <Image onClick={this.onNavigateToRisk} src={DETAIL_AD} className='appointment-detail-ad'></Image>

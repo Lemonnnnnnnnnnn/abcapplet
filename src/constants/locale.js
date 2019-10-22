@@ -11,6 +11,19 @@ export const LOCALE_RECEIVE_CANT = '无法领取'
 export const LOCALE_RECEIVE_HAVE = '已领取'
 export const LOCALE_VOUCHER = '券'
 export const LOCALE_FIRST_MONTH_ONLY = '仅限首月'
+export const LOCALE_NAME ='姓名'
+export const LOCALE_TEL = '电话'
+export const LOCALE_IDCARD = '身份证号码'
+export const LOCALE_RENT_DATE = '租期'
+export const LOCALE_APPOINTMENT_APARTMENT = '预约公寓'
+export const LOCALE_USER_HAVENT_INPUT = '亲，您还没有填写'
+export const LOCALE_OH = '哦'
+export const LOCALE_CHOISE = '选择'
+export const LOCALE_INPUT_NAME ='请输入您的姓名'
+export const LOCALE_INPUT_TEL = '请输入您的电话号码'
+export const LOCALE_INPUT_IDCARD = '请输入您的身份证号码'
+export const LOCALE_COLON = '：'
+export const LOCALE_MINUS = '-'
 
 
 export const LOCALE_RENT = '租金'
@@ -35,7 +48,6 @@ export const LOCALE_USER_FAVORITE = '我的心愿卡'
 export const LOCALE_USER_FAVORITE_EXTRA_TEXT = '多个房源'
 export const LOCALE_USER_NEED = '我的需求卡'
 export const LOCALE_USER_NEED_EXTRA_TEXT = ''
-export const LOCALE_USER_COUPON = '我的优惠券'
 export const LOCALE_USER_COUPON_EXTRA_TEXT = ''
 
 export const LOCALE_ORDER_LIST = '预定订单'
@@ -77,6 +89,9 @@ export const LOCALE_ORDER_ID_CARD = '身份证号'
 export const LOCALE_ORDER_APARTMENT = '预订公寓'
 export const LOCALE_DOWN_PAYMENT = '定金：'
 export const LOCALE_SHOW_DOWN_PAYMENT_RULE = '查看完整定金协议'
+export const LOCALE_CHOISE_ROOM_FIRST ='请先选择房间'
+export const LOCALE_ORDER_LOGIN_NOT ='您暂未登录，无法签约下定'
+
 
 export const LOCALE_ORDER_STATUS_SUCCESS_NOTICE = '恭喜您成功签约，祝您租后生活愉快'
 export const LOCALE_ORDER_STATUS_CANCEL_NOTICE = '柠小萌期待下一次为您服务'
@@ -105,7 +120,6 @@ export const LOCALE_ORDER_PROCESS_GUIDE = '签约预定流程'
 export const LOCALE_ORDER_VIEW_AGREEMENT = '查看公寓*ABC*预定服务协议'
 export const LOCALE_ORDER_VIEW_PROCESS_GUIDE = '进入完整签约流程引导'
 export const LOCALE_ORDER_CHOISE_COUPON = ''
-export const LOCALE_ORDER_RENTAL_COUPON = '租房优惠券'
 export const LOCALE_UNIVERSAL_COUPON = '全场通用券'
 
 // 签约码
@@ -113,7 +127,7 @@ export const LOCALE_SIGNED_CODE = '签约码'
 export const LOCALE_SIGNED_CODE_SHOW = '查看签约码'
 export const LOCALE_SIGNED_CODE_NOTICE = '请到预订公寓向管家出示该签约码，核对信息后即可进行合同签约。'
 
-// 风险金
+// 退租险
 export const LOCALE_HEADER_RETURN_TITLE = '首月退租'
 export const LOCALE_HEADER_RETURN_DESC = '返回部分押金'
 export const LOCALE_HEADER_LIMIT_TITLE = '额度提升'
@@ -121,6 +135,7 @@ export const LOCALE_HEADER_LIMIT_DESC = '根据用户行为'
 export const LOCALE_CAN_APPLY = '前可申请'
 export const LOCALE_WILL_COST_RISK = '将使用退租险'
 export const LOCALE_COSTED_RISK = '已使用退租险'
+export const LOCALE_ORDER_RISK = '本单可享受退租险赔付：'
 export const LOCALE_APPLY_RISK = '申请赔付'
 export const LOCALE_RISK_STATUS_CAN_APPLY = '可申请'
 export const LOCALE_RISK_STATUS_WAIT_APPLY = '待审核'
@@ -150,12 +165,14 @@ export const LOCALE_LOCK_ROOM = '快速锁定'
 export const LOCALE_LOCK_ROOM_DESC = '目标房源'
 export const LOCALE_LOCK_RISK = '赔付权益'
 export const LOCALE_LOCK_RISK_DESC = '押金退租险'
+export const LOCALE_LOCA_ORDER_NOTICE = '房源锁定成功前取消订单可急速退款'
 export const LOCALE_LOCK_NOTICE = '公寓ABC代理预订房源服务'
 export const LOCALE_RISK_NOTICE = '本单可享受退租押金赔付退租险'
 export const LOCALE_DOWN_PAYMENT_RATIO = '租金的50%'
 export const LOCALE_SIGN_NOW = '立即预订'
 export const LOCALE_CHANGE = '修改'
 export const LOCALE_PAY = '付款'
+export const LOCALE_ROOM_CHOISE = '看完房后，您想签约的是哪间房间？'
 
 export const LOCALE_SELF_SEE = '自己看看'
 export const LOCALE_HELP_REMOEND = '帮我推荐'
@@ -272,6 +289,17 @@ export const LOCALE_RENT_INTRODUCE_TWO = '2.签约时请仔细阅读相关押金
 export const LOCALE_RENT_BUTTON = '无忧预定'
 export const LOCALE_RENT_RISK_MONEY_ONE = '本公寓可享受'
 export const LOCALE_RENT_RISK_MONEY_TWO = '预定退租险保障最高￥500'
+
+// 优惠券
+export const LOCALE_ORDER_RENTAL_COUPON = '租房优惠券'
+export const LOCALE_COUPON = '优惠券'
+export const LOCALE_USER_COUPON = '我的优惠券'
+export const LOCALE_COUPON_NONE = '暂无可用优惠券'
+export const LOCALE_COUPON_CAN_USED = '个可用'
+
+
+
+
 
 // 协议相关
 
