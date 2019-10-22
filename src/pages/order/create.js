@@ -192,41 +192,38 @@ class OrderCreate extends BaseComponent {
   // 选择房间
   async onSelectRoom(id) {
 
-    const { coupon } = this.state
+    const { appointment_id = 0, type_id = 0 } = this.$router.params
+    const { payload } = this.state
+    const { data: { data } } = await this.props.dispatchOrderPreview({ room_id: id, appointment_id, type_id })
+
     let [worthText, couponPrice] = ['', '']
 
-    for (let i = 0; i < coupon.length; i++) {
-      if (coupon[i].is_select) {
-        if (coupon[i].coupon_type === 1) {
-          worthText = coupon[i].worth * 100
+    for (let i = 0; i < data.coupon.length; i++) {
+      if (data.coupon[i].is_select) {
+        if (data.coupon[i].coupon_type === 1) {
+          worthText = data.coupon[i].worth * 100
           worthText = worthText.toString()
           if (worthText[worthText.length - 1] === '0') {
             worthText = worthText[0]
           }
           couponPrice = worthText + LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT
         } else {
-          worthText = parseFloat(coupon[i].worth)
+          worthText = parseFloat(data.coupon[i].worth)
           couponPrice = LOCALE_PRICE_SEMICOLON + worthText
         }
         break
       }
     }
 
-    this.setState({ couponPrice })
-
-
-    const { appointment_id = 0, type_id = 0 } = this.$router.params
-    const { data: { data } } = await this.props.dispatchOrderPreview({ room_id: id, appointment_id, type_id })
     this.setState({
+      couponPrice,
+      showRoomList: false,
+      payload: { ...payload, room_id: id },
       room: { ...data.room },
       rooms: [...data.rooms],
+      coupon: [...data.coupon]
     })
 
-    const { payload } = this.state
-    this.setState({
-      showRoomList: false,
-      payload: { ...payload, room_id: id }
-    })
   }
 
   // 选择优惠券

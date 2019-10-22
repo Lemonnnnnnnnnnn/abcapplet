@@ -13,17 +13,21 @@ import {
 
 import { RISK_MONEY_BANNER, NONE_TRAVE } from '@constants/picture'
 import { PAGE_RISK_LANDING } from '@constants/page'
+import { AD_DISPATCH_DIST } from '@constants/ad'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
 import * as userActions from '@actions/user'
+import * as adActions from '@actions/ad'
+
 
 import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
   ...appointmentActions,
-  ...userActions
+  ...userActions,
+  ...adActions
 })
 
 class ServicesHome extends Component {
@@ -35,20 +39,19 @@ class ServicesHome extends Component {
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
-    count: true
   }
 
   refserviceList = (node) => this.ServiceList = node
 
   componentDidShow() {
-    const { count } = this.state
     buryPoint()
     this.onShow()
   }
 
   async componentWillMount() {
     // const { payload: user } = await this.props.dispatchUser()
-    // user && this.props.dispatchAdList({ city: user.citycode, type: 1 })
+    // const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
+    // AD_DISPATCH_DIST.find(i => i.url === lastPage && this.props.dispatchAdList({ city: user.citycode, type: i.type }))
   }
 
   onShow() {
