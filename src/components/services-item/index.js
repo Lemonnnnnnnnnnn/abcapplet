@@ -155,76 +155,23 @@ class ServiceItem extends BaseComponent {
     width = mini ? minWidth : width
     height = mini ? minHeight : height
 
-    const imageStyle = {
-      width: '100%',
-      height: Taro.pxTransform(364),
-    }
-
-    const imageStyleMask = {
-      width: "100%",
-      height: Taro.pxTransform(364),
-      position: "absolute",
-      opacity: "0.2",
-      backgroundColor: "#000"
-    }
-
-    const headerStyle = {
-      width: '100%',
-    }
-
-    const serviceMiddleStyle = {
-      position: 'absolute',
-      left: "50%",
-      top: Taro.pxTransform(260),
-      height: Taro.pxTransform(138),
-      transform: "translate( -50% , 30%)",
-      borderRadius: Taro.pxTransform(24),
-      width: '90%',
-      background: 'rgba(255,255,255,1)',
-      boxShadow: '0px 3px 6px rgba(0,0,0,0.04)',
-    }
-
-    const ImageCenteredStyle = {
-      width: Taro.pxTransform(120),
-      height: Taro.pxTransform(120),
-      position: "absolute",
-      left: "16%",
-      top: '50%',
-      transform: "translate( -50% , -50%)",
-    }
-
-    const CenterStyle = {
-      position: "absolute",
-      left: "16%",
-      top: '50%',
-      transform: "translate( -50% , -50%)",
-    }
-
-    const rightStyle = {
-      position: "absolute",
-      top: '50%',
-      left: "39%",
-      transform: "translate( 0 , -50%)",
-    }
-
-
 
     // 设置图片宽高，方便七牛云格式化图片
     const src = `${cover.split('?')[0]}?imageView2/1/w/${width}/h/${height}`
 
     return (
-      <View className='pl-2 pr-2 pb-3 mt-1 m-2  home' style='position:relative ;' >
+      <View className='pl-2 pr-2 pb-3 mt-1 m-2  home position-relative' >
         <View className={classNames('apartment')} >
           {/* 头部 */}
-          <View className='apartment-header' style={headerStyle}>
+          <View className='service-header' >
 
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
             {cover
               ?
               <View>
-                <View style={imageStyleMask}></View>
+                <View className='service-image-mask' ></View>
 
-                <Image src={src} mode='scaleToFill' style={imageStyle} />
+                <Image src={src} mode='scaleToFill' className='service-image' />
 
               </View>
               : <ImagePlaceholder height={height} />
@@ -265,26 +212,26 @@ class ServiceItem extends BaseComponent {
                   />
                 </View>
               </View>
-              <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile ' style={{ position: 'absolute', top: '75%', left: '63%' }}>支持退租险</View>
+              <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>支持退租险</View>
             </View>
           </View>
-          <View className='ml-3' style={{ position: 'absolute', top: '18%' }}>
+          <View className='ml-3 position-absolute' style={{ top: '18%' }}>
             <View className=' mt-2 ml-1 text-small text-white'>{house_type_title}</View>
           </View>
 
 
           {/* 中间，计时框 */}
-          <View className='' style={serviceMiddleStyle}>
-            <View className='at-row at-row__justify--between'>
+          <View className='service-middle' >
+            <View className='at-row at-row__justify--between inherit-Height'>
               {/* 左边 */}
 
               {
                 appointment_status >= 3 ?
-                  <View className='at-col at-col-3' style={{ postion: "relative" }}>
-                    <Image src='https://images.gongyuabc.com//image/appointmentOver.png' style={ImageCenteredStyle}></Image>
+                  <View className='at-col at-col-3 inherit-Height position-relative' >
+                    <Image className='service-image-center' src='https://images.gongyuabc.com//image/appointmentOver.png' ></Image>
                   </View>
                   :
-                  <View className='at-col at-col-3 ' style={CenterStyle}>
+                  <View className='at-col at-col-3 service-center' >
                     <View className='at-row at-row__justify--center text-bold' style='font-size:22px;'>
                       {order_time}
                     </View>
@@ -295,12 +242,12 @@ class ServiceItem extends BaseComponent {
               }
 
               {/* 中间竖线 */}
-              <View className='at-col at-col-0' style={{ position: "absolute", left: '32%', top: "50%", transform: "translate(0,-50%)" }}>
+              <View className='at-col at-col-0 position-absolute' style={{ left: '32%', top: "50%", transform: "translate(0,-50%)" }}>
                 <View className='service-line'></View>
               </View>
 
               {/* 右边 server_id===0时*/}
-              <View hidden={server_id === 0 ? true : false} style={rightStyle} className='at-col at-col-9 at-row at-row__justify--center '>
+              <View hidden={server_id === 0 ? true : false} className='at-col at-col-9 at-row at-row__justify--center service-right'>
                 <View className='at-row at-row__justify--between' >
                   <View className='at-col at-col-0'>
                     <Image src={server_user.headimgurl} style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
@@ -326,7 +273,7 @@ class ServiceItem extends BaseComponent {
                 </View>
               </View>
               {/* 右边 server_id!==0时*/}
-              <View hidden={server_id === 0 ? false : true} style={rightStyle} className='at-col at-col-8 at-row at-row__justify--center'>
+              <View hidden={server_id === 0 ? false : true} className='at-col at-col-8 at-row at-row__justify--center service-right'>
                 <View className='at-row at-row__justify--between ' >
                   <View className='at-col at-col-2'>
                     <image src='http://images.gongyuabc.com/image/icon/head-no.png' style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />

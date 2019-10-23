@@ -47,6 +47,13 @@
   &-circle {
     border-radius: 20px * $hd;
   }
+
+  &-risk{
+    background: linear-gradient(to bottom , rgba(255, 201, 25, 1) , rgba(255, 170, 0, 1));
+    color: #fff;
+    border-radius: 12px;
+    padding: 4px 12px;
+  }
 }
 
 .at-tag--small.at-tag--circle {

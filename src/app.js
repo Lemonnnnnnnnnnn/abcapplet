@@ -3,6 +3,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import Index from './pages/index'
 import configStore from './store'
+import initProject from './utils/init'
 import './styles/app.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -43,7 +44,7 @@ class App extends Component {
           'search',
         ]
       },
-       {
+      {
         root: 'pages/appointment',
         pages: [
           'message',
@@ -145,8 +146,7 @@ class App extends Component {
 
   componentWillMount() {
     this.autoUpdate()
-    Taro.setStorageSync('haveLocationPower', 0)
-
+    initProject()
   }
 
 

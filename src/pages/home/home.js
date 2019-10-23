@@ -12,7 +12,6 @@ import Header from '@components/header'
 import Select from '@components/select'
 import ApartmentList from '@components/apartment-list'
 import RequirementCard from '@components/requirement-card'
-import GetAuthorizationMask from '@components/get-authorization-mask'
 import Curtain from '@components/curtain'
 
 import {
@@ -52,7 +51,6 @@ import BaseComponent from '../../components/base'
   ...cityActions,
   ...userActions,
   ...distActions,
-
   ...apartmentActions,
   ...apartmentLookActions,
   ...homeActions,
@@ -64,40 +62,45 @@ class CommonHome extends BaseComponent {
     enablePullDownRefresh: true,
   }
 
-  state = {
-    payloadApartment: PAYLOAD_APARTMENT_LIST,
-    // 弹窗相关
-    showCard: false,//显示需求卡1
-    showAuthorizationMask: false,
-    showCurtain: true,
+  constructor(props) {
+    super(props)
 
-    roomList: [],
-    floorList: [],
-    adList: [],
+    const showCurtain = Taro.getStorageSync('CurtainShow') ? true : false
 
-    latitude: 0,
-    longitude: 0,
+    this.state = {
+      payloadApartment: PAYLOAD_APARTMENT_LIST,
+      // 弹窗相关
+      showCard: false,//显示需求卡1
+      showCurtain: showCurtain,
 
+      roomList: [],
+      floorList: [],
+      adList: [],
 
-    // 搜索相关
-    searchScrollTop: null,
-    searchIsFixed: false,
-
-    // 选择器相关
-    selectIsFixed: false,
-    selectScrollTop: null,
+      latitude: 0,
+      longitude: 0,
 
 
-    scrollNow: false,
-    showSearch: true,
-    showSelect: true,
+      // 搜索相关
+      searchScrollTop: null,
+      searchIsFixed: false,
 
-    // 城市相关
-    selector: ['厦门市'],
-    selectorChecked: '厦门市',
-    cityCode: 0,
+      // 选择器相关
+      selectIsFixed: false,
+      selectScrollTop: null,
 
+
+      scrollNow: false,
+      showSearch: true,
+      showSelect: true,
+
+      // 城市相关
+      selector: ['厦门市'],
+      selectorChecked: '厦门市',
+      cityCode: 0,
+    }
   }
+
   async onPullDownRefresh() {
     await this.componentWillMount()
     Taro.stopPullDownRefresh()
@@ -183,16 +186,6 @@ class CommonHome extends BaseComponent {
         Taro.setStorageSync('latitude', 0)
         Taro.setStorageSync('longitude', 0)
 
-        Taro.getSetting().then(res => {
-          const index = Taro.getStorageSync('haveLocationPower')
-          Taro.setStorageSync('haveLocationPower', parseInt(index) + 1)
-
-          if (parseInt(index) === 1) {
-            const haveLocationPower = res.authSetting['scope.userLocation']
-            !haveLocationPower && this.setState({ showAuthorizationMask: true })
-          }
-
-        })
       }
     }).catch(err => { console.log(err) })
   }
@@ -394,22 +387,20 @@ class CommonHome extends BaseComponent {
     this.setState({ showCard: false })
   }
 
-  // 关闭获取授权弹窗
-  onCloseAuthorizationMask() {
-    this.setState({ showAuthorizationMask: false })
-    this.onRefreshPage()
-  }
 
   // 关闭幕帘
   onCloseCurtain() {
-    this.props.dispatchClosePopupAdPost().then(() =>
+    const { adList } = this.state
+    let id = ''
+    adList.forEach(i => id += i.id)
+    const idStr = id.split('').toString()
+
+    this.props.dispatchClosePopupAdPost({ id: idStr }).then(() =>
       this.setState({ showCurtain: false })
     )
-    // this.setState({ showCurtain: false })
   }
 
   // 分享
-
   onShareAppMessage() {
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
@@ -442,7 +433,6 @@ class CommonHome extends BaseComponent {
       payloadApartment,
 
       showCard,
-      showAuthorizationMask,
       showCurtain,
 
       adList
@@ -634,11 +624,7 @@ class CommonHome extends BaseComponent {
           initialRoom={roomList}
         />
 
-        <GetAuthorizationMask
-          type='getLocation'
-          onClose={this.onCloseAuthorizationMask}
-          show={showAuthorizationMask}
-        />
+
 
         {adList.length && <Curtain adList={adList} onClose={this.onCloseCurtain} isOpened={showCurtain} />}
       </View>

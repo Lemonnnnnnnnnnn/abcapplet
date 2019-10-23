@@ -107,7 +107,7 @@ class ServiceItem extends BaseComponent {
               </View>)}
           </View>}
 
-        {status === 3 || status === 4 || status === 5 || status === 6 || status === 7 || status === 8 || status === 9 || status === 10 || status === 11 ? <View className=' at-col-2'>
+        {status >= 3 && status <= 11 ? <View className=' at-col-2'>
           <View className='page-middile text-normal  text-yellow apartment-item-noaAppoint' >
             看房
         </View>
@@ -121,7 +121,7 @@ class ServiceItem extends BaseComponent {
           </View>
         }
 
-        {status === 4 || status === 5 || status === 6 || status === 7 || status === 8 || status === 9 || status === 10 || status === 11 ? <View className='at-row at-col-2'>
+        {status >= 4 && status <= 11 ? <View className='at-row at-col-2'>
           {[1, 2, 3].map(i =>
             <View key={i.id}>
               <AtIcon value='chevron-right' size='15' color='#FFC919' />
@@ -140,7 +140,7 @@ class ServiceItem extends BaseComponent {
           不满意
           </View> :
           <View>
-            {status === 5 || status === 6 || status === 7 || status === 8 || status === 9 || status === 10 || status === 11 ? <View className=' at-col-2'>
+            {status >= 5 && status <= 11 ? <View className=' at-col-2'>
 
               <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >
                 {LOCAL_APPOINTMENT_AGENCY}
@@ -201,7 +201,7 @@ class ServiceItem extends BaseComponent {
           <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>查看评价</View>}
       </View>}
 
-      {(status === 6 || status === 7 || status === 8 || status === 9 || status === 12 || status === 13 ||status === 14) && <View className='at-row page-middile mt-3 pb-3'>
+      {(status >= 6 && status <= 14) && <View className='at-row page-middile mt-3 pb-3'>
         {status === 6 && <View className='text-bold '>“已签约返现”</View>}
         {status === 7 && <View className='text-bold text-normal'>“已签约返现并获得退租险”</View>}
         {status === 8 && <View className='text-bold '>“签约审核中”</View>}
@@ -209,12 +209,12 @@ class ServiceItem extends BaseComponent {
         {status === 12 && <View className='text-bold '>“管家审核通过”</View>}
         {status === 13 && <View className='text-bold '>“管家审核拒绝”</View>}
         {status === 14 && <View className='text-bold '>“审核拒绝”</View>}
-        {(status === 6 || status === 7 || status === 8 || status === 9 ) && <View>
+        {(status >= 6 && status <= 9) && <View>
           {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>服务评价</View> :
             <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>查看评价</View>}
         </View>
         }
-         {(status === 12 || status === 13 || status === 14 ) && <View>
+        {(status >= 12 && status <= 14) && <View>
           <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onGudit}>审核详情</View>
         </View>
         }

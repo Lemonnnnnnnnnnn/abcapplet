@@ -30,6 +30,8 @@ import {
   LOCALE_QI,
 } from '@constants/locale'
 
+import '../../styles/_tag.scss'
+
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
     type: '',
@@ -194,11 +196,7 @@ class ApartmentItem extends BaseComponent {
             <View >
               <View className='at-row at-row__justify--between at-row__align--center'>
                 <View className='text-large mt-2 at-col-1 at-col--auto' style={{ color: "rgba(53, 53, 53, 1)" }}>{sub_title}</View>
-                {
-                  is_sign && <View className='mt-2'>
-                    <Image src={SIGN} className='apartment-container-sign'></Image>
-                  </View>
-                }
+                {is_sign && <View className='mt-2 text-normal tag-risk'>安心住</View>}
               </View>
               {desc && <View className='text-muted text-normal apartment-content-desc'>{one_word}</View>}
 
@@ -261,9 +259,6 @@ class ApartmentItem extends BaseComponent {
           </View>}
         </View>
         }
-
-
-
 
 
         {/* 迷你内容 ,公寓列表*/}
