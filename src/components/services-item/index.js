@@ -54,20 +54,6 @@ class ServiceItem extends BaseComponent {
     middileTop: 0
   }
 
-
-  // componentDidMount() {
-  //   Taro.createSelectorQuery()
-  //     .in(this.$scope)
-  //     .select('.home')
-  //     .boundingClientRect()
-  //     .exec(res => {
-  //       console.log(res[0].height)
-  //       this.setState({
-  //         middileTop:res[0].height*0.75
-  //       })
-  //     })
-  // }
-
   onIntention() {
     this.setState({ haveIntention: true })
   }

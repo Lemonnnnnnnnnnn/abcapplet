@@ -289,7 +289,10 @@ class OrderCreate extends BaseComponent {
 
   // 显示房间列表
   onShowRoomList() {
-    this.setState({ showRoomList: true })
+    Taro.getStorageSync('user_info').token ?
+      this.setState({ showRoomList: true })
+      :
+      Taro.showToast({ title: '请先执行登录操作', icon: 'none' })
   }
 
   // 显示优惠券列表

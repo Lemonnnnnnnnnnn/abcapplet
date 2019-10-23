@@ -48,20 +48,9 @@ class OrderCouponMask extends BaseComponent {
               couponList.map(i =>
                 <ApartmentCouponItem
                   key={i.status}
+                  coupon={i}
                   onSelectCoupon={this.props.onSelectCoupon}
                   block='order'
-                  status={i.status}
-                  validity_period_time={i.end_time}
-                  active={i.is_select}
-                  couponId={i.id}
-
-                  type={i.type}
-                  coupon_type={i.coupon_type}
-                  use_type={i.use_type}
-                  worth={i.worth}
-                  apartment_title={i.apartment_title}
-                  apartment_type={i.apartment_type}
-                  apartment_no={i.apartment_no}
                 />)
             }
 

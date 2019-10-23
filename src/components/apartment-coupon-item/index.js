@@ -77,8 +77,10 @@ class ApartmentCouponItem extends BaseComponent {
   }
 
   render() {
+    const { coupon, block } = this.props
+
     const { status, worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no,
-      validity_period_time, couponId, block, active, can_receive, max_receive_num } = this.props
+      validity_period_time, couponId, active, can_receive, max_receive_num, validity_period } = coupon
 
     // 对后台传过来的数值进行判断再赋值
 
@@ -156,6 +158,7 @@ class ApartmentCouponItem extends BaseComponent {
                   {apartment_no && <Text className='ml-1'>房间号:{apartment_no}</Text>}
                 </View>
                 <View className='text-mini '>{validity_period_time}</View>
+                {validity_period && <View className='text-mini'>租期：{validity_period === -1 ? '无限制' : validity_period + '月'}</View>}
               </View>
             </View>
           </View>
@@ -168,7 +171,7 @@ class ApartmentCouponItem extends BaseComponent {
                   {!can_receive && block === 'apartment' && <AtIcon value='help' size='14' color='#88888'></AtIcon>}
                 </View>
                 {use_type === 1 && <View className='text-mini text-center'>{LOCALE_FIRST_MONTH_ONLY}</View>}
-                {max_receive_num && <View className='text-mini text-center'>最高可领{max_receive_num === -1 ? '无限次' : max_receive_num}</View>}
+                {max_receive_num && <View className='text-mini text-center'>最高可领{max_receive_num === -1 ? '无限次' : max_receive_num + '次'}</View>}
               </View>
 
             </View>

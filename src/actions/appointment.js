@@ -12,6 +12,7 @@ import {
   API_APPOINTMENT_DETAILREWARD,
   API_APPOINTMENT_REWARD_ORDER_ROOM_POST,
   API_APPOINTMENT_UNSATIS,
+  API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME
 } from '@constants/api'
 
 import{
@@ -25,6 +26,7 @@ import{
   TYPE_APPOINTMENT_DETAILREWAR,
   TYPE_APPOINTMENT_REWARD_ORDERROOM,
   TYPE_APPOINTMENT_UNSATIS,
+  TYPE_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME
 }from '@constants/appointment'
 
 /**
@@ -142,4 +144,12 @@ export const dispatchAppointUnsatis= (payload) => createAction({
   method: 'POST',
   type: TYPE_APPOINTMENT_UNSATIS,
   url: API_APPOINTMENT_UNSATIS,
+})
+
+// 看房行程  修改看房时间
+export const dispatchAppointChangeTime = payload =>createAction({
+  payload ,
+  method :'POST',
+  type : TYPE_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME,
+  url : API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME
 })

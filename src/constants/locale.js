@@ -245,6 +245,7 @@ export const LOCALE_APPOINTMENT_INTENTION_LOOKROOM = "您可能看过的房间�
 export const LOCALE_APPOINTMENT_MESSAGE_LIU = '仅针对以下行程发起留言沟通'
 
 // 签约返现
+export const LOCALE_CASH_BACK= '返现'
 export const LOCALE_ADVERTISING_WORD_WU = '还没签约？选择ABC待预定服务'
 export const LOCALE_ADVERTISING_WORD_FU = '快速锁定房间，还可以获得最高￥800元退租押金赔付'
 export const LOCALE_APPOINTMENT_DETAIL_REVIEW = '确定提交审核'

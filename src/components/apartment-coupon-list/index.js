@@ -22,17 +22,10 @@ class ApartmentCouponList extends BaseList {
     const userCouponList = block === 'user' && couponList.length && couponList.map(i =>
       <ApartmentCouponItem
         key={i.list.id}
+        coupon={i}
         block={block}
         status={i.status}
         validity_period_time={i.validity_period_time}
-
-        type={i.list.type}
-        coupon_type={i.list.coupon_type}
-        use_type={i.list.use_type}
-        worth={i.list.worth}
-        apartment_title={i.list.apartment_title}
-        apartment_type={i.list.apartment_type}
-        apartment_no={i.list.apartment_no}
       />)
 
 
@@ -41,22 +34,9 @@ class ApartmentCouponList extends BaseList {
       <ApartmentCouponItem
         key={i.id}
         block={block}
-        status={i.status}
-        validity_period_time={i.validity_period_time}
-        couponId={i.id}
+        coupon={i}
         params={this.props.params}
         onListRefresh={this.props.onListRefresh}
-
-        max_receive_num={i.max_receive_num}
-        can_receive={i.can_receive}
-        receive_reason={i.receive_reason}
-        type={i.type}
-        coupon_type={i.coupon_type}
-        use_type={i.use_type}
-        worth={i.worth}
-        apartment_title={i.apartment_title}
-        apartment_type={i.apartment_type}
-        apartment_no={i.apartment_no}
       />)
 
     return (

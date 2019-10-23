@@ -379,7 +379,7 @@
     border-radius: 9px * $hd;
   }
   &-noaAppoint {
-    width: 44px * $hd;
+    // padding: 3px 3px;
     height: 22px * $hd;
     opacity: 1;
     border-radius: 8px * $hd;
@@ -408,13 +408,13 @@
   }
 
   &-buttonYellowBo {
-    width: 84px * $hd;
+    padding: 5px 10px * $hd;
     height: 30px * $hd;
     background: rgba(255, 201, 25, 1);
     border-radius: 23px * $hd;
   }
   &-buttonGrayBo{
-    width: 84px * $hd;
+    padding: 5px 10px * $hd;
     height: 30px * $hd;
     background: rgba(216, 216, 216, 1);
     border-radius: 23px * $hd;
@@ -425,5 +425,11 @@
     width:343px * $hd;
     height:292px * $hd;
     border-radius:  10px  * $hd 10px  * $hd 0 0;
+  }
+  &-coupon {
+    width: 40px * $hd;
+    position: absolute;
+    left: -4px * $hd;
+    // height: 33px * $hd;
   }
 }

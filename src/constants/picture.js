@@ -21,6 +21,7 @@ export const LEAVE_MSG = 'https://images.gongyuabc.com/image/leaveMsgle_new.png'
 export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone_new.png'
 export const COMMENT = 'https://images.gongyuabc.com/image/comment_new.png'
 export const EXPECT = 'https://images.gongyuabc.com/image/expect_new.png'
+export const APPOINTMENT_COUPON = 'https://images.gongyuabc.com/image/appointment-coupon.png'
 
 // 签约返现
 

@@ -270,4 +270,6 @@ export const PAYLOAD_COUPON_HAVE_BEEN_USED = { current_page: 1, page_size: 10, s
 export const PAYLOAD_COUPON_USER_EXPIRED = { current_page: 1, page_size: 10, status: 2 }
 //看房行程 看房不满意
 export const API_APPOINTMENT_UNSATIS = `${HOST}/appointment/unsatisfactoryPost`
+// 看房行程 修改看房时间
+export const API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME =`${HOST}/appointment/changeAppointmentLookTimePost`
 
