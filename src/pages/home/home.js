@@ -115,7 +115,12 @@ class CommonHome extends BaseComponent {
 
   async componentWillMount() {
 
-    this.props.dispatchPopupAdPost().then(({ data: { data } }) => this.setState({ adList: data }))
+    this.props.dispatchPopupAdPost().then(({ data: { data } }) => {
+      this.setState({ adList: data })
+      Taro.getStorageSync('user_info').token && data.length && this.setState({ showCurtain: true })
+
+    })
+
 
     const {
       searchScrollTop,
@@ -395,9 +400,13 @@ class CommonHome extends BaseComponent {
     adList.forEach(i => id += i.id)
     const idStr = id.split('').toString()
 
-    this.props.dispatchClosePopupAdPost({ id: idStr }).then(() =>
+    Taro.getStorageSync('user_info').token ?
+      this.props.dispatchClosePopupAdPost({ id: idStr }).then(() =>
+        this.setState({ showCurtain: false })
+      )
+      :
       this.setState({ showCurtain: false })
-    )
+
   }
 
   // 分享

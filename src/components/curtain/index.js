@@ -37,33 +37,31 @@ export default class Curtain extends BaseComponent {
     const { isOpened, adList, swiperHeight } = this.props
 
     // 轮播高度
-    const swiperStyle = { height: `${Taro.pxTransform(swiperHeight)}` }
-    const imageStyle = { width: '80%' }
+    const swiperStyle = { height: `${Taro.pxTransform(swiperHeight)}`, width: '80%', marginLeft: '10%' }
+    const imageStyle = { width: '100%' }
 
     return (isOpened &&
-      <View>
-        <AtCurtain isOpened onClose={this.props.onClose}>
-          <Swiper
-            autoplay
-            circular
-            indicatorDots
-            indicatorActiveColor={COLOR_YELLOW}
-            indicatorColor={COLOR_DOATS_CAROUSEL}
-            style={swiperStyle}
-          >
-            {
-              adList.map(i =>
-                <SwiperItem key={i.id} onClick={this.onNavigation.bind(this, i.url)}>
-                  <View className='curtain-wrap'>
-                    <Image src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
-                  </View>
-                </SwiperItem>
-              )
-            }
+      <AtCurtain isOpened onClose={this.props.onClose}>
+        <Swiper
+          autoplay
+          circular
+          indicatorDots
+          indicatorActiveColor={COLOR_YELLOW}
+          indicatorColor={COLOR_DOATS_CAROUSEL}
+          style={swiperStyle}
+        >
+          {
+            adList.map(i =>
+              <SwiperItem key={i.id} onClick={this.onNavigation.bind(this, i.url)}>
+                <View className='curtain-wrap'>
+                  <Image src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
+                </View>
+              </SwiperItem>
+            )
+          }
 
-          </Swiper>
-        </AtCurtain>
-      </View>
+        </Swiper>
+      </AtCurtain>
     );
   }
 }

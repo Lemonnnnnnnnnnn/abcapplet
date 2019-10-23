@@ -411,7 +411,12 @@
     width: 84px * $hd;
     height: 30px * $hd;
     background: rgba(255, 201, 25, 1);
-    opacity: 1;
+    border-radius: 23px * $hd;
+  }
+  &-buttonGrayBo{
+    width: 84px * $hd;
+    height: 30px * $hd;
+    background: rgba(216, 216, 216, 1);
     border-radius: 23px * $hd;
   }
 }
