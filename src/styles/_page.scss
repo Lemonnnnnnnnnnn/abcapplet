@@ -21,6 +21,10 @@ page {
     background: #ffffff;
     min-height: 100vh;
   }
+  &-orange {
+    background: linear-gradient(to bottom , #FFC919 ,#FFA319 );
+    min-height: 100vh;
+  }
 
   &-recommend {
     background: url("https://images.gongyuabc.com/bg.jpg") center center no-repeat;
@@ -232,6 +236,8 @@ page {
   left: 50%;
   top: 0;
 }
+
+
 
 // 继承父元素高度
 .inherit-Height {
