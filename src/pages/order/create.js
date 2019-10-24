@@ -599,7 +599,7 @@ class OrderCreate extends BaseComponent {
               </View>
               <View>
                 <View className='text-brand text-super text-bold'>{LOCALE_PRICE_SEMICOLON}{room_id ? price : 0}</View>
-                {room_id && coupon_money && <View className='text-normal text-secondary mt-1'>{LOCALE_COUPON}{LOCALE_COLON}{LOCALE_MINUS}{LOCALE_MONEY}{parseInt(coupon_money)}</View>}
+                {room_id && coupon_money && <View className='text-normal text-secondary mt-1'>{coupon_money}</View>}
               </View>
             </View>
           </View>

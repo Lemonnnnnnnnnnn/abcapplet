@@ -91,6 +91,7 @@ class App extends Component {
         root: 'pages/external',
         pages: [
           'index',
+          'coupon_receive'
         ]
       },
     ],
