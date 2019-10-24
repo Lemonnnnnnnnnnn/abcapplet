@@ -24,6 +24,7 @@ export const LOCALE_INPUT_TEL = '请输入您的电话号码'
 export const LOCALE_INPUT_IDCARD = '请输入您的身份证号码'
 export const LOCALE_COLON = '：'
 export const LOCALE_MINUS = '-'
+export const LOCALE_TIMES ='次'
 
 
 export const LOCALE_RENT = '租金'
@@ -297,6 +298,10 @@ export const LOCALE_COUPON = '优惠券'
 export const LOCALE_USER_COUPON = '我的优惠券'
 export const LOCALE_COUPON_NONE = '暂无可用优惠券'
 export const LOCALE_COUPON_CAN_USED = '个可用'
+export const LOCALE_UNLIMITED = '无限制'
+export const LOCALE_UNLIMITED_TIMES = '无限次'
+export const LOCALE_LOGIN_RECEIVE = '登录领取'
+export const LOCALE_HIGHEST_RECEIVE = '最高可领'
 
 
 

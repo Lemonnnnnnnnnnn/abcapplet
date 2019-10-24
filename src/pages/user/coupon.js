@@ -43,7 +43,7 @@ class UserFavorite extends Component {
   componentWillMount() {
     buryPoint()
   }
-  
+
   onInputValue(e) {
     const code = e.detail.value
     this.setState({ code })
@@ -95,9 +95,7 @@ class UserFavorite extends Component {
 
     list && list.length && list.map(i => couponList.push({
       status: i.status,
-      list: i.coupon,
-      validity_period_time: i.end_time,
-      coupon_id: i.coupon_id
+      list: { ...i.coupon, period_time: i.period_time },
     }))
 
     return (

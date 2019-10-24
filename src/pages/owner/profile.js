@@ -52,16 +52,9 @@ class UserProfile extends Component {
     orderOptionLists: USER_ORDER_OPTIONS_LISTS,
     showCard: false,
     showMask: false,
-    floorList: [],
-    roomList: [],
   }
 
   refRequirementCard = (node) => this.requirementCard = node
-
-  componentWillMount() {
-
-    this.initialHouseType()
-  }
 
   async componentDidShow() {
     Taro.showTabBarRedDot({
@@ -109,29 +102,6 @@ class UserProfile extends Component {
   }
 
 
-  // 初始化户型列表
-
-  initialHouseType() {
-    const initialFloor = [{ id: 0, title: "不限" }]
-    const initialRoom = [{ id: 0, title: "不限" }]
-    const { dists } = this.props
-
-
-    const room = dists ? dists.housetype_list.room : ''
-    const floor = dists ? dists.housetype_list.floor : ''
-
-    floor.map(i => {
-      initialFloor.push(i)
-    })
-    room && room.map(i => {
-      initialRoom.push(i)
-    })
-
-    this.setState({
-      floorList: [...initialFloor],
-      roomList: [...initialRoom],
-    })
-  }
   //前往橘子公社小程序
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({
@@ -156,7 +126,7 @@ class UserProfile extends Component {
 
 
   render() {
-    const { optionLists, orderOptionLists, showCard, floorList, roomList, showMask } = this.state
+    const { optionLists, orderOptionLists, showCard, showMask } = this.state
     const { user: { username, mobile }, dists } = this.props
 
     const maskStyle = {
@@ -269,8 +239,6 @@ class UserProfile extends Component {
           onCloseCard={this.onCloseCard}
           dists={dists}
 
-          initialFloor={floorList}
-          initialRoom={roomList}
         />
 
         {

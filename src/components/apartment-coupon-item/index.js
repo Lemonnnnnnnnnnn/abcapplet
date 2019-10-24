@@ -8,17 +8,25 @@ import { AtIcon } from 'taro-ui'
 import BaseComponent from '@components/base'
 
 // 自定义常量
-import { APARTMENT_COUPON_DIST, ORDER_COUPON_DIST } from '@constants/apartment'
+import { ORDER_COUPON_DIST } from '@constants/apartment'
 import { USER_COUPON_DIST } from '@constants/user'
 import {
   LOCALE_RECEIVE,
-  LOCALE_RECEIVE_HAVE,
   LOCALE_RECEIVE_CANT,
   LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT,
   LOCALE_UNIVERSAL_COUPON,
   LOCALE_VOUCHER,
   LOCALE_FIRST_MONTH_ONLY,
-  LOCALE_PRICE_SEMICOLON
+  LOCALE_PRICE_SEMICOLON,
+  LOCALE_COLON,
+  LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM,
+  LOCALE_UNLIMITED,
+  LOCALE_MONTH,
+  LOCALE_RENT_DATE,
+  LOCALE_LOGIN_RECEIVE,
+  LOCALE_UNLIMITED_TIMES,
+  LOCALE_TIMES,
+  LOCALE_HIGHEST_RECEIVE
 } from '@constants/locale'
 import { PAGE_USER_AUTH } from '@constants/page'
 
@@ -31,8 +39,11 @@ import * as apartmentActions from '@actions/apartment'
   ...apartmentActions,
 })
 class ApartmentCouponItem extends BaseComponent {
+  static defaultProps = {
+    coupon: {}
+  }
 
-  onCouponReceive() {
+  onCouponReceive(id) {
     // 判断登录状态 如果用户没有登录，优先执行跳转操作，引导用户登录
     const { params } = this.props
     let index = 0
@@ -49,20 +60,17 @@ class ApartmentCouponItem extends BaseComponent {
       Taro.navigateTo({ url: PAGE_USER_AUTH })
     )
 
-
-    const { couponId, can_receive, receive_reason, block } = this.props
-
+    const { coupon: { receive_reason }, can_receive, block } = this.props
     // 如果状态为可领取，发送请求，请求成功提示服务器传回的信息
     can_receive &&
       (
-        this.props.dispatchCouponReceive({ id: couponId }).then((res) => {
+        this.props.dispatchCouponReceive({ id: id }).then((res) => {
           res.data.code === 1 && (
             this.props.onListRefresh(),
             setTimeout(() => {
               Taro.showToast({ title: res.data.msg, icon: 'none' })
             }, 200)
           )
-
         })
       )
     // 如果当前item所处板块为详情页，状态为不可领取，提示不可领取原因
@@ -77,10 +85,10 @@ class ApartmentCouponItem extends BaseComponent {
   }
 
   render() {
-    const { coupon, block } = this.props
+    const { coupon, block, status } = this.props
 
-    const { status, worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no,
-      validity_period_time, couponId, active, can_receive, max_receive_num, validity_period } = coupon
+    const { worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no,
+      id, can_receive, max_receive_num, validity_period, period_time, is_select ,end_time } = coupon
 
     // 对后台传过来的数值进行判断再赋值
 
@@ -123,7 +131,7 @@ class ApartmentCouponItem extends BaseComponent {
       } break
       case 'apartment': {
         statusText = can_receive ? LOCALE_RECEIVE : LOCALE_RECEIVE_CANT
-        statusText = !Taro.getStorageSync('user_info').token ? '登录领取' : statusText
+        statusText = !Taro.getStorageSync('user_info').token ? LOCALE_LOGIN_RECEIVE : statusText
 
         backgroundColor = 'background-white'
         textColorGlobal = can_receive ? 'text-secondary' : 'text-gray--1'
@@ -136,8 +144,8 @@ class ApartmentCouponItem extends BaseComponent {
 
     return (
       <View
-        className={`${backgroundColor} ${active ? 'shadow-yellow' : 'shadow-black'} apartment-coupon-item  mt-2 `}
-        onClick={this.onSelectCoupon.bind(this, couponId, couponPrice, block)}
+        className={`${backgroundColor} ${is_select ? 'shadow-yellow' : 'shadow-black'} apartment-coupon-item  mt-2 `}
+        onClick={this.onSelectCoupon.bind(this, id, couponPrice, block)}
       >
         <View className={`${textColorGlobal} at-row inherit-Height `}  >
           {/* 左 价格 */}
@@ -155,15 +163,15 @@ class ApartmentCouponItem extends BaseComponent {
                 <View className={`${textColorName} text-small text-bold`}>{couponName}</View>
                 <View className={`${textColorName} text-mini `}>
                   {apartment_type && <Text>{apartment_type} </Text>}
-                  {apartment_no && <Text className='ml-1'>房间号:{apartment_no}</Text>}
+                  {apartment_no && <Text className='ml-1'>{LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM + LOCALE_COLON + apartment_no}</Text>}
                 </View>
-                <View className='text-mini '>{validity_period_time}</View>
-                {validity_period && <View className='text-mini'>租期：{validity_period === -1 ? '无限制' : validity_period + '月'}</View>}
+                <View className='text-mini'>{period_time || end_time}</View>
+                {validity_period && <View className='text-mini'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : validity_period + LOCALE_MONTH}</View>}
               </View>
             </View>
           </View>
           {/* 右 减免类型 状态文本*/}
-          <View className='text-normal ' onClick={this.onCouponReceive} style={{ width: '30%' }}>
+          <View className='text-normal ' onClick={this.onCouponReceive.bind(this, id)} style={{ width: '30%' }}>
             <View className=' at-row at-row__justify--center at-row__align--center inherit-Height' >
               <View>
                 <View className='at-row at-row__justify--center at-row__align--center'>
@@ -171,14 +179,15 @@ class ApartmentCouponItem extends BaseComponent {
                   {!can_receive && block === 'apartment' && <AtIcon value='help' size='14' color='#88888'></AtIcon>}
                 </View>
                 {use_type === 1 && <View className='text-mini text-center'>{LOCALE_FIRST_MONTH_ONLY}</View>}
-                {max_receive_num && <View className='text-mini text-center'>最高可领{max_receive_num === -1 ? '无限次' : max_receive_num + '次'}</View>}
+                {max_receive_num && <View className='text-mini text-center'>{LOCALE_HIGHEST_RECEIVE}{max_receive_num === -1 ? LOCALE_UNLIMITED_TIMES : max_receive_num + LOCALE_TIMES}</View>}
               </View>
 
             </View>
           </View>
         </View>
-        <View className={`${active && 'top-active'} top apartment-coupon-item-angle `} style={{ top: Taro.pxTransform(-6) }}></View>
-        <View className={`${active && 'bottom-active'} bottom apartment-coupon-item-angle `} style={{ bottom: Taro.pxTransform(-6) }}></View>
+        {/* 两个缺角 */}
+        <View className={`${is_select && 'top-active'} top apartment-coupon-item-angle `} style={{ top: Taro.pxTransform(-6) }}></View>
+        <View className={`${is_select && 'bottom-active'} bottom apartment-coupon-item-angle `} style={{ bottom: Taro.pxTransform(-6) }}></View>
       </View>
 
     )

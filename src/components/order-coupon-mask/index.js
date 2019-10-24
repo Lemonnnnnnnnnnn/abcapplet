@@ -47,7 +47,8 @@ class OrderCouponMask extends BaseComponent {
             {
               couponList.map(i =>
                 <ApartmentCouponItem
-                  key={i.status}
+                  key={i.id}
+                  status={i.status}
                   coupon={i}
                   onSelectCoupon={this.props.onSelectCoupon}
                   block='order'
