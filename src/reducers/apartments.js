@@ -4,6 +4,7 @@ import {
   UPDATE_APARTMENT_FAVORITE,
   SET_NEXT_PAGE_APARTMENT_LIST,
   APARTMENT_URL_DIST,
+  TYPE_SETTING_RISK_POST
 } from '@constants/apartment'
 
 const formatList = (list, type) => {
@@ -21,13 +22,13 @@ export default function apartment(state = APARTMENT_DEFAULT, action) {
   switch (action.type) {
     case SET_APARTMENT_LIST: {
       const { list, total, type } = action.payload
-      return { list: formatList(list, type), total, type }
+      return { ...state, list: formatList(list, type), total, type }
     }
 
     case SET_NEXT_PAGE_APARTMENT_LIST: {
       const { list: oldList } = state
       const { list, total, type } = action.payload
-      return { list: [...oldList, ...list], total, type }
+      return { ...state, list: [...oldList, ...list], total, type }
     }
 
     case UPDATE_APARTMENT_FAVORITE: {
@@ -39,6 +40,11 @@ export default function apartment(state = APARTMENT_DEFAULT, action) {
       )
 
       return { ...state, list }
+    }
+
+    case TYPE_SETTING_RISK_POST: {
+      const { people_num } = action.payload
+      return { ...state, people_num }
     }
 
     default: {

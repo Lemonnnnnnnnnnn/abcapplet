@@ -75,11 +75,11 @@ class HouseTypeShow extends Component {
     showRentDescription: false,
     showMatch: false,
     showApartRoom: true,
+    showCouponTag: false,
     nearbyPost: [],
     showMap: true,
     showCouponMask: false,
-    payload: PAYLOAD_COUPON_LIST,
-    cityId:350200,
+    cityId: 350200,
   }
 
   async componentDidMount() {
@@ -87,13 +87,19 @@ class HouseTypeShow extends Component {
     const { id } = this.$router.params
 
     const { citycode } = Taro.getStorageSync('user_info')
-    citycode&&this.setState({cityId:citycode})
+    citycode && this.setState({ cityId: citycode })
     this.setState({
       Id: id
     })
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
       const apartmentID = data.apartment_id
+
+      // 获取优惠券列表
+      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: apartmentID }).then(({ data: { data } }) => {
+        data.total && this.setState({ showCouponTag: true })
+      })
+
 
       // 获取附近公寓列表
       await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
@@ -207,7 +213,7 @@ class HouseTypeShow extends Component {
 
   onOpenLittleMask() {
     const { cityId } = this.state
-    this.props.dispatchApartmentHouseDataPost({ type: 1,city_id:cityId })
+    this.props.dispatchApartmentHouseDataPost({ type: 1, city_id: cityId })
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -280,7 +286,7 @@ class HouseTypeShow extends Component {
 
   onOpenMap() {
     const { cityId } = this.state
-    this.props.dispatchApartmentHouseDataPost({ type: 5,city_id:cityId })
+    this.props.dispatchApartmentHouseDataPost({ type: 5, city_id: cityId })
     const { houstType, map } = this.state
     const { latitude, longitude } = map
     const { address } = houstType
@@ -342,7 +348,7 @@ class HouseTypeShow extends Component {
 
 
   onShareAppMessage() {
-    this.props.dispatchApartmentHouseDataPost({ type: 2,city_id:cityId })
+    this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
     const { houstType } = this.state
     let { swipers, title } = houstType
     if (title.length > 17) {
@@ -368,7 +374,7 @@ class HouseTypeShow extends Component {
     const { cityId } = this.state
     if (method === 'onCreateBusiness') {
 
-      this.props.dispatchApartmentHouseDataPost({ type: 3,city_id:cityId })
+      this.props.dispatchApartmentHouseDataPost({ type: 3, city_id: cityId })
       const { houstType } = this.state
       const { apartmentId, id } = houstType
       Taro.navigateTo({
@@ -391,16 +397,12 @@ class HouseTypeShow extends Component {
     })
   }
 
-  onTest() {
-    Taro.showToast({ title: 'res.data.msg', icon: 'none' })
-  }
   render() {
     const { apartments } = this.props
 
-    const { houstType, map, buttons, showRentDescription,
+    const { houstType, map, buttons, showRentDescription, showCouponTag,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
       showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask, } = this.state
-
 
     const { latitude, longitude, markers } = map
 
@@ -443,7 +445,7 @@ class HouseTypeShow extends Component {
         >
 
           <ApartmentContainer
-            type={true}
+            type
             qsf_picture={qsfPicture}
             houseType_id={houseType_id}
             swipers={swipers}
@@ -531,14 +533,6 @@ class HouseTypeShow extends Component {
                   </View>
               }
 
-              {/* 押金保障 */}
-
-              {/* {
-                <View className='at-row at-row__align--center  mt-1'>
-                  <View className='at-col at-col-2 text-normal at-row at-row__align--center house-type-deposit' style={{ fontSize: Taro.pxTransform(22) }}>押金保障</View>
-                  <View className='at-col at-col-6 text-normal ml-3 text-secondary '>该房源支持退租押金最高50%无忧赔付</View>
-                </View>
-              } */}
 
               {/* 广告位 */}
               <View className='page-middile mt-2'>
@@ -547,18 +541,22 @@ class HouseTypeShow extends Component {
 
               {/* 已有多少人获得转租金 */}
               <View style={{ height: Taro.pxTransform(60) }} className='my-1'>
-                <View className='page-middile text-normal text-secondary'>已有50人获得转租险</View>
-
+                <View className='page-middile text-normal text-secondary'>已有{apartments.people_num || 51}人获得退租险</View>
               </View>
-
-
 
               <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>
 
 
               {/* 活动信息 */}
+              <View className='mt-3 '>
+                {/* 领优惠券小Tag */}
+                {showCouponTag && <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1' style={{ float: 'right' }}>
+                  <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
+                    <Text>领优惠券</Text>
+                    <ABCIcon icon='chevron_right' size='22' />
+                  </View>
+                </View>}
 
-              <View className='mt-1 at-row at-row__align--center at-row__justify--between'>
                 <View>
                   {rules && rules.map(i =>
                     <View key={i.id} className=' mr-1'>
@@ -566,14 +564,6 @@ class HouseTypeShow extends Component {
                       <Text className='text-secondary text-small ml-2'>{i.content}</Text>
                     </View>
                   )}
-                </View>
-
-                {/* 领优惠券小Tag */}
-                <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1'>
-                  <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
-                    <Text>领优惠券</Text>
-                    <ABCIcon icon='chevron_right' size='22' />
-                  </View>
                 </View>
               </View>
 

@@ -259,6 +259,7 @@ export const PAYLOAD_COUPON_LIST = { current_page: 1, page_size: 10 }
 // 领取优惠券
 export const API_COUPON_RECEIVE = `${HOST}/coupon/receivePost`
 
+
 // 兑换码获取优惠券
 export const API_COUPON_RECEIVECODE = `${HOST}/coupon/receiveCodePost`
 
@@ -275,3 +276,6 @@ export const API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME =`${HOST}/appointment/c
 
 // 获取单一优惠券
 export const API_COUPON_ALONE = `${HOST}/coupon/detailPost`
+
+// 获取退租险人数和金额
+export const API_SETTING_RISK_POST=`${HOST}/index/settingRiskPost`

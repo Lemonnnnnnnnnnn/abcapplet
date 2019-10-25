@@ -24,6 +24,7 @@ import {
 
   API_COUPON_LIST,
   API_COUPON_RECEIVE,
+  API_SETTING_RISK_POST,
 } from '@constants/api'
 
 import {
@@ -60,6 +61,7 @@ import {
   TYPE_COUPON_LISTPOST,
   TYPE_NEXTPAGE_COUPON_LISTPOST,
   TYPE_COUPON_RECEIVEPOST,
+  TYPE_SETTING_RISK_POST
 } from '@constants/apartment'
 
 
@@ -337,4 +339,13 @@ export const dispatchCouponReceive = payload => createAction({
   method: 'POST',
   type: TYPE_COUPON_RECEIVEPOST,
   url: API_COUPON_RECEIVE
+})
+
+// 获取退租险人数和金额
+export const dispatchRiskPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_SETTING_RISK_POST,
+  url: API_SETTING_RISK_POST,
+  cb: ({ data: { data } }) => ({ ...data })
 })

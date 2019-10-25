@@ -115,11 +115,13 @@ class CommonHome extends BaseComponent {
 
   async componentWillMount() {
 
+    // 获取幕帘弹窗内容
     this.props.dispatchPopupAdPost().then(({ data: { data } }) => {
       this.setState({ adList: data })
       Taro.getStorageSync('user_info').token && data.length && this.setState({ showCurtain: true })
-
     })
+    // 获取从后台获取的全平台获得退租险人数，没有值默认为50
+    this.props.dispatchRiskPost()
 
 
     const {

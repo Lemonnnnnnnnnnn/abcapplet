@@ -20,8 +20,10 @@ import CustomNav from '@components/custom-nav'
 import { COLOR_GREY_2 } from '@constants/styles'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
+import { PAYLOAD_COUPON_LIST } from '@constants/api'
 
 import buryPoint from '../../utils/bury-point'
+import ApartmentCouponMask from './components/apartment-coupon-mask'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -36,6 +38,8 @@ class ApartmentShow extends Component {
 
   state = {
     showLittleMask: false,
+    showCouponMask: false,
+    showCouponTag: false,
     apartment: {
       Id: 0,
       cbds: [],
@@ -56,16 +60,20 @@ class ApartmentShow extends Component {
     nearbyPost: [],
     navHeight: 0,
 
-    cityId:350200,
+    cityId: 350200,
   }
 
   async componentDidMount() {
     const { id } = this.$router.params
     buryPoint()
+    this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: id }).then(({ data: { data } }) => {
+      data.total && this.setState({ showCouponTag: true })
+      console.log(data)
+    })
 
 
     const { citycode } = Taro.getStorageSync('user_info')
-    citycode&&this.setState({cityId:citycode})
+    citycode && this.setState({ cityId: citycode })
 
     this.setState({ Id: id })
 
@@ -148,7 +156,7 @@ class ApartmentShow extends Component {
 
   onOpenLittleMask() {
     const { cityId } = this.state
-    this.props.dispatchApartmentDataPost({ type: 1,city_id:cityId })
+    this.props.dispatchApartmentDataPost({ type: 1, city_id: cityId })
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -161,9 +169,20 @@ class ApartmentShow extends Component {
     Taro.navigateTo({ url })
   }
 
+  onOpenCoupon() {
+    this.setState({ showCouponMask: true })
+    this.onHideMap()
+  }
+
+  // 关闭租房优惠券
+  onCloseCoupon() {
+    this.setState({ showCouponMask: false })
+    this.onShowMap()
+  }
+
   onOpenMap() {
     const { cityId } = this.state
-    this.props.dispatchApartmentDataPost({ type: 5,city_id:cityId })
+    this.props.dispatchApartmentDataPost({ type: 5, city_id: cityId })
     const { apartment, map } = this.state
     const { latitude, longitude } = map
     const { address } = apartment
@@ -193,17 +212,17 @@ class ApartmentShow extends Component {
   }
 
   onShareAppMessage() {
-    const {  cityId } = this.state
-    this.props.dispatchApartmentDataPost({ type: 2,city_id:cityId })
+    const { cityId } = this.state
+    this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
   }
 
   onClick(method) {
-    const { Id , cityId } = this.state
+    const { Id, cityId } = this.state
     if (method === 'onCreateBusiness') {
-      this.props.dispatchApartmentDataPost({ type: 3,city_id:cityId })
+      this.props.dispatchApartmentDataPost({ type: 3, city_id: cityId })
 
       const { apartment } = this.state
       const { id, types } = apartment
@@ -214,7 +233,7 @@ class ApartmentShow extends Component {
     }
     if (method === 'onCreateOrder') {
 
-      this.props.dispatchApartmentDataPost({ type: 4,city_id:cityId })
+      this.props.dispatchApartmentDataPost({ type: 4, city_id: cityId })
 
       // this[method]()
 
@@ -241,7 +260,7 @@ class ApartmentShow extends Component {
 
   onShareAppMessage() {
     const { cityId } = this.state
-    this.props.dispatchApartmentDataPost({ type: 2,city_id:cityId })
+    this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
     const { apartment } = this.state
     let { swipers, title } = apartment
     if (title.length > 17) {
@@ -254,11 +273,11 @@ class ApartmentShow extends Component {
   }
 
   render() {
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, showCouponMask, showCouponTag } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, tags, desc,
-      notices, cbds, intro, rules, position, cover, num } = apartment
+      notices, cbds, intro, rules, position, cover, num, id } = apartment
 
     const BrandingStyle = {
       backgroundColor: "rgb(248,248,248)",
@@ -314,7 +333,7 @@ class ApartmentShow extends Component {
           type='apart'
         />
 
-        <View onClick={this.onCloseLittleMask}   style={{ paddingBottom: Taro.pxTransform(120) }}>
+        <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120) }}>
 
           <ApartmentContainer
             swipers={swipers}
@@ -323,6 +342,14 @@ class ApartmentShow extends Component {
             onCreateFavorite={this.onCreateFavorite}
             onDeleteFavorite={this.onDeleteFavorite}
           >
+
+            <ApartmentCouponMask
+              show={showCouponMask}
+              onClose={this.onCloseCoupon}
+              apartment_id={id}
+              params={this.$router.params}
+              onTest={this.onTest}
+            />
 
             {/* 加上边距 */}
             <View className='ml-3 mr-3'>
@@ -333,6 +360,15 @@ class ApartmentShow extends Component {
 
               {/* 活动信息 */}
               <View className='mt-2'>
+
+                {/* 领优惠券小Tag */}
+                {showCouponTag && <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1' style={{ float: 'right' }}>
+                  <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
+                    <Text>领优惠券</Text>
+                    <ABCIcon icon='chevron_right' size='22' />
+                  </View>
+                </View>}
+
                 {rules.length ? rules.map(i =>
                   <View key={i.id} className=' mr-3'>
                     <Text className={`text-smail badge badge-${i.type}`} > {ACTIVITY_TYPE_DIST[i.type]['message']}</Text>
@@ -500,8 +536,8 @@ class ApartmentShow extends Component {
                   mini
                   type={TYPE_FAVORITE_APARTMENT}
                   // items={apartments.list}
-                  defaultPayload={{ city }}
-                  dispatchList={this.props.dispatchRecommendHouseType}
+                  // defaultPayload={{ city }}
+                  // dispatchList={this.props.dispatchRecommendHouseType}
                 />
               </View>
             }
