@@ -175,16 +175,21 @@ class ServiceItemShow extends BaseComponent {
           <View className='at-col at-col-2'>
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
               <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow apartment-item-noaAppoint position-relative' >
-                {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
-                  <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
+                {(status === 8 || status === 12 || status === 13 || status === 14) ?
+                <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
-                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>}
-                {<Text >{(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ? LOCAL_APPOINTMENT_AGENCY : LOCALE_CASH_BACK}</Text>}
+                  <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
+                  }
+                {<Text >{(status === 8 || status === 12 || status === 13 || status === 14) ?  LOCALE_CASH_BACK :LOCAL_APPOINTMENT_AGENCY}</Text>}
               </View>
             </View>
               :
-              <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+              item && item.is_sign ?<View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
                 {LOCAL_APPOINTMENT_AGENCY}
+              </View>
+              :
+              <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+                {LOCALE_CASH_BACK}
               </View>
             }
           </View>}
@@ -243,7 +248,7 @@ class ServiceItemShow extends BaseComponent {
 
       {status === 5 && <View className='at-row page-middile mt-3 pb-3'>
         {status === 5 && <View className='text-bold '>“已锁定成功”</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onSign}>去签约</View>
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>去签约</View>
       </View>}
 
       {status >= 6 && status <= 14 && <View className='at-row page-middile mt-3 pb-3'>

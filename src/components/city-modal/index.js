@@ -26,20 +26,6 @@ class CityModal extends Component {
     Taro.setStorageSync('code', code)
   }
 
-  // async getPhoneNumber(cityCode, e) {
-  //   let code = Taro.getStorageSync('code')
-  //   // code ? code = code : code =  await Taro.login()
-
-  //   const { encryptedData: encrypt_data, iv } = e.currentTarget
-  //   const urlCode = encodeURIComponent(code)
-  //   const urlEncrypt_data = encodeURIComponent(encrypt_data)
-  //   const urlIv = encodeURIComponent(iv)
-
-  //   encrypt_data && iv && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv })
-
-  //   this.props.onSelectCity(cityCode)
-  // }
-
   render() {
     const { citycode, city, onSelectCity } = this.props
 

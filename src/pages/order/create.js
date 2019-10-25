@@ -109,7 +109,7 @@ class OrderCreate extends BaseComponent {
     typeId: 0,
     beginTime: '',//进入页面的时间
     userSign: false, //用户是否下定
-
+    cityId: 350200
   }
 
 
@@ -155,6 +155,8 @@ class OrderCreate extends BaseComponent {
 
 
   componentDidMount() {
+    const { citycode } = Taro.getStorageSync('user_info')
+    citycode && this.setState({ cityId: citycode })
     const { timeList } = this.state
     let timeListinit = JSON.parse(JSON.stringify(timeList))
     timeListinit.map(i => {
@@ -172,11 +174,12 @@ class OrderCreate extends BaseComponent {
 
   componentWillUnmount() {
     // //获取离开这个页面的时间
+    const { cityId } = this.state
     const { beginTime, userSign } = this.state
     if (!userSign) {
       const OutTime = new Date()
       const remainTime = ((OutTime.getMinutes() - beginTime.getMinutes()) * 60) + (OutTime.getSeconds() - beginTime.getSeconds())
-      this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 0 })
+      this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 0 ,city_id:cityId })
     }
   }
 
@@ -344,7 +347,7 @@ class OrderCreate extends BaseComponent {
   // 创建(立即预定)
   onOrderCreate() {
     const { payload, typeId } = this.state
-
+    const { cityId } = this.state
     if (!this.onCheckPayload()) return;
 
     //获取离开这个页面的时间
@@ -352,7 +355,7 @@ class OrderCreate extends BaseComponent {
     const OutTime = new Date()
     const remainTime = ((OutTime.getMinutes() - beginTime.getMinutes()) * 60) + (OutTime.getSeconds() - beginTime.getSeconds())
     this.setState({ userSign: true })
-    this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 1 })
+    this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 1,city_id: cityId  })
 
     // 执行下定操作并进行跳转
     this.props.dispatchOrderCreate(payload).then(({ data: { data } }) => {
