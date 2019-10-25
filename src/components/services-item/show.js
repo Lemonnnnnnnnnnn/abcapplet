@@ -77,9 +77,9 @@ class ServiceItemShow extends BaseComponent {
 
   onSign() {
     const { item } = this.props
-    const { apartment_id, id, house_type_id } = item
+    const { id } = item
     this.props.dispatchAppointChangeTime({ appointment_id: id }).then(() =>
-      Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?appointment_id=${id}&type_id=${house_type_id}&apartment_id=${apartment_id}` }))
+      Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?appointment_id=${id}` }))
   }
   // ---------------------------
   // appointment_status	状态描述	进度(共有5)	按钮	显示文字
@@ -175,8 +175,11 @@ class ServiceItemShow extends BaseComponent {
           <View className='at-col at-col-2'>
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
               <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow apartment-item-noaAppoint position-relative' >
-                <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
-                <Text >{item.is_sign ? LOCAL_APPOINTMENT_AGENCY : LOCALE_CASH_BACK}</Text>
+                {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
+                  <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
+                  :
+                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>}
+                {<Text >{(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ? LOCAL_APPOINTMENT_AGENCY : LOCALE_CASH_BACK}</Text>}
               </View>
             </View>
               :
@@ -209,19 +212,26 @@ class ServiceItemShow extends BaseComponent {
         </View>
         <View >
           <View className='text-mini text-center page-middile text-secondary'>获得返现红包</View>
-          <View className='text-normal page-middile  mt-1 apartment-item-buttonYellowBo' onClick={this.onAgency}>线下已签约</View>
-        </View>
-        <View>
-          <View className='text-mini page-middile  text-secondary'>获得退租险及返现</View>
-          <View className=' text-normal page-middile mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
+          <View className='text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onAgency}>
             <View style='position:absolute;top:12%;left:-1%' >
-              <Image style='width:36px;height:34px' src={APPOINTMENT_COUPON} ></Image>
+              <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINTMENT_COUPON} ></Image>
             </View>
-            <View className='ml-4'>
-              <Text>在线预定</Text>
+            <View className='ml-4 mt-1'>
+              <Text>线下已签约</Text>
             </View>
           </View>
         </View>
+        {item && item.is_sign && <View>
+          <View className='text-mini page-middile  text-secondary'>获得退租险及返现</View>
+          <View className=' text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
+            <View style='position:absolute;top:12%;left:-1%' >
+              <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src='https://images.gongyuabc.com/image/appoint-ange.png' ></Image>
+            </View>
+            <View className='ml-4 mt-1'>
+              <Text>在线预定</Text>
+            </View>
+          </View>
+        </View>}
 
       </View>}
 
@@ -249,7 +259,7 @@ class ServiceItemShow extends BaseComponent {
             <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>查看评价</View>}
         </View>
         }
-        {(status === 12 || status === 13 || status === 14 || status === 8 )&& <View>
+        {(status === 12 || status === 13 || status === 14 || status === 8) && <View>
           <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onGudit}>查看审核详情</View>
         </View>
         }
