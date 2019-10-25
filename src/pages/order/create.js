@@ -127,26 +127,30 @@ class OrderCreate extends BaseComponent {
       if (res) {
         data = res.data.data
         const selectedCoupon = data.coupon.find(i => i.is_select)
-        selectedCoupon && this.setState({ payload: { coupon_user_id: selectedCoupon.id } })
+
+        const timeList = data.tenancy
+        timeList.map(i => i.id === 12 ? i.active = true : i.active = false)
+        const payload = {
+          room_id: room_id && data.room.id,
+          appointment_id,
+          tenancy: 12,
+          name: data.user_info.name,
+          mobile: data.user_info.mobile,
+          id_code: data.user_info.id_no,
+        }
 
         // 初始化表单
         this.setState({
-          timeList: data.tenancy,
+          timeList,
           cost_deposit: data.cost_deposit,
           room: { ...data.room },
           rooms: [...data.rooms],
           signTime: data.sign_time,
           coupon: data.coupon,
           couponTotal: data.coupon.length + LOCALE_COUPON_CAN_USED,
-          payload: {
-            room_id: room_id && data.room.id,
-            appointment_id,
-            tenancy: 12,
-            name: data.user_info.name,
-            mobile: data.user_info.mobile,
-            id_code: data.user_info.id_no,
-          }
+          payload,
         })
+        selectedCoupon && this.setState({ payload: { ...payload, coupon_user_id: selectedCoupon.id } })
 
       } else this.setState({ couponTotal: LOCALE_COUPON_NONE })
     })
@@ -157,19 +161,6 @@ class OrderCreate extends BaseComponent {
   componentDidMount() {
     const { citycode } = Taro.getStorageSync('user_info')
     citycode && this.setState({ cityId: citycode })
-    const { timeList } = this.state
-    let timeListinit = JSON.parse(JSON.stringify(timeList))
-    timeListinit.map(i => {
-      if (i.id === 12) {
-        i.active = true
-      } else {
-        i.active = false
-      }
-    })
-
-    this.setState({
-      timeList: timeListinit
-    })
   }
 
   componentWillUnmount() {
@@ -179,7 +170,7 @@ class OrderCreate extends BaseComponent {
     if (!userSign) {
       const OutTime = new Date()
       const remainTime = ((OutTime.getMinutes() - beginTime.getMinutes()) * 60) + (OutTime.getSeconds() - beginTime.getSeconds())
-      this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 0 ,city_id:cityId })
+      this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 0, city_id: cityId })
     }
   }
 
@@ -247,19 +238,28 @@ class OrderCreate extends BaseComponent {
     }
 
     const selectedCoupon = data.coupon.find(i => i.is_select)
-    selectedCoupon && this.setState({ payload: { coupon_user_id: selectedCoupon.id } })
 
     this.setState({
       couponPrice,
       showRoomList: false,
-      payload: {
-        ...payload,
-        room_id: id,
-      },
       room: { ...data.room },
       rooms: [...data.rooms],
       coupon: [...data.coupon]
     })
+
+    selectedCoupon ? this.setState({
+      payload: {
+        ...payload,
+        room_id: id,
+        coupon_user_id: selectedCoupon.id
+      }
+    }) :
+      this.setState({
+        payload: {
+          ...payload,
+          room_id: id,
+        }
+      })
 
   }
 
@@ -355,7 +355,7 @@ class OrderCreate extends BaseComponent {
     const OutTime = new Date()
     const remainTime = ((OutTime.getMinutes() - beginTime.getMinutes()) * 60) + (OutTime.getSeconds() - beginTime.getSeconds())
     this.setState({ userSign: true })
-    this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 1,city_id: cityId  })
+    this.props.dispatchApartmentRemainTime({ time: remainTime, sign: 1, city_id: cityId })
 
     // 执行下定操作并进行跳转
     this.props.dispatchOrderCreate(payload).then(({ data: { data } }) => {

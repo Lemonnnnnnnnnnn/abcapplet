@@ -1,6 +1,7 @@
 export const LOCALE_ERROR = '服务出现问题，请稍后再试。'
 export const LOCALE_SEARCH_PLACEHOLDER = '搜索公寓/商圈/地铁/BRT'
 export const LOCALE_AUTH = '在使用公寓ABC小程序服务时为提供安全且愉悦的使用体验，需要你进行确认微信授权'
+export const LOCALE_AUTH_SIMPLE = '为提供安全且愉悦的使用体验，需要你进行确认微信授权'
 export const LOCALE_MORE = '更多'
 export const LOCALE_HOT_CBD = '热门租房商圈'
 export const LOCALE_RECOMMEND_APARTMENT = '推荐品牌公寓'
@@ -29,6 +30,7 @@ export const LOCALE_MINUS = '-'
 export const LOCALE_TIMES = '次'
 export const LOCALE_NO_DESCRIPTION = '暂无描述'
 export const LOCALE_ORIGINAL_PRICE = '原价'
+export const LOCALE_CANCEL = '取消'
 
 
 export const LOCALE_RENT = '租金'

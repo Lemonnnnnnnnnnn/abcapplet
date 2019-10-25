@@ -84,21 +84,21 @@ class AppointPostNextMask extends BaseComponent {
 
 
               <View className='at-row at-row__justify--center mt-2 my-4'>
-                <View className='at-row at-row__justify--center'>
-                  <View className='text-yellow text-normal mt-1 ml-1'>{LOCALE_APPOINTMENT_ACCEPT_ORDER}</View>
-                  <View className='text-yellow text-large ml-1 mr-2'>—</View>
-                  <View className='text-yellow text-normal  mt-1 ml-1'>{LOCALE_APPOINTMENT_CALL}</View>
+                <View className='at-row at-row__justify--center ml-1'>
+                  <View className='text-yellow text-normal mt-1 '>{LOCALE_APPOINTMENT_ACCEPT_ORDER}</View>
+                  <View className='text-yellow text-large  mr-2'>—</View>
+                  <View className='text-yellow text-normal mt-1 '>{LOCALE_APPOINTMENT_CALL}</View>
 
-                  <View className='text-yellow text-large  ml-1 mr-2'>—</View>
-                  {serverId === 0 && <View className='text-muted text-normal mt-1 ml-1' >{LOCALE_APPOINTMENT_LOOK}</View>}
-                  {serverId !== 0 && <View className='text-yellow text-normal mt-2 ml-1' >{LOCALE_APPOINTMENT_LOOK}</View>}
+                  <View className='text-yellow text-large  mr-2'>—</View>
+                  {serverId === 0 && <View className='text-muted text-normal mt-1 ' >{LOCALE_APPOINTMENT_LOOK}</View>}
+                  {serverId !== 0 && <View className='text-yellow text-normal mt-2 ' >{LOCALE_APPOINTMENT_LOOK}</View>}
                 </View>
               </View>
 
-              <Image className='mt-2' onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' style={{ width: '100%' }}></Image>
+              <Image className='mt-2 inherit-Width' onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' ></Image>
 
 
-              <View className='at-row at-row__justify--center mt-1' style='width:100%;height:1px;background:#F8F8F8'></View>
+              <View className='at-row at-row__justify--center mt-1 inherit-Width' style='height:1px;background:#F8F8F8'></View>
 
               {/* 下部分的内容 */}
               <View>

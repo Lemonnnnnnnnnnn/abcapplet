@@ -2,6 +2,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 
+// 自定义常量
+import { LOCALE_CONFIRM, LOCALE_AUTH_SIMPLE, LOCALE_CANCEL } from '@constants/locale'
+
 class Auth extends Component {
   static options = {
     addGlobalClass: true
@@ -9,9 +12,9 @@ class Auth extends Component {
 
   static defaultProps = {
     logo: '',
-    text: '确定',
+    text: LOCALE_CONFIRM,
+    message: LOCALE_AUTH_SIMPLE,
     onLogin: () => { },
-    message: '为提供安全且愉悦的使用体验，需要你进行确认微信授权',
   }
 
   async componentDidShow() {
@@ -21,7 +24,6 @@ class Auth extends Component {
 
   onNavigation() {
     Taro.navigateBack()
-
   }
 
   render() {
@@ -46,7 +48,7 @@ class Auth extends Component {
         {/* 确认按钮 */}
         <View>
           <AtButton className='btn-green' openType='getUserInfo' onGetUserInfo={onLogin} >{text}</AtButton>
-          <AtButton className='btn-grey mt-3' onClick={this.onNavigation}>取消</AtButton>
+          <AtButton className='btn-grey mt-3' onClick={this.onNavigation}>{LOCALE_CANCEL}</AtButton>
         </View>
       </View>
     )

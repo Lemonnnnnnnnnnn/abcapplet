@@ -1,12 +1,14 @@
 import BaseComponent from '@components/base'
-import { PAGE_SIZE } from '@constants/api'
 import Taro from '@tarojs/taro'
+// 自定义常量
+import { LOCALE_NO_DATA } from '@constants/locale'
+import { PAGE_SIZE } from '@constants/api'
 
 class BaseList extends BaseComponent {
   static defaultProps = {
     items: [],
     show: true,
-    message: '暂无数据',
+    message: LOCALE_NO_DATA,
     defaultPayload: {},
     dispatchList: null,
     pageSize: PAGE_SIZE,
