@@ -273,3 +273,5 @@ export const API_APPOINTMENT_UNSATIS = `${HOST}/appointment/unsatisfactoryPost`
 // 看房行程 修改看房时间
 export const API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME =`${HOST}/appointment/changeAppointmentLookTimePost`
 
+// 获取单一优惠券
+export const API_COUPON_ALONE = `${HOST}/coupon/detailPost`

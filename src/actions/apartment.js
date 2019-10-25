@@ -331,7 +331,7 @@ export const dispatchNextPageCouponListPost = payload => createAction({
   cb: ({ data: { data } }) => data
 })
 
-// 领取优惠券
+// 领取优惠券(单一页面))
 export const dispatchCouponReceive = payload => createAction({
   payload,
   method: 'POST',

@@ -14,7 +14,8 @@ import {
   API_AUTH_MOBILEPOST,
 
   API_COUPON_RECEIVECODE,
-  API_COUPON_USER
+  API_COUPON_USER,
+  API_COUPON_ALONE
 } from '@constants/api'
 
 import {
@@ -31,7 +32,8 @@ import {
 
   TYPE_COUPON_RECEIVECODEPOST,
   TYPE_NEXTPAGE_COUPON_USERPOST,
-  TYPE_COUPON_USERPOST
+  TYPE_COUPON_USERPOST,
+  TYPE_GET_COUPON_DETAILPOST
 
 } from '@constants/user'
 
@@ -243,5 +245,12 @@ export const dispatchNextPageCouponUser = payload => createAction({
   cb: ({ data: { data } }) => data
 })
 
+// 获取单一优惠券详情
+export const dispatchCouponAlone = payload =>createAction({
+  payload,
+  method : 'POST',
+  type : TYPE_GET_COUPON_DETAILPOST,
+  url : API_COUPON_ALONE ,
+})
 
 

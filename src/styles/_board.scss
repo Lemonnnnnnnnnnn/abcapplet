@@ -98,7 +98,26 @@
   opacity: 1;
 }
 .line-dotted {
-  width: 100%;
-  height: 0px * $hd;
-  border: 1px * $hd dotted #d8d8d8;
+  overflow: hidden;
+  height: 100px;
+  color: #d8d8d8;
+  white-space: nowrap;
+}
+
+.coupon-angel {
+  width: 14px * $hd;
+  height: 22px * $hd;
+  background: #FFB319;
+  position: absolute;
+  top: 422px;
+  &.left {
+    left: -10px;
+    border-radius: 0 22px 22px 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  &.right {
+    right: -10px;
+    border-radius: 22px 0 0 22px ;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }

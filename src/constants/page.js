@@ -13,6 +13,7 @@ export const PAGE_APPOINTMENT_CREATE = '/pages/apartment/appointment'
 // 文章和外链
 export const PAGE_ARTICLE_SHOW = '/pages/article/show'
 export const PAGE_EXTERNAL_INDEX = '/pages/external/index'
+export const PAGE_EXTERNAL_COUPON_RECEIVE ='/pages/external/coupon_receive'
 
 // 用户相关
 export const PAGE_USER_AUTH = '/pages/user/auth'
