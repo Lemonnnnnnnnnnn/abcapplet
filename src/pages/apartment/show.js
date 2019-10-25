@@ -55,12 +55,17 @@ class ApartmentShow extends Component {
     buttons: [],
     nearbyPost: [],
     navHeight: 0,
+
+    cityId:350200,
   }
 
   async componentDidMount() {
     const { id } = this.$router.params
     buryPoint()
 
+
+    const { citycode } = Taro.getStorageSync('user_info')
+    citycode&&this.setState({cityId:citycode})
 
     this.setState({ Id: id })
 
@@ -138,10 +143,12 @@ class ApartmentShow extends Component {
     })
   }
 
+
   // 电话客服/在线客服
 
   onOpenLittleMask() {
-    this.props.dispatchApartmentDataPost({ type: 1 })
+    const { cityId } = this.state
+    this.props.dispatchApartmentDataPost({ type: 1,city_id:cityId })
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -155,7 +162,8 @@ class ApartmentShow extends Component {
   }
 
   onOpenMap() {
-    this.props.dispatchApartmentDataPost({ type: 5 })
+    const { cityId } = this.state
+    this.props.dispatchApartmentDataPost({ type: 5,city_id:cityId })
     const { apartment, map } = this.state
     const { latitude, longitude } = map
     const { address } = apartment
@@ -185,16 +193,17 @@ class ApartmentShow extends Component {
   }
 
   onShareAppMessage() {
-    this.props.dispatchApartmentDataPost({ type: 2 })
+    const {  cityId } = this.state
+    this.props.dispatchApartmentDataPost({ type: 2,city_id:cityId })
     return {
       title: "我在公寓ABC上发现了一个好\n房源",
     }
   }
 
   onClick(method) {
-    const { Id } = this.state
+    const { Id , cityId } = this.state
     if (method === 'onCreateBusiness') {
-      this.props.dispatchApartmentDataPost({ type: 3 })
+      this.props.dispatchApartmentDataPost({ type: 3,city_id:cityId })
 
       const { apartment } = this.state
       const { id, types } = apartment
@@ -205,7 +214,7 @@ class ApartmentShow extends Component {
     }
     if (method === 'onCreateOrder') {
 
-      this.props.dispatchApartmentDataPost({ type: 4 })
+      this.props.dispatchApartmentDataPost({ type: 4,city_id:cityId })
 
       // this[method]()
 
@@ -231,7 +240,8 @@ class ApartmentShow extends Component {
 
 
   onShareAppMessage() {
-    this.props.dispatchApartmentDataPost({ type: 2 })
+    const { cityId } = this.state
+    this.props.dispatchApartmentDataPost({ type: 2,city_id:cityId })
     const { apartment } = this.state
     let { swipers, title } = apartment
     if (title.length > 17) {

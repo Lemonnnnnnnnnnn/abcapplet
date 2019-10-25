@@ -79,13 +79,15 @@ class HouseTypeShow extends Component {
     showMap: true,
     showCouponMask: false,
     payload: PAYLOAD_COUPON_LIST,
+    cityId:350200,
   }
 
   async componentDidMount() {
     buryPoint()
     const { id } = this.$router.params
 
-
+    const { citycode } = Taro.getStorageSync('user_info')
+    citycode&&this.setState({cityId:citycode})
     this.setState({
       Id: id
     })
@@ -204,7 +206,8 @@ class HouseTypeShow extends Component {
   // 电话客服/在线客服
 
   onOpenLittleMask() {
-    this.props.dispatchApartmentHouseDataPost({ type: 1 })
+    const { cityId } = this.state
+    this.props.dispatchApartmentHouseDataPost({ type: 1,city_id:cityId })
     const { showLittleMask } = this.state
     this.setState({ showLittleMask: !showLittleMask })
   }
@@ -276,7 +279,8 @@ class HouseTypeShow extends Component {
   }
 
   onOpenMap() {
-    this.props.dispatchApartmentHouseDataPost({ type: 5 })
+    const { cityId } = this.state
+    this.props.dispatchApartmentHouseDataPost({ type: 5,city_id:cityId })
     const { houstType, map } = this.state
     const { latitude, longitude } = map
     const { address } = houstType
@@ -338,7 +342,7 @@ class HouseTypeShow extends Component {
 
 
   onShareAppMessage() {
-    this.props.dispatchApartmentHouseDataPost({ type: 2 })
+    this.props.dispatchApartmentHouseDataPost({ type: 2,city_id:cityId })
     const { houstType } = this.state
     let { swipers, title } = houstType
     if (title.length > 17) {
@@ -361,9 +365,10 @@ class HouseTypeShow extends Component {
    */
   onClick(method) {
     const { Id } = this.state
+    const { cityId } = this.state
     if (method === 'onCreateBusiness') {
 
-      this.props.dispatchApartmentHouseDataPost({ type: 3 })
+      this.props.dispatchApartmentHouseDataPost({ type: 3,city_id:cityId })
       const { houstType } = this.state
       const { apartmentId, id } = houstType
       Taro.navigateTo({
