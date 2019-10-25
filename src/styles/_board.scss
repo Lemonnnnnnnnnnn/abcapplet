@@ -13,8 +13,28 @@
   background: #ffc919;
 }
 
+.decorate-gradient {
+  height: 480px * $hd;
+  width: 100%;
+  background: linear-gradient(to bottom, #ffc919 5%, #f8f8f8 40%, #f8f8f8 100%);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .board {
   background: #ffffff;
+  &--wrap {
+    width: 90%;
+  }
+
+  &--pink {
+    background: linear-gradient(to bottom, #fffaec, #fff3db);
+    height: 179px * $hd;
+    width: 100%;
+  }
 
   &--all {
     border-radius: 12px * $hd;
@@ -76,4 +96,28 @@
   height: 0px * $hd;
   border: 1px * $hd solid rgba(248, 248, 248, 1);
   opacity: 1;
+}
+.line-dotted {
+  overflow: hidden;
+  height: 100px;
+  color: #d8d8d8;
+  white-space: nowrap;
+}
+
+.coupon-angel {
+  width: 14px * $hd;
+  height: 22px * $hd;
+  background: #FFB319;
+  position: absolute;
+  top: 422px;
+  &.left {
+    left: -10px;
+    border-radius: 0 22px 22px 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  &.right {
+    right: -10px;
+    border-radius: 22px 0 0 22px ;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }

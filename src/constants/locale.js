@@ -135,6 +135,7 @@ export const LOCALE_HEADER_LIMIT_TITLE = '额度提升'
 export const LOCALE_HEADER_LIMIT_DESC = '根据用户行为'
 export const LOCALE_CAN_APPLY = '前可申请'
 export const LOCALE_WILL_COST_RISK = '将使用退租险'
+export const LOCALE_RISK_CASH_BACK='获得退租险及返现'
 export const LOCALE_COSTED_RISK = '已使用退租险'
 export const LOCALE_ORDER_RISK = '本单可享受退租险赔付：'
 export const LOCALE_APPLY_RISK = '申请赔付'
@@ -247,6 +248,7 @@ export const LOCALE_APPOINTMENT_MESSAGE_LIU = '仅针对以下行程发起留言
 
 // 签约返现
 export const LOCALE_CASH_BACK= '返现'
+export const LOCALE_CASH_BACK_RED_ENVELOPE='获得返现红包'
 export const LOCALE_ADVERTISING_WORD_WU = '还没签约？选择ABC待预定服务'
 export const LOCALE_ADVERTISING_WORD_FU = '快速锁定房间，还可以获得最高￥800元退租押金赔付'
 export const LOCALE_APPOINTMENT_DETAIL_REVIEW = '确定提交审核'

@@ -21,6 +21,10 @@ page {
     background: #ffffff;
     min-height: 100vh;
   }
+  &-orange {
+    background: linear-gradient(to bottom, #ffc919, #ffa319);
+    min-height: 100vh;
+  }
 
   &-recommend {
     background: url("https://images.gongyuabc.com/bg.jpg") center center no-repeat;
@@ -145,14 +149,6 @@ page {
   }
 }
 
-//单位元素垂直居中
-.page-middile {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 // maskTop 样式
 .mask-top {
   border-top-left-radius: 24px;
@@ -199,8 +195,8 @@ page {
     background: #fff;
     min-height: 100vh;
 
-    .at-button{
-      height : 37px * $hd;
+    .at-button {
+      height: 37px * $hd;
       line-height: 37px * $hd;
     }
     &-input {
@@ -210,6 +206,13 @@ page {
     &-nav-active {
       border-bottom: 2px * $hd solid #ffc919;
     }
+  }
+}
+
+.coupon_receive {
+  box-shadow: 0 3px * $hd 10px * $hd rgba($color: #000000, $alpha: 0.16);
+  .at-button {
+    box-shadow: 0 3px * $hd 10px * $hd rgba($color: #ffc919, $alpha: 0.39);
   }
 }
 
@@ -233,16 +236,22 @@ page {
   top: 0;
 }
 
+//单位元素垂直居中
+.page-middile {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 // 继承父元素高度
 .inherit-Height {
   height: 100%;
 }
-.risk-ad{
+.risk-ad {
   background: url("https://images.gongyuabc.com/image/risk-ad.png") center center no-repeat;
   background-size: contain;
 
   width: 343px * $hd;
-  height:47px * $hd;
-
-
+  height: 47px * $hd;
 }

@@ -70,7 +70,7 @@ class AppointPostNextMask extends BaseComponent {
               </View>}
 
               {serverId !== 0 && <View className='mb-5'>
-                <View className='at-row at-row__justify--center' onClick={this.onNavigateToRisk}>
+                <View className='at-row at-row__justify--center' >
                   <Image src={APARTMENT_APPOINTMENT_ACCEPT} style='height:45px;width:40px'></Image>
                 </View>
                 <View className='at-row at-row__justify--center mt-2'>
@@ -95,7 +95,7 @@ class AppointPostNextMask extends BaseComponent {
                 </View>
               </View>
 
-              <Image className='mt-2' src={RISK_MONEY_BANNER} mode='widthFix' style={{ width: '100%' }}></Image>
+              <Image className='mt-2' onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' style={{ width: '100%' }}></Image>
 
 
               <View className='at-row at-row__justify--center mt-1' style='width:100%;height:1px;background:#F8F8F8'></View>
