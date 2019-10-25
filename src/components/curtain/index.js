@@ -9,8 +9,6 @@ import BaseComponent from '@components/base'
 import { PAGE_EXTERNAL_INDEX } from '@constants/page'
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 
-import '../../styles/_curtain.scss'
-
 export default class Curtain extends BaseComponent {
   static defaultProps = {
     swiperHeight: 800,

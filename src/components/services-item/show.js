@@ -20,8 +20,6 @@ import CustomerMask from '@components/customer-mask'
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
 
-import '../../styles/_apartment.scss'
-
 @connect(state => state, {
   ...appointmentActions,
 })

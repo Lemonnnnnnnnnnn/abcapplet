@@ -248,6 +248,15 @@ page {
 .inherit-Height {
   height: 100%;
 }
+// 继承父元素宽度
+.inherit-Width {
+  width: 100%;
+}
+
+.wrap-Style{
+  overflow: hidden;
+  position: relative;
+}
 .risk-ad {
   background: url("https://images.gongyuabc.com/image/risk-ad.png") center center no-repeat;
   background-size: contain;

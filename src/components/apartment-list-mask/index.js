@@ -12,6 +12,7 @@ import ApartmentItemMask from '@components/apartment-item-mask'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
+import { LOCALE_VIEW_APARTMENT_DETAILS, LOCALE_VIEW_APARTMENT_DETAILS_NONE } from '@constants/locale'
 
 class ApartmentListMask extends BaseComponent {
   static defaultProps = {
@@ -28,19 +29,19 @@ class ApartmentListMask extends BaseComponent {
         <View className='m-3'>
           {/* 公寓头部 */}
           <View className='at-row at-row__justify--between mb-3'>
-            <View className='text-bold'>查看公寓详情</View>
+            <View className='text-bold'>{LOCALE_VIEW_APARTMENT_DETAILS}</View>
             <View onClick={this.props.onClose}>
               <ABCIcon icon='close' color={COLOR_GREY_2} />
             </View>
           </View>
 
-          <ScrollView scrollY style={{ height: '250px' }}>
+          <ScrollView scrollY style={{ height: Taro.pxTransform(250 * 2) }}>
             {/* 公寓列表 */}
             {apartments.map(i => <ApartmentItemMask key={i.id} apartment={i} />)}
           </ScrollView>
 
           {/* 无公寓详情 */}
-          {apartments.length === 0 && <View>无公寓详情</View>}
+          {apartments.length === 0 && <View>{LOCALE_VIEW_APARTMENT_DETAILS_NONE}</View>}
         </View>
       </Board>
 

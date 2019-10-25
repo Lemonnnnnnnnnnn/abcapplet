@@ -11,8 +11,6 @@ import { connect } from '@tarojs/redux'
 
 import * as homeActions from '@actions/home'
 
-import '../../styles/_carousel.scss'
-
 @connect(state => state, {
   ...homeActions,
 })

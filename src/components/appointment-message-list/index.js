@@ -5,6 +5,10 @@ import { AtAvatar } from 'taro-ui'
 import { View, Image } from '@tarojs/components'
 import BaseComponent from '@components/base'
 
+// 自定义常量
+import {ICON_HEAD_NO} from '@constants/picture'
+
+
 class AppointmentMessageList extends BaseComponent {
   static defaultProps = {
     items: [],
@@ -12,12 +16,12 @@ class AppointmentMessageList extends BaseComponent {
   render() {
     const { items} = this.props
     return (
-      <View>
+      <View className='appointment-message-list'>
         {items.map(i =>
           <View key={i.id} className='text-normal'>
 
             {i.sayer !== 'user' && <View className='at-row mt-3'>
-              <Image src='http://images.gongyuabc.com/image/icon/head-no.png' style={{ width: Taro.pxTransform(80), height: Taro.pxTransform(80), borderRadius: "50%" }}></Image>
+              <Image src={ICON_HEAD_NO} className='icon-head-no' />
               <View className='ml-2'>
                 <View className='message-item p-2'>{i.content}</View>
                 <View className='text-secondary text-mini mt-1'>

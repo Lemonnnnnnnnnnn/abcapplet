@@ -71,7 +71,7 @@ class AppointPostNextMask extends BaseComponent {
 
               {serverId !== 0 && <View className='mb-5'>
                 <View className='at-row at-row__justify--center' >
-                  <Image src={APARTMENT_APPOINTMENT_ACCEPT} style='height:45px;width:40px'></Image>
+                  <Image src={APARTMENT_APPOINTMENT_ACCEPT} style={{ height: Taro.pxTransform(45 * 2), width: Taro.pxTransform(40 * 2) }}></Image>
                 </View>
                 <View className='at-row at-row__justify--center mt-2'>
                   <View className='text-bold text-super '>{LOCALE_APPOINTMENT_ACCEPT}</View>
@@ -122,7 +122,7 @@ class AppointPostNextMask extends BaseComponent {
           {/* 遮罩层 */}
           <Masks show={show} />
         </View>
-      </View>
+      </View >
   }
 }
 

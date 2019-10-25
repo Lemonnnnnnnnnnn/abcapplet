@@ -13,6 +13,15 @@ import BaseComponent from '@components/base'
 
 // 自定义常量
 import { COLOR_GREY_2 } from '@constants/styles'
+import {
+  LOCALE_NAME,
+  LOCALE_COLON,
+  LOCALE_MODIFY_NAME,
+  LOCALE_MODIFY_TEL,
+  LOCALE_CONFIRM,
+  LOCALE_ORDER_MOBILE,
+  LOCALE_TEL
+} from '@constants/locale'
 
 class AppointPostMask extends BaseComponent {
   static defaultProps = {
@@ -41,25 +50,25 @@ class AppointPostMask extends BaseComponent {
               </View>
             </View>
             <View className='at-row'>
-              <View className='at-col-4 text-normal at-row at-row__align--center '>姓名：</View>
+              <View className='at-col-4 text-normal at-row at-row__align--center '>{LOCALE_NAME + LOCALE_COLON}</View>
               <View className='at-col-6 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
                 {
-                  name === '姓名' ?
-                    <Input className='text-normal ml-2' placeholder='修改姓名' onChange={this.props.onGetName} ></Input>
+                  name === LOCALE_NAME ?
+                    <Input className='text-normal ml-2' placeholder={LOCALE_MODIFY_NAME} onChange={this.props.onGetName} ></Input>
                     :
-                    <Input className='text-normal ml-2' placeholder='修改姓名' onChange={this.props.onGetName} value={name} ></Input>
+                    <Input className='text-normal ml-2' placeholder={LOCALE_MODIFY_NAME} onChange={this.props.onGetName} value={name} ></Input>
                 }
 
               </View>
             </View>
             <View className='at-row mt-3'>
-              <View className='at-col-4 text-normal at-row at-row__align--center '>电话号码：</View>
+              <View className='at-col-4 text-normal at-row at-row__align--center '>{LOCALE_ORDER_MOBILE + LOCALE_COLON}</View>
               <View className='at-col-6 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
                 {
-                  tel === '电话' ?
-                    <Input className='text-normal ml-2 ' placeholder='修改电话号码' onChange={this.props.onGetTel} ></Input>
+                  tel === LOCALE_TEL ?
+                    <Input className='text-normal ml-2 ' placeholder={LOCALE_MODIFY_TEL} onChange={this.props.onGetTel} ></Input>
                     :
-                    <Input className='text-normal ml-2 ' placeholder='修改电话号码' onChange={this.props.onGetTel} value={tel}></Input>
+                    <Input className='text-normal ml-2 ' placeholder={LOCALE_MODIFY_TEL} onChange={this.props.onGetTel} value={tel}></Input>
                 }
 
               </View>
@@ -68,7 +77,7 @@ class AppointPostMask extends BaseComponent {
               circle
               className='mt-3 mb-2 btn-yellow active'
               onClick={this.props.onClose}
-            >确定</AtButton>
+            >{LOCALE_CONFIRM}</AtButton>
           </View>
         </View>
       </Board>

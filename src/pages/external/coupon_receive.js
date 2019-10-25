@@ -29,9 +29,6 @@ import {
 } from '@constants/locale'
 
 
-import '../../styles/_page.scss'
-import '../../styles/_board.scss'
-
 @connect(state => state, {
   ...userActions,
   ...apartmentActions

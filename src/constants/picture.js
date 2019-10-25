@@ -16,12 +16,12 @@ export const CALL_PHONE_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-b
 export const COMMENT_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-two.png'
 export const EXPECT_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-three.png'
 export const NONE_TRAVE = 'https://images.gongyuabc.com/image/noneTravelOne.png'
-
 export const LEAVE_MSG = 'https://images.gongyuabc.com/image/leaveMsgle_new.png'
 export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone_new.png'
 export const COMMENT = 'https://images.gongyuabc.com/image/comment_new.png'
 export const EXPECT = 'https://images.gongyuabc.com/image/expect_new.png'
 export const APPOINTMENT_COUPON = 'https://images.gongyuabc.com/image/appointment-coupon.png'
+export const ICON_HEAD_NO='http://images.gongyuabc.com/image/icon/head-no.png'
 
 // 签约返现
 
