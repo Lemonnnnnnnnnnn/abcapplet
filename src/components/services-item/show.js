@@ -175,12 +175,12 @@ class ServiceItemShow extends BaseComponent {
           <View className='at-col at-col-2'>
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
               <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow apartment-item-noaAppoint position-relative' >
-                {(status === 8 || status === 12 || status === 13 || status === 14) ?
+                {(status === 8 || status === 9 ||status === 12 || status === 13 || status === 14) ?
                 <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
                   <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
                   }
-                {<Text >{(status === 8 || status === 12 || status === 13 || status === 14) ?  LOCALE_CASH_BACK :LOCAL_APPOINTMENT_AGENCY}</Text>}
+                {<Text >{(status === 8 ||status === 9 || status === 12 || status === 13 || status === 14) ?  LOCALE_CASH_BACK :LOCAL_APPOINTMENT_AGENCY}</Text>}
               </View>
             </View>
               :
