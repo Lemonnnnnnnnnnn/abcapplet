@@ -2,14 +2,20 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as apartmentActions from '@actions/apartment'
+
 // 自定义组件
 import Borad from '@components/board'
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
 import { COLOR_BLACK } from '@constants/styles'
 
+@connect(state => state, {
+  ...apartmentActions,
+})
 class RiskHeader extends BaseComponent {
-
   static defaultProps = {
     items: [],
   }
@@ -18,7 +24,7 @@ class RiskHeader extends BaseComponent {
   }
 
   render() {
-    const { items, className } = this.props
+    const { items, className, apartments } = this.props
     return (<View>
       <Borad color='black' className={className}>
         <View className='px-4 py-4' onClick={this.onNavigetion}>
@@ -39,7 +45,7 @@ class RiskHeader extends BaseComponent {
         </View>
       </Borad>
       <View className='risk-ad  page-middile mb-3'>
-        <View className='text-small' style={{marginLeft:Taro.pxTransform(200)}}> 已有50人获得退租险  共赔付￥10000</View>
+        <View className='text-small' style={{ marginLeft: Taro.pxTransform(200) }}> 已有50人获得退租险  共赔付￥{apartments.sum || 10000}</View>
       </View>
     </View>
     )

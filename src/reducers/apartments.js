@@ -43,8 +43,8 @@ export default function apartment(state = APARTMENT_DEFAULT, action) {
     }
 
     case TYPE_SETTING_RISK_POST: {
-      const { people_num } = action.payload
-      return { ...state, people_num }
+      const { people_num, sum } = action.payload
+      return { ...state, people_num, sum }
     }
 
     default: {
