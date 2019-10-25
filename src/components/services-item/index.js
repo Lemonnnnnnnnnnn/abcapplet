@@ -134,7 +134,7 @@ class ServiceItem extends BaseComponent {
     const { haveIntention, haveEvalution, showIntention, showEvalution, step, middileTop } = this.state
 
 
-    const { id, cover, apartment_title, house_type_title,
+    const { id, cover, apartment_title, house_type_title,is_sign,
       order_time, server_id, server_user, comment, look_time, intention, remark, date, status, appointment_status } = service
 
     // 重置宽高
@@ -198,7 +198,7 @@ class ServiceItem extends BaseComponent {
                   />
                 </View>
               </View>
-              <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>支持退租险</View>
+              {is_sign && <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>支持退租险</View>}
             </View>
           </View>
           <View className='ml-3 position-absolute' style={{ top: '18%' }}>

@@ -88,7 +88,7 @@ class ApartmentCouponItem extends BaseComponent {
     const { coupon, block, status } = this.props
 
     const { worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no,
-      id, can_receive, max_receive_num, validity_period, period_time, is_select ,end_time } = coupon
+      id, can_receive, max_receive_num, validity_period, period_time, is_select ,end_time ,condition_period } = coupon
 
     // 对后台传过来的数值进行判断再赋值
 
@@ -166,7 +166,7 @@ class ApartmentCouponItem extends BaseComponent {
                   {apartment_no && <Text className='ml-1'>{LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM + LOCALE_COLON + apartment_no}</Text>}
                 </View>
                 <View className='text-mini'>{period_time || end_time}</View>
-                {validity_period && <View className='text-mini'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : validity_period + LOCALE_MONTH}</View>}
+                {condition_period && <View className='text-mini'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : condition_period + LOCALE_MONTH}</View>}
               </View>
             </View>
           </View>
