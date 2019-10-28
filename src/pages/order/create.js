@@ -401,7 +401,9 @@ class OrderCreate extends BaseComponent {
         />
 
         {/* 流程引导mask */}
-        <OrderStepMask show={showProcessMask} onClose={this.onCloseMask} />
+        <OrderStepMask
+          show={showProcessMask}
+          onClose={this.onCloseMask} />
 
         <View className='p-3'>
           {/* 背景底色 */}

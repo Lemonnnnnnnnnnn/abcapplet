@@ -1,10 +1,9 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
 import { View, Button, Image } from '@tarojs/components'
-import { AtButton, AtFloatLayout } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 
 // 自定义组件
-import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
 
 import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
@@ -64,9 +63,8 @@ class TabBar extends BaseComponent {
 
   render() {
     const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,
-      showLittleMask, floatLayoutHeightNum, title, Id, type } = this.props
+      showLittleMask, title, Id, type } = this.props
 
-    const { showCallPhoneView } = this.state
 
     const littleMaskHeight = Taro.pxTransform(height)
     const littleMaskWidth = Taro.pxTransform(width)
@@ -75,7 +73,6 @@ class TabBar extends BaseComponent {
 
     const fontHeight = Taro.pxTransform(height / 2)
 
-    const floatLayoutHeight = Taro.pxTransform(floatLayoutHeightNum / 2)
 
 
     const littleMaskStyle = {
@@ -98,9 +95,7 @@ class TabBar extends BaseComponent {
       borderTop: "1px solid rgb(200,200,200)"
     }
 
-    const grayRudeLineStyle = {
-      borderTop: "4px solid rgb(200,200,200)"
-    }
+
 
     const buttonStyle = {
       border: "1px solid #fff",
@@ -108,9 +103,6 @@ class TabBar extends BaseComponent {
       padding: 0,
     }
 
-    const floatLayoutStyle = {
-      height: floatLayoutHeight
-    }
 
     return (
       show && <View className={classNames(className)}>
@@ -125,9 +117,9 @@ class TabBar extends BaseComponent {
             <View className='at-row at-row__align--center at-row__justify--center' >
               <Button
                 className='Customer-button'
-                // send-message-path={`${PAGE_HOUSE_TYPE_SHOW}?id=${Id}`}
                 send-message-path={type === 'house' ? `${PAGE_HOUSE_TYPE_SHOW}?id=${Id}` : `${PAGE_APARTMENT_SHOW}?id=${Id}`}
-                open-type='contact' size='mini' plain style={buttonStyle} show-message-card bindcontact='handleContact' send-message-title={title}>
+                open-type='contact' size='mini' plain style={buttonStyle} show-message-card bindcontact='handleContact' send-message-title={title}
+              >
                 <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>在线客服</View>
               </Button>
             </View>
@@ -142,29 +134,14 @@ class TabBar extends BaseComponent {
             <View onClick={onOpenLittleMask} className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
               <Image style='width:7vw;height:7vw' src='https://images.gongyuabc.com/image/call.png'></Image>
             </View>
-            {/* <AtButton open-type='contact' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              <ABCIcon icon='headset_mic' color='#000' />
-            </AtButton> */}
+
           </View>}
           {hasShare && <View className='at-col-2'>
             <AtButton open-type='share' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              {/* <ABCIcon icon='share' color='#000' /> */}
+
               <Image style='width:7vw;height:7vw' src='https://images.gongyuabc.com/image/share.png'></Image>
             </AtButton>
           </View>}
-
-          {/* 暂时隐藏，设计稿和接口有出入 */}
-          {/* <View className='at-col-2'>
-            <AtButton className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              <ABCIcon icon='favorite_border' color='#000' />
-            </AtButton>
-          </View>
-
-          <View className='at-col-2'>
-            <AtButton className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              <ABCIcon icon='star' color='#000' />
-            </AtButton>
-          </View> */}
 
           {buttons.map((i, index) =>
             <View key={i.id} className={classNames(i.className || 'at-col', buttons.length - 1 !== index && 'pr-2')}>

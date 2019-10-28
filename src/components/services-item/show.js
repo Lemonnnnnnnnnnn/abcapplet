@@ -3,12 +3,40 @@ import Taro from '@tarojs/taro'
 import { View, Image, Button, Text } from '@tarojs/components'
 import { AtIcon, AtButton } from 'taro-ui'
 
-import { PAGE_ORDER_CREATE, PAGE_ORDER_SHOW, PAGE_APPOINTMENT_DETAIL, PAGE_APPOINTMENT_AUDIT } from '@constants/page'
+import {
+  PAGE_ORDER_CREATE,
+  PAGE_ORDER_SHOW,
+  PAGE_APPOINTMENT_DETAIL,
+  PAGE_APPOINTMENT_AUDIT,
+} from '@constants/page'
 import {
   LOCAL_APPOINTMENT_APPOINT,
   LOCAL_APPOINTMENT_LOOKROOM,
   LOCAL_APPOINTMENT_AGENCY,
-  LOCALE_CASH_BACK
+  LOCALE_CASH_BACK,
+  LOCAL_APPOINTMENT_DISLIKE,
+  LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER,
+  LOCAL_APPOINTMENT_CONTACT_CUSTOMER,
+  LOCAL_APPOINTMENT_LOOKROOM_AGENCY,
+  LOCAL_APPOINTMENT_CASHBACK_REDPACK,
+  LOCAL_APPOINTMENT_OFFLINE_SIGNING,
+  LOCAL_APPOINTMENT_GET_CASHBACK,
+  LOCALE_APPOINTMENT_EVALUTION,
+  LOCALE_APPOINTMENT_HAVE_EVALUTION,
+  LOCAL_APPOINTMENT_GO_SIGN ,
+  LOCAL_APPOINTMENT_DETAIL_REVIWE,
+  LOCAL_APPOINTMENT_GO_PAY,
+  LOCAL_APPOINTMENT_ORDER_DETAIL,
+  LOCAL_APPOINTMENT_BOOK_ONLINE,
+  LOCAL_APPOINTMENT_GOODSERVICE,
+  LOCAL_APPOINTMENT_LOCKSUCCESSD,
+  LOCAL_APPOINTMENT_APPOINTED,
+  LOCAL_APPOINTMENT_GET_REDPACK,
+  LOCAL_APPOINTMENT_AUDIT,
+  LOCAL_APPOINTMENT_HASEDCASHBACK,
+  LOCAL_APPOINTMENT_HOUSEKEPPERSUCCESS,
+  LOCAL_APPOINTMENT_HOUSEKEPPERFAIL,
+  LOCAL_APPOINTMENT_AUDITFAIL
 } from '@constants/locale'
 import { APPOINTMENT_COUPON } from '@constants/picture'
 
@@ -140,14 +168,14 @@ class ServiceItemShow extends BaseComponent {
 
         {status >= 3 && status <= 14 ? <View className=' at-col-2'>
           <View className='page-middile text-normal  text-yellow apartment-item-noaAppoint' >
-            看房
-        </View>
+            {LOCAL_APPOINTMENT_LOOKROOM}
+          </View>
         </View>
           :
           <View className=' at-col-2'>
             <View className='page-middile text-normal text-muted apartment-item-haveAppoint' >
-              看房
-        </View>
+              {LOCAL_APPOINTMENT_LOOKROOM}
+            </View>
           </View>
         }
 
@@ -168,27 +196,27 @@ class ServiceItemShow extends BaseComponent {
 
         {(status === 3 || status === 4) && step === 7
           ?
-          <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >不满意</View>
+          <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >{LOCAL_APPOINTMENT_DISLIKE}</View>
           :
           <View className='at-col at-col-2'>
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
               <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow apartment-item-noaAppoint position-relative' >
-                {(status === 8 || status === 9 ||status === 12 || status === 13 || status === 14) ?
-                <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
+                {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
+                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
                   <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
-                  }
-                {<Text >{(status === 8 ||status === 9 || status === 12 || status === 13 || status === 14) ?  LOCALE_CASH_BACK :LOCAL_APPOINTMENT_AGENCY}</Text>}
+                }
+                {<Text >{(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ? LOCALE_CASH_BACK : LOCAL_APPOINTMENT_AGENCY}</Text>}
               </View>
             </View>
               :
-              item && item.is_sign ?<View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+              item && item.is_sign ? <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
                 {LOCAL_APPOINTMENT_AGENCY}
               </View>
-              :
-              <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
-                {LOCALE_CASH_BACK}
-              </View>
+                :
+                <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+                  {LOCALE_CASH_BACK}
+                </View>
             }
           </View>}
       </View>
@@ -198,40 +226,40 @@ class ServiceItemShow extends BaseComponent {
       </View>
 
       {status === 1 && <View className='at-row at-row__justify--around  mt-3 pb-3' >
-        <View className='text-normal page-middile text-white apartment-item-buttonGrey' >联系管家</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onOpenCustom}>联系客服</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onSign}>已看房去签约</View>
+        <View className='text-normal page-middile text-white apartment-item-buttonGrey' >{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
+        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
+        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
       </View>}
 
       {status === 2 && <View className='at-row at-row__justify--around mt-3 pb-3'>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.props.onContact}>联系管家</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onOpenCustom}>联系客服</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onSign}>已看房去签约</View>
+        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.props.onContact}>{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
+        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
+        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
       </View>}
 
       {((status === 3 || status === 4) && step !== 7) && <View className='at-row at-row__justify--around  mt-3 pb-3'>
         <View className='mt-3'>
-          <View className='text-normal page-middile  mt-1 apartment-item-buttonGrayBo' onClick={this.props.onDisLike.bind(this, item)}>不满意</View>
+          <View className='text-normal page-middile  mt-1 apartment-item-buttonGrayBo' onClick={this.props.onDisLike.bind(this, item)}>{LOCAL_APPOINTMENT_DISLIKE}</View>
         </View>
         <View >
-          <View className='text-mini text-center page-middile text-secondary'>获得返现红包</View>
+          <View className='text-mini text-center page-middile text-secondary'>{LOCAL_APPOINTMENT_CASHBACK_REDPACK}</View>
           <View className='text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onAgency}>
             <View style='position:absolute;top:12%;left:-1%' >
               <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINTMENT_COUPON} ></Image>
             </View>
             <View className='ml-4 mt-1'>
-              <Text>线下已签约</Text>
+              <Text>{LOCAL_APPOINTMENT_OFFLINE_SIGNING}</Text>
             </View>
           </View>
         </View>
         {item && item.is_sign && <View>
-          <View className='text-mini page-middile  text-secondary'>获得退租险及返现</View>
+          <View className='text-mini page-middile  text-secondary'>{LOCAL_APPOINTMENT_GET_CASHBACK}</View>
           <View className=' text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
             <View style='position:absolute;top:12%;left:-1%' >
               <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src='https://images.gongyuabc.com/image/appoint-ange.png' ></Image>
             </View>
             <View className='ml-4 mt-1'>
-              <Text>在线预定</Text>
+              <Text>{LOCAL_APPOINTMENT_BOOK_ONLINE}</Text>
             </View>
           </View>
         </View>}
@@ -239,43 +267,43 @@ class ServiceItemShow extends BaseComponent {
       </View>}
 
       {(status === 3 || status === 4) && step === 7 && <View className='at-row page-middile mt-3 pb-3'>
-        <View className='text-bold text-normal '>“将为您提供更好的服务”</View>
-        {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>服务评价</View> :
-          <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>查看评价</View>}
+        <View className='text-bold text-normal '>{LOCAL_APPOINTMENT_GOODSERVICE}</View>
+        {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_EVALUTION}</View> :
+          <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_HAVE_EVALUTION}</View>}
       </View>}
 
       {status === 5 && <View className='at-row page-middile mt-3 pb-3'>
-        {status === 5 && <View className='text-bold '>“已锁定成功”</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>去签约</View>
+        {status === 5 && <View className='text-bold '>{LOCAL_APPOINTMENT_LOCKSUCCESSD}</View>}
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_SIGN }</View>
       </View>}
 
       {status >= 6 && status <= 14 && <View className='at-row page-middile mt-3 pb-3'>
-        {status === 6 && <View className='text-bold '>“已签约”</View>}
-        {status === 7 && <View className='text-bold text-normal'>“已签约返现并获得退租险”</View>}
-        {status === 8 && <View className='text-bold '>“签约审核中”</View>}
-        {status === 9 && <View className='text-bold '>“已签约返现”</View>}
-        {status === 12 && <View className='text-bold '>“管家审核通过”</View>}
-        {status === 13 && <View className='text-bold '>“管家审核拒绝”</View>}
-        {status === 14 && <View className='text-bold '>“审核拒绝”</View>}
+        {status === 6 && <View className='text-bold '>{LOCAL_APPOINTMENT_APPOINTED}</View>}
+        {status === 7 && <View className='text-bold text-normal'>{LOCAL_APPOINTMENT_GET_REDPACK}</View>}
+        {status === 8 && <View className='text-bold '>{LOCAL_APPOINTMENT_AUDIT}</View>}
+        {status === 9 && <View className='text-bold '>{LOCAL_APPOINTMENT_HASEDCASHBACK}</View>}
+        {status === 12 && <View className='text-bold '>{LOCAL_APPOINTMENT_HOUSEKEPPERSUCCESS}</View>}
+        {status === 13 && <View className='text-bold '>{LOCAL_APPOINTMENT_HOUSEKEPPERFAIL}</View>}
+        {status === 14 && <View className='text-bold '>{LOCAL_APPOINTMENT_AUDITFAIL}</View>}
         {(status === 6 || status === 7 || status === 9) && <View>
-          {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>服务评价</View> :
-            <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>查看评价</View>}
+          {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_EVALUTION}</View> :
+            <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_HAVE_EVALUTION}</View>}
         </View>
         }
         {(status === 12 || status === 13 || status === 14 || status === 8) && <View>
-          <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onGudit}>查看审核详情</View>
+          <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onGudit}>{LOCAL_APPOINTMENT_DETAIL_REVIWE}</View>
         </View>
         }
       </View>}
 
       {(status === 10) && <View className='at-row page-middile pb-3'>
         {status === 10 && <View className='text-bold '>“等待支付”</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>去支付</View>
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_PAY}</View>
       </View>}
 
       {(status === 11) && <View className='at-row page-middile  pb-3'>
         {status === 11 && <View className='text-bold '>“等待锁定”</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>查看订单详情</View>
+        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_ORDER_DETAIL}</View>
       </View>}
 
 
