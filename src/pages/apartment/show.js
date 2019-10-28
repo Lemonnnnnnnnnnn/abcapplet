@@ -28,6 +28,7 @@ import { LOCALE_SHARE_TEXT } from '@constants/locale'
 
 import buryPoint from '../../utils/bury-point'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
+import ApartmentContainer from './components/apartment-container'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {

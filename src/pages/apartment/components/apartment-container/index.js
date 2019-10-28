@@ -10,8 +10,6 @@ import MaskTop from '@components/maskTop'
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 import { HEART_YELLOW, HEART_YELLOW_EMPTY } from '@constants/picture'
 
-import '../../styles/_apartment.scss'
-
 class ApartmentContainer extends BaseComponent {
 
   static defaultProps = {
@@ -73,7 +71,6 @@ class ApartmentContainer extends BaseComponent {
       width: '100%',
       height: Taro.pxTransform(height),
     }
-
 
     return (
       <View className='position-relative' >

@@ -17,7 +17,6 @@ import OrderHeader from '@components/order-header'
 import RoomItem from '@components/room-item'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
-import ApartmentContainer from '@components/apartment-container'
 import HouseTypeAvatar from '@components/house-type-avatar'
 import CustomNav from '@components/custom-nav'
 
@@ -38,6 +37,7 @@ import buryPoint from '../../utils/bury-point'
 import ApartmentRentDescriptionMask from './components/apartment-rent-description-mask'
 import AppartmentMatchingMask from './components/apartment-matching-mask'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
+import ApartmentContainer from './components/apartment-container'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {

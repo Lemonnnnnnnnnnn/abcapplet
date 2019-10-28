@@ -12,12 +12,12 @@ import * as homeActions from '@actions/home'
 // 自定义组件
 import Select from '@components/select'
 import ApartmentList from '@components/apartment-list'
-import ApartmentHeader from '@components/apartment-header'
 
 // 自定义常量
 import { PAYLOAD_CBD_APARTMENT_LIST } from '@constants/api'
 
 import buryPoint from '../../utils/bury-point'
+import ApartmentHeader from './components/apartment-header'
 
 @connect(state => state, {
   ...userActions,
