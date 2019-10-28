@@ -76,6 +76,12 @@ $hd: 2 !default; // 基本单位
  $border-radius-lg: 6px * $hd !default;
  $border-radius-circle: 50% !default;
 
+ $border-radius-mini : 6px * $hd !default;
+ $border-radius-normal : 12px * $hd !default;
+ $border-radius-large : 16px * $hd !default;
+ $border-radius-huge : 20px * $hd !default;
+ $border-radius-super : 24px * $hd !default;
+
 //  /* 透明度 */
  $opacity-active: 0.6 !default; // Button 等组件点击态额透明度
  $opacity-disabled: 0.3 !default; // Button 等组件禁用态的透明度

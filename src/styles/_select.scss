@@ -6,7 +6,7 @@
   z-index: 200;
   background: #fff;
   width: 100%;
-  
+
 
   &-fixed {
     position: fixed;
@@ -35,7 +35,7 @@
       width: 20px;
       height: 20px;
       border: 1px solid #ffc919;
-      border-radius: 50%;
+      border-radius:$border-radius-circle ;
       background: #fff;
       margin-right: 6px;
       color: #ffc919;
@@ -45,7 +45,7 @@
       width: 20px;
       height: 20px;
       border: 1px solid #ffc919;
-      border-radius: 50%;
+      border-radius:$border-radius-circle ;
       background: #fff;
       margin-right: 6px;
       color: #ffc919;
@@ -58,7 +58,7 @@
       transform: translate(-47%, -53%);
       width: 15px;
       height: 15px;
-      border-radius: 50%;
+      border-radius:$border-radius-circle ;
       background: #ffc919;
     }
   }

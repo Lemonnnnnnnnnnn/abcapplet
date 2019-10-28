@@ -114,7 +114,7 @@ page {
     height: 104px * $hd;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 12px * $hd;
+    border-radius:$border-radius-normal ;
   }
   &-sublet-image {
     height: 104px * $hd;
@@ -126,7 +126,7 @@ page {
     height: 22px * $hd;
     background: rgba(255, 201, 25, 1);
     opacity: 1;
-    border-radius: 5px * $hd;
+    border-radius: $border-radius-mini;
     color: #ffffff;
   }
 }
@@ -134,7 +134,7 @@ page {
 .default-page {
   &-background {
     background-color: #fff;
-    border-radius: 40px;
+    border-radius: $border-radius-huge;
   }
   &-picture {
     width: 90%;
@@ -165,7 +165,7 @@ page {
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 6px * $hd rgba(0, 0, 0, 0.21);
   opacity: 1;
-  border-radius: 22px * $hd;
+  border-radius: $border-radius-huge;
   position: fixed;
   bottom: 4%;
   right: 4%;
@@ -174,7 +174,7 @@ page {
   width: 25px * $hd;
   height: 25px * $hd;
   background: rgba(255, 201, 25, 1);
-  border-radius: 50%;
+  border-radius:$border-radius-circle ;
   opacity: 1;
 }
 .user {

@@ -5,20 +5,20 @@
   height: 60px;
   width: 60px;
   background: #ffd700;
-  border-radius: 50%;
+  border-radius:$border-radius-circle ;
 
   // 黄色小圆点 实心 迷你
   &-mini {
     width: 7px * $hd;
     height: 7px * $hd;
     background: #ffd700;
-    border-radius: 50%;
+    border-radius:$border-radius-circle ;
 
     // 黄色小圆点 空心 迷你
     &-empty {
       width: 13px * $hd;
       height: 13px * $hd;
-      border-radius: 50%;
+      border-radius:$border-radius-circle ;
       border: 1px solid #ffd700;
     }
   }

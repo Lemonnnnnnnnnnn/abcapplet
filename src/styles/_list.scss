@@ -5,11 +5,11 @@
   border-bottom:1px solid #f8f8f8;
 
   &:first-child {
-    border-radius: 20px 20px 0 0;
+    border-radius: 10px * $hd 10px * $hd 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 10px * $hd 10px * $hd;
     border-bottom: none;
   }
 }

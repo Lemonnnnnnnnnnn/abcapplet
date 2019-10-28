@@ -2,7 +2,7 @@
 
 .risk-input {
   background: #f8f8f8;
-  border-radius: 12px * $hd;
+  border-radius:$border-radius-normal ;
   height: 38px * $hd;
   line-height: 38px * $hd;
   padding: 0 10px * $hd;
@@ -13,7 +13,7 @@
     width: 100px * $hd;
     height: 100px * $hd;
     border: 1px dashed #d2d2d2;
-    border-radius: 12px * $hd;
+    border-radius:$border-radius-normal ;
     box-sizing: border-box;
     margin: 10px;
   }
@@ -23,5 +23,5 @@
   height: 45px * $hd;
   background: rgba(242, 242, 242, 1);
   opacity: 1;
-  border-radius: 12px * $hd;
+  border-radius:$border-radius-normal ;
 }

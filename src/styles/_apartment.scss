@@ -2,15 +2,15 @@
 
 .apartment {
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 0px 5px * $hd 0px rgba(222, 222, 222, 1);
-  border-radius: 6px * $hd;
+  box-shadow: 0px 0px 5px * $hd 0px rgb(222, 222, 222);
+  border-radius :$border-radius-mini;
 
   &-order {
     &-step-mask {
       width: 80%;
       z-index: 200;
       background: #fff;
-      border-radius: 12px * $hd;
+      border-radius:$border-radius-normal ;
       .at-button {
         height: 37px * $hd;
         line-height: 37px * $hd;
@@ -31,14 +31,14 @@
       &-icon {
         background: linear-gradient(to right, #ffc919, #fba700);
         padding: 5px * $hd 15px * $hd;
-        border-radius: 6px * $hd;
+        border-radius :$border-radius-mini;
         position: relative;
         color: #fff;
         &-angle {
           background: #fff;
-          border-radius: 50%;
-          width: 20px;
-          height: 20px;
+          border-radius:$border-radius-circle ;
+          width: 10px * $hd;
+          height: 10px * $hd;
         }
       }
     }
@@ -74,7 +74,7 @@
       width: 90%;
       margin-left: 5%;
       height: 84px * $hd;
-      border-radius: 12px * $hd;
+      border-radius:$border-radius-normal ;
       position: relative;
       // background: #fff;
       &.background {
@@ -100,7 +100,7 @@
         width: 90%;
         margin-left: 5%;
         height: 84px * $hd;
-        border-radius: 12px * $hd;
+        border-radius:$border-radius-normal ;
         position: relative;
         background: #c8c8c8;
       }
@@ -182,11 +182,11 @@
     bottom: 0;
     transform: translateY(50%);
     color: #fff;
-    border-radius: 12px;
+    border-radius: $border-radius-normal;
     background: #ffc919;
   }
   &-box-shadow-style {
-    border-radius: 12px;
+    border-radius: $border-radius-normal;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin-bottom: 40px;
@@ -197,14 +197,14 @@
 
   &-header {
     position: relative;
-    border-radius: 6px * $hd;
+    border-radius :$border-radius-mini;
 
     &-title {
       position: absolute;
       left: 5%;
       top: 10%;
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 6px * $hd;
+      border-radius :$border-radius-mini;
       padding: 2px * $hd 9px * $hd;
       font-size: 12px * $hd;
       color: #888;
@@ -218,11 +218,11 @@
       color: #fff;
       padding: 4px * $hd 12px * $hd;
       font-size: 10px * $hd;
-      border-radius: 6px * $hd;
+      border-radius :$border-radius-mini;
       background: #ffc919;
 
       &-item {
-        border-radius: 24px;
+        border-radius: $border-radius-huge;
         overflow: hidden;
       }
     }
@@ -268,7 +268,7 @@
 
 .apartment-item-mask {
   background: #f8f8f8;
-  border-radius: 12px * $hd;
+  border-radius:$border-radius-normal ;
 }
 
 .apartment-container {
@@ -276,13 +276,20 @@
   &-opactyRoom {
     width: 115px * $hd;
     height: 26px * $hd;
-    background: rgba(0, 0, 0, 1);
-    opacity: 0.5;
-    border-radius: 13px * $hd;
     position: absolute;
     z-index: 99;
     top: 200px * $hd;
     left: 75px * $hd;
+    .mask {
+      opacity: 0.5;
+      background: rgba(0, 0, 0, 1);
+      border-radius: $border-radius-normal;
+    }
+    .num {
+      top: 3px * $hd;
+      position: absolute;
+      z-index: 100;
+    }
   }
   &-favorite {
     position: absolute;
@@ -292,7 +299,7 @@
 
     height: 50px * $hd;
     width: 50px * $hd;
-    border-radius: 50%;
+    border-radius:$border-radius-circle ;
     box-shadow: 0px 3px 10px rgba(255, 201, 25, 0.46);
   }
 
@@ -303,7 +310,7 @@
 
   &-opacityBgStyle {
     position: absolute;
-    border-radius: 24px;
+    border-radius: $border-radius-super;
     height: 100%;
     width: 100%;
     background: #000;
@@ -320,7 +327,7 @@
     .mask {
       opacity: 0.5;
       background: rgba(0, 0, 0, 1);
-      border-radius: 13px * $hd;
+      border-radius: $border-radius-normal;
     }
     .num {
       top: 3px * $hd;
@@ -348,16 +355,16 @@
 .house-type {
   &-branding {
     background-color: rgb(248, 248, 248);
-    border-radius: 32px;
+    border-radius: $border-radius-large;
   }
   &-public-configuration {
     background-color: rgba(248, 248, 248, 1);
-    border-radius: 24px;
+    border-radius: $border-radius-normal;
     width: 80px;
     height: 80px;
   }
   &-deposit {
-    border-radius: 24px;
+    border-radius: $border-radius-normal;
     background-color: rgba(255, 201, 25, 1);
     color: #fff;
     text-align: center;
@@ -368,13 +375,13 @@
   }
 
   &-apartment-type-border {
-    border-radius: 12px;
+    border-radius: $border-radius-normal;
     box-shadow: 0 2px 12px rgb(220, 220, 220);
     overflow: hidden;
     margin-right: 28px;
   }
   &-has-room-block {
-    border-radius: 10px;
+    border-radius: $border-radius-mini;
     height: 32px;
     text-align: center;
     line-height: 32px;
@@ -382,7 +389,7 @@
   }
   &-gray-background {
     background-color: #f8f8f8;
-    border-radius: 24px;
+    border-radius: $border-radius-normal;
   }
 }
 
@@ -390,7 +397,7 @@
   position: absolute;
   height: 27px * $hd;
   width: 27px * $hd;
-  border-radius: 50%;
+  border-radius:$border-radius-circle ;
 
   border-style: solid;
   border-width: 2px * $hd;
@@ -403,7 +410,7 @@
     height: 23px * $hd;
     background: rgba(255, 201, 25, 1);
     opacity: 1;
-    border-radius: 9px * $hd;
+    border-radius: $border-radius-mini;
   }
   &-noaAppoint {
     // padding: 3px 3px;
@@ -413,12 +420,14 @@
     border: 1px * $hd solid rgba(255, 201, 25, 1);
   }
   &-haveAppoint {
-    width: 44px * $hd;
     height: 22px * $hd;
-    opacity: 1;
-    border-radius: 8px * $hd;
+    border-radius: $border-radius-mini;
     border: 1px * $hd solid rgba(216, 216, 216, 1);
   }
+  &-haveAppoint.icon{
+    padding: 0 4px * $hd 0 0;
+  }
+
   &-buttonYellow {
     width: 98px * $hd;
     height: 30px * $hd;
@@ -457,13 +466,11 @@
     width: 40px * $hd;
     position: absolute;
     left: -4px * $hd;
-    // height: 33px * $hd;
   }
   &-coupontwo {
     width: 40px * $hd;
     position: absolute;
     left: -4px * $hd;
     top: -3px * $hd;
-    // height: 33px * $hd;
   }
 }

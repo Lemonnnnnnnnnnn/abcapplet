@@ -10,7 +10,7 @@ $borders: left, right, top, bottom !default;
 
 .border-decorate {
   width: 4px * $hd;
-  border-radius: 8px;
+  border-radius:  $border-radius-mini;
 
   &-yellow {
     background: $color-yellow-0;

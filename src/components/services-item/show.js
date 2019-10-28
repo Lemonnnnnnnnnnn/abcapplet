@@ -47,6 +47,7 @@ import CustomerMask from '@components/customer-mask'
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
+import '../../styles/_apartment.scss'
 
 @connect(state => state, {
   ...appointmentActions,
@@ -210,11 +211,13 @@ class ServiceItemShow extends BaseComponent {
               </View>
             </View>
               :
-              item && item.is_sign ? <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+              item && item.is_sign ? <View className='at-row at-row__align--center at-row__justify--end text-normal text-muted apartment-item-haveAppoint position-relative icon' >
+                <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
                 {LOCAL_APPOINTMENT_AGENCY}
               </View>
                 :
-                <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+                <View className='at-row at-row__align--center at-row__justify--end  text-normal text-muted apartment-item-haveAppoint position-relative icon' >
+                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   {LOCALE_CASH_BACK}
                 </View>
             }

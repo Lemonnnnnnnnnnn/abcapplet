@@ -1,6 +1,6 @@
 @import "overrides";
 .tag {
-  border-radius: 6px * $hd;
+  border-radius :$border-radius-mini;
   padding: 8px * $hd;
   margin-right: 4px * $hd;
 
@@ -45,20 +45,20 @@
   }
 
   &-circle {
-    border-radius: 20px * $hd;
+    border-radius: $border-radius-huge;
   }
 
   &-risk{
     background: linear-gradient(to bottom , rgba(255, 201, 25, 1) , rgba(255, 170, 0, 1));
     color: #fff;
-    border-radius: 12px;
+    border-radius: $border-radius-normal;
     padding: 4px 12px;
     box-shadow: 0 2px 15px  rgba(255, 170, 0, 1);
   }
 }
 
 .at-tag--small.at-tag--circle {
-  border-radius: 15px * $hd;
+  border-radius: $border-radius-large;
 }
 
 .at-tag--small {

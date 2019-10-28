@@ -28,5 +28,5 @@
   height: 183px * $hd;
   background: rgba(242, 242, 242, 1);
   opacity: 1;
-  border-radius: 12px * $hd;
+  border-radius:$border-radius-normal ;
 }

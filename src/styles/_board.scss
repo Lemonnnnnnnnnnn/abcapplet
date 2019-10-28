@@ -37,7 +37,7 @@
   }
 
   &--all {
-    border-radius: 12px * $hd;
+    border-radius:$border-radius-normal ;
   }
 
   &--top {
@@ -112,12 +112,12 @@
   top: 422px;
   &.left {
     left: -10px;
-    border-radius: 0 22px 22px 0;
+    border-radius: 0 11px * $hd 11px * $hd 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
   }
   &.right {
     right: -10px;
-    border-radius: 22px 0 0 22px ;
+    border-radius: 11px * $hd 0 0 11px * $hd ;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
   }
 }

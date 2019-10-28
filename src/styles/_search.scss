@@ -13,7 +13,7 @@
     background: #F2F2F2 !important;
     height: 37px * $hd;
     width: 100%;
-    border-radius: 19px * $hd;
+    border-radius: $border-radius-huge;
   }
 
   &-fixed {

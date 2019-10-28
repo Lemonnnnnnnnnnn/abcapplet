@@ -55,7 +55,7 @@
 .button-order {
   width: 50px * $hd;
   height: 50px * $hd;
-  border-radius: 50%;
+  border-radius:$border-radius-circle ;
   background: #F9F9F9;
 }
 
@@ -71,7 +71,7 @@
 .btn-risk-header-item {
   color: #000000;
   background:linear-gradient(180deg,rgba(255,237,178,1) 0%,rgba(255,201,25,1) 100%);
-  border-radius: 50%;
+  border-radius:$border-radius-circle ;
   height: 50px * $hd;
   width: 50px * $hd;
 }
