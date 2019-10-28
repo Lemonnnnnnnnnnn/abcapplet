@@ -8,7 +8,6 @@ export const PATH = 'https://images.gongyuabc.com//image/path_new.png'
 export const HOME = 'https://images.gongyuabc.com//image/home.png'
 export const FREE = 'https://images.gongyuabc.com//image/free_new.png'
 export const POING_THREE = 'https://images.gongyuabc.com//image/pointThree.png'
-export const DETAIL_AD = 'https://images.gongyuabc.com/image/detailAd.png'
 
 // 行程相关
 export const LEAVE_MSG_GRAY = 'http://images.gongyuabc.com/image/icon/servixe-bottom-one.png'
@@ -41,11 +40,11 @@ export const SIGN_SUCCESS = 'https://images.gongyuabc.com/image/sign-success.png
 export const ORDER_STEP_ONE = 'https://images.gongyuabc.com/image/order-step1.png'
 export const ORDER_STEP_TWO = 'https://images.gongyuabc.com/image/order-step2.png'
 export const ORDER_STEP_THREE = 'https://images.gongyuabc.com/image/order-step3.png'
-export const ORDER_STEP_FOUR = 'https://images.gongyuabc.com/image/order-step4.png'
+export const ORDER_STEP_FOUR = 'https://images.gongyuabc.com/image/order-step-risk_One.png'
 export const ORDER_LEASE_INSURANCE='https://images.gongyuabc.com/image/lease-insurance.png'
 
 // 预约看房
 export const APARTMENT_APPOINTMENT_ACCEPT = 'https://images.gongyuabc.com//image/accept.png'
 
 // 风险金相关
-export const RISK_MONEY_BANNER = 'https://images.gongyuabc.com/image/riskMoneyBanner.png'
+export const RISK_MONEY_BANNER = 'https://images.gongyuabc.com/image/riskMoneyBanner_One.png'

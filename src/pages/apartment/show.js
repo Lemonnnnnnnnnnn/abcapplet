@@ -8,6 +8,9 @@ import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
 
+// 自定义方法
+import textWrap from '@utils/text-wrap'
+
 // 自定义组件
 import Tag from '@components/tag'
 import TabBar from '@components/tab-bar'
@@ -21,6 +24,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { PAYLOAD_COUPON_LIST } from '@constants/api'
+import { LOCALE_SHARE_TEXT } from '@constants/locale'
 
 import buryPoint from '../../utils/bury-point'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
@@ -33,7 +37,7 @@ const city = userActions.dispatchUser().payload.citycode
 class ApartmentShow extends Component {
   config = {
     navigationBarTitleText: '公寓详情',
-    navigationStyle: 'custom',
+    // navigationStyle: 'custom',
   }
 
   state = {
@@ -211,11 +215,19 @@ class ApartmentShow extends Component {
       .then(() => this.setState({ apartment: { ...apartment, isCollect: false } }))
   }
 
+  // onShareAppMessage() {
+  //   const { cityId } = this.state
+  //   this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
+  //   return {
+  //     title: "我在公寓ABC上发现了一个好\n房源",
+  //   }
+  // }
   onShareAppMessage() {
     const { cityId } = this.state
-    this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
+    this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
+    const text = LOCALE_SHARE_TEXT
     return {
-      title: "我在公寓ABC上发现了一个好\n房源",
+      title: textWrap(text, 17)
     }
   }
 
@@ -253,24 +265,10 @@ class ApartmentShow extends Component {
     })
   }
 
-  insertStr(soure, start, newStr) {
-    return soure.slice(0, start) + newStr + soure.slice(start)
-  }
+  // insertStr(soure, start, newStr) {
+  //   return soure.slice(0, start) + newStr + soure.slice(start)
+  // }
 
-
-  onShareAppMessage() {
-    const { cityId } = this.state
-    this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
-    const { apartment } = this.state
-    let { swipers, title } = apartment
-    if (title.length > 17) {
-      title = this.insertStr(title, 17, '\n')
-    }
-    return {
-      title: title,
-      imageUrl: swipers[0].url
-    }
-  }
 
   render() {
     const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, showCouponMask, showCouponTag } = this.state
@@ -317,7 +315,7 @@ class ApartmentShow extends Component {
     return (
       <View style={{ overflow: "hidden" }}>
 
-        <CustomNav title='公寓详情' />
+        {/* <CustomNav title='公寓详情' /> */}
 
 
         <TabBar
@@ -535,9 +533,9 @@ class ApartmentShow extends Component {
                   nearbyPost={nearbyPost}
                   mini
                   type={TYPE_FAVORITE_APARTMENT}
-                  // items={apartments.list}
-                  // defaultPayload={{ city }}
-                  // dispatchList={this.props.dispatchRecommendHouseType}
+                // items={apartments.list}
+                // defaultPayload={{ city }}
+                // dispatchList={this.props.dispatchRecommendHouseType}
                 />
               </View>
             }

@@ -27,6 +27,8 @@ import {
   PAYLOAD_SEARCH_APARTMENT
 } from '@constants/api'
 
+import buryPoint from '../../utils/bury-point'
+
 @connect(state => state, {
   ...cityActions,
   ...userActions,
@@ -61,6 +63,7 @@ class CommonSearch extends BaseComponent {
   refRecommendApartmentList = (node) => this.recommendApartmentList = node
 
   componentWillMount() {
+    buryPoint()
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = this.props.dispatchUser()
     this.onReset(user.citycode)

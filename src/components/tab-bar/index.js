@@ -6,8 +6,11 @@ import { AtButton, AtFloatLayout } from 'taro-ui'
 // 自定义组件
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
+// 自定义方法
+import textWrap from '@utils/text-wrap'
 
 import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
+import { LOCALE_SHARE_TEXT } from '@constants/locale'
 // NPM 包
 import classNames from 'classnames'
 
@@ -51,16 +54,31 @@ class TabBar extends BaseComponent {
   }
 
   onCallPhone() {
-
     Taro.makePhoneCall({ phoneNumber: '0592-5911297' })
   }
 
   onShareAppMessage() {
-
+    const { cityId } = this.state
+    this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
+    const text = LOCALE_SHARE_TEXT
     return {
-      title: "我在公寓ABC上发现了一个好\n房源",
+      title: textWrap(text, 17)
     }
   }
+
+  // onShareAppMessage() {
+  //   const { cityId } = this.state
+  //   this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
+  //   const { houstType } = this.state
+  //   let { swipers, title } = houstType
+  //   if (title.length > 17) {
+  //     title = this.insertStr(title, 17, '\n')
+  //   }
+  //   return {
+  //     title: title,
+  //     imageUrl: swipers[0].url
+  //   }
+  // }
 
   render() {
     const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,

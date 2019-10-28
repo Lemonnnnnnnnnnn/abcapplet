@@ -173,22 +173,22 @@ class ServiceItemShow extends BaseComponent {
           <View className='at-col at-col-2'>
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
               <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow apartment-item-noaAppoint position-relative' >
-                {(status === 8 || status === 9 ||status === 12 || status === 13 || status === 14) ?
-                <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
+                {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
+                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
                   <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
-                  }
-                {<Text >{(status === 8 ||status === 9 || status === 12 || status === 13 || status === 14) ?  LOCALE_CASH_BACK :LOCAL_APPOINTMENT_AGENCY}</Text>}
+                }
+                {<Text >{(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ? LOCALE_CASH_BACK : LOCAL_APPOINTMENT_AGENCY}</Text>}
               </View>
             </View>
               :
-              item && item.is_sign ?<View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+              item && item.is_sign ? <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
                 {LOCAL_APPOINTMENT_AGENCY}
               </View>
-              :
-              <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
-                {LOCALE_CASH_BACK}
-              </View>
+                :
+                <View className='page-middile text-normal text-muted apartment-item-haveAppoint ' >
+                  {LOCALE_CASH_BACK}
+                </View>
             }
           </View>}
       </View>
@@ -225,7 +225,7 @@ class ServiceItemShow extends BaseComponent {
           </View>
         </View>
         {item && item.is_sign && <View>
-          <View className='text-mini page-middile  text-secondary'>获得退租险及返现</View>
+          <View className='text-mini page-middile  text-secondary'>获得退租险和租金立减</View>
           <View className=' text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
             <View style='position:absolute;top:12%;left:-1%' >
               <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src='https://images.gongyuabc.com/image/appoint-ange.png' ></Image>

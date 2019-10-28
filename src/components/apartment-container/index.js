@@ -2,15 +2,15 @@
 import Taro from '@tarojs/taro'
 import { View, Swiper, SwiperItem, Image, Text } from '@tarojs/components'
 
-
 // 自定义组件
 import BaseComponent from '@components/base'
 import MaskTop from '@components/maskTop'
 
-
 // 自定义常量
 import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 import { HEART_YELLOW, HEART_YELLOW_EMPTY } from '@constants/picture'
+
+import '../../styles/_apartment.scss'
 
 class ApartmentContainer extends BaseComponent {
 
@@ -80,25 +80,34 @@ class ApartmentContainer extends BaseComponent {
         {type && qsf_picture.length ? <View>
           {showPhotos ? <View>
             <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看样板房照片</View>
-            <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
-              <Text className='text-yellow'>{current + 1 ? current + 1 : qsf_picture.length}</Text>
-              <Text className='text-white'>/{qsf_picture.length}</Text>
+            <View className='apartment-container-picIndexStyle'>
+              <View className='mask inherit-Width inherit-Height'></View>
+              <View className='num text-normal at-row at-row__align--center at-row__justify--center '>
+                <Text className='text-yellow'>{current + 1 ? current + 1 : qsf_picture.length}</Text>
+                <Text className='text-white'>/{qsf_picture.length}</Text>
+              </View>
             </View>
           </View>
             :
             <View>
               <View className='apartment-container-opactyRoom text-white text-small page-middile' onClick={this.onShowPhoto}>查看清水房照片</View>
-              <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
-                <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
-                <Text className='text-white'>/{swipers.length}</Text>
+              <View className='apartment-container-picIndexStyle'>
+                <View className='mask inherit-Width inherit-Height'></View>
+                <View className='num text-normal at-row at-row__align--center at-row__justify--center '>
+                  <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
+                  <Text className='text-white'>/{swipers.length}</Text>
+                </View>
               </View>
             </View>
           }
         </View>
           :
-          <View className='text-normal at-row at-row__align--center at-row__justify--center apartment-container-picIndexStyle page-middile'>
-            <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
-            <Text className='text-white'>/{swipers.length}</Text>
+          <View className='apartment-container-picIndexStyle'>
+            <View className='mask inherit-Width inherit-Height'></View>
+            <View className='num text-normal at-row at-row__align--center at-row__justify--center '>
+              <Text className='text-yellow'>{current + 1 ? current + 1 : swipers.length}</Text>
+              <Text className='text-white'>/{swipers.length}</Text>
+            </View>
           </View>
         }
 

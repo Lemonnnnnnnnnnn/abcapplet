@@ -14,12 +14,12 @@ import ApartmentList from '@components/apartment-list'
 import RequirementCard from '@components/requirement-card'
 import Curtain from '@components/curtain'
 
-import {
-  PAGE_HOME,
-  PAGE_USER_AUTH
-} from '@constants/page'
+import {PAGE_HOME,PAGE_USER_AUTH} from '@constants/page'
 
 import { AD_DISPATCH_DIST } from '@constants/ad'
+
+// 自定义方法
+import textWrap from '@utils/text-wrap'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -43,6 +43,7 @@ import {
   LOCALE_ACTIVITY,
   LOCALE_APARTMENT,
   LOCALE_RECOMMEND_APARTMENT,
+  LOCALE_SHARE_TEXT
 } from '@constants/locale'
 import BaseComponent from '../../components/base'
 
@@ -412,11 +413,20 @@ class CommonHome extends BaseComponent {
   }
 
   // 分享
+  // onShareAppMessage() {
+  //   const { cityId } = this.state
+  //   this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
+  //   return {
+  //     title: "我在公寓ABC上发现了一个好\n房源",
+  //   }
+  // }
   onShareAppMessage() {
+    const text = LOCALE_SHARE_TEXT
     return {
-      title: "我在公寓ABC上发现了一个好\n房源",
+      title: textWrap(text, 17)
     }
   }
+
   //前往橘子公社小程序
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({

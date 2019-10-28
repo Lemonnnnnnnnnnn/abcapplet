@@ -31,7 +31,7 @@ class ArticleShow extends Component {
   config = {
     navigationBarTitleText: '文章详情',
     enablePullDownRefresh: true,
-    navigationStyle: 'custom',
+    // navigationStyle: 'custom',
   }
 
   state = {
@@ -125,7 +125,7 @@ class ArticleShow extends Component {
     return (
       <View style={{ paddingBottom: Taro.pxTransform(120),  }}>
 
-        <CustomNav title={articleChange} />
+        {/* <CustomNav title={articleChange} /> */}
 
 
         {article &&

@@ -129,8 +129,8 @@
     }
   }
 
-  &-type{
-    &-item{
+  &-type {
+    &-item {
       .mask {
         background: #000;
         opacity: 0.5;
@@ -313,13 +313,20 @@
   &-picIndexStyle {
     width: 50px * $hd;
     height: 26px * $hd;
-    background: rgba(0, 0, 0, 1);
-    opacity: 0.5;
-    border-radius: 13px * $hd;
     position: absolute;
     z-index: 99;
     top: 200px * $hd;
     left: 15px * $hd;
+    .mask {
+      opacity: 0.5;
+      background: rgba(0, 0, 0, 1);
+      border-radius: 13px * $hd;
+    }
+    .num {
+      top: 3px * $hd;
+      position: absolute;
+      z-index: 100;
+    }
   }
 
   &-heartNum {

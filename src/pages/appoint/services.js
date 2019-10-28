@@ -133,7 +133,7 @@ class ServicesHome extends Component {
           />
 
           <View className='page-middile mt-2' onClick={this.onNavigateToRisk}>
-            <Image src={RISK_MONEY_BANNER} className='appointment-ad'></Image>
+            <Image src={RISK_MONEY_BANNER} mode='widthFix' className='appointment-ad'></Image>
           </View>
           <View className='at-row at-row__align--center  p-2' >
             <View className='at-row at-row__align--center at-row__justify--center ml-2 appointment-yellowbot' ></View>
