@@ -17,7 +17,6 @@ import TabBar from '@components/tab-bar'
 import ABCIcon from '@components/abc-icon'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
-import ApartmentContainer from '@components/apartment-container'
 import CustomNav from '@components/custom-nav'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
