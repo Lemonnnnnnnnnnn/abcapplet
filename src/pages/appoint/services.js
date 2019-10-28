@@ -39,23 +39,16 @@ class ServicesHome extends Component {
     payload: PAYLOAD_APPOINTMENT_LIST,
     time: '',
     adList: [],
+    count:false,
   }
 
   refserviceList = (node) => this.ServiceList = node
 
   componentDidShow() {
     buryPoint()
-    this.onShow()
+    const { count } = this.state
+    count ?this.onSetReset(): this.onShow()
   }
-
-  // async componentWillMount() {
-  //   const { payload: user } = await this.props.dispatchUser()
-  //   const lastPage = Taro.getCurrentPages()[Taro.getCurrentPages().length - 1].route
-  //   AD_DISPATCH_DIST.find(i => i.url === lastPage &&
-  //     this.props.dispatchAdList({ city: user.citycode, type: i.type }).then(
-  //       ({ data: { data } }) => { this.setState({ adList: data.list }) })
-  //   )
-  // }
 
   onShow() {
     const { payload } = this.state
@@ -85,8 +78,7 @@ class ServicesHome extends Component {
   }
 
   componentDidHide() {
-
-    this.props.user.token && this.ServiceList.onReset(null)
+   this.props.user.token && this.setState({count:true})
   }
 
   /**

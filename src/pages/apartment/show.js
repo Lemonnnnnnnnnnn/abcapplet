@@ -72,7 +72,6 @@ class ApartmentShow extends Component {
     buryPoint()
     this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: id }).then(({ data: { data } }) => {
       data.total && this.setState({ showCouponTag: true })
-      console.log(data)
     })
 
 
@@ -271,7 +270,7 @@ class ApartmentShow extends Component {
 
 
   render() {
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, navHeight, showCouponMask, showCouponTag } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, tags, desc,
@@ -313,12 +312,12 @@ class ApartmentShow extends Component {
 
 
     return (
-      <View style={{ overflow: "hidden" }}>
+      <View style={{ overflow: "hidden",minHeight:'100vh',backgroundColor:'#ffffff' }}>
 
         {/* <CustomNav title='公寓详情' /> */}
 
 
-        <TabBar
+        {types.length && <TabBar
           showLittleMask={showLittleMask}
           onOpenLittleMask={this.onOpenLittleMask}
           onCloseLittleMask={this.onCloseLittleMask}
@@ -329,7 +328,7 @@ class ApartmentShow extends Component {
           title={title}
           Id={apartment.id}
           type='apart'
-        />
+        />}
 
         <View onClick={this.onCloseLittleMask} style={{ paddingBottom: Taro.pxTransform(120) }}>
 
