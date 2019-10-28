@@ -78,7 +78,7 @@ class ServicesHome extends Component {
   }
 
   componentDidHide() {
-    this.setState({count:true})
+   this.props.user.token && this.setState({count:true})
   }
 
   /**
