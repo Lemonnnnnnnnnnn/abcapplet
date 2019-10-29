@@ -206,8 +206,6 @@ class HouseTypeShow extends Component {
     }
   }
 
-
-
   // 电话客服/在线客服
 
   onOpenLittleMask() {
@@ -221,26 +219,10 @@ class HouseTypeShow extends Component {
     this.setState({ showLittleMask: false })
   }
 
-  onNavigation(url) {
-    Taro.navigateTo({ url })
-  }
-  //前往退租险页面
-  onNavigateToRisk() {
-    Taro.navigateTo({ url: PAGE_RISK_LANDING })
-  }
-
   // 打开租金介绍
-
   onOpenRentDescription() {
     this.setState({ showRentDescription: true })
     this.onHideMap()
-  }
-
-  // 关闭租金介绍
-
-  onCloseRentDescription() {
-    this.setState({ showRentDescription: false })
-    this.onShowMap()
   }
 
   // 打开所有配置弹窗
@@ -249,32 +231,25 @@ class HouseTypeShow extends Component {
     this.onHideMap()
   }
 
-  // 关闭所有配置弹窗
-
-  onCloseAllMatching() {
-    this.setState({ showMatch: false })
-    this.onShowMap()
-  }
-
   // 打开租房优惠券
   onOpenCoupon() {
     this.setState({ showCouponMask: true })
     this.onHideMap()
   }
-  // 关闭租房优惠券
-  onCloseCoupon() {
-    this.setState({ showCouponMask: false })
+
+  // 关闭
+  onClose() {
+    this.setState({
+      showCouponMask: false,
+      showMatch: false,
+      showRentDescription: false,
+      showLittleMask: false,
+    })
     this.onShowMap()
   }
 
-  onNavigationApartment() {
-    const { houstType } = this.state
-    const { apartmentId } = houstType
-    this.onNavigation(`${PAGE_APARTMENT_SHOW}?id=${apartmentId}`)
-  }
 
   // 打开弹窗时隐藏地图，关闭弹窗时打开地图
-
   onHideMap() {
     this.setState({ showMap: false })
   }
@@ -282,6 +257,23 @@ class HouseTypeShow extends Component {
   onShowMap() {
     this.setState({ showMap: true })
   }
+
+
+  // 路由跳转
+  onNavigationApartment() {
+    const { houstType } = this.state
+    const { apartmentId } = houstType
+    this.onNavigation(`${PAGE_APARTMENT_SHOW}?id=${apartmentId}`)
+  }
+
+  onNavigation(url) {
+    Taro.navigateTo({ url })
+  }
+  //前往退租险页面
+  onNavigateToRisk() {
+    Taro.navigateTo({ url: PAGE_RISK_LANDING })
+  }
+
 
   onOpenMap() {
     const { cityId } = this.state
@@ -341,24 +333,6 @@ class HouseTypeShow extends Component {
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
 
-  // insertStr(soure, start, newStr) {
-  //   return soure.slice(0, start) + newStr + soure.slice(start)
-  // }
-
-  // onShareAppMessage() {
-  //   const { cityId } = this.state
-  //   this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
-  //   const { houstType } = this.state
-  //   let { swipers, title } = houstType
-  //   if (title.length > 17) {
-  //     title = this.insertStr(title, 17, '\n')
-  //   }
-  //   return {
-  //     title: title,
-  //     imageUrl: swipers[0].url
-  //   }
-  // }
-
   onShareAppMessage() {
     const { cityId } = this.state
     this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
@@ -372,7 +346,6 @@ class HouseTypeShow extends Component {
     const { id } = this.$router.params
     Taro.navigateTo({ url: `/pages/apartment/search-room?id=${id}` })
   }
-
 
   /**
    * 点击 预约看房,查看订单
@@ -390,19 +363,8 @@ class HouseTypeShow extends Component {
       })
     }
     if (method === 'onCreateOrder') {
-
       this[method]()
     }
-  }
-
-  onReturn() {
-    Taro.navigateBack()
-  }
-
-  onBackHome() {
-    Taro.switchTab({
-      url: PAGE_HOME
-    })
   }
 
   render() {
@@ -426,7 +388,6 @@ class HouseTypeShow extends Component {
     let showPrice = 0
     if (priceTitle) { showPrice = priceTitle }
 
-    // const isNaNPrice = Number.isNaN(parseInt(priceTitle))
 
     return (
       <View >
@@ -471,19 +432,19 @@ class HouseTypeShow extends Component {
                 isSign={isSign}
 
                 show={showRentDescription}
-                onClose={this.onCloseRentDescription}
+                onClose={this.onClose}
                 typeId={id}
               />
 
               <AppartmentMatchingMask
                 facilitys={facilitys}
                 show={showMatch}
-                onClose={this.onCloseAllMatching}
+                onClose={this.onClose}
               />
 
               <ApartmentCouponMask
                 show={showCouponMask}
-                onClose={this.onCloseCoupon}
+                onClose={this.onClose}
                 apartment_id={apartmentId}
                 params={this.$router.params}
                 onTest={this.onTest}
