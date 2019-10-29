@@ -105,7 +105,7 @@ class ApartmentShow extends Component {
 
     const buttons = !data.is_sign
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]
-      : [{ message: '预约看房', method: 'onCreateBusiness' }, { message: '签约下定', method: 'onCreateOrder' }]
+      : [{ message: '签约下定', method: 'onCreateOrder' }, { message: '预约看房', method: 'onCreateBusiness' }]
 
     this.setState({
       publicMatch_list: publicMatch_list,
@@ -221,6 +221,7 @@ class ApartmentShow extends Component {
   //     title: "我在公寓ABC上发现了一个好\n房源",
   //   }
   // }
+
   onShareAppMessage() {
     const { cityId } = this.state
     this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
@@ -312,7 +313,7 @@ class ApartmentShow extends Component {
 
 
     return (
-      <View style={{ overflow: "hidden",minHeight:'100vh',backgroundColor:'#ffffff' }}>
+      <View style={{ overflow: "hidden", minHeight: '100vh', backgroundColor: '#ffffff' }}>
 
         {/* <CustomNav title='公寓详情' /> */}
 

@@ -146,7 +146,7 @@ class UserProfile extends Component {
 
           {/* 用户头像信息 */}
           <UserHeader
-            className='mt-3 mx-3'
+            className='p-3'
             mobile={mobile}
             username={username}
             onLogin={this.onLogin}
