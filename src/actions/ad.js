@@ -1,6 +1,6 @@
 import { createAction } from '@utils/redux'
-import { API_AD_LIST, API_AD_POPUP_LIST, API_AD_POPUP_LIST_CLOSE } from '@constants/api'
-import { SET_AD_LIST, SET_POPUP_AD_LIST, CLOSE_POPUP_AD_LIST } from '@constants/ad'
+import { API_AD_LIST, API_AD_POPUP_LIST, API_AD_POPUP_LIST_CLOSE, API_SETTING_RISK_POST } from '@constants/api'
+import { SET_AD_LIST, SET_POPUP_AD_LIST, CLOSE_POPUP_AD_LIST, TYPE_SETTING_RISK_POST } from '@constants/ad'
 
 /**
  * 获取广告列表
@@ -29,4 +29,13 @@ export const dispatchClosePopupAdPost = payload => createAction({
   method: 'POST',
   type: CLOSE_POPUP_AD_LIST,
   url: API_AD_POPUP_LIST_CLOSE,
+})
+
+// 获取退租险人数和金额
+export const dispatchRiskPost = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_SETTING_RISK_POST,
+  url: API_SETTING_RISK_POST,
+  cb: ({ data: { data } }) => ({ ...data })
 })

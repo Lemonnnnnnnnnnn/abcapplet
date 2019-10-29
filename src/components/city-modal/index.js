@@ -1,8 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-// import cityModelBackground from '@assets/images/home/city-modal.png'
 import { AtModal, AtModalHeader, AtModalContent, AtButton } from 'taro-ui'
-import { COLOR_YELLOW } from '@constants/styles'
+import { CITY_MODAL_ICON } from "@constants/picture";
+import { LOCALE_CHOISE_RENT_POSITION } from '@constants/locale'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -29,17 +29,6 @@ class CityModal extends Component {
   render() {
     const { citycode, city, onSelectCity } = this.props
 
-    const cityModalHeaderstyle = {
-      width: '100%',
-      height: '60%',
-    }
-
-    const yellowLine = {
-      height: Taro.pxTransform(5),
-      width: Taro.pxTransform(54),
-      background: COLOR_YELLOW,
-    }
-
     const greyLine = {
       width: '60%',
       borderBottom: '1px solid #E5E5E5',
@@ -57,15 +46,14 @@ class CityModal extends Component {
 
         {/* 模态框头部 */}
         <View style={{ height: Taro.pxTransform(160) }}>
-          {/* <Image src='https://images.gongyuabc.com//image/city-modal.png' style={style} ></Image> */}
-          <View style={cityModalHeaderstyle} className='at-row at-row__justify--center'>
+          <View className='at-row at-row__justify--center city-modal-header'>
             <View className='at-row at-row__align--center at-row__justify--center'>
-              <Image src='https://images.gongyuabc.com/image/city_modal_icon.png' style={{ height: iconHeight, width: iconWeight }}></Image>
-              <View className='text-large text-bold ml-2'>请选择租房位置</View>
+              <Image src={CITY_MODAL_ICON} style={{ height: iconHeight, width: iconWeight }}></Image>
+              <View className='text-large text-bold ml-2'>{LOCALE_CHOISE_RENT_POSITION}</View>
             </View>
           </View>
           <View className='at-row at-row__align--center at-row__justify--center mt-2'>
-            <View style={yellowLine}></View>
+            <View className='yellow-line'></View>
           </View>
 
         </View>
@@ -84,7 +72,7 @@ class CityModal extends Component {
                 </View>
               </AtButton>
               <View className='at-row at-row__align--center at-row__justify--center'>
-                <View style={key + 1 === city.length ? '' : greyLine}></View>
+                <View style={key + 1 === city.length ? '' : greyLine} ></View>
               </View>
             </View>
           )}

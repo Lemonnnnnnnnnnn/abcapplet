@@ -4,10 +4,21 @@
   .at-modal__container {
     width: 80%;
   }
+  &-header {
+    width: 100%;
+    height: 60%;
+  }
 
   .at-modal__header {
     padding: 0;
     height: 90px * $hd;
+    border-bottom: none;
+  }
+
+  .yellow-line {
+    height: 5px;
+    width: 54px;
+    background: $color-yellow-0;
   }
 
   &-content {
@@ -24,14 +35,19 @@
       align-items: center;
     }
 
-    &-title, &-title:before, &-title:after { display: flex; }
+    &-title,
+    &-title:before,
+    &-title:after {
+      display: flex;
+    }
 
-    &-title:before, &-title:after {
+    &-title:before,
+    &-title:after {
       width: 16px * $hd;
       height: 3px * $hd;
       border-radius: 6px;
 
-      content: '';
+      content: "";
       background: #ffcf11;
       margin: 8px * $hd;
     }
@@ -50,9 +66,8 @@
       border: none;
       // border-bottom: 1px solid $color-grey-4;
     }
-    .at-button{
-      border : 1px solid transparent
+    .at-button {
+      border: 1px solid transparent;
     }
   }
 }
-

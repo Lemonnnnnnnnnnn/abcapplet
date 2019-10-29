@@ -22,6 +22,7 @@ import sublet from './sublet'
 import userCouponList from './userCoupon'
 import apartmentCouponList from './apartmentCoupon'
 
+
 export default combineReducers({
   ads,
   user,

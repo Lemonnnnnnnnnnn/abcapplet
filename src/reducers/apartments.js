@@ -42,11 +42,6 @@ export default function apartment(state = APARTMENT_DEFAULT, action) {
       return { ...state, list }
     }
 
-    case TYPE_SETTING_RISK_POST: {
-      const { people_num, sum } = action.payload
-      return { ...state, people_num, sum }
-    }
-
     default: {
       return state
     }

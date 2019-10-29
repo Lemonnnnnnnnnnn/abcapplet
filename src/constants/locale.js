@@ -32,6 +32,11 @@ export const LOCALE_NO_DESCRIPTION = '暂无描述'
 export const LOCALE_ORIGINAL_PRICE = '原价'
 export const LOCALE_CANCEL = '取消'
 export const LOCALE_SHARE_TEXT = '我在公寓ABC上发现了一个好房源'
+export const LOCALE_CUSTOMER_SERVICE = '客服服务'
+export const LOCALE_TELEPHONE_CUSTOMER_SERVICE = '电话客服'
+export const LOCALE_CONTACT_VIA_PHONE = '电话联系'
+export const LOCALE_ONLINE_SERVICE = '在线客服'
+
 
 
 export const LOCALE_RENT = '租金'
@@ -48,6 +53,8 @@ export const LOCALE_CONFIRM = '确定'
 export const LOCALE_RESET = '重置'
 export const LOCALE_NO_MORE = '我可是有底线的哦'
 export const LOCALE_NO_APARTMENT_DATA = '暂时还没有公寓哦'
+export const LOCALE_CHOISE_RENT_POSITION = '请选择租房位置'
+export const LOCALE_CONSUMER_HOTLINE = '0592-5911297'
 
 // /pages/apartment
 export const LOCALE_VIEW_APARTMENT_DETAILS = '查看公寓详情'

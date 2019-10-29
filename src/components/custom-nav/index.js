@@ -11,8 +11,6 @@ import BaseComponent from '../../components/base';
 
 export default class CustomNav extends BaseComponent {
 
-
-
   onReturn() {
     Taro.navigateBack()
   }

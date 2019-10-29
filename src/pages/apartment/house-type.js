@@ -7,6 +7,7 @@ import { View, Map, Image, Text, ScrollView, RichText } from '@tarojs/components
 import { connect } from '@tarojs/redux'
 import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
+import * as adActions from '@actions/ad'
 
 
 // 自定义组件
@@ -43,6 +44,7 @@ const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
   ...userActions,
   ...apartmentActions,
+  ...adActions
 })
 class HouseTypeShow extends Component {
   config = {
@@ -368,7 +370,7 @@ class HouseTypeShow extends Component {
   }
 
   render() {
-    const { apartments } = this.props
+    const { apartments ,ads:{riskAd} } = this.props
 
     const { houstType, map, buttons, showRentDescription, showCouponTag,
       houseType_id, showMatch, roomMatch_list, publicMatch_list,
@@ -509,7 +511,7 @@ class HouseTypeShow extends Component {
 
               {/* 已有多少人获得转租金 */}
               <View style={{ height: Taro.pxTransform(60) }} className='my-1'>
-                <View className='page-middile text-normal text-secondary'>已有{apartments.people_num || 51}人获得退租险</View>
+                <View className='page-middile text-normal text-secondary'>已有{riskAd.people_num || 51}人获得退租险</View>
               </View>
 
               <View style={{ borderBottom: "1Px solid rgba(248, 248, 248, 1)" }}></View>

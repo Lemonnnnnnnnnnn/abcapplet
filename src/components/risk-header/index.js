@@ -4,7 +4,7 @@ import { View, Image } from '@tarojs/components'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
-import * as apartmentActions from '@actions/apartment'
+import * as adActions from '@actions/ad'
 
 // 自定义组件
 import Borad from '@components/board'
@@ -13,7 +13,7 @@ import BaseComponent from '@components/base'
 import { COLOR_BLACK } from '@constants/styles'
 
 @connect(state => state, {
-  ...apartmentActions,
+  ...adActions,
 })
 class RiskHeader extends BaseComponent {
   static defaultProps = {
@@ -24,7 +24,7 @@ class RiskHeader extends BaseComponent {
   }
 
   render() {
-    const { items, className, apartments } = this.props
+    const { items, className, ads:{riskAd} } = this.props
     return (<View>
       <Borad color='black' className={className}>
         <View className='px-4 py-4' onClick={this.onNavigetion}>
@@ -45,7 +45,7 @@ class RiskHeader extends BaseComponent {
         </View>
       </Borad>
       <View className='risk-ad  page-middile mb-3'>
-        <View className='text-small' style={{ marginLeft: Taro.pxTransform(200) }}> 已有50人获得退租险  共赔付￥{apartments.sum || 10000}</View>
+        <View className='text-small' style={{ marginLeft: Taro.pxTransform(200) }}> 已有{riskAd.people_num || 50}人获得退租险  共赔付￥{riskAd.sum || 10000}</View>
       </View>
     </View>
     )

@@ -6,74 +6,74 @@ import ABCIcon from '@components/abc-icon'
 
 import { AtFloatLayout } from 'taro-ui'
 
+// 自定义常量
+import {
+  LOCALE_ONLINE_SERVICE,
+  LOCALE_CONTACT_VIA_PHONE,
+  LOCALE_CONSUMER_HOTLINE
+} from '@constants/locale'
 import { COLOR_GREY_2 } from '@constants/styles'
 
 
 // 自定义组件
 import Board from '@components/board'
+import '../../styles/_user.scss'
 
-// 自定义常量
 
 class CustomerServiceMask extends Taro.Component {
-    static defaultProps = {
+  static defaultProps = {
+  }
+
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
+
+  onCallPhone() {
+    Taro.makePhoneCall({ phoneNumber: LOCALE_CONSUMER_HOTLINE })
+  }
+
+  render() {
+    let { show } = this.props
+
+    const fontStyle = {
+      padding: Taro.pxTransform(30),
+      textAlign: 'center',
+      color: '#888888',
+      fontSize: Taro.pxTransform(24),
     }
 
-    onMaskTouchMove(e) {
-        return e.stopPropagation()
+    const buttonStyle = {
+      border: "1px solid #fff",
+      color: "#888",
+      padding: 0,
+      width: '100%',
     }
 
-    onCallPhone() {
-        Taro.makePhoneCall({ phoneNumber: '0592-5911297' })
-    }
+    return <View className='user-customer-service' onTouchMove={this.onMaskTouchMove}>
+      {/* 主体内容 */}
+      <AtFloatLayout isOpened={show} onClose={this.props.onClose}>
+        <Button
+          open-type='contact'
+          size='mini'
+          plain
+          bindcontact='handleContact'
+          style={buttonStyle}
+        >
+          <View className='text-normal text-secondary text-center ' style={{ padding: Taro.pxTransform(20) }}>
+            {LOCALE_ONLINE_SERVICE}
+          </View>
+        </Button>
 
-    render() {
-        let { show } = this.props
+        <View className='gray-line' ></View>
 
-        const greyStyle = {
-            height: '1rpx',
-            background: 'rgb(220,220,220)',
-            width: '80%',
-            position: 'absolute',
-            left: '50%',
-            transform: 'translate(-50%,0)',
-
-        }
-
-        const fontStyle = {
-            padding: '15px',
-            textAlign: 'center',
-            color: '#888888',
-            fontSize: '12px',
-        }
-
-        const ButtonfontStyle = {
-            padding: '10px',
-            textAlign: 'center',
-            color: '#888888',
-            fontSize: '12px',
-        }
-
-        const buttonStyle = {
-            border: "1px solid #fff",
-            color: "#888",
-            padding: 0,
-            width: '100%',
-        }
-
-        return <View onTouchMove={this.onMaskTouchMove}>
-            {/* 主体内容 */}
-            <AtFloatLayout isOpened={show} onClose={this.props.onClose}>
-                <Button open-type='contact' size='mini' plain bindcontact='handleContact' style={buttonStyle}>
-                    <View style={ButtonfontStyle}>
-                        在线客服
-                    </View>
-                </Button>
-                <View style={greyStyle}></View>
-                <View onClick={this.onCallPhone} style={fontStyle}>电话联系</View>
-            </AtFloatLayout>
-            {/* 遮罩层 */}
-        </View >
-    }
+        <View
+          onClick={this.onCallPhone}
+          style={fontStyle}
+        >{LOCALE_CONTACT_VIA_PHONE}</View>
+      </AtFloatLayout>
+      {/* 遮罩层 */}
+    </View >
+  }
 }
 
 export default CustomerServiceMask

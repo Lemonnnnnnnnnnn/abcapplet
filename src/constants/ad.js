@@ -7,10 +7,11 @@ import {
 } from '@constants/page'
 
 
-export const AD_DEFAULT = []
+export const AD_DEFAULT = { list: [], riskAd: {} }
 export const SET_AD_LIST = 'SET_AD_LIST'
 export const SET_POPUP_AD_LIST = 'SET_POPUP_AD_POST'
 export const CLOSE_POPUP_AD_LIST = 'CLOSE_POPUP_AD_LIST'
+export const TYPE_SETTING_RISK_POST = 'TYPE_SETTING_RISK_POST'
 
 
 export const SUB_DEFAULT = { list: [], total: 0 }

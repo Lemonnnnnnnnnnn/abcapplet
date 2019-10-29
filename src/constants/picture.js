@@ -49,3 +49,6 @@ export const APARTMENT_APPOINTMENT_ACCEPT = 'https://images.gongyuabc.com//image
 
 // 风险金相关
 export const RISK_MONEY_BANNER = 'https://images.gongyuabc.com/image/riskMoneyBanner_One.png'
+
+// home
+export const CITY_MODAL_ICON = 'https://images.gongyuabc.com/image/city_modal_icon.png'
