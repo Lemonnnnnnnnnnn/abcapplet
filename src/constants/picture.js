@@ -20,7 +20,8 @@ export const CALL_PHONE = 'https://images.gongyuabc.com/image/callPhone_new.png'
 export const COMMENT = 'https://images.gongyuabc.com/image/comment_new.png'
 export const EXPECT = 'https://images.gongyuabc.com/image/expect_new.png'
 export const APPOINTMENT_COUPON = 'https://images.gongyuabc.com/image/appointment-coupon.png'
-export const ICON_HEAD_NO='http://images.gongyuabc.com/image/icon/head-no.png'
+export const ICON_HEAD_NO = 'http://images.gongyuabc.com/image/icon/head-no.png'
+export const APPOINT_ANGE = 'https://images.gongyuabc.com/image/appoint-ange.png'
 
 // 签约返现
 
@@ -41,7 +42,7 @@ export const ORDER_STEP_ONE = 'https://images.gongyuabc.com/image/order-step1.pn
 export const ORDER_STEP_TWO = 'https://images.gongyuabc.com/image/order-step2.png'
 export const ORDER_STEP_THREE = 'https://images.gongyuabc.com/image/order-step3.png'
 export const ORDER_STEP_FOUR = 'https://images.gongyuabc.com/image/order-step-risk_One.png'
-export const ORDER_LEASE_INSURANCE='https://images.gongyuabc.com/image/lease-insurance.png'
+export const ORDER_LEASE_INSURANCE = 'https://images.gongyuabc.com/image/lease-insurance.png'
 
 // 预约看房
 export const APARTMENT_APPOINTMENT_ACCEPT = 'https://images.gongyuabc.com//image/accept.png'

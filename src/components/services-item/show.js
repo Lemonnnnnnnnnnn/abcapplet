@@ -36,9 +36,9 @@ import {
   LOCAL_APPOINTMENT_HASEDCASHBACK,
   LOCAL_APPOINTMENT_HOUSEKEPPERSUCCESS,
   LOCAL_APPOINTMENT_HOUSEKEPPERFAIL,
-  LOCAL_APPOINTMENT_AUDITFAIL
+  LOCAL_APPOINTMENT_AUDITFAIL,
 } from '@constants/locale'
-import { APPOINTMENT_COUPON } from '@constants/picture'
+import { APPOINTMENT_COUPON ,APPOINT_ANGE } from '@constants/picture'
 
 // 自定义组件
 import BaseComponent from '@components/base'
@@ -205,14 +205,14 @@ class ServiceItemShow extends BaseComponent {
                 {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
                   <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
-                  <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
+                  <Image src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
                 }
                 {<Text >{(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ? LOCALE_CASH_BACK : LOCAL_APPOINTMENT_AGENCY}</Text>}
               </View>
             </View>
               :
               item && item.is_sign ? <View className='at-row at-row__align--center at-row__justify--end text-normal text-muted apartment-item-haveAppoint position-relative icon' >
-                <Image src='https://images.gongyuabc.com/image/appoint-ange.png' mode='widthFix' className='appointment-coupontwo' ></Image>
+                <Image src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
                 {LOCAL_APPOINTMENT_AGENCY}
               </View>
                 :

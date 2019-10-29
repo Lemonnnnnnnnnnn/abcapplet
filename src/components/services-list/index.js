@@ -41,10 +41,10 @@ class ServiceList extends BaseList {
 
 
         {/* 无数据 */}
-        {lists.length === 0
+        {/* {lists.length === 0
           && hasMore === false
           && loading === false
-          && <View class='page-demo'>{LOCALE_NO_DATA}</View>}
+          && <View class='page-demo'>{LOCALE_NO_DATA}</View>} */}
       </View>)
   }
 }

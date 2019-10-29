@@ -37,27 +37,22 @@ class ServicesHome extends Component {
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
-    time: '',
-    adList: [],
-    count:false,
+    flag: false,
   }
 
   refserviceList = (node) => this.ServiceList = node
 
   componentDidShow() {
     buryPoint()
-    const { count } = this.state
-    count ?this.onSetReset(): this.onShow()
+    const { flag } = this.state
+    flag && this.onSetReset()
   }
 
   onShow() {
     const { payload } = this.state
     this.props.dispatchAppointmentList(payload).
       then((res) => {
-        res && this.setState({
-          time: res.data.data.date
-        })
-        res && res.data.data.total === 0 &&
+        res && !res.data.data.total &&
           Taro.showToast({
             title: '今天暂无行程',
             icon: 'none',
@@ -65,20 +60,19 @@ class ServicesHome extends Component {
           })
       }
       )
-
   }
   async onPullDownRefresh() {
     this.ServiceList.onReset(null)
-
     Taro.stopPullDownRefresh()
   }
 
   onSetReset() {
     this.ServiceList.onReset(null)
+    Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
   }
 
   componentDidHide() {
-   this.props.user.token && this.setState({count:true})
+    this.setState({ flag: true })
   }
 
   /**
@@ -86,7 +80,6 @@ class ServicesHome extends Component {
    */
   onReachBottom() {
     this.ServiceList.onNextPage()
-
   }
   //调转到地图找房
   onToLeft() {
@@ -109,7 +102,7 @@ class ServicesHome extends Component {
 
   render() {
     const { appointments } = this.props
-    const { time, payload, adList } = this.state
+    const { payload } = this.state
 
     const page = {
       backgroundColor: '#FFFFFF',
@@ -130,38 +123,26 @@ class ServicesHome extends Component {
           <View className='at-row at-row__align--center  p-2' >
             <View className='at-row at-row__align--center at-row__justify--center ml-2 appointment-yellowbot' ></View>
             <View className='pl-2 text-bold text-large'>看房行程</View>
-
           </View>
 
-          {
-            Taro.getStorageSync('user_info').token ? <View>
-              {
-                appointments.list.length ?
-                  <View className=' at-col'>
-                    <View >
-                      <ServicesList
-                        lists={appointments.list}
-                        ref={this.refserviceList}
-                        defaultPayload={payload}
-                        onSetReset={this.onSetReset}
-                        dispatchList={this.props.dispatchAppointmentList}
-                        dispatchNextPageList={this.props.dispatchNextPageApartmentList}
-                      />
-                    </View>
-                  </View>
-                  :
-                  <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: "50px" }}>
-                    <Image src={NONE_TRAVE}></Image>
-                  </View>
-              }
-            </View>
-              :
-              <View className='mt-5'>
-                <loginButton message='请登录后查看行程' />
-              </View>
-          }
+          {/* 未登录 */}
+          {!Taro.getStorageSync('user_info').token && <View className='mt-5'>
+            <loginButton message='请登录后查看行程' />
+          </View>}
 
+          <ServicesList
+            lists={appointments.list}
+            ref={this.refserviceList}
+            defaultPayload={payload}
+            onSetReset={this.onSetReset}
+            dispatchList={this.props.dispatchAppointmentList}
+            dispatchNextPageList={this.props.dispatchNextPageApartmentList}
+          />
 
+          {/* 没有数据 */}
+          {!appointments.list.length && Taro.getStorageSync('user_info').token && <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: Taro.pxTransform(100) }}>
+            <Image src={NONE_TRAVE}></Image>
+          </View>}
 
         </View>
 
