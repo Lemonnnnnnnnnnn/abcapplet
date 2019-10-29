@@ -14,7 +14,7 @@ import ApartmentList from '@components/apartment-list'
 import RequirementCard from '@components/requirement-card'
 import Curtain from '@components/curtain'
 
-import {PAGE_HOME,PAGE_USER_AUTH} from '@constants/page'
+import { PAGE_HOME, PAGE_USER_AUTH } from '@constants/page'
 
 import { AD_DISPATCH_DIST } from '@constants/ad'
 
@@ -43,8 +43,12 @@ import {
   LOCALE_ACTIVITY,
   LOCALE_APARTMENT,
   LOCALE_RECOMMEND_APARTMENT,
-  LOCALE_SHARE_TEXT
+  LOCALE_SHARE_TEXT,
+  LOCALE_PROJECT_NAME,
+  LOCALE_XIAMEN,
+  LOCALE_NO_LIMIT
 } from '@constants/locale'
+import { RECOMMED } from '@constants/picture'
 import BaseComponent from '../../components/base'
 
 @connect(state => state, {
@@ -59,13 +63,12 @@ import BaseComponent from '../../components/base'
 
 class CommonHome extends BaseComponent {
   config = {
-    navigationBarTitleText: '公寓ABC',
+    navigationBarTitleText: LOCALE_PROJECT_NAME,
     enablePullDownRefresh: true,
   }
 
   constructor(props) {
     super(props)
-
     const showCurtain = Taro.getStorageSync('CurtainShow') ? true : false
 
     this.state = {
@@ -96,14 +99,13 @@ class CommonHome extends BaseComponent {
       showSelect: true,
 
       // 城市相关
-      selector: ['厦门市'],
-      selectorChecked: '厦门市',
-      cityCode: 0,
+      selector: [LOCALE_XIAMEN],
     }
   }
 
   async onPullDownRefresh() {
-    await this.componentWillMount()
+    // await this.componentWillMount()
+    this.apartmentList.onReset(null)
     Taro.stopPullDownRefresh()
   }
 
@@ -115,7 +117,6 @@ class CommonHome extends BaseComponent {
 
 
   async componentWillMount() {
-
     // 获取幕帘弹窗内容
     this.props.dispatchPopupAdPost().then(({ data: { data } }) => {
       this.setState({ adList: data })
@@ -124,13 +125,12 @@ class CommonHome extends BaseComponent {
     // 获取从后台获取的全平台获得退租险人数，没有值默认为50
     this.props.dispatchRiskPost()
 
-
     const {
       searchScrollTop,
       payloadApartment,
     } = this.state
 
-    this.setState({ payloadApartment: { ...payloadApartment, city: Taro.getStorageSync('user_info').citycode, } })
+    this.setState({ payloadApartment: { ...payloadApartment, city: Taro.getStorageSync('user_info').citycode } })
 
     // 获取筛选器和搜索框距离顶部的距离
     !searchScrollTop
@@ -142,24 +142,33 @@ class CommonHome extends BaseComponent {
 
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params
-
     page && id && Taro.navigateTo({ url: `${page}?id=${id}` })
 
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
-
     user && this.onSelectCity(user.citycode)
-    user && this.setState({ cityCode: user.citycode })
 
     // 拉取城市列表
-    await this.props.dispatchCityList().then((res) => {
-      const citys = res.data.data.list
+    await this.props.dispatchCityList().then(({ data: { data } }) => {
+      const citys = data.list
       // 设置城市选择器
       const selector = citys.map(i => i.title)
       const selectorCity = citys.filter(i => i.id === user.citycode)[0]
-      const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
 
-      this.setState({ selector, selectorChecked })
+      const [selectorCityTitle, selectorCitySort] = selectorCity ?
+        [selectorCity.title, selectorCity.sort] : [LOCALE_XIAMEN, 1]
+
+      this.setState({
+        selector,
+        selectorChecked: {
+          title: selectorCityTitle,
+          sort: selectorCitySort
+        }
+      })
+    })
+    //判断是否弹出需求卡
+    await this.props.dispatchGetUserMsg().then(res => {
+      res && !res.data.data.user.is_guide && this.setState({ showCard: true })
     })
   }
 
@@ -200,19 +209,14 @@ class CommonHome extends BaseComponent {
 
   // 刷新页面
   onRefreshPage() {
-    Taro.reLaunch({ url: '/pages/common/home' })
+    Taro.reLaunch({ url: PAGE_HOME })
   }
 
   /**
    * 选择城市
    */
-  async onSelectCity(citycode, title) {
-
-    const {
-      selectScrollTop,
-      // latitude,
-      // longitude
-    } = this.state
+  async onSelectCity(citycode, title, sort) {
+    const { selectScrollTop, selectorChecked } = this.state
 
     const overloadData = []
     const overloadDist = []
@@ -240,26 +244,19 @@ class CommonHome extends BaseComponent {
       .boundingClientRect()
       .exec(res => this.setState({ selectScrollTop: res[0].top, }))
 
-    this.setState({ selectorChecked: title })
+    title && sort && this.setState({ selectorChecked: { ...selectorChecked, title, sort } })
 
     overloadDist.length === 1 && this.initialHouseType()
   }
 
-  // 初始化户型的数据，供筛选项使用
   async componentDidShow() {
-    //判断是否弹出需求卡
-    await this.props.dispatchGetUserMsg().then((res) => {
-      if (res && res.data.data.user.is_guide === 0) {
-        this.setState({ showCard: true })
-      }
-    })
-    Taro.showTabBarRedDot({
-      index: 2
-    })
+
   }
+
+  // 初始化户型的数据，供筛选项使用
   initialHouseType() {
-    const initialFloor = [{ id: 0, title: "不限" }]
-    const initialRoom = [{ id: 0, title: "不限" }]
+    const initialFloor = [{ id: 0, title: LOCALE_NO_LIMIT }]
+    const initialRoom = [{ id: 0, title: LOCALE_NO_LIMIT }]
     const { dists } = this.props
 
     const room = dists.housetype_list.room
@@ -292,11 +289,9 @@ class CommonHome extends BaseComponent {
     const user_info = Taro.getStorageSync('user_info')
     Taro.setStorageSync('user_info', { ...user_info, citycode: newCity.id })
 
-    this.setState({ selectorChecked })
+    this.setState({ selectorChecked: { sort: newCity.sort, title: newCity.title } })
     this.onSelectCity(newCity.id)
-
     this.onRefreshPage()
-
   }
 
   onSearchTrue() {
@@ -412,14 +407,6 @@ class CommonHome extends BaseComponent {
 
   }
 
-  // 分享
-  // onShareAppMessage() {
-  //   const { cityId } = this.state
-  //   this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
-  //   return {
-  //     title: "我在公寓ABC上发现了一个好\n房源",
-  //   }
-  // }
   onShareAppMessage() {
     const text = LOCALE_SHARE_TEXT
     return {
@@ -431,15 +418,6 @@ class CommonHome extends BaseComponent {
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({
       appId: 'wxd3537ccb429de3b4', // 要跳转的小程序的appid
-
-      success(res) {
-        // 打开成功
-        console.log(res)
-      },
-      fail(res) {
-        console.log(res)
-      }
-
     })
   }
   render() {
@@ -459,22 +437,14 @@ class CommonHome extends BaseComponent {
       adList
     } = this.state
 
-
-    const {
-      ads, user, dists,
-      citys, apartments, home
-    } = this.props
+    const { ads, user, dists, citys, apartments, home } = this.props
 
     const { banner: banners, hot_activity: activities, hot_cbd: cbds, recommend: recommends } = home
-
-    const citycode = Taro.getStorageSync('user_info').citycode
-    let current = 0
-    if (citycode === 350200) { current = 0 } else { current = 1 }
-
     return (
       <View
         className='page-white'
-        style={{ overflow: "hidden", minHeight: '300vh' }} >
+        style={{ overflow: "hidden", minHeight: '300vh' }}
+      >
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
@@ -483,19 +453,19 @@ class CommonHome extends BaseComponent {
                 className='mb-2'
                 isFixed={searchIsFixed}
                 showSearch={showSearch}
-                current={current}
-
 
                 selector={selector}
                 selectorChecked={selectorChecked}
                 onChangeSelector={this.onChangeSelector}
               />
             }
+            {/* 将搜索框设为flex布局的同时填充同高度的空白区域以使页面布局不会错乱 */}
             <View style={searchIsFixed ? { height: Taro.pxTransform(92) } : {}}></View>
           </View>
+
           {/* 轮播 */}
           <View style={{ minHeight: Taro.pxTransform(530) }}>
-            {banners.length > 0 &&
+            {banners.length &&
               <Carousel
                 className='mt-2'
                 type='banner'
@@ -506,7 +476,7 @@ class CommonHome extends BaseComponent {
 
           {/* 热门租房商圈 */}
           <View style={{ minHeight: Taro.pxTransform(176) }}>
-            {cbds.length > 0 &&
+            {cbds.length &&
               <View >
                 <Header
                   className='mb-2'
@@ -526,7 +496,7 @@ class CommonHome extends BaseComponent {
 
           {/* 广告 */}
           <View>
-            {ads.length > 0 &&
+            {ads.length &&
               <Carousel
                 className='mt-2'
                 type='normal'
@@ -541,7 +511,7 @@ class CommonHome extends BaseComponent {
 
           {/* 推荐品牌公寓 */}
           <View style={{ minHeight: Taro.pxTransform(275) }}>
-            {recommends.length > 0 &&
+            {recommends.length &&
               <View>
                 <Header
                   className='mt-4 mb-2'
@@ -560,7 +530,7 @@ class CommonHome extends BaseComponent {
 
           {/* 活动专区 */}
           <View style={{ minHeight: Taro.pxTransform(240) }}>
-            {activities.length > 0 &&
+            {activities.length &&
               <View>
                 <Header
                   className='mt-4 mb-2'
@@ -581,7 +551,7 @@ class CommonHome extends BaseComponent {
 
           {/* 优选入口 */}
           <View className='mx-1' onClick={this.openMiniProgramCreate}>
-            <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-home-image'></Image>
+            <Image src={RECOMMED} className='user-home-image'></Image>
           </View>
 
 
@@ -591,7 +561,8 @@ class CommonHome extends BaseComponent {
             <View className='home-select'>
               {/* 选择框下拉框部分 */}
               {
-                !(JSON.stringify(dists) === '{}') && <Select
+                // 如果dists不为空对象时渲染Select组件
+                Object.keys(dists).length && <Select
                   onSearchTrue={this.onSearchTrue}
                   isFixed={selectIsFixed}
                   showSelect={showSelect}
@@ -609,7 +580,7 @@ class CommonHome extends BaseComponent {
             </View>
 
             <View className='home-apartment ml-3 mr-3'>
-              {banners.length > 0 && <ApartmentList
+              {banners.length && <ApartmentList
                 key={apartments.type}
                 type={apartments.type}
                 items={apartments.list}

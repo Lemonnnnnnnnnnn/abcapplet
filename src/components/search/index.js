@@ -69,7 +69,7 @@ class Search extends BaseComponent {
 
   render() {
     const { isInput, value } = this.state
-    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel, showSearch, current, isInputSub ,inputValue} = this.props
+    const { selector, onChangeSelector, selectorChecked, size, isFixed, className, showCancel, showSearch, isInputSub, inputValue } = this.props
 
     const hideStyle = {
       top: Taro.pxTransform(-92)
@@ -84,9 +84,9 @@ class Search extends BaseComponent {
         <View className='search-box'>
           <View className='search-content at-row at-row__align--center'>
             <View className='at-col at-col-3'>
-              <Picker mode='selector' range={selector} value={current} onChange={onChangeSelector}>
+              <Picker mode='selector' range={selector} value={selectorChecked.sort - 1} onChange={onChangeSelector}>
                 <View className='picker text-normal ml-3 at-row at-row__align--center'>
-                  <Text>{selectorChecked}</Text>
+                  <Text>{selectorChecked.title}</Text>
                   <AtIcon prefixClass='iconfont icon' value='down' size={size} color={COLOR_BLACK} />
                 </View>
               </Picker>

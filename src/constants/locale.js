@@ -1,4 +1,5 @@
 export const LOCALE_ERROR = '服务出现问题，请稍后再试。'
+export const LOCALE_PROJECT_NAME = '公寓ABC'
 export const LOCALE_SEARCH_PLACEHOLDER = '搜索公寓/商圈/地铁/BRT'
 export const LOCALE_AUTH = '在使用公寓ABC小程序服务时为提供安全且愉悦的使用体验，需要你进行确认微信授权'
 export const LOCALE_AUTH_SIMPLE = '为提供安全且愉悦的使用体验，需要你进行确认微信授权'
@@ -36,6 +37,8 @@ export const LOCALE_CUSTOMER_SERVICE = '客服服务'
 export const LOCALE_TELEPHONE_CUSTOMER_SERVICE = '电话客服'
 export const LOCALE_CONTACT_VIA_PHONE = '电话联系'
 export const LOCALE_ONLINE_SERVICE = '在线客服'
+export const LOCALE_XIAMEN = '厦门市'
+export const LOCALE_NO_LIMIT = '不限'
 
 
 
@@ -590,22 +593,22 @@ export const LOCAL_APPOINTMENT_AGENCY = "签约"
 export const LOCAL_APPOINTMENT_DISLIKE = "不满意"
 export const LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER = "联系管家"
 export const LOCAL_APPOINTMENT_CONTACT_CUSTOMER = "联系客服"
-export const LOCAL_APPOINTMENT_LOOKROOM_AGENCY ="已看房去签约"
-export const LOCAL_APPOINTMENT_CASHBACK_REDPACK ="获得返现红包"
+export const LOCAL_APPOINTMENT_LOOKROOM_AGENCY = "已看房去签约"
+export const LOCAL_APPOINTMENT_CASHBACK_REDPACK = "获得返现红包"
 export const LOCAL_APPOINTMENT_OFFLINE_SIGNING = "线下已签约"
 export const LOCAL_APPOINTMENT_GET_CASHBACK = "获得退租险及返现"
-export const LOCAL_APPOINTMENT_GO_SIGN  = "去签约"
+export const LOCAL_APPOINTMENT_GO_SIGN = "去签约"
 export const LOCAL_APPOINTMENT_DETAIL_REVIWE = "查看审核详情"
-export const LOCAL_APPOINTMENT_GO_PAY ="去支付"
-export const LOCAL_APPOINTMENT_ORDER_DETAIL ="查看订单详情"
+export const LOCAL_APPOINTMENT_GO_PAY = "去支付"
+export const LOCAL_APPOINTMENT_ORDER_DETAIL = "查看订单详情"
 export const LOCAL_APPOINTMENT_BOOK_ONLINE = "在线预定"
 
-export const LOCAL_APPOINTMENT_GOODSERVICE= "“将为您提供更好的服务”"
-export const LOCAL_APPOINTMENT_LOCKSUCCESSD= "“已锁定成功”"
-export const LOCAL_APPOINTMENT_APPOINTED= "“已签约”"
-export const LOCAL_APPOINTMENT_GET_REDPACK =  "“已签约返现并获得退租险”"
-export const LOCAL_APPOINTMENT_AUDIT= " “签约审核中”"
-export const LOCAL_APPOINTMENT_HASEDCASHBACK= "“已签约返现”"
-export const LOCAL_APPOINTMENT_HOUSEKEPPERSUCCESS=  "“管家审核通过”"
-export const LOCAL_APPOINTMENT_HOUSEKEPPERFAIL= "“管家审核拒绝”"
-export const LOCAL_APPOINTMENT_AUDITFAIL="“审核拒绝”"
+export const LOCAL_APPOINTMENT_GOODSERVICE = "“将为您提供更好的服务”"
+export const LOCAL_APPOINTMENT_LOCKSUCCESSD = "“已锁定成功”"
+export const LOCAL_APPOINTMENT_APPOINTED = "“已签约”"
+export const LOCAL_APPOINTMENT_GET_REDPACK = "“已签约返现并获得退租险”"
+export const LOCAL_APPOINTMENT_AUDIT = " “签约审核中”"
+export const LOCAL_APPOINTMENT_HASEDCASHBACK = "“已签约返现”"
+export const LOCAL_APPOINTMENT_HOUSEKEPPERSUCCESS = "“管家审核通过”"
+export const LOCAL_APPOINTMENT_HOUSEKEPPERFAIL = "“管家审核拒绝”"
+export const LOCAL_APPOINTMENT_AUDITFAIL = "“审核拒绝”"

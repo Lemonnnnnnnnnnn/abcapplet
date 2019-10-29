@@ -65,7 +65,7 @@ class CityModal extends Component {
               <AtButton
                 // openType='getPhoneNumber'
                 // onGetPhoneNumber={this.getPhoneNumber.bind(this, item.id)}
-                onClick={onSelectCity.bind(this, item.id, item.title)}
+                onClick={onSelectCity.bind(this, item.id, item.title , item.sort)}
               >
                 <View className='city-modal-item text-center p-2 text-secondary'>
                   {item.title}

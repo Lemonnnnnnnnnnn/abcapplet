@@ -52,3 +52,4 @@ export const RISK_MONEY_BANNER = 'https://images.gongyuabc.com/image/riskMoneyBa
 
 // home
 export const CITY_MODAL_ICON = 'https://images.gongyuabc.com/image/city_modal_icon.png'
+export const RECOMMED = 'https://images.gongyuabc.com/image/recommed.png'

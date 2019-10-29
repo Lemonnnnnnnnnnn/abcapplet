@@ -147,6 +147,7 @@ class App extends Component {
   componentWillMount() {
     this.autoUpdate()
     initProject()
+    Taro.showTabBarRedDot({ index: 2 })
   }
 
 
