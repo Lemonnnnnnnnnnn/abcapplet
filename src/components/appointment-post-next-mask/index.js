@@ -23,7 +23,8 @@ import {
   LOCALE_APPOINTMENT_CALL,
   LOCALE_APPOINTMENT_LOOK,
   LOCALE_APPOINTMENT_FINISH_REQUIRE,
-  LOCALE_APPOINTMENT_HELP
+  LOCALE_APPOINTMENT_HELP,
+  LOCALE_EXCLAMATION_MARK
 } from '@constants/locale'
 import { RISK_MONEY_BANNER, APARTMENT_APPOINTMENT_ACCEPT } from '@constants/picture'
 import { PAGE_RISK_LANDING } from '@constants/page'
@@ -59,7 +60,7 @@ class AppointPostNextMask extends BaseComponent {
                   <AtIcon value='check-circle' size='50' color='#FFC919'></AtIcon>
                 </View>
                 <View className='at-row at-row__justify--center mt-2'>
-                  <View className='text-bold text-super '>{LOCALE_APPOINTMENT_SUCCESS}</View>
+                  <View className='text-bold text-super '>{LOCALE_APPOINTMENT_SUCCESS + LOCALE_EXCLAMATION_MARK}</View>
                 </View>
                 <View className='at-row at-row__justify--center mt-2' >
                   <View className='text-muted text-normal '>{LOCALE_APPOINTMENT_WATING}</View>

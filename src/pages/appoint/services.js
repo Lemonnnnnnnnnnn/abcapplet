@@ -9,7 +9,12 @@ import loginButton from '@components/login-button'
 import Carousel from '@components/carousel'
 
 import { PAYLOAD_APPOINTMENT_LIST } from '@constants/api'
-
+import {
+  LOCALE_NO_TRIP_TODAY,
+  LOCALE_NONE,
+  LOCALE_APPOINTMENT_VIEW_TRIP,
+  LOCALE_LOGIN_VIEW_TRIP
+} from '@constants/locale'
 import { RISK_MONEY_BANNER, NONE_TRAVE } from '@constants/picture'
 import { PAGE_RISK_LANDING } from '@constants/page'
 import { AD_DISPATCH_DIST } from '@constants/ad'
@@ -55,8 +60,8 @@ class ServicesHome extends Component {
       then((res) => {
         res && !res.data.data.total &&
           Taro.showToast({
-            title: '今天暂无行程',
-            icon: 'none',
+            title: LOCALE_NO_TRIP_TODAY,
+            icon: LOCALE_NONE,
             duration: 2000
           })
       }
@@ -105,14 +110,11 @@ class ServicesHome extends Component {
     const { appointments } = this.props
     const { payload } = this.state
 
-    const page = {
-      backgroundColor: '#FFFFFF',
-      minHeight: '100vh',
-    }
+
 
     return (
-      <View style={page}>
-        <View style={{ overflow: "hidden" }}>
+      <View className='page-white'>
+        <View className='wrap-Style' >
           <ServicesHeader
             onClickLeft={this.onToLeft}
             onClickRight={this.onToRight}
@@ -123,12 +125,12 @@ class ServicesHome extends Component {
           </View>
           <View className='at-row at-row__align--center  p-2' >
             <View className='at-row at-row__align--center at-row__justify--center ml-2 appointment-yellowbot' ></View>
-            <View className='pl-2 text-bold text-large'>看房行程</View>
+            <View className='pl-2 text-bold text-large'>{LOCALE_APPOINTMENT_VIEW_TRIP}</View>
           </View>
 
           {/* 未登录 */}
           {!Taro.getStorageSync('user_info').token && <View className='mt-5'>
-            <loginButton message='请登录后查看行程' />
+            <loginButton message={LOCALE_LOGIN_VIEW_TRIP} />
           </View>}
 
           <ServicesList
@@ -141,9 +143,10 @@ class ServicesHome extends Component {
           />
 
           {/* 没有数据 */}
-          {!appointments.list.length && Taro.getStorageSync('user_info').token && <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: Taro.pxTransform(100) }}>
-            <Image src={NONE_TRAVE}></Image>
-          </View>}
+          {!appointments.list.length && Taro.getStorageSync('user_info').token &&
+            <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: Taro.pxTransform(100) }}>
+              <Image src={NONE_TRAVE}></Image>
+            </View>}
 
         </View>
 

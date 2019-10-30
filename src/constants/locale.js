@@ -28,6 +28,7 @@ export const LOCALE_OH = '哦'
 export const LOCALE_CHOISE = '选择'
 export const LOCALE_COLON = '：'
 export const LOCALE_MINUS = '-'
+export const LOCALE_EXCLAMATION_MARK = '！'
 export const LOCALE_TIMES = '次'
 export const LOCALE_NO_DESCRIPTION = '暂无描述'
 export const LOCALE_ORIGINAL_PRICE = '原价'
@@ -42,9 +43,6 @@ export const LOCALE_NO_LIMIT = '不限'
 export const LOCALE_NONE = 'none'
 export const LOCALE_POINT = '分'
 export const LOCALE_LOGIN = '点击登录'
-
-
-
 export const LOCALE_RENT = '租金'
 export const LOCALE_SEMICOLON = '：'
 export const LOCALE_PRICE_SEMICOLON = '￥'
@@ -61,11 +59,29 @@ export const LOCALE_NO_MORE = '我可是有底线的哦'
 export const LOCALE_NO_APARTMENT_DATA = '暂时还没有公寓哦'
 export const LOCALE_CHOISE_RENT_POSITION = '请选择租房位置'
 export const LOCALE_CONSUMER_HOTLINE = '0592-5911297'
+export const LOCALE_NO_LISTINGS = '暂无房源'
+export const LOCALE_YEAR = '年'
+export const LOCALE_MONTH = '月'
+export const LOCALE_DAY = '日'
 
 // /pages/apartment
 export const LOCALE_VIEW_APARTMENT_DETAILS = '查看公寓详情'
 export const LOCALE_VIEW_APARTMENT_DETAILS_NONE = '无公寓详情'
 export const LOCALE_VIEWING_CURRENT_HOUSETYPE = '您正在浏览此户型'
+
+// /pages/apartment/appointment
+export const LOCALE_APARTMENT_APPOINTMENT_AD_TEXT1 = '即刻预约看房,'
+export const LOCALE_APARTMENT_APPOINTMENT_AD_TEXT2 = '线上签约0元享退租险！'
+export const LOCALE_LOGIN_APPOINTMENT = '请登录后预约'
+export const LOCALE_MULTIPLE_SELECTION = '*可多选'
+export const LOCALE_NO_OPTIONAL_UNIT = '暂无可选户型'
+export const LOCALE_NIGHT_LIST_NOTICE = '提示：管家休息期间，接单会延迟'
+export const LOCALE_CHOISE_VIEW_ROOM_TIME = '请选择看房时间'
+export const LOCALE_MOBILE_FORMAT_ERROR = '电话号码格式错误'
+export const LOCALE_VIEW_ROOM_DATE = '看房日期'
+export const LOCALE_VIEWING_HOUSETYPE = '所看户型'
+export const LOCALE_APPOINTMENT_SUCCESS = '预约成功'
+
 
 // pages/user/profile
 export const LOCALE_USER_CARD = '我的小黄卡'
@@ -86,7 +102,6 @@ export const LOCALE_NO_DATA = '暂无数据'
 export const LOCALE_NO_AWARD_AND_SPACE = '无朝向和空间信息'
 export const LOCALE_ABC_SIGN = '平台代订'
 export const LOCALE_MONEY = '￥'
-export const LOCALE_MONTH = '月'
 export const LOCALE_QI = '/月'
 
 // components/appointment-detail-room
@@ -234,6 +249,7 @@ export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
 /**
  * 看房服务相关
  */
+export const LOCALE_LOGIN_VIEW_TRIP = '请登录后查看行程'
 export const LOCALE_BOOK_SUPPORTED_NOT = '该公寓暂不支持线上预订'
 export const LOCALE_APPOINTMENT_SIGNED = '签约返现'
 export const LOCALE_APPOINTMENT_CASHPLEDGE = '立得￥50元现金红包'
@@ -241,6 +257,7 @@ export const LOCALE_APPOINTMENT_DETAIL = '查看详情'
 export const LOCALE_APPOINTMENT_HASLOOK = '已带看服务'
 export const LOCALE_APPOINTMENT_SUMMON = '正在为你召唤'
 export const LOCALE_APPOINTMENT_BELONG = '专属管家...'
+export const LOCALE_NO_TRIP_TODAY = '今天暂无行程'
 //找房服务看房评价
 export const LOCALE_BUSINESS_LIKEABILITY_NONE = '非常不满意'
 export const LOCALE_BUSINESS_LIKEABILITY_NORMAL = '不满意'
@@ -299,9 +316,9 @@ export const LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT = '您还不能提交预约�
 
 
 //预约看房
+export const LOCALE_APPOINTMENT_VIEW_TRIP = '看房行程'
 export const LOCALE_APPOINTMENT_LOOKTIME = "看房时间："
 export const LOCALE_APPOINTMENT_POST = "提交预约"
-export const LOCALE_APPOINTMENT_SUCCESS = '预约成功!'
 export const LOCALE_APPOINTMENT_WATING = "柠小萌火速处理中，请耐心等待!"
 export const LOCALE_APPOINTMENT_ACCEPT = '管家已接单！'
 export const LOCALE_APPOINTMENT_ACCEPT_PHONE = '稍后管家将与您电话联系'

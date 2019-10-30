@@ -3,14 +3,14 @@
 .apartment {
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 5px * $hd 0px rgb(222, 222, 222);
-  border-radius :$border-radius-mini;
+  border-radius: $border-radius-mini;
 
   &-order {
     &-step-mask {
       width: 80%;
       z-index: 200;
       background: #fff;
-      border-radius:$border-radius-normal ;
+      border-radius: $border-radius-normal;
       .at-button {
         height: 37px * $hd;
         line-height: 37px * $hd;
@@ -31,12 +31,12 @@
       &-icon {
         background: linear-gradient(to right, #ffc919, #fba700);
         padding: 5px * $hd 15px * $hd;
-        border-radius :$border-radius-mini;
+        border-radius: $border-radius-mini;
         position: relative;
         color: #fff;
         &-angle {
           background: #fff;
-          border-radius:$border-radius-circle ;
+          border-radius: $border-radius-circle;
           width: 10px * $hd;
           height: 10px * $hd;
         }
@@ -60,7 +60,6 @@
       background: #fff;
     }
   }
-
   &-coupon {
     position: relative;
     right: -16px * $hd;
@@ -74,7 +73,7 @@
       width: 90%;
       margin-left: 5%;
       height: 84px * $hd;
-      border-radius:$border-radius-normal ;
+      border-radius: $border-radius-normal;
       position: relative;
       // background: #fff;
       &.background {
@@ -100,7 +99,7 @@
         width: 90%;
         margin-left: 5%;
         height: 84px * $hd;
-        border-radius:$border-radius-normal ;
+        border-radius: $border-radius-normal;
         position: relative;
         background: #c8c8c8;
       }
@@ -197,14 +196,14 @@
 
   &-header {
     position: relative;
-    border-radius :$border-radius-mini;
+    border-radius: $border-radius-mini;
 
     &-title {
       position: absolute;
       left: 5%;
       top: 10%;
       background: rgba(255, 255, 255, 0.9);
-      border-radius :$border-radius-mini;
+      border-radius: $border-radius-mini;
       padding: 2px * $hd 9px * $hd;
       font-size: 12px * $hd;
       color: #888;
@@ -218,7 +217,7 @@
       color: #fff;
       padding: 4px * $hd 12px * $hd;
       font-size: 10px * $hd;
-      border-radius :$border-radius-mini;
+      border-radius: $border-radius-mini;
       background: #ffc919;
 
       &-item {
@@ -255,6 +254,42 @@
     border-top-left-radius: 6px * $hd;
     border-top-right-radius: 6px * $hd;
   }
+
+  &-appointment {
+    .ad {
+      &-font-wrap {
+        left: 30px * $hd;
+        top: 50px * $hd;
+        z-index: 9;
+      }
+      &-image {
+        height: 200px * $hd;
+        overflow: hidden;
+      }
+      &-image-font {
+        line-height: 27px * 1.5 * $hd;
+        font-size: 27px * $hd;
+        letter-spacing: 2px * $hd;
+      }
+      &-mask {
+        height: 200px * $hd;
+        opacity: 0.5;
+        top: 0;
+        background-color: #000;
+      }
+      &-white-line {
+        width: 50px * $hd;
+        height: 5px * $hd;
+        background-color: #fff;
+        margin-bottom: 10px * $hd;
+        border-radius: 5px * $hd;
+      }
+    }
+    &-font {
+      font-size: 15px * $hd;
+      padding: 0 5px * $hd;
+    }
+  }
 }
 
 .apartment-mask {
@@ -268,7 +303,7 @@
 
 .apartment-item-mask {
   background: #f8f8f8;
-  border-radius:$border-radius-normal ;
+  border-radius: $border-radius-normal;
 }
 
 .apartment-container {
@@ -299,7 +334,7 @@
 
     height: 50px * $hd;
     width: 50px * $hd;
-    border-radius:$border-radius-circle ;
+    border-radius: $border-radius-circle;
     box-shadow: 0px 3px 10px rgba(255, 201, 25, 0.46);
   }
 
@@ -397,7 +432,7 @@
   position: absolute;
   height: 27px * $hd;
   width: 27px * $hd;
-  border-radius:$border-radius-circle ;
+  border-radius: $border-radius-circle;
 
   border-style: solid;
   border-width: 2px * $hd;
@@ -424,7 +459,7 @@
     border-radius: $border-radius-mini;
     border: 1px * $hd solid rgba(216, 216, 216, 1);
   }
-  &-haveAppoint.icon{
+  &-haveAppoint.icon {
     padding: 0 4px * $hd 0 0;
   }
 
@@ -454,23 +489,5 @@
     height: 30px * $hd;
     background: rgba(216, 216, 216, 1);
     border-radius: 23px * $hd;
-  }
-}
-.appointment {
-  &-image {
-    width: 343px * $hd;
-    height: 292px * $hd;
-    border-radius: 10px * $hd 10px * $hd 0 0;
-  }
-  &-coupon {
-    width: 40px * $hd;
-    position: absolute;
-    left: -4px * $hd;
-  }
-  &-coupontwo {
-    width: 40px * $hd;
-    position: absolute;
-    left: -4px * $hd;
-    top: -3px * $hd;
   }
 }

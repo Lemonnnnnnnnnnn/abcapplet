@@ -34,7 +34,7 @@ class AppointPostMask extends BaseComponent {
   }
 
   render() {
-    let { show, name, tel } = this.props
+    let { show, name, mobile } = this.props
 
     return show && <View className='apartment-mask' onTouchMove={this.onMaskTouchMove}>
       {/* 主体内容 */}
@@ -45,7 +45,7 @@ class AppointPostMask extends BaseComponent {
             {/* 头部 */}
             <View className='at-row at-row__justify--between mb-3'>
               <View className='text-bold'></View>
-              <View onClick={this.props.onClose}>
+              <View onClick={this.props.onCloseInputMask}>
                 <ABCIcon icon='close' color={COLOR_GREY_2} />
               </View>
             </View>
@@ -65,10 +65,10 @@ class AppointPostMask extends BaseComponent {
               <View className='at-col-4 text-normal at-row at-row__align--center '>{LOCALE_ORDER_MOBILE + LOCALE_COLON}</View>
               <View className='at-col-6 p-1 at-row ' style='background:#F8F8F8; border-radius: 30px'>
                 {
-                  tel === LOCALE_TEL ?
+                  mobile === LOCALE_TEL ?
                     <Input className='text-normal ml-2 ' placeholder={LOCALE_MODIFY_TEL} onChange={this.props.onGetTel} ></Input>
                     :
-                    <Input className='text-normal ml-2 ' placeholder={LOCALE_MODIFY_TEL} onChange={this.props.onGetTel} value={tel}></Input>
+                    <Input className='text-normal ml-2 ' placeholder={LOCALE_MODIFY_TEL} onChange={this.props.onGetTel} value={mobile}></Input>
                 }
 
               </View>
@@ -76,7 +76,7 @@ class AppointPostMask extends BaseComponent {
             <AtButton
               circle
               className='mt-3 mb-2 btn-yellow active'
-              onClick={this.props.onClose}
+              onClick={this.props.onConfirmInputMask}
             >{LOCALE_CONFIRM}</AtButton>
           </View>
         </View>
