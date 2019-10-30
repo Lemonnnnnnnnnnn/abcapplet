@@ -57,9 +57,7 @@ class UserProfile extends Component {
   refRequirementCard = (node) => this.requirementCard = node
 
   async componentDidShow() {
-    Taro.showTabBarRedDot({
-      index: 2
-    })
+    Taro.showTabBarRedDot({index: 2})
     buryPoint()
     const { payload: user } = await this.props.dispatchUser()
     this.props.dispatchDistList(user.citycode)

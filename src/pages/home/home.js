@@ -122,7 +122,7 @@ class CommonHome extends BaseComponent {
       this.setState({ adList: data })
       Taro.getStorageSync('user_info').token && data.length && this.setState({ showCurtain: true })
     })
-    // 获取从后台获取的全平台获得退租险人数，没有值默认为50
+    // 获取从后台获取的全平台获得退租险人数
     this.props.dispatchRiskPost()
 
     const {
@@ -170,6 +170,10 @@ class CommonHome extends BaseComponent {
     await this.props.dispatchGetUserMsg().then(res => {
       res && !res.data.data.user.is_guide && this.setState({ showCard: true })
     })
+  }
+
+  componentDidShow() {
+    Taro.showTabBarRedDot({ index: 2 })
   }
 
   // 获取经纬度
@@ -247,10 +251,6 @@ class CommonHome extends BaseComponent {
     title && sort && this.setState({ selectorChecked: { ...selectorChecked, title, sort } })
 
     overloadDist.length === 1 && this.initialHouseType()
-  }
-
-  async componentDidShow() {
-
   }
 
   // 初始化户型的数据，供筛选项使用

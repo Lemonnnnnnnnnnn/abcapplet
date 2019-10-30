@@ -25,11 +25,20 @@ import {
   LOCALE_APPOINTMENT_HASLOOK,
   LOCALE_APPOINTMENT_SUMMON,
   LOCALE_APPOINTMENT_BELONG,
+  LOCALE_BOOK_SUPPORTED_NOT,
+  LOCALE_NONE,
+  LOCALE_RISK_MONEY_SUPPORT,
+  LOCALE_POINT,
+  LOCALE_TIMES
 } from '@constants/locale'
+
+import { APPOINTMENT_OVER, ICON_HEAD_NO } from '@constants/picture'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
+
+import '../../styles/_appointment.scss'
 
 @connect(state => state, {
   ...appointmentActions,
@@ -101,8 +110,8 @@ class ServiceItem extends BaseComponent {
 
   onalert() {
     Taro.showToast({
-      title: '该公寓暂不支持线上预订',
-      icon: 'none',
+      title: LOCALE_BOOK_SUPPORTED_NOT,
+      icon: LOCALE_NONE,
       duration: 2000
     })
   }
@@ -134,7 +143,7 @@ class ServiceItem extends BaseComponent {
     const { haveIntention, haveEvalution, showIntention, showEvalution, step, middileTop } = this.state
 
 
-    const { id, cover, apartment_title, house_type_title,is_sign,
+    const { id, cover, apartment_title, house_type_title, is_sign,
       order_time, server_id, server_user, comment, look_time, intention, remark, date, status, appointment_status } = service
 
     // 重置宽高
@@ -178,8 +187,8 @@ class ServiceItem extends BaseComponent {
 
           {/* 头部 公寓类型以及查看详情 */}
           <View>
-            <View className='at-row p-2 at-row at-row__justify--between service-head ml-2' style={{ postion: "absolute", zIndex: "9" }} >
-              <View className='mt-1' style='color:#FFFFFF ;font-size:17px'>
+            <View className='at-row p-2 at-row at-row__justify--between service-head ml-2 position-absolute' style={{ zIndex: "9" }} >
+              <View className='mt-1 text-large' style='color:#FFFFFF '>
                 <View >{date}</View>
                 <View className='mt-1'>
                   <View className='at-row'>
@@ -198,7 +207,7 @@ class ServiceItem extends BaseComponent {
                   />
                 </View>
               </View>
-              {is_sign && <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>支持退租险</View>}
+              {is_sign && <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>{LOCALE_RISK_MONEY_SUPPORT}</View>}
             </View>
           </View>
           <View className='ml-3 position-absolute' style={{ top: '18%' }}>
@@ -214,14 +223,14 @@ class ServiceItem extends BaseComponent {
               {
                 appointment_status >= 3 ?
                   <View className='at-col at-col-3 inherit-Height position-relative' >
-                    <Image className='service-image-center' src='https://images.gongyuabc.com//image/appointmentOver.png' ></Image>
+                    <Image className='service-image-center' src={APPOINTMENT_OVER} ></Image>
                   </View>
                   :
                   <View className='at-col at-col-3 service-center' >
                     <View className='at-row at-row__justify--center text-bold' style='font-size:22px;'>
                       {order_time}
                     </View>
-                    <View className='at-row at-row__justify--center text-muted mt-1' style='font-size:10px'>
+                    <View className='at-row at-row__justify--center text-muted mt-1 text-mini' style='font-size:10px'>
                       {look_time}
                     </View>
                   </View>
@@ -236,11 +245,14 @@ class ServiceItem extends BaseComponent {
               <View hidden={server_id === 0 ? true : false} className='at-col at-col-9 at-row at-row__justify--center service-right'>
                 <View className='at-row at-row__justify--between' >
                   <View className='at-col at-col-0'>
-                    <Image src={server_user.headimgurl} style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
+                    <Image
+                      className='service-avatar'
+                      src={server_user.headimgurl}
+                    />
                   </View>
                   <View className='at-col at-col-9 ml-2' >
                     <View className='at-row mt-1 at-row__align--end'>
-                      <View className='at-col at-col-4 text-bold at-col__align--center' style='font-size:14px'>{server_user.name}</View>
+                      <View className='at-col at-col-4 text-bold at-col__align--center text-normal'>{server_user.name}</View>
                       <View className='at-col at-col-6 at-col__align--center'>
                         <View className='at-row at-row__align--center mb-1'>
                           <View className='at-col at-col-3 ml-2 '>
@@ -250,11 +262,11 @@ class ServiceItem extends BaseComponent {
                               color='#FFCB1F'
                             />
                           </View>
-                          <View className='at-col at-col-7 text-small text-muted mt-1' >{server_user.comment_score}分</View>
+                          <View className='at-col at-col-7 text-small text-muted mt-1' >{server_user.comment_score + LOCALE_POINT}</View>
                         </View>
                       </View>
                     </View>
-                    <View className='text-muted ' style='font-size:10px'>{LOCALE_APPOINTMENT_HASLOOK}{server_user.service_num}次</View>
+                    <View className='text-muted ' style='font-size:10px'>{LOCALE_APPOINTMENT_HASLOOK + server_user.service_num + LOCALE_TIMES}</View>
                   </View>
                 </View>
               </View>
@@ -262,7 +274,7 @@ class ServiceItem extends BaseComponent {
               <View hidden={server_id === 0 ? false : true} className='at-col at-col-8 at-row at-row__justify--center service-right'>
                 <View className='at-row at-row__justify--between ' >
                   <View className='at-col at-col-2'>
-                    <image src='http://images.gongyuabc.com/image/icon/head-no.png' style='width:50px;height:50px;background:rgba(255,255,255,1);border-radius:50%;' />
+                    <Image src={ICON_HEAD_NO} className='service-avatar' />
                   </View>
                   <View className='at-col at-col-9 mr-4'>
                     <View className='text-small at-col font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>

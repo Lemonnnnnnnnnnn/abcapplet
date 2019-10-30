@@ -55,9 +55,6 @@ class AppointmentIntention extends Component {
     return e.stopPropagation()
   }
 
-
-
-
   //分数，星星数
   onScoreChange(value) {
     const { payload, Payloadlist } = this.state

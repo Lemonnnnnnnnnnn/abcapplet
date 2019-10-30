@@ -44,6 +44,7 @@ class ServicesHome extends Component {
 
   componentDidShow() {
     buryPoint()
+    Taro.showTabBarRedDot({ index: 2 })
     const { flag } = this.state
     flag && this.onSetReset()
   }

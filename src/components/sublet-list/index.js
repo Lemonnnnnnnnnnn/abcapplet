@@ -6,7 +6,6 @@ import { View } from '@tarojs/components'
 import Placeholder from '@components/placeholder'
 import SubletItem from '@components/sublet-item'
 
-
 // 常量
 import { LOCALE_NO_DATA } from '@constants/locale'
 import BaseListSublet from '@components/base-list-sublet'
@@ -49,8 +48,6 @@ class SubletList extends BaseListSublet {
   render() {
     const { hasMore, loading, page } = this.state
     const { mini, sublet, home } = this.props
-
-
 
     return (
       <View className>

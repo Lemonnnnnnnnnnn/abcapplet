@@ -36,8 +36,14 @@
   }
   &-header {
     position: relative;
-    border-radius :$border-radius-mini;
+    border-radius: $border-radius-mini;
     width: 100%;
+  }
+  &-avatar {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
   }
   &-middle {
     position: absolute;
@@ -85,7 +91,7 @@
 .message {
   &-item {
     background: #ffffff;
-    border-radius:$border-radius-normal ;
+    border-radius: $border-radius-normal;
     max-width: 200px * $hd;
     min-height: 20px * $hd;
     line-height: 20px * $hd;
@@ -116,7 +122,7 @@
     bottom: 50px;
     right: 50px;
     background: #fff;
-    border-radius:$border-radius-circle ;
+    border-radius: $border-radius-circle;
     padding: 20px;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.2);
   }
@@ -125,7 +131,7 @@
     height: 22px * $hd;
     background: rgba(255, 201, 25, 1);
     border: 4px * $hd solid rgba(255, 220, 107, 1);
-    border-radius:$border-radius-circle ;
+    border-radius: $border-radius-circle;
     opacity: 1;
   }
   &-noaudit {
@@ -133,7 +139,7 @@
     height: 22px * $hd;
     background: rgba(210, 210, 210, 1);
     border: 4px * $hd solid rgba(242, 242, 242, 1);
-    border-radius:$border-radius-circle ;
+    border-radius: $border-radius-circle;
     opacity: 1;
   }
   &-line {
@@ -158,7 +164,7 @@
     height: 410px * $hd;
     background: rgba(255, 255, 255, 1);
     opacity: 1;
-    border-radius:$border-radius-normal ;
+    border-radius: $border-radius-normal;
   }
 
   &-envolpe {
@@ -212,11 +218,11 @@
       }
     }
   }
-  &-message-list{
-    .icon-head-no{
+  &-message-list {
+    .icon-head-no {
       width: 80px;
       height: 80px;
-      border-radius:$border-radius-circle ;
+      border-radius: $border-radius-circle;
     }
   }
 }

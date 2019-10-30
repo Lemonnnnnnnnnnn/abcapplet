@@ -107,10 +107,8 @@ class ApartmentRecommend extends Component {
     })
   }
 
-  componentDidShow(){
-    Taro.hideTabBarRedDot({
-      index:2
-    })
+  componentDidShow() {
+    Taro.hideTabBarRedDot({ index: 2 })
   }
   //下拉选择
   async onChangeSelector({ currentTarget: { value } }) {

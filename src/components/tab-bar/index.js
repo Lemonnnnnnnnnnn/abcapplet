@@ -9,7 +9,13 @@ import BaseComponent from '@components/base'
 import textWrap from '@utils/text-wrap'
 
 import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
-import { LOCALE_SHARE_TEXT } from '@constants/locale'
+import {
+  LOCALE_SHARE_TEXT,
+  LOCALE_CONSUMER_HOTLINE,
+  LOCALE_ONLINE_SERVICE,
+  LOCALE_TELEPHONE_CUSTOMER_SERVICE
+} from '@constants/locale'
+import { CALL, SHARE } from '@constants/picture'
 // NPM 包
 import classNames from 'classnames'
 
@@ -43,7 +49,7 @@ class TabBar extends BaseComponent {
   onOpenCallPhoneView() {
 
     Taro.makePhoneCall({
-      phoneNumber: '0592-5911297'
+      phoneNumber: LOCALE_CONSUMER_HOTLINE
     });
   }
 
@@ -53,7 +59,7 @@ class TabBar extends BaseComponent {
   }
 
   onCallPhone() {
-    Taro.makePhoneCall({ phoneNumber: '0592-5911297' })
+    Taro.makePhoneCall({ phoneNumber: LOCALE_CONSUMER_HOTLINE })
   }
 
   onShareAppMessage() {
@@ -65,19 +71,6 @@ class TabBar extends BaseComponent {
     }
   }
 
-  // onShareAppMessage() {
-  //   const { cityId } = this.state
-  //   this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
-  //   const { houstType } = this.state
-  //   let { swipers, title } = houstType
-  //   if (title.length > 17) {
-  //     title = this.insertStr(title, 17, '\n')
-  //   }
-  //   return {
-  //     title: title,
-  //     imageUrl: swipers[0].url
-  //   }
-  // }
 
   render() {
     const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,
@@ -88,7 +81,6 @@ class TabBar extends BaseComponent {
     const littleMaskWidth = Taro.pxTransform(width)
     const littleMaskLeft = Taro.pxTransform(left)
     const littleMaskBottom = Taro.pxTransform(bottom)
-
     const fontHeight = Taro.pxTransform(height / 2)
 
 
@@ -128,7 +120,7 @@ class TabBar extends BaseComponent {
         {/* 电话客服/在线客服 */}
         {
           showLittleMask && <View className='text-secondary text-normal ' style={littleMaskStyle} >
-            <View className='at-row at-row__align--center at-row__justify--center' onClick={this.onOpenCallPhoneView} style={fontStyle}>电话客服</View>
+            <View className='at-row at-row__align--center at-row__justify--center' onClick={this.onOpenCallPhoneView} style={fontStyle}>{LOCALE_TELEPHONE_CUSTOMER_SERVICE}</View>
             {/* 分割线 */}
             <View style={grayLineStyle}></View>
 
@@ -138,7 +130,7 @@ class TabBar extends BaseComponent {
                 send-message-path={type === 'house' ? `${PAGE_HOUSE_TYPE_SHOW}?id=${Id}` : `${PAGE_APARTMENT_SHOW}?id=${Id}`}
                 open-type='contact' size='mini' plain style={buttonStyle} show-message-card bindcontact='handleContact' send-message-title={title}
               >
-                <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>在线客服</View>
+                <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>{LOCALE_ONLINE_SERVICE}</View>
               </Button>
             </View>
           </View>
@@ -150,14 +142,14 @@ class TabBar extends BaseComponent {
 
           {hasContact && <View className='at-col-2'>
             <View onClick={onOpenLittleMask} className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-              <Image style='width:7vw;height:7vw' src='https://images.gongyuabc.com/image/call.png'></Image>
+              <Image style='width:7vw;height:7vw' src={CALL}></Image>
             </View>
 
           </View>}
           {hasShare && <View className='at-col-2'>
             <AtButton open-type='share' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
 
-              <Image style='width:7vw;height:7vw' src='https://images.gongyuabc.com/image/share.png'></Image>
+              <Image style='width:7vw;height:7vw' src={SHARE}></Image>
             </AtButton>
           </View>}
 

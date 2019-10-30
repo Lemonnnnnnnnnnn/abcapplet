@@ -9,6 +9,9 @@ import classNames from 'classnames'
 // 自定义组件
 import BaseComponent from '@components/base'
 
+// 自定义常量
+import { LOCALE_LOGIN } from '@constants/locale'
+
 
 class UserHeader extends BaseComponent {
   static defaultProps = {
@@ -34,7 +37,7 @@ class UserHeader extends BaseComponent {
 
     const userLogin = (
       <View className='at-row at-row__align--center' onClick={onLogin}>
-        <Text className='text-huge'>点击登录</Text>
+        <Text className='text-huge'>{LOCALE_LOGIN}</Text>
       </View>
     )
 

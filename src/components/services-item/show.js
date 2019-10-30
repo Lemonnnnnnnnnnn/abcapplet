@@ -259,7 +259,7 @@ class ServiceItemShow extends BaseComponent {
           <View className='text-mini page-middile  text-secondary'>获得退租险和租金立减</View>
           <View className=' text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
             <View style='position:absolute;top:12%;left:-1%' >
-              <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src='https://images.gongyuabc.com/image/appoint-ange.png' ></Image>
+              <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINT_ANGE} ></Image>
             </View>
             <View className='ml-4 mt-1'>
               <Text>{LOCAL_APPOINTMENT_BOOK_ONLINE}</Text>

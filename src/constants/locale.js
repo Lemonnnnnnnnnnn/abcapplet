@@ -39,6 +39,9 @@ export const LOCALE_CONTACT_VIA_PHONE = '电话联系'
 export const LOCALE_ONLINE_SERVICE = '在线客服'
 export const LOCALE_XIAMEN = '厦门市'
 export const LOCALE_NO_LIMIT = '不限'
+export const LOCALE_NONE = 'none'
+export const LOCALE_POINT = '分'
+export const LOCALE_LOGIN = '点击登录'
 
 
 
@@ -155,6 +158,7 @@ export const LOCALE_SIGNED_CODE_SHOW = '查看签约码'
 export const LOCALE_SIGNED_CODE_NOTICE = '请到预订公寓向管家出示该签约码，核对信息后即可进行合同签约。'
 
 // 退租险
+export const LOCALE_RISK_MONEY_SUPPORT = '支持退租险'
 export const LOCALE_HEADER_RETURN_TITLE = '首月退租'
 export const LOCALE_HEADER_RETURN_DESC = '返回部分押金'
 export const LOCALE_HEADER_LIMIT_TITLE = '额度提升'
@@ -230,7 +234,7 @@ export const LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT = '折'
 /**
  * 看房服务相关
  */
-
+export const LOCALE_BOOK_SUPPORTED_NOT = '该公寓暂不支持线上预订'
 export const LOCALE_APPOINTMENT_SIGNED = '签约返现'
 export const LOCALE_APPOINTMENT_CASHPLEDGE = '立得￥50元现金红包'
 export const LOCALE_APPOINTMENT_DETAIL = '查看详情'
@@ -260,7 +264,6 @@ export const LOCALE_APPOINTMENT_LIKEABILITY_SUPER = '意向强烈'
 export const LOCALE_APPOINTMENT_LIKEABILITY_SIGNING = '马上预定'
 
 //服务评价
-
 export const LOCALE_APPOINTMENT_SERVICE = '已带看服务'
 export const LOCALE_APPOINTMENT_SERVICE_EVALUTION = "管家服务评价"
 
@@ -269,7 +272,6 @@ export const LOCALE_APPOINTMENT_INTENTION_DU = "您的订房意向度？"
 export const LOCALE_APPOINTMENT_INTENTION_LOCAL = "关注您本次看过的房间，可以跟踪房间的预定情况哦！"
 export const LOCALE_APPOINTMENT_INTENTION_FIND = "搜索"
 export const LOCALE_APPOINTMENT_INTENTION_LOOKROOM = "您可能看过的房间："
-
 export const LOCALE_APPOINTMENT_MESSAGE_LIU = '仅针对以下行程发起留言沟通'
 
 // 签约返现
