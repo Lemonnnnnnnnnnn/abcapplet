@@ -16,13 +16,12 @@ page {
     justify-content: center;
     height: 90vh;
   }
-
   &-white {
     background: #ffffff;
     min-height: 100vh;
   }
   &-orange {
-    background: linear-gradient(to bottom, #ffc919, #ffa319);
+    background: linear-gradient(to bottom, $color-yellow-0, #ffa319);
     min-height: 100vh;
   }
 
@@ -184,7 +183,7 @@ page {
 .coupon_receive {
   box-shadow: 0 3px * $hd 10px * $hd rgba($color: #000000, $alpha: 0.16);
   .at-button {
-    box-shadow: 0 3px * $hd 10px * $hd rgba($color: #ffc919, $alpha: 0.39);
+    box-shadow: 0 3px * $hd 10px * $hd rgba($color: $color-yellow-0, $alpha: 0.39);
   }
 }
 

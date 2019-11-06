@@ -5,256 +5,35 @@
   box-shadow: 0px 0px 5px * $hd 0px rgb(222, 222, 222);
   border-radius: $border-radius-mini;
 
-  &-order {
-    &-step-mask {
-      width: 80%;
-      z-index: 200;
-      background: #fff;
+  //  /pages/apartment/show
+  &-show {
+    &-brand {
+      background-color: $color-bg-grey;
+      border-radius: $border-radius-large;
+    }
+    &-text {
+      word-break: break-all;
+    }
+    &-public-configuration {
+      background-color: $color-bg-grey;
       border-radius: $border-radius-normal;
-      .at-button {
-        height: 37px * $hd;
-        line-height: 37px * $hd;
-      }
+      padding: 1px * $hd 3px * $hd;
     }
-    &-lease-insurance {
-      background: linear-gradient(to right, #ffd447, #f8ecd0);
-      .picture {
-        width: 104px * $hd;
-        height: 36px * $hd;
-      }
-    }
-    &-deal-banner-picture {
-      width: 344px * $hd;
-      height: 64px * $hd;
-    }
-    &-coupon {
-      &-icon {
-        background: linear-gradient(to right, #ffc919, #fba700);
-        padding: 5px * $hd 15px * $hd;
-        border-radius: $border-radius-mini;
-        position: relative;
-        color: #fff;
-        &-angle {
-          background: #fff;
-          border-radius: $border-radius-circle;
-          width: 10px * $hd;
-          height: 10px * $hd;
-        }
-      }
-    }
-    &-room {
-      width: 100%;
-      &-item {
-        border-bottom: 1px solid rgb(240, 240, 240);
-      }
-      &-item:last-child {
-        border: none;
-      }
-      .at-button {
-        height: 37px * $hd;
-        line-height: 37px * $hd;
-        width: 136px * $hd;
-      }
-    }
-    &-mask {
-      background: #fff;
-    }
-  }
-  &-coupon {
-    position: relative;
-    right: -16px * $hd;
-    background: linear-gradient(to right, #ffc919, #feb013);
-    border-top-left-radius: 16px * $hd;
-    border-bottom-left-radius: 16px * $hd;
-    padding: 5px * $hd 6px * $hd 5px * $hd 12px * $hd;
-    min-width: 100px * $hd;
-
-    &-item {
-      width: 90%;
-      margin-left: 5%;
-      height: 84px * $hd;
-      border-radius: $border-radius-normal;
-      position: relative;
-      // background: #fff;
-      &.background {
-        &-gray {
-          background: #c8c8c8;
-        }
-        &-white {
-          background: #fff;
-        }
-      }
-
-      &.shadow {
-        &-yellow {
-          box-shadow: 0 1px 6px #ffc919;
-          border: 1px solid #ffe284;
-        }
-        &-black {
-          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-      }
-
-      &-expired {
-        width: 90%;
-        margin-left: 5%;
-        height: 84px * $hd;
-        border-radius: $border-radius-normal;
-        position: relative;
-        background: #c8c8c8;
-      }
-
-      &-angle {
-        width: 12px * $hd;
-        height: 8px * $hd;
-        background: #f8f8f8;
-        position: absolute;
-        left: 68%;
-        &.top {
-          border-radius: 0 0 12px 12px;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-          &-active {
-            border-bottom: 1px solid #ffe284;
-          }
-        }
-        &.bottom {
-          border-radius: 12px 12px 0 0;
-          border-top: 1px solid rgba(0, 0, 0, 0.1);
-          &-active {
-            border-top: 1px solid #ffe284;
-          }
-        }
-      }
-    }
-  }
-
-  &-type {
-    &-item {
-      .mask {
-        background: #000;
-        opacity: 0.5;
-        width: 100%;
-        height: 200px;
-        position: absolute;
-        z-index: 20;
-      }
-      .font {
-        color: #fff;
-        position: absolute;
-        z-index: 30;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        height: 200px;
-      }
-    }
-  }
-
-  &-heart {
-    width: 70px;
-    height: 60px;
-
-    &-wrap {
-      padding: 10px;
-    }
-
-    &-num {
-      top: 0;
-      position: absolute;
-      text-align: center;
-      font-size: 28px;
-      left: 50%;
-      top: 42%;
-      transform: translate(-50%, -50%);
-      color: #ffc919;
-    }
-  }
-  &-image {
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 6px * $hd;
-    border-top-right-radius: 6px * $hd;
-  }
-  &-header-type {
-    position: absolute;
-    left: 6%;
-    bottom: 0;
-    transform: translateY(50%);
-    color: #fff;
-    border-radius: $border-radius-normal;
-    background: #ffc919;
-  }
-  &-box-shadow-style {
-    border-radius: $border-radius-normal;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 40px;
-  }
-  &-card-margin-style {
-    margin-bottom: 40px;
-  }
-
-  &-header {
-    position: relative;
-    border-radius: $border-radius-mini;
-
-    &-title {
-      position: absolute;
-      left: 5%;
-      top: 10%;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: $border-radius-mini;
-      padding: 2px * $hd 9px * $hd;
-      font-size: 12px * $hd;
-      color: #888;
-    }
-
-    &-type {
-      position: absolute;
-      // left: 20px * $hd;
-      bottom: 0;
-      transform: translateY(50%);
-      color: #fff;
-      padding: 4px * $hd 12px * $hd;
-      font-size: 10px * $hd;
-      border-radius: $border-radius-mini;
-      background: #ffc919;
-
-      &-item {
-        border-radius: $border-radius-huge;
-        overflow: hidden;
-      }
-    }
-
-    &-favorite {
-      position: absolute;
-      top: 5px * $hd;
-      right: 5px * $hd;
-    }
-  }
-
-  &-content {
-    &-main {
-      width: 70%;
-    }
-
-    &-desc {
-      max-width: 100%;
-      overflow: hidden;
+    &-scroll-wrap {
       white-space: nowrap;
-      text-overflow: ellipsis;
+    }
+    &-image {
+      display: inline-block;
+    }
+    &-border {
+      border-radius: $border-radius-mini;
+      box-shadow: 0 1px * $hd 3px * $hd rgb(220, 220, 220);
+      overflow: hidden;
+      margin-right: 14px * $hd;
     }
   }
 
-  .at-tag {
-    height: auto;
-  }
-
-  image {
-    border-top-left-radius: 6px * $hd;
-    border-top-right-radius: 6px * $hd;
-  }
-
+  //  /pages/apartment/appointment
   &-appointment {
     .ad {
       &-font-wrap {
@@ -290,204 +69,220 @@
       padding: 0 5px * $hd;
     }
   }
-}
 
-.apartment-mask {
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 200;
-  position: fixed;
-  background: #fff;
-}
+  // /pages/apartment/housetype
+  &-house-type {
+    &-branding {
+      background-color: rgb(248, 248, 248);
+      border-radius: $border-radius-large;
+    }
+    &-public-configuration {
+      background-color: rgba(248, 248, 248, 1);
+      border-radius: $border-radius-normal;
+      width: 80px;
+      height: 80px;
+    }
 
-.apartment-item-mask {
-  background: #f8f8f8;
-  border-radius: $border-radius-normal;
-}
+    &-image {
+      height: 350px;
+    }
 
-.apartment-container {
-  position: relative;
-  &-opactyRoom {
-    width: 115px * $hd;
-    height: 26px * $hd;
-    position: absolute;
-    z-index: 99;
-    top: 200px * $hd;
-    left: 75px * $hd;
+    &-has-room-block {
+      border-radius: $border-radius-mini;
+      height: 32px;
+      text-align: center;
+      line-height: 32px;
+      padding: 4px 14px;
+    }
+  }
+
+  // /components/apartment-type-item
+  &-type-item {
     .mask {
+      background: #000;
       opacity: 0.5;
-      background: rgba(0, 0, 0, 1);
+      height: 100px * $hd;
+      z-index: 20;
+    }
+    .font {
+      z-index: 30;
+      height: 100px * $hd;
+    }
+    &-wrap {
+      border-radius: $border-radius-normal;
+      box-shadow: 0 1px * $hd 6px * $hd rgb(220, 220, 220);
+      overflow: hidden;
+      margin-right: 14px * $hd;
+    }
+  }
+
+  // /components/apartment-item
+  &-item {
+    &-content {
+      &-main {
+        width: 70%;
+      }
+
+      &-desc {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+    // wrap
+    &-wrap {
+      border-radius: $border-radius-normal;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    // 头部
+    &-header {
+      position: relative;
+      border-radius: $border-radius-mini;
+      &-title {
+        position: absolute;
+        left: 5%;
+        top: 10%;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: $border-radius-mini;
+        padding: 2px * $hd 9px * $hd;
+        font-size: 12px * $hd;
+        color: #888;
+      }
+      &-type {
+        position: absolute;
+        left: 6%;
+        bottom: 0;
+        transform: translateY(50%);
+        color: #fff;
+        border-radius: $border-radius-normal;
+        background: $color-yellow-0;
+      }
+      &-favorite {
+        position: absolute;
+        top: 5px * $hd;
+        right: 5px * $hd;
+      }
+    }
+    // 爱心样式
+    &-heart {
+      width: 70px;
+      height: 60px;
+
+      &-wrap {
+        padding: 10px;
+      }
+
+      &-num {
+        top: 0;
+        position: absolute;
+        text-align: center;
+        font-size: 28px;
+        left: 50%;
+        top: 42%;
+        transform: translate(-50%, -50%);
+        color: $color-yellow-0;
+      }
+    }
+
+    &-mask {
+      background: #f8f8f8;
       border-radius: $border-radius-normal;
     }
-    .num {
-      top: 3px * $hd;
+  }
+
+  // /components/apartment-coutainer
+  &-container {
+    position: relative;
+    &-opactyRoom {
+      width: 115px * $hd;
+      height: 26px * $hd;
       position: absolute;
-      z-index: 100;
+      z-index: 99;
+      top: 200px * $hd;
+      left: 75px * $hd;
+      .mask {
+        opacity: 0.5;
+        background: rgba(0, 0, 0, 1);
+        border-radius: $border-radius-normal;
+      }
+      .num {
+        top: 3px * $hd;
+        position: absolute;
+        z-index: 100;
+      }
+    }
+    &-favorite {
+      position: absolute;
+      right: 25px * $hd;
+      top: -75px;
+      background: #ffffff;
+
+      height: 50px * $hd;
+      width: 50px * $hd;
+      border-radius: $border-radius-circle;
+      box-shadow: 0px 3px 10px rgba(255, 201, 25, 0.46);
+    }
+
+    &-sign {
+      width: 18px * $hd;
+      height: 18px * $hd;
+    }
+
+    &-opacityBgStyle {
+      position: absolute;
+      border-radius: $border-radius-super;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      opacity: 0.5;
+    }
+
+    &-picIndexStyle {
+      width: 50px * $hd;
+      height: 26px * $hd;
+      position: absolute;
+      z-index: 99;
+      top: 200px * $hd;
+      left: 15px * $hd;
+      .mask {
+        opacity: 0.5;
+        background: rgba(0, 0, 0, 1);
+        border-radius: $border-radius-normal;
+      }
+      .num {
+        top: 3px * $hd;
+        position: absolute;
+        z-index: 100;
+      }
+    }
+
+    &-heartNum {
+      position: absolute;
+      text-align: center;
+      font-size: 20px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: $color-yellow-0;
+    }
+
+    &-heart {
+      width: 66px;
+      height: 57px;
     }
   }
-  &-favorite {
-    position: absolute;
-    right: 25px * $hd;
-    top: -75px;
-    background: #ffffff;
 
-    height: 50px * $hd;
-    width: 50px * $hd;
-    border-radius: $border-radius-circle;
-    box-shadow: 0px 3px 10px rgba(255, 201, 25, 0.46);
-  }
 
-  &-sign {
-    width: 18px * $hd;
-    height: 18px * $hd;
-  }
-
-  &-opacityBgStyle {
-    position: absolute;
-    border-radius: $border-radius-super;
-    height: 100%;
+  // 通用样式
+  &-mask {
+    top: 0;
+    left: 0;
     width: 100%;
-    background: #000;
-    opacity: 0.5;
-  }
-
-  &-picIndexStyle {
-    width: 50px * $hd;
-    height: 26px * $hd;
-    position: absolute;
-    z-index: 99;
-    top: 200px * $hd;
-    left: 15px * $hd;
-    .mask {
-      opacity: 0.5;
-      background: rgba(0, 0, 0, 1);
-      border-radius: $border-radius-normal;
-    }
-    .num {
-      top: 3px * $hd;
-      position: absolute;
-      z-index: 100;
-    }
-  }
-
-  &-heartNum {
-    position: absolute;
-    text-align: center;
-    font-size: 20px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffc919;
-  }
-
-  &-heart {
-    width: 66px;
-    height: 57px;
-  }
-}
-
-.house-type {
-  &-branding {
-    background-color: rgb(248, 248, 248);
-    border-radius: $border-radius-large;
-  }
-  &-public-configuration {
-    background-color: rgba(248, 248, 248, 1);
-    border-radius: $border-radius-normal;
-    width: 80px;
-    height: 80px;
-  }
-  &-deposit {
-    border-radius: $border-radius-normal;
-    background-color: rgba(255, 201, 25, 1);
-    color: #fff;
-    text-align: center;
-  }
-  &-image {
-    height: 350px;
-    display: inline-block;
-  }
-
-  &-apartment-type-border {
-    border-radius: $border-radius-normal;
-    box-shadow: 0 2px 12px rgb(220, 220, 220);
-    overflow: hidden;
-    margin-right: 28px;
-  }
-  &-has-room-block {
-    border-radius: $border-radius-mini;
-    height: 32px;
-    text-align: center;
-    line-height: 32px;
-    padding: 4px 14px;
-  }
-  &-gray-background {
-    background-color: #f8f8f8;
-    border-radius: $border-radius-normal;
-  }
-}
-
-.image-list {
-  position: absolute;
-  height: 27px * $hd;
-  width: 27px * $hd;
-  border-radius: $border-radius-circle;
-
-  border-style: solid;
-  border-width: 2px * $hd;
-  border-color: #ffffff;
-}
-
-.apartment-item {
-  &-risk {
-    width: 85px * $hd;
-    height: 23px * $hd;
-    background: rgba(255, 201, 25, 1);
-    opacity: 1;
-    border-radius: $border-radius-mini;
-  }
-  &-noaAppoint {
-    // padding: 3px 3px;
-    height: 22px * $hd;
-    opacity: 1;
-    border-radius: 8px * $hd;
-    border: 1px * $hd solid rgba(255, 201, 25, 1);
-  }
-  &-haveAppoint {
-    height: 22px * $hd;
-    border-radius: $border-radius-mini;
-    border: 1px * $hd solid rgba(216, 216, 216, 1);
-  }
-  &-haveAppoint.icon {
-    padding: 0 4px * $hd 0 0;
-  }
-
-  &-buttonYellow {
-    width: 98px * $hd;
-    height: 30px * $hd;
-    background: rgba(255, 201, 25, 1);
-    opacity: 1;
-    border-radius: 23px * $hd;
-  }
-  &-buttonGrey {
-    width: 98px * $hd;
-    height: 30px * $hd;
-    background: rgba(216, 216, 216, 1);
-    opacity: 1;
-    border-radius: 23px * $hd;
-  }
-
-  &-buttonYellowBo {
-    padding: 5px 10px * $hd;
-    height: 30px * $hd;
-    background: rgba(255, 201, 25, 1);
-    border-radius: 23px * $hd;
-  }
-  &-buttonGrayBo {
-    padding: 5px 10px * $hd;
-    height: 30px * $hd;
-    background: rgba(216, 216, 216, 1);
-    border-radius: 23px * $hd;
+    z-index: 200;
+    position: fixed;
+    background: #fff;
   }
 }

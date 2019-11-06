@@ -141,52 +141,51 @@ class ApartmentItem extends BaseComponent {
 
 
     return (
-      <View className='apartment-box-shadow-style' onClick={this.onNavigation}>
+      <View className='apartment-item-wrap' onClick={this.onNavigation}>
         {/* 户型头部 */}
-        <View className='apartment-header'>
+        <View className='apartment-item-header'>
 
-          <View style={{ width: '100%', height: Taro.pxTransform(imgWrapHeight), overflow: 'hidden', position: 'relative' }}>
+          <View className='wrap-Style inherit-Width' style={{ height: Taro.pxTransform(imgWrapHeight) }}>
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
             {cover
-              ? <Image src={src} style={{ width: '100%', height: '100%', borderRadius: Taro.pxTransform(12) }} mode='widthFix' className='vertical-level-center' />
+              ? <Image src={src} style={{ borderRadius: Taro.pxTransform(12) }} mode='widthFix' className='vertical-level-center inherit-Width inherit-Height' />
               : <ImagePlaceholder height={height} />
             }
           </View>
 
           {/* 户型 cbd 列表 */}
           {
-            cbd && <View className='apartment-header-title' >
+            cbd && <View className='apartment-item-header-title' >
               {cbdTitle}
             </View>
           }
 
-
           {/* 户型种类，公寓类型是没有这个字段的 */}
-          {apartmentTitle && <View style={apartmentHeaderType} className=' text-large apartment-header-type'>{apartmentTitle}</View>}
+          {apartmentTitle && <View style={apartmentHeaderType} className=' text-large apartment-item-header-type'>{apartmentTitle}</View>}
 
           {/* 爱心按钮*/}
           {!mini && (isCollect
             ?
-            <View className='apartment-header-favorite mr-2 mt-2' onClick={this.onDeleteFavorite}>
-              <View className='apartment-heart-wrap' >
-                <Image className='apartment-heart' src={HEART_YELLOW} ></Image>
+            <View className='apartment-item-header-favorite mr-2 mt-2' onClick={this.onDeleteFavorite}>
+              <View className='apartment-item-heart-wrap' >
+                <Image className='apartment-item-heart' src={HEART_YELLOW} ></Image>
               </View>
-              <View className='apartment-heart-num text-small' >{num}</View>
+              <View className='apartment-item-heart-num text-small' >{num}</View>
 
             </View>
             :
-            <View className='apartment-header-favorite mr-2 mt-2' onClick={this.onCreateFavorite}>
-              <View className='apartment-heart-wrap' >
-                <Image className='apartment-heart' src={HEART_BLACK} ></Image>
+            <View className='apartment-item-header-favorite mr-2 mt-2' onClick={this.onCreateFavorite}>
+              <View className='apartment-item-heart-wrap' >
+                <Image className='apartment-item-heart' src={HEART_BLACK} ></Image>
               </View>
-              <View className='apartment-heart-num text-small' >{num}</View>
+              <View className='apartment-item-heart-num text-small' >{num}</View>
 
             </View>)
           }
         </View>
 
         {/* 正常内容 */}
-        {!mini && <View className='apartment-content mx-3 py-2'>
+        {!mini && <View className='apartment-item-content mx-3 py-2'>
 
 
           {/* 公寓名称 */}
@@ -196,7 +195,7 @@ class ApartmentItem extends BaseComponent {
                 <View className='text-large mt-2 at-col-1 at-col--auto' style={{ color: "rgba(53, 53, 53, 1)" }}>{sub_title}</View>
                 {is_sign && <View className='mt-2 text-normal tag-risk'>安心住</View>}
               </View>
-              {desc && <View className='text-muted text-normal apartment-content-desc'>{one_word}</View>}
+              {desc && <View className='text-muted text-normal apartment-item-content-desc'>{one_word}</View>}
 
             </View>
           </View>
@@ -260,7 +259,7 @@ class ApartmentItem extends BaseComponent {
 
 
         {/* 迷你内容 ,公寓列表*/}
-        {mini && <View className='apartment-content mx-2 mt-2 mb-2'>
+        {mini && <View className='apartment-item-content mx-2 mt-2 mb-2'>
           {/* 价格和公寓名称 */}
           {
             nearbyPost ? <View className='text-normal '>{title}</View> : <View className=' text-normal mt-3'>{apartmentTitle}</View>
@@ -269,7 +268,7 @@ class ApartmentItem extends BaseComponent {
           {
             discount_price_title ?
               <View className='text-yellow text-normal ml-1 ' style={{ marginTop: Taro.pxTransform(5) }} >{`${LOCALE_MONEY}${discount_price_title}${LOCALE_QI}`}</View> :
-              <View className='text-yellow text-normal mt-3 mb-2  ml-1'>{`${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
+              <View className='text-yellow text-normal mt-1 mb-2  ml-1'>{`${LOCALE_MONEY}${priceTitle}${LOCALE_QI}`}</View>
           }
           {/* 原价 */}
           {discount_price_title && <View className='at-row  at-row__align--center  mb-2' style='text-decoration:line-through;' >

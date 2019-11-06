@@ -29,26 +29,26 @@
       font-size: $font-size-base;
     }
     .multi-selected text {
-      color: #ffc919 !important;
+      color: $color-yellow-0 !important;
     }
     .multi-unselect icon {
       width: 20px;
       height: 20px;
-      border: 1px solid #ffc919;
+      border: 1px solid $color-yellow-0;
       border-radius:$border-radius-circle ;
       background: #fff;
       margin-right: 6px;
-      color: #ffc919;
+      color: $color-yellow-0;
     }
     .multi-selected icon {
       position: relative;
       width: 20px;
       height: 20px;
-      border: 1px solid #ffc919;
+      border: 1px solid $color-yellow-0;
       border-radius:$border-radius-circle ;
       background: #fff;
       margin-right: 6px;
-      color: #ffc919;
+      color: $color-yellow-0;
     }
     .multi-selected icon::after {
       position: absolute;
@@ -59,7 +59,7 @@
       width: 15px;
       height: 15px;
       border-radius:$border-radius-circle ;
-      background: #ffc919;
+      background: $color-yellow-0;
     }
   }
 

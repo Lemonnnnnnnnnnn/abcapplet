@@ -17,7 +17,7 @@ import { USER_COUPON_DIST } from '@constants/user'
 
 // 自定义组件
 import Decorate from '@components/decorate'
-import ApartmentCouponList from '@components/apartment-coupon-list'
+import CouponList from '@components/coupon-list'
 
 import buryPoint from '../../utils/bury-point'
 
@@ -127,7 +127,7 @@ class UserFavorite extends Component {
             <View>
               {/* 可使用板块 */}
               {
-                current === 0 && <ApartmentCouponList
+                current === 0 && <CouponList
                   ref={this.refCouponListCanUsed}
                   blockStatus={current}
                   block='user'
@@ -141,7 +141,7 @@ class UserFavorite extends Component {
 
               {/* 已使用板块 */}
               {
-                current === 1 && <ApartmentCouponList
+                current === 1 && <CouponList
                   ref={this.refCouponListHaveBeenUsed}
                   blockStatus={current}
                   block='user'
@@ -155,7 +155,7 @@ class UserFavorite extends Component {
 
               {/* 已过期板块 */}
               {
-                current === 2 && <ApartmentCouponList
+                current === 2 && <CouponList
                   ref={this.refCouponListExpired}
                   blockStatus={current}
                   block='user'

@@ -1,0 +1,57 @@
+@import "overrides";
+
+.order {
+  &-step-mask {
+    width: 80%;
+    z-index: 200;
+    background: #fff;
+    border-radius: $border-radius-normal;
+    .at-button {
+      height: 37px * $hd;
+      line-height: 37px * $hd;
+    }
+  }
+  &-lease-insurance {
+    background: linear-gradient(to right, #ffd447, #f8ecd0);
+    .picture {
+      width: 104px * $hd;
+      height: 36px * $hd;
+    }
+  }
+  &-deal-banner-picture {
+    width: 344px * $hd;
+    height: 64px * $hd;
+  }
+  &-coupon {
+    &-icon {
+      background: linear-gradient(to right, $color-yellow-0, #fba700);
+      padding: 5px * $hd 15px * $hd;
+      border-radius: $border-radius-mini;
+      position: relative;
+      color: #fff;
+      &-angle {
+        background: #fff;
+        border-radius: $border-radius-circle;
+        width: 10px * $hd;
+        height: 10px * $hd;
+      }
+    }
+  }
+  &-room {
+    width: 100%;
+    &-item {
+      border-bottom: 1px solid rgb(240, 240, 240);
+    }
+    &-item:last-child {
+      border: none;
+    }
+    .at-button {
+      height: 37px * $hd;
+      line-height: 37px * $hd;
+      width: 136px * $hd;
+    }
+  }
+  &-mask {
+    background: #fff;
+  }
+}

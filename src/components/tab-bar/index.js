@@ -148,7 +148,6 @@ class TabBar extends BaseComponent {
           </View>}
           {hasShare && <View className='at-col-2'>
             <AtButton open-type='share' className='tab-bar__item--icon at-row at-row__justify--center at-row__align--center'>
-
               <Image style='width:7vw;height:7vw' src={SHARE}></Image>
             </AtButton>
           </View>}

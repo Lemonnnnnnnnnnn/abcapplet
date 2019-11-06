@@ -8,7 +8,7 @@ import Board from '@components/board'
 
 // 自定义组件
 import BaseComponent from '@components/base'
-import ApartmentCouponList from '@components/apartment-coupon-list'
+import CouponList from '@components/coupon-list'
 import loginButton from '@components/login-button'
 
 // 自定义常量
@@ -30,26 +30,22 @@ class ApartmentCouponMask extends BaseComponent {
     apartment_id: 0,
   }
 
-  CouponList = node => this.ApartmentCouponList = node
+  CouponList = node => this.CouponListRef = node
 
   onMaskTouchMove(e) {
     return e.stopPropagation()
   }
 
   onBottomOut() {
-    this.ApartmentCouponList.onNextPage()
+    this.CouponListRef.onNextPage()
   }
 
   onListRefresh(){
-    this.ApartmentCouponList.onReset(null)
-  }
-
-  onTest(){
-    Taro.showToast({ title: '领取成功', icon: 'none' })
+    this.CouponListRef.onReset(null)
   }
 
   render() {
-    const { show, onClose, apartmentCouponList, apartment_id } = this.props
+    const { show, onClose, apartmentCouponList, apartment_id , houseType_id } = this.props
     const { list } = apartmentCouponList
 
     return (
@@ -59,12 +55,14 @@ class ApartmentCouponMask extends BaseComponent {
           <View className='text-huge  mt-2 text-center pb-2'> {LOCALE_ORDER_RENTAL_COUPON}</View>
           <ScrollView style={{ height: Taro.pxTransform(list && list.length && 750) }} scrollY onScrollToLower={this.onBottomOut}>
 
-            <ApartmentCouponList
+            <CouponList
               block='apartment'
               couponList={list}
               ref={this.CouponList}
               params={this.props.params}
               onListRefresh={this.onListRefresh}
+              houseType_id={houseType_id}
+              apartment_id={apartment_id}
 
               defaultPayload={{ ...PAYLOAD_COUPON_LIST, apartment_id }}
               dispatchList={this.props.dispatchCouponListPost}

@@ -47,7 +47,6 @@ import CustomerMask from '@components/customer-mask'
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
-import '../../styles/_apartment.scss'
 
 @connect(state => state, {
   ...appointmentActions,
@@ -147,7 +146,7 @@ class ServiceItemShow extends BaseComponent {
     return (<View className='mb-2' >
       <View className='at-row at-row__align--center page-middile ml-1' >
         <View className='at-col-2'>
-          <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >
+          <View className='page-middile text-normal text-yellow service-noaAppoint' >
             {LOCAL_APPOINTMENT_APPOINT}
           </View>
         </View>
@@ -168,13 +167,13 @@ class ServiceItemShow extends BaseComponent {
           </View>}
 
         {status >= 3 && status <= 14 ? <View className=' at-col-2'>
-          <View className='page-middile text-normal  text-yellow apartment-item-noaAppoint' >
+          <View className='page-middile text-normal  text-yellow service-noaAppoint' >
             {LOCAL_APPOINTMENT_LOOKROOM}
           </View>
         </View>
           :
           <View className=' at-col-2'>
-            <View className='page-middile text-normal text-muted apartment-item-haveAppoint' >
+            <View className='page-middile text-normal text-muted service-haveAppoint' >
               {LOCAL_APPOINTMENT_LOOKROOM}
             </View>
           </View>
@@ -197,11 +196,11 @@ class ServiceItemShow extends BaseComponent {
 
         {(status === 3 || status === 4) && step === 7
           ?
-          <View className='page-middile text-normal text-yellow apartment-item-noaAppoint' >{LOCAL_APPOINTMENT_DISLIKE}</View>
+          <View className='page-middile text-normal text-yellow service-noaAppoint' >{LOCAL_APPOINTMENT_DISLIKE}</View>
           :
           <View className='at-col at-col-2'>
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
-              <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow apartment-item-noaAppoint position-relative' >
+              <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow service-noaAppoint position-relative' >
                 {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
                   <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
@@ -211,12 +210,12 @@ class ServiceItemShow extends BaseComponent {
               </View>
             </View>
               :
-              item && item.is_sign ? <View className='at-row at-row__align--center at-row__justify--end text-normal text-muted apartment-item-haveAppoint position-relative icon' >
+              item && item.is_sign ? <View className='at-row at-row__align--center at-row__justify--end text-normal text-muted service-haveAppoint position-relative icon' >
                 <Image src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
                 {LOCAL_APPOINTMENT_AGENCY}
               </View>
                 :
-                <View className='at-row at-row__align--center at-row__justify--end  text-normal text-muted apartment-item-haveAppoint position-relative icon' >
+                <View className='at-row at-row__align--center at-row__justify--end  text-normal text-muted service-haveAppoint position-relative icon' >
                   <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   {LOCALE_CASH_BACK}
                 </View>
@@ -229,24 +228,24 @@ class ServiceItemShow extends BaseComponent {
       </View>
 
       {status === 1 && <View className='at-row at-row__justify--around  mt-3 pb-3' >
-        <View className='text-normal page-middile text-white apartment-item-buttonGrey' >{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
+        <View className='text-normal page-middile text-white service-buttonGrey' >{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
+        <View className='text-normal page-middile service-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
+        <View className='text-normal page-middile service-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
       </View>}
 
       {status === 2 && <View className='at-row at-row__justify--around mt-3 pb-3'>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.props.onContact}>{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
-        <View className='text-normal page-middile apartment-item-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
+        <View className='text-normal page-middile service-buttonYellow' onClick={this.props.onContact}>{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
+        <View className='text-normal page-middile service-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
+        <View className='text-normal page-middile service-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
       </View>}
 
       {((status === 3 || status === 4) && step !== 7) && <View className='at-row at-row__justify--around  mt-3 pb-3'>
         <View className='mt-3'>
-          <View className='text-normal page-middile  mt-1 apartment-item-buttonGrayBo' onClick={this.props.onDisLike.bind(this, item)}>{LOCAL_APPOINTMENT_DISLIKE}</View>
+          <View className='text-normal page-middile  mt-1 service-buttonGrayBo' onClick={this.props.onDisLike.bind(this, item)}>{LOCAL_APPOINTMENT_DISLIKE}</View>
         </View>
         <View >
           <View className='text-mini text-center page-middile text-secondary'>{LOCAL_APPOINTMENT_CASHBACK_REDPACK}</View>
-          <View className='text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onAgency}>
+          <View className='text-normal  mt-1 service-buttonYellowBo' style='position:relative' onClick={this.onAgency}>
             <View style='position:absolute;top:12%;left:-1%' >
               <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINTMENT_COUPON} ></Image>
             </View>
@@ -257,7 +256,7 @@ class ServiceItemShow extends BaseComponent {
         </View>
         {item && item.is_sign && <View>
           <View className='text-mini page-middile  text-secondary'>获得退租险和租金立减</View>
-          <View className=' text-normal  mt-1 apartment-item-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
+          <View className=' text-normal  mt-1 service-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
             <View style='position:absolute;top:12%;left:-1%' >
               <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINT_ANGE} ></Image>
             </View>
@@ -271,13 +270,13 @@ class ServiceItemShow extends BaseComponent {
 
       {(status === 3 || status === 4) && step === 7 && <View className='at-row page-middile mt-3 pb-3'>
         <View className='text-bold text-normal '>{LOCAL_APPOINTMENT_GOODSERVICE}</View>
-        {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_EVALUTION}</View> :
-          <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_HAVE_EVALUTION}</View>}
+        {!comment.remark ? <View className='text-normal page-middile service-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_EVALUTION}</View> :
+          <View className='text-normal page-middile service-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_HAVE_EVALUTION}</View>}
       </View>}
 
       {status === 5 && <View className='at-row page-middile mt-3 pb-3'>
         {status === 5 && <View className='text-bold '>{LOCAL_APPOINTMENT_LOCKSUCCESSD}</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_SIGN }</View>
+        <View className='text-normal page-middile service-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_SIGN }</View>
       </View>}
 
       {status >= 6 && status <= 14 && <View className='at-row page-middile mt-3 pb-3'>
@@ -289,24 +288,24 @@ class ServiceItemShow extends BaseComponent {
         {status === 13 && <View className='text-bold '>{LOCAL_APPOINTMENT_HOUSEKEPPERFAIL}</View>}
         {status === 14 && <View className='text-bold '>{LOCAL_APPOINTMENT_AUDITFAIL}</View>}
         {(status === 6 || status === 7 || status === 9) && <View>
-          {!comment.remark ? <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_EVALUTION}</View> :
-            <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_HAVE_EVALUTION}</View>}
+          {!comment.remark ? <View className='text-normal page-middile service-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_EVALUTION}</View> :
+            <View className='text-normal page-middile service-buttonYellowBo' onClick={this.props.onEvalution}>{LOCALE_APPOINTMENT_HAVE_EVALUTION}</View>}
         </View>
         }
         {(status === 12 || status === 13 || status === 14 || status === 8) && <View>
-          <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.props.onGudit}>{LOCAL_APPOINTMENT_DETAIL_REVIWE}</View>
+          <View className='text-normal page-middile service-buttonYellowBo' onClick={this.props.onGudit}>{LOCAL_APPOINTMENT_DETAIL_REVIWE}</View>
         </View>
         }
       </View>}
 
       {(status === 10) && <View className='at-row page-middile pb-3'>
         {status === 10 && <View className='text-bold '>“等待支付”</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_PAY}</View>
+        <View className='text-normal page-middile service-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_PAY}</View>
       </View>}
 
       {(status === 11) && <View className='at-row page-middile  pb-3'>
         {status === 11 && <View className='text-bold '>“等待锁定”</View>}
-        <View className='text-normal page-middile apartment-item-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_ORDER_DETAIL}</View>
+        <View className='text-normal page-middile service-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_ORDER_DETAIL}</View>
       </View>}
 
 

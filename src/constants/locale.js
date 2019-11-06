@@ -63,6 +63,8 @@ export const LOCALE_NO_LISTINGS = '暂无房源'
 export const LOCALE_YEAR = '年'
 export const LOCALE_MONTH = '月'
 export const LOCALE_DAY = '日'
+export const LOCALE_ZHANG = '张'
+export const LOCALE_LOGIN_FIRST ='请先执行登录操作'
 
 // /pages/apartment
 export const LOCALE_VIEW_APARTMENT_DETAILS = '查看公寓详情'
@@ -111,6 +113,7 @@ export const LOCALE_CHOISE_ROOM_ID = '请选择房间号'
 // components/apartment-header
 export const LOCALE_HAVE_APARTMENT_TOTAL = '%s家公寓'
 export const LOCALE_SHOW_DESC = '查看详情'
+export const LOCALE_RETURN_HOME = '返回首页'
 export const LOCALE_SHOW_MORE_DESC = '查看更多'
 export const LOCALE_HIDE_MORE_DESC = '隐藏详情'
 
@@ -133,9 +136,11 @@ export const LOCALE_ORDER_MOBILE = '电话号码'
 export const LOCALE_ORDER_ID_CARD = '身份证号'
 export const LOCALE_ORDER_APARTMENT = '预订公寓'
 export const LOCALE_DOWN_PAYMENT = '定金：'
+export const LOCALE_DOWN_PAYMENT_REAL = '定金实付款：'
 export const LOCALE_SHOW_DOWN_PAYMENT_RULE = '查看完整定金协议'
 export const LOCALE_CHOISE_ROOM_FIRST = '请先选择房间'
 export const LOCALE_ORDER_LOGIN_NOT = '您暂未登录，无法签约下定'
+export const LOCALE_HAVE_CHOISE = '已选'
 
 
 export const LOCALE_ORDER_STATUS_SUCCESS_NOTICE = '恭喜您成功签约，祝您租后生活愉快'
@@ -313,8 +318,6 @@ export const LOCALE_APPOINTMENT_DETAIL_ADD_PICTURE = '添加合同照片'
 export const LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT = '您还不能提交预约审核单'
 
 
-
-
 //预约看房
 export const LOCALE_APPOINTMENT_VIEW_TRIP = '看房行程'
 export const LOCALE_APPOINTMENT_LOOKTIME = "看房时间："
@@ -349,8 +352,6 @@ export const LOCALE_UNLIMITED = '无限制'
 export const LOCALE_UNLIMITED_TIMES = '无限次'
 export const LOCALE_LOGIN_RECEIVE = '登录领取'
 export const LOCALE_HIGHEST_RECEIVE = '最高可领'
-
-
 
 
 

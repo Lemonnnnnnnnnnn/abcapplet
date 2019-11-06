@@ -12,7 +12,7 @@ import day from 'dayjs'
 import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
-  ...orderActions,
+  ...orderActions
 })
 
 export default class DepositBar extends BaseComponent {
@@ -81,8 +81,9 @@ export default class DepositBar extends BaseComponent {
     }
 
     const textArr = [
-      '已确认收到公寓ABC平台为签约入住人 ' + name + ' (手机号：' + customerPhone + ' ）代理预订的 ' + apartment_title + '  公寓房间号为 ' + roomNum + ' 的预订定金（人民币）' + price + ' 元。',
-      '将为签约入住人保留房源至 ' + time + ' ，请签约入住人在此日期前前往公寓办理正式租房合同，逾期定金将失效，定金不予退还。',
+      { title: '已确认收到公寓ABC平台为签约入住人 ' + name + ' (手机号：' + customerPhone + ' ）代理预订的 ' + apartment_title + '  公寓房间号为 ' + roomNum + ' 的预订定金（人民币）' + price + ' 元。', important: false },
+      { title: '将为签约入住人保留房源至 ' + time + ' ，请签约入住人在此日期前前往公寓办理正式租房合同，逾期定金将失效，定金不予退还。', important: false },
+      { title: '请于3天内完成签约，如有不便，可与联系管家重新协商签约时间，仅可调整一次。', important: true }
     ]
     const messageArr = [
       { title: '收款公寓:', content: apartment_title },
@@ -96,7 +97,7 @@ export default class DepositBar extends BaseComponent {
         <View style={wrapStyle} className='p-3 level-center mt-3'>
           <View className='mb-3 text-large text-bold at-row at-row__justify--center'>定金凭证</View>
           {
-            textArr.map(i => <View key={i} className='mb-3 text-normal text-indent'>{i}</View>)
+            textArr.map(i => <View key={i} className={`${i.important ? 'text-yellow' : ''} mb-3 text-normal text-indent`}>{i.title}</View>)
           }
           <View style={dashedStyle} className='text-secondary'>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </View>
           <View className=''>

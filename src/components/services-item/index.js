@@ -38,7 +38,6 @@ import { APPOINTMENT_OVER, ICON_HEAD_NO } from '@constants/picture'
 import { connect } from '@tarojs/redux'
 import * as appointmentActions from '@actions/appointment'
 
-import '../../styles/_appointment.scss'
 
 @connect(state => state, {
   ...appointmentActions,
@@ -207,7 +206,7 @@ class ServiceItem extends BaseComponent {
                   />
                 </View>
               </View>
-              {is_sign && <View onClick={this.onNavigateToRisk} className='apartment-item-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>{LOCALE_RISK_MONEY_SUPPORT}</View>}
+              {is_sign && <View onClick={this.onNavigateToRisk} className='service-risk text-normal page-middile position-absolute' style={{ top: '75%', left: '63%' }}>{LOCALE_RISK_MONEY_SUPPORT}</View>}
             </View>
           </View>
           <View className='ml-3 position-absolute' style={{ top: '18%' }}>
@@ -262,11 +261,11 @@ class ServiceItem extends BaseComponent {
                               color='#FFCB1F'
                             />
                           </View>
-                          <View className='at-col at-col-7 text-small text-muted mt-1' >{server_user.comment_score + LOCALE_POINT}</View>
+                          <View className='at-col at-col-7 text-small text-muted mt-1' >{server_user.comment_score || '0' + LOCALE_POINT}</View>
                         </View>
                       </View>
                     </View>
-                    <View className='text-muted ' style='font-size:10px'>{LOCALE_APPOINTMENT_HASLOOK + server_user.service_num + LOCALE_TIMES}</View>
+                    <View className='text-muted ' style='font-size:10px'>{LOCALE_APPOINTMENT_HASLOOK + (server_user.service_num || '0') + LOCALE_TIMES}</View>
                   </View>
                 </View>
               </View>
@@ -277,8 +276,8 @@ class ServiceItem extends BaseComponent {
                     <Image src={ICON_HEAD_NO} className='service-avatar' />
                   </View>
                   <View className='at-col at-col-9 mr-4'>
-                    <View className='text-small at-col font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>
-                    <View className='text-small at-col font-center mt-2' >{LOCALE_APPOINTMENT_BELONG}</View>
+                    <View className='text-small at-col service-font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>
+                    <View className='text-small at-col service-font-center mt-2' >{LOCALE_APPOINTMENT_BELONG}</View>
 
                   </View>
                 </View>

@@ -8,7 +8,6 @@ import BaseComponent from '@components/base'
 // 自定义常量
 import { LOCALE_PRICE_SEMICOLON, LOCALE_QI } from '@constants/locale'
 import { SUBLET_FINISH_NEW } from '@constants/picture'
-import '../../styles/_page.scss'
 
 
 class SunletItem extends BaseComponent {

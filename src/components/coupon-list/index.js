@@ -8,19 +8,19 @@ import * as userActions from '@actions/user'
 
 // 自定义组件
 import BaseList from '@components/base-list'
-import ApartmentCouponItem from '@components/apartment-coupon-item'
+import CouponItem from '@components/coupon-item'
 
 @connect(state => state, {
   ...userActions
 })
-class ApartmentCouponList extends BaseList {
+class CouponList extends BaseList {
 
   render() {
-    const { couponList, block } = this.props
+    const { couponList, block, houseType_id, apartment_id } = this.props
 
     // 用户优惠券
     const userCouponList = block === 'user' && couponList.length && couponList.map(i =>
-      <ApartmentCouponItem
+      <CouponItem
         key={i.list.id}
         coupon={i.list}
         block={block}
@@ -30,10 +30,12 @@ class ApartmentCouponList extends BaseList {
 
     // 详情优惠券
     const apartmentCouponList = block === 'apartment' && couponList.length && couponList.map(i =>
-      <ApartmentCouponItem
+      <CouponItem
         key={i.id}
         block={block}
         status={i.status}
+        houseType_id={houseType_id}
+        apartment_id={apartment_id}
         coupon={i}
         params={this.props.params}
         onListRefresh={this.props.onListRefresh}
@@ -48,5 +50,5 @@ class ApartmentCouponList extends BaseList {
 
   }
 }
-export default ApartmentCouponList
+export default CouponList
 

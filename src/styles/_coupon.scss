@@ -1,0 +1,114 @@
+@import "overrides";
+
+.coupon-item {
+  width: 90%;
+  margin-left: 5%;
+  height: 84px * $hd;
+  border-radius: $border-radius-normal;
+  position: relative;
+  box-sizing: border-box;
+  // 背景颜色
+  &.background {
+    &-gray {
+      background: #c8c8c8;
+    }
+    &-white {
+      background: #fff;
+    }
+  }
+  // 阴影颜色
+  &.shadow {
+    &-yellow {
+      box-shadow: 0 1px 6px $color-yellow-0;
+      border: 1px solid $color-brand;
+    }
+    &-black {
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+  // 过期优惠券
+  &-expired {
+    width: 90%;
+    margin-left: 5%;
+    height: 84px * $hd;
+    border-radius: $border-radius-normal;
+    position: relative;
+    background: #c8c8c8;
+  }
+  // 优惠券缺角样式
+  &-angle {
+    width: 12px * $hd;
+    height: 8px * $hd;
+    background: #f8f8f8;
+    position: absolute;
+    left: 68%;
+    &.top {
+      border-radius: 0 0 6px * $hd 6px * $hd;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      top: -3px * $hd;
+      &-active {
+        border-bottom: 1px solid $color-brand;
+      }
+    }
+    &.bottom {
+      border-radius: 6px * $hd 6px * $hd 0 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      bottom: -3px * $hd;
+      &-active {
+        border-top: 1px solid $color-brand;
+      }
+    }
+  }
+
+  &-mini {
+    height: 24px * $hd;
+    min-width: 48px * $hd;
+    border-radius: $border-radius-mini;
+    border: 1px solid $color-brand;
+    &-angle {
+      width: 8px * $hd;
+      height: 8px * $hd;
+      background: #fff;
+      &.left {
+        border-radius: 0 50% 50% 0;
+        box-sizing: border-box;
+        left: -4px * $hd;
+        border-right: 1px solid $color-brand;
+        border-top: 1px solid $color-brand;
+        border-bottom: 1px solid $color-brand;
+      }
+      &.right {
+        border-radius: 50% 0 0 50%;
+        box-sizing: border-box;
+        right: -4px * $hd;
+        border-left: 1px solid $color-brand;
+        border-top: 1px solid $color-brand;
+        border-bottom: 1px solid $color-brand;
+      }
+    }
+    .square-cover{
+      width: 4px * $hd;
+      height: 8px * $hd;
+      background: #fff;
+      &.left{
+        left: -4px * $hd;
+      }
+      &.right{
+        right: -4px * $hd;
+      }
+    }
+  }
+
+  // 样式覆盖
+  .button-hover{
+    background-color: #fff;
+  }
+  button{
+    font-size: 14px * $hd;
+    background-color: #fff;
+    line-height: 14px * $hd * 1.5;
+    &:after{
+      border: none;
+    }
+  }
+}

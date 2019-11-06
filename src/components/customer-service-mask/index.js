@@ -17,7 +17,6 @@ import { COLOR_GREY_2 } from '@constants/styles'
 
 // 自定义组件
 import Board from '@components/board'
-import '../../styles/_user.scss'
 
 
 class CustomerServiceMask extends Taro.Component {

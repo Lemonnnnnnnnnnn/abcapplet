@@ -298,7 +298,7 @@ class AppointmentDetail extends BaseComponent {
     const house_type_list = type_list.map(i => i.title)
 
     return (
-      <View className='message-background appointment-detail' style={{ paddingTop: Taro.pxTransform(150), paddingBottom: Taro.pxTransform(60) }}>
+      <View className='inherit-Width appointment-detail' style={{ paddingTop: Taro.pxTransform(150), paddingBottom: Taro.pxTransform(60) }}>
         {/* 头部 */}
         <View class='board--grey board--fixed-top ' style='position:absolute;z-index:9' >
           <Decorate height='126' />

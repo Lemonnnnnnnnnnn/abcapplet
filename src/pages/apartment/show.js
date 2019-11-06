@@ -17,9 +17,11 @@ import TabBar from '@components/tab-bar'
 import ABCIcon from '@components/abc-icon'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
-import CustomNav from '@components/custom-nav'
+import CouponItem from '@components/coupon-item'
+
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
+import { PATH } from '@constants/picture'
 import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { PAYLOAD_COUPON_LIST } from '@constants/api'
@@ -62,7 +64,7 @@ class ApartmentShow extends Component {
     },
     buttons: [],
     nearbyPost: [],
-    navHeight: 0,
+    couponCutList: [],
 
     cityId: 350200,
   }
@@ -71,7 +73,10 @@ class ApartmentShow extends Component {
     const { id } = this.$router.params
     buryPoint()
     this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: id }).then(({ data: { data } }) => {
-      data.total && this.setState({ showCouponTag: true })
+      if (data.total) {
+        const couponCutList = data.list.slice(0, 3)
+        this.setState({ showCouponTag: true, couponCutList })
+      }
     })
 
 
@@ -83,15 +88,6 @@ class ApartmentShow extends Component {
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
-
-    await Taro.getSystemInfo().then(res => {
-      this.setState({ navHeight: 72 })
-      if (res.model.indexOf('iPhone X') !== -1) {
-        this.setState({ navHeight: 88 })
-      } else if (res.model.indexOf('iPhone') !== -1) {
-        this.setState({ navHeight: 64 })
-      }
-    })
 
 
     let facilitys = data.facility_list
@@ -174,7 +170,6 @@ class ApartmentShow extends Component {
 
   onOpenCoupon() {
     this.setState({ showCouponMask: true })
-    this.onHideMap()
   }
 
   // 关闭租房优惠券
@@ -214,13 +209,6 @@ class ApartmentShow extends Component {
       .then(() => this.setState({ apartment: { ...apartment, isCollect: false } }))
   }
 
-  // onShareAppMessage() {
-  //   const { cityId } = this.state
-  //   this.props.dispatchApartmentDataPost({ type: 2, city_id: cityId })
-  //   return {
-  //     title: "我在公寓ABC上发现了一个好\n房源",
-  //   }
-  // }
 
   onShareAppMessage() {
     const { cityId } = this.state
@@ -247,8 +235,6 @@ class ApartmentShow extends Component {
 
       this.props.dispatchApartmentDataPost({ type: 4, city_id: cityId })
 
-      // this[method]()
-
       Taro.navigateTo({
         url: `${PAGE_ORDER_CREATE}?apartment_id=${Id}`
       })
@@ -265,58 +251,22 @@ class ApartmentShow extends Component {
     })
   }
 
-  // insertStr(soure, start, newStr) {
-  //   return soure.slice(0, start) + newStr + soure.slice(start)
-  // }
 
 
   render() {
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag, couponCutList } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, tags, desc,
       notices, cbds, intro, rules, position, cover, num, id } = apartment
 
-    const BrandingStyle = {
-      backgroundColor: "rgb(248,248,248)",
-      borderRadius: Taro.pxTransform(32),
-    }
-
-    const textDeal = {
-      wordBreak: "break-all",
-      textIndent: Taro.pxTransform(20),
-    }
-
-    const PublicConfiguration = {
-      backgroundColor: "rgba(248, 248, 248, 1)",
-      borderRadius: Taro.pxTransform(24),
-      padding: " 2px 6px"
-    }
-
-    const ScrollWrapStyle = {
-      whiteSpace: "nowrap",
-    }
-
-
     const imageStyle = {
       width: Taro.pxTransform(600),
       height: Taro.pxTransform(350),
-      display: "inline-block",
     }
-
-    const borderStyle = {
-      borderRadius: Taro.pxTransform(12),
-      boxShadow: "0 1px 6px rgb(220,220,220)",
-      overflow: 'hidden',
-      marginRight: Taro.pxTransform(28),
-    }
-
 
     return (
-      <View style={{ overflow: "hidden", minHeight: '100vh', backgroundColor: '#ffffff' }}>
-
-        {/* <CustomNav title='公寓详情' /> */}
-
+      <View className='page-white wrap-Style' >
 
         {types.length && <TabBar
           showLittleMask={showLittleMask}
@@ -359,11 +309,23 @@ class ApartmentShow extends Component {
               {/* 活动信息 */}
               <View className='mt-2'>
 
-                {/* 领优惠券小Tag */}
-                {showCouponTag && <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1' style={{ float: 'right' }}>
-                  <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
-                    <Text>领优惠券</Text>
-                    <ABCIcon icon='chevron_right' size='22' />
+                {/* 领优惠券 */}
+                {showCouponTag && <View onClick={this.onOpenCoupon} className='text-normal text-secondary my-1'>
+                  <View className='at-row at-row__justify--between'>
+                    <View className='at-row'>
+                      <Text>领优惠券</Text>
+                      {
+                        couponCutList.map(i =>
+                          <CouponItem
+                            key={i.id}
+                            block='mini'
+                            coupon={i}
+                            className='ml-2'
+                          />)
+                      }
+                    </View>
+
+                    <ABCIcon icon='chevron_right' size='22' color='#888888' />
                   </View>
                 </View>}
 
@@ -377,7 +339,7 @@ class ApartmentShow extends Component {
               </View>
 
 
-              <View style={BrandingStyle}>
+              <View className='apartment-show-brand' >
                 <Tag className='my-3' active circle>
                   <View className='at-row  at-row__align--center text-secondary'>
 
@@ -399,7 +361,7 @@ class ApartmentShow extends Component {
               {/* 地图 */}
               <View className='at-row  at-row__align--center  mb-2'>
                 <View className=''>
-                  <Image src='https://images.gongyuabc.com//image/path_new.png' style='width:12px;height:16px'></Image>
+                  <Image src={PATH} style='width:12px;height:16px'></Image>
                 </View>
                 {
                   position ? <View className='text-normal text-secondary  ml-2'>{position}</View> : <View className='text-secondary text-normal ml-2'>暂无相关位置信息</View>
@@ -414,13 +376,13 @@ class ApartmentShow extends Component {
 
             {
               types &&
-              <View style={ScrollWrapStyle} className='mt-4 ml-3' >
+              <View className='mt-4 ml-3 scroll-X' >
 
                 <ScrollView scrollX>
                   {types.map(i =>
 
-                    <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-1' >
-                      <View style={borderStyle} className='' >
+                    <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-1 display-inline-block' >
+                      <View className='apartment-type-item-wrap' >
                         <ApartmentTypeItem item={i} />
                       </View>
                     </View>)}
@@ -449,7 +411,7 @@ class ApartmentShow extends Component {
                   </View>
                 </View>
                 {
-                  desc ? <View className='text-secondary text-normal' style={textDeal}>{desc}</View> : <View className='text-secondary'>暂无相关描述</View>
+                  desc ? <View className='text-secondary text-normal text-indent apartment-show-text' >{desc}</View> : <View className='text-secondary'>暂无相关描述</View>
                 }
 
                 {/* 公共配置 */}
@@ -462,7 +424,7 @@ class ApartmentShow extends Component {
                     </View>
                   )}
 
-                  {publicMatch_list && publicMatch_list.length > 5 && <View style={PublicConfiguration} className='text-center'>
+                  {publicMatch_list && publicMatch_list.length > 5 && <View className='text-center apartment-show-public-configuration'>
                     <View onClick={this.onOpenAllMatching} style={{ height: '35px', width: '35px' }}>...</View>
                     <View className='text-small'>更多</View>
                   </View>}

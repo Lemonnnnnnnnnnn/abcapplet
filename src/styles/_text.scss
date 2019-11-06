@@ -79,6 +79,10 @@
   &-indent {
     text-indent: 2em;
   }
+  &-wrap{
+    word-break:break-all;
+    word-wrap: break-word;
+  }
 }
 //文字超出省略
 .overtext {
@@ -86,3 +90,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+

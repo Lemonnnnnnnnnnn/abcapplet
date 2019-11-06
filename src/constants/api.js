@@ -136,7 +136,8 @@ export const API_ORDER_DELETE = `${HOST}/order/cancelOrderPost`
 
 // 订单创建
 export const API_ORDER_CREATE = `${HOST}/order/createOrderPost`
-export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', tenancy: '', appointment_id: 0 }
+export const PAYLOAD_ORDER_CREATE = { room_id: 0, name: '', mobile: '', id_code: '', tenancy: '', appointment_id: 0, coupon_user_id: '' }
+export const PAYLOAD_ORDER_DETAIL = { room_id: 0, appointment_id: 0, type_id: 0, apartment_id: 0, coupon_user_id: '', tenancy: 12 }
 
 // 订单预览
 export const API_ORDER_PREVIEW = `${HOST}/order/perOrderPost`
@@ -272,10 +273,10 @@ export const PAYLOAD_COUPON_USER_EXPIRED = { current_page: 1, page_size: 10, sta
 //看房行程 看房不满意
 export const API_APPOINTMENT_UNSATIS = `${HOST}/appointment/unsatisfactoryPost`
 // 看房行程 修改看房时间
-export const API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME =`${HOST}/appointment/changeAppointmentLookTimePost`
+export const API_APPOINTMENT_CHANGE_APPOINTMENT_LOOKTIME = `${HOST}/appointment/changeAppointmentLookTimePost`
 
 // 获取单一优惠券
 export const API_COUPON_ALONE = `${HOST}/coupon/detailPost`
 
 // 获取退租险人数和金额
-export const API_SETTING_RISK_POST=`${HOST}/index/settingRiskPost`
+export const API_SETTING_RISK_POST = `${HOST}/index/settingRiskPost`

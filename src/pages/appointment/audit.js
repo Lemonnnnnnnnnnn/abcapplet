@@ -54,7 +54,7 @@ class AppointmentDetail extends BaseComponent {
     const { apartmentTitle, roomNo, tenancy, status } = this.state
 
     return (
-      <View className='message-background' style={{ 'padding-top': '75px', 'padding-bottom': '30px' }}>
+      <View className='inherit-Width' style={{ 'padding-top': '75px', 'padding-bottom': '30px' }}>
         {/* 头部 */}
         <View class='board--grey board--fixed-top ' style='position:absolute;z-index:9' >
           <Decorate height='126' />

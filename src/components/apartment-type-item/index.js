@@ -49,8 +49,8 @@ class ApartmentTypeItem extends BaseComponent {
       {
         houseType && index === 0 &&
         <View className='at-row at-row__justify--center'>
-          <View className='mask' ></View>
-          <View className='text-normal font'>{LOCALE_VIEWING_CURRENT_HOUSETYPE}</View>
+          <View className='position-absolute mask inherit-Width' ></View>
+          <View className='vertical-level-center text-white text-normal font'>{LOCALE_VIEWING_CURRENT_HOUSETYPE}</View>
         </View>
       }
       <View className='wrap-Style inherit-Width' style={{ height: Taro.pxTransform(height) }}>

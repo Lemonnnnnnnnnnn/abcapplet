@@ -14,21 +14,16 @@ import * as adActions from '@actions/ad'
 import Tag from '@components/tag'
 import TabBar from '@components/tab-bar'
 import ABCIcon from '@components/abc-icon'
-import OrderHeader from '@components/order-header'
-import RoomItem from '@components/room-item'
 import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
-import HouseTypeAvatar from '@components/house-type-avatar'
-import CustomNav from '@components/custom-nav'
-
+import CouponItem from '@components/coupon-item'
 
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
-import { ORDER_HEADERS } from '@constants/order'
 // 自定义方法
 import textWrap from '@utils/text-wrap'
 
-import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT, APARTMENT_AVATAR_DIST } from '@constants/apartment'
+import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SHARE_TEXT, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
 import { PAYLOAD_COUPON_LIST } from '@constants/api'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
@@ -40,6 +35,8 @@ import AppartmentMatchingMask from './components/apartment-matching-mask'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
 import ApartmentContainer from './components/apartment-container'
 
+// import '../../styles/_apartment.scss'
+
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
   ...userActions,
@@ -49,12 +46,10 @@ const city = userActions.dispatchUser().payload.citycode
 class HouseTypeShow extends Component {
   config = {
     navigationBarTitleText: '户型详情',
-    // navigationStyle: 'custom',
   }
 
   state = {
     Id: 0,
-    navHeight: 0,
     showLittleMask: false,
     houseType_id: 83,
     houstType: {
@@ -76,15 +71,17 @@ class HouseTypeShow extends Component {
       markers: [],
     },
     buttons: [],
+    nearbyPost: [],
+    couponCutList: [],
     showRentDescription: false,
     showMatch: false,
-    showApartRoom: true,
     showCouponTag: false,
-    nearbyPost: [],
     showMap: true,
     showCouponMask: false,
     cityId: 350200,
   }
+
+  refApartmentCouponMask = node => this.apartmentCouponMask = node
 
   async componentWillMount() {
     buryPoint()
@@ -92,14 +89,17 @@ class HouseTypeShow extends Component {
 
     const { citycode } = Taro.getStorageSync('user_info')
     citycode && this.setState({ cityId: citycode })
-    this.setState({ Id: id })
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
       const apartmentID = data.apartment_id
 
       // 获取优惠券列表
       this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: apartmentID }).then(res => {
-        res.data.data.total && this.setState({ showCouponTag: true })
+        if (res.data.data.total) {
+          const couponCutList = res.data.data.list.slice(0, 3)
+          this.setState({ showCouponTag: true, couponCutList })
+
+        }
       })
 
       // 获取附近公寓列表
@@ -297,12 +297,11 @@ class HouseTypeShow extends Component {
     const { id } = houstType
     Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?type_id=${id}` })
   }
-  // onCreateBusiness
 
+  // 点击爱心/取消爱心
   onCreateFavorite() {
     const { houstType } = this.state
     const { id } = houstType
-
     this.props.dispatchFavoriteCreate({ type_id: id })
       .then(() => this.setState({ houstType: { ...houstType, isCollect: true } }))
   }
@@ -310,7 +309,6 @@ class HouseTypeShow extends Component {
   onDeleteFavorite() {
     const { houstType } = this.state
     const { id } = houstType
-
     this.props.dispatchFavoriteDelete({ type_id: id })
       .then(() => this.setState({ houstType: { ...houstType, isCollect: false } }))
   }
@@ -335,12 +333,29 @@ class HouseTypeShow extends Component {
       .then(() => this.setState({ houstType: { ...houstType, roomList } }))
   }
 
-  onShareAppMessage() {
-    const { cityId } = this.state
-    this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
+  onShareAppMessage(target) {
     const text = LOCALE_SHARE_TEXT
-    return {
-      title: textWrap(text, 17)
+    if (target.target && target.target.dataset.url) {
+      let { url, id } = target.target.dataset
+      url = url.replace(/\s*/g, "")
+
+      this.props.dispatchCouponReceive({ id: id }).then(res => {
+        res.data.code === 1 && (
+          this.apartmentCouponMask.onListRefresh(),
+          setTimeout(() => { Taro.showToast({ title: res.data.msg, icon: 'none' }) }, 2000)
+        )
+      })
+      return {
+        title: textWrap(text, 17),
+        path: url,
+      }
+    } else {
+      const { cityId } = this.state
+      this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
+      return {
+        title: textWrap(text, 17),
+        success: () => console.log('111')
+      }
     }
   }
 
@@ -353,7 +368,6 @@ class HouseTypeShow extends Component {
    * 点击 预约看房,查看订单
    */
   onClick(method) {
-    const { Id } = this.state
     const { cityId } = this.state
     if (method === 'onCreateBusiness') {
 
@@ -370,11 +384,10 @@ class HouseTypeShow extends Component {
   }
 
   render() {
-    const { apartments ,ads:{riskAd} } = this.props
+    const { apartments, ads: { riskAd } } = this.props
 
-    const { houstType, map, buttons, showRentDescription, showCouponTag,
-      houseType_id, showMatch, roomMatch_list, publicMatch_list,
-      showApartRoom, nearbyPost, showLittleMask, navHeight, showMap, showCouponMask, } = this.state
+    const { houstType, map, buttons, showRentDescription, showCouponTag, houseType_id, showMatch, roomMatch_list,
+      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -406,8 +419,6 @@ class HouseTypeShow extends Component {
           Id={houseType_id}
           type='house'
         />
-
-        {/* <CustomNav title='户型详情' /> */}
 
         <View
           onClick={this.onCloseLittleMask}
@@ -446,14 +457,15 @@ class HouseTypeShow extends Component {
 
               <ApartmentCouponMask
                 show={showCouponMask}
+                ref={this.refApartmentCouponMask}
                 onClose={this.onClose}
+                houseType_id={id}
                 apartment_id={apartmentId}
                 params={this.$router.params}
-                onTest={this.onTest}
               />
 
               {/* 头部 */}
-              <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32) }}>{title}</View>
+              <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32), width: Taro.pxTransform(560) }}>{title}</View>
 
               <View className='text-secondary text-large mt-1' style={{ minHeight: Taro.pxTransform(24) }}>{intro}</View>
 
@@ -519,14 +531,27 @@ class HouseTypeShow extends Component {
 
               {/* 活动信息 */}
               <View className='mt-3 '>
-                {/* 领优惠券小Tag */}
-                {showCouponTag && <View onClick={this.onOpenCoupon} className='apartment-coupon text-normal mt-1' style={{ float: 'right' }}>
-                  <View className='at-row at-row-1 at-col--auto at-row__justify--end'>
-                    <Text>领优惠券</Text>
-                    <ABCIcon icon='chevron_right' size='22' />
+                {/* 优惠券 */}
+                {showCouponTag && <View onClick={this.onOpenCoupon} className='text-normal text-secondary my-1'>
+                  <View className='at-row at-row__justify--between'>
+                    <View className='at-row'>
+                      <Text>领优惠券</Text>
+                      {
+                        couponCutList.map(i =>
+                          <CouponItem
+                            key={i.id}
+                            block='mini'
+                            coupon={i}
+                            className='ml-2'
+                          />)
+                      }
+                    </View>
+
+                    <ABCIcon icon='chevron_right' size='22' color='#888888' />
                   </View>
                 </View>}
 
+                {/* 活动 */}
                 <View>
                   {rules && rules.map(i =>
                     <View key={i.id} className=' mr-1'>
@@ -538,7 +563,7 @@ class HouseTypeShow extends Component {
               </View>
 
               {/* 品牌宣传 */}
-              <View className='house-type-branding'>
+              <View className='apartment-house-type-branding'>
                 <Tag className='my-3' active circle>
                   <View className='at-row  at-row__align--center at-row__justify--center text-secondary'>
 
@@ -575,8 +600,8 @@ class HouseTypeShow extends Component {
                 <View className='at-row at-row__align--end mt-4'>
                   <View className='text-bold text-huge at-col at-col-3'>户型简介</View>
                   {
-                    has_room ? <Text className=' text-mini badge-hasRoom mb-1 house-type-has-room-block' >有余房</Text>
-                      : <Text className=' text-mini badge-hasNoRoom mb-1 house-type-has-room-block' >满房</Text>
+                    has_room ? <Text className=' text-mini badge-hasRoom mb-1 apartment-house-type-has-room-block' >有余房</Text>
+                      : <Text className=' text-mini badge-hasNoRoom mb-1 apartment-house-type-has-room-block' >满房</Text>
                   }
                 </View>
 
@@ -600,7 +625,7 @@ class HouseTypeShow extends Component {
 
                 {roomMatch_list && roomMatch_list.map((i, key) => key !== 5 ?
                   <View key={i.title} className='at-col' style={{ position: "relative", left: Taro.pxTransform(13) }}>
-                    <View className='house-type-public-configuration' ></View>
+                    <View className='apartment-house-type-public-configuration' ></View>
                     <View style={{ position: "absolute", top: Taro.pxTransform(10), left: Taro.pxTransform(13) }}>
                       <Image src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
                       <View className='text-small text-center' >{i.title}</View>
@@ -608,7 +633,7 @@ class HouseTypeShow extends Component {
                   </View>
                   :
                   <View onClick={this.onOpenAllMatching} key={i.title} className='at-col ' style={{ position: "relative" }}>
-                    <View className='house-type-public-configuration' style={{ left: Taro.pxTransform(13), position: 'absolute' }}></View>
+                    <View className='apartment-house-type-public-configuration' style={{ left: Taro.pxTransform(13), position: 'absolute' }}></View>
                     <View style={{ position: "absolute", top: Taro.pxTransform(10), left: Taro.pxTransform(23) }}>
                       <Image src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
                       <View className='text-small text-center'>{i.title}</View>
@@ -693,7 +718,7 @@ class HouseTypeShow extends Component {
 
                   {publicMatch_list && publicMatch_list.map((i, key) => key !== 5 ?
                     <View key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
-                      <View className='house-type-public-configuration' ></View>
+                      <View className='apartment-house-type-public-configuration' ></View>
                       <View style={{ position: "absolute", top: "5px", left: "5px" }}>
                         <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px', }} />
                         <View className='text-small text-center' >{i.title}</View>
@@ -701,7 +726,7 @@ class HouseTypeShow extends Component {
                     </View>
                     :
                     <View onClick={this.onOpenAllMatching} key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
-                      <View className='house-type-public-configuration' ></View>
+                      <View className='apartment-house-type-public-configuration' ></View>
                       <View style={{ position: "absolute", top: "5px", left: "5px" }}>
                         <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                         <View className='text-small text-center'>{i.title}</View>
@@ -714,19 +739,19 @@ class HouseTypeShow extends Component {
 
               {
                 types &&
-
-                <View style={{ whiteSpace: "nowrap" }} className='mt-4' >
+                <View className='mt-4 scroll-X' >
 
                   <ScrollView scrollX>
                     {types.map((i, index) =>
 
-                      <View key={i.id} className='at-col at-col-5 mt-1 house-type-image' >
-                        <View className='house-type-apartment-type-border' >
+                      <View key={i.id} className='at-col at-col-5 mt-1 apartment-house-type-image display-inline-block' >
+                        <View className='apartment-type-item-wrap' >
                           <ApartmentTypeItem
                             item={i}
                             houseType
                             type='HouseType'
-                            index={index} />
+                            index={index}
+                          />
                         </View>
                       </View>)}
                   </ScrollView>
@@ -743,8 +768,6 @@ class HouseTypeShow extends Component {
                     key={apartments.type}
                     type={TYPE_FAVORITE_APARTMENT}
                     items={apartments.list}
-                  // defaultPayload={{ city }}
-                  // dispatchList={this.props.dispatchRecommendHouseType}
                   />
                 </View>
               }
