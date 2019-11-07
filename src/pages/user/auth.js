@@ -1,14 +1,13 @@
 import Taro, { Component } from '@tarojs/taro'
 import { LOCALE_AUTH } from '@constants/locale'
-import { PAGE_HOME, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 
-import Auth from '@components/auth'
 import logo from '@assets/icons/logo.png'
 // redux
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/user'
 
 import buryPoint from '../../utils/bury-point'
+import Auth from './components/auth'
 
 
 @connect(state => state.user, actions)

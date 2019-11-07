@@ -12,7 +12,6 @@ import * as userActions from '@actions/user'
 // 自定义组件
 import Decorate from '@components/decorate'
 import OrderRoomListMask from '@components/order-room-list-mask'
-import OrderCouponMask from '@components/order-coupon-mask'
 import OrderStepMask from '@components/order-step-mask'
 
 import loginButton from '@components/login-button'
@@ -46,6 +45,7 @@ import {
 import buryPoint from '../../utils/bury-point'
 import OrderProcessGuidance from './components/order-process-guidance'
 import OrderMessage from './components/order-message'
+import OrderCouponMask from './components/order-coupon-mask'
 
 
 @connect(state => state, {
@@ -233,15 +233,19 @@ class OrderCreate extends BaseComponent {
       }
     })
 
-
-    // 把不同组优惠券的canChoise设为false
-    couponClone.forEach(i => {
-      if (i.coupon_link_id !== coupon_link_id) {
-        i.canChoise = false
-      }
-      // 如果没有选中任何优惠券  把所有的canChoise设为true
-      if (!couponIdArrClone.length) i.canChoise = true
-    })
+    // 把不同组优惠券的canChoise设为false，如果link_id为0，其他所有优惠券默认canChoise为false
+    coupon_link_id
+      ? couponClone.forEach(i => {
+        if (i.coupon_link_id !== coupon_link_id) {
+          i.canChoise = false
+        }
+        // 如果没有选中任何优惠券  把所有的canChoise设为true
+        if (!couponIdArrClone.length) i.canChoise = true
+      })
+      : couponClone.forEach(i => {
+        i.active ? i.canChoise = true : i.canChoise = false
+        if (!couponIdArrClone.length) i.canChoise = true
+      })
 
 
     this.setState({
@@ -266,6 +270,7 @@ class OrderCreate extends BaseComponent {
 
     payloadDetail = { ...payloadDetail, coupon_user_id }
 
+
     // 发送请求
     this.props.dispatchOrderPreview(payloadDetail).then(res => {
       const { data: { data } } = res
@@ -274,9 +279,9 @@ class OrderCreate extends BaseComponent {
         showCouponList: false,
         couponStorage: coupon,
         couponIdArrStorage: couponIdArr,
-        couponPrice,
+        couponPrice : couponIdArr.length ? couponPrice : data.coupon.length + LOCALE_COUPON_CAN_USED,
         payloadDetail,
-        payload: { ...payload, coupon_user_id }
+        payload: { ...payload, coupon_user_id },
       })
     })
   }

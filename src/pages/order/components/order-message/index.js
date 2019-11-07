@@ -28,10 +28,6 @@ import {
   LOCALE_INPUT_IDCARD,
   LOCALE_DOWN_PAYMENT_REAL,
   LOCALE_DOWN_PAYMENT_RATIO,
-  LOCALE_MONEY,
-  LOCALE_MINUS,
-  LOCALE_COLON,
-  LOCALE_ORIGINAL_PRICE
 } from '@constants/locale'
 import { PAYLOAD_ORDER_CREATE } from '@constants/api'
 import { ORDER_LEASE_INSURANCE } from '@constants/picture'
@@ -53,11 +49,11 @@ export default class OrderMessage extends BaseComponent {
 
   render() {
     const { rooms, timeList, couponPrice, couponTotal, cost_deposit, room, payload } = this.props
-    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, coupon_money } = room
+    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, coupon_money,old_discount_price,discount_price ,coupon_price } = room
     const { name, mobile, id_code: idCode, room_id } = payload
 
     // 生成供渲染的价格列表，计算减去优惠券后的租金，如果没有租金减免不渲染这一条
-    let [priceList, rentPriceCutOff, renderPriceCutOff] = [[], discountPrice, false]
+    let [priceList, renderPriceCutOff] = [[], false]
 
     for (let i in coupon_money) {
       priceList.push({ ...CREATE_ORDER_DIST[i], num: coupon_money[i] })
@@ -65,7 +61,6 @@ export default class OrderMessage extends BaseComponent {
 
     priceList.forEach(i => {
       if (i.type === 1) {
-        rentPriceCutOff -= i.num
         renderPriceCutOff = true
       }
     })
@@ -252,7 +247,7 @@ export default class OrderMessage extends BaseComponent {
           <View className='mb-2 text-normal text-secondary'>
             <View className='at-row at-row__align--start at-row__justify--between'>
               <View>租金：</View>
-              <View>￥{discountPrice}</View>
+              <View>￥{old_discount_price || discount_price}</View>
             </View>
             {/* 租金优惠明细 */}
             {
@@ -263,7 +258,7 @@ export default class OrderMessage extends BaseComponent {
             }
             {/* 减去优惠金额后的租金 */}
             {
-              renderPriceCutOff && <View className='at-row at-row__align--start at-row__justify--end text-black' >优惠后租金：{rentPriceCutOff}</View>
+              renderPriceCutOff && <View className='at-row at-row__align--start at-row__justify--end text-black' >优惠后租金：{discount_price}</View>
             }
           </View>
 
@@ -271,7 +266,7 @@ export default class OrderMessage extends BaseComponent {
           <View className='text-normal text-secondary'>
             <View className='at-row at-row__align--start at-row__justify--between'>
               <View>定金(租金50%)：</View>
-              <View>￥{rentPriceCutOff / 2}</View>
+              <View>￥{coupon_price || price}</View>
             </View>
             {/* 定金减免 */}
             {

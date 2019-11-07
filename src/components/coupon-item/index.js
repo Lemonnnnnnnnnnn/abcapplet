@@ -76,7 +76,7 @@ class CouponItem extends BaseComponent {
               this.props.onListRefresh(),
               setTimeout(() => {
                 Taro.showToast({ title: res.data.msg, icon: 'none' })
-              }, 200)
+              }, 1000)
             )
           })
         } break
@@ -200,7 +200,7 @@ class CouponItem extends BaseComponent {
                 <View className='at-row at-row__justify--center at-row__align--center'>
                   <View className={textColorStaus}>{statusText}</View>
                 </View>
-                {use_type === 1 && <View className='text-mini text-center'>{LOCALE_FIRST_MONTH_ONLY}</View>}
+                <View className='text-mini text-center'>{use_type === 1 ? LOCALE_FIRST_MONTH_ONLY : '仅租金可用'}</View>
               </View>
             </View>
           </View>
@@ -247,7 +247,7 @@ class CouponItem extends BaseComponent {
 
                   {!can_receive && <AtIcon value='help' size='14' color='#88888'></AtIcon>}
                 </View>
-                {use_type === 1 && <View className='text-mini text-center'>{LOCALE_FIRST_MONTH_ONLY}</View>}
+                <View className='text-mini text-center'>{use_type === 1 ? LOCALE_FIRST_MONTH_ONLY : '仅租金可用'}</View>
                 {max_receive_num && <View className='text-mini text-center'>{LOCALE_HIGHEST_RECEIVE}{max_receive_num === -1 ? LOCALE_UNLIMITED_TIMES : max_receive_num + LOCALE_TIMES}</View>}
               </View>
 
@@ -292,7 +292,7 @@ class CouponItem extends BaseComponent {
                 <View className='at-row at-row__justify--center at-row__align--center'>
                   <View className={`${textColorStaus}`}>{statusText}</View>
                 </View>
-                {use_type === 1 && <View className='text-mini text-center'>{LOCALE_FIRST_MONTH_ONLY}</View>}
+                <View className='text-mini text-center'>{use_type === 1 ? LOCALE_FIRST_MONTH_ONLY : '仅租金可用'}</View>
               </View>
 
             </View>
@@ -306,7 +306,7 @@ class CouponItem extends BaseComponent {
     // 迷你tag
     const couponMini =
       <View className={classNames('coupon-item-mini', 'position-relative', className)}>
-        <View className='vertical-level-center text-small text-yellow'>
+        <View className='vertical-level-center text-small text-white'>
           {coupon_type === 2 && <Text >{LOCALE_PRICE_SEMICOLON}</Text>}
           <Text >{worthText}</Text>
           {coupon_type === 1 && <Text >{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</Text>}

@@ -62,9 +62,9 @@
 
   &-mini {
     height: 24px * $hd;
-    min-width: 48px * $hd;
+    min-width: 58px * $hd;
     border-radius: $border-radius-mini;
-    border: 1px solid $color-brand;
+    background: linear-gradient(to bottom , #FFC919 ,#FFAA00);
     &-angle {
       width: 8px * $hd;
       height: 8px * $hd;

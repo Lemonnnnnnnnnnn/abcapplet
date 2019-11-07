@@ -78,7 +78,7 @@ class ApartmentContainer extends BaseComponent {
           {showPhotos ? <View>
             <View className='apartment-container-opactyRoom text-white text-small' onClick={this.onShowPhoto}>
               <View className='mask inherit-Width inherit-Height'></View>
-              <View className='num text-normal at-row at-row__align--center at-row__justify--center '>查看样板房照片</View>
+              <View className='num text-normal at-row at-row__align--center at-row__justify--center '>查看清水房照片</View>
             </View>
             <View className='apartment-container-picIndexStyle'>
               <View className='mask inherit-Width inherit-Height'></View>
@@ -92,7 +92,7 @@ class ApartmentContainer extends BaseComponent {
             <View>
               <View className='apartment-container-opactyRoom text-white text-small ' onClick={this.onShowPhoto}>
                 <View className='mask inherit-Width inherit-Height'></View>
-                <View className='num text-normal at-row at-row__align--center at-row__justify--center '>查看样板房照片</View>
+                <View className='num text-normal at-row at-row__align--center at-row__justify--center '>查看清水房照片</View>
               </View>
               <View className='apartment-container-picIndexStyle'>
                 <View className='mask inherit-Width inherit-Height'></View>
