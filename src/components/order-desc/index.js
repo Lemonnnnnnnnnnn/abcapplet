@@ -95,7 +95,7 @@ class OrderDesc extends BaseComponent {
     ]
 
     // 生成供渲染的价格列表，计算减去优惠券后的租金，如果没有租金减免不渲染这一条
-    let [priceList, rentPriceCutOff, renderPriceCutOff] = [[], price, false]
+    let [priceList, renderPriceCutOff] = [[], price, false]
 
     for (let i in coupon_price) {
       priceList.push({ ...CREATE_ORDER_DIST[i], num: coupon_price[i] })
@@ -103,7 +103,6 @@ class OrderDesc extends BaseComponent {
 
     priceList.forEach(i => {
       if (i.type === 1) {
-        rentPriceCutOff -= i.num
         renderPriceCutOff = true
       }
     })

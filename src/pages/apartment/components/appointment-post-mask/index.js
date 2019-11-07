@@ -23,7 +23,7 @@ import {
   LOCALE_TEL
 } from '@constants/locale'
 
-class AppointPostMask extends BaseComponent {
+class AppointmentPostMask extends BaseComponent {
   static defaultProps = {
     show: false,
     apartments: [],
@@ -88,4 +88,4 @@ class AppointPostMask extends BaseComponent {
   }
 }
 
-export default AppointPostMask
+export default AppointmentPostMask

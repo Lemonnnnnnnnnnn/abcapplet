@@ -30,7 +30,7 @@ import { RISK_MONEY_BANNER, APARTMENT_APPOINTMENT_ACCEPT } from '@constants/pict
 import { PAGE_RISK_LANDING } from '@constants/page'
 
 
-class AppointPostNextMask extends BaseComponent {
+class AppointmentPostNextMask extends BaseComponent {
   static defaultProps = {
     show: false,
   }
@@ -127,4 +127,4 @@ class AppointPostNextMask extends BaseComponent {
   }
 }
 
-export default AppointPostNextMask
+export default AppointmentPostNextMask

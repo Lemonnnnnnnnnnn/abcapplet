@@ -38,13 +38,13 @@ import {
   LOCALE_APPOINTMENT_SUCCESS
 } from '@constants/locale'
 // 自定义组件
-import AppointmentPostMask from '@components/appointment-post-mask'
-import AppointmentPostNextMask from '@components/appointment-post-next-mask'
 import GetAuthorizationMask from '@components/get-authorization-mask'
 import MaskTop from '@components/maskTop'
 import loginButton from '@components/login-button'
 
 import buryPoint from '../../utils/bury-point'
+import AppointmentPostMask from './components/appointment-post-mask'
+import AppointmentPostNextMask from './components/appointment-post-next-mask'
 
 const nowTime = new Date()
 let currentMonth = nowTime.getMonth()

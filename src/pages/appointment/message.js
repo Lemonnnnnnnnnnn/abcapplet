@@ -7,11 +7,11 @@ import { LOCALE_APPOINTMENT_MESSAGE_LIU } from '@constants/locale'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
-
 import * as messageActions from '@actions/message'
-import AppointmentMessageList from '@components/appointment-message-list'
 
 import buryPoint from '../../utils/bury-point'
+import AppointmentMessageList from './components/appointment-message-list'
+
 
 @connect(state => state, {
   ...messageActions,

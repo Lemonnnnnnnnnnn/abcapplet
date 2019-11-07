@@ -15,27 +15,27 @@ import {
   LOCALE_APPOINTMENT_DETAIL_SIGN_PHONE,
   LOCALE_APPOINTMENT_DETAIL_SIGN_APARTMENT,
   LOCALE_APPOINTMENT_DETAIL_SIGN_MESSAGE,
-  LOCALE_APPOINTMENT_DETAIL_HAVE_NO_ROOM,
   LOCALE_APPOINTMENT_DETAIL_MODIFY,
   LOCALE_APPOINTMENT_DETAIL_ADD_PICTURE,
   LOCALE_APPOINTMENT_DETAIL_INPUT_RENT,
   LOCALE_APPOINTMENT_DETAIL_INPUT_PHONE,
   LOCALE_APPOINTMENT_DETAIL_CANT_SUBMIT,
-  LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM,
   LOCALE_APPOINTMENT_DETAIL_SIGN_PICTURE
 } from '@constants/locale'
 
 // 自定义组件
 import Decorate from '@components/decorate'
 import ImageUpload from '@components/image-upload'
-import AppointmentDetailRoom from '@components/appointment-detail-room'
+import BaseComponent from '@components/base'
+
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
-import BaseComponent from '../../components/base'
 
 import buryPoint from '../../utils/bury-point'
+import AppointmentDetailRoom from './components/appointment-detail-room'
+
 
 
 @connect(state => state, {
