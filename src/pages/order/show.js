@@ -18,7 +18,6 @@ import day from 'dayjs'
 import Board from '@components/board'
 import ABCIcon from '@components/abc-icon'
 import Decorate from '@components/decorate'
-import OrderDesc from '@components/order-desc'
 import OrderTimer from '@components/order-timer'
 import TabBarBoard from '@components/tab-bar-board'
 import ApartmentList from '@components/apartment-list'
@@ -66,6 +65,8 @@ import {
 } from '@constants/locale'
 
 import buryPoint from '../../utils/bury-point'
+import OrderDesc from './components/order-desc'
+
 
 @connect(state => state, {
   ...userActions,

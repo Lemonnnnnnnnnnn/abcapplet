@@ -44,7 +44,7 @@ class OrderCouponMask extends BaseComponent {
           <AtIcon onClick={onClose} value='close' size='15' className='p-2 mr-1 mt-1' color='#888' style='position : absolute ; right : 0'></AtIcon>
           <View className='at-row at-row__align--end ml-4 py-3'>
             <View className='text-huge '> 选择优惠券</View>
-            <View className='text-normal text-secondary ml-1' style={{marginBottom : Taro.pxTransform(3)}}>*可多选</View>
+            <View className='text-small text-secondary ml-2' style={{marginBottom : Taro.pxTransform(3) }}>部分优惠券可叠加使用</View>
           </View>
           <ScrollView style={{ height: Taro.pxTransform(couponList && couponList.length && 750) }} scrollY >
             {

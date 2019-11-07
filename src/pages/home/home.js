@@ -174,6 +174,8 @@ class CommonHome extends BaseComponent {
 
   componentDidShow() {
     Taro.showTabBarRedDot({ index: 2 })
+    const user_info = Taro.getStorageSync('user_info')
+    console.log(user_info.citycode)
   }
 
   // 获取经纬度

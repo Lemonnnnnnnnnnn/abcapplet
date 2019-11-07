@@ -10,7 +10,7 @@ import { LOCALE_PRICE_SEMICOLON, LOCALE_QI } from '@constants/locale'
 import { SUBLET_FINISH_NEW } from '@constants/picture'
 
 
-class SunletItem extends BaseComponent {
+class SubletItem extends BaseComponent {
 
   render() {
     const { item } = this.props
@@ -54,4 +54,4 @@ class SunletItem extends BaseComponent {
   }
 }
 
-export default SunletItem
+export default SubletItem

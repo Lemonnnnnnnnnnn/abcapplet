@@ -18,6 +18,8 @@ import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import CouponItem from '@components/coupon-item'
 
+// import ApartmentContainer from '#components/apartment-container'
+
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 // 自定义方法
@@ -35,8 +37,6 @@ import AppartmentMatchingMask from './components/apartment-matching-mask'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
 import ApartmentContainer from './components/apartment-container'
 
-// import '../../styles/_apartment.scss'
-
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
   ...userActions,
@@ -49,7 +49,6 @@ class HouseTypeShow extends Component {
   }
 
   state = {
-    Id: 0,
     showLittleMask: false,
     houseType_id: 83,
     houstType: {
@@ -336,7 +335,7 @@ class HouseTypeShow extends Component {
   onShareAppMessage(target) {
     const text = LOCALE_SHARE_TEXT
     if (target.target && target.target.dataset.url) {
-      let { url, id } = target.target.dataset
+      let { url, id, share_title, share_img } = target.target.dataset
       url = url.replace(/\s*/g, "")
 
       this.props.dispatchCouponReceive({ id: id }).then(res => {
@@ -346,15 +345,15 @@ class HouseTypeShow extends Component {
         )
       })
       return {
-        title: textWrap(text, 17),
+        title: textWrap(share_title, 17),
         path: url,
+        imageUrl: share_img
       }
     } else {
       const { cityId } = this.state
       this.props.dispatchApartmentHouseDataPost({ type: 2, city_id: cityId })
       return {
-        title: textWrap(text, 17),
-        success: () => console.log('111')
+        title: textWrap(text, 17)
       }
     }
   }

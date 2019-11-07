@@ -17,31 +17,19 @@ import { PAGE_ORDER_DOWN_PAYMENT, PAGE_ORDER_DEPOSIT_BAR } from '@constants/page
 import { ORDER_STATUS_DIST } from '@constants/order'
 
 import {
-  LOCALE_RENT,
   LOCALE_CONTACT,
-  LOCALE_ORDER_NO,
   LOCALE_SIGN_INFO,
-  LOCALE_RISK_FUND,
-  LOCALE_ORDER_TIME,
-  LOCALE_DOWN_PAYMENT,
-  LOCALE_ORDER_MOBILE,
-  LOCALE_ORDER_ID_CARD,
-  LOCALE_ORDER_USERNAME,
-  LOCALE_ORDER_APARTMENT,
   LOCALE_DOWN_PAYMENT_REAL,
   LOCALE_SHOW_DOWN_PAYMENT_RULE,
-  LOCALE_DOWN_PAYMENT_RATIO,
   LOCALE_PRICE_SEMICOLON,
 } from '@constants/locale'
 
 import { CREATE_ORDER_DIST } from '@constants/dist'
 
-import '../../styles/_text.scss'
-
 
 class OrderDesc extends BaseComponent {
   static defaultProps = {
-    order: {}
+    order: { coupon_price: {} }
   }
 
   onNavigation() {
@@ -88,7 +76,7 @@ class OrderDesc extends BaseComponent {
 
     const arr = [
       { title: '订单号：', message: [orderNo] },
-      { title: '预定公寓：', message: [apartmentTitle + '  '+ apartment_room_id + '间'] },
+      { title: '预定公寓：', message: [apartmentTitle + '  ' + apartment_room_id + '间'] },
       { title: '签约时间：', message: [day.unix(signTime).format('YYYY年MM月DD日')] },
       { title: '预定人：', message: [name, mobile, idCode] },
       { title: '风险金：', message: [riskPrice] },
@@ -101,11 +89,7 @@ class OrderDesc extends BaseComponent {
       priceList.push({ ...CREATE_ORDER_DIST[i], num: coupon_price[i] })
     }
 
-    priceList.forEach(i => {
-      if (i.type === 1) {
-        renderPriceCutOff = true
-      }
-    })
+    renderPriceCutOff = Object.keys(coupon_price).length && true
 
     return (
       <View className={className}>
@@ -145,7 +129,7 @@ class OrderDesc extends BaseComponent {
           </View>
         </Board>
         {/* 价格相关 */}
-        <View className='mx-2 '>
+        <View className='mx-2 my-4 '>
           {/* 租金 */}
           <View className='mb-2 text-normal text-secondary'>
             <View className='at-row at-row__align--start at-row__justify--between'>

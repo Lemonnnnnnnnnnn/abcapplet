@@ -37,8 +37,6 @@ import { PAGE_USER_AUTH, PAGE_APPOINTMENT_CREATE } from '@constants/page'
 import { connect } from '@tarojs/redux'
 import * as apartmentActions from '@actions/apartment'
 
-import '../../styles/_coupon.scss'
-
 @connect(state => state, {
   ...apartmentActions,
 })
@@ -99,8 +97,8 @@ class CouponItem extends BaseComponent {
   render() {
     const { coupon, block, status, className } = this.props
 
-    const { worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no, share_url, receive_type,
-      id, can_receive, max_receive_num, validity_period, period_time, end_time, condition_period, active, canChoise } = coupon
+    const { worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no, share_url, share_title, share_img, receive_type,
+      id, can_receive, max_receive_num, validity_period, period_time, end_time, condition_period, active, canChoise, coupon_link_title } = coupon
 
     // 对后台传过来的数值进行判断再赋值
 
@@ -123,7 +121,7 @@ class CouponItem extends BaseComponent {
     }
 
 
-    // 对三种不同外观的优惠券样式进行class赋值
+    // 对三种不同外观的优惠券样式进行class赋值和状态赋值
     switch (block) {
       case 'user': {
         statusText = status !== undefined && USER_COUPON_DIST[status].title
@@ -149,10 +147,10 @@ class CouponItem extends BaseComponent {
           switch (receive_type) {
             case 0: { statusText = LOCALE_RECEIVE } break
             case 1: {
-              statusText = '分享领取'
+              statusText = '分享发放'
               shareIf = true
             } break
-            case 2: { statusText = '预约领取' } break
+            case 2: { statusText = '预约发放' } break
           }
         }
 
@@ -179,7 +177,7 @@ class CouponItem extends BaseComponent {
               {coupon_type === 1 && <View className='text-huge  page-middile mt-2'>{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</View>}
             </View>
           </View>
-          {/* 中 券类  有效期*/}
+          {/* 中 券类 户型房间 叠加title 有效期 租期*/}
           <View className=' inherit-Height ' style={{ borderRight: '1px dashed #EEEEEE', width: '40%' }}>
             <View className='at-row at-row__align--center inherit-Height' >
               <View>
@@ -188,6 +186,7 @@ class CouponItem extends BaseComponent {
                   {apartment_type && <Text>{apartment_type} </Text>}
                   {apartment_no && <Text className='ml-1'>{LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM + LOCALE_COLON + apartment_no}</Text>}
                 </View>
+                {coupon_link_title && <View className='text-mini'>{coupon_link_title}</View>}
                 <View className='text-mini'>{period_time || end_time}</View>
                 {condition_period && <View className='text-mini'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : condition_period + LOCALE_MONTH}</View>}
               </View>
@@ -231,6 +230,7 @@ class CouponItem extends BaseComponent {
                   {apartment_type && <Text>{apartment_type} </Text>}
                   {apartment_no && <Text className='ml-1'>{LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM + LOCALE_COLON + apartment_no}</Text>}
                 </View>
+                {coupon_link_title && <View className='text-mini'>{coupon_link_title}</View>}
                 <View className='text-mini'>{period_time || end_time}</View>
                 {condition_period && <View className='text-mini'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : condition_period + LOCALE_MONTH}</View>}
               </View>
@@ -242,7 +242,14 @@ class CouponItem extends BaseComponent {
               <View>
                 <View className='at-row at-row__justify--center at-row__align--center'>
                   {shareIf ?
-                    <Button data-url={share_url} data-id={id} open-type='share' className={textColorStaus}>{statusText}</Button> :
+                    <Button
+                      data-share_title={share_title}
+                      data-share_img={share_img}
+                      data-url={share_url}
+                      data-id={id}
+                      open-type='share'
+                      className={textColorStaus}
+                    >{statusText}</Button> :
                     <View className={`${textColorStaus}`}>{statusText}</View>}
 
                   {!can_receive && <AtIcon value='help' size='14' color='#88888'></AtIcon>}
@@ -280,6 +287,7 @@ class CouponItem extends BaseComponent {
                   {apartment_type && <Text>{apartment_type} </Text>}
                   {apartment_no && <Text className='ml-1'>{LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM + LOCALE_COLON + apartment_no}</Text>}
                 </View>
+                {coupon_link_title && <View className='text-mini'>{coupon_link_title}</View>}
                 <View className='text-mini'>{period_time || end_time}</View>
                 {condition_period && <View className='text-mini'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : condition_period + LOCALE_MONTH}</View>}
               </View>

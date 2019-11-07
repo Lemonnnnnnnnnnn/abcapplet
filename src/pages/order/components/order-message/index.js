@@ -49,7 +49,7 @@ export default class OrderMessage extends BaseComponent {
 
   render() {
     const { rooms, timeList, couponPrice, couponTotal, cost_deposit, room, payload } = this.props
-    const { no: roomNo, discount_price: discountPrice, price, apartment_title: apartmentTitle, risk_money, coupon_money,old_discount_price,discount_price ,coupon_price } = room
+    const { no: roomNo, price, apartment_title: apartmentTitle, risk_money, coupon_money, old_discount_price, discount_price, coupon_price } = room
     const { name, mobile, id_code: idCode, room_id } = payload
 
     // 生成供渲染的价格列表，计算减去优惠券后的租金，如果没有租金减免不渲染这一条
@@ -106,7 +106,7 @@ export default class OrderMessage extends BaseComponent {
                       {rooms.length !== 0 && <View className='text-normal  mt-1'>
                         {LOCALE_RENT}{LOCALE_SEMICOLON}
                         <Text className='text-normal'>{LOCALE_PRICE_SEMICOLON}</Text>
-                        <Text className='text-huge'>{discountPrice}</Text>
+                        <Text className='text-huge'>{discount_price || old_discount_price}</Text>
                         {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
                       </View>}
                     </View>

@@ -21,6 +21,7 @@ import {
   LOCALE_HOT_SEARCH,
   LOCALE_HISTORY_SEARCH,
   LOCALE_RECOMMEND_SEARCH,
+  LOCALE_XIAMEN
 } from '@constants/locale'
 
 import {
@@ -48,8 +49,6 @@ class CommonSearch extends BaseComponent {
 
     // 城市相关
     city: 0,
-    selector: ['厦门'],
-    selectorChecked: '厦门',
 
     // 搜索记录
     hotList: [],
@@ -78,17 +77,6 @@ class CommonSearch extends BaseComponent {
     // 获取字典
     this.props.dispatchDistList(city)
 
-    // 拉取城市列表
-    this.props.dispatchCityList().then((res) => {
-      const citys = res.data.data.list
-      // 设置城市选择器
-      const selector = citys.map(i => i.title)
-      const selectorCity = citys.filter(i => i.id === city)[0]
-      const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
-
-      this.setState({ selector, selectorChecked })
-    })
-
     // 热门搜索，因为这个就这里用到了就没写到 reducer
     this.props.dispatchHotSearch()
       .then(({ data: { data } }) =>
@@ -103,21 +91,6 @@ class CommonSearch extends BaseComponent {
       showPreview: true,
       defaultPayload: { ...PAYLOAD_SEARCH_APARTMENT, city }
     })
-  }
-
-  /**
-   * 城市相关选择器数据
-   * @param {*} param
-   */
-  onChangeSelector({ currentTarget: { value } }) {
-    const { citys } = this.props
-    const { selector } = this.state
-
-    const selectorChecked = selector[value]
-    const newCity = citys.filter(i => i.title === selectorChecked)[0]
-
-    this.setState({ selectorChecked })
-    this.onReset(newCity.id)
   }
 
   /**
@@ -171,9 +144,7 @@ class CommonSearch extends BaseComponent {
 
   render() {
     const {
-      selector,
       showPreview,
-      selectorChecked,
 
       city,
       hotList,
@@ -194,13 +165,11 @@ class CommonSearch extends BaseComponent {
         <Search
           isInput
           isFixed={false}
+          showPicker={false}
           ref={this.refSearch}
-          selector={selector}
           showCancel={!showPreview}
-          selectorChecked={selectorChecked}
 
           onInputCancel={this.onInputCancel}
-          onChangeSelector={this.onChangeSelector}
           onInputConfirm={this.onApartmentPayloadChange}
         />
 
