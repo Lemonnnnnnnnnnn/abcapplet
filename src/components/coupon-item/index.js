@@ -120,7 +120,6 @@ class CouponItem extends BaseComponent {
       couponPrice = LOCALE_PRICE_SEMICOLON + worthText
     }
 
-
     // 对三种不同外观的优惠券样式进行class赋值和状态赋值
     switch (block) {
       case 'user': {
@@ -324,7 +323,6 @@ class CouponItem extends BaseComponent {
         <View className='right vertical-center coupon-item-mini-angle'></View>
         <View className='right vertical-center square-cover'></View>
       </View>
-
 
     return <View>
       {block === 'order' && couponOrder}

@@ -21,7 +21,6 @@ import {
   LOCALE_HOT_SEARCH,
   LOCALE_HISTORY_SEARCH,
   LOCALE_RECOMMEND_SEARCH,
-  LOCALE_XIAMEN
 } from '@constants/locale'
 
 import {

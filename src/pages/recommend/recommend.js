@@ -32,15 +32,11 @@ class ApartmentRecommend extends Component {
   refSubletList = (node) => this.SubletList = node
 
   state = {
-    selector: ['厦门市'],
-    selectorChecked: '厦门市',
-    citys: [],
     isInput: 1,
     payload: PAYLOAD_SUB_LIST,
     count: false,
     inputValue: '',
     showCancel: false,
-    selectorCheckedId: 0,
   }
 
   async  onPullDownRefresh() {
@@ -79,27 +75,12 @@ class ApartmentRecommend extends Component {
         console.log(res)
       }
 
-    })
+    }).catch(e=>console.log(e))
   }
   async componentWillMount() {
     buryPoint()
 
     // 获取用户数据 和 刷新页面数据
-    const { payload: user } = await this.props.dispatchUser()
-
-
-    this.props.dispatchCityList().then((res) => {
-      const citys = res.data.data.list
-
-      // 设置城市选择器
-      const selector = citys.map(i => i.title)
-      const selectorCity = citys.filter(i => i.id === user.citycode)[0]
-      const selectorChecked = selectorCity ? selectorCity.title : '厦门市'
-      const selectorCheckedId = res.data.data.list[0].id
-
-      this.setState({ selector, selectorChecked, citys, selectorCheckedId })
-    })
-
     const { count } = this.state
     count && this.SubletList.onReset(null)
     this.setState({
@@ -110,39 +91,27 @@ class ApartmentRecommend extends Component {
   componentDidShow() {
     Taro.hideTabBarRedDot({ index: 2 })
   }
-  //下拉选择
-  async onChangeSelector({ currentTarget: { value } }) {
-    const { selector, citys, payload } = this.state
-    this.setState({
-      selectorChecked: selector[value],
-      selectorCheckedId: citys[value].id,
-      inputValue: '',
-      showCancel: false,
-    })
-    await this.SubletList.onReset({ ...payload, city_id: citys[value].id })
-    await this.props.dispatchSubList({ ...payload, city_id: citys[value].id })
 
-  }
   //用户输入
   onInputValue({ currentTarget: { value } }) {
     this.setState({ inputValue: value })
   }
   //搜索
   async onInputConfirm() {
-    const { inputValue, payload, selectorCheckedId } = this.state
+    const { inputValue, payload } = this.state
     this.setState({ showCancel: true })
-    await this.SubletList.onReset({ ...payload, keyword: inputValue, city_id: selectorCheckedId })
-    await this.props.dispatchSubList({ ...payload, keyword: inputValue, city_id: selectorCheckedId })
+    await this.SubletList.onReset({ ...payload, keyword: inputValue })
+    await this.props.dispatchSubList({ ...payload, keyword: inputValue })
 
   }
   onInputCancel() {
-    const { payload, selectorCheckedId } = this.state
-    this.SubletList.onReset({ ...payload, city_id: selectorCheckedId })
+    const { payload } = this.state
+    this.SubletList.onReset({ ...payload })
     this.setState({ showCancel: false, inputValue: '' })
   }
 
   render() {
-    const { selector, selectorChecked, isInput, payload, showCancel, inputValue, count } = this.state
+    const {  isInput, payload, showCancel, inputValue } = this.state
     const { sublet } = this.props
 
     return (
@@ -151,13 +120,11 @@ class ApartmentRecommend extends Component {
           {
             <Search
               className='mb-2'
-              selector={selector}
-              selectorChecked={selectorChecked}
+              showPicker={false}
               isInputSub={isInput}
               showCancel={showCancel}
               inputValue={inputValue}
               onInputValue={this.onInputValue}
-              onChangeSelector={this.onChangeSelector}
               onInputCancel={this.onInputCancel}
               onInputConfirm={this.onInputConfirm}
             />

@@ -46,7 +46,7 @@ class OrderStepMask extends BaseComponent {
         const carouselStyle = { height: Taro.pxTransform(contentHeight + pictureHeight) }
 
         return (show && <View className={className} onTouchMove={this.onMaskTouchMove}>
-            <View className='vertical-level-center apartment-order-step-mask'  >
+            <View className='vertical-level-center order-step-mask'  >
                 <View className='m-3'>
                     {/* 头部 */}
                     <View className='text-bold text-huge text-center'>{LOCALE_ORDER_PROCESS_GUIDE}</View>

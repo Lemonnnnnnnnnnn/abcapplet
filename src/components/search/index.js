@@ -116,10 +116,9 @@ class Search extends BaseComponent {
                 }
               </View>}
             {/* 搜索转租 */}
-            {isInputSub && <View className='at-col at-col-9'>
+            {isInputSub && <View className='at-col '>
               <View className='at-row at-row__align--center at-row__justify--between text-normal' >
                 <Input className='ml-3'
-
                   value={inputValue}
                   confirmType='确定'
                   placeholder='搜索公寓/户型等关键词'

@@ -192,7 +192,7 @@ class ApartmentItem extends BaseComponent {
           <View className='mt-1'>
             <View >
               <View className='at-row at-row__justify--between at-row__align--center'>
-                <View className='text-large mt-2 at-col-1 at-col--auto' style={{ color: "rgba(53, 53, 53, 1)" }}>{sub_title}</View>
+                <View className='at-col at-col-10 text-large  mt-2 overtext' style={{ color: "rgba(53, 53, 53, 1)" }}>{sub_title}</View>
                 {is_sign && <View className='mt-2 text-normal tag-risk'>安心住</View>}
               </View>
               {desc && <View className='text-muted text-normal apartment-item-content-desc'>{one_word}</View>}
