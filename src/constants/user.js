@@ -128,3 +128,6 @@ export const USER_COUPON_DIST = [
   { title: '已使用', active: false, status: 1, ref: 'CouponListHaveBeenUsed' },
   { title: '已过期', active: false, status: 2, ref: 'CouponListExpired' },
 ]
+
+// 设置用户所在站点
+export const SET_USER_CITY = 'SET_USER_CITY'

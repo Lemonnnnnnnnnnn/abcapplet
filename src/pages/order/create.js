@@ -24,6 +24,7 @@ import { PAYLOAD_ORDER_CREATE, PAYLOAD_ORDER_DETAIL } from '@constants/api'
 import {
   LOCALE_SIGN_NOW,
   LOCALE_LOCA_ORDER_NOTICE,
+  LOCALE_LOCA_ORDER_NOTICE2,
   LOCALE_COUPON_NONE,
   LOCALE_CHOISE_ROOM_FIRST,
   LOCALE_NAME,
@@ -154,17 +155,19 @@ class OrderCreate extends BaseComponent {
     const { payload, timeList } = this.state
 
     const timeListClone = timeList.map(i => ({ ...i, active: i.active = i.id === id ? true : false }))
-    payloadDetail = { ...payloadDetail, tenancy: id }
+    payloadDetail = { ...payloadDetail, tenancy: id , coupon_user_id: '' }
 
     // 置空优惠券列表
     this.props.dispatchOrderPreview(payloadDetail).then(({ data: { data } }) => {
       this.setState({
         timeList: timeListClone,
+        room: { ...data.room },
         payload: { ...payload, tenancy: id },
         payloadDetail,
         couponTotal: data.coupon.length + LOCALE_COUPON_CAN_USED,
         couponPrice: 0,
         coupon: data.coupon.map(i => ({ ...i, active: false, canChoise: true })),
+        couponIdArr : [],
       })
     })
   }
@@ -193,7 +196,7 @@ class OrderCreate extends BaseComponent {
   // 选择房间
   async onSelectRoom(id) {
     let { payload, payloadDetail } = this.state
-    payloadDetail = { ...payloadDetail, room_id: id }
+    payloadDetail = { ...payloadDetail, room_id: id, coupon_user_id: '' }
     const { data: { data } } = await this.props.dispatchOrderPreview(payloadDetail)
 
     // 置空优惠券列表
@@ -205,7 +208,8 @@ class OrderCreate extends BaseComponent {
       couponTotal: data.coupon.length + LOCALE_COUPON_CAN_USED,
       couponPrice: 0,
       coupon: data.coupon.map(i => ({ ...i, active: false, canChoise: true })),
-      payloadDetail
+      payloadDetail,
+      couponIdArr : [],
     })
   }
 
@@ -279,7 +283,7 @@ class OrderCreate extends BaseComponent {
         showCouponList: false,
         couponStorage: coupon,
         couponIdArrStorage: couponIdArr,
-        couponPrice : couponIdArr.length ? couponPrice : data.coupon.length + LOCALE_COUPON_CAN_USED,
+        couponPrice: couponIdArr.length ? couponPrice : data.coupon.length + LOCALE_COUPON_CAN_USED,
         payloadDetail,
         payload: { ...payload, coupon_user_id },
       })
@@ -452,7 +456,8 @@ class OrderCreate extends BaseComponent {
           />
 
           {/* 提示信息 */}
-          <View className='text-secondary text-normal text-center mt-5 mb-3'>{LOCALE_LOCA_ORDER_NOTICE}</View>
+          <View className='text-secondary text-normal text-center mt-5 '>{LOCALE_LOCA_ORDER_NOTICE}</View>
+          <View className='text-secondary text-normal text-center mb-3'>{LOCALE_LOCA_ORDER_NOTICE2}</View>
 
           {/* 立即预订 */}
           {rooms.length !== 0 ? <View className='at-row'>

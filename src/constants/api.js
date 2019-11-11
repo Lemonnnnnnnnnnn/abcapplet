@@ -280,3 +280,7 @@ export const API_COUPON_ALONE = `${HOST}/coupon/detailPost`
 
 // 获取退租险人数和金额
 export const API_SETTING_RISK_POST = `${HOST}/index/settingRiskPost`
+
+// 设置用户所在站点
+export const API_SETTING_CITY = `${HOST}/user/setCityPost`
+
