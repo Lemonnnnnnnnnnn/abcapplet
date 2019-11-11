@@ -93,6 +93,13 @@ class App extends Component {
           'coupon_receive'
         ]
       },
+      {
+        root: 'pages/bargain',
+        pages: [
+          'pages/bargain-list',
+          'pages/bargain-detail'
+        ]
+      },
     ],
 
     window: {
