@@ -88,8 +88,8 @@ class UserFavorite extends Component {
 
   render() {
     const { code, navList, current } = this.state
-    const { userCouponList } = this.props
-    const { list } = userCouponList
+    const { userCouponList: { list } } = this.props
+    const city_id = parseInt(Taro.getStorageSync('cityDefault'))
 
     let couponList = []
 
@@ -133,7 +133,7 @@ class UserFavorite extends Component {
                   block='user'
                   couponList={couponList}
 
-                  defaultPayload={PAYLOAD_COUPON_CAN_USED}
+                  defaultPayload={{ ...PAYLOAD_COUPON_CAN_USED, city_id }}
                   dispatchList={this.props.dispatchCouponUser}
                   dispatchNextPageList={this.props.dispatchNextPageCouponUser}
                 />
@@ -147,7 +147,7 @@ class UserFavorite extends Component {
                   block='user'
                   couponList={couponList}
 
-                  defaultPayload={PAYLOAD_COUPON_HAVE_BEEN_USED}
+                  defaultPayload={{ ...PAYLOAD_COUPON_HAVE_BEEN_USED, city_id }}
                   dispatchList={this.props.dispatchCouponUser}
                   dispatchNextPageList={this.props.dispatchNextPageCouponUser}
                 />
@@ -161,7 +161,7 @@ class UserFavorite extends Component {
                   block='user'
                   couponList={couponList}
 
-                  defaultPayload={PAYLOAD_COUPON_USER_EXPIRED}
+                  defaultPayload={{ ...PAYLOAD_COUPON_USER_EXPIRED, city_id }}
                   dispatchList={this.props.dispatchCouponUser}
                   dispatchNextPageList={this.props.dispatchNextPageCouponUser}
                 />

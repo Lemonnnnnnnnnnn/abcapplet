@@ -39,7 +39,6 @@ const city = userActions.dispatchUser().payload.citycode
 class ApartmentShow extends Component {
   config = {
     navigationBarTitleText: '公寓详情',
-    // navigationStyle: 'custom',
   }
 
   state = {
@@ -254,7 +253,7 @@ class ApartmentShow extends Component {
 
 
   render() {
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag, couponCutList } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag, couponCutList ,cityId } = this.state
     const { latitude, longitude, markers } = map
     const {
       title, swipers, isCollect, special, types, tags, desc,
@@ -295,6 +294,7 @@ class ApartmentShow extends Component {
               show={showCouponMask}
               onClose={this.onCloseCoupon}
               apartment_id={id}
+              cityId={cityId}
               params={this.$router.params}
               onTest={this.onTest}
             />

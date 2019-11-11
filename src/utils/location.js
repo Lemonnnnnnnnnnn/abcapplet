@@ -17,6 +17,7 @@ const getUserLocation = (latitude, longitude) => new Promise(function (resolve, 
     }, success: function (result) {
       const { city_code, nation_code } = result.result.ad_info
       const city_id = city_code.replace(nation_code, '')
+      Taro.setStorageSync('cityDefault' , city_id)
       resolve(city_id)
     }
   })

@@ -88,6 +88,7 @@ class HouseTypeShow extends Component {
 
     const { citycode } = Taro.getStorageSync('user_info')
     citycode && this.setState({ cityId: citycode })
+
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
       const apartmentID = data.apartment_id
@@ -386,7 +387,7 @@ class HouseTypeShow extends Component {
     const { apartments, ads: { riskAd } } = this.props
 
     const { houstType, map, buttons, showRentDescription, showCouponTag, houseType_id, showMatch, roomMatch_list,
-      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList } = this.state
+      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList ,cityId } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -460,6 +461,7 @@ class HouseTypeShow extends Component {
                 onClose={this.onClose}
                 houseType_id={id}
                 apartment_id={apartmentId}
+                cityId={cityId}
                 params={this.$router.params}
               />
 
