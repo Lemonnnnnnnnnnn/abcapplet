@@ -1,6 +1,6 @@
 // Taro 相关
 import Taro, { Component } from '@tarojs/taro'
-import { View, Image, Picker, Text } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import { AtAvatar, AtIcon, AtButton, AtTag } from 'taro-ui'
 
 // Redux 相关
@@ -16,8 +16,6 @@ import {
   LOCALE_CHANGE,
   LOCALE_APPOINTMENT_LOOKTIME,
   LOCALE_APPOINTMENT_POST,
-  LOCALE_APARTMENT_APPOINTMENT_AD_TEXT1,
-  LOCALE_APARTMENT_APPOINTMENT_AD_TEXT2,
   LOCALE_LOGIN_APPOINTMENT,
   LOCALE_MULTIPLE_SELECTION,
   LOCALE_NO_OPTIONAL_UNIT,
@@ -28,9 +26,6 @@ import {
   LOCALE_OH,
   LOCALE_CHOISE_VIEW_ROOM_TIME,
   LOCALE_NO_LISTINGS,
-  LOCALE_YEAR,
-  LOCALE_MONTH,
-  LOCALE_DAY,
   LOCALE_NONE,
   LOCALE_MOBILE_FORMAT_ERROR,
   LOCALE_VIEW_ROOM_DATE,
@@ -46,22 +41,7 @@ import timePicker from '@components/time-picker'
 import buryPoint from '../../utils/bury-point'
 import AppointmentPostMask from './components/appointment-post-mask'
 import AppointmentPostNextMask from './components/appointment-post-next-mask'
-
-// const nowTime = new Date()
-// let currentMonth = nowTime.getMonth()
-// let currentDay = nowTime.getDate()
-// let currentHours = nowTime.getHours()
-// let currentYear = nowTime.getFullYear()
-
-// let payloadH = 0
-
-// if (currentHours >= 0 && currentHours < 8) {
-//   payloadH = '09:30'
-// } else if (currentHours > 19 && currentHours <= 24) {
-//   payloadH = '21:30'
-// } else {
-//   payloadH = currentHours + 2 + ':00'
-// }
+import ApartmentAppointmentHeader from './components/apartment-appointment-header'
 
 @connect(state => state, {
   ...userActions,
@@ -95,9 +75,6 @@ class AppointmentPost extends Component {
       swipers: [],
     },
     houseTypeList: [],
-    currentTime: [],
-    secTimeClick: false,
-
     houseTypeArr: [],
 
     isNight: false,//夜单时间，false:不是，true:是
@@ -161,7 +138,6 @@ class AppointmentPost extends Component {
     })
 
     // 初始化户型列表
-
     await this.props.dispatchApartmentShow({ id: apartmentId }).then(res => {
       const houseTypeListInal = res.data.data.house_types
       let houseTypeList = JSON.parse(JSON.stringify(houseTypeListInal))
@@ -192,79 +168,6 @@ class AppointmentPost extends Component {
         houseTypeList: [...typeList],
       })
     })
-
-
-    // 计算可供选择的时间列表
-
-    // let currentHoursIndex = 0
-    // if (currentHours * 2 - 15 > 24) {
-    //   currentHoursIndex = 24
-    // } else if (currentHours * 2 - 15 < 0) {
-    //   currentHoursIndex = 0
-    // } else {
-    //   currentHoursIndex = currentHours * 2 - 15
-    // }
-
-
-    // let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
-    // this.setState({ currentTime: currentTime })
-
-    // const finalList = []
-
-    // // 生成用于map的空数组
-    // const monthList_NaN = Array.from({ length: 12 })
-    // const timeList_NaN = Array.from({ length: 25 })
-    // let dayList_NaN = []
-
-    // // 判断大小月与平年闰年
-
-    // let bigMonth = [1, 3, 5, 7, 8, 10, 12]
-    // let smailMonth = [4, 6, 9, 11]
-    // let judge = { "bigMonth": true, "flatYear": true }
-
-    // bigMonth.forEach(i => {
-    //   if (i === currentMonth + 1) {
-    //     judge.bigMonth = true
-    //   }
-    // })
-
-    // smailMonth.forEach(i => {
-    //   if (i === currentMonth + 1) {
-    //     judge.bigMonth = false
-    //   }
-    // })
-
-    // if ((currentYear % 4 === 0 && currentYear % 100 != 0) || currentYear % 400 === 0) {
-    //   judge.flatYear = false
-    // } else {
-    //   judge.flatYear = true
-    // }
-
-    // if (currentMonth !== 1) {
-    //   judge.bigMonth ? dayList_NaN = Array.from({ length: 31 }) : dayList_NaN = Array.from({ length: 30 })
-    // } else if (currentMonth === 1) {
-    //   judge.flatYear ? dayList_NaN = Array.from({ length: 28 }) : dayList_NaN = Array.from({ length: 29 })
-    // }
-
-    // //填充数据
-    // let yearList = [nowTime.getFullYear() + LOCALE_YEAR]
-    // let monthList = []
-    // let dayList = []
-    // let timeList = []
-
-    // monthList_NaN.map((i, key) => monthList.push(key + 1 + LOCALE_MONTH))
-    // dayList_NaN.map((i, key) => dayList.push(key + 1 + LOCALE_DAY))
-    // timeList_NaN.map((i, key) => {
-    //   key % 2 === 0 && timeList.push((key / 2) + 9 + " :30")
-    //   key % 2 === 1 && timeList.push(((key + 1) / 2) + 9 + " :00")
-    // })
-
-
-    // finalList.push(yearList)
-    // finalList.push(monthList)
-    // finalList.push(dayList)
-    // finalList.push(timeList)
-    // this.setState({ range: finalList })
   }
 
 
@@ -303,7 +206,6 @@ class AppointmentPost extends Component {
     this.setState({ showGetPhoneNumMask: false })
   }
 
-
   // 户型选择
   onChoiseHouseType(e, index) {
     const { houseTypeList, Payload, houseTypeArr } = this.state
@@ -335,128 +237,6 @@ class AppointmentPost extends Component {
     })
 
   }
-
-  // onClickPicker() {
-  //   const { Payload, range, secTimeClick } = this.state
-  //   const year = (range[0][0]).split(LOCALE_YEAR)[0]
-
-  //   if (!secTimeClick) {
-  //     currentMonth = nowTime.getMonth()
-  //     currentDay = nowTime.getDate()
-  //     currentHours = nowTime.getHours()
-
-  //     if (currentHours >= 0 && currentHours < 8) {
-  //       payloadH = '09:30'
-  //     } else if (currentHours > 19 && currentHours <= 24) {
-  //       payloadH = '21:30'
-  //     } else {
-  //       payloadH = currentHours + 2 + ':00'
-  //     }
-
-
-  //     let currentHoursIndex = 0
-  //     if (currentHours * 2 - 15 > 24) {
-  //       currentHoursIndex = 24
-  //     } else if (currentHours * 2 - 15 < 0) {
-  //       currentHoursIndex = 0
-  //     } else {
-  //       currentHoursIndex = currentHours * 2 - 15
-  //     }
-
-  //     let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
-  //     this.setState({ currentTime: currentTime })
-
-
-  //     const payloadStr = year + "-"
-  //       + this.onJudgeTen(currentMonth + 1)
-  //       + "-" + this.onJudgeTen(currentDay)
-  //       + " " + payloadH
-
-  //     this.setState({
-  //       Payload: { ...Payload, order_time: payloadStr }
-  //     })
-  //   }
-  //   this.setState({ secTimeClick: true })
-  // }
-
-  // onColumnChange = e => {
-  //   const { column, value } = e.detail
-  //   const { Payload, range } = this.state
-  //   const year = (range[0][0]).split(LOCALE_YEAR)[0]
-
-  //   if (column === 1) { currentMonth = value }
-  //   if (column === 2) {
-  //     currentDay = value + 1
-  //   }
-  //   if (column === 3) {
-  //     if (value % 2 === 0) {
-  //       payloadH = this.onJudgeTen(value / 2 + 9) + ':30'
-  //     } else if (value % 2 === 1) {
-  //       payloadH = this.onJudgeTen((value + 1) / 2 + 9) + ':00'
-  //     }
-  //   }
-
-  //   const payloadStr = year + "-"
-  //     + this.onJudgeTen(currentMonth + 1) + "-"
-  //     + this.onJudgeTen(currentDay) + " "
-  //     + payloadH
-
-
-  //   this.setState({
-  //     Payload: { ...Payload, order_time: payloadStr }
-  //   })
-
-  //   if (column !== 1) { return }
-
-  //   let finalList = []
-
-  //   const yearList = range[0]
-  //   const monthList = range[1]
-  //   const timeList = range[3]
-
-  //   let judge = { "bigMonth": true, "flatYear": true }
-
-  //   let dayList = []
-  //   const dayBigDayList_NaN = Array.from({ length: 31 })
-  //   const daySmailDayList_NaN = Array.from({ length: 30 })
-  //   const dayflatDayList_NaN = Array.from({ length: 28 })
-  //   const dayleapDayList_NaN = Array.from({ length: 29 })
-
-
-  //   if (value === 0 || value === 2 || value === 4 || value === 6 || value === 7 || value === 9 || value === 11) {
-  //     judge.bigMonth = true
-  //   } else if (value === 3 || value === 5 || value === 8 || value === 10) {
-  //     judge.bigMonth = false
-  //   }
-
-  //   if ((year % 4 === 0 && year % 100 != 0) || year % 400 === 0) {
-  //     judge.flatYear = false
-  //   } else {
-  //     judge.flatYear = true
-  //   }
-
-  //   if (value !== 1) {
-  //     judge.bigMonth ? dayBigDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : daySmailDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-  //   } else if (value === 1) {
-  //     judge.flatYear ? dayflatDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : dayleapDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-  //   }
-
-  //   finalList.push(yearList)
-  //   finalList.push(monthList)
-  //   finalList.push(dayList)
-  //   finalList.push(timeList)
-  //   this.setState({ range: finalList })
-
-  // }
-
-  // onJudgeTen(num) {
-  //   let newNum = parseInt(num)
-  //   if (newNum < 10) {
-  //     return "0" + newNum
-  //   } else {
-  //     return newNum
-  //   }
-  // }
 
 
   //打开,关闭获取姓名和电话号码弹窗
@@ -499,17 +279,20 @@ class AppointmentPost extends Component {
   }
 
   onCloseRequirement() {
-    clearInterval(this.state.sectime);
-    clearInterval(this.state.getPost);
+    this.onClearInterval()
     Taro.navigateBack()
   }
 
   componentWillUnmount() {
+    this.onClearInterval()
+  }
+  // 清除定时器
+  onClearInterval() {
     clearInterval(this.state.sectime);
     clearInterval(this.state.getPost);
   }
 
-
+  // 检查数据是否有空值,提示用户填写
   onChenkPayload() {
     const { Payload } = this.state
     const { house_type, mobile, name } = Payload
@@ -606,162 +389,142 @@ class AppointmentPost extends Component {
 
   render() {
     const { houstType, users: { headimgurl }, showInformation, Payload,
-      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, range, currentTime, showGetPhoneNumMask, isNight } = this.state
+      showNext, zeroSecTime, zeroMinTime, serverId, houseTypeList, showGetPhoneNumMask, isNight } = this.state
 
-    const { mobile, name, order_time } = Payload
+    const { mobile, name } = Payload
 
-    const { title, swipers, priceTitle, intro, } = houstType
+    const { title, swipers, intro } = houstType
 
     return (
       <View className='page-white apartment-appointment'>
+        {/* 获取用户电话号码弹窗 */}
+        <GetAuthorizationMask
+          type='getPhoneNumber'
+          onClose={this.onClosePhoneMask}
+          show={showGetPhoneNumMask}
+          onFillPhone={this.getPhoneNumber}
+        />
+        {/* 预约成功弹窗1 */}
+        <AppointmentPostMask
+          show={showInformation}
+          name={name}
+          mobile={mobile}
+          onCloseInputMask={this.onCloseInputMask}
+          onConfirmInputMask={this.onConfirmInputMask}
+          onGetName={this.onGetName}
+          onGetTel={this.onGetTel}
+        />
+        {/* 预约成功弹窗2 */}
+        <AppointmentPostNextMask
+          show={showNext}
+          onCloseRequirement={this.onCloseRequirement}
+          secTime={zeroSecTime}
+          minTime={zeroMinTime}
+          serverId={serverId}
+        />
         <View className='wrap-Style' >
+          {/* 顶部的背景板 */}
+          <ApartmentAppointmentHeader swipers={swipers} />
+
+          {/* 圆角样式 */}
+          <MaskTop />
+
           <View >
+            {/* 标题内容 */}
 
-            <View className='ad-font-wrap position-absolute' >
-              <View className='ad-white-line'></View>
-              <View className='ad-image-font text-white text-bold'>{LOCALE_APARTMENT_APPOINTMENT_AD_TEXT1}</View>
-              <View className='ad-image-font text-white text-bold'>{LOCALE_APARTMENT_APPOINTMENT_AD_TEXT2}</View>
+            <View className='pl-3'>
+              <View className='text-bold text-huge mt-2' >{title}</View>
+              <View className='text-secondary text-normal'>{intro}</View>
             </View>
+            {/* 分割线 */}
+            <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
 
-            <View className='ad-image inherit-Width' >
-              <Image className='inherit-Width' src={swipers}></Image>
-              <View className='ad-mask inherit-Width position-absolute' >
-              </View>
+            {/* 主体内容 */}
+            <View style='width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 ' border='all'>
+              <View className=' mt-2' border='all' >
+                {/* 姓名 电话  如果用户没有登录此块显示引导登录按钮 */}
+                {
+                  Taro.getStorageSync('user_info').token ?
+                    <View className='at-row ml-3 mt-1'>
 
-            </View>
-            {/* 头部 */}
+                      <View className='at-col-2'>
+                        <AtAvatar circle image={headimgurl}></AtAvatar>
+                      </View>
 
-            <MaskTop />
-
-            <View >
-              <View className='pl-3'>
-                <View className='text-bold text-huge mt-2' >{title}</View>
-                <View className='text-secondary text-normal'>{intro}</View>
-              </View>
-              <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
-
-
-              <View style='width:96%;background:#FFFFFF;border-radius:4%;box-shadow: 0 2px #FCFCFC;' className='p-2 ' border='all'>
-                <View className=' mt-2' border='all' >
-
-                  {/* 姓名 电话 */}
-                  {
-                    Taro.getStorageSync('user_info').token ?
-                      <View className='at-row ml-3 mt-1'>
-                        <View className='at-col-2'>
-                          <AtAvatar circle image={headimgurl}></AtAvatar>
-                        </View>
-                        <View className='at-col-4 ml-1'>
-                          <View>
-                            <View className='text-bold'>{name}</View>
-                            <View className='at-row'>
-                              <AtIcon value='iphone' size='13'></AtIcon>
-                              <View className='text-small mt-1'>{mobile}</View>
-                            </View>
+                      <View className='at-col-4 ml-1'>
+                        <View>
+                          <View className='text-bold'>{name}</View>
+                          <View className='at-row'>
+                            <AtIcon value='iphone' size='13'></AtIcon>
+                            <View className='text-small mt-1'>{mobile}</View>
                           </View>
                         </View>
-
-                        <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onOpenInputMask}>
-                          <View className='text-normal'>{LOCALE_CHANGE}</View>
-                          <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
-                        </View>
                       </View>
-                      :
-                      <loginButton params={this.$router.params} backTwo message={LOCALE_LOGIN_APPOINTMENT} />
 
-                  }
-
-
-
-                  {/* 选择户型 */}
-                  <View className='mt-2 '>
-
-                    {/* 多选提示 */}
-                    {houseTypeList.length && <View className='text-secondary text-small ml-3 mt-3 mb-1 text-red'>{LOCALE_MULTIPLE_SELECTION}</View>}
-                    {
-                      houseTypeList && houseTypeList.length ? houseTypeList.map((i, key) =>
-                        <AtTag
-                          type={i.type ? "primary" : ""}
-                          className='ml-3 mt-1 mb-3'
-                          circle
-                          key={i.id}
-                          size='small'
-                          onClick={(e) => this.onChoiseHouseType(e, key)}
-                          active={i.active}
-                        >
-                          <View className='apartment-appointment-font' >{i.title}</View>
-                        </AtTag>
-                      ) : <View className='text-secondary ml-3'>{LOCALE_NO_OPTIONAL_UNIT}</View>
-                    }
-                  </View>
-
-                  {/* 中间横线 */}
-
-                  <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
-
-                  {/* 下面部分 */}
-                  {isNight && <View className='text-normal ml-3 mt-2'>{LOCALE_NIGHT_LIST_NOTICE}</View>}
-                  <View className='mt-3 ml-3 appointment-padding at-row at-row__justify--around ' >
-                    <View className=' text-bold text-large at-col at-col__align--center' >{LOCALE_APPOINTMENT_LOOKTIME}</View>
-                    <View className='p-2 at-col at-col-9 text-center' >
-
-                      {/* <Picker onClick={this.onClickPicker} value={currentTime} mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
-                        <View className='text-small'>
-                          {order_time}
-                        </View>
-                      </Picker> */}
-
-                      <timePicker ref={this.refTimerPicker} />
-
+                      <View className='at-col-5 at-row at-row__justify--end at-row__align--center' onClick={this.onOpenInputMask}>
+                        <View className='text-normal'>{LOCALE_CHANGE}</View>
+                        <AtIcon value='chevron-right' size='13' color='#888888'></AtIcon>
+                      </View>
                     </View>
-                    <View className='at-col at-col-1'></View>
-                  </View>
-                  {/* 按钮 */}
+                    :
+                    <loginButton params={this.$router.params} backTwo message={LOCALE_LOGIN_APPOINTMENT} />
+                }
+
+                {/* 选择户型 */}
+                <View className='mt-2 '>
+
+                  {/* 多选提示 */}
+                  {houseTypeList.length && <View className='text-secondary text-small ml-3 mt-3 mb-1 text-red'>{LOCALE_MULTIPLE_SELECTION}</View>}
                   {
-                    Taro.getStorageSync('user_info').token ?
-                      <AtButton
+                    houseTypeList.length ? houseTypeList.map((i, key) =>
+                      <AtTag
+                        type={i.type ? "primary" : ""}
+                        className='ml-3 mt-1 mb-3'
                         circle
-                        className='m-3 btn-yellow active'
-                        onClick={this.onAppointmentPost}
-                      >{LOCALE_APPOINTMENT_POST}</AtButton>
-                      :
-                      <AtButton
-                        circle
-                        className='m-3 btn-grey active'
-                      >{LOCALE_APPOINTMENT_POST}</AtButton>
+                        key={i.id}
+                        size='small'
+                        onClick={(e) => this.onChoiseHouseType(e, key)}
+                        active={i.active}
+                      >
+                        <View className='apartment-appointment-font' >{i.title}</View>
+                      </AtTag>
+                    ) : <View className='text-secondary ml-3'>{LOCALE_NO_OPTIONAL_UNIT}</View>
                   }
-
-
                 </View>
+
+                {/* 中间横线 */}
+                <View className='at-row at-row__justify--center mt-3' style='width:100%;height:2px;background:#F8F8F8'></View>
+
+                {/* 下面部分 夜单 */}
+                {isNight && <View className='text-normal ml-3 mt-2'>{LOCALE_NIGHT_LIST_NOTICE}</View>}
+                <View className='mt-3 ml-3 appointment-padding at-row at-row__justify--around ' >
+                  <View className=' text-bold text-large at-col at-col__align--center' >{LOCALE_APPOINTMENT_LOOKTIME}</View>
+
+                  <View className='p-2 at-col at-col-9 text-center' >
+                    <timePicker ref={this.refTimerPicker} />
+                  </View>
+
+                  <View className='at-col at-col-1'></View>
+                </View>
+                {/* 按钮 */}
+                {
+                  Taro.getStorageSync('user_info').token ?
+                    <AtButton
+                      circle
+                      className='m-3 btn-yellow active'
+                      onClick={this.onAppointmentPost}
+                    >{LOCALE_APPOINTMENT_POST}</AtButton>
+                    :
+                    <AtButton
+                      circle
+                      className='m-3 btn-grey active'
+                    >{LOCALE_APPOINTMENT_POST}</AtButton>
+                }
+
               </View>
-              <AppointmentPostMask
-                show={showInformation}
-                name={name}
-                mobile={mobile}
-                onCloseInputMask={this.onCloseInputMask}
-                onConfirmInputMask={this.onConfirmInputMask}
-                onGetName={this.onGetName}
-                onGetTel={this.onGetTel}
-              />
-              <AppointmentPostNextMask
-                show={showNext}
-                onCloseRequirement={this.onCloseRequirement}
-                secTime={zeroSecTime}
-                minTime={zeroMinTime}
-                serverId={serverId}
-              />
-              <GetAuthorizationMask
-                type='getPhoneNumber'
-                onClose={this.onClosePhoneMask}
-                show={showGetPhoneNumMask}
-                onFillPhone={this.getPhoneNumber} />
-
-
             </View>
-
           </View>
         </View>
-
       </View>
     )
   }

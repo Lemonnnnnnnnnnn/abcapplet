@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
-import {  Picker } from '@tarojs/components';
+import { Picker } from '@tarojs/components';
 import dayjs from 'dayjs'
-import {  AtIcon } from 'taro-ui'
+import { AtIcon } from 'taro-ui'
 // 自定义函数
 import { rangeGeneration, choiseValue } from '@utils/time-judge'
 
@@ -21,22 +21,25 @@ export default class timePicker extends BaseComponents {
     secTimeClick: false,
   }
 
-  // 还没有处理边缘值
-
   componentWillMount() {
     const [year, month, day, hours, minutes, timeStr] = [
       dayjs().year(),
       dayjs().month(),
       dayjs().date(),
-      dayjs().hour(),
+      // 初始化时间往后两个小时
+      dayjs().hour() + 2,
       0,
       '请选择看房时间'
     ]
     this.setState({ year, month, day, hours, minutes, timeStr })
 
     // 初始化range
-    // 因为时间是从9点开始的，半小时制，所以减七乘以二是将时间往后推两个小时
-    let currentTime = [0, month, day - 1, (hours - 7) * 2]
+    // 因为时间是从9点半开始的，半小时制，所以减七乘以二减一是将时间往后推两个小时
+    let currentHour = (hours - 9) * 2 - 1
+    currentHour = currentHour < 0 ? 0 : currentHour
+    currentHour = currentHour >= 24 ? 24 : currentHour
+
+    let currentTime = [0, month, day - 1, currentHour]
     this.setState({ range: rangeGeneration(month, year), currentTime: currentTime })
   }
 
@@ -59,9 +62,15 @@ export default class timePicker extends BaseComponents {
 
   onClickPicker() {
     let { year, month, day, hours, minutes, secTimeClick } = this.state
+
     if (!secTimeClick) {
-      hours = TIME_PICKER_DIST[(hours - 7) * 2].hours
-      minutes = TIME_PICKER_DIST[(hours - 7) * 2].minutes
+      let currentHour = (hours - 9) * 2 - 1
+      currentHour = currentHour < 0 ? 0 : currentHour
+      currentHour = currentHour >= 24 ? 24 : currentHour
+
+      hours = TIME_PICKER_DIST[currentHour].hours
+      minutes = TIME_PICKER_DIST[currentHour].minutes
+
       const timeStr = dayjs(new Date(year, month, day, hours, minutes)).format('YYYY-MM-DD HH:mm')
       this.setState({ timeStr, secTimeClick: true })
     }
