@@ -94,7 +94,7 @@ class HouseTypeShow extends Component {
       const apartmentID = data.apartment_id
 
       // 获取优惠券列表
-      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: apartmentID }).then(res => {
+      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: apartmentID, city_id: citycode }).then(res => {
         if (res.data.data.total) {
           const couponCutList = res.data.data.list.slice(0, 3)
           this.setState({ showCouponTag: true, couponCutList })
@@ -387,7 +387,7 @@ class HouseTypeShow extends Component {
     const { apartments, ads: { riskAd } } = this.props
 
     const { houstType, map, buttons, showRentDescription, showCouponTag, houseType_id, showMatch, roomMatch_list,
-      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList ,cityId } = this.state
+      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList, cityId } = this.state
 
     const { latitude, longitude, markers } = map
 
