@@ -41,26 +41,27 @@ import {
 import GetAuthorizationMask from '@components/get-authorization-mask'
 import MaskTop from '@components/maskTop'
 import loginButton from '@components/login-button'
+import timePicker from '@components/time-picker'
 
 import buryPoint from '../../utils/bury-point'
 import AppointmentPostMask from './components/appointment-post-mask'
 import AppointmentPostNextMask from './components/appointment-post-next-mask'
 
-const nowTime = new Date()
-let currentMonth = nowTime.getMonth()
-let currentDay = nowTime.getDate()
-let currentHours = nowTime.getHours()
-let currentYear = nowTime.getFullYear()
+// const nowTime = new Date()
+// let currentMonth = nowTime.getMonth()
+// let currentDay = nowTime.getDate()
+// let currentHours = nowTime.getHours()
+// let currentYear = nowTime.getFullYear()
 
-let payloadH = 0
+// let payloadH = 0
 
-if (currentHours >= 0 && currentHours < 8) {
-  payloadH = '09:30'
-} else if (currentHours > 19 && currentHours <= 24) {
-  payloadH = '21:30'
-} else {
-  payloadH = currentHours + 2 + ':00'
-}
+// if (currentHours >= 0 && currentHours < 8) {
+//   payloadH = '09:30'
+// } else if (currentHours > 19 && currentHours <= 24) {
+//   payloadH = '21:30'
+// } else {
+//   payloadH = currentHours + 2 + ':00'
+// }
 
 @connect(state => state, {
   ...userActions,
@@ -102,6 +103,7 @@ class AppointmentPost extends Component {
     isNight: false,//夜单时间，false:不是，true:是
   }
 
+  refTimerPicker = node => this.TimerPicker = node
 
   async componentDidMount() {
     buryPoint()
@@ -111,6 +113,7 @@ class AppointmentPost extends Component {
 
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
+    // 获取用户电话号码 如果没有电话号码则打开授权获取电话号码的弹窗
     await this.props.dispatchGetUserMsg().then(res => {
       if (res) {
         const name = res.data.data.user.name
@@ -193,75 +196,75 @@ class AppointmentPost extends Component {
 
     // 计算可供选择的时间列表
 
-    let currentHoursIndex = 0
-    if (currentHours * 2 - 15 > 24) {
-      currentHoursIndex = 24
-    } else if (currentHours * 2 - 15 < 0) {
-      currentHoursIndex = 0
-    } else {
-      currentHoursIndex = currentHours * 2 - 15
-    }
+    // let currentHoursIndex = 0
+    // if (currentHours * 2 - 15 > 24) {
+    //   currentHoursIndex = 24
+    // } else if (currentHours * 2 - 15 < 0) {
+    //   currentHoursIndex = 0
+    // } else {
+    //   currentHoursIndex = currentHours * 2 - 15
+    // }
 
 
-    let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
-    this.setState({ currentTime: currentTime })
+    // let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
+    // this.setState({ currentTime: currentTime })
 
-    const finalList = []
+    // const finalList = []
 
-    // 生成用于map的空数组
-    const monthList_NaN = Array.from({ length: 12 })
-    const timeList_NaN = Array.from({ length: 25 })
-    let dayList_NaN = []
+    // // 生成用于map的空数组
+    // const monthList_NaN = Array.from({ length: 12 })
+    // const timeList_NaN = Array.from({ length: 25 })
+    // let dayList_NaN = []
 
-    // 判断大小月与平年闰年
+    // // 判断大小月与平年闰年
 
-    let bigMonth = [1, 3, 5, 7, 8, 10, 12]
-    let smailMonth = [4, 6, 9, 11]
-    let judge = { "bigMonth": true, "flatYear": true }
+    // let bigMonth = [1, 3, 5, 7, 8, 10, 12]
+    // let smailMonth = [4, 6, 9, 11]
+    // let judge = { "bigMonth": true, "flatYear": true }
 
-    bigMonth.forEach(i => {
-      if (i === currentMonth + 1) {
-        judge.bigMonth = true
-      }
-    })
+    // bigMonth.forEach(i => {
+    //   if (i === currentMonth + 1) {
+    //     judge.bigMonth = true
+    //   }
+    // })
 
-    smailMonth.forEach(i => {
-      if (i === currentMonth + 1) {
-        judge.bigMonth = false
-      }
-    })
+    // smailMonth.forEach(i => {
+    //   if (i === currentMonth + 1) {
+    //     judge.bigMonth = false
+    //   }
+    // })
 
-    if ((currentYear % 4 === 0 && currentYear % 100 != 0) || currentYear % 400 === 0) {
-      judge.flatYear = false
-    } else {
-      judge.flatYear = true
-    }
+    // if ((currentYear % 4 === 0 && currentYear % 100 != 0) || currentYear % 400 === 0) {
+    //   judge.flatYear = false
+    // } else {
+    //   judge.flatYear = true
+    // }
 
-    if (currentMonth !== 1) {
-      judge.bigMonth ? dayList_NaN = Array.from({ length: 31 }) : dayList_NaN = Array.from({ length: 30 })
-    } else if (currentMonth === 1) {
-      judge.flatYear ? dayList_NaN = Array.from({ length: 28 }) : dayList_NaN = Array.from({ length: 29 })
-    }
+    // if (currentMonth !== 1) {
+    //   judge.bigMonth ? dayList_NaN = Array.from({ length: 31 }) : dayList_NaN = Array.from({ length: 30 })
+    // } else if (currentMonth === 1) {
+    //   judge.flatYear ? dayList_NaN = Array.from({ length: 28 }) : dayList_NaN = Array.from({ length: 29 })
+    // }
 
-    //填充数据
-    let yearList = [nowTime.getFullYear() + LOCALE_YEAR]
-    let monthList = []
-    let dayList = []
-    let timeList = []
+    // //填充数据
+    // let yearList = [nowTime.getFullYear() + LOCALE_YEAR]
+    // let monthList = []
+    // let dayList = []
+    // let timeList = []
 
-    monthList_NaN.map((i, key) => monthList.push(key + 1 + LOCALE_MONTH))
-    dayList_NaN.map((i, key) => dayList.push(key + 1 + LOCALE_DAY))
-    timeList_NaN.map((i, key) => {
-      key % 2 === 0 && timeList.push((key / 2) + 9 + " :30")
-      key % 2 === 1 && timeList.push(((key + 1) / 2) + 9 + " :00")
-    })
+    // monthList_NaN.map((i, key) => monthList.push(key + 1 + LOCALE_MONTH))
+    // dayList_NaN.map((i, key) => dayList.push(key + 1 + LOCALE_DAY))
+    // timeList_NaN.map((i, key) => {
+    //   key % 2 === 0 && timeList.push((key / 2) + 9 + " :30")
+    //   key % 2 === 1 && timeList.push(((key + 1) / 2) + 9 + " :00")
+    // })
 
 
-    finalList.push(yearList)
-    finalList.push(monthList)
-    finalList.push(dayList)
-    finalList.push(timeList)
-    this.setState({ range: finalList })
+    // finalList.push(yearList)
+    // finalList.push(monthList)
+    // finalList.push(dayList)
+    // finalList.push(timeList)
+    // this.setState({ range: finalList })
   }
 
 
@@ -333,127 +336,127 @@ class AppointmentPost extends Component {
 
   }
 
-  onClickPicker() {
-    const { Payload, range, secTimeClick } = this.state
-    const year = (range[0][0]).split(LOCALE_YEAR)[0]
+  // onClickPicker() {
+  //   const { Payload, range, secTimeClick } = this.state
+  //   const year = (range[0][0]).split(LOCALE_YEAR)[0]
 
-    if (!secTimeClick) {
-      currentMonth = nowTime.getMonth()
-      currentDay = nowTime.getDate()
-      currentHours = nowTime.getHours()
+  //   if (!secTimeClick) {
+  //     currentMonth = nowTime.getMonth()
+  //     currentDay = nowTime.getDate()
+  //     currentHours = nowTime.getHours()
 
-      if (currentHours >= 0 && currentHours < 8) {
-        payloadH = '09:30'
-      } else if (currentHours > 19 && currentHours <= 24) {
-        payloadH = '21:30'
-      } else {
-        payloadH = currentHours + 2 + ':00'
-      }
-
-
-      let currentHoursIndex = 0
-      if (currentHours * 2 - 15 > 24) {
-        currentHoursIndex = 24
-      } else if (currentHours * 2 - 15 < 0) {
-        currentHoursIndex = 0
-      } else {
-        currentHoursIndex = currentHours * 2 - 15
-      }
-
-      let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
-      this.setState({ currentTime: currentTime })
+  //     if (currentHours >= 0 && currentHours < 8) {
+  //       payloadH = '09:30'
+  //     } else if (currentHours > 19 && currentHours <= 24) {
+  //       payloadH = '21:30'
+  //     } else {
+  //       payloadH = currentHours + 2 + ':00'
+  //     }
 
 
-      const payloadStr = year + "-"
-        + this.onJudgeTen(currentMonth + 1)
-        + "-" + this.onJudgeTen(currentDay)
-        + " " + payloadH
+  //     let currentHoursIndex = 0
+  //     if (currentHours * 2 - 15 > 24) {
+  //       currentHoursIndex = 24
+  //     } else if (currentHours * 2 - 15 < 0) {
+  //       currentHoursIndex = 0
+  //     } else {
+  //       currentHoursIndex = currentHours * 2 - 15
+  //     }
 
-      this.setState({
-        Payload: { ...Payload, order_time: payloadStr }
-      })
-    }
-    this.setState({ secTimeClick: true })
-  }
-
-  onColumnChange = e => {
-    const { column, value } = e.detail
-    const { Payload, range } = this.state
-    const year = (range[0][0]).split(LOCALE_YEAR)[0]
-
-    if (column === 1) { currentMonth = value }
-    if (column === 2) {
-      currentDay = value + 1
-    }
-    if (column === 3) {
-      if (value % 2 === 0) {
-        payloadH = this.onJudgeTen(value / 2 + 9) + ':30'
-      } else if (value % 2 === 1) {
-        payloadH = this.onJudgeTen((value + 1) / 2 + 9) + ':00'
-      }
-    }
-
-    const payloadStr = year + "-"
-      + this.onJudgeTen(currentMonth + 1) + "-"
-      + this.onJudgeTen(currentDay) + " "
-      + payloadH
+  //     let currentTime = [0, currentMonth, currentDay - 1, currentHoursIndex]
+  //     this.setState({ currentTime: currentTime })
 
 
-    this.setState({
-      Payload: { ...Payload, order_time: payloadStr }
-    })
+  //     const payloadStr = year + "-"
+  //       + this.onJudgeTen(currentMonth + 1)
+  //       + "-" + this.onJudgeTen(currentDay)
+  //       + " " + payloadH
 
-    if (column !== 1) { return }
+  //     this.setState({
+  //       Payload: { ...Payload, order_time: payloadStr }
+  //     })
+  //   }
+  //   this.setState({ secTimeClick: true })
+  // }
 
-    let finalList = []
+  // onColumnChange = e => {
+  //   const { column, value } = e.detail
+  //   const { Payload, range } = this.state
+  //   const year = (range[0][0]).split(LOCALE_YEAR)[0]
 
-    const yearList = range[0]
-    const monthList = range[1]
-    const timeList = range[3]
+  //   if (column === 1) { currentMonth = value }
+  //   if (column === 2) {
+  //     currentDay = value + 1
+  //   }
+  //   if (column === 3) {
+  //     if (value % 2 === 0) {
+  //       payloadH = this.onJudgeTen(value / 2 + 9) + ':30'
+  //     } else if (value % 2 === 1) {
+  //       payloadH = this.onJudgeTen((value + 1) / 2 + 9) + ':00'
+  //     }
+  //   }
 
-    let judge = { "bigMonth": true, "flatYear": true }
-
-    let dayList = []
-    const dayBigDayList_NaN = Array.from({ length: 31 })
-    const daySmailDayList_NaN = Array.from({ length: 30 })
-    const dayflatDayList_NaN = Array.from({ length: 28 })
-    const dayleapDayList_NaN = Array.from({ length: 29 })
+  //   const payloadStr = year + "-"
+  //     + this.onJudgeTen(currentMonth + 1) + "-"
+  //     + this.onJudgeTen(currentDay) + " "
+  //     + payloadH
 
 
-    if (value === 0 || value === 2 || value === 4 || value === 6 || value === 7 || value === 9 || value === 11) {
-      judge.bigMonth = true
-    } else if (value === 3 || value === 5 || value === 8 || value === 10) {
-      judge.bigMonth = false
-    }
+  //   this.setState({
+  //     Payload: { ...Payload, order_time: payloadStr }
+  //   })
 
-    if ((year % 4 === 0 && year % 100 != 0) || year % 400 === 0) {
-      judge.flatYear = false
-    } else {
-      judge.flatYear = true
-    }
+  //   if (column !== 1) { return }
 
-    if (value !== 1) {
-      judge.bigMonth ? dayBigDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : daySmailDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-    } else if (value === 1) {
-      judge.flatYear ? dayflatDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : dayleapDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
-    }
+  //   let finalList = []
 
-    finalList.push(yearList)
-    finalList.push(monthList)
-    finalList.push(dayList)
-    finalList.push(timeList)
-    this.setState({ range: finalList })
+  //   const yearList = range[0]
+  //   const monthList = range[1]
+  //   const timeList = range[3]
 
-  }
+  //   let judge = { "bigMonth": true, "flatYear": true }
 
-  onJudgeTen(num) {
-    let newNum = parseInt(num)
-    if (newNum < 10) {
-      return "0" + newNum
-    } else {
-      return newNum
-    }
-  }
+  //   let dayList = []
+  //   const dayBigDayList_NaN = Array.from({ length: 31 })
+  //   const daySmailDayList_NaN = Array.from({ length: 30 })
+  //   const dayflatDayList_NaN = Array.from({ length: 28 })
+  //   const dayleapDayList_NaN = Array.from({ length: 29 })
+
+
+  //   if (value === 0 || value === 2 || value === 4 || value === 6 || value === 7 || value === 9 || value === 11) {
+  //     judge.bigMonth = true
+  //   } else if (value === 3 || value === 5 || value === 8 || value === 10) {
+  //     judge.bigMonth = false
+  //   }
+
+  //   if ((year % 4 === 0 && year % 100 != 0) || year % 400 === 0) {
+  //     judge.flatYear = false
+  //   } else {
+  //     judge.flatYear = true
+  //   }
+
+  //   if (value !== 1) {
+  //     judge.bigMonth ? dayBigDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : daySmailDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
+  //   } else if (value === 1) {
+  //     judge.flatYear ? dayflatDayList_NaN.map((i, key) => dayList.push(key + 1 + "日")) : dayleapDayList_NaN.map((i, key) => dayList.push(key + 1 + "日"))
+  //   }
+
+  //   finalList.push(yearList)
+  //   finalList.push(monthList)
+  //   finalList.push(dayList)
+  //   finalList.push(timeList)
+  //   this.setState({ range: finalList })
+
+  // }
+
+  // onJudgeTen(num) {
+  //   let newNum = parseInt(num)
+  //   if (newNum < 10) {
+  //     return "0" + newNum
+  //   } else {
+  //     return newNum
+  //   }
+  // }
 
 
   //打开,关闭获取姓名和电话号码弹窗
@@ -495,9 +498,22 @@ class AppointmentPost extends Component {
     this.setState({ mobileStorage: value })
   }
 
+  onCloseRequirement() {
+    clearInterval(this.state.sectime);
+    clearInterval(this.state.getPost);
+    Taro.navigateBack()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.sectime);
+    clearInterval(this.state.getPost);
+  }
+
+
   onChenkPayload() {
     const { Payload } = this.state
-    const { house_type, mobile, name, order_time } = Payload
+    const { house_type, mobile, name } = Payload
+    const order_time = this.TimerPicker.__state.timeStr
 
     let judgeArr = [
       { title: LOCALE_NAME, value: name, default: LOCALE_NAME },
@@ -523,22 +539,11 @@ class AppointmentPost extends Component {
 
   }
 
-
-  onCloseRequirement() {
-    clearInterval(this.state.sectime);
-    clearInterval(this.state.getPost);
-    Taro.navigateBack()
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.sectime);
-    clearInterval(this.state.getPost);
-  }
-
-
   //提交预约
   onAppointmentPost() {
-    const { Payload, showNext } = this.state
+    let { Payload, showNext } = this.state
+    const order_time = this.TimerPicker.__state.timeStr
+    Payload = { ...Payload, order_time }
 
     this.onChenkPayload() &&
       this.props.dispatchAppointmentCreate(Payload).then(res => {
@@ -698,16 +703,15 @@ class AppointmentPost extends Component {
                   {isNight && <View className='text-normal ml-3 mt-2'>{LOCALE_NIGHT_LIST_NOTICE}</View>}
                   <View className='mt-3 ml-3 appointment-padding at-row at-row__justify--around ' >
                     <View className=' text-bold text-large at-col at-col__align--center' >{LOCALE_APPOINTMENT_LOOKTIME}</View>
-                    <View className='p-2 at-col at-col-8 text-center' style={{ background: '#F8F8F8', borderRadius: Taro.pxTransform(60) }} >
+                    <View className='p-2 at-col at-col-9 text-center' >
 
-
-                      {/* <View className='text-small '>选择看房日期</View> */}
-
-                      <Picker onClick={this.onClickPicker} value={currentTime} mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
+                      {/* <Picker onClick={this.onClickPicker} value={currentTime} mode='multiSelector' range={range} onColumnChange={this.onColumnChange} >
                         <View className='text-small'>
                           {order_time}
                         </View>
-                      </Picker>
+                      </Picker> */}
+
+                      <timePicker ref={this.refTimerPicker} />
 
                     </View>
                     <View className='at-col at-col-1'></View>
