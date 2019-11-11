@@ -39,6 +39,11 @@
     background: #888888;
   }
 
+  &--grey--1 {
+    color: $color-white;
+    background: #d4d4d4;
+  }
+
   &-small {
     padding: 4px * $hd 8px * $hd;
     margin-right: 2px * $hd;
