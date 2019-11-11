@@ -193,8 +193,6 @@ export const ORDER_COUPON_DIST = {
   1: { message: '无法使用' }
 }
 
-
-
 // 签约下定页面流程图
 export const ORDER_PROCESS = [
   { url: ORDER_STEP_ONE, title: LOCALE_ORDER_STEP_ONE },
