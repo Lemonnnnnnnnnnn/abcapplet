@@ -15,7 +15,8 @@ import {
 
   API_COUPON_RECEIVECODE,
   API_COUPON_USER,
-  API_COUPON_ALONE
+  API_COUPON_ALONE,
+  API_SETTING_CITY
 } from '@constants/api'
 
 import {
@@ -33,7 +34,8 @@ import {
   TYPE_COUPON_RECEIVECODEPOST,
   TYPE_NEXTPAGE_COUPON_USERPOST,
   TYPE_COUPON_USERPOST,
-  TYPE_GET_COUPON_DETAILPOST
+  TYPE_GET_COUPON_DETAILPOST,
+  SET_USER_CITY
 
 } from '@constants/user'
 
@@ -254,3 +256,10 @@ export const dispatchCouponAlone = payload =>createAction({
 })
 
 
+// 设置用户所在站点
+export const dispatchSetCity = payload =>createAction({
+  payload ,
+  method: 'POST',
+  type : SET_USER_CITY,
+  url : API_SETTING_CITY
+})

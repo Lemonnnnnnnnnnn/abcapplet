@@ -40,12 +40,12 @@ class ApartmentCouponMask extends BaseComponent {
     this.CouponListRef.onNextPage()
   }
 
-  onListRefresh(){
+  onListRefresh() {
     this.CouponListRef.onReset(null)
   }
 
   render() {
-    const { show, onClose, apartmentCouponList, apartment_id , houseType_id } = this.props
+    const { show, onClose, apartmentCouponList, apartment_id, houseType_id, cityId: city_id } = this.props
     const { list } = apartmentCouponList
 
     return (
@@ -64,7 +64,7 @@ class ApartmentCouponMask extends BaseComponent {
               houseType_id={houseType_id}
               apartment_id={apartment_id}
 
-              defaultPayload={{ ...PAYLOAD_COUPON_LIST, apartment_id }}
+              defaultPayload={{ ...PAYLOAD_COUPON_LIST, apartment_id, city_id }}
               dispatchList={this.props.dispatchCouponListPost}
               dispatchNextPageList={this.props.dispatchNextPageCouponListPost}
             />

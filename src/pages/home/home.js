@@ -20,6 +20,8 @@ import { AD_DISPATCH_DIST } from '@constants/ad'
 
 // 自定义方法
 import textWrap from '@utils/text-wrap'
+import getUserLocation from '@utils/location'
+import Map from '@utils/qqmap-wx-jssdk'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -91,7 +93,8 @@ class CommonHome extends BaseComponent {
 
       // 选择器相关
       selectIsFixed: false,
-      selectScrollTop: null,
+      // 筛选框转化为浮动单位的位置已写死，如果后续需要在上面插入新的元素，请重新修改以下数值
+      selectScrollTop: 990,
 
 
       scrollNow: false,
@@ -102,19 +105,13 @@ class CommonHome extends BaseComponent {
       selector: [LOCALE_XIAMEN],
     }
   }
+  refApartmentList = (node) => this.apartmentList = node
 
   async onPullDownRefresh() {
     // await this.componentWillMount()
     this.apartmentList.onReset(null)
     Taro.stopPullDownRefresh()
   }
-
-  onLogin() {
-    Taro.reLaunch({ url: PAGE_USER_AUTH })
-  }
-
-  refApartmentList = (node) => this.apartmentList = node
-
 
   async componentWillMount() {
     // 获取幕帘弹窗内容
@@ -178,6 +175,63 @@ class CommonHome extends BaseComponent {
     console.log(user_info.citycode)
   }
 
+  onPageScroll({ scrollTop }) {
+    const { apartments } = this.props
+
+    const {
+      selectIsFixed,
+      selectScrollTop,
+      searchScrollTop,
+      searchIsFixed,
+      apartmentScrollTop,
+      scrollNow
+    } = this.state
+
+    // 搜索相关
+
+    // 判断上滑还是下滑
+    this.setState({ scrollNow: scrollTop })
+    scrollTop > scrollNow && scrollTop > searchScrollTop && this.setState({ showSearch: false })
+    scrollTop < scrollNow && this.setState({ showSearch: true })
+
+
+    scrollTop > scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
+    scrollTop < scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
+
+
+    scrollTop > searchScrollTop
+      && !searchIsFixed
+      && this.setState({ searchIsFixed: true })
+
+    scrollTop < searchScrollTop - 45
+      && searchIsFixed
+      && this.setState({ searchIsFixed: false })
+
+    // 公寓相关
+
+    scrollTop > selectScrollTop + 87
+      && apartments.total !== 0
+      && !selectIsFixed
+      && this.setState({ selectIsFixed: true })
+
+
+    scrollTop < selectScrollTop - 46
+      && selectIsFixed
+      && this.setState({ selectIsFixed: false })
+
+    // 公寓相关
+    !apartmentScrollTop
+      && Taro.createSelectorQuery()
+        .in(this.$scope)
+        .select('.home-apartment')
+        .boundingClientRect()
+        .exec(res => this.setState({ apartmentScrollTop: res[0].top }))
+  }
+
+  onLogin() {
+    Taro.reLaunch({ url: PAGE_USER_AUTH })
+  }
+
   // 获取经纬度
   async onGetLocation() {
     const { payloadApartment } = this.state
@@ -195,6 +249,10 @@ class CommonHome extends BaseComponent {
 
         Taro.setStorageSync('latitude', res.latitude)
         Taro.setStorageSync('longitude', res.longitude)
+
+        getUserLocation(res.latitude, res.longitude).then(city_id => this.props.dispatchSetCity({ city_id }))
+
+
       },
       fail: () => {
         this.setState({
@@ -211,6 +269,7 @@ class CommonHome extends BaseComponent {
 
       }
     }).catch(err => { console.log(err) })
+
   }
 
   // 刷新页面
@@ -222,7 +281,7 @@ class CommonHome extends BaseComponent {
    * 选择城市
    */
   async onSelectCity(citycode, title, sort) {
-    const { selectScrollTop, selectorChecked } = this.state
+    const { selectorChecked } = this.state
 
     const overloadData = []
     const overloadDist = []
@@ -244,11 +303,11 @@ class CommonHome extends BaseComponent {
     await this.props.dispatchDistList(citycode) && overloadDist.push(1)
 
     // 当数据全部加载完成后读取筛选框的位置
-    overloadData.length === 3 && !selectScrollTop && Taro.createSelectorQuery()
-      .in(this.$scope)
-      .select('.home-select')
-      .boundingClientRect()
-      .exec(res => this.setState({ selectScrollTop: res[0].top, }))
+    // overloadData.length === 3 && !selectScrollTop && Taro.createSelectorQuery()
+    //   .in(this.$scope)
+    //   .select('.home-select')
+    //   .boundingClientRect()
+    //   .exec(res => this.setState({ selectScrollTop: res[0].top, }))
 
     title && sort && this.setState({ selectorChecked: { ...selectorChecked, title, sort } })
 
@@ -303,58 +362,7 @@ class CommonHome extends BaseComponent {
    * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
    * @param {*} param0
    */
-  onPageScroll({ scrollTop }) {
-    const { apartments } = this.props
 
-    const {
-      selectIsFixed,
-      selectScrollTop,
-      searchScrollTop,
-      searchIsFixed,
-      apartmentScrollTop,
-      scrollNow
-    } = this.state
-
-    // 搜索相关
-
-    // 判断上滑还是下滑
-    this.setState({ scrollNow: scrollTop })
-    scrollTop > scrollNow && scrollTop > searchScrollTop && this.setState({ showSearch: false })
-    scrollTop < scrollNow && this.setState({ showSearch: true })
-
-
-    scrollTop > scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: false })
-    scrollTop < scrollNow && scrollTop > selectScrollTop && apartments.total !== 0 && this.setState({ showSelect: true })
-
-
-    scrollTop > searchScrollTop
-      && !searchIsFixed
-      && this.setState({ searchIsFixed: true })
-
-    scrollTop < searchScrollTop - 45
-      && searchIsFixed
-      && this.setState({ searchIsFixed: false })
-
-    // 公寓相关
-
-    scrollTop > selectScrollTop + 87
-      && apartments.total !== 0
-      && !selectIsFixed
-      && this.setState({ selectIsFixed: true })
-
-
-    scrollTop < selectScrollTop - 46
-      && selectIsFixed
-      && this.setState({ selectIsFixed: false })
-
-    // 公寓相关
-    !apartmentScrollTop
-      && Taro.createSelectorQuery()
-        .in(this.$scope)
-        .select('.home-apartment')
-        .boundingClientRect()
-        .exec(res => this.setState({ apartmentScrollTop: res[0].top }))
-  }
 
   /**
    * 到底部加载公寓下一页
@@ -420,7 +428,7 @@ class CommonHome extends BaseComponent {
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({
       appId: 'wxd3537ccb429de3b4', // 要跳转的小程序的appid
-    })
+    }).catch(e => console.log(e))
   }
   render() {
 
@@ -552,7 +560,7 @@ class CommonHome extends BaseComponent {
           </View>
 
           {/* 优选入口 */}
-          <View className='mx-1' onClick={this.openMiniProgramCreate}>
+          <View className='mx-1' style={{ minHeight: Taro.pxTransform(180) }} onClick={this.openMiniProgramCreate}>
             <Image src={RECOMMED} className='user-home-image'></Image>
           </View>
 

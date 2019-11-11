@@ -43,6 +43,8 @@ export default class OrderMessage extends BaseComponent {
       price: '',
       risk_money: '',
       discount_price: '',
+      old_discount_price: 0,
+      coupon_price: 0
     },
     payload: PAYLOAD_ORDER_CREATE
   }
@@ -53,17 +55,18 @@ export default class OrderMessage extends BaseComponent {
     const { name, mobile, id_code: idCode, room_id } = payload
 
     // 生成供渲染的价格列表，计算减去优惠券后的租金，如果没有租金减免不渲染这一条
-    let [priceList, renderPriceCutOff] = [[], false]
+    let [priceList, renderPriceCutOff, rentPrice, deposit] = [[], false, 0, 0]
 
     for (let i in coupon_money) {
       priceList.push({ ...CREATE_ORDER_DIST[i], num: coupon_money[i] })
     }
 
     priceList.forEach(i => {
-      if (i.type === 1) {
-        renderPriceCutOff = true
-      }
+      i.type === 1 ? renderPriceCutOff = true : renderPriceCutOff = false
     })
+    // 直接在渲染里用old_discount_price || discount_price 会读取old_discount_price的前一个值？？
+    rentPrice = old_discount_price || discount_price
+    deposit = coupon_price || price
 
     return (
       <View>
@@ -247,7 +250,7 @@ export default class OrderMessage extends BaseComponent {
           <View className='mb-2 text-normal text-secondary'>
             <View className='at-row at-row__align--start at-row__justify--between'>
               <View>租金：</View>
-              <View>￥{old_discount_price || discount_price}</View>
+              <View>￥{rentPrice}</View>
             </View>
             {/* 租金优惠明细 */}
             {
@@ -266,7 +269,7 @@ export default class OrderMessage extends BaseComponent {
           <View className='text-normal text-secondary'>
             <View className='at-row at-row__align--start at-row__justify--between'>
               <View>定金(租金50%)：</View>
-              <View>￥{coupon_price || price}</View>
+              <View>￥{deposit}</View>
             </View>
             {/* 定金减免 */}
             {
