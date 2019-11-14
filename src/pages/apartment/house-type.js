@@ -96,7 +96,7 @@ class HouseTypeShow extends Component {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
       // 获取优惠券列表
-      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: data.apartment_id }).then(res => {
+      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: data.apartment_id, city_id: citycode }).then(res => {
         if (res.data.data.total) {
           const couponCutList = res.data.data.list.slice(0, 3)
           this.setState({ showCouponTag: true, couponCutList })
