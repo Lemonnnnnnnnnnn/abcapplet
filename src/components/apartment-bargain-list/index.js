@@ -4,18 +4,23 @@ import { View } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
-import ApartmentBargainItem from '../apartment-bargain-item'
+
+import ApartmentBargainItem from '@components/apartment-bargain-item'
+
 
 
 class ApartmentBargainList extends BaseList {
 
   render() {
-    const locale = [1, 2, 3]
+    const { bargainList } = this.props
     return (
       <View>
         {
-          locale.map(i =>
-            <ApartmentBargainItem key={i} />)
+          bargainList.map(i =>
+            <ApartmentBargainItem
+              item={i}
+              key={i}
+            />)
         }
       </View>
     )

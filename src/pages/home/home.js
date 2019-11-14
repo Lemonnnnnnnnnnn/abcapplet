@@ -626,8 +626,6 @@ class CommonHome extends BaseComponent {
           initialRoom={roomList}
         />
 
-
-
         {adList.length && <Curtain adList={adList} onClose={this.onCloseCurtain} isOpened={showCurtain} />}
       </View>
     )

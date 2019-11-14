@@ -1,6 +1,6 @@
 @import "overrides";
 .tag {
-  border-radius :$border-radius-mini;
+  border-radius: $border-radius-mini;
   padding: 8px * $hd;
   margin-right: 4px * $hd;
 
@@ -12,6 +12,11 @@
       color: $color-white;
       background: $color-yellow-0;
     }
+  }
+
+  &--black {
+    color: #fff;
+    background: #353535;
   }
 
   &--primary {
@@ -44,6 +49,7 @@
     background: #d4d4d4;
   }
 
+
   &-small {
     padding: 4px * $hd 8px * $hd;
     margin-right: 2px * $hd;
@@ -53,12 +59,12 @@
     border-radius: $border-radius-huge;
   }
 
-  &-risk{
-    background: linear-gradient(to bottom , rgba(255, 201, 25, 1) , rgba(255, 170, 0, 1));
+  &-risk {
+    background: linear-gradient(to bottom, rgba(255, 201, 25, 1), rgba(255, 170, 0, 1));
     color: #fff;
     border-radius: $border-radius-normal;
     padding: 4px 12px;
-    box-shadow: 0 2px 15px  rgba(255, 170, 0, 1);
+    box-shadow: 0 2px 15px rgba(255, 170, 0, 1);
   }
 }
 

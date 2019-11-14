@@ -30,7 +30,8 @@ import {
   PAGE_USER_AUTH,
   PAGE_USER_FAVORITE,
   PAGE_USER_COUPON,
-  PAGE_USER_FEEDBACK
+  PAGE_USER_FEEDBACK,
+  PAGE_USER_ACTIVITY
 } from '@constants/page'
 
 import buryPoint from '../../utils/bury-point'
@@ -57,7 +58,7 @@ class UserProfile extends Component {
   refRequirementCard = (node) => this.requirementCard = node
 
   async componentDidShow() {
-    Taro.showTabBarRedDot({index: 2})
+    Taro.showTabBarRedDot({ index: 2 })
     buryPoint()
     const { payload: user } = await this.props.dispatchUser()
     this.props.dispatchDistList(user.citycode)
@@ -76,6 +77,11 @@ class UserProfile extends Component {
   // 跳转我的优惠券页面
   onNavigateToCoupon() {
     Taro.navigateTo({ url: PAGE_USER_COUPON })
+  }
+
+  // 跳转我的活动页面
+  onNavigateToActivity() {
+    Taro.navigateTo({ url: PAGE_USER_ACTIVITY })
   }
 
   // 打开/关闭需求卡
@@ -149,6 +155,7 @@ class UserProfile extends Component {
             onOpenCard={this.onOpenCard}
             onNavigateToFavorite={this.onNavigateToFavorite}
             onNavigateToCoupon={this.onNavigateToCoupon}
+            onNavigateToActivity={this.onNavigateToActivity}
             lists={optionLists}
           />
 

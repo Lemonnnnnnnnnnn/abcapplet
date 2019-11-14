@@ -93,10 +93,49 @@ image {
 
     &-has-room-block {
       border-radius: $border-radius-mini;
-      height: 32px;
+      height: 16px * $hd;
       text-align: center;
-      line-height: 32px;
-      padding: 4px 14px;
+      line-height: 16px * $hd;
+      padding: 2px * $hd 7px * $hd;
+    }
+
+    &-bargain-card {
+      .float-unit {
+        top: -25px * $hd;
+      }
+
+      .tag {
+        padding: 5px * $hd 12px * $hd;
+        border-radius: $border-radius-mini;
+      }
+
+      .huge-text {
+        line-height: 30px * $hd;
+      }
+
+      .btn-bargain {
+        background: #ff6b29 !important;
+        height: 30px * $hd !important;
+        line-height: 30px * $hd !important;
+        padding: 0 32px * $hd !important;
+        box-shadow: none;
+      }
+
+      .at-countdown__item {
+        .at-countdown__time-box {
+          padding: 6px * $hd 4px * $hd;
+          color: #fff;
+          border: none;
+          background-color: #353535;
+          font-family: inherit;
+          &:after {
+            height: 0;
+          }
+        }
+        .at-countdown__separator {
+          align-self : flex-end;
+        }
+      }
     }
   }
 
@@ -278,7 +317,6 @@ image {
       height: 57px;
     }
   }
-
 
   // 通用样式
   &-mask {

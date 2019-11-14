@@ -284,3 +284,24 @@ export const API_SETTING_RISK_POST = `${HOST}/index/settingRiskPost`
 // 设置用户所在站点
 export const API_SETTING_CITY = `${HOST}/user/setCityPost`
 
+// 获取用户详情
+export const API_USER_ACTIVITY = `${HOST}/user/myActivityPost`
+
+
+// 砍价相关
+// 获取砍价列表
+export const API_BARGAIN_LIST = `${HOST}/bargain/listPost`
+
+// 获取砍价详情
+export const API_BARGAIN_DETAIL = `${HOST}/bargain/detailPost`
+
+// 发起砍价
+export const API_BARGAIN_CUT = `${HOST}/bargain/cutPost`
+
+// 帮砍
+export const API_BARGAIN_HELP_CUT = `${HOST}/bargain/helpCutPost`
+
+// 领取优惠券
+export const API_BARGAIN_GET_COUPON = `${HOST}/bargain/getCouponPost`
+
+

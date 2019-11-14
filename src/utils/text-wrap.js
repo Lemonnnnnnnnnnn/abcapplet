@@ -13,7 +13,7 @@ export default function textWrap(str, length) {
     if (len >= length) {
       res = insertStr(str, length, '\n')
       len = 0
-    }
+    } else res = str
   })
 
   return res;

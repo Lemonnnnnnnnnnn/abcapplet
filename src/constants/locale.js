@@ -347,13 +347,13 @@ export const LOCALE_RENT_RISK_MONEY_TWO = '预定退租险保障最高￥500'
 export const LOCALE_ORDER_RENTAL_COUPON = '租房优惠券'
 export const LOCALE_COUPON = '优惠券'
 export const LOCALE_USER_COUPON = '我的优惠券'
+export const LOCALE_USER_ACTIVITY = '我的活动'
 export const LOCALE_COUPON_NONE = '暂无可用优惠券'
 export const LOCALE_COUPON_CAN_USED = '个可用'
 export const LOCALE_UNLIMITED = '无限制'
 export const LOCALE_UNLIMITED_TIMES = '无限次'
 export const LOCALE_LOGIN_RECEIVE = '登录领取'
 export const LOCALE_HIGHEST_RECEIVE = '最高可领'
-
 
 
 // 协议相关

@@ -10,6 +10,7 @@ import * as apartmentActions from '@actions/apartment'
 
 // 自定义方法
 import textWrap from '@utils/text-wrap'
+import { timestampChange } from '@utils/time-judge'
 
 // 自定义组件
 import Tag from '@components/tag'
@@ -30,6 +31,7 @@ import { LOCALE_SHARE_TEXT } from '@constants/locale'
 import buryPoint from '../../utils/bury-point'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
 import ApartmentContainer from './components/apartment-container'
+import ApartmentBargainCard from './components/apartment-bargain-card'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -88,7 +90,6 @@ class ApartmentShow extends Component {
 
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
 
-
     let facilitys = data.facility_list
     let publicMatch = []
     facilitys && facilitys.map(i => {
@@ -97,10 +98,17 @@ class ApartmentShow extends Component {
 
     const publicMatch_list = publicMatch.slice(0, 5)
 
-
     const buttons = !data.is_sign
       ? [{ message: '预约看房', method: 'onCreateBusiness' }]
       : [{ message: '签约下定', method: 'onCreateOrder' }, { message: '预约看房', method: 'onCreateBusiness' }]
+
+    // 计算活动剩余时间
+    let [days, hours, minutes, seconds, haveBargain] = [99, 23, 59, 59, true]
+    if (data.bargain) {
+      const { close_time } = data.bargain
+      close_time > 0 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
+    } else haveBargain = false
+
 
     this.setState({
       publicMatch_list: publicMatch_list,
@@ -127,7 +135,9 @@ class ApartmentShow extends Component {
         swipers: data.extend_info.pictures,
         appointment_show_num: data.appointment_show_num,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
-        num: data.num
+        num: data.num,
+        bargain: { ...data.bargain, days, hours, minutes, seconds },
+        haveBargain
       },
       map: {
         latitude: parseFloat(data.latitude),
@@ -174,7 +184,6 @@ class ApartmentShow extends Component {
   // 关闭租房优惠券
   onCloseCoupon() {
     this.setState({ showCouponMask: false })
-    this.onShowMap()
   }
 
   onOpenMap() {
@@ -240,24 +249,12 @@ class ApartmentShow extends Component {
     }
   }
 
-  onReturn() {
-    Taro.navigateBack()
-  }
-
-  onBackHome() {
-    Taro.switchTab({
-      url: PAGE_HOME
-    })
-  }
-
-
-
   render() {
-    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag, couponCutList ,cityId } = this.state
+    const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag, couponCutList, cityId } = this.state
     const { latitude, longitude, markers } = map
     const {
-      title, swipers, isCollect, special, types, tags, desc,
-      notices, cbds, intro, rules, position, cover, num, id } = apartment
+      title, swipers, isCollect, special, types, tags, desc, haveBargain,
+      notices, cbds, intro, rules, position, cover, num, id, bargain } = apartment
 
     const imageStyle = {
       width: Taro.pxTransform(600),
@@ -363,11 +360,12 @@ class ApartmentShow extends Component {
                 <View className=''>
                   <Image src={PATH} style='width:12px;height:16px'></Image>
                 </View>
-                {
-                  position ? <View className='text-normal text-secondary  ml-2'>{position}</View> : <View className='text-secondary text-normal ml-2'>暂无相关位置信息</View>
-                }
-
+                {position ? <View className='text-normal text-secondary  ml-2'>{position}</View>
+                  : <View className='text-secondary text-normal ml-2'>暂无相关位置信息</View>}
               </View>
+
+              {/* 砍价 */}
+              {haveBargain && <ApartmentBargainCard bargain={bargain} />}
 
             </View>
 

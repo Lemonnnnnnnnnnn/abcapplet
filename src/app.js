@@ -59,7 +59,7 @@ class App extends Component {
           'favorite',
           'coupon',
           'feedback',
-
+          'activity'
         ]
       },
       {
@@ -97,7 +97,8 @@ class App extends Component {
         root: 'pages/bargain',
         pages: [
           'pages/bargain-list',
-          'pages/bargain-detail'
+          'pages/bargain-detail',
+          'pages/bargain-coupon'
         ]
       },
     ],

@@ -27,12 +27,13 @@ class Mask extends BaseComponent {
   }
 
   render() {
-    const { show, className, onClick } = this.props
+    const { show, className, onClick, customStyle } = this.props
 
     const rootClassName = ['page-mask']
     const classObject = {}
 
     return (show && <View
+      style={customStyle}
       onClick={onClick}
       onTouchMove={this.onMaskTouchMove}
       className={classNames(rootClassName, classObject, className)}

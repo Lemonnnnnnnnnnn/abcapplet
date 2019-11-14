@@ -21,6 +21,8 @@ import home from './home'
 import sublet from './sublet'
 import userCouponList from './userCoupon'
 import apartmentCouponList from './apartmentCoupon'
+import bargain from './bargain'
+import userActivityList from './userActivity'
 
 
 export default combineReducers({
@@ -46,4 +48,6 @@ export default combineReducers({
   sublet,
   userCouponList,
   apartmentCouponList,
+  bargain,
+  userActivityList
 })

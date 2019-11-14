@@ -16,7 +16,8 @@ import {
   API_COUPON_RECEIVECODE,
   API_COUPON_USER,
   API_COUPON_ALONE,
-  API_SETTING_CITY
+  API_SETTING_CITY,
+  API_USER_ACTIVITY
 } from '@constants/api'
 
 import {
@@ -35,6 +36,8 @@ import {
   TYPE_NEXTPAGE_COUPON_USERPOST,
   TYPE_COUPON_USERPOST,
   TYPE_GET_COUPON_DETAILPOST,
+  TYPE_GET_USER_ACTIVITY,
+  TYPE_GET_NEXTPAGE_USER_ACTIVITY,
   SET_USER_CITY
 
 } from '@constants/user'
@@ -248,18 +251,35 @@ export const dispatchNextPageCouponUser = payload => createAction({
 })
 
 // 获取单一优惠券详情
-export const dispatchCouponAlone = payload =>createAction({
+export const dispatchCouponAlone = payload => createAction({
   payload,
-  method : 'POST',
-  type : TYPE_GET_COUPON_DETAILPOST,
-  url : API_COUPON_ALONE ,
+  method: 'POST',
+  type: TYPE_GET_COUPON_DETAILPOST,
+  url: API_COUPON_ALONE,
 })
 
 
 // 设置用户所在站点
-export const dispatchSetCity = payload =>createAction({
-  payload ,
+export const dispatchSetCity = payload => createAction({
+  payload,
   method: 'POST',
-  type : SET_USER_CITY,
-  url : API_SETTING_CITY
+  type: SET_USER_CITY,
+  url: API_SETTING_CITY
+})
+
+// 获取用户活动
+export const dispatchUserActivity = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_GET_USER_ACTIVITY,
+  url: API_USER_ACTIVITY,
+  cb: ({ data: { data } }) => data
+})
+
+export const dispatchNextPageUserActivity = payload => createAction({
+  payload,
+  method: 'POST',
+  type: TYPE_GET_NEXTPAGE_USER_ACTIVITY,
+  url: API_USER_ACTIVITY,
+  cb: ({ data: { data } }) => data
 })

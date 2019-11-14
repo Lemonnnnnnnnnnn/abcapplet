@@ -60,10 +60,6 @@ class ApartmentItemMask extends BaseComponent {
             );
         }
 
-        // const divdingLine = {
-        //     borderBottom: "1Px solid #F8F8F8",
-        //     lineHeight: "35px"
-        // }
 
         const introduceStyle = {
             lineHeight: "25px"

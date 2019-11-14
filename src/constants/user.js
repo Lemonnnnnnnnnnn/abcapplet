@@ -20,6 +20,7 @@ import {
   LOCALE_RISK_FUND,
 
   LOCALE_USER_COUPON,
+  LOCALE_USER_ACTIVITY,
   LOCALE_USER_COUPON_EXTRA_TEXT,
 } from '@constants/locale'
 
@@ -82,7 +83,13 @@ export const USER_OPTIONS_LISTS = [
     icon: PREFERENTIAL,
     title: LOCALE_USER_COUPON,
     extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
-  }
+  },
+  {
+    id: 4,
+    icon: PREFERENTIAL,
+    title: LOCALE_USER_ACTIVITY,
+    extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
+  },
 ]
 
 
@@ -131,3 +138,7 @@ export const USER_COUPON_DIST = [
 
 // 设置用户所在站点
 export const SET_USER_CITY = 'SET_USER_CITY'
+
+// 获取用户活动
+export const TYPE_GET_USER_ACTIVITY = 'TYPE_GET_USER_ACTIVITY'
+export const TYPE_GET_NEXTPAGE_USER_ACTIVITY = 'TYPE_GET_NEXTPAGE_USER_ACTIVITY'

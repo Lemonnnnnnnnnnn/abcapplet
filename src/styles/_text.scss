@@ -34,7 +34,7 @@
   }
 
   &-gray--2 {
-    color: rgb(53, 53, 53) !important;
+    color: #353535 !important;
   }
 
   &-red {
@@ -90,6 +90,9 @@
   &-wrap{
     word-break:break-all;
     word-wrap: break-word;
+  }
+  &-line-through{
+    text-decoration: line-through;
   }
 }
 //文字超出省略

@@ -21,6 +21,7 @@ class UserOptions extends BaseComponent {
       case 1: { this.props.onNavigateToFavorite() } break
       case 2: { this.props.onOpenCard() } break
       case 3: { this.props.onNavigateToCoupon() } break
+      case 4: { this.props.onNavigateToActivity() } break
     }
   }
   render() {

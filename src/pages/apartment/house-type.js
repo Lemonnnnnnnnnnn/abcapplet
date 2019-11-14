@@ -9,6 +9,8 @@ import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
 import * as adActions from '@actions/ad'
 
+// 自定义方法
+import { timestampChange } from '@utils/time-judge'
 
 // 自定义组件
 import Tag from '@components/tag'
@@ -36,6 +38,7 @@ import ApartmentRentDescriptionMask from './components/apartment-rent-descriptio
 import AppartmentMatchingMask from './components/apartment-matching-mask'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
 import ApartmentContainer from './components/apartment-container'
+import ApartmentBargainCard from './components/apartment-bargain-card'
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {
@@ -91,10 +94,9 @@ class HouseTypeShow extends Component {
 
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-      const apartmentID = data.apartment_id
 
       // 获取优惠券列表
-      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: apartmentID }).then(res => {
+      this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: data.apartment_id }).then(res => {
         if (res.data.data.total) {
           const couponCutList = res.data.data.list.slice(0, 3)
           this.setState({ showCouponTag: true, couponCutList })
@@ -103,19 +105,14 @@ class HouseTypeShow extends Component {
       })
 
       // 获取附近公寓列表
-      await this.props.dispatchAppointmentNearbyPost({ id: apartmentID }).then(res => this.setState({ nearbyPost: res.data.data }))
+      await this.props.dispatchAppointmentNearbyPost({ id: data.apartment_id }).then(res => this.setState({ nearbyPost: res.data.data }))
 
       const buttons = !data.is_sign
         ? [{ message: '预约看房', method: 'onCreateBusiness' }]
         : [{ message: '签约下定', method: 'onCreateOrder' }, { message: '预约看房', method: 'onCreateBusiness' }]
 
       // 生成前五个房间配置/公共配置/房间
-
-      let facilitys = data.facility_list
-      let roomMatch = []
-      let publicMatch = []
-      let allHouseType = []
-      let firstIndex = 0
+      let [facilitys, roomMatch, publicMatch, allHouseType, firstIndex] = [data.facility_list, [], [], [], 0]
 
       facilitys && facilitys.map(i => {
         i.type === 2 && roomMatch.push(i)
@@ -144,6 +141,12 @@ class HouseTypeShow extends Component {
       const all_houseType = currentHouseType.concat(allHouseType)
 
 
+      // 计算活动剩余时间
+      let [days, hours, minutes, seconds, haveBargain] = [99, 23, 59, 59, true]
+      if (data.bargain) {
+        const { close_time } = data.bargain
+        close_time > 0 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
+      } else haveBargain = false
 
       data && this.setState({
         roomMatch_list: roomMatch_list,
@@ -185,7 +188,9 @@ class HouseTypeShow extends Component {
           type_desc: data.type_desc,
           has_room: data.has_room,
           num: data.num,
-          discount_price_title: data.discount_price_title
+          discount_price_title: data.discount_price_title,
+          bargain: { ...data.bargain, days, hours, minutes, seconds },
+          haveBargain
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -313,25 +318,6 @@ class HouseTypeShow extends Component {
       .then(() => this.setState({ houstType: { ...houstType, isCollect: false } }))
   }
 
-  onRoomCreateFavorite({ payload }) {
-    const { houstType } = this.state
-    let roomList = []
-    if (houstType) {
-      roomList = houstType.roomList.map(i => i.id == payload.room_id ? { ...i, is_collect: true } : i)
-    }
-    this.props.dispatchFavoriteCreate(payload)
-      .then(() => this.setState({ houstType: { ...houstType, roomList } }))
-  }
-
-  onRoomDeleteFavorite({ payload }) {
-    const { houstType } = this.state
-    let roomList = []
-    if (houstType) {
-      roomList = houstType.roomList.map(i => i.id == payload.room_id ? { ...i, is_collect: false } : i)
-    }
-    this.props.dispatchFavoriteDelete(payload)
-      .then(() => this.setState({ houstType: { ...houstType, roomList } }))
-  }
 
   onShareAppMessage(target) {
     const text = LOCALE_SHARE_TEXT
@@ -359,11 +345,6 @@ class HouseTypeShow extends Component {
     }
   }
 
-  onSearchRoom() {
-    const { id } = this.$router.params
-    Taro.navigateTo({ url: `/pages/apartment/search-room?id=${id}` })
-  }
-
   /**
    * 点击 预约看房,查看订单
    */
@@ -387,7 +368,7 @@ class HouseTypeShow extends Component {
     const { apartments, ads: { riskAd } } = this.props
 
     const { houstType, map, buttons, showRentDescription, showCouponTag, houseType_id, showMatch, roomMatch_list,
-      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList ,cityId } = this.state
+      publicMatch_list, nearbyPost, showLittleMask, showMap, showCouponMask, couponCutList, cityId } = this.state
 
     const { latitude, longitude, markers } = map
 
@@ -396,7 +377,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
-      discount_price_title, apartmentId
+      discount_price_title, apartmentId, bargain, haveBargain
     } = houstType
 
     let { priceTitle } = houstType
@@ -591,9 +572,8 @@ class HouseTypeShow extends Component {
                   <View className=' text-normal text-secondary ' >{position}</View>
                 </View>
               }
-
-
-              {/* 文章相关 */}
+              {/* 砍价 */}
+              {haveBargain && <ApartmentBargainCard bargain={bargain} />}
 
 
               {/* 户型简介 */}

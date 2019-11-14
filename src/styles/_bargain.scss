@@ -2,7 +2,7 @@
 
 .bargain {
   &-background {
-    height: 900px * $hd;
+    min-height: 100vh;
     background: linear-gradient(to bottom, #fa624a, #ffca4e);
   }
   &-header {
@@ -11,31 +11,43 @@
     top: -50px * $hd !important;
   }
 
-  &-main-block {
+  &-body-wrap {
     position: relative;
     z-index: 10;
-    top: 200px * $hd;
 
-    &-image {
-      position: relative;
-      top: -50px;
-      box-shadow: 0px 3px 6px #000;
+    .main-block {
+      &-image {
+        position: relative;
+        top: -50px;
+        box-shadow: 0px 3px 6px #000;
+      }
+      &-price {
+        border: 1px solid rgba(213, 213, 213, 1);
+        box-sizing: border-box;
+        border-radius: 8px * $hd;
+        padding: 5px * $hd 20px * $hd;
+      }
+      // 吸引词
+      &.gray-border {
+        line-height: 30px * $hd;
+        border-bottom: 1px solid rgba(232, 232, 232, 1);
+      }
+      &-header {
+        width: 30px * $hd;
+        height: 30px * $hd;
+        border-radius: 50%;
+      }
     }
-    &-price {
-      border: 1px solid rgba(213, 213, 213, 1);
-      box-sizing: border-box;
-      border-radius: 8px * $hd;
-      padding: 5px * $hd 20px * $hd;
-    }
-    // 吸引词
-    &.gray-border {
-      line-height: 30px * $hd;
-      border-bottom: 1px solid rgba(232, 232, 232, 1);
-    }
-    &-header {
-      width: 30px * $hd;
-      height: 30px * $hd;
-      border-radius: 50%;
+    // 样式覆盖
+    .at-countdown--card .at-countdown__time-box {
+      padding: 6px * $hd 4px * $hd;
+      color: #fff;
+      border: none;
+      background-color: #000;
+      font-family: inherit;
+      &:after {
+        height: 0;
+      }
     }
   }
 
@@ -45,35 +57,106 @@
     }
   }
 
-  &-image {
-    width: 126px * $hd;
-    height: 94px * $hd;
-    border-radius: 6px * $hd;
-    overflow: hidden;
-    &-mask {
-      background: rgba($color: #000000, $alpha: 0.5);
-      color: #fff;
-      position: absolute;
-      bottom: 0;
-      height: 21px * $hd;
-      width: 100%;
-    }
-    &-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-  }
-
   &-tag {
     border-radius: 6px * $hd;
     padding: 4px * $hd 8px * $hd;
   }
 
-  &-bargaining{
-    &-image{
+  // 砍价状态
+  &-bargaining {
+    &-image {
       width: 48px * $hd;
       height: 48px * $hd;
       border-radius: 50%;
+    }
+  }
+  // 帮砍好友
+  &-friend {
+    border-bottom: 1px solid $color-grey-7;
+    &-icon {
+      width: 35px * $hd;
+      height: 35px * $hd;
+      border-radius: 50%;
+    }
+  }
+
+  // 代金券
+  &-coupon-card {
+    .leftPart {
+      border-right: 1px dashed #fb784a;
+    }
+    // 优惠券缺角样式
+    &-angle {
+      width: 15px * $hd;
+      height: 15px * $hd;
+      position: absolute;
+      box-sizing: border-box;
+      left: 40%;
+      &.top {
+        // border-radius: 0 0 50% 50%;
+        border-radius: 50%;
+        top: -7.5px * $hd;
+        background: #fa624a;
+      }
+      &.bottom {
+        // border-radius: 50% 50% 0 0;
+        border-radius: 50%;
+        bottom: -7.5px * $hd;
+        background: linear-gradient(to bottom, #f46e41, #fa754a);
+      }
+    }
+    &-ribbon {
+      position: absolute;
+      background: #fa624a;
+      width: 100px * $hd;
+      line-height: 23px * $hd;
+      right: -22px * $hd;
+      top: 10px * $hd;
+      transform: rotateZ(45deg);
+    }
+
+    // 样式覆盖
+    .at-countdown__time-box {
+      color: #ff6b29;
+      border: none;
+      font-family: inherit;
+      font-size: 12px * $hd;
+    }
+    .at-countdown__separator {
+      font-size: 12px * $hd;
+      color: #ff6b29;
+      padding: 0;
+    }
+  }
+
+  // 列表
+  &-list {
+    background: #fc8f4b;
+    &-image {
+      width: 126px * $hd;
+      height: 94px * $hd;
+      border-radius: 6px * $hd;
+      overflow: hidden;
+      &-mask {
+        background: rgba($color: #000000, $alpha: 0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 0;
+        height: 21px * $hd;
+        width: 100%;
+      }
+      &-wrap {
+        position: relative;
+        overflow: hidden;
+      }
+    }
+  }
+
+  // 详情
+  &-detail {
+    &-image {
+      width: 118px * $hd;
+      height: 88px * $hd;
     }
   }
 }

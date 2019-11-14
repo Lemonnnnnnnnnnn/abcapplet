@@ -87,3 +87,27 @@ function yearJudge(year) {
   return flatYear
 }
 
+
+
+// 时间戳转日时分秒
+export function timestampChange(time) {
+  let res = { days: 0, hours: 0, minutes: 0, seconds: 0 }
+  const minuteUnit = 60
+  const hourUnit = minuteUnit * 60
+  const dayUnit = hourUnit * 24
+  let remainTime = time
+
+
+  res.days = Math.floor(time / dayUnit)
+  remainTime = time % dayUnit
+
+  res.hours = Math.floor(remainTime / hourUnit)
+  remainTime = remainTime % hourUnit
+
+  res.minutes = Math.floor(remainTime / minuteUnit)
+  remainTime = remainTime % minuteUnit
+
+  res.seconds = Math.floor(remainTime)
+
+  return res
+}
