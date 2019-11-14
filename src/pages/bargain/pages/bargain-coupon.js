@@ -24,19 +24,19 @@ export default class BargainCoupon extends Component {
     this.props.dispatchBargainDetail({ id: parseInt(id) }).then(({ data: { data } }) => {
       this.setState({
         coupon: data.coupon,
-        reward_id: data.reward_id,
         price: data.price,
         apartment_title: data.apartment_title,
         apartment_type_title: data.apartment_type_title,
         no: data.no,
-        cover: data.cover
+        cover: data.cover,
+        user_bargain: data.user_bargain
       })
     })
   }
 
   onReceiveCoupon() {
-    const { reward_id } = this.state
-    this.props.dispatchBargainGetCoupon({ bargain_record_id: reward_id }).then(res => {
+    const { user_bargain: { bargain_record_id } } = this.state
+    this.props.dispatchBargainGetCoupon({ bargain_record_id }).then(res => {
       res.data.code === 1 && Taro.showToast({ title: '代金券领取成功！', icon: 'none' })
     })
   }
