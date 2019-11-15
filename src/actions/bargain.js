@@ -38,7 +38,7 @@ export const dispatchBargainDetail = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_BARGAIN_DETAIL,
-  url : API_BARGAIN_DETAIL,
+  url: API_BARGAIN_DETAIL,
   cb: ({ data: { data } }) => data
 })
 
@@ -47,8 +47,8 @@ export const dispatchBargainCut = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_BARGAIN_CUT,
-  url : API_BARGAIN_CUT,
-  cb: ({ data: { data } }) => data
+  url: API_BARGAIN_CUT,
+  cb: res => res && res.data && res.data.data
 })
 
 // 帮砍
@@ -56,8 +56,8 @@ export const dispatchBargainHelpCut = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_BARGAIN_HELP_CUT,
-  url : API_BARGAIN_HELP_CUT,
-  cb: ({ data: { data } }) => data
+  url: API_BARGAIN_HELP_CUT,
+  cb: res => res && res.data && res.data.data
 })
 
 // 领取优惠券
@@ -65,6 +65,6 @@ export const dispatchBargainGetCoupon = payload => createAction({
   payload,
   method: 'POST',
   type: TYPE_BARGAIN_GET_COUPON,
-  url : API_BARGAIN_GET_COUPON,
-  cb: ({ data: { data } }) => data
+  url: API_BARGAIN_GET_COUPON,
+  cb: res => res && res.data && res.data.data
 })

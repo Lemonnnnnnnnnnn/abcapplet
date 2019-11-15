@@ -448,7 +448,6 @@ class HouseTypeShow extends Component {
 
               {/* 头部 */}
               <View style={{ fontSize: Taro.pxTransform(40), minHeight: Taro.pxTransform(32), width: Taro.pxTransform(560) }}>{title}</View>
-
               <View className='text-secondary text-large mt-1' style={{ minHeight: Taro.pxTransform(24) }}>{intro}</View>
 
 

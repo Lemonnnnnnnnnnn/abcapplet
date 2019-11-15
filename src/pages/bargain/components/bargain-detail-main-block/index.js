@@ -2,6 +2,23 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 import { AtCountdown } from 'taro-ui'
 
+import {
+  LOCALE_NONE,
+  LOCALE_BARGAIN_OVER,
+  LOCALE_BARGAIN_ROOM,
+  LOCALE_COLON,
+  LOCALE_ORIGINAL_PRICE,
+  LOCALE_BARGAIN_AFTER,
+  LOCALE_MONEY,
+  LOCALE_QI,
+  LOCALE_BARGAIN_IMMEDIATE_PROVINCE,
+  LOCALE_ACTIVITY_REMAIN_TIME,
+  LOCALE_DATE,
+  LOCALE_HOUR,
+  LOCALE_MINUTE,
+  LOCALE_SECOND
+} from '@constants/locale'
+
 
 import Board from '@components/board'
 import BaseComponent from '@components/base'
@@ -17,7 +34,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
   }
 
   onTimeUp() {
-    Taro.showToast({ title: '活动已结束！', icon: 'none' })
+    Taro.showToast({ title: LOCALE_BARGAIN_OVER, icon: LOCALE_NONE })
   }
 
   render() {
@@ -30,7 +47,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
     const tenancyRender = '（租期' + tenancy + '个月）'
 
     return (
-      <Board className=' ml-3 mr-3'>
+      <Board className=' ml-3 mr-3' customStyle={{ minHeight: Taro.pxTransform(273 * 2) }}>
         {/* 用padding让板块具有一定内边距 */}
         <View className='p-2'>
           {/* 板块内第一个板块  图片加公寓信息左右排列*/}
@@ -43,7 +60,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
                 {/* <AtIcon value='chevron-right' size='17' color='rgba(53, 53, 53, 1)' /> */}
               </View>
               <View className='text-normal pt-2'>
-                {apartment_type_title && <Text className='text-secondary'>砍价房间:</Text>}
+                {apartment_type_title && <Text className='text-secondary'>{LOCALE_BARGAIN_ROOM + LOCALE_COLON}</Text>}
                 {apartment_type_title && <Text className='text-gray--2 ml-2'>{apartment_type_title}</Text>}
                 {no && <Text className='ml-2'>{no}</Text>}
               </View>
@@ -53,28 +70,28 @@ export default class BargainDetailMainBlock extends BaseComponent {
           {/* 第二板块 价格*/}
           <View className='at-row text-center'>
             <View className='at-col main-block-price mr-3'>
-              <View className='text-normal'>原价：</View>
-              <View className='text-line-through text-secondary'>￥{parseInt(original_price || 0)}/月</View>
+              <View className='text-normal'>{LOCALE_ORIGINAL_PRICE + LOCALE_COLON}</View>
+              <View className='text-line-through text-secondary'>{LOCALE_MONEY + parseInt(original_price || 0) + LOCALE_QI}</View>
             </View>
             <View className='at-col main-block-price'>
-              <View className='text-normal'>砍价后:</View>
-              <View className='text-orange text-bold'>￥{parseInt(price || 0)}/月</View>
+              <View className='text-normal'>{LOCALE_BARGAIN_AFTER + LOCALE_COLON}</View>
+              <View className='text-orange text-bold'>{LOCALE_MONEY + parseInt(price || 0) + LOCALE_QI}</View>
             </View>
           </View>
 
           {/* 第三板块 吸引词 */}
-          <View className='text-normal mt-2 text-orange text-center gray-border'>立省￥{save_money + tenancyRender}</View>
+          <View className='text-normal mt-2 text-orange text-center gray-border'>{LOCALE_BARGAIN_IMMEDIATE_PROVINCE + LOCALE_MONEY + save_money + tenancyRender}</View>
 
           {/* 第四板块 活动剩余时间 */}
           {close_time !== -1 && !activityOver &&
             <View>
-              <View className='text-normal text-center pt-3'>活动剩余时间</View>
+              <View className='text-normal text-center pt-3'>{LOCALE_ACTIVITY_REMAIN_TIME}</View>
               <View className='at-row at-row__justify--center'>
                 <AtCountdown
                   isCard
                   isShowDay
                   isShowHour
-                  format={{ day: '天', hours: '时', minutes: '分', seconds: '秒' }}
+                  format={{ day: LOCALE_DATE, hours: LOCALE_HOUR, minutes: LOCALE_MINUTE, seconds: LOCALE_SECOND }}
                   day={days}
                   hours={hours}
                   minutes={minutes}

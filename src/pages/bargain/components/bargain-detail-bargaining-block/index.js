@@ -2,13 +2,20 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 import { AtIcon } from 'taro-ui'
 
-import { LOCALE_HAVE_BEEN, LOCALE_PEOPLE_HELP_BARGAIN } from '@constants/locale'
+import {
+  LOCALE_HAVE_BEEN,
+  LOCALE_PEOPLE_HELP_BARGAIN,
+  LOCALE_BARGAIN_CURRENT_PRICE,
+  LOCALE_BARGAIN_HAVE_CUT2,
+  LOCALE_COLON,
+  LOCALE_MONEY
+} from '@constants/locale'
 
 import Board from '@components/board'
 import BaseComponent from '@components/base'
 
 
-export default class BargainingBlock extends BaseComponent {
+export default class BargainDetailBargainingBlock extends BaseComponent {
   static defaultProps = {
     user_bargain: {
       headimg: '',
@@ -47,14 +54,14 @@ export default class BargainingBlock extends BaseComponent {
           {/* 右 */}
           <View className='at-col at-col-5'>
             {status === 0 && <View className='at-row at-row__align--center at-row__justify--center text-center'>
-              <Text className='text-small'>现价： </Text>
-              <Text className='text-orange text-huge'>￥{price}</Text>
+              <Text className='text-small'>{LOCALE_BARGAIN_CURRENT_PRICE + LOCALE_COLON} </Text>
+              <Text className='text-orange text-huge'>{LOCALE_MONEY + price}</Text>
             </View>}
             {status === 1 && <View className='text-orange text-huge text-center  text-bold'>砍价成功！</View>}
 
             <View className='at-row at-row__align--center at-row__justify--center text-center'>
-              <Text className='text-small'>已砍： </Text>
-              <Text className='text-orange text-huge'>￥{help_bargain_price}</Text>
+              <Text className='text-small'>{LOCALE_BARGAIN_HAVE_CUT2 + LOCALE_COLON} </Text>
+              <Text className='text-orange text-huge'>{LOCALE_MONEY + help_bargain_price}</Text>
             </View>
           </View>
 

@@ -22,8 +22,13 @@ export default class BargainTab extends BaseComponent {
         <View className=' p-2 at-row' style={{ width: 'auto' }}>
           {
             bargainSuccess && <View className='at-col at-col-6  ml-2 text-normal'>
-              <View className='text-center'>{LOCALE_BARGAIN_GET_POWER}</View>
-              <View className='text-center'>{LOCALE_BARGAIN_RECEIVE_COUPON}</View>
+              {
+                is_receive ? <View className='text-center'>您已领取优惠券</View>
+                  : <View className='text-center'>
+                    <View >{LOCALE_BARGAIN_GET_POWER}</View>
+                    <View >{LOCALE_BARGAIN_RECEIVE_COUPON}</View>
+                  </View>
+              }
             </View>
           }
           {

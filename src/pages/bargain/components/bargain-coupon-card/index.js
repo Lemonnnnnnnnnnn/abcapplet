@@ -9,7 +9,8 @@ import {
   LOCALE_MONEY,
   LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT,
   LOCALE_BARGAIN_AFTER,
-  LOCALE_QI
+  LOCALE_QI,
+  LOCALE_COLON
 } from '@constants/locale'
 
 export default class BargainCouponCard extends BaseComponent {
@@ -58,7 +59,7 @@ export default class BargainCouponCard extends BaseComponent {
               {no && <Text className='ml-1'>{no}</Text>}
             </View>
             <View className='at-row text-small'>
-              <Text className='text-secondary'>{LOCALE_BARGAIN_AFTER}</Text>
+              <Text className='text-secondary'>{LOCALE_BARGAIN_AFTER + LOCALE_COLON}</Text>
               <Text className='text-orange text-normal text-bold'>{LOCALE_MONEY + parseInt(price) + LOCALE_QI}</Text>
             </View>
           </View>

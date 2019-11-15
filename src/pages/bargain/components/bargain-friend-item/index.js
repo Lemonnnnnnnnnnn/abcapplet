@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 import BaseComponent from '@components/base'
 // 自定义常量
-import { LOCALE_DOT, LOCALE_MONEY, LOCALE_BARGAIN_HAVE } from '@constants/locale'
+import { LOCALE_DOT, LOCALE_MONEY, LOCALE_BARGAIN_HAVE_CUT1 } from '@constants/locale'
 
 export default class BargainFriendItem extends BaseComponent {
   config = {
@@ -11,7 +11,7 @@ export default class BargainFriendItem extends BaseComponent {
 
   static defaultProps = {
     headimg: '',
-    price: '',
+    price: 0,
     username: ''
   }
 
@@ -30,7 +30,7 @@ export default class BargainFriendItem extends BaseComponent {
         <View className='text-small at-row at-row__justify--center'>{username}</View>
       </View>
       <View className='at-row at-row__align--end at-row__justify--end'>
-        <Text className='text-mini text-secondary mb-1 mr-1'>{LOCALE_BARGAIN_HAVE}</Text>
+        <Text className='text-mini text-secondary mb-1 mr-1'>{LOCALE_BARGAIN_HAVE_CUT1}</Text>
         <Text className='text-huge text-orange'>{LOCALE_MONEY + price}</Text>
       </View>
     </View>

@@ -26,7 +26,7 @@ import BargainContainer from '../components/bargain-container'
 import BargainTab from '../components/bargain-tab'
 import BargainDetailMainBlock from '../components/bargain-detail-main-block'
 import BargainDetailSecBlock from '../components/bargain-detail-sec-block'
-import BargainingBlock from '../components/bargaining-block'
+import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
 
 
@@ -45,11 +45,11 @@ export default class BargainDetail extends Component {
     buttons: []
   }
 
-  async componentDidShow(){
+  componentDidShow() {
     this.initState()
   }
 
-  async initState(){
+  async initState() {
     const { id, share_id } = this.$router.params
     let [buttons, userID] = [[], 0]
     await this.props.dispatchGetUserMsg().then(res => {
@@ -133,7 +133,7 @@ export default class BargainDetail extends Component {
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
     const { bargainDetail: { id } } = this.state
     this.props.dispatchBargainCut({ id }).then(res => {
-      res.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+      res.data && res.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
     })
   }
 
@@ -143,7 +143,7 @@ export default class BargainDetail extends Component {
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
     const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
     this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
-      if (res.data.code === 1) {
+      if (res.data && res.data.code === 1) {
         Taro.showToast({ title: LOCALE_BARGAIN_HELP_SUCCESS, icon: LOCALE_NONE })
         setTimeout(() => {
           Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + share_id })
@@ -189,6 +189,7 @@ export default class BargainDetail extends Component {
       <View className='bargain wrap-Style'>
         {/* 帮砍好友 */}
         <BargainHelpFriendsMask user_bargain={user_bargain} show={showHelpFriends} onClose={this.onCloseHelpFriendsMask} />
+        {/* 背景图 */}
         <BargainContainer />
 
         <View className='bargain-background'>
@@ -199,7 +200,7 @@ export default class BargainDetail extends Component {
               bargainDetail={bargainDetail}
             />
             {/* 砍价状态 */}
-            {user_bargain && <BargainingBlock user_bargain={user_bargain} onOpenHelpFriendsMask={this.onOpenHelpFriendsMask} />}
+            {user_bargain && <BargainDetailBargainingBlock user_bargain={user_bargain} onOpenHelpFriendsMask={this.onOpenHelpFriendsMask} />}
             {/* 第二个板块 */}
             <BargainDetailSecBlock bargainDetail={bargainDetail} />
           </View>

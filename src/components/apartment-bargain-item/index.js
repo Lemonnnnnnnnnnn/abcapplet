@@ -47,7 +47,7 @@ export default class ApartmentBargainItem extends BaseComponent {
               {/* 水平垂直居中 */}
               <View className='vertical-level-center '>
                 <View className='bargain-list-image' >
-                  <Image className='inherit-Width inherit-Height' mode='scaleToFill' src={`${cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}></Image>
+                  <Image className='inherit-Width inherit-Height' mode='scaleToFill' src={`${cover}`}></Image>
                   <View className='bargain-list-image-mask text-center text-small'>{participate_num}</View>
                 </View>
               </View>
