@@ -36,6 +36,8 @@ export const APPOINTMENT_DETAIL = 'https://images.gongyuabc.com/image/appointmen
 export const USER_WISH = 'https://images.gongyuabc.com/image/wish.png' //心愿单
 export const REQUIREMENT_CARD = 'https://images.gongyuabc.com/image/requirement-card.png'  //需求卡
 export const PREFERENTIAL = 'https://images.gongyuabc.com/image/Preferential.png'  //优惠卷
+export const USER_ACTIVITY = 'https://images.gongyuabc.com/image/myActivity.png' //我的活动
+export const USER_FEEDBACK = 'https://images.gongyuabc.com/image/feedback.png'
 
 // 签约下定
 export const ORDER_SIGN = 'https://images.gongyuabc.com/image/order-sign.png'

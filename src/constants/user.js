@@ -13,18 +13,34 @@ import {
 import {
   LOCALE_USER_FAVORITE,
   LOCALE_USER_FAVORITE_EXTRA_TEXT,
+  LOCALE_USER_FEEDBACK_EXTRA_TEXT,
   LOCALE_USER_NEED,
-  LOCALE_USER_NEED_EXTRA_TEXT,
 
   LOCALE_ORDER_LIST,
   LOCALE_RISK_FUND,
 
   LOCALE_USER_COUPON,
   LOCALE_USER_ACTIVITY,
-  LOCALE_USER_COUPON_EXTRA_TEXT,
+
+  LOCALE_CONTACT,
+  LOCALE_FEEDBACK,
+
+  LOCALE_NAVI_FAVORITE,
+  LOCALE_OPEN_CARD,
+  LOCALE_NAVI_COUPON,
+  LOCALE_NAVI_ACTIVITY,
+  LOCALE_SHOW_CUSTOMER_MASK,
+  LOCALE_ON_FEED_BACK,
 } from '@constants/locale'
 
-import { USER_WISH, REQUIREMENT_CARD, PREFERENTIAL } from '@constants/picture'
+import {
+  USER_WISH,
+  CALL,
+  USER_FEEDBACK,
+  REQUIREMENT_CARD,
+  PREFERENTIAL,
+  USER_ACTIVITY
+} from '@constants/picture'
 
 export const USER_DEFAULT = {
   // 城市数据
@@ -71,25 +87,46 @@ export const USER_OPTIONS_LISTS = [
     icon: USER_WISH,
     title: LOCALE_USER_FAVORITE,
     extraText: LOCALE_USER_FAVORITE_EXTRA_TEXT,
+    method: LOCALE_NAVI_FAVORITE
   },
   {
     id: 2,
     icon: REQUIREMENT_CARD,
     title: LOCALE_USER_NEED,
-    extraText: LOCALE_USER_NEED_EXTRA_TEXT,
+    extraText: '',
+    method: LOCALE_OPEN_CARD
   },
   {
     id: 3,
     icon: PREFERENTIAL,
     title: LOCALE_USER_COUPON,
-    extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
+    extraText: '',
+    method: LOCALE_NAVI_COUPON
   },
   {
     id: 4,
-    icon: PREFERENTIAL,
+    icon: USER_ACTIVITY,
     title: LOCALE_USER_ACTIVITY,
-    extraText: LOCALE_USER_COUPON_EXTRA_TEXT,
+    extraText: '',
+    method: LOCALE_NAVI_ACTIVITY
   },
+]
+
+export const USER_FEEDBACK_OPTIONS_LIST = [
+  {
+    id: 1,
+    icon: CALL,
+    title: LOCALE_CONTACT,
+    extraText: LOCALE_USER_FEEDBACK_EXTRA_TEXT,
+    method: LOCALE_SHOW_CUSTOMER_MASK
+  },
+  {
+    id: 2,
+    icon: USER_FEEDBACK,
+    title: LOCALE_FEEDBACK,
+    extraText: '',
+    method: LOCALE_ON_FEED_BACK
+  }
 ]
 
 

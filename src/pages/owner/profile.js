@@ -13,6 +13,7 @@ import Decorate from '@components/decorate'
 import UserHeader from '@components/user-header'
 import UserOptions from '@components/user-options'
 import UserOrderOptions from '@components/user-order-options'
+import UserFeedbackOptions from '@components/user-feedback-options'
 import Board from '@components/board'
 import RequirementCard from '@components/requirement-card'
 import CustomerServiceMask from '@components/customer-service-mask'
@@ -21,6 +22,7 @@ import CustomerServiceMask from '@components/customer-service-mask'
 import {
   USER_OPTIONS_LISTS,
   USER_ORDER_OPTIONS_LISTS,
+  USER_FEEDBACK_OPTIONS_LIST
 } from '@constants/user'
 
 import { COLOR_GREY_2 } from '@constants/styles'
@@ -50,6 +52,7 @@ class UserProfile extends Component {
 
   state = {
     optionLists: USER_OPTIONS_LISTS,
+    optionFeedbackLists: USER_FEEDBACK_OPTIONS_LIST,
     orderOptionLists: USER_ORDER_OPTIONS_LISTS,
     showCard: false,
     showMask: false,
@@ -97,7 +100,7 @@ class UserProfile extends Component {
 
   // 打开/关闭联系客服弹窗
 
-  onshowCustomerMask() {
+  onShowCustomerMask() {
     this.setState({ showMask: true })
   }
 
@@ -119,23 +122,22 @@ class UserProfile extends Component {
     })
   }
 
+  onClick(method) {
+    this[method]()
+  }
+
 
   render() {
-    const { optionLists, orderOptionLists, showCard, showMask } = this.state
+    const { optionLists, orderOptionLists, showCard, showMask, optionFeedbackLists } = this.state
     const { user: { username, mobile }, dists } = this.props
-
-    const maskStyle = {
-      position: 'absolute',
-      height: '100vh',
-      width: '100%',
-      top: '20vh',
-      zIndex: 99,
-    }
-
 
     return (
       <View className='page-grey' style={{ overflow: 'hidden' }}>
         <View className='page ' >
+          {
+            !Taro.getStorageSync('user_info').token &&
+            <View className='page-mask-opacity' onClick={() => Taro.showToast({ title: '请先登录再进行后续操作', icon: 'none' })}></View>
+          }
           {/* 背景底色 */}
           <Decorate height='300' />
 
@@ -146,16 +148,11 @@ class UserProfile extends Component {
             username={username}
             onLogin={this.onLogin}
           />
-          {/* https://images.gongyuabc.com/image/recommed.png */}
-
 
           {/* 用户可选信息 */}
           <UserOptions
             className='mt-3 mx-3'
-            onOpenCard={this.onOpenCard}
-            onNavigateToFavorite={this.onNavigateToFavorite}
-            onNavigateToCoupon={this.onNavigateToCoupon}
-            onNavigateToActivity={this.onNavigateToActivity}
+            onClick={this.onClick}
             lists={optionLists}
           />
 
@@ -170,20 +167,21 @@ class UserProfile extends Component {
             lists={orderOptionLists}
           />
 
+          {/* 反馈入口 */}
+          <UserFeedbackOptions
+            className='mt-3 mx-3'
+            onClick={this.onClick}
+            lists={optionFeedbackLists}
+          />
 
-          {/* 联系客服 */}
-          <Board className='mt-2 mx-3'>
+          {/* <Board className='mt-2 mx-3'>
             <View className=' p-3 mt-2' onClick={this.onshowCustomerMask} style={{ marginTop: Taro.pxTransform(8) }}>
               <View className='at-row at-row__justify--between'>
-                {/* 左侧内容 */}
                 <View className='at-row at-row__align--center ml-2'>
-                  {/* 左侧图标 */}
                   <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src='https://images.gongyuabc.com/image/call.png'></Image>
-                  {/* 文本内容 */}
                   <View className='ml-2 text-normal' style={{ color: '#000' }}>联系客服</View>
                 </View>
 
-                {/* 右侧图片 */}
                 <View className='at-col at-col-3 '>
                   <View className='at-row at-row__align--center'>
                     <View className='text-small text-secondary mr-2'>9:30-21:30</View>
@@ -197,19 +195,14 @@ class UserProfile extends Component {
             </View>
           </Board>
 
-          {/* 意见反馈 */}
           <Board className='mt-2 mx-3'>
             <View className=' p-3 mt-2' onClick={this.onFeedback} style={{ marginTop: Taro.pxTransform(8) }}>
               <View className='at-row at-row__justify--between'>
-                {/* 左侧内容 */}
                 <View className='at-row at-row__align--center ml-2'>
-                  {/* 左侧图标 */}
                   <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src='https://images.gongyuabc.com/image/feedback.png'></Image>
-                  {/* 文本内容 */}
                   <View className='ml-2 text-normal' style={{ color: '#000' }}>意见反馈</View>
                 </View>
 
-                {/* 右侧图片 */}
                 <View className='at-col at-col-1'>
                   <View style={{ marginBottom: Taro.pxTransform(4) }} className='ml-3'>
                     <AtIcon value='chevron-right' color={COLOR_GREY_2} size={17} />
@@ -219,7 +212,7 @@ class UserProfile extends Component {
               </View>
             </View>
 
-          </Board>
+          </Board> */}
 
         </View >
 
@@ -233,15 +226,7 @@ class UserProfile extends Component {
           ref={this.refRequirementCard}
           onCloseCard={this.onCloseCard}
           dists={dists}
-
         />
-
-        {
-          !Taro.getStorageSync('user_info').token &&
-          <View style={maskStyle} onClick={() => Taro.showToast({ title: '请先登录！', icon: 'none' })}></View>
-        }
-
-
       </View>
     )
   }

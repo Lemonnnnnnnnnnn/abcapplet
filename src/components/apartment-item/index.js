@@ -148,7 +148,7 @@ class ApartmentItem extends BaseComponent {
           <View className='wrap-Style inherit-Width' style={{ height: Taro.pxTransform(imgWrapHeight) }}>
             {/* 户型封面，如果没有地址则使用 Image Placeholder 来占位 */}
             {cover
-              ? <Image src={src} style={{ borderRadius: Taro.pxTransform(12) }} mode='widthFix' className='vertical-level-center inherit-Width inherit-Height' />
+              ? <Image lazyLoad src={src} style={{ borderRadius: Taro.pxTransform(12) }} mode='widthFix' className='vertical-level-center inherit-Width inherit-Height' />
               : <ImagePlaceholder height={height} />
             }
           </View>
@@ -168,7 +168,7 @@ class ApartmentItem extends BaseComponent {
             ?
             <View className='apartment-item-header-favorite mr-2 mt-2' onClick={this.onDeleteFavorite}>
               <View className='apartment-item-heart-wrap' >
-                <Image className='apartment-item-heart' src={HEART_YELLOW} ></Image>
+                <Image  className='apartment-item-heart' src={HEART_YELLOW} ></Image>
               </View>
               <View className='apartment-item-heart-num text-small' >{num}</View>
 

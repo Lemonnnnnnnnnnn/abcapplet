@@ -36,13 +36,17 @@ class UserHeader extends BaseComponent {
     )
 
     const userLogin = (
-      <View className='at-row at-row__align--center' onClick={onLogin}>
+      <View className='at-row at-row__align--center' >
         <Text className='text-huge'>{LOCALE_LOGIN}</Text>
       </View>
     )
 
     return (
-      <View className={classNames(className, 'user-card display-flex')}>
+      <View
+        onClick={onLogin}
+        className={classNames(className, 'user-card display-flex position-relative')}
+        style={{ zIndex: 100 }}
+      >
         {userAvatar}
         {username === '' ? userLogin : userInfo}
       </View>

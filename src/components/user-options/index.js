@@ -16,14 +16,6 @@ class UserOptions extends BaseComponent {
     size: 17,
   }
 
-  onOptionClick(value) {
-    switch (value) {
-      case 1: { this.props.onNavigateToFavorite() } break
-      case 2: { this.props.onOpenCard() } break
-      case 3: { this.props.onNavigateToCoupon() } break
-      case 4: { this.props.onNavigateToActivity() } break
-    }
-  }
   render() {
     const { lists, size, className } = this.props
 
@@ -31,7 +23,7 @@ class UserOptions extends BaseComponent {
       <Board className={className}>
         {
           lists.map(i =>
-            <View className='user-list-item py-3 mx-3' onClick={this.onOptionClick.bind(this, i.id)} key={i.id}>
+            <View className='user-list-item py-3 mx-3' onClick={this.props.onClick.bind(this, i.method)} key={i.id}>
               <View className='at-row at-row__justify--around'>
                 {/* 左 */}
                 <View className='at-row'>

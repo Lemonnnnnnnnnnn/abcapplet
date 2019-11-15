@@ -15,7 +15,7 @@ import BargainFriendItem from '../bargain-friend-item'
 export default class BargainHelpFriendsMask extends BaseComponent {
   static defaultProps = {
     show: false,
-    user_bargain: { help_bargain_list: [] }
+    user_bargain: { help_bargain_list: [], is_receive: false }
   }
 
   onMaskTouchMove(e) {
@@ -23,7 +23,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
   }
 
   render() {
-    const { show, user_bargain: { help_bargain_list } } = this.props
+    const { show, user_bargain: { help_bargain_list, is_receive } } = this.props
     return (show &&
       <View onTouchMove={this.onMaskTouchMove}>
         <Board fixed='bottom' border='top' customStyle={{ zIndex: 12, width: 'auto' }} className='p-2'>
@@ -56,11 +56,11 @@ export default class BargainHelpFriendsMask extends BaseComponent {
 
           </View>
           {/* 分享按钮 */}
-          <AtButton
+          {!is_receive && <AtButton
             circle
             className='btn-bargain mb-2'
             open-type='share'
-          >{LOCALE_BARGAIN_SHARE}</AtButton>
+          >{LOCALE_BARGAIN_SHARE}</AtButton>}
 
         </Board>
         <Masks customStyle={{ zIndex: 11 }} show />

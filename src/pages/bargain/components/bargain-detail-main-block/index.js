@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
-import { AtCountdown } from 'taro-ui'
+import { AtCountdown, AtIcon } from 'taro-ui'
 
 import {
   LOCALE_NONE,
@@ -18,6 +18,8 @@ import {
   LOCALE_MINUTE,
   LOCALE_SECOND
 } from '@constants/locale'
+
+import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
 
 
 import Board from '@components/board'
@@ -37,13 +39,21 @@ export default class BargainDetailMainBlock extends BaseComponent {
     Taro.showToast({ title: LOCALE_BARGAIN_OVER, icon: LOCALE_NONE })
   }
 
+  onNavigation() {
+    const { bargainDetail: { type_id, type } } = this.props
+    switch (type) {
+      case 1: { Taro.navigateTo({ url: PAGE_APARTMENT_SHOW + '?id=' + type_id }) } break
+      case 2: { Taro.navigateTo({ url: PAGE_HOUSE_TYPE_SHOW + '?id=' + type_id }) } break
+    }
+  }
+
   render() {
     const { bargainDetail } = this.props
     const { apartment_title, apartment_type_title, cover, original_price, participate_num, price,
       save_money, tenancy = 12, close_time, no, days, hours, minutes, seconds, activityOver } = bargainDetail
 
     let { headimg } = bargainDetail
-    const headImgRender = headimg && headimg.splice(0, 5)
+    const headImgRender = headimg && headimg.slice(0, 5)
     const tenancyRender = '（租期' + tenancy + '个月）'
 
     return (
@@ -51,14 +61,15 @@ export default class BargainDetailMainBlock extends BaseComponent {
         {/* 用padding让板块具有一定内边距 */}
         <View className='p-2'>
           {/* 板块内第一个板块  图片加公寓信息左右排列*/}
-          <View className='at-row'>
+          <View className='at-row at-row__justify--between'>
             <Image src={cover} className='bargain-detail-image main-block-image'></Image>
 
-            <View className='ml-3'>
-              <View className='pt-2 text-large text-bold at-row at-row__align--center at-row__justify--between'>
-                <Text>{apartment_title}</Text>
-                {/* <AtIcon value='chevron-right' size='17' color='rgba(53, 53, 53, 1)' /> */}
+            <View className='at-col at-col-7'>
+              <View onClick={this.onNavigation} className='pt-2 text-large text-bold at-row at-row__align--center at-row__justify--between'>
+                <Text >{apartment_title}</Text>
+                <AtIcon value='chevron-right' size='17' color='rgba(53, 53, 53, 1)' />
               </View>
+
               <View className='text-normal pt-2'>
                 {apartment_type_title && <Text className='text-secondary'>{LOCALE_BARGAIN_ROOM + LOCALE_COLON}</Text>}
                 {apartment_type_title && <Text className='text-gray--2 ml-2'>{apartment_type_title}</Text>}

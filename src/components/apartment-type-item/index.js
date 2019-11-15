@@ -33,7 +33,7 @@ class ApartmentTypeItem extends BaseComponent {
 
   onNavigation() {
     const { type } = this.props
-    type === 'HouseType' ? this.props.dispatchApartmentHouseDataPost({ type: 4,city_id:Taro.getStorageSync('user_info').citycode ||  350200}) : this.props.dispatchApartmentDataPost({ type: 4 })
+    type === 'HouseType' ? this.props.dispatchApartmentHouseDataPost({ type: 4, city_id: Taro.getStorageSync('user_info').citycode || 350200 }) : this.props.dispatchApartmentDataPost({ type: 4 })
     const { item: { url } } = this.props
     Taro.navigateTo({ url })
   }
@@ -56,6 +56,7 @@ class ApartmentTypeItem extends BaseComponent {
       <View className='wrap-Style inherit-Width' style={{ height: Taro.pxTransform(height) }}>
         {
           cover && <Image
+            lazyLoad
             src={cover}
             className='inherit-Width inherit-Height'
           >
