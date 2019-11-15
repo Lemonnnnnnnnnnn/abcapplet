@@ -28,7 +28,7 @@ import { COLOR_GREY_2 } from '@constants/styles'
 import textWrap from '@utils/text-wrap'
 
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, HOUSE_TYPE_DESC, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
-import { LOCALE_PRICE_START, LOCALE_PRICE_SEMICOLON, LOCALE_SHARE_TEXT, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
+import { LOCALE_PRICE_START, LOCALE_MONEY, LOCALE_SHARE_TEXT, LOCALE_SEMICOLON, LOCALE_PRICE_ACTIVITY, LOCALE_PRICE_ORIGIN } from '@constants/locale'
 import { PAYLOAD_COUPON_LIST } from '@constants/api'
 import { PAGE_HOME, PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_APPOINTMENT_CREATE, PAGE_RISK_LANDING } from '@constants/page'
 import { PATH, HOME, FREE, POING_THREE, RISK_MONEY_BANNER } from '@constants/picture'
@@ -459,7 +459,7 @@ class HouseTypeShow extends Component {
                     <View className='text-yellow at-col' >
                       {/* 折扣价独立出来显示 */}
                       <Text style={{ fontSize: Taro.pxTransform(36) }}>
-                        {LOCALE_PRICE_SEMICOLON + discount_price_title}
+                        {LOCALE_MONEY + discount_price_title}
                       </Text>
                       <Text className='text-normal'>{LOCALE_PRICE_START + LOCALE_PRICE_ACTIVITY}</Text>
                     </View>
@@ -467,7 +467,7 @@ class HouseTypeShow extends Component {
                     <View className='at-row at-row__justify--between at-row__align--center mt-2' >
 
                       <View className='at-col text-normal text-secondary' >
-                        {LOCALE_PRICE_SEMICOLON + showPrice + LOCALE_PRICE_START + LOCALE_PRICE_ORIGIN}
+                        {LOCALE_MONEY + showPrice + LOCALE_PRICE_START + LOCALE_PRICE_ORIGIN}
                       </View>
 
                       <View className='at-col '>
@@ -483,7 +483,7 @@ class HouseTypeShow extends Component {
                   <View className='at-row at-row__justify--between at-row__align--center mt-2' >
                     <View className='text-yellow at-col' >
                       <Text style={{ fontSize: Taro.pxTransform(36) }}>
-                        {LOCALE_PRICE_SEMICOLON + showPrice}
+                        {LOCALE_MONEY + showPrice}
                       </Text>
                       <Text className='text-normal'>{LOCALE_PRICE_START}</Text>
                     </View>
@@ -573,7 +573,7 @@ class HouseTypeShow extends Component {
                 </View>
               }
               {/* 砍价 */}
-              {haveBargain && <ApartmentBargainCard bargain={bargain} />}
+              {haveBargain && <ApartmentBargainCard title='本户型' bargain={bargain} />}
 
 
               {/* 户型简介 */}

@@ -103,7 +103,8 @@ class CommonSearch extends BaseComponent {
   /**
    * 设置输入框的值
    */
-  onSetInput(value) {
+  onSetInput(value, url) {
+    url && Taro.navigateTo({ url })
     this.search.setState({ value })
     this.onApartmentPayloadChange({ payload: { search_key: value } })
   }
@@ -181,7 +182,7 @@ class CommonSearch extends BaseComponent {
                 <View
                   key={i.id}
                   className='mr-2'
-                  onClick={this.onSetInput.bind(this, i.text)}
+                  onClick={this.onSetInput.bind(this, i.text, i.url)}
                 >{i.text}</View>
               )}
             </View>

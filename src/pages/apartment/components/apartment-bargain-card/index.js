@@ -8,8 +8,6 @@ import BaseComponent from '@components/base'
 // 自定义常量
 import { PAGE_BARGAIN_DETAIL } from '@constants/page'
 
-import '../../../../styles/_apartment.scss'
-
 export default class apartmentBargainCard extends BaseComponent {
   static defaultProps = {
     bargain: {
@@ -37,7 +35,7 @@ export default class apartmentBargainCard extends BaseComponent {
   }
 
   render() {
-    const { bargain: {  price, days, hours, minutes, seconds } } = this.props
+    const { bargain: { price, days, hours, minutes, seconds }, title } = this.props
     const { show } = this.state
     return (show &&
       <Board className='my-4 apartment-house-type-bargain-card' shadow='black-shadow'>
@@ -46,7 +44,7 @@ export default class apartmentBargainCard extends BaseComponent {
           {/* 绝对定位 户型房间 和砍价时间 */}
           <View className='position-relative' style={{ minHeight: Taro.pxTransform(20) }}>
             <View className='position-absolute at-row at-row__justify--around at-row__align--end float-unit' >
-              <Text className='text-small tag tag--black'>本户型 </Text>
+              <Text className='text-small tag tag--black'>{title}</Text>
               <View className='at-col at-col-8'>
                 <AtCountdown
                   isCard

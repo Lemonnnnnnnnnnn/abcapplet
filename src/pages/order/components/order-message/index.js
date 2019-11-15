@@ -13,7 +13,7 @@ import {
   LOCALE_RENT,
   LOCALE_PRICE_UNIT,
   LOCALE_SIGN_APARTMENT,
-  LOCALE_PRICE_SEMICOLON,
+  LOCALE_MONEY,
   LOCALE_CHANGE,
   LOCALE_ROOM_CHOISE,
   LOCALE_COUPON,
@@ -108,7 +108,7 @@ export default class OrderMessage extends BaseComponent {
                       <View className=' text-normal'>{apartmentTitle}{roomNo}</View>
                       {rooms.length !== 0 && <View className='text-normal  mt-1'>
                         {LOCALE_RENT}{LOCALE_SEMICOLON}
-                        <Text className='text-normal'>{LOCALE_PRICE_SEMICOLON}</Text>
+                        <Text className='text-normal'>{LOCALE_MONEY}</Text>
                         <Text className='text-huge'>{discount_price || old_discount_price}</Text>
                         {LOCALE_PRICE_UNIT}/{LOCALE_MONTH}
                       </View>}
@@ -237,7 +237,7 @@ export default class OrderMessage extends BaseComponent {
             <View className='text-small'>{LOCALE_ORDER_RISK}</View>
             <View className='text-bold '>
               <View className='at-row at-row__align--end'>
-                <View className='text-small mb-1'>{LOCALE_PRICE_SEMICOLON}</View>
+                <View className='text-small mb-1'>{LOCALE_MONEY}</View>
                 <View className='text-huge'>{room_id && risk_money}</View>
               </View>
             </View>
@@ -290,7 +290,7 @@ export default class OrderMessage extends BaseComponent {
                 <View className='text-brand text-large text-bold'>{LOCALE_DOWN_PAYMENT_REAL}</View>
                 {!cost_deposit && <View className='text-normal text-secondary mt-1'>{LOCALE_DOWN_PAYMENT_RATIO}</View>}
               </View>
-              <View className='text-brand text-super text-bold' >{LOCALE_PRICE_SEMICOLON}{room_id ? price : 0}</View>
+              <View className='text-brand text-super text-bold' >{LOCALE_MONEY}{room_id ? price : 0}</View>
             </View>
           </View>
 

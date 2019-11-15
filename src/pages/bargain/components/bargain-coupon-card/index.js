@@ -5,7 +5,12 @@ import Board from '@components/board'
 import BaseComponent from '@components/base'
 
 // 自定义常量
-import { LOCALE_PRICE_SEMICOLON, LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT } from '@constants/locale'
+import {
+  LOCALE_MONEY,
+  LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT,
+  LOCALE_BARGAIN_AFTER,
+  LOCALE_QI
+} from '@constants/locale'
 
 export default class BargainCouponCard extends BaseComponent {
   static defaultProps = {
@@ -48,12 +53,13 @@ export default class BargainCouponCard extends BaseComponent {
             </View>
             <View className='text-small text-bold'>{apartment_title}</View>
             <View className='text-small text-secondary'>
-              {apartment_type_title && <Text className='text-gray--2 ml-2'>{apartment_type_title}</Text>}
-              {no && <Text className='ml-2'>-{no}</Text>}
+
+              {apartment_type_title && <Text className='text-gray--2'>{apartment_type_title}</Text>}
+              {no && <Text className='ml-1'>{no}</Text>}
             </View>
             <View className='at-row text-small'>
-              <Text className='text-secondary'>砍价后：</Text>
-              <Text className='text-orange text-normal text-bold'>￥{parseInt(price)}/月</Text>
+              <Text className='text-secondary'>{LOCALE_BARGAIN_AFTER}</Text>
+              <Text className='text-orange text-normal text-bold'>{LOCALE_MONEY + parseInt(price) + LOCALE_QI}</Text>
             </View>
           </View>
 
@@ -61,7 +67,7 @@ export default class BargainCouponCard extends BaseComponent {
           <View className='at-col at-col-7 at-col--wrap'>
             <View className='text-orange text-bold at-row at-row__justify--center at-row__align--center inherit-Height' >
               <View className='ar-row at-row__align--end'>
-                {coupon_type === 2 && <Text className='text-super'>{LOCALE_PRICE_SEMICOLON}</Text>}
+                {coupon_type === 2 && <Text className='text-super'>{LOCALE_MONEY}</Text>}
                 <Text style={{ fontSize: Taro.pxTransform(58 * 2) }}>{parseInt(worthText)}</Text>
                 {coupon_type === 1 && <Text className='mt-2' style={{ fontSize: Taro.pxTransform(43 * 2) }}>{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</Text>}
               </View>

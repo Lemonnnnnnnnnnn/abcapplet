@@ -8,7 +8,7 @@ import { BARGAIN_NAV_DIST } from '@constants/bargain'
 
 import BargainLeaderboard from '../bargain-leaderboard'
 
-export default class BargainDetailMainBlock extends BaseComponent {
+export default class BargainDetailSecBlock extends BaseComponent {
   state = {
     navList: BARGAIN_NAV_DIST,
     current: 1,

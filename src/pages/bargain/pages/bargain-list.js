@@ -5,11 +5,10 @@ import { View, Text, Button } from '@tarojs/components';
 import { connect } from '@tarojs/redux'
 import * as bargainAction from '@actions/bargain'
 
+// 自定义变量
+import { LOCALE_BARGAIN_LIST } from '@constants/locale'
 // 自定义组件
-import Board from '@components/board'
 import ApartmentBargainList from '@components/apartment-bargain-list'
-
-import '../../../styles/_bargain.scss'
 
 @connect(state => state, {
   ...bargainAction,
@@ -33,14 +32,11 @@ export default class BargainList extends Component {
     const { bargain: { list } } = this.props
     return (
       <View className='bargain-list p-3'>
-        {/* ad */}
-        {/* <Board>
-          <View style={{ height: Taro.pxTransform(100) }}></View>
-        </Board> */}
         {/* 列表 */}
-        <View className='text-huge my-2 text-white'>砍价列表</View>
+        <View className='text-huge my-2 text-white'>{LOCALE_BARGAIN_LIST}</View>
         <ApartmentBargainList
           ref={this.refBargainList}
+          block='bargainList'
           bargainList={list}
           defaultPayload={payload}
 

@@ -32,6 +32,7 @@ export default class UserActivity extends Component {
         <Decorate height='200' />
 
         <ApartmentBargainList
+          block='userActivity'
           ref={this.refBargainList}
           bargainList={list}
           defaultPayload={payload}

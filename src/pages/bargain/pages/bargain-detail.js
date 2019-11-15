@@ -11,7 +11,15 @@ import { timestampChange } from '@utils/time-judge'
 import textWrap from '@utils/text-wrap'
 
 // 自定义常量
-import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL } from '@constants/page'
+import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL, PAGE_USER_AUTH } from '@constants/page'
+import {
+  LOCALE_BARGAIN_HELP_SUCCESS,
+  LOCALE_NONE,
+  LOCALE_BARGAIN_SHARE,
+  LOCALE_BARGAIN_HELP,
+  LOCALE_BARGAIN_I_WANT,
+  LOCALE_COUPON_RECEIVE
+} from '@constants/locale'
 
 // 自定义组件
 import BargainContainer from '../components/bargain-container'
@@ -20,8 +28,6 @@ import BargainDetailMainBlock from '../components/bargain-detail-main-block'
 import BargainDetailSecBlock from '../components/bargain-detail-sec-block'
 import BargainingBlock from '../components/bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
-
-import '../../../styles/_bargain.scss'
 
 
 @connect(state => state, {
@@ -39,10 +45,13 @@ export default class BargainDetail extends Component {
     buttons: []
   }
 
-  async componentWillMount() {
+  async componentDidShow(){
+    this.initState()
+  }
+
+  async initState(){
     const { id, share_id } = this.$router.params
     let [buttons, userID] = [[], 0]
-
     await this.props.dispatchGetUserMsg().then(res => {
       if (res) {
         const { data: { data } } = res
@@ -57,21 +66,28 @@ export default class BargainDetail extends Component {
       // 计算活动剩余时间
       let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
       if (close_time) {
-        close_time === -1 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
+        close_time !== -1 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
       } else activityOver = true
 
       // 给buttons赋值
 
-      !share_id || parseInt(share_id) === userID ? buttons = [{ message: '分享', method: 'onShare' }]
-        : buttons = [
-          { message: '我也要砍', method: 'onBargain' },
-          { message: '分享', method: 'onShare' },
-          { message: '帮砍', method: 'onHelpBargain' }
-        ]
-
-      if (user_bargain && user_bargain.status === 1) {
-        buttons = [{ message: '领取优惠券', method: 'onReceiveCoupon' }]
-        bargainSuccess = true
+      if (share_id) {
+        if (parseInt(share_id) === userID) {
+          buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare' }]
+        } else {
+          buttons = [
+            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain' },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare' },
+            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain' }
+          ]
+        }
+      } else {
+        if (user_bargain) {
+          user_bargain.status === 1 ? (buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon' }], bargainSuccess = true)
+            : buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare' }]
+        } else {
+          buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain' }]
+        }
       }
 
       this.setState({
@@ -114,21 +130,21 @@ export default class BargainDetail extends Component {
   }
 
   onBargain() {
+    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
     const { bargainDetail: { id } } = this.state
     this.props.dispatchBargainCut({ id }).then(res => {
       res.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
     })
   }
 
-  onShare() {
-    console.log('我在分享')
-  }
+  onShare() { }
 
   onHelpBargain() {
-    const { bargainDetail: { reward_id, id }, share_id } = this.state
-    this.props.dispatchBargainHelpCut({ bargain_record_id: reward_id }).then(res => {
+    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+    const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
+    this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
       if (res.data.code === 1) {
-        Taro.showToast({ title: '帮砍成功！', icon: 'none' })
+        Taro.showToast({ title: LOCALE_BARGAIN_HELP_SUCCESS, icon: LOCALE_NONE })
         setTimeout(() => {
           Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + share_id })
         }, 2000)
@@ -137,15 +153,17 @@ export default class BargainDetail extends Component {
   }
 
   onReceiveCoupon() {
+    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+
     const { bargainDetail: { id }, share_id } = this.state
     Taro.navigateTo({ url: PAGE_BARGAIN_COUPON + '?id=' + id + '&share_id=' + share_id })
   }
 
   onShareAppMessage() {
-    const { bargainDetail: { id, share_image, share_title }, userID } = this.state
+    const { bargainDetail: { id, share_image, share_title }, userID, share_id } = this.state
     return {
       title: textWrap(share_title, 17),
-      url: PAGE_BARGAIN_DETAIL + '?id=' + id + 'share_id=' + userID,
+      path: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + (share_id || userID),
       imageUrl: share_image
     }
   }
@@ -167,7 +185,6 @@ export default class BargainDetail extends Component {
 
   render() {
     const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail } = this.state
-
     return (
       <View className='bargain wrap-Style'>
         {/* 帮砍好友 */}
@@ -188,6 +205,7 @@ export default class BargainDetail extends Component {
           </View>
           {/* 底部tab栏 */}
           <BargainTab
+            user_bargain={user_bargain}
             zIndex={11}
             onClick={this.onClick}
             buttons={buttons}

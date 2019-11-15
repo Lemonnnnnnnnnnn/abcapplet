@@ -365,7 +365,7 @@ class ApartmentShow extends Component {
               </View>
 
               {/* 砍价 */}
-              {haveBargain && <ApartmentBargainCard bargain={bargain} />}
+              {haveBargain && <ApartmentBargainCard title='本公寓' bargain={bargain} />}
 
             </View>
 

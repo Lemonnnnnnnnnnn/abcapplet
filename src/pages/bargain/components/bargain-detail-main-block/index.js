@@ -7,11 +7,11 @@ import Board from '@components/board'
 import BaseComponent from '@components/base'
 
 
-export default class BargainDetailSecBlock extends BaseComponent {
+export default class BargainDetailMainBlock extends BaseComponent {
   static defaultProps = {
     bargainDetail: {
-      apartment_title: '', apartment_type_title: '', content: '', cover: '', headimg: '', original_price: '', participate_num: '', price: '',
-      price_list: '', reward_id: '', save_money: '', tenancy: '', type: '', type_id: '', id: '', end_time: '', begin_time: '', no: '', day: 99,
+      apartment_title: '', apartment_type_title: '', content: '', cover: '', headimg: '', original_price: 0, participate_num: 0, price: 0,
+      price_list: [], reward_id: 0, save_money: 0, tenancy: 12, type: 0, type_id: 0, id: 0, end_time: '', begin_time: '', no: 0, day: 99,
       hours: 23, minutes: 59, seconds: 59, activityOver: true
     }
   }
@@ -23,7 +23,7 @@ export default class BargainDetailSecBlock extends BaseComponent {
   render() {
     const { bargainDetail } = this.props
     const { apartment_title, apartment_type_title, cover, original_price, participate_num, price,
-      save_money, tenancy, close_time, no, days, hours, minutes, seconds, activityOver } = bargainDetail
+      save_money, tenancy = 12, close_time, no, days, hours, minutes, seconds, activityOver } = bargainDetail
 
     let { headimg } = bargainDetail
     const headImgRender = headimg && headimg.splice(0, 5)
@@ -54,11 +54,11 @@ export default class BargainDetailSecBlock extends BaseComponent {
           <View className='at-row text-center'>
             <View className='at-col main-block-price mr-3'>
               <View className='text-normal'>原价：</View>
-              <View className='text-line-through text-secondary'>￥{parseInt(original_price)}/月</View>
+              <View className='text-line-through text-secondary'>￥{parseInt(original_price || 0)}/月</View>
             </View>
             <View className='at-col main-block-price'>
               <View className='text-normal'>砍价后:</View>
-              <View className='text-orange text-bold'>￥{parseInt(price)}/月</View>
+              <View className='text-orange text-bold'>￥{parseInt(price || 0)}/月</View>
             </View>
           </View>
 

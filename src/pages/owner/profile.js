@@ -237,7 +237,8 @@ class UserProfile extends Component {
         />
 
         {
-          !Taro.getStorageSync('user_info').token && <View style={maskStyle}></View>
+          !Taro.getStorageSync('user_info').token &&
+          <View style={maskStyle} onClick={() => Taro.showToast({ title: '请先登录！', icon: 'none' })}></View>
         }
 
 

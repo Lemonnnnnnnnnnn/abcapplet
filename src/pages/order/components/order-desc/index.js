@@ -21,7 +21,7 @@ import {
   LOCALE_SIGN_INFO,
   LOCALE_DOWN_PAYMENT_REAL,
   LOCALE_SHOW_DOWN_PAYMENT_RULE,
-  LOCALE_PRICE_SEMICOLON,
+  LOCALE_MONEY,
 } from '@constants/locale'
 
 import { CREATE_ORDER_DIST } from '@constants/dist'
@@ -173,7 +173,7 @@ class OrderDesc extends BaseComponent {
               <View>
                 <View className='text-brand text-large text-bold'>{LOCALE_DOWN_PAYMENT_REAL}</View>
               </View>
-              <View className='text-brand text-super text-bold' >{LOCALE_PRICE_SEMICOLON}{amount_total}</View>
+              <View className='text-brand text-super text-bold' >{LOCALE_MONEY}{amount_total}</View>
             </View>
           </View>
 

@@ -45,7 +45,7 @@ export const LOCALE_POINT = '分'
 export const LOCALE_LOGIN = '点击登录'
 export const LOCALE_RENT = '租金'
 export const LOCALE_SEMICOLON = '：'
-export const LOCALE_PRICE_SEMICOLON = '￥'
+export const LOCALE_MONEY = '￥'
 export const LOCALE_PRICE_UNIT = '元'
 export const LOCALE_PRICE_START = '/月起'
 export const LOCALE_PRICE_ACTIVITY = '(余房活动价)'
@@ -65,6 +65,7 @@ export const LOCALE_MONTH = '月'
 export const LOCALE_DAY = '日'
 export const LOCALE_ZHANG = '张'
 export const LOCALE_LOGIN_FIRST ='请先执行登录操作'
+export const LOCALE_DOT = '.'
 
 // /pages/apartment
 export const LOCALE_VIEW_APARTMENT_DETAILS = '查看公寓详情'
@@ -103,7 +104,6 @@ export const LOCALE_NO_DATA = '暂无数据'
 // components/room-item
 export const LOCALE_NO_AWARD_AND_SPACE = '无朝向和空间信息'
 export const LOCALE_ABC_SIGN = '平台代订'
-export const LOCALE_MONEY = '￥'
 export const LOCALE_QI = '/月'
 
 // components/appointment-detail-room
@@ -354,6 +354,27 @@ export const LOCALE_UNLIMITED = '无限制'
 export const LOCALE_UNLIMITED_TIMES = '无限次'
 export const LOCALE_LOGIN_RECEIVE = '登录领取'
 export const LOCALE_HIGHEST_RECEIVE = '最高可领'
+export const LOCALE_COUPON_RECEIVE = '领取优惠券'
+
+// 砍价
+export const LOCALE_BARGAIN_RECEIVE=  '立即领取'
+export const LOCALE_BARGAIN_RECEIVE_SUCCESS= '代金券领取成功！'
+export const LOCALE_BARGAIN_HELP = '帮砍'
+export const LOCALE_BARGAIN_HELP_SUCCESS = '帮砍成功！'
+export const LOCALE_BARGAIN_I_WANT = '我也要砍'
+export const LOCALE_BARGAIN_LIST = '砍价列表'
+export const LOCALE_BARGAIN_AFTER = '砍价后：'
+export const LOCALE_BARGAIN_HAVE = '已砍到'
+export const LOCALE_BARGAIN_HELP_FRIENDS = '帮砍好友'
+export const LOCALE_BARGAIN_HELP_FRIENDS_DEFAULT_TEXT = '快去找好友帮忙砍价吧！'
+export const LOCALE_BARGAIN_LEADERBOARD_TOP_TEN = 'Top 10'
+export const LOCALE_BARGAIN_HAVENT = '尚未有人正在砍价'
+export const LOCALE_BARGAIN_GET_POWER ='恭喜您已获得活动资格'
+export const LOCALE_BARGAIN_RECEIVE_COUPON = '请领取优惠券'
+export const LOCALE_BARGAIN_SHARE = '邀请朋友砍价'
+export const LOCALE_HAVE_BEEN  ='已有'
+export const LOCALE_PEOPLE_HELP_BARGAIN = '人帮砍'
+
 
 
 // 协议相关

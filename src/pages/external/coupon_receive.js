@@ -16,7 +16,7 @@ import {
   LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT,
   LOCALE_UNIVERSAL_COUPON,
   LOCALE_VOUCHER,
-  LOCALE_PRICE_SEMICOLON,
+  LOCALE_MONEY,
   LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM,
   LOCALE_COLON,
   LOCALE_UNLIMITED,
@@ -111,7 +111,7 @@ class ExternalIndex extends BaseComponent {
               <View>
                 {/* 金额 */}
                 <View className='at-row  at-row__justify--center at-row__align--center text-bold'>
-                  {coupon_type === 2 && <View style={{ fontSize: Taro.pxTransform(31 * 2) }} className='mt-4' >{LOCALE_PRICE_SEMICOLON}</View>}
+                  {coupon_type === 2 && <View style={{ fontSize: Taro.pxTransform(31 * 2) }} className='mt-4' >{LOCALE_MONEY}</View>}
                   <View style={{ fontSize: Taro.pxTransform(70 * 2) }}>{worthText}</View>
                   {coupon_type === 1 && <View style={{ fontSize: Taro.pxTransform(60 * 2) }} className='mt-2'>{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</View>}
                 </View>

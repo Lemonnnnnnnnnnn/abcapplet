@@ -12,13 +12,14 @@ import ApartmentBargainItem from '@components/apartment-bargain-item'
 class ApartmentBargainList extends BaseList {
 
   render() {
-    const { bargainList } = this.props
+    const { bargainList ,block } = this.props
     return (
       <View>
         {
           bargainList.map(i =>
             <ApartmentBargainItem
               item={i}
+              block={block}
               key={i}
             />)
         }

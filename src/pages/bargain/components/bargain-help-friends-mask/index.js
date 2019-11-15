@@ -1,13 +1,15 @@
 import Taro, { Component } from '@tarojs/taro';
 import { AtIcon, AtButton } from 'taro-ui'
-import { View, Text, Button } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 // 自定义组件
 import Board from '@components/board'
 import Masks from '@components/masks'
 import BaseComponent from '@components/base'
 
-import BargainTab from '../bargain-tab'
+// 自定义常量
+import { LOCALE_BARGAIN_HELP_FRIENDS_DEFAULT_TEXT, LOCALE_BARGAIN_HELP_FRIENDS ,LOCALE_BARGAIN_SHARE } from '@constants/locale'
+
 import BargainFriendItem from '../bargain-friend-item'
 
 export default class BargainHelpFriendsMask extends BaseComponent {
@@ -32,7 +34,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
               style='position : absolute ; right : 5px ; top : 5px'
             />
 
-            <View className='text-bold text-center text-large mt-3'>帮砍好友</View>
+            <View className='text-bold text-center text-large mt-3'>{LOCALE_BARGAIN_HELP_FRIENDS}</View>
 
             {
               help_bargain_list.length ? help_bargain_list.map(i =>
@@ -43,7 +45,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
                   username={i.username}
                   key={i}
                 />)
-                : <View className='text-large text-secondary text-center py-4' >快去找好友帮忙砍价吧！</View>
+                : <View className='text-large text-secondary text-center py-4' >{LOCALE_BARGAIN_HELP_FRIENDS_DEFAULT_TEXT}</View>
             }
 
           </View>
@@ -52,7 +54,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
             circle
             className='btn-bargain mb-2'
             open-type='share'
-          >分享</AtButton>
+          >{LOCALE_BARGAIN_SHARE}</AtButton>
 
         </Board>
         <Masks customStyle={{ zIndex: 11 }} show />

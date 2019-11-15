@@ -7,7 +7,7 @@ import Board from '@components/board'
 import BaseComponent from '@components/base'
 
 // 自定义常量
-import { LOCALE_PRICE_SEMICOLON, LOCALE_QI, LOCALE_ORIGINAL_PRICE, LOCALE_COLON } from '@constants/locale'
+import { LOCALE_MONEY, LOCALE_QI, LOCALE_ORIGINAL_PRICE, LOCALE_COLON } from '@constants/locale'
 import { PAGE_BARGAIN_DETAIL } from '@constants/page'
 
 export default class ApartmentBargainItem extends BaseComponent {
@@ -29,15 +29,17 @@ export default class ApartmentBargainItem extends BaseComponent {
     }
   }
 
-  onNavigation(id) {
-    Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+  onNavigation(target) {
+    const { id, bargain_id, block } = target
+    block === 'userActivity' && Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + bargain_id })
+    block === 'bargainList' && Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
   }
 
   render() {
-    const { imageHeight, imageWidth, item } = this.props
-    const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, id } = item
+    const { imageHeight, imageWidth, item, block } = this.props
+    const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id } = item
     return (
-      <View className='pb-3' style={{ overflow: 'hidden' }} onClick={this.onNavigation.bind(this, id)}>
+      <View className='pb-3' style={{ overflow: 'hidden' }} onClick={this.onNavigation.bind(this, { id, bargain_id, block })}>
         <Board shadow='black-shadow'>
           <View className='at-row p-2' style={{ width: 'auto' }}>
             {/* 左 image */}
@@ -66,12 +68,12 @@ export default class ApartmentBargainItem extends BaseComponent {
               </View>
               <View className='at-row at-row__justify--between at-row__align--center mt-1'>
                 <View className='text-orange'>
-                  <Text className='text-huge text-bold'>{LOCALE_PRICE_SEMICOLON}{parseInt(price)}</Text>
+                  <Text className='text-huge text-bold'>{LOCALE_MONEY}{parseInt(price)}</Text>
                   <Text className='text-normal'>{LOCALE_QI}</Text>
                 </View>
                 <View className='text-secondary text-small ml-2 mt-1'>
                   {LOCALE_ORIGINAL_PRICE + LOCALE_COLON}
-                  <Text className='text-line-through'>{LOCALE_PRICE_SEMICOLON + parseInt(original_price) + LOCALE_QI}</Text>
+                  <Text className='text-line-through'>{LOCALE_MONEY + parseInt(original_price) + LOCALE_QI}</Text>
                 </View>
               </View>
 

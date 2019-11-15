@@ -20,7 +20,7 @@ import {
   LOCALE_UNIVERSAL_COUPON,
   LOCALE_VOUCHER,
   LOCALE_FIRST_MONTH_ONLY,
-  LOCALE_PRICE_SEMICOLON,
+  LOCALE_MONEY,
   LOCALE_COLON,
   LOCALE_APPOINTMENT_DETAIL_SIGN_ROOM,
   LOCALE_UNLIMITED,
@@ -117,7 +117,7 @@ class CouponItem extends BaseComponent {
       couponPrice = worthText + LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT
     } else {
       worthText = parseFloat(worth)
-      couponPrice = LOCALE_PRICE_SEMICOLON + worthText
+      couponPrice = LOCALE_MONEY + worthText
     }
 
     // 对三种不同外观的优惠券样式进行class赋值和状态赋值
@@ -171,7 +171,7 @@ class CouponItem extends BaseComponent {
           {/* 左 价格 */}
           <View style={{ width: '30%' }} >
             <View className={`${textColorPrice} at-row at-row__justify--center at-row__align--center inherit-Height `} >
-              {coupon_type === 2 && <View className='text-normal  page-middile mb-1' >{LOCALE_PRICE_SEMICOLON}</View>}
+              {coupon_type === 2 && <View className='text-normal  page-middile mb-1' >{LOCALE_MONEY}</View>}
               <View className='text-bold  page-middile' style={{ fontSize: Taro.pxTransform(27 * 2) }}>{worthText}</View>
               {coupon_type === 1 && <View className='text-huge  page-middile mt-2'>{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</View>}
             </View>
@@ -215,7 +215,7 @@ class CouponItem extends BaseComponent {
           {/* 左 价格 */}
           <View style={{ width: '30%' }} >
             <View className={`${textColorPrice} at-row at-row__justify--center at-row__align--center inherit-Height `} >
-              {coupon_type === 2 && <View className='text-normal  page-middile mb-1' >{LOCALE_PRICE_SEMICOLON}</View>}
+              {coupon_type === 2 && <View className='text-normal  page-middile mb-1' >{LOCALE_MONEY}</View>}
               <View className='text-bold  page-middile' style={{ fontSize: Taro.pxTransform(27 * 2) }}>{worthText}</View>
               {coupon_type === 1 && <View className='text-huge  page-middile mt-2'>{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</View>}
             </View>
@@ -272,7 +272,7 @@ class CouponItem extends BaseComponent {
           {/* 左 价格 */}
           <View style={{ width: '30%' }} >
             <View className={`${textColorPrice} at-row at-row__justify--center at-row__align--center inherit-Height `} >
-              {coupon_type === 2 && <View className='text-normal  page-middile mb-1' >{LOCALE_PRICE_SEMICOLON}</View>}
+              {coupon_type === 2 && <View className='text-normal  page-middile mb-1' >{LOCALE_MONEY}</View>}
               <View className='text-bold  page-middile' style={{ fontSize: Taro.pxTransform(27 * 2) }}>{worthText}</View>
               {coupon_type === 1 && <View className='text-huge  page-middile mt-2'>{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</View>}
             </View>
@@ -314,7 +314,7 @@ class CouponItem extends BaseComponent {
     const couponMini =
       <View className={classNames('coupon-item-mini', 'position-relative', className)}>
         <View className='vertical-level-center text-small text-white'>
-          {coupon_type === 2 && <Text >{LOCALE_PRICE_SEMICOLON}</Text>}
+          {coupon_type === 2 && <Text >{LOCALE_MONEY}</Text>}
           <Text >{worthText}</Text>
           {coupon_type === 1 && <Text >{LOCALE_ACTIVITY_TYPE_SIMPLE_DISCOUNT}</Text>}
         </View>

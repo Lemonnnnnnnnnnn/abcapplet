@@ -6,7 +6,7 @@ import { View, Image, Text } from '@tarojs/components'
 import BaseComponent from '@components/base'
 
 // 自定义常量
-import { LOCALE_PRICE_SEMICOLON, LOCALE_QI } from '@constants/locale'
+import { LOCALE_MONEY, LOCALE_QI } from '@constants/locale'
 import { SUBLET_FINISH_NEW } from '@constants/picture'
 
 
@@ -40,7 +40,7 @@ class SubletItem extends BaseComponent {
             <View className='at-row at-row__justify--between position-absolute' style={{ bottom: '2%' }} >
               <View className='at-col-4 page-middile text-small page-house'>{item.dict_house_type}</View>
               <View className='at-col-6 at-row'>
-                <View className='text-yellow'>{LOCALE_PRICE_SEMICOLON}</View>
+                <View className='text-yellow'>{LOCALE_MONEY}</View>
                 <View className='text-yellow'>{parseInt(item.price)}</View>
                 <View className='text-yellow text-small mt-2 ml-1'>{LOCALE_QI}</View>
               </View>
