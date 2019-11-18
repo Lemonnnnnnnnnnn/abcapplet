@@ -15,7 +15,6 @@ import { PAGE_SEARCH } from '@constants/page'
 import { LOCALE_SEARCH_PLACEHOLDER } from '@constants/locale'
 import { COLOR_GREY_0, COLOR_BLACK } from '@constants/styles'
 
-
 class Search extends BaseComponent {
   static defaultProps = {
     size: 13,
@@ -97,21 +96,27 @@ class Search extends BaseComponent {
 
             {/* 带样式的输入框，点击后跳转搜索页 */}
             {!isInputSub &&
-              <View className='at-col ' onClick={this.onNavigation}>
+              <View className='at-col' onClick={this.onNavigation}>
                 {!isInput
                   ? <View className='at-row at-row__align--center text-normal text-muted' >
                     <AtIcon className='ml-2' value='search' size={size} color={COLOR_GREY_0} />
                     <Text className='ml-2'>{LOCALE_SEARCH_PLACEHOLDER}</Text>
                   </View>
-                  : <View className='at-row at-row__align--center at-row__justify--between text-normal' >
-                    <Input className='ml-3'
-                      focus
-                      value={value}
-                      confirmType='确定'
-                      onInput={this.onInputValue}
-                      onConfirm={this.onInputConfirm}
-                    />
-                    {showCancel && <View className='mr-3 text-muted' onClick={this.onInputCancel}>取消</View>}
+                  : <View className='at-row at-row__align--center text-normal' >
+                    <AtIcon className='ml-3' value='search' size={size} color={COLOR_GREY_0} />
+                    <View className='at-col'>
+                      <Input
+                        className='ml-2'
+                        style={{height : Taro.pxTransform(30 * 2) , minHeight : Taro.pxTransform(30 * 2)}}
+                        focus
+                        value={value}
+                        confirmType='确定'
+                        placeholder='搜索公寓/商圈'
+                        onInput={this.onInputValue}
+                        onConfirm={this.onInputConfirm}
+                      />
+                    </View>
+                    {showCancel && <View className='px-3 text-muted' style={{float : 'right'}} onClick={this.onInputCancel}>取消</View>}
                   </View>
                 }
               </View>}

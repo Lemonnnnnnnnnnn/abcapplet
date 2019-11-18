@@ -174,46 +174,6 @@ class UserProfile extends Component {
             lists={optionFeedbackLists}
           />
 
-          {/* <Board className='mt-2 mx-3'>
-            <View className=' p-3 mt-2' onClick={this.onshowCustomerMask} style={{ marginTop: Taro.pxTransform(8) }}>
-              <View className='at-row at-row__justify--between'>
-                <View className='at-row at-row__align--center ml-2'>
-                  <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src='https://images.gongyuabc.com/image/call.png'></Image>
-                  <View className='ml-2 text-normal' style={{ color: '#000' }}>联系客服</View>
-                </View>
-
-                <View className='at-col at-col-3 '>
-                  <View className='at-row at-row__align--center'>
-                    <View className='text-small text-secondary mr-2'>9:30-21:30</View>
-                    <View style={{ marginBottom: Taro.pxTransform(4) }}>
-                      <AtIcon value='chevron-right' color={COLOR_GREY_2} size={17} />
-                    </View>
-                  </View>
-                </View>
-
-              </View>
-            </View>
-          </Board>
-
-          <Board className='mt-2 mx-3'>
-            <View className=' p-3 mt-2' onClick={this.onFeedback} style={{ marginTop: Taro.pxTransform(8) }}>
-              <View className='at-row at-row__justify--between'>
-                <View className='at-row at-row__align--center ml-2'>
-                  <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src='https://images.gongyuabc.com/image/feedback.png'></Image>
-                  <View className='ml-2 text-normal' style={{ color: '#000' }}>意见反馈</View>
-                </View>
-
-                <View className='at-col at-col-1'>
-                  <View style={{ marginBottom: Taro.pxTransform(4) }} className='ml-3'>
-                    <AtIcon value='chevron-right' color={COLOR_GREY_2} size={17} />
-                  </View>
-                </View>
-
-              </View>
-            </View>
-
-          </Board> */}
-
         </View >
 
         <CustomerServiceMask

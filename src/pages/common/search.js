@@ -28,6 +28,7 @@ import {
 } from '@constants/api'
 
 import buryPoint from '../../utils/bury-point'
+import '../../styles/_tag.scss'
 
 @connect(state => state, {
   ...cityActions,
@@ -103,11 +104,17 @@ class CommonSearch extends BaseComponent {
   /**
    * 设置输入框的值
    */
-  onSetInput(value, url) {
+  onSetInputHot(value, url) {
     url && Taro.navigateTo({ url })
     this.search.setState({ value })
     this.onApartmentPayloadChange({ payload: { search_key: value } })
   }
+
+  onSetInputHistory(value) {
+    this.search.setState({ value })
+    this.onApartmentPayloadChange({ payload: { search_key: value } })
+  }
+
 
   /**
    * 当选择栏变化时更新公寓数据
@@ -177,12 +184,13 @@ class CommonSearch extends BaseComponent {
         {showPreview && hotList.length > 0 &&
           <View className='py-2 pl-3'>
             <View>{LOCALE_HOT_SEARCH}</View>
-            <View className='at-row text-normal text-secondary mt-2'>
+            <View className='at-row  at-row--wrap text-normal text-secondary '>
               {hotList.map(i =>
                 <View
                   key={i.id}
-                  className='mr-2'
-                  onClick={this.onSetInput.bind(this, i.text, i.url)}
+                  className={`mr-3 my-2 ${i.url ? 'tag tag--yellow--1' : 'tag tag--grey--2'}`}
+                  style={{ borderRadius: Taro.pxTransform(13 * 2) }}
+                  onClick={this.onSetInputHot.bind(this, i.text, i.url)}
                 >{i.text}</View>
               )}
             </View>
@@ -193,12 +201,13 @@ class CommonSearch extends BaseComponent {
         {showPreview && historyList.length > 0 &&
           <View className='py-2 pl-3'>
             <View>{LOCALE_HISTORY_SEARCH}</View>
-            <View className='at-row text-normal text-secondary mt-2'>
+            <View className='at-row at-row--wrap text-normal text-secondary '>
               {historyList.map(i =>
                 <View
                   key={i.id}
-                  className='mr-2'
-                  onClick={this.onSetInput.bind(this, i.text)}
+                  className='mr-3 my-2 tag tag--grey--2'
+                  onClick={this.onSetInputHistory.bind(this, i.text)}
+                  style={{ borderRadius: Taro.pxTransform(13 * 2) }}
                 >{i.text}</View>
               )}
             </View>

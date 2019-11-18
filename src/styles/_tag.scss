@@ -1,8 +1,7 @@
 @import "overrides";
 .tag {
   border-radius: $border-radius-mini;
-  padding: 8px * $hd;
-  margin-right: 4px * $hd;
+  padding: 4px * $hd 12px * $hd;
 
   &--special {
     color: $color-yellow-0;
@@ -34,6 +33,13 @@
     background: #fffae9;
   }
 
+  &--yellow--1{
+    background: #fff;
+    color:  $color-yellow-0;
+    box-sizing: border-box;
+    border: 1px solid $color-yellow-0;
+  }
+
   &--blue {
     color: #7be3ff;
     background: #ecfbff;
@@ -47,6 +53,11 @@
   &--grey--1 {
     color: $color-white;
     background: #d4d4d4;
+  }
+
+  &--grey--2 {
+    color: #888888;
+    background: #F8F8F8;
   }
 
 

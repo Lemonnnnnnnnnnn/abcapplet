@@ -95,15 +95,17 @@ export default class BargainDetail extends Component {
       if (share_id) {
         if (parseInt(share_id) === userID) {
           if (user_bargain) {
-            // 本人
+            // 本人 已参加
             if (user_bargain.status === 1) {
-              // 本人 已砍价完成   是否已领取优惠券
+              // 本人 已参加 已砍价完成   是否已领取优惠券
               user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
             } else {
-              // 未砍价完成
+              // 本人 已参加 未砍价完成
               Buttontype = Buttontype = 1
             }
-          } else { Buttontype = 2 }
+          }
+          // 本人 未参加
+          else { Buttontype = 2 }
         } else {
           // 非本人  type = 5-9
 
@@ -123,14 +125,15 @@ export default class BargainDetail extends Component {
       }
       else {
         if (user_bargain) {
-          // 本人
+          // 本人 已参加
           if (user_bargain.status === 1) {
-            // 本人 已砍价完成   是否已领取优惠券
+            // 本人 已参加 已砍价完成   是否已领取优惠券
             user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
           } else {
-            // 未砍价完成
+            //  本人 已参加  未砍价完成
             Buttontype = Buttontype = 1
           }
+          // 本人  未参加
         } else { Buttontype = 2 }
       }
 
