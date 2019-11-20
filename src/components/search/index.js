@@ -72,16 +72,12 @@ class Search extends BaseComponent {
     const { isInput, value } = this.state
     const { selector, showPicker, onChangeSelector, selectorChecked, size, isFixed, className, showCancel, showSearch, isInputSub, inputValue } = this.props
 
-    const hideStyle = {
-      top: Taro.pxTransform(-92)
-    }
+    const hideStyle = {top: Taro.pxTransform(-92)}
 
-    const showStyle = {
-      top: 0
-    }
+    const showStyle = {top: 0}
 
     return (
-      <View className={classNames(className, 'search', isFixed ? 'search-fixed' : '')} style={showSearch ? showStyle : hideStyle} >
+      <View className={classNames(className, 'search', isFixed ? 'search-fixed px-3' : '')} style={showSearch ? showStyle : hideStyle} >
         <View className='search-box'>
           <View className='search-content at-row  at-row__align--center'>
             {/* 城市选择器 */}

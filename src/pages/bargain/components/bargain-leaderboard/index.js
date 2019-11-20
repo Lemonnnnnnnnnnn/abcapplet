@@ -32,7 +32,7 @@ export default class BargainLeaderboard extends BaseComponent {
                 username={i.username}
               />)}
           </View>
-          : <View className='text-center text-huge page-middile'>{LOCALE_BARGAIN_HAVENT}</View>
+          : <View className='py-3 text-secondary text-center text-huge page-middile'>{LOCALE_BARGAIN_HAVENT}</View>
         }
 
       </View>

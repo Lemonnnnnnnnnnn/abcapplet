@@ -45,7 +45,7 @@ class RoomItem extends BaseComponent {
     year: 0,
   }
 
-  componentDidMount() {
+  componentWillMount(){
     const { room } = this.props
     const { open_time, status } = room
     status === 2 && this.changeTime(open_time)
@@ -57,34 +57,6 @@ class RoomItem extends BaseComponent {
     Taro.navigateTo({ url: `${PAGE_ORDER_CREATE}?room_id=${id}` })
   }
 
-  // onCreateFavorite() {
-  //   const { room } = this.props
-  //   const id = room.room_id || room.id
-
-  //   this.props.onCreateFavorite({ payload: { room_id: id } })
-  // }
-
-  // onDeleteFavorite() {
-  //   const { room } = this.props
-  //   const id = room.room_id || room.id
-
-  //   this.props.onDeleteFavorite({ payload: { room_id: id } })
-  // }
-
-
-  // onViewPic() {
-  //   const { room, roomList } = this.props
-  //   const { cover } = room
-  //   let picList = []
-
-  //   roomList.map((value) => {
-  //     picList.push(value.cover)
-  //   })
-  //   Taro.previewImage({
-  //     current: cover,
-  //     urls: picList
-  //   })
-  // }
 
   changeTime(time) {
     const nowDate = new Date()

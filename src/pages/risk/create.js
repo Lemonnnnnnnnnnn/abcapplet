@@ -50,7 +50,7 @@ class RiskCreate extends Component {
     },
   }
 
-  componentDidMount() {
+  componentWillMount() {
     buryPoint()
     const { id } = this.$router.params
     const { payload } = this.state

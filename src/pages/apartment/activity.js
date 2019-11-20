@@ -45,13 +45,11 @@ class ApartmentCbd extends Component {
   refApartmentList = (node) => this.apartmentList = node
 
   componentWillMount() {
-    const { id } = this.$router.params
-    const { payload: user } = this.props.dispatchUser()
-
     buryPoint()
 
+    const { id } = this.$router.params
+    const { payload: user } = this.props.dispatchUser()
     this.setState({ cityCode: user.citycode })
-
     const {
       selectScrollTop,
     } = this.state
@@ -73,15 +71,24 @@ class ApartmentCbd extends Component {
           .exec(res => this.setState({ selectScrollTop: res[0].top, }))
     }, 500);
 
+    // 设置状态
+    this.setState({ id, defaultPayload })
+  }
+
+  componentDidMount() {
+    const { payload: user } = this.props.dispatchUser()
+    const { id } = this.$router.params
+    const defaultPayload = {
+      ...PAYLOAD_ACTIVITY_APARTMENT_LIST,
+      id,
+      city: user.citycode,
+    }
     // 获取字典
     this.props.dispatchDistList(user.citycode)
 
     // 获取活动详情
     this.props.dispatchActivityShow(defaultPayload)
       .catch(() => Taro.reLaunch({ url: PAGE_HOME }))
-
-    // 设置状态
-    this.setState({ id, defaultPayload })
   }
 
   /**

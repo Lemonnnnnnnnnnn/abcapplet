@@ -77,15 +77,19 @@ class AppointmentDetail extends BaseComponent {
     userInputView: false,
   }
 
-  async componentWillMount() {
+  componentWillMount() {
     buryPoint()
-    let roomListArr = []
-    let type = 0
 
     const myDate = new Date()
     const month = myDate.getMonth() + 1
     const signTime = myDate.getFullYear() + '-' + month + '-' + myDate.getDate()
     this.setState({ signTime })
+
+  }
+
+  async componentDidMount() {
+    let roomListArr = []
+    let type = 0
 
     const { payload } = this.state
     const { id, isSign } = this.$router.params
@@ -125,6 +129,7 @@ class AppointmentDetail extends BaseComponent {
         payload: { ...payload, appointment_id: res.data.data.id, mobile: res.data.data.mobile, sign_time: signTime, type: type }
       })
     })
+
   }
 
   //选择房间

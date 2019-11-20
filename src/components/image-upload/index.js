@@ -22,7 +22,7 @@ class ImageUpload extends BaseComponent {
     picArr: [],
   }
 
-  componentDidMount() {
+  componentWillMount(){
     const { placeholer } = this.props
 
     const files = Array.from({ length: placeholer }).map(() => ({ url: '' }))

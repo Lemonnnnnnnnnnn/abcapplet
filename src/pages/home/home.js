@@ -88,7 +88,7 @@ class CommonHome extends BaseComponent {
 
 
       // 搜索相关
-      searchScrollTop: null,
+      searchScrollTop: 46,
       searchIsFixed: false,
 
       // 选择器相关
@@ -108,39 +108,20 @@ class CommonHome extends BaseComponent {
   refApartmentList = (node) => this.apartmentList = node
 
   async onPullDownRefresh() {
-    // await this.componentWillMount()
     this.apartmentList.onReset(null)
     Taro.stopPullDownRefresh()
   }
 
-  async componentWillMount() {
-    // 获取幕帘弹窗内容
-    this.props.dispatchPopupAdPost().then(({ data: { data } }) => {
-      this.setState({ adList: data })
-      Taro.getStorageSync('user_info').token && data.length && this.setState({ showCurtain: true })
-    })
-    // 获取从后台获取的全平台获得退租险人数
-    this.props.dispatchRiskPost()
-
-    const {
-      searchScrollTop,
-      payloadApartment,
-    } = this.state
-
-    this.setState({ payloadApartment: { ...payloadApartment, city: Taro.getStorageSync('user_info').citycode } })
-
-    // 获取筛选器和搜索框距离顶部的距离
-    !searchScrollTop
-      && Taro.createSelectorQuery()
-        .in(this.$scope)
-        .select('.home-search')
-        .boundingClientRect()
-        .exec(res => res[0] && res[0].height > 0 && this.setState({ searchScrollTop: res[0].height }))
-
+  componentWillMount() {
     // 如果是分享页面进来的进行跳转
     const { page, id } = this.$router.params
     page && id && Taro.navigateTo({ url: `${page}?id=${id}` })
 
+    const { payloadApartment } = this.state
+    this.setState({ payloadApartment: { ...payloadApartment, city: Taro.getStorageSync('user_info').citycode } })
+  }
+
+  async componentDidMount() {
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
     user && this.onSelectCity(user.citycode)
@@ -163,16 +144,10 @@ class CommonHome extends BaseComponent {
         }
       })
     })
-    //判断是否弹出需求卡
-    await this.props.dispatchGetUserMsg().then(res => {
-      res && !res.data.data.user.is_guide && this.setState({ showCard: true })
-    })
   }
 
   componentDidShow() {
     Taro.showTabBarRedDot({ index: 2 })
-    const user_info = Taro.getStorageSync('user_info')
-    console.log(user_info.citycode)
   }
 
   onPageScroll({ scrollTop }) {
@@ -302,12 +277,18 @@ class CommonHome extends BaseComponent {
     // 字典
     await this.props.dispatchDistList(citycode) && overloadDist.push(1)
 
-    // 当数据全部加载完成后读取筛选框的位置
-    // overloadData.length === 3 && !selectScrollTop && Taro.createSelectorQuery()
-    //   .in(this.$scope)
-    //   .select('.home-select')
-    //   .boundingClientRect()
-    //   .exec(res => this.setState({ selectScrollTop: res[0].top, }))
+    // 获取幕帘弹窗内容
+    const { data: { data } } = await this.props.dispatchPopupAdPost()
+    this.setState({ adList: data })
+    Taro.getStorageSync('user_info').token && data.length && this.setState({ showCurtain: true })
+
+    // 获取从后台获取的全平台获得退租险人数
+    this.props.dispatchRiskPost()
+
+    //判断是否弹出需求卡
+    this.props.dispatchGetUserMsg().then(res => {
+      res && !res.data.data.user.is_guide && this.setState({ showCard: true })
+    })
 
     title && sort && this.setState({ selectorChecked: { ...selectorChecked, title, sort } })
 
@@ -358,11 +339,6 @@ class CommonHome extends BaseComponent {
   onSearchTrue() {
     this.setState({ showSearch: true, showSelect: true })
   }
-  /**
-   * 利用坐标来确定什么时候 fixed 搜索栏和选择栏
-   * @param {*} param0
-   */
-
 
   /**
    * 到底部加载公寓下一页
@@ -431,7 +407,6 @@ class CommonHome extends BaseComponent {
     }).catch(e => console.log(e))
   }
   render() {
-
     const {
       showSelect, showSearch, floorList, roomList,
       searchIsFixed,
@@ -450,6 +425,7 @@ class CommonHome extends BaseComponent {
     const { ads, user, dists, citys, apartments, home } = this.props
 
     const { banner: banners, hot_activity: activities, hot_cbd: cbds, recommend: recommends } = home
+
     return (
       <View
         className='page-white'

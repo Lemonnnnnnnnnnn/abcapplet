@@ -85,12 +85,16 @@ class HouseTypeShow extends Component {
 
   refApartmentCouponMask = node => this.apartmentCouponMask = node
 
-  async componentWillMount() {
+  componentWillMount() {
     buryPoint()
-    const { id } = this.$router.params
-
     const { citycode } = Taro.getStorageSync('user_info')
     citycode && this.setState({ cityId: citycode })
+  }
+
+
+  async componentDidMount(){
+    const { id } = this.$router.params
+    const { citycode } = await Taro.getStorage({key : 'user_info'})
 
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
@@ -100,7 +104,6 @@ class HouseTypeShow extends Component {
         if (res.data.data.total) {
           const couponCutList = res.data.data.list.slice(0, 3)
           this.setState({ showCouponTag: true, couponCutList })
-
         }
       })
 
@@ -212,7 +215,6 @@ class HouseTypeShow extends Component {
       })
     }
   }
-
   // 电话客服/在线客服
 
   onOpenLittleMask() {

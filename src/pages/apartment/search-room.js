@@ -30,15 +30,12 @@ class ApartmentSearchRoom extends Component {
 
     buryPoint()
     const { id } = this.$router.params
-
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
-
     this.setState({
       roomList: data.room_list,
       matchRoomList: data.room_list,
       isSign: data.is_sign,
     })
-
   }
 
   onHandleInput(e) {

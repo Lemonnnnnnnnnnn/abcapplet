@@ -17,9 +17,6 @@ class UserFeedbackOptions extends BaseComponent {
     lists: [],
   }
 
-  onNavigation(url) {
-    Taro.navigateTo({ url })
-  }
 
   render() {
     const { lists, className } = this.props
@@ -27,8 +24,8 @@ class UserFeedbackOptions extends BaseComponent {
     return (
       <View className={className}>
         {
-          lists.map(i => <Borad key={i.id} className='p-3 mb-2' onClick={this.props.onClick.bind(this, i.method)}>
-              <View className='at-row at-row__justify--between'>
+          lists.map(i => <Borad key={i.id} className='p-3 mb-2'>
+              <View className='at-row at-row__justify--between' onClick={this.props.onClick.bind(this, i.method)}>
                 {/* 左侧内容 */}
                 <View className='at-row at-row__align--center ml-2'>
                   {/* 左侧图标 */}

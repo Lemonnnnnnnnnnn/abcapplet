@@ -60,7 +60,7 @@ class AutoSlider extends Component {
     return Math.ceil(result / step) * step
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Taro.getSystemInfo()
       .then(({ windowWidth }) => this.setState({ windowWidth }))
   }

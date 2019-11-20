@@ -38,7 +38,7 @@ class SelectHouseType extends Component {
     initialFloor: [],
   }
 
-  componentDidMount() {
+  componentWillMount(){
     const { items } = this.props
 
     const floorList = [{ id: 0, title: "不限", active: true, type: true }]

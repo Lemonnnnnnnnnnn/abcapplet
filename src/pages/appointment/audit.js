@@ -35,8 +35,10 @@ class AppointmentDetail extends BaseComponent {
     status: 0,
   }
   componentWillMount() {
-
     buryPoint()
+  }
+
+  componentDidMount() {
     const { id } = this.$router.params
     this.props.dispatchAppointRewordOrderDetail({ id }).then((res) => {
 
@@ -46,8 +48,7 @@ class AppointmentDetail extends BaseComponent {
         tenancy: res.data.data.tenancy,
         status: res.data.data.status,
       })
-    }
-    )
+    })
   }
   render() {
 

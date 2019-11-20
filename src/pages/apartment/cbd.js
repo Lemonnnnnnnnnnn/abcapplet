@@ -43,13 +43,11 @@ class ApartmentCbd extends Component {
   refApartmentList = (node) => this.apartmentList = node
 
   componentWillMount() {
+    buryPoint()
+
     const { id } = this.$router.params
     const { payload: user } = this.props.dispatchUser()
-    buryPoint()
-    const {
-      selectScrollTop,
-    } = this.state
-
+    const { selectScrollTop} = this.state
     const defaultPayload = { ...PAYLOAD_CBD_APARTMENT_LIST, cbd: id }
 
     // 获取筛选器和搜索框距离顶部的距离
@@ -62,21 +60,23 @@ class ApartmentCbd extends Component {
           .boundingClientRect()
           .exec(res => this.setState({ selectScrollTop: res[0].top, }))
     }, 500);
+    this.setState({ cityCode: user.citycode })
+    // 设置状态
+    this.setState({ id, defaultPayload })
+  }
 
+  componentDidMount(){
+    const { id } = this.$router.params
+    const { payload: user } = this.props.dispatchUser()
+    const defaultPayload = { ...PAYLOAD_CBD_APARTMENT_LIST, cbd: id }
     // 获取字典
     this.props.dispatchDistList(user.citycode)
-
-    this.setState({ cityCode: user.citycode })
 
     // 获取活动详情
     this.props.dispatchCbdShow(defaultPayload)
       .then((res) => {
         this.setState({ apartment_num: res.data.data.cbd.apartment_num })
       })
-    // .catch(() => Taro.reLaunch({ url: PAGE_HOME }))
-
-    // 设置状态
-    this.setState({ id, defaultPayload })
   }
 
   /**

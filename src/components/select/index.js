@@ -82,6 +82,18 @@ class Select extends BaseComponent {
   refSelectPrice = (node) => this.selectPrice = node
   refSelectHouseType = (node) => this.selectHouseType = node
 
+  async componentDidMount() {
+
+    const { payload } = this.state
+    const { cityCode } = this.props
+
+    await Taro.getLocation({
+      success: (res) => { this.setState({ payload: { ...payload, city: cityCode }, latitude: res.latitude, longitude: res.longitude }) },
+      fail: () => { this.setState({ payload: { ...payload, city: cityCode }, latitude: 0, longitude: 0 }) }
+    }).catch((err) => { console.log(err) })
+    // this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
+  }
+
   onPayloadReset() {
     const { cityCode, cbdId } = this.props
     this.selectCbd && this.selectCbd.onResetState()
@@ -134,18 +146,6 @@ class Select extends BaseComponent {
     this.setState({ payload, headerIndex: '' })
     await this.props.onApartmentPayloadChange({ payload })
 
-  }
-
-  async componentWillMount() {
-
-    const { payload } = this.state
-    const { cityCode } = this.props
-
-    await Taro.getLocation({
-      success: (res) => { this.setState({ payload: { ...payload, city: cityCode }, latitude: res.latitude, longitude: res.longitude }) },
-      fail: () => { this.setState({ payload: { ...payload, city: cityCode }, latitude: 0, longitude: 0 }) }
-    }).catch((err) => { console.log(err) })
-    // this.setState({ latitude, longitude, payload: { ...payload, city: cityCode } })
   }
 
   //筛选器选择下拉

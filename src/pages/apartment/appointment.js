@@ -82,12 +82,13 @@ class AppointmentPost extends Component {
 
   refTimerPicker = node => this.TimerPicker = node
 
-  async componentDidMount() {
+  componentWillMount() {
     buryPoint()
+   }
 
+  async componentDidMount() {
     const { id, apartmentId } = this.$router.params
     let { Payload } = this.state
-
     const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
 
     // 获取用户电话号码 如果没有电话号码则打开授权获取电话号码的弹窗
@@ -168,8 +169,8 @@ class AppointmentPost extends Component {
         houseTypeList: [...typeList],
       })
     })
-  }
 
+  }
 
   //判断是否在夜单时间内
   async componentDidShow() {

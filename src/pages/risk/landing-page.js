@@ -12,13 +12,14 @@ class RiskLandingPage extends Component {
   state = {
     statusBarHeight: 0,
   }
-  async componentWillMount() {
+  componentWillMount() {
 
     buryPoint()
-    await Taro.getSystemInfo().then(res => {
+    Taro.getSystemInfo().then(res => {
       this.setState({ statusBarHeight: res.statusBarHeight })
     })
   }
+
   onReturn() {
     Taro.navigateBack()
   }

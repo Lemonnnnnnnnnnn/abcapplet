@@ -41,7 +41,7 @@ class ExternalIndex extends BaseComponent {
     navigationBarBackgroundColor: '#FFC919',
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.$router.params
     // let id = 7
     this.props.dispatchCouponAlone({ id }).then(({ data: { data } }) => {
@@ -61,6 +61,7 @@ class ExternalIndex extends BaseComponent {
       })
     })
   }
+
 
   onCouponReceive(id) {
     Taro.getStorageSync('user_info').token ?

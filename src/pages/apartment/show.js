@@ -70,22 +70,24 @@ class ApartmentShow extends Component {
     cityId: 350200,
   }
 
-  async componentDidMount() {
+  componentWillMount() {
     const { id } = this.$router.params
+    // 数据埋点
     buryPoint()
+    const { citycode } = Taro.getStorageSync('user_info')
+    citycode && this.setState({ cityId: citycode })
+    this.setState({ Id: id })
+  }
+
+  async componentDidMount(){
+    const { id } = this.$router.params
+
     this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: id }).then(({ data: { data } }) => {
       if (data.total) {
         const couponCutList = data.list.slice(0, 3)
         this.setState({ showCouponTag: true, couponCutList })
       }
     })
-
-
-    const { citycode } = Taro.getStorageSync('user_info')
-    citycode && this.setState({ cityId: citycode })
-
-    this.setState({ Id: id })
-
     const { data: { data } } = await this.props.dispatchApartmentShow({ id })
 
     await this.props.dispatchAppointmentNearbyPost({ id }).then(res => this.setState({ nearbyPost: res.data.data }))
@@ -122,7 +124,6 @@ class ApartmentShow extends Component {
         desc: data.desc,
         apartmentTitle: data.apartment_title,
 
-        // address: data.address,
         cbds: data.cbd_list,
         types: data.house_types.map(i => ({ ...i, url: `${PAGE_HOUSE_TYPE_SHOW}?id=${i.id}` })),
         isCollect: data.is_collect,

@@ -11,7 +11,7 @@ export default class BargainFriendItem extends BaseComponent {
 
   static defaultProps = {
     headimg: '',
-    price: 0,
+    price: '',
     username: ''
   }
 

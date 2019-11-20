@@ -29,6 +29,9 @@ export default class BargainCoupon extends Component {
 
   componentWillMount() {
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+  }
+
+  componentDidMount(){
     const { id, share_id } = this.$router.params
     this.props.dispatchBargainDetail({ id: parseInt(id) }).then(({ data: { data } }) => {
       this.setState({
@@ -42,6 +45,8 @@ export default class BargainCoupon extends Component {
       })
     })
   }
+
+
 
   onReceiveCoupon() {
     const { user_bargain: { bargain_record_id } } = this.state

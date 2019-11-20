@@ -43,12 +43,12 @@ class AppointmentIntention extends Component {
     Payloadlist: PAYLOAD_INTENTION_ROOM_SHOW,//行程下相关的房间列表appointment_id: 0, room_no:''
     localComment: 0,
   }
-  componentDidMount() {
+
+  componentWillMount(){
     const { roomList } = this.state
     this.setState({
       roomList: roomList.map(i => ({ ...i, active: false }))
-    }
-    )
+    })
   }
 
   onMaskTouchMove(e) {

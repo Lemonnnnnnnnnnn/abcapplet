@@ -75,17 +75,14 @@ class ApartmentRecommend extends Component {
         console.log(res)
       }
 
-    }).catch(e=>console.log(e))
+    }).catch(e => console.log(e))
   }
-  async componentWillMount() {
+  componentWillMount() {
     buryPoint()
-
     // 获取用户数据 和 刷新页面数据
     const { count } = this.state
     count && this.SubletList.onReset(null)
-    this.setState({
-      count: true
-    })
+    this.setState({ count: true })
   }
 
   componentDidShow() {
@@ -111,7 +108,7 @@ class ApartmentRecommend extends Component {
   }
 
   render() {
-    const {  isInput, payload, showCancel, inputValue } = this.state
+    const { isInput, payload, showCancel, inputValue } = this.state
     const { sublet } = this.props
 
     return (

@@ -89,18 +89,11 @@ class OrderCreate extends BaseComponent {
   }
 
 
-  async componentWillMount() {
-    // 数据埋点
-    buryPoint()
+  async componentDidMount() {
     // 初始化获取详情Payload
     const { room_id = 0, appointment_id = 0, type_id = 0, apartment_id = 0 } = this.$router.params
     let { payloadDetail } = this.state
     payloadDetail = { ...payloadDetail, room_id, appointment_id, type_id, apartment_id }
-    this.setState({ payloadDetail })
-
-    // 将进入页面的时间存进状态里
-    const beginTime = new Date()
-    this.setState({ beginTime })
 
     let data = ''
     await this.props.dispatchOrderPreview(payloadDetail).then(res => {
@@ -128,12 +121,18 @@ class OrderCreate extends BaseComponent {
           couponStorage: data.coupon.map(i => ({ ...i, active: false, canChoise: true })),
           couponTotal: data.coupon.length + LOCALE_COUPON_CAN_USED,
           payload,
+          payloadDetail
         })
       } else this.setState({ couponTotal: LOCALE_COUPON_NONE })
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    // 数据埋点
+    buryPoint()
+    // 将进入页面的时间存进状态里
+    const beginTime = new Date()
+    this.setState({ beginTime })
     const { citycode } = Taro.getStorageSync('user_info')
     citycode && this.setState({ cityId: citycode })
   }
@@ -155,7 +154,7 @@ class OrderCreate extends BaseComponent {
     const { payload, timeList } = this.state
 
     const timeListClone = timeList.map(i => ({ ...i, active: i.active = i.id === id ? true : false }))
-    payloadDetail = { ...payloadDetail, tenancy: id , coupon_user_id: '' }
+    payloadDetail = { ...payloadDetail, tenancy: id, coupon_user_id: '' }
 
     // 置空优惠券列表
     this.props.dispatchOrderPreview(payloadDetail).then(({ data: { data } }) => {
@@ -167,7 +166,7 @@ class OrderCreate extends BaseComponent {
         couponTotal: data.coupon.length + LOCALE_COUPON_CAN_USED,
         couponPrice: 0,
         coupon: data.coupon.map(i => ({ ...i, active: false, canChoise: true })),
-        couponIdArr : [],
+        couponIdArr: [],
       })
     })
   }
@@ -209,9 +208,11 @@ class OrderCreate extends BaseComponent {
       couponPrice: 0,
       coupon: data.coupon.map(i => ({ ...i, active: false, canChoise: true })),
       payloadDetail,
-      couponIdArr : [],
+      couponIdArr: [],
     })
   }
+
+
 
   // 选择优惠券
   onSelectCoupon(id, price) {

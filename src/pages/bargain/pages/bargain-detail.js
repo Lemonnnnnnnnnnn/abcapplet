@@ -51,11 +51,6 @@ export default class BargainDetail extends Component {
     this.initState()
   }
 
-  // componentWillMount() {
-  //   setInterval(() => {
-  //     this.initState()
-  //   }, 5000)
-  // }
 
   async initState() {
     const { id, share_id } = this.$router.params
@@ -286,7 +281,6 @@ export default class BargainDetail extends Component {
         <BargainHelpFriendsMask user_bargain={user_bargain} show={showHelpFriends} onClose={this.onCloseHelpFriendsMask} />
         {/* 背景图 */}
         <BargainContainer />
-
         <View className='bargain-background'>
 
           <View className='bargain-body-wrap '>

@@ -33,8 +33,11 @@ export default class DepositBar extends BaseComponent {
     time: '',
   }
 
-  async componentWillMount() {
+  componentWillMount() {
     buryPoint()
+  }
+
+  async componentDidMount(){
     const { id, roomId } = this.$router.params
 
     const { data: { data } } = await this.props.dispatchOrderShow({ id })
@@ -55,7 +58,6 @@ export default class DepositBar extends BaseComponent {
       price: data.amount_total,
       time: signTime
     })
-
   }
 
   render() {

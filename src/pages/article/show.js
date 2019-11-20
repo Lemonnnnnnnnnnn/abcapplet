@@ -40,7 +40,7 @@ class ArticleShow extends Component {
     ],
   }
 
-  async componentDidMount() {
+  componentWillMount() {
     buryPoint()
   }
 

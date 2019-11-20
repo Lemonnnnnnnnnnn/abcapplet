@@ -51,7 +51,6 @@ class UserFavorite extends Component {
   }
 
   componentDidMount() {
-
     this.houseTypeList.onReset(null)
   }
 

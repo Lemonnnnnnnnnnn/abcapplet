@@ -20,12 +20,9 @@ class UserAuth extends Component {
     lastPagePath: ''
   }
 
-  componentDidMount() {
-
+  componentWillMount() {
     buryPoint()
     this.autoUpdate()
-
-
   }
 
   autoUpdate() {
