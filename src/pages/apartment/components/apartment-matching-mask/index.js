@@ -44,7 +44,7 @@ class AppartmentMatchingMask extends BaseComponent {
                             <View className='at-row at-row--wrap'>
                                 {facilitys.map(i =>
                                     i.type === 2 && <View style={PublicConfiguration} key={i.title} className='at-col at-col-2 text-center mr-2'>
-                                        <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                                        <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                                         <View className='text-small'>{i.title}</View>
                                     </View>
                                 )}
@@ -57,7 +57,7 @@ class AppartmentMatchingMask extends BaseComponent {
                             <View className='at-row '>
                                 {facilitys.map(i =>
                                     i.type === 1 && <View style={PublicConfiguration} key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-2'>
-                                        <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                                        <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                                         <View className='text-small'>{i.title}</View>
                                     </View>
                                 )}

@@ -291,6 +291,7 @@ class ApartmentShow extends Component {
             <ApartmentCouponMask
               show={showCouponMask}
               onClose={this.onCloseCoupon}
+              houseType_id={types[0].id}
               apartment_id={id}
               cityId={cityId}
               params={this.$router.params}
@@ -342,12 +343,12 @@ class ApartmentShow extends Component {
                   <View className='at-row  at-row__align--center text-secondary'>
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
-                      <Image className='mr-1' src='https://images.gongyuabc.com//image/free_new.png' style='width:18px;height:18px'></Image>
+                      <Image lazyLoad className='mr-1' src='https://images.gongyuabc.com//image/free_new.png' style='width:18px;height:18px'></Image>
                       <View className='ml-1 '>100%免中介费</View>
                     </View>
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
-                      <Image className='mr-1' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
+                      <Image lazyLoad className='mr-1' src='https://images.gongyuabc.com//image/home.png' style='width:18px;height:18px'></Image>
                       <View className='ml-1'>100%真实房源</View>
                     </View>
 
@@ -359,7 +360,7 @@ class ApartmentShow extends Component {
               {/* 地图 */}
               <View className='at-row  at-row__align--center  mb-2'>
                 <View className=''>
-                  <Image src={PATH} style='width:12px;height:16px'></Image>
+                  <Image lazyLoad src={PATH} style='width:12px;height:16px'></Image>
                 </View>
                 {position ? <View className='text-normal text-secondary  ml-2'>{position}</View>
                   : <View className='text-secondary text-normal ml-2'>暂无相关位置信息</View>}
@@ -418,7 +419,7 @@ class ApartmentShow extends Component {
                 <View className='at-row at-row--wrap mt-3 mb-3'>
                   {publicMatch_list && publicMatch_list.map(i =>
                     <View key={i.title} className='at-col at-col-1 text-center at-col--auto  mr-4'>
-                      <Image src={i.icon} mode='aspectFit' style={{ height: '35px', width: '35px' }} />
+                      <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: '35px', width: '35px' }} />
                       <View className='text-small'>{i.title}</View>
                     </View>
                   )}

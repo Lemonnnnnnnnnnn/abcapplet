@@ -37,7 +37,7 @@ class Auth extends Component {
       <View className='mt-5 mx-3'>
         {/* Logo */}
         <View className='text-center'>
-          <Image src={logo} mode='aspectFit' style={imageStyle}></Image>
+          <Image lazyLoad src={logo} mode='aspectFit' style={imageStyle}></Image>
         </View>
 
         {/* 授权说明 */}

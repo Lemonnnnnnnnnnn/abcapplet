@@ -50,7 +50,7 @@ export default class BargainCouponCard extends BaseComponent {
           {/* 左 */}
           <View className='at-col at-col-5 leftPart'>
             <View style={imageStyle} className='wrap-Style'>
-              <Image className='inherit-Height inherit-Width' src={cover} mode='scaleToFill'></Image>
+              <Image lazyLoad className='inherit-Height inherit-Width' src={cover} mode='scaleToFill'></Image>
             </View>
             <View className='text-small text-bold'>{apartment_title}</View>
             <View className='text-small text-secondary'>

@@ -29,7 +29,7 @@ class UserFeedbackOptions extends BaseComponent {
                 {/* 左侧内容 */}
                 <View className='at-row at-row__align--center ml-2'>
                   {/* 左侧图标 */}
-                  <Image style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src={i.icon}></Image>
+                  <Image lazyLoad style={{ width: Taro.pxTransform(32), height: Taro.pxTransform(32), marginTop: Taro.pxTransform(4) }} src={i.icon}></Image>
                   {/* 文本内容 */}
                   <View className='ml-2 text-normal' style={{ color: '#000' }}>{i.title}</View>
                 </View>

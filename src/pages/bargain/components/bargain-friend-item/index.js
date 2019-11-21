@@ -24,7 +24,7 @@ export default class BargainFriendItem extends BaseComponent {
         <Text className='text-secondary text-huge'>{num + LOCALE_DOT}</Text>
         {/* 头像 */}
         <View className='at-col at-col-4'>
-          <Image src={headimg} className='bargain-friend-icon' />
+          <Image lazyLoad src={headimg} className='bargain-friend-icon' />
         </View>
         {/* 昵称 */}
         <View className='text-small at-row at-row__justify--center'>{username}</View>
@@ -38,7 +38,7 @@ export default class BargainFriendItem extends BaseComponent {
     // 帮砍好友
     const bargainHelpFriends = <View className='at-row at-row__align--center at-row__justify--between '>
       <View className='at-row at-row__align--center'>
-        <Image src={headimg} className='bargain-friend-icon' />
+        <Image lazyLoad src={headimg} className='bargain-friend-icon' />
         <Text className='text-normal ml-3'>{username}</Text>
       </View>
       <View className='at-row at-row__align--end at-row__justify--end'>

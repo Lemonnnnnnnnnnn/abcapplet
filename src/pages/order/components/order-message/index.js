@@ -233,7 +233,7 @@ export default class OrderMessage extends BaseComponent {
         {/* 退租险 */}
         <Board className='px-3 py-2 mb-3 order-lease-insurance'>
           <View onClick={this.props.onNavigateToRisk} className='at-row at-row__justify--between at-row__align--center'>
-            <Image src={ORDER_LEASE_INSURANCE} className='picture' ></Image>
+            <Image lazyLoad src={ORDER_LEASE_INSURANCE} className='picture' ></Image>
             <View className='text-small'>{LOCALE_ORDER_RISK}</View>
             <View className='text-bold '>
               <View className='at-row at-row__align--end'>

@@ -32,7 +32,7 @@ class UserOrderOptions extends BaseComponent {
           {lists.map(i =>
             <View key={i.id} className='mx-2 at-col' onClick={this.onNavigation.bind(this, i.url)}>
               <View  className='ml-5 button-order at-row at-row__justify--center at-row__align--center'>
-                <Image src={i.imageurl} style='width:45px;height:45px' />
+                <Image lazyLoad src={i.imageurl} style='width:45px;height:45px' />
               </View>
               <View >
                 <View style='text-align : center' className='text-small mt-2'>{i.title}</View>

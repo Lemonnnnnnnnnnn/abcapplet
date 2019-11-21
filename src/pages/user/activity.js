@@ -31,7 +31,7 @@ export default class UserActivity extends Component {
       <View className='p-3'>
         <Decorate height='200' />
 
-        {list.length ?<ApartmentBargainList
+        <ApartmentBargainList
           block='userActivity'
           ref={this.refBargainList}
           bargainList={list}
@@ -40,8 +40,8 @@ export default class UserActivity extends Component {
           dispatchList={this.props.dispatchUserActivity}
           dispatchNextPageList={this.props.dispatchNextPageUserActivity}
         />
-        : <View style={{minHeight : '80vh'}} className=' text-large page-middile'>您当前尚未参加活动</View>
-      }
+
+        {list && !list.length && <View style={{ minHeight: '80vh' }} className=' text-large page-middile'>您当前尚未参加活动</View>}
 
       </View>
     );

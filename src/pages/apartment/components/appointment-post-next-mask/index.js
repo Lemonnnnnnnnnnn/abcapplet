@@ -72,7 +72,7 @@ class AppointmentPostNextMask extends BaseComponent {
 
               {serverId !== 0 && <View className='mb-5'>
                 <View className='at-row at-row__justify--center' >
-                  <Image src={APARTMENT_APPOINTMENT_ACCEPT} style={{ height: Taro.pxTransform(45 * 2), width: Taro.pxTransform(40 * 2) }}></Image>
+                  <Image lazyLoad src={APARTMENT_APPOINTMENT_ACCEPT} style={{ height: Taro.pxTransform(45 * 2), width: Taro.pxTransform(40 * 2) }}></Image>
                 </View>
                 <View className='at-row at-row__justify--center mt-2'>
                   <View className='text-bold text-super '>{LOCALE_APPOINTMENT_ACCEPT}</View>
@@ -96,7 +96,7 @@ class AppointmentPostNextMask extends BaseComponent {
                 </View>
               </View>
 
-              <Image className='mt-2 inherit-Width' onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' ></Image>
+              <Image lazyLoad className='mt-2 inherit-Width' onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' ></Image>
 
 
               <View className='at-row at-row__justify--center mt-1 inherit-Width' style='height:1px;background:#F8F8F8'></View>

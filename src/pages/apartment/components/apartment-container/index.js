@@ -132,6 +132,7 @@ class ApartmentContainer extends BaseComponent {
                 >
                   {swipers.map(i => <SwiperItem key={i.url}>
                     <Image
+                      lazyLoad
                       style={style}
                       mode='aspectFill'
                       src={i.url}
@@ -140,6 +141,7 @@ class ApartmentContainer extends BaseComponent {
                 </Swiper>
                 :
                 <Image
+                  lazyLoad
                   style={style}
                   mode='aspectFill'
                   src={swipers.length ? `${swipers[0].url}` : ''}
@@ -166,6 +168,7 @@ class ApartmentContainer extends BaseComponent {
                 >
                   {qsf_picture.map(i => <SwiperItem key={i.url}>
                     <Image
+                      lazyLoad
                       style={style}
                       mode='aspectFill'
                       src={i.url}
@@ -174,6 +177,7 @@ class ApartmentContainer extends BaseComponent {
                 </Swiper>
                 :
                 <Image
+                  lazyLoad
                   style={style}
                   mode='aspectFill'
                   src={qsf_picture.length ? `${qsf_picture[0].url}` : ''}
@@ -191,12 +195,12 @@ class ApartmentContainer extends BaseComponent {
             {isCollect
               ?
               <View className='at-row at-row__justify--center at-row__align--center' style={{ marginTop: '1px' }} onClick={this.props.onDeleteFavorite}>
-                <Image src={HEART_YELLOW} className='apartment-container-heart'></Image>
+                <Image lazyLoad src={HEART_YELLOW} className='apartment-container-heart'></Image>
                 <View className='apartment-container-heartNum' >{num}</View>
               </View>
               :
               <View className='at-row at-row__justify--center at-row__align--center' style={{ marginTop: '1px' }} onClick={this.props.onCreateFavorite}>
-                <Image src={HEART_YELLOW_EMPTY} className='apartment-container-heart' ></Image>
+                <Image lazyLoad src={HEART_YELLOW_EMPTY} className='apartment-container-heart' ></Image>
                 <View className='apartment-container-heartNum' >{num}</View>
               </View>
             }

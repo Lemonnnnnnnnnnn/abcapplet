@@ -18,7 +18,7 @@ export default class apartmentAppointmentHeader extends BaseComponent {
         </View>
 
         <View className='ad-image inherit-Width' >
-          <Image className='inherit-Width' src={this.props.swipers}></Image>
+          <Image lazyLoad className='inherit-Width' src={this.props.swipers}></Image>
           <View className='ad-mask inherit-Width position-absolute' >
           </View>
         </View>

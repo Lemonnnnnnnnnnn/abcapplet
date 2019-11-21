@@ -12,7 +12,7 @@ class OrderList extends BaseList {
   render() {
     const { items, className, show } = this.props
     const { hasMore, loading, page } = this.state
-  
+
     return (show && <View className={className}>
 
       {/* 渲染 公寓列表 */}
@@ -25,7 +25,7 @@ class OrderList extends BaseList {
         && hasMore === false
         && loading === false
         && <View className='mt-2 pt-4 pb-2 default-page-background' >
-          <Image mode='widthFix' src='https://images.gongyuabc.com/image/page_risk.png' className='default-page-picture'></Image>
+          <Image lazyLoad mode='widthFix' src='https://images.gongyuabc.com/image/page_risk.png' className='default-page-picture'></Image>
           <View  style={{ position: 'relative' }}>
             <View className='text-large text-center default-page-font' >您没有申请赔付哦~</View>
           </View>

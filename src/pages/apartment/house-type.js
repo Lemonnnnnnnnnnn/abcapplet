@@ -501,7 +501,7 @@ class HouseTypeShow extends Component {
 
               {/* 广告位 */}
               <View className='page-middile mt-2'>
-                <Image onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' className='appointment-detail-ad'></Image>
+                <Image lazyLoad onClick={this.onNavigateToRisk} src={RISK_MONEY_BANNER} mode='widthFix' className='appointment-detail-ad'></Image>
               </View>
 
               {/* 已有多少人获得转租金 */}
@@ -551,12 +551,12 @@ class HouseTypeShow extends Component {
                   <View className='at-row  at-row__align--center at-row__justify--center text-secondary'>
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
-                      <Image className='mr-1' src={FREE} style='width:18px;height:18px'></Image>
+                      <Image lazyLoad className='mr-1' src={FREE} style='width:18px;height:18px'></Image>
                       <View className='ml-1 '>100%免中介费</View>
                     </View>
 
                     <View className='at-row  at-row__align--center at-row__justify--center '>
-                      <Image className='mr-1' src={HOME} style='width:18px;height:18px'></Image>
+                      <Image lazyLoad className='mr-1' src={HOME} style='width:18px;height:18px'></Image>
                       <View className='ml-1'>100%真实房源</View>
                     </View>
 
@@ -568,7 +568,7 @@ class HouseTypeShow extends Component {
               {
                 position && <View className='at-row  at-row__align--center'>
                   <View className='at-col at-col-1 '>
-                    <Image src={PATH} style='width:12px;height:16px'></Image>
+                    <Image lazyLoad src={PATH} style='width:12px;height:16px'></Image>
                   </View>
                   <View className=' text-normal text-secondary ' >{position}</View>
                 </View>
@@ -609,7 +609,7 @@ class HouseTypeShow extends Component {
                   <View key={i.title} className='at-col' style={{ position: "relative", left: Taro.pxTransform(13) }}>
                     <View className='apartment-house-type-public-configuration' ></View>
                     <View style={{ position: "absolute", top: Taro.pxTransform(10), left: Taro.pxTransform(13) }}>
-                      <Image src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
+                      <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
                       <View className='text-small text-center' >{i.title}</View>
                     </View>
                   </View>
@@ -617,7 +617,7 @@ class HouseTypeShow extends Component {
                   <View onClick={this.onOpenAllMatching} key={i.title} className='at-col ' style={{ position: "relative" }}>
                     <View className='apartment-house-type-public-configuration' style={{ left: Taro.pxTransform(13), position: 'absolute' }}></View>
                     <View style={{ position: "absolute", top: Taro.pxTransform(10), left: Taro.pxTransform(23) }}>
-                      <Image src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
+                      <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: Taro.pxTransform(60), width: Taro.pxTransform(60) }} />
                       <View className='text-small text-center'>{i.title}</View>
                     </View>
                   </View>
@@ -702,7 +702,7 @@ class HouseTypeShow extends Component {
                     <View key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
                       <View className='apartment-house-type-public-configuration' ></View>
                       <View style={{ position: "absolute", top: "5px", left: "5px" }}>
-                        <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px', }} />
+                        <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px', }} />
                         <View className='text-small text-center' >{i.title}</View>
                       </View>
                     </View>
@@ -710,7 +710,7 @@ class HouseTypeShow extends Component {
                     <View onClick={this.onOpenAllMatching} key={i.title} className='at-col at-col-1 ' style={{ position: "relative" }}>
                       <View className='apartment-house-type-public-configuration' ></View>
                       <View style={{ position: "absolute", top: "5px", left: "5px" }}>
-                        <Image src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
+                        <Image lazyLoad src={i.icon} mode='aspectFit' style={{ height: '30px', width: '30px' }} />
                         <View className='text-small text-center'>{i.title}</View>
                       </View>
                     </View>

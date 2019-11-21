@@ -9,7 +9,7 @@ export default class bargainContainer extends BaseComponent {
     const src = 'https://images.gongyuabc.com/image/bargain-banner.png'
     return (
       <View style={{ minHeight: Taro.pxTransform(200 * 2), background: '#fa624a' }}>
-        <Image className='bargain-header level-center' src={src} mode='widthFix'></Image>
+        <Image lazyLoad className='bargain-header level-center' src={src} mode='widthFix'></Image>
       </View>
     );
   }

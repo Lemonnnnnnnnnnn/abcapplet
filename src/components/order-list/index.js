@@ -29,7 +29,7 @@ class OrderList extends BaseList {
         && hasMore === false
         && loading === false
         && <View className='pt-4 pb-2 default-page-background' style={pageBgStyle}>
-          <Image mode='widthFix' src='https://images.gongyuabc.com/image/page_order.png' className='default-page-picture' ></Image>
+          <Image lazyLoad mode='widthFix' src='https://images.gongyuabc.com/image/page_order.png' className='default-page-picture' ></Image>
           <View style={{ position: 'relative' }}>
             <View className='text-large text-center default-page-font' >您还没有订单哦~</View>
           </View>

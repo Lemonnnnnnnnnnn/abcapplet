@@ -62,7 +62,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
         <View className='p-2'>
           {/* 板块内第一个板块  图片加公寓信息左右排列*/}
           <View className='at-row at-row__justify--between'>
-            <Image src={cover} className='bargain-detail-image main-block-image'></Image>
+            <Image lazyLoad src={cover} className='bargain-detail-image main-block-image'></Image>
 
             <View className='at-col at-col-7'>
               <View onClick={this.onNavigation} className='pt-2 text-large text-bold at-row at-row__align--center at-row__justify--between'>

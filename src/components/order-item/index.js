@@ -80,7 +80,7 @@ class OrderItem extends BaseComponent {
 
                   <View className=' text-normal badge-hasRoom mr-2 at-row at-row__align--center' style={hasRoomStyle}>
                     {
-                      icon && <Image style={{ width: Taro.pxTransform(width), height: Taro.pxTransform(height) }} className='mr-1' src={icon}></Image>
+                      icon && <Image lazyLoad style={{ width: Taro.pxTransform(width), height: Taro.pxTransform(height) }} className='mr-1' src={icon}></Image>
                     }
                     <Text>{message}</Text>
                   </View>
@@ -89,7 +89,7 @@ class OrderItem extends BaseComponent {
 
                   <View className='at-row at-row__align--center mr-2'>
                     {
-                      icon && <Image style={{ width: Taro.pxTransform(width), height: Taro.pxTransform(height) }} className='mr-2' src={icon}></Image>
+                      icon && <Image lazyLoad style={{ width: Taro.pxTransform(width), height: Taro.pxTransform(height) }} className='mr-2' src={icon}></Image>
                     }
                     <View className={`text-small ${color}`}>{message}</View>
                   </View>

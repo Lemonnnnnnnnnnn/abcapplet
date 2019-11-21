@@ -21,7 +21,7 @@ class AppointmentMessageList extends BaseComponent {
           <View key={i.id} className='text-normal'>
 
             {i.sayer !== 'user' && <View className='at-row mt-3'>
-              <Image src={ICON_HEAD_NO} className='icon-head-no' />
+              <Image lazyLoad src={ICON_HEAD_NO} className='icon-head-no' />
               <View className='ml-2'>
                 <View className='message-item p-2'>{i.content}</View>
                 <View className='text-secondary text-mini mt-1'>

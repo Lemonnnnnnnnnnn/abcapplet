@@ -537,7 +537,7 @@ class CommonHome extends BaseComponent {
 
           {/* 优选入口 */}
           <View className='mx-1' style={{ minHeight: Taro.pxTransform(180) }} onClick={this.openMiniProgramCreate}>
-            <Image src={RECOMMED} className='user-home-image'></Image>
+            <Image lazyLoad src={RECOMMED} className='user-home-image'></Image>
           </View>
 
 

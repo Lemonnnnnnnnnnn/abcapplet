@@ -38,7 +38,7 @@ export default class BargainDetailBargainingBlock extends BaseComponent {
           {/* 左 */}
           <View className='at-col at-col-3'>
             <View className='at-row at-row__align--center at-row__justify--center inherit-Height'>
-              <Image src={headimg} className='bargain-bargaining-image'></Image>
+              <Image lazyLoad src={headimg} className='bargain-bargaining-image'></Image>
             </View>
           </View>
           {/* 中 */}

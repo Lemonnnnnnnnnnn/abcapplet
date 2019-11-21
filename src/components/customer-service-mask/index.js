@@ -38,7 +38,7 @@ class CustomerServiceMask extends Taro.Component {
       padding: Taro.pxTransform(30),
       textAlign: 'center',
       color: '#888888',
-      fontSize: Taro.pxTransform(24),
+      fontSize: Taro.pxTransform(26),
     }
 
     const buttonStyle = {

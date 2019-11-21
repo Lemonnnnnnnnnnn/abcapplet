@@ -26,7 +26,7 @@ class OrderProcessGuidance extends BaseComponent {
                     {
                         processArr.map(i =>
                             <View key={i}>
-                                <Image src={i.url} style={{ width: Taro.pxTransform(64 * 2), height: Taro.pxTransform(73 * 2) }} />
+                                <Image lazyLoad src={i.url} style={{ width: Taro.pxTransform(64 * 2), height: Taro.pxTransform(73 * 2) }} />
                                 <View className='text-small text-center'>{i.title}</View>
 
                             </View>)

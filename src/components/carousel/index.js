@@ -98,6 +98,7 @@ class Carousel extends Component {
           <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
             <View style={{ height: Taro.pxTransform(380), overflow: 'hidden', position: 'relative' }}>
               <Image
+                lazyLoad
                 src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
                 mode='withfix'
                 className='carousel-image vertical-level-center carousel-banner'
@@ -122,6 +123,7 @@ class Carousel extends Component {
             className='mr-2 carousel-normal-item'
           >
             <Image
+              lazyLoad
               className='carousel-image'
               src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
               mode='withfix'
@@ -138,7 +140,7 @@ class Carousel extends Component {
               <View>
                 <View className='count-bg'></View>
                 <View className='at-row at-row__align--center count-text'>
-                  <Image src='https://images.gongyuabc.com//image/fire.png' className='ml-1' style={{ width: Taro.pxTransform(20), height: Taro.pxTransform(20) }}></Image>
+                  <Image src='https://images.gongyuabc.com//image/fire.png' lazyLoad className='ml-1' style={{ width: Taro.pxTransform(20), height: Taro.pxTransform(20) }}></Image>
                   <View className='at-col at-col-8 text-mini text-yellow ' style={{ overflow: 'hidden', lineHeight: Taro.pxTransform(40) }}>{item.sum}</View>
                 </View>
               </View>

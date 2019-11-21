@@ -32,7 +32,7 @@ class RiskHeader extends BaseComponent {
             {items.map(i => <View key={i.id}>
               <View className='at-row  at-row__align--center'>
                 <View className=''>
-                  <Image src={i.url} style={{ width: Taro.pxTransform(i.width), height: Taro.pxTransform(i.height) }}></Image>
+                  <Image lazyLoad src={i.url} style={{ width: Taro.pxTransform(i.width), height: Taro.pxTransform(i.height) }}></Image>
                 </View>
                 <View className='text-white text-normal ml-2 mb-1'>
                   <View>{i.title}</View>

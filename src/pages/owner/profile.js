@@ -158,7 +158,7 @@ class UserProfile extends Component {
 
           {/* 优选入口 */}
           <View className='mx-2' onClick={this.openMiniProgramCreate} style={{ position: 'relative', zIndex: 100 }}>
-            <Image src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
+            <Image lazyLoad src='https://images.gongyuabc.com/image/recommed.png ' className='user-image'></Image>
           </View>
 
           {/* 我的订单 */}

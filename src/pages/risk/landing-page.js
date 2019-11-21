@@ -47,7 +47,7 @@ class RiskLandingPage extends Component {
           <AtIcon className='pl-2 pr-2' value='chevron-left' size='22' ></AtIcon>
         </View>
         {/* 展示内容 */}
-        <Image src='https://images.gongyuabc.com/image/RiskLandingPage_new.jpg' mode='widthFix' style={bgStyle}></Image>
+        <Image lazyLoad src='https://images.gongyuabc.com/image/RiskLandingPage_new.jpg' mode='widthFix' style={bgStyle}></Image>
       </View>
     )
   }

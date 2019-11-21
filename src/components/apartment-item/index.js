@@ -168,7 +168,7 @@ class ApartmentItem extends BaseComponent {
             ?
             <View className='apartment-item-header-favorite mr-2 mt-2' onClick={this.onDeleteFavorite}>
               <View className='apartment-item-heart-wrap' >
-                <Image  className='apartment-item-heart' src={HEART_YELLOW} ></Image>
+                <Image lazyLoad  className='apartment-item-heart' src={HEART_YELLOW} ></Image>
               </View>
               <View className='apartment-item-heart-num text-small' >{num}</View>
 
@@ -176,7 +176,7 @@ class ApartmentItem extends BaseComponent {
             :
             <View className='apartment-item-header-favorite mr-2 mt-2' onClick={this.onCreateFavorite}>
               <View className='apartment-item-heart-wrap' >
-                <Image className='apartment-item-heart' src={HEART_BLACK} ></Image>
+                <Image lazyLoad className='apartment-item-heart' src={HEART_BLACK} ></Image>
               </View>
               <View className='apartment-item-heart-num text-small' >{num}</View>
 

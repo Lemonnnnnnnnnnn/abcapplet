@@ -23,7 +23,7 @@ class OrderSignCode extends BaseComponent {
         <AtModalContent >
           <View className='p-2 text-center'>
             <View className='text-bold text-huge mb-2'>{LOCALE_SIGNED_CODE}</View>
-            <Image className='mb-2' src={code} style={{ width: '200px', height: '200px' }} />
+            <Image lazyLoad className='mb-2' src={code} style={{ width: '200px', height: '200px' }} />
             <View className='text-normal'>{LOCALE_SIGNED_CODE_NOTICE}</View>
           </View>
         </AtModalContent>

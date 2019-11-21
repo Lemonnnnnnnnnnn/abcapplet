@@ -19,9 +19,10 @@ class SubletItem extends BaseComponent {
       <View className='at-row at-row__justify--center py-2 inherit-Width ' >
         {item && <View className='at-row page-sublet' onClick={this.props.onNavicatSublet.bind(this, item)}>
           <View className='at-col-5 position-relative'>
-            <Image src={item.url} className='inherit-Width inherit-Height page-sublet-image' mode='aspectFill'></Image>
+            <Image lazyLoad src={item.url} className='inherit-Width inherit-Height page-sublet-image' mode='aspectFill'></Image>
             {item && item.status === 2 && <View className=' position-absolute inherit-Width inherit-Height mask' >
               <Image
+                lazyLoad
                 className='vertical-level-center'
                 src={SUBLET_FINISH_NEW}
                 mode='widthFix'

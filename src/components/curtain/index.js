@@ -52,7 +52,7 @@ export default class Curtain extends BaseComponent {
             adList.map(i =>
               <SwiperItem key={i.id} onClick={this.onNavigation.bind(this, i.url)}>
                 <View className='curtain-wrap'>
-                  <Image src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
+                  <Image lazyLoad src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
                 </View>
               </SwiperItem>
             )

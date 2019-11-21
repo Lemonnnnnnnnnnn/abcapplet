@@ -48,7 +48,7 @@ class CityModal extends Component {
         <View style={{ height: Taro.pxTransform(160) }}>
           <View className='at-row at-row__justify--center city-modal-header'>
             <View className='at-row at-row__align--center at-row__justify--center'>
-              <Image src={CITY_MODAL_ICON} style={{ height: iconHeight, width: iconWeight }}></Image>
+              <Image lazyLoad src={CITY_MODAL_ICON} style={{ height: iconHeight, width: iconWeight }}></Image>
               <View className='text-large text-bold ml-2'>{LOCALE_CHOISE_RENT_POSITION}</View>
             </View>
           </View>

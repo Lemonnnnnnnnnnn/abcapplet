@@ -411,7 +411,7 @@ class AppointmentDetail extends BaseComponent {
               <View className='at-row at-row__justify--between ' onClick={this.onNavigateTo}>
                 <View className=''>
                   <View className='at-row'>
-                    <Image className='mt-1 appointment-image' src={APPOINTMENT_DETAIL}></Image>
+                    <Image lazyLoad className='mt-1 appointment-image' src={APPOINTMENT_DETAIL}></Image>
                     <View className='text-bold text-large ml-2'>{LOCALE_ADVERTISING_WORD_WU}</View>
                   </View>
                   <View className='text-small mt-1'>
@@ -432,12 +432,12 @@ class AppointmentDetail extends BaseComponent {
 
         {/* 广告图片 */}
         <View className='appointment-detail-head'>
-          <Image src={SIGN_CASH_BACK} mode='widthFix' className='appointment-head'></Image>
+          <Image lazyLoad src={SIGN_CASH_BACK} mode='widthFix' className='appointment-head'></Image>
         </View>
 
         {/* 客服悬浮入口 */}
         <Button open-type='contact' >
-          <Image className='appointment-fix-icon' src={CALL}></Image>
+          <Image lazyLoad className='appointment-fix-icon' src={CALL}></Image>
         </Button>
 
       </View >

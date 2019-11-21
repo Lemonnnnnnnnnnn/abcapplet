@@ -202,21 +202,21 @@ class ServiceItemShow extends BaseComponent {
             {status >= 5 && status <= 14 ? <View className='inherit-Height'>
               <View className='at-row at-row__align--center at-row__justify--end text-normal text-yellow service-noaAppoint position-relative' >
                 {(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ?
-                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
+                  <Image lazyLoad src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   :
-                  <Image src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
+                  <Image lazyLoad src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
                 }
                 {<Text >{(status === 8 || status === 9 || status === 12 || status === 13 || status === 14) ? LOCALE_CASH_BACK : LOCAL_APPOINTMENT_AGENCY}</Text>}
               </View>
             </View>
               :
               item && item.is_sign ? <View className='at-row at-row__align--center at-row__justify--end text-normal text-muted service-haveAppoint position-relative icon' >
-                <Image src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
+                <Image lazyLoad src={APPOINT_ANGE} mode='widthFix' className='appointment-coupontwo' ></Image>
                 {LOCAL_APPOINTMENT_AGENCY}
               </View>
                 :
                 <View className='at-row at-row__align--center at-row__justify--end  text-normal text-muted service-haveAppoint position-relative icon' >
-                  <Image src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
+                  <Image lazyLoad src={APPOINTMENT_COUPON} mode='widthFix' className='appointment-coupon' ></Image>
                   {LOCALE_CASH_BACK}
                 </View>
             }
@@ -247,7 +247,7 @@ class ServiceItemShow extends BaseComponent {
           <View className='text-mini text-center page-middile text-secondary'>{LOCAL_APPOINTMENT_CASHBACK_REDPACK}</View>
           <View className='text-normal  mt-1 service-buttonYellowBo' style='position:relative' onClick={this.onAgency}>
             <View style='position:absolute;top:12%;left:-1%' >
-              <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINTMENT_COUPON} ></Image>
+              <Image lazyLoad style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINTMENT_COUPON} ></Image>
             </View>
             <View className='ml-4 mt-1'>
               <Text>{LOCAL_APPOINTMENT_OFFLINE_SIGNING}</Text>
@@ -258,7 +258,7 @@ class ServiceItemShow extends BaseComponent {
           <View className='text-mini page-middile  text-secondary'>获得退租险和租金立减</View>
           <View className=' text-normal  mt-1 service-buttonYellowBo' style='position:relative' onClick={this.onBookRoom}>
             <View style='position:absolute;top:12%;left:-1%' >
-              <Image style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINT_ANGE} ></Image>
+              <Image lazyLoad style={{ width: Taro.pxTransform(72), height: Taro.pxTransform(68) }} src={APPOINT_ANGE} ></Image>
             </View>
             <View className='ml-4 mt-1'>
               <Text>{LOCAL_APPOINTMENT_BOOK_ONLINE}</Text>

@@ -155,7 +155,7 @@ class ImageUpload extends BaseComponent {
                   i.url ?
                     <View>
                       <View className='upload-image-item at-row at-row__align--center at-row__justify--center' style={{ overflow: 'hidden' }}>
-                        <Image src={i.url} mode='widthFix' style={{ width: '80%', height: '80%' }} />
+                        <Image lazyLoad src={i.url} mode='widthFix' style={{ width: '80%', height: '80%' }} />
                       </View>
                       <View className='text-small  at-row at-row__align--center at-row__justify--center' style={closeStyle} onClick={this.onDeletePic.bind(this, key)} >
                         {/* <AtIcon value='close' size='10' color='#fff'></AtIcon> */}
@@ -164,7 +164,7 @@ class ImageUpload extends BaseComponent {
                     </View>
                     :
                     <View className='upload-image-item at-row at-row__align--center at-row__justify--center'>
-                      <Image src={i.url} style={{ width: '80%', height: '80%' }} />
+                      <Image lazyLoad src={i.url} style={{ width: '80%', height: '80%' }} />
                     </View>
                 }
               </View>

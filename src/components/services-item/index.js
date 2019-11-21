@@ -165,7 +165,7 @@ class ServiceItem extends BaseComponent {
               <View>
                 <View className='service-image-mask' ></View>
 
-                <Image src={src} mode='scaleToFill' className='service-image' />
+                <Image lazyLoad src={src} mode='scaleToFill' className='service-image' />
 
               </View>
               : <ImagePlaceholder height={height} />
@@ -222,7 +222,7 @@ class ServiceItem extends BaseComponent {
               {
                 appointment_status >= 3 ?
                   <View className='at-col at-col-3 inherit-Height position-relative' >
-                    <Image className='service-image-center' src={APPOINTMENT_OVER} ></Image>
+                    <Image lazyLoad className='service-image-center' src={APPOINTMENT_OVER} ></Image>
                   </View>
                   :
                   <View className='at-col at-col-3 service-center' >
@@ -245,6 +245,7 @@ class ServiceItem extends BaseComponent {
                 <View className='at-row at-row__justify--between' >
                   <View className='at-col at-col-0'>
                     <Image
+                      lazyLoad
                       className='service-avatar'
                       src={server_user.headimgurl}
                     />
@@ -273,7 +274,7 @@ class ServiceItem extends BaseComponent {
               <View hidden={server_id === 0 ? false : true} className='at-col at-col-8 at-row at-row__justify--center service-right'>
                 <View className='at-row at-row__justify--between ' >
                   <View className='at-col at-col-2'>
-                    <Image src={ICON_HEAD_NO} className='service-avatar' />
+                    <Image lazyLoad src={ICON_HEAD_NO} className='service-avatar' />
                   </View>
                   <View className='at-col at-col-9 mr-4'>
                     <View className='text-small at-col service-font-center' >{LOCALE_APPOINTMENT_SUMMON}</View>

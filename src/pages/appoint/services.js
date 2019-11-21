@@ -121,7 +121,7 @@ class ServicesHome extends Component {
           />
 
           <View className='page-middile mt-2' onClick={this.onNavigateToRisk}>
-            <Image src={RISK_MONEY_BANNER} mode='widthFix' className='appointment-ad'></Image>
+            <Image lazyLoad src={RISK_MONEY_BANNER} mode='widthFix' className='appointment-ad'></Image>
           </View>
           <View className='at-row at-row__align--center  p-2' >
             <View className='at-row at-row__align--center at-row__justify--center ml-2 appointment-yellowbot' ></View>
@@ -145,7 +145,7 @@ class ServicesHome extends Component {
           {/* 没有数据 */}
           {!appointments.list.length && Taro.getStorageSync('user_info').token &&
             <View className='at-row at-row__align--center at-row__justify--center' style={{ marginTop: Taro.pxTransform(100) }}>
-              <Image src={NONE_TRAVE}></Image>
+              <Image lazyLoad src={NONE_TRAVE}></Image>
             </View>}
 
         </View>
