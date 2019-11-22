@@ -91,7 +91,7 @@ class AppointmentDetail extends BaseComponent {
     let roomListArr = []
     let type = 0
 
-    const { payload } = this.state
+    const { payload, signTime } = this.state
     const { id, isSign } = this.$router.params
     await this.props.dispatchAppointRewordOrderRoomPost({ appointment_id: parseInt(id) }).then(res => {
 
@@ -425,7 +425,7 @@ class AppointmentDetail extends BaseComponent {
             </Board>
           }
 
-          <View className='mx-2 mt-3 text-muted' onClick={this.onComfirm}>
+          <View className='mx-2 my-3 text-muted' onClick={this.onComfirm}>
             <AtButton className='mx-2 btn-yellow active' size='normal' circle >{LOCALE_APPOINTMENT_DETAIL_REVIEW}</AtButton>
           </View>
         </View>
