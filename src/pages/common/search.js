@@ -247,8 +247,8 @@ class CommonSearch extends BaseComponent {
           onApartmentPayloadChange={this.onApartmentPayloadChange}
         />
 
-        <ApartmentList
-          show={showPreview === false}
+        {!showPreview && <ApartmentList
+          // show={showPreview === false}
           initReset={false}
           key={apartmentsearch.type}
           type={apartmentsearch.type}
@@ -260,7 +260,7 @@ class CommonSearch extends BaseComponent {
           onDeleteFavorite={this.onDeleteFavorite}
           dispatchList={this.props.dispatchSearchApartmentList}
           dispatchNextPageList={this.props.dispatchNextPageSearchApartmentList}
-        />
+        />}
 
       </View>
     </View>

@@ -34,6 +34,7 @@ class UserFavorite extends Component {
     code: '',
     navList: USER_COUPON_DIST,
     current: 0,
+    couponList: []
   }
 
   refCouponListCanUsed = node => this.CouponListCanUsed = node
@@ -42,6 +43,20 @@ class UserFavorite extends Component {
 
   componentWillMount() {
     buryPoint()
+  }
+
+  componentWillReceiveProps(nextProps){
+    const { userCouponList: { list } } = nextProps
+
+    let couponList = []
+
+    list && list.length && list.map(i => couponList.push({
+      status: i.status,
+      list: { ...i.coupon, period_time: i.period_time },
+    }))
+
+    this.setState({couponList})
+
   }
 
   onInputValue(e) {
@@ -87,16 +102,16 @@ class UserFavorite extends Component {
 
 
   render() {
-    const { code, navList, current } = this.state
+    const { code, navList, current ,couponList } = this.state
     const { userCouponList: { list } } = this.props
     const city_id = parseInt(Taro.getStorageSync('cityDefault'))
 
-    let couponList = []
+    // let couponList = []
 
-    list && list.length && list.map(i => couponList.push({
-      status: i.status,
-      list: { ...i.coupon, period_time: i.period_time },
-    }))
+    // list && list.length && list.map(i => couponList.push({
+    //   status: i.status,
+    //   list: { ...i.coupon, period_time: i.period_time },
+    // }))
 
     return (
       <View >

@@ -56,6 +56,7 @@ class ExternalIndex extends BaseComponent {
         apartment_no: data.apartment_no,
         apartment_room_id: data.apartment_room_id,
         period_time: data.period_time,
+        condition_period : data.condition_period,
         id: data.id,
         max_receive_num: data.max_receive_num
       })
@@ -84,7 +85,7 @@ class ExternalIndex extends BaseComponent {
 
   render() {
     const { worth, type, coupon_type, use_type, apartment_title, apartment_type, apartment_no,
-      id, max_receive_num, validity_period, period_time } = this.state
+      id, max_receive_num, condition_period, period_time } = this.state
 
     let [ couponName, worthText] =['', '']
 
@@ -132,7 +133,7 @@ class ExternalIndex extends BaseComponent {
             <View className='text-normal'>
               <View className='text-normal mt-1 ml-4' style={{ color: '#353535' }}>
                 {period_time && <View className='mt-1'>{period_time}</View>}
-                {validity_period && <View className='mt-1'>{LOCALE_RENT_DATE + LOCALE_COLON}{validity_period === -1 ? LOCALE_UNLIMITED : validity_period + LOCALE_MONTH}</View>}
+                {condition_period && <View className='mt-1'>{LOCALE_RENT_DATE + LOCALE_COLON}{condition_period === -1 ? LOCALE_UNLIMITED : condition_period + LOCALE_MONTH}</View>}
                 {use_type === 1 && <View className='mt-1'>{LOCALE_FIRST_MONTH_ONLY}</View>}
 
               </View>
