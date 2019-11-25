@@ -58,12 +58,16 @@ class ServicesHome extends Component {
     Taro.showTabBarRedDot({ index: 2 })
     const { payload } = this.state
 
-    // 每次进入页面，刷新列表，回到顶部
+    // 每次进入页面，刷新列表，如果citycode和缓存里的city_id不一致，回到顶部
     const city_id = Taro.getStorageSync('user_info').citycode
-    const payloadNow = { ...payload, city_id }
-    this.ServiceList.onReset(payloadNow)
-    this.setState({ payload: payloadNow })
-    Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
+    if(payload.city_id !== city_id){
+      const payloadNow = { ...payload, city_id }
+      this.ServiceList.onReset(payloadNow)
+      this.setState({ payload: payloadNow })
+      Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
+    }else{
+      this.ServiceList.onReset(payload)
+    }
   }
 
   onShow() {
