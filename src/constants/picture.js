@@ -61,3 +61,7 @@ export const RECOMMED = 'https://images.gongyuabc.com/image/recommed.png'
 
 // 转租
 export const SUBLET_FINISH_NEW = 'https://images.gongyuabc.com/image/sublease/subletFinishNew.png'
+
+
+// 砍价
+export const BARGAIN_MORE_HOUSE= 'https://images.gongyuabc.com/image/more_house.png'

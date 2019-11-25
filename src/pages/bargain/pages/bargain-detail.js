@@ -22,14 +22,19 @@ import {
   LOCALE_BARGAIN_HELP_HAVEN,
   LOCALE_BARGAIN_VIEW_MINE
 } from '@constants/locale'
+import { BARGAIN_MORE_HOUSE } from '@constants/picture'
 
 // 自定义组件
+import Curtain from '@components/curtain'
 import BargainContainer from '../components/bargain-container'
 import BargainTab from '../components/bargain-tab'
 import BargainDetailMainBlock from '../components/bargain-detail-main-block'
 import BargainDetailSecBlock from '../components/bargain-detail-sec-block'
+import BargainDetailThirdBlock from '../components/bargain-detail-third-block'
 import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
+
+import '../../../styles/_bargain.scss'
 
 
 @connect(state => state, {
@@ -65,8 +70,6 @@ export default class BargainDetail extends Component {
     this.props.dispatchBargainDetail({ id: parseInt(id), share_id }).then(({ data: { data } }) => {
       const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num, price, price_list, is_cut, is_record,
         reward_id, save_money, tenancy, type, type_id, begin_time, no, close_time, user_bargain, share_title, share_image } = data
-
-      console.log(is_cut, is_record)
 
       // 计算活动剩余时间
       let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
@@ -275,15 +278,21 @@ export default class BargainDetail extends Component {
 
   render() {
     const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail, Buttontype } = this.state
+    const imageStyle = {
+      width: Taro.pxTransform(78 * 2),
+      height: Taro.pxTransform(78 * 2),
+
+    }
+
     return (
       <View className='bargain wrap-Style'>
         {/* 帮砍好友 */}
         <BargainHelpFriendsMask user_bargain={user_bargain} show={showHelpFriends} onClose={this.onCloseHelpFriendsMask} />
         {/* 背景图 */}
         <BargainContainer />
-        <View className='bargain-background'>
+        <View className='bargain-background' >
 
-          <View className='bargain-body-wrap '>
+          <View className='bargain-body-wrap ' style={{ paddingBottom: Taro.pxTransform(75 * 2) }}>
             {/* 第一个板块 */}
             <BargainDetailMainBlock
               bargainDetail={bargainDetail}
@@ -292,6 +301,8 @@ export default class BargainDetail extends Component {
             {user_bargain && <BargainDetailBargainingBlock user_bargain={user_bargain} onOpenHelpFriendsMask={this.onOpenHelpFriendsMask} />}
             {/* 第二个板块 */}
             <BargainDetailSecBlock bargainDetail={bargainDetail} />
+            {/* 第三个板块 */}
+            <BargainDetailThirdBlock />
           </View>
           {/* 底部tab栏 */}
           <BargainTab
@@ -302,6 +313,9 @@ export default class BargainDetail extends Component {
             buttons={buttons}
             bargainSuccess={bargainSuccess}
           />
+
+          {/* 更多好房 flex */}
+          <Image src={BARGAIN_MORE_HOUSE} className='bargain-detail-float-icon' style={imageStyle} mode='widthFix' lazyLoad />
 
         </View>
 

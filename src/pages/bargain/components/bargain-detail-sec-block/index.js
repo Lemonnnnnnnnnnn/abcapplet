@@ -31,22 +31,22 @@ export default class BargainDetailSecBlock extends BaseComponent {
     const { navList, current } = this.state
     const { bargainDetail, bargainDetail: { content } } = this.props
 
-    return (
-      <View style={{ paddingBottom: Taro.pxTransform(75 * 2) }}>
-        <Board className='mt-2 ml-3 mr-3' >
-          {/* 板块内边距 */}
-          <View>
-            {/* 导航栏 */}
-            <View className='at-row at-row__justify--around pt-3'>
-              {navList.map(i => <View onClick={this.onChangeBlock.bind(this, i.id)} className={i.active ? 'text-large text-bold user-coupon-nav-active' : 'text-normal text-secondary'} key={i}>{i.title}</View>)}
-            </View>
 
-            {/* 可切换的板块 */}
-            {current === 1 && <View className='text-indent text-large p-3 my-2'>{content}</View>}
-            {current === 2 && <BargainLeaderboard bargainDetail={bargainDetail} />}
+
+    return (
+      <Board className='mt-2 ml-3 mr-3' >
+        {/* 板块内边距 */}
+        <View>
+          {/* 导航栏 */}
+          <View className='at-row at-row__justify--around pt-3'>
+            {navList.map(i => <View onClick={this.onChangeBlock.bind(this, i.id)} className={i.active ? 'text-large text-bold user-coupon-nav-active' : 'text-normal text-secondary'} key={i}>{i.title}</View>)}
           </View>
-        </Board>
-      </View>
+
+          {/* 可切换的板块 */}
+          {current === 1 && <View className='text-indent text-large p-3 my-2'>{content}</View>}
+          {current === 2 && <BargainLeaderboard bargainDetail={bargainDetail} />}
+        </View>
+      </Board>
     );
   }
 }

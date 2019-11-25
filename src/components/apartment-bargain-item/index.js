@@ -36,7 +36,7 @@ export default class ApartmentBargainItem extends BaseComponent {
   }
 
   render() {
-    const { imageHeight, imageWidth, item, block } = this.props
+    const { item, block } = this.props
     const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id } = item
     return (
       <View className='pb-3' style={{ overflow: 'hidden' }} onClick={this.onNavigation.bind(this, { id, bargain_id, block })}>
@@ -47,7 +47,7 @@ export default class ApartmentBargainItem extends BaseComponent {
               {/* 水平垂直居中 */}
               <View className='vertical-level-center '>
                 <View className='bargain-list-image' >
-                  <Image lazyLoad className='inherit-Width inherit-Height' mode='scaleToFill' src={`${cover}`}></Image>
+                  <Image lazyLoad className='inherit-Width inherit-Height' mode='scaleToFill' src={cover}></Image>
                   <View className='bargain-list-image-mask text-center text-small'>{participate_num}</View>
                 </View>
               </View>
