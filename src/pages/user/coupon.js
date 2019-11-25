@@ -103,15 +103,7 @@ class UserFavorite extends Component {
 
   render() {
     const { code, navList, current ,couponList } = this.state
-    const { userCouponList: { list } } = this.props
     const city_id = parseInt(Taro.getStorageSync('cityDefault'))
-
-    // let couponList = []
-
-    // list && list.length && list.map(i => couponList.push({
-    //   status: i.status,
-    //   list: { ...i.coupon, period_time: i.period_time },
-    // }))
 
     return (
       <View >
