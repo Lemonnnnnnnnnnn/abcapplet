@@ -332,7 +332,7 @@ class CommonHome extends BaseComponent {
   onChangeSelector({ currentTarget: { value } }) {
 
     const { citys } = this.props
-    const { selector } = this.state
+    const { selector, payloadApartment } = this.state
     const selectorChecked = selector[value]
     const newCity = citys.filter(i => i.title === selectorChecked)[0]
 
@@ -341,7 +341,7 @@ class CommonHome extends BaseComponent {
 
     this.setState({ selectorChecked: { sort: newCity.sort, title: newCity.title } })
     this.onSelectCity(newCity.id)
-    this.onRefreshPage()
+    this.apartmentList.onReset({ ...payloadApartment, city: newCity.id })
   }
 
   onSearchTrue() {
@@ -440,6 +440,8 @@ class CommonHome extends BaseComponent {
 
     const { banner: banners, hot_activity: activities, hot_cbd: cbds, recommend: recommends } = home
 
+    const isXiamen = Taro.getStorageSync('user_info').citycode === 350200
+
     return (
       <View
         className='page-white'
@@ -498,22 +500,24 @@ class CommonHome extends BaseComponent {
           </View>
 
           {/* 热门租房商圈 */}
-          {cbds.length &&
-            <View >
-              <Header
-                className='mb-2'
-                title={LOCALE_HOT_CBD}
-              />
-              <Carousel
-                type='cbd'
-                imageHeight='176'
-                imageWidth='312'
-                carousel={cbds}
-                hasContent={false}
-                haveText={false}
-              />
-            </View>
-          }
+          <View style={{ minHeight: isXiamen ? Taro.pxTransform(176) : 0 }}>
+            {cbds.length &&
+              <View >
+                <Header
+                  className='mb-2'
+                  title={LOCALE_HOT_CBD}
+                />
+                <Carousel
+                  type='cbd'
+                  imageHeight='176'
+                  imageWidth='312'
+                  carousel={cbds}
+                  hasContent={false}
+                  haveText={false}
+                />
+              </View>
+            }
+          </View>
 
           {/* 广告 */}
           {ads.length &&
@@ -529,40 +533,44 @@ class CommonHome extends BaseComponent {
           }
 
           {/* 推荐品牌公寓 */}
-          {recommends.length &&
-            <View>
-              <Header
-                className='mt-4 mb-2'
-                title={LOCALE_RECOMMEND_APARTMENT}
-              />
-              <Carousel
-                type='normal'
-                imageHeight='275'
-                imageWidth='642'
-                carousel={recommends}
-                hasContent={false}
-              />
-            </View>
-          }
+          <View style={{ minHeight: isXiamen ? Taro.pxTransform(275) : 0 }}>
+            {recommends.length &&
+              <View>
+                <Header
+                  className='mt-4 mb-2'
+                  title={LOCALE_RECOMMEND_APARTMENT}
+                />
+                <Carousel
+                  type='normal'
+                  imageHeight='275'
+                  imageWidth='642'
+                  carousel={recommends}
+                  hasContent={false}
+                />
+              </View>
+            }
+          </View>
 
           {/* 活动专区 */}
-          {activities.length &&
-            <View>
-              <Header
-                className='mt-4 mb-2'
-                title={LOCALE_ACTIVITY}
-                hasExtra={false}
-              />
-              <Carousel
-                type='normal'
-                imageHeight='240'
-                imageWidth='414'
-                carousel={activities}
-                hasContent={false}
-                haveText={false}
-              />
-            </View>
-          }
+          <View style={{ minHeight: isXiamen ? Taro.pxTransform(240) : 0 }}>
+            {activities.length &&
+              <View>
+                <Header
+                  className='mt-4 mb-2'
+                  title={LOCALE_ACTIVITY}
+                  hasExtra={false}
+                />
+                <Carousel
+                  type='normal'
+                  imageHeight='240'
+                  imageWidth='414'
+                  carousel={activities}
+                  hasContent={false}
+                  haveText={false}
+                />
+              </View>
+            }
+          </View>
 
           {/* 优选入口 */}
           <View className='mx-1' style={{ minHeight: Taro.pxTransform(180) }} onClick={this.openMiniProgramCreate}>

@@ -66,8 +66,6 @@ export default class BargainDetail extends Component {
       const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num, price, price_list, is_cut, is_record,
         reward_id, save_money, tenancy, type, type_id, begin_time, no, close_time, user_bargain, share_title, share_image } = data
 
-      console.log(is_cut, is_record)
-
       // 计算活动剩余时间
       let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
       if (close_time) {

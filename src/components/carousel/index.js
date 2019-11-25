@@ -59,10 +59,6 @@ class Carousel extends Component {
 
     return Taro.navigateTo({ url: newUrl })
   }
-  // 如果下拉刷新时swiper的current属性没有重置，会出现报错/图片空白的问题
-  componentWillUnmount() {
-    console.log(this.swiper)
-  }
 
   render() {
     const {
