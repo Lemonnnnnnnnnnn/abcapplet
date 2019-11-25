@@ -269,6 +269,8 @@ class CommonHome extends BaseComponent {
     // 当城市 id 不存在的时候不读取数据
     if (citycode === 0 || !citycode) return;
 
+    Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
+
     // 城市
     await this.props.dispatchUserCity(citycode) && overloadData.push(1)
 

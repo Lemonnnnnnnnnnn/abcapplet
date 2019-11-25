@@ -33,6 +33,8 @@ class Carousel extends Component {
     payload: PAYLOAD_HOME_INDEXDATAPOAT
   }
 
+  refSwiper = node => this.swiper = node
+
   onNavigation({ url, title, id }) {
     const { type } = this.props
     const { payload } = this.state
@@ -56,6 +58,10 @@ class Carousel extends Component {
 
 
     return Taro.navigateTo({ url: newUrl })
+  }
+  // 如果下拉刷新时swiper的current属性没有重置，会出现报错/图片空白的问题
+  componentWillUnmount() {
+    console.log(this.swiper)
   }
 
   render() {
@@ -85,6 +91,8 @@ class Carousel extends Component {
     // 轮播图
     const bannerCarousel = type === 'banner' &&
       <Swiper
+        current={0}
+        ref={this.refSwiper}
         className='mr-3'
         autoplay
         circular
@@ -95,11 +103,12 @@ class Carousel extends Component {
         displayMultipleItems={displayMultipleItems}
       >
         {carousel.map(item =>
-          <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
+          <SwiperItem key={item.id} onClick={this.onNavigation.bind(this, item)}>
             <View style={{ height: Taro.pxTransform(380), overflow: 'hidden', position: 'relative' }}>
               <Image
                 lazyLoad
-                src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                // src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                src={item.cover}
                 mode='withfix'
                 className='carousel-image vertical-level-center carousel-banner'
               />
