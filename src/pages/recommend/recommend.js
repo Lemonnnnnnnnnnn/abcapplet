@@ -29,14 +29,39 @@ class ApartmentRecommend extends Component {
     enablePullDownRefresh: true,
   }
 
-  refSubletList = (node) => this.SubletList = node
-
   state = {
     isInput: 1,
     payload: PAYLOAD_SUB_LIST,
-    count: false,
+    // count: false,
     inputValue: '',
     showCancel: false,
+  }
+
+  refSubletList = (node) => this.SubletList = node
+
+  componentWillMount() {
+    buryPoint()
+    const { payload } = this.state
+
+    const city_id = Taro.getStorageSync('user_info').citycode
+    this.setState({ payload: { ...payload, city_id } })
+    // 获取用户数据 和 刷新页面数据
+    // const { count } = this.state
+    // count && this.SubletList.onReset(null)
+    // this.setState({ count: true })
+  }
+
+  componentDidShow() {
+    const { payload } = this.state
+    Taro.hideTabBarRedDot({ index: 2 })
+
+    // 每次进入页面，根据如果payload里的city_id和缓存里的citycode不一致，刷新列表
+    const city_id = Taro.getStorageSync('user_info').citycode
+    if (payload.city_id !== city_id) {
+      const payloadNow = { ...payload, city_id }
+      this.SubletList.onReset(payloadNow)
+      this.setState({ payload: payloadNow })
+    }
   }
 
   async  onPullDownRefresh() {
@@ -77,17 +102,7 @@ class ApartmentRecommend extends Component {
 
     }).catch(e => console.log(e))
   }
-  componentWillMount() {
-    buryPoint()
-    // 获取用户数据 和 刷新页面数据
-    const { count } = this.state
-    count && this.SubletList.onReset(null)
-    this.setState({ count: true })
-  }
 
-  componentDidShow() {
-    Taro.hideTabBarRedDot({ index: 2 })
-  }
 
   //用户输入
   onInputValue({ currentTarget: { value } }) {

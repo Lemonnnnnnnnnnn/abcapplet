@@ -42,16 +42,28 @@ class ServicesHome extends Component {
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
-    flag: false,
   }
 
   refserviceList = (node) => this.ServiceList = node
 
-  componentDidShow() {
+  componentWillMount() {
     buryPoint()
+    const { payload } = this.state
+
+    const city_id = Taro.getStorageSync('user_info').citycode
+    this.setState({ payload: { ...payload, city_id } })
+  }
+
+  componentDidShow() {
     Taro.showTabBarRedDot({ index: 2 })
-    const { flag } = this.state
-    flag && this.onSetReset()
+    const { payload } = this.state
+
+    // 每次进入页面，刷新列表，回到顶部
+    const city_id = Taro.getStorageSync('user_info').citycode
+    const payloadNow = { ...payload, city_id }
+    this.ServiceList.onReset(payloadNow)
+    this.setState({ payload: payloadNow })
+    Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
   }
 
   onShow() {
@@ -75,10 +87,6 @@ class ServicesHome extends Component {
   onSetReset() {
     this.ServiceList.onReset(null)
     Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
-  }
-
-  componentDidHide() {
-    this.setState({ flag: true })
   }
 
   /**
@@ -109,8 +117,6 @@ class ServicesHome extends Component {
   render() {
     const { appointments } = this.props
     const { payload } = this.state
-
-
 
     return (
       <View className='page-white'>
