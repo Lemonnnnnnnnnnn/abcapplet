@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
+import { AtCurtain } from 'taro-ui'
 
 // redux相关
 import { connect } from '@tarojs/redux'
@@ -26,6 +27,7 @@ import { BARGAIN_MORE_HOUSE } from '@constants/picture'
 
 // 自定义组件
 import Curtain from '@components/curtain'
+import Board from '@components/board'
 import BargainContainer from '../components/bargain-container'
 import BargainTab from '../components/bargain-tab'
 import BargainDetailMainBlock from '../components/bargain-detail-main-block'
@@ -49,7 +51,9 @@ export default class BargainDetail extends Component {
   state = {
     showHelpFriends: false,
     bargainDetail: {},
-    buttons: []
+    buttons: [],
+    showPicCurtain: false,
+    showBargainCurtain: false
   }
 
   componentDidShow() {
@@ -275,19 +279,43 @@ export default class BargainDetail extends Component {
     this.setState({ showHelpFriends: false })
   }
 
+  // 关闭幕帘
+  onCloseCurtain() {
+    this.setState({ showPicCurtain: false })
+    this.setState({ showBargainCurtain: false })
+  }
+
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail, Buttontype } = this.state
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail, Buttontype, showBargainCurtain, showPicCurtain } = this.state
     const imageStyle = {
       width: Taro.pxTransform(78 * 2),
       height: Taro.pxTransform(78 * 2),
-
     }
 
     return (
       <View className='bargain wrap-Style'>
         {/* 帮砍好友 */}
         <BargainHelpFriendsMask user_bargain={user_bargain} show={showHelpFriends} onClose={this.onCloseHelpFriendsMask} />
+        {/* 图片弹窗 */}
+        <Curtain
+          whiteBg
+          swiperHeight={300 * 2}
+          onClose={this.onCloseCurtain}
+          isOpened={showPicCurtain}
+        />
+
+        {/* 帮砍成功弹窗 */}
+        {showBargainCurtain &&
+          <AtCurtain isOpened onClose={this.onCloseCurtain}>
+            <Board >
+              <View className='p-3 at-row'>
+                <Text className='text-bold text-huge'>已帮砍</Text>
+                <Text className='text-orange text-super'>50元</Text>
+              </View>
+            </Board>
+          </AtCurtain>}
+
         {/* 背景图 */}
         <BargainContainer />
         <View className='bargain-background' >

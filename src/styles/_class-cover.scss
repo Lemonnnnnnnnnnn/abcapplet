@@ -5,3 +5,10 @@
     height: $hd * 80px;
   }
 }
+
+.curtain-white{
+  .at-curtain__body{
+    background: #fff;
+    border-radius: $border-radius-small;
+  }
+}

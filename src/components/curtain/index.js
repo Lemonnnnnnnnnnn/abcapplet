@@ -12,6 +12,7 @@ import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 export default class Curtain extends BaseComponent {
   static defaultProps = {
     swiperHeight: 800,
+    whiteBg : false
   }
 
   onNavigation(url) {
@@ -32,34 +33,36 @@ export default class Curtain extends BaseComponent {
   }
 
   render() {
-    const { isOpened, adList, swiperHeight } = this.props
+    const { isOpened, adList, swiperHeight , whiteBg } = this.props
 
-    // 轮播高度
+    // 轮播宽度
     const swiperStyle = { height: `${Taro.pxTransform(swiperHeight)}`, width: '80%', marginLeft: '10%' }
     const imageStyle = { width: '100%' }
 
     return (isOpened &&
-      <AtCurtain isOpened onClose={this.props.onClose}>
-        <Swiper
-          autoplay
-          circular
-          indicatorDots
-          indicatorActiveColor={COLOR_YELLOW}
-          indicatorColor={COLOR_DOATS_CAROUSEL}
-          style={swiperStyle}
-        >
-          {
-            adList.map(i =>
-              <SwiperItem key={i.id} onClick={this.onNavigation.bind(this, i.url)}>
-                <View className='curtain-wrap'>
-                  <Image lazyLoad src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
-                </View>
-              </SwiperItem>
-            )
-          }
+      <View className={whiteBg && 'curtain-white'}>
+        <AtCurtain isOpened onClose={this.props.onClose}>
+          <Swiper
+            autoplay
+            circular
+            indicatorDots
+            indicatorActiveColor={COLOR_YELLOW}
+            indicatorColor={COLOR_DOATS_CAROUSEL}
+            style={swiperStyle}
+          >
+            {
+              adList.map(i =>
+                <SwiperItem key={i.id} onClick={this.onNavigation.bind(this, i.url)}>
+                  <View className='curtain-wrap'>
+                    <Image lazyLoad src={i.cover} mode='widthFix' style={imageStyle} className='vertical-level-center' />
+                  </View>
+                </SwiperItem>
+              )
+            }
 
-        </Swiper>
-      </AtCurtain>
-    );
+          </Swiper>
+        </AtCurtain>
+      </View>
+    )
   }
 }
