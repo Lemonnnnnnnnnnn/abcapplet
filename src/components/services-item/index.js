@@ -175,6 +175,7 @@ class ServiceItem extends BaseComponent {
             <ServiceItemShow
               status={service.appointment_status}
               item={service}
+              is_sign={service.is_sign}
               step={service.status}
               onContact={this.onContact}
               onDisLike={this.onDisLike}

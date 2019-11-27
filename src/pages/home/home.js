@@ -100,12 +100,13 @@ class CommonHome extends BaseComponent {
       scrollNow: false,
       showSearch: true,
       showSelect: true,
+      canMove: false,
 
       // 城市相关
       selector: [LOCALE_XIAMEN],
     }
   }
-  refApartmentList = (node) => this.apartmentList = node
+  refApartmentList = node => this.apartmentList = node
 
   async onPullDownRefresh() {
     this.apartmentList.onReset(null)
@@ -117,11 +118,15 @@ class CommonHome extends BaseComponent {
     const { page, id } = this.$router.params
     page && id && Taro.navigateTo({ url: `${page}?id=${id}` })
 
+    // 获取从后台获取的全平台获得退租险人数
+    this.props.dispatchRiskPost()
+
     const { payloadApartment } = this.state
     this.setState({ payloadApartment: { ...payloadApartment, city: Taro.getStorageSync('user_info').citycode } })
   }
 
   async componentDidMount() {
+
     // 获取用户数据 和 刷新页面数据
     const { payload: user } = await this.props.dispatchUser()
     user && this.onSelectCity(user.citycode)
@@ -264,6 +269,8 @@ class CommonHome extends BaseComponent {
     // 当城市 id 不存在的时候不读取数据
     if (citycode === 0 || !citycode) return;
 
+    Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
+
     // 城市
     await this.props.dispatchUserCity(citycode) && overloadData.push(1)
 
@@ -282,17 +289,18 @@ class CommonHome extends BaseComponent {
     this.setState({ adList: data })
     Taro.getStorageSync('user_info').token && data.length && this.setState({ showCurtain: true })
 
-    // 获取从后台获取的全平台获得退租险人数
-    this.props.dispatchRiskPost()
-
     //判断是否弹出需求卡
-    this.props.dispatchGetUserMsg().then(res => {
-      res && !res.data.data.user.is_guide && this.setState({ showCard: true })
-    })
+    this.props.dispatchGetUserMsg().then(res => { res && !res.data.data.user.is_guide && this.setState({ showCard: true }) })
 
     title && sort && this.setState({ selectorChecked: { ...selectorChecked, title, sort } })
 
     overloadDist.length === 1 && this.initialHouseType()
+    // 当数据全部加载完成后读取筛选框的位置
+    overloadData.length === 3 && Taro.createSelectorQuery()
+      .in(this.$scope)
+      .select('.home-select')
+      .boundingClientRect()
+      .exec(res => this.setState({ selectScrollTop: res[0].top, canMove: true }))
   }
 
   // 初始化户型的数据，供筛选项使用
@@ -324,7 +332,7 @@ class CommonHome extends BaseComponent {
   onChangeSelector({ currentTarget: { value } }) {
 
     const { citys } = this.props
-    const { selector } = this.state
+    const { selector, payloadApartment } = this.state
     const selectorChecked = selector[value]
     const newCity = citys.filter(i => i.title === selectorChecked)[0]
 
@@ -333,7 +341,7 @@ class CommonHome extends BaseComponent {
 
     this.setState({ selectorChecked: { sort: newCity.sort, title: newCity.title } })
     this.onSelectCity(newCity.id)
-    this.onRefreshPage()
+    this.apartmentList.onReset({ ...payloadApartment, city: newCity.id })
   }
 
   onSearchTrue() {
@@ -406,6 +414,11 @@ class CommonHome extends BaseComponent {
       appId: 'wxd3537ccb429de3b4', // 要跳转的小程序的appid
     }).catch(e => console.log(e))
   }
+
+  onMaskTouchMove(e) {
+    return e.stopPropagation()
+  }
+
   render() {
     const {
       showSelect, showSearch, floorList, roomList,
@@ -418,6 +431,7 @@ class CommonHome extends BaseComponent {
 
       showCard,
       showCurtain,
+      canMove,
 
       adList
     } = this.state
@@ -426,11 +440,36 @@ class CommonHome extends BaseComponent {
 
     const { banner: banners, hot_activity: activities, hot_cbd: cbds, recommend: recommends } = home
 
+    const isXiamen = Taro.getStorageSync('user_info').citycode === 350200
+
     return (
       <View
         className='page-white'
         style={{ overflow: "hidden", minHeight: '300vh' }}
       >
+        {/* 栏目未加载完成时的遮盖层 */}
+        {!canMove && <View className='page-mask-opacity' onTouchMove={this.onMaskTouchMove}></View>}
+
+        {/* 城市模态框 */}
+        <CityModal
+          city={citys}
+          citycode={user.citycode}
+          onSelectCity={this.onSelectCity}
+        />
+
+        {/* 需求卡 */}
+        <RequirementCard
+          show={showCard}
+          onCloseCard={this.onCloseCard}
+          dists={dists}
+
+          initialFloor={floorList}
+          initialRoom={roomList}
+        />
+
+        {/* 广告幕帘 */}
+        {adList.length && <Curtain adList={adList} onClose={this.onCloseCurtain} isOpened={showCurtain} />}
+
         <View>
           {/* 搜索框 & 城市选择器 */}
           <View className='home-search pl-3 pr-3'>
@@ -461,7 +500,7 @@ class CommonHome extends BaseComponent {
           </View>
 
           {/* 热门租房商圈 */}
-          <View style={{ minHeight: Taro.pxTransform(176) }}>
+          <View style={{ minHeight: isXiamen ? Taro.pxTransform(176) : 0 }}>
             {cbds.length &&
               <View >
                 <Header
@@ -481,22 +520,20 @@ class CommonHome extends BaseComponent {
           </View>
 
           {/* 广告 */}
-          <View>
-            {ads.length &&
-              <Carousel
-                className='mt-2'
-                type='normal'
-                imageHeight='126'
-                imageWidth='686'
-                carousel={ads}
-                hasContent={false}
-                haveText={false}
-              />
-            }
-          </View>
+          {ads.length &&
+            <Carousel
+              className='mt-2'
+              type='normal'
+              imageHeight='126'
+              imageWidth='686'
+              carousel={ads}
+              hasContent={false}
+              haveText={false}
+            />
+          }
 
           {/* 推荐品牌公寓 */}
-          <View style={{ minHeight: Taro.pxTransform(275) }}>
+          <View style={{ minHeight: isXiamen ? Taro.pxTransform(275) : 0 }}>
             {recommends.length &&
               <View>
                 <Header
@@ -515,7 +552,7 @@ class CommonHome extends BaseComponent {
           </View>
 
           {/* 活动专区 */}
-          <View style={{ minHeight: Taro.pxTransform(240) }}>
+          <View style={{ minHeight: isXiamen ? Taro.pxTransform(240) : 0 }}>
             {activities.length &&
               <View>
                 <Header
@@ -583,26 +620,7 @@ class CommonHome extends BaseComponent {
             </View>
           </View>
 
-          {/* 城市模态框 */}
-          <CityModal
-            city={citys}
-            citycode={user.citycode}
-            onSelectCity={this.onSelectCity}
-          />
         </View>
-
-        {/* 需求卡 */}
-
-        <RequirementCard
-          show={showCard}
-          onCloseCard={this.onCloseCard}
-          dists={dists}
-
-          initialFloor={floorList}
-          initialRoom={roomList}
-        />
-
-        {adList.length && <Curtain adList={adList} onClose={this.onCloseCurtain} isOpened={showCurtain} />}
       </View>
     )
   }

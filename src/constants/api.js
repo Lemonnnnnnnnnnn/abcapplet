@@ -164,7 +164,7 @@ export const API_ORDER_PAYMENT = `${HOST}/payment/payOrderPost`
  */
 //获取看房行程信息
 export const API_APPOINTMENT_LIST = `${HOST}/appointment/listPost`
-export const PAYLOAD_APPOINTMENT_LIST = { current_page: 1, page_size: PAGE_SIZE }
+export const PAYLOAD_APPOINTMENT_LIST = { current_page: 1, page_size: PAGE_SIZE, city_id: 350200 }
 
 //添加评价
 export const API_REVULUTION_CREAT = `${HOST}/appointment/commentPost`

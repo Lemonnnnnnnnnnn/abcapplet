@@ -30,8 +30,10 @@ class Carousel extends Component {
     haveText: true
   }
   state = {
-    payload: PAYLOAD_HOME_INDEXDATAPOAT
+    payload: PAYLOAD_HOME_INDEXDATAPOAT,
   }
+
+  refSwiper = node => this.swiper = node
 
   onNavigation({ url, title, id }) {
     const { type } = this.props
@@ -58,6 +60,14 @@ class Carousel extends Component {
     return Taro.navigateTo({ url: newUrl })
   }
 
+  componentWillReceiveProps() {
+    this.setState({ current: 0 })
+  }
+
+  onChangeIndex({ detail: { current} }) {
+    this.setState({ current })
+  }
+
   render() {
     const {
       type,
@@ -70,6 +80,8 @@ class Carousel extends Component {
       displayMultipleItems,
       haveText,
     } = this.props
+
+    const { current } = this.state
 
     /**
      * 计算轮播高度
@@ -85,6 +97,8 @@ class Carousel extends Component {
     // 轮播图
     const bannerCarousel = type === 'banner' &&
       <Swiper
+        ref={this.refSwiper}
+        current={current}
         className='mr-3'
         autoplay
         circular
@@ -93,13 +107,15 @@ class Carousel extends Component {
         indicatorActiveColor={COLOR_YELLOW}
         indicatorColor={COLOR_DOATS_CAROUSEL}
         displayMultipleItems={displayMultipleItems}
+        onChange={this.onChangeIndex}
       >
         {carousel.map(item =>
-          <SwiperItem key={item.id} style={{}} onClick={this.onNavigation.bind(this, item)}>
+          <SwiperItem key={item.id} onClick={this.onNavigation.bind(this, item)}>
             <View style={{ height: Taro.pxTransform(380), overflow: 'hidden', position: 'relative' }}>
               <Image
                 lazyLoad
-                src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                // src={`${item.cover}?imageView2/1/w/${imageWidth}/h/${imageHeight}`}
+                src={item.cover}
                 mode='withfix'
                 className='carousel-image vertical-level-center carousel-banner'
               />

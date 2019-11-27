@@ -42,16 +42,32 @@ class ServicesHome extends Component {
   }
   state = {
     payload: PAYLOAD_APPOINTMENT_LIST,
-    flag: false,
   }
 
   refserviceList = (node) => this.ServiceList = node
 
-  componentDidShow() {
+  componentWillMount() {
     buryPoint()
+    const { payload } = this.state
+
+    const city_id = Taro.getStorageSync('user_info').citycode
+    this.setState({ payload: { ...payload, city_id } })
+  }
+
+  componentDidShow() {
     Taro.showTabBarRedDot({ index: 2 })
-    const { flag } = this.state
-    flag && this.onSetReset()
+    const { payload } = this.state
+
+    // 每次进入页面，刷新列表，如果citycode和缓存里的city_id不一致，回到顶部
+    const city_id = Taro.getStorageSync('user_info').citycode
+    if(payload.city_id !== city_id){
+      const payloadNow = { ...payload, city_id }
+      this.ServiceList && this.ServiceList.onReset(payloadNow)
+      this.setState({ payload: payloadNow })
+      Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
+    }else{
+      this.ServiceList && this.ServiceList.onReset(payload)
+    }
   }
 
   onShow() {
@@ -77,10 +93,6 @@ class ServicesHome extends Component {
     Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
   }
 
-  componentDidHide() {
-    this.setState({ flag: true })
-  }
-
   /**
    * 到底部加载行程下一页
    */
@@ -104,13 +116,9 @@ class ServicesHome extends Component {
     Taro.navigateTo({ url: PAGE_RISK_LANDING })
   }
 
-
-
   render() {
     const { appointments } = this.props
     const { payload } = this.state
-
-
 
     return (
       <View className='page-white'>
