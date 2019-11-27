@@ -65,3 +65,4 @@ export const SUBLET_FINISH_NEW = 'https://images.gongyuabc.com/image/sublease/su
 
 // 砍价
 export const BARGAIN_MORE_HOUSE= 'https://images.gongyuabc.com/image/more_house.png'
+export const BARGAIN_CALL = 'https://images.gongyuabc.com/image/bargain-call.png'

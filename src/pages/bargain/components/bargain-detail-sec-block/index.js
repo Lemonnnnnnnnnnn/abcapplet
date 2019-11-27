@@ -1,12 +1,13 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text, Button, Image } from '@tarojs/components';
-// 自定义组件
-import Board from '@components/board'
-import BaseComponent from '@components/base'
+import { View } from '@tarojs/components';
 
 import { BARGAIN_NAV_DIST } from '@constants/bargain'
 
+// 自定义组件
+import Board from '@components/board'
+import BaseComponent from '@components/base'
 import BargainLeaderboard from '../bargain-leaderboard'
+import BargainActivityDescription from '../bargain-activity-description'
 
 export default class BargainDetailSecBlock extends BaseComponent {
   state = {
@@ -31,8 +32,6 @@ export default class BargainDetailSecBlock extends BaseComponent {
     const { navList, current } = this.state
     const { bargainDetail, bargainDetail: { content } } = this.props
 
-
-
     return (
       <Board className='mt-2 ml-3 mr-3' >
         {/* 板块内边距 */}
@@ -43,7 +42,7 @@ export default class BargainDetailSecBlock extends BaseComponent {
           </View>
 
           {/* 可切换的板块 */}
-          {current === 1 && <View className='text-indent text-large p-3 my-2'>{content}</View>}
+          {current === 1 && <BargainActivityDescription content={content} />}
           {current === 2 && <BargainLeaderboard bargainDetail={bargainDetail} />}
         </View>
       </Board>

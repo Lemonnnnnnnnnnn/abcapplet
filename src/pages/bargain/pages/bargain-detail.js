@@ -12,10 +12,8 @@ import { timestampChange } from '@utils/time-judge'
 import textWrap from '@utils/text-wrap'
 
 // 自定义常量
-import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL, PAGE_USER_AUTH } from '@constants/page'
+import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL, PAGE_USER_AUTH, PAGE_HOME } from '@constants/page'
 import {
-  LOCALE_BARGAIN_HELP_SUCCESS,
-  LOCALE_NONE,
   LOCALE_BARGAIN_SHARE,
   LOCALE_BARGAIN_HELP,
   LOCALE_BARGAIN_I_WANT,
@@ -27,7 +25,7 @@ import { BARGAIN_MORE_HOUSE } from '@constants/picture'
 
 // 自定义组件
 import Curtain from '@components/curtain'
-import Board from '@components/board'
+import GetAuthorizationMask from '@components/get-authorization-mask'
 import BargainContainer from '../components/bargain-container'
 import BargainTab from '../components/bargain-tab'
 import BargainDetailMainBlock from '../components/bargain-detail-main-block'
@@ -36,7 +34,7 @@ import BargainDetailThirdBlock from '../components/bargain-detail-third-block'
 import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
 
-import '../../../styles/_bargain.scss'
+import '../../../styles/_class-cover.scss'
 
 
 @connect(state => state, {
@@ -53,7 +51,8 @@ export default class BargainDetail extends Component {
     bargainDetail: {},
     buttons: [],
     showPicCurtain: false,
-    showBargainCurtain: false
+    showBargainCurtain: false,
+    showGetPhoneNumMask: false
   }
 
   componentDidShow() {
@@ -91,6 +90,8 @@ export default class BargainDetail extends Component {
       // Buttontype = 6  button : [我也要砍，已帮砍（灰），分享]        他人/已砍价/未发起
       // Buttontype = 7  button : [我的砍价，已帮砍（灰），分享]        他人/已砍价/已发起
       // Buttontype = 8  button : [我的砍价，帮砍，分享]        他人/未砍价/已发起
+
+      // 我也要砍增加手机号码授权
 
       let Buttontype = 0
 
@@ -221,14 +222,26 @@ export default class BargainDetail extends Component {
     })
   }
 
-  onBargain() {
-    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
-    const { bargainDetail: { id } } = this.state
-    this.props.dispatchBargainCut({ id }).then(res => {
-      res.data && res.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+  // 我也要砍
+  async onBargain() {
+    // 判断用户是否已有手机号缓存
+    await this.props.dispatchGetUserMsg().then(res => {
+      if (res) {
+        const mobile = res.data.data.user.mobile
+        if (mobile) {
+          !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+          const { bargainDetail: { id } } = this.state
+          this.props.dispatchBargainCut({ id }).then(res => {
+            res.data && res.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+          })
+        } else {
+          this.setState({ showGetPhoneNumMask: true })
+        }
+      }
     })
   }
 
+  // 查看自己的砍价
   onViewMineBargain() {
     const { bargainDetail: { id } } = this.state
     Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
@@ -236,12 +249,13 @@ export default class BargainDetail extends Component {
 
   onShare() { }
 
+  // 帮砍
   onHelpBargain() {
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
     const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
     this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
       if (res.data && res.data.code === 1) {
-        Taro.showToast({ title: LOCALE_BARGAIN_HELP_SUCCESS, icon: LOCALE_NONE })
+        this.setState({ showBargainCurtain: true })
         setTimeout(() => {
           Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + share_id })
         }, 2000)
@@ -249,6 +263,7 @@ export default class BargainDetail extends Component {
     })
   }
 
+  // 领取优惠券
   onReceiveCoupon() {
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
 
@@ -285,9 +300,29 @@ export default class BargainDetail extends Component {
     this.setState({ showBargainCurtain: false })
   }
 
+  // 获取手机号授权
+  async getPhoneNumber(e) {
+    let code = Taro.getStorageSync('code')
+
+    const { encryptedData: encrypt_data, iv } = e.currentTarget
+    const urlCode = encodeURIComponent(code)
+    const urlEncrypt_data = encodeURIComponent(encrypt_data)
+    const urlIv = encodeURIComponent(iv)
+
+    iv && encrypt_data && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(() => {
+      Taro.showToast({ title: '授权成功', icon: 'none' })
+      this.onClosePhoneMask()
+    })
+
+  }
+  // 关闭手机号授权弹窗
+  onClosePhoneMask() {
+    this.setState({ showGetPhoneNumMask: false })
+  }
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail, Buttontype, showBargainCurtain, showPicCurtain } = this.state
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail, Buttontype,
+      showBargainCurtain, showPicCurtain, showGetPhoneNumMask } = this.state
     const imageStyle = {
       width: Taro.pxTransform(78 * 2),
       height: Taro.pxTransform(78 * 2),
@@ -306,15 +341,25 @@ export default class BargainDetail extends Component {
         />
 
         {/* 帮砍成功弹窗 */}
-        {showBargainCurtain &&
+        {showBargainCurtain && <View className='curtain-white'>
           <AtCurtain isOpened onClose={this.onCloseCurtain}>
-            <Board >
-              <View className='p-3 at-row'>
-                <Text className='text-bold text-huge'>已帮砍</Text>
-                <Text className='text-orange text-super'>50元</Text>
-              </View>
-            </Board>
-          </AtCurtain>}
+            {/* <Board > */}
+            <View className='p-3 at-row at-row__align--center at-row__justify--center' style={{ width: 'auto' }}>
+              <Text className='text-bold text-huge'>已帮砍</Text>
+              <Text className='text-orange text-super'>50元</Text>
+            </View>
+            {/* </Board> */}
+          </AtCurtain>
+        </View>
+        }
+
+        {/* 手机号码授权 */}
+        <GetAuthorizationMask
+          type='getPhoneNumber'
+          onClose={this.onClosePhoneMask}
+          show={showGetPhoneNumMask}
+          onFillPhone={this.getPhoneNumber}
+        />
 
         {/* 背景图 */}
         <BargainContainer />
@@ -343,7 +388,13 @@ export default class BargainDetail extends Component {
           />
 
           {/* 更多好房 flex */}
-          <Image src={BARGAIN_MORE_HOUSE} className='bargain-detail-float-icon' style={imageStyle} mode='widthFix' lazyLoad />
+          <Image
+            src={BARGAIN_MORE_HOUSE}
+            className='bargain-detail-float-icon'
+            onClick={() => Taro.switchTab({ url: PAGE_HOME })}
+            style={imageStyle}
+            mode='widthFix'
+          />
 
         </View>
 
