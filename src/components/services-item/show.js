@@ -73,7 +73,8 @@ class ServiceItemShow extends BaseComponent {
     const { item } = this.props
 
     const { id, is_can_reward, reward_id } = item
-    if (!is_can_reward) {
+
+    if (is_can_reward) {
       Taro.navigateTo({
         url: `${PAGE_APPOINTMENT_AUDIT}?id=${reward_id}`
       })
@@ -94,7 +95,6 @@ class ServiceItemShow extends BaseComponent {
   //去签约
   onGoAgency() {
     const { item } = this.props
-
     Taro.navigateTo({
       url: `${PAGE_ORDER_SHOW}?id=${item.order_id}`
     })
