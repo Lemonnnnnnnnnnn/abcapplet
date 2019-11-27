@@ -23,7 +23,7 @@ import {
   LOCAL_APPOINTMENT_GET_CASHBACK,
   LOCALE_APPOINTMENT_EVALUTION,
   LOCALE_APPOINTMENT_HAVE_EVALUTION,
-  LOCAL_APPOINTMENT_GO_SIGN ,
+  LOCAL_APPOINTMENT_GO_SIGN,
   LOCAL_APPOINTMENT_DETAIL_REVIWE,
   LOCAL_APPOINTMENT_GO_PAY,
   LOCAL_APPOINTMENT_ORDER_DETAIL,
@@ -38,7 +38,7 @@ import {
   LOCAL_APPOINTMENT_HOUSEKEPPERFAIL,
   LOCAL_APPOINTMENT_AUDITFAIL,
 } from '@constants/locale'
-import { APPOINTMENT_COUPON ,APPOINT_ANGE } from '@constants/picture'
+import { APPOINTMENT_COUPON, APPOINT_ANGE } from '@constants/picture'
 
 // 自定义组件
 import BaseComponent from '@components/base'
@@ -140,7 +140,7 @@ class ServiceItemShow extends BaseComponent {
   // 7	不满意	预约 >>> 看房 >>> 不满意	服务评价(亮) 如果已评价显示查看评价	将为您提供更好的服务
   // ----------------------------
   render() {
-    const { status, step, item, comment } = this.props
+    const { status, step, item, comment, is_sign } = this.props
 
     const { showCustomer } = this.state
     return (<View className='mb-2' >
@@ -230,7 +230,9 @@ class ServiceItemShow extends BaseComponent {
       {status === 1 && <View className='at-row at-row__justify--around  mt-3 pb-3' >
         <View className='text-normal page-middile text-white service-buttonGrey' >{LOCAL_APPOINTMENT_CONTACT_HOUSEKEPPER}</View>
         <View className='text-normal page-middile service-buttonYellow' onClick={this.onOpenCustom}>{LOCAL_APPOINTMENT_CONTACT_CUSTOMER}</View>
-        <View className='text-normal page-middile service-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
+        {is_sign
+          ? <View className='text-normal page-middile service-buttonYellow' onClick={this.onSign}>{LOCAL_APPOINTMENT_LOOKROOM_AGENCY}</View>
+          : <View className='text-normal page-middile service-buttonYellow' onClick={this.onAgency}>{LOCAL_APPOINTMENT_OFFLINE_SIGNING}</View>}
       </View>}
 
       {status === 2 && <View className='at-row at-row__justify--around mt-3 pb-3'>
@@ -276,7 +278,7 @@ class ServiceItemShow extends BaseComponent {
 
       {status === 5 && <View className='at-row page-middile mt-3 pb-3'>
         {status === 5 && <View className='text-bold '>{LOCAL_APPOINTMENT_LOCKSUCCESSD}</View>}
-        <View className='text-normal page-middile service-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_SIGN }</View>
+        <View className='text-normal page-middile service-buttonYellowBo' onClick={this.onGoAgency}>{LOCAL_APPOINTMENT_GO_SIGN}</View>
       </View>}
 
       {status >= 6 && status <= 14 && <View className='at-row page-middile mt-3 pb-3'>

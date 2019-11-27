@@ -62,11 +62,11 @@ class ServicesHome extends Component {
     const city_id = Taro.getStorageSync('user_info').citycode
     if(payload.city_id !== city_id){
       const payloadNow = { ...payload, city_id }
-      this.ServiceList.onReset(payloadNow)
+      this.ServiceList && this.ServiceList.onReset(payloadNow)
       this.setState({ payload: payloadNow })
       Taro.pageScrollTo({ scrollTop: 0, duration: 0 })
     }else{
-      this.ServiceList.onReset(payload)
+      this.ServiceList && this.ServiceList.onReset(payload)
     }
   }
 
@@ -115,8 +115,6 @@ class ServicesHome extends Component {
   onNavigateToRisk() {
     Taro.navigateTo({ url: PAGE_RISK_LANDING })
   }
-
-
 
   render() {
     const { appointments } = this.props
