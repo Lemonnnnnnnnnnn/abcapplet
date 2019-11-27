@@ -74,7 +74,7 @@ class ServiceItemShow extends BaseComponent {
 
     const { id, is_can_reward, reward_id } = item
 
-    if (is_can_reward) {
+    if (!is_can_reward) {
       Taro.navigateTo({
         url: `${PAGE_APPOINTMENT_AUDIT}?id=${reward_id}`
       })
