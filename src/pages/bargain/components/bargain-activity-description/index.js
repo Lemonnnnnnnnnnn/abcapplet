@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
+import { View, Image, RichText } from '@tarojs/components';
 import { AtDivider, AtIcon, AtButton } from 'taro-ui'
 
 // 自定义常量
@@ -20,9 +20,12 @@ export default class BargainActivityDescription extends BaseComponent {
     }
     return (
       <View className='pt-3 bargain-activity-description'>
-        <View className='text-indent text-large' style={{ minHeight: Taro.pxTransform(200) }}>{content}</View>
+        {/* <View className='text-indent text-large' style={{ minHeight: Taro.pxTransform(200) }}>{content}</View> */}
+        <View className='px-3 pb-3'>
+          <RichText nodes={content} ></RichText>
+        </View>
 
-        <AtDivider height='10' />
+        <AtDivider height='10' lineColor='#F8F8F8' />
 
         <AtButton open-type='contact' >
           <View className='py-1 at-row at-row__align--center at-row__justify--center' >

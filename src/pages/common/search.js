@@ -28,7 +28,6 @@ import {
 } from '@constants/api'
 
 import buryPoint from '../../utils/bury-point'
-import '../../styles/_tag.scss'
 
 @connect(state => state, {
   ...cityActions,

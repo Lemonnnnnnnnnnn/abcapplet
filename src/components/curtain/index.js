@@ -12,12 +12,14 @@ import { COLOR_DOATS_CAROUSEL, COLOR_YELLOW } from '@constants/styles'
 export default class Curtain extends BaseComponent {
   static defaultProps = {
     swiperHeight: 800,
-    whiteBg : false
+    whiteBg: false
   }
 
   onNavigation(url) {
-    let newUrl = url
+    const { canNavigate } = this.props
+    if (!canNavigate) return
 
+    let newUrl = url
     if (url === '') return;
 
     // 判断是否为外链
@@ -33,7 +35,7 @@ export default class Curtain extends BaseComponent {
   }
 
   render() {
-    const { isOpened, adList, swiperHeight , whiteBg } = this.props
+    const { isOpened, adList, swiperHeight, whiteBg } = this.props
 
     // 轮播宽度
     const swiperStyle = { height: `${Taro.pxTransform(swiperHeight)}`, width: '80%', marginLeft: '10%' }

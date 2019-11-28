@@ -63,7 +63,7 @@ export default class ApartmentBargainItem extends BaseComponent {
 
               <View className='at-row at-row__align--center mt-1'>
                 {cbd.map(i =>
-                  <View key={i} className='at-col at-col-1 at-col--auto at-col--wrap  mr-2 tag--grey--1 bargain-tag text-small'>{i.title}</View>
+                  <View key={i} className='at-col at-col-1 at-col--auto mr-2 tag--grey--1 bargain-tag text-small '>{i.title}</View>
                 )}
               </View>
               <View className='at-row at-row__justify--between at-row__align--center mt-1'>

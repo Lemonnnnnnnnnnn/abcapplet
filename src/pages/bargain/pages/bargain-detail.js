@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 import { AtCurtain } from 'taro-ui'
+import dayjs from 'dayjs'
 
 // redux相关
 import { connect } from '@tarojs/redux'
@@ -34,8 +35,6 @@ import BargainDetailThirdBlock from '../components/bargain-detail-third-block'
 import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
 
-import '../../../styles/_class-cover.scss'
-
 
 @connect(state => state, {
   ...bargainActions,
@@ -52,11 +51,18 @@ export default class BargainDetail extends Component {
     buttons: [],
     showPicCurtain: false,
     showBargainCurtain: false,
-    showGetPhoneNumMask: false
+    showGetPhoneNumMask: false,
+    helpBargainMoney: 0
   }
 
   componentDidShow() {
     this.initState()
+  }
+
+  // 进入页面时候拿到code存入缓存，如果在点击按钮后再获取code会过期
+  async componentDidMount() {
+    const { code } = await Taro.login()
+    Taro.setStorageSync('code', code)
   }
 
 
@@ -72,13 +78,26 @@ export default class BargainDetail extends Component {
 
     this.props.dispatchBargainDetail({ id: parseInt(id), share_id }).then(({ data: { data } }) => {
       const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num, price, price_list, is_cut, is_record,
-        reward_id, save_money, tenancy, type, type_id, begin_time, no, close_time, user_bargain, share_title, share_image } = data
+        reward_id, save_money, tenancy, type, type_id, begin_time, no, close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num } = data
 
-      // 计算活动剩余时间
+      // 计算活动剩余时间/活动开始时间
       let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
-      if (close_time) {
-        close_time !== -1 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
-      } else activityOver = true
+      if (count_down) {
+        days = timestampChange(count_down).days
+        hours = timestampChange(count_down).hours
+        minutes = timestampChange(count_down).minutes
+        seconds = timestampChange(count_down).seconds
+      } else {
+        if (close_time < dayjs().unix()) {
+          // 如果结束时间小于当前时间，设置activityOver为true
+          activityOver = true
+        } else {
+          // 如果结束时间大于当前时间，且close_time不等于1
+          close_time !== -1 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
+        }
+      }
+
+      activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
 
       // 给buttons赋值
       // Buttontype = 1  button : [分享]          本人/已参加
@@ -142,10 +161,10 @@ export default class BargainDetail extends Component {
 
 
       switch (Buttontype) {
-        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare' }] } break;
-        case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain' }] } break;
+        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 }] } break;
+        case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver || count_down > 0 }] } break;
         case 3: {
-          buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon' }]
+          buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: activityOver || count_down > 0 }]
         } break;
         case 4: {
           buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: true }]
@@ -153,31 +172,31 @@ export default class BargainDetail extends Component {
         } break;
         case 5: {
           buttons = [
-            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain' },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare' },
-            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain' }
+            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver || count_down > 0 },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
+            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver || count_down > 0 }
           ]
         } break;
         case 6: {
           buttons = [
-            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain' },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare' },
+            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver || count_down > 0 },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
             { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
           ]
         } break;
         case 7: {
           buttons = [
-            { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain' },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare' },
+            { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
             { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
           ]
         } break;
 
         case 8: {
           buttons = [
-            { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain' },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare' },
-            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain' }
+            { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
+            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver || count_down > 0 }
           ]
         } break;
       }
@@ -186,6 +205,7 @@ export default class BargainDetail extends Component {
         bargainDetail: {
           apartment_title,
           apartment_type_title,
+          picture: picture.map(i => ({ cover: i })),
           content,
           cover,
           headimg,
@@ -201,10 +221,12 @@ export default class BargainDetail extends Component {
           id: data.id,
           close_time,
           begin_time,
+          count_down,
           no,
           user_bargain,
           share_title,
           share_image,
+          need_people_num,
 
           days,
           hours,
@@ -224,6 +246,7 @@ export default class BargainDetail extends Component {
 
   // 我也要砍
   async onBargain() {
+
     // 判断用户是否已有手机号缓存
     await this.props.dispatchGetUserMsg().then(res => {
       if (res) {
@@ -231,8 +254,8 @@ export default class BargainDetail extends Component {
         if (mobile) {
           !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
           const { bargainDetail: { id } } = this.state
-          this.props.dispatchBargainCut({ id }).then(res => {
-            res.data && res.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+          this.props.dispatchBargainCut({ id }).then(response => {
+            response.data && response.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
           })
         } else {
           this.setState({ showGetPhoneNumMask: true })
@@ -247,15 +270,18 @@ export default class BargainDetail extends Component {
     Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
   }
 
-  onShare() { }
+  onShare() {
+
+  }
 
   // 帮砍
   onHelpBargain() {
+
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
     const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
     this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
       if (res.data && res.data.code === 1) {
-        this.setState({ showBargainCurtain: true })
+        this.setState({ showBargainCurtain: true, helpBargainMoney: res.data.data[0].price })
         setTimeout(() => {
           Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + share_id })
         }, 2000)
@@ -294,6 +320,12 @@ export default class BargainDetail extends Component {
     this.setState({ showHelpFriends: false })
   }
 
+  // 打开图片幕帘
+  onOpenPicCurtain() {
+    const { bargainDetail: { picture } } = this.state
+    picture.length && this.setState({ showPicCurtain: true })
+  }
+
   // 关闭幕帘
   onCloseCurtain() {
     this.setState({ showPicCurtain: false })
@@ -321,12 +353,8 @@ export default class BargainDetail extends Component {
   }
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail: { user_bargain }, bargainDetail, Buttontype,
-      showBargainCurtain, showPicCurtain, showGetPhoneNumMask } = this.state
-    const imageStyle = {
-      width: Taro.pxTransform(78 * 2),
-      height: Taro.pxTransform(78 * 2),
-    }
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask } = this.state
+    const { user_bargain, count_down, picture, need_people_num } = bargainDetail
 
     return (
       <View className='bargain wrap-Style'>
@@ -335,6 +363,9 @@ export default class BargainDetail extends Component {
         {/* 图片弹窗 */}
         <Curtain
           whiteBg
+          canNavigate={false}
+
+          adList={picture}
           swiperHeight={300 * 2}
           onClose={this.onCloseCurtain}
           isOpened={showPicCurtain}
@@ -346,7 +377,7 @@ export default class BargainDetail extends Component {
             {/* <Board > */}
             <View className='p-3 at-row at-row__align--center at-row__justify--center' style={{ width: 'auto' }}>
               <Text className='text-bold text-huge'>已帮砍</Text>
-              <Text className='text-orange text-super'>50元</Text>
+              <Text className='text-orange text-super'>{helpBargainMoney}元</Text>
             </View>
             {/* </Board> */}
           </AtCurtain>
@@ -368,10 +399,15 @@ export default class BargainDetail extends Component {
           <View className='bargain-body-wrap ' style={{ paddingBottom: Taro.pxTransform(75 * 2) }}>
             {/* 第一个板块 */}
             <BargainDetailMainBlock
+              onOpenPicCurtain={this.onOpenPicCurtain}
               bargainDetail={bargainDetail}
             />
             {/* 砍价状态 */}
-            {user_bargain && <BargainDetailBargainingBlock user_bargain={user_bargain} onOpenHelpFriendsMask={this.onOpenHelpFriendsMask} />}
+            {user_bargain &&
+              <BargainDetailBargainingBlock
+                need_people_num={need_people_num}
+                user_bargain={user_bargain}
+                onOpenHelpFriendsMask={this.onOpenHelpFriendsMask} />}
             {/* 第二个板块 */}
             <BargainDetailSecBlock bargainDetail={bargainDetail} />
             {/* 第三个板块 */}
@@ -379,6 +415,7 @@ export default class BargainDetail extends Component {
           </View>
           {/* 底部tab栏 */}
           <BargainTab
+            count_down={count_down}
             user_bargain={user_bargain}
             Buttontype={Buttontype}
             zIndex={11}
@@ -392,7 +429,6 @@ export default class BargainDetail extends Component {
             src={BARGAIN_MORE_HOUSE}
             className='bargain-detail-float-icon'
             onClick={() => Taro.switchTab({ url: PAGE_HOME })}
-            style={imageStyle}
             mode='widthFix'
           />
 
