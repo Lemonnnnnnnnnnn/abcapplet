@@ -243,7 +243,11 @@ export const API_FUNNEL_ORDER = `${HOST}/index/funnelOrderPost`
 // https://sub.gongyuabc.com/api/v1/sublease/orders/index  //线上接口
 // http://sub.abc.411er.cn/api/v1/sublease/orders/index     //测试接口
 export const API_SUB_LIST = 'https://sub.gongyuabc.com/api/v1/sublease/orders/index'
-export const PAYLOAD_SUB_LIST = { city_id: 350200, page: 1, size: 6 }
+export const PAYLOAD_SUB_LIST = { city_id: 350200, page: 1, size: 6, type: 1 }
+//商圈
+export const API_SUBLEASE_INDEX = `https://sub.gongyuabc.com/api/v1/sublease/index/index`
+//获取中国城市列表
+export const API_CITYCODE_LIST = `https://sub.gongyuabc.com/api/v1/common/setting/open-city`
 
 //用户反馈接口
 export const API_USER_FEEDBACK = `${HOST}/user/setFeedbackPost`
