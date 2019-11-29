@@ -7,8 +7,6 @@ import BaseList from '@components/base-list'
 
 import ApartmentBargainItem from '@components/apartment-bargain-item'
 
-
-
 class ApartmentBargainList extends BaseList {
 
   render() {

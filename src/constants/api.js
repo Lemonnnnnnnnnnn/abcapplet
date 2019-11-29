@@ -291,6 +291,7 @@ export const API_USER_ACTIVITY = `${HOST}/user/myActivityPost`
 // 砍价相关
 // 获取砍价列表
 export const API_BARGAIN_LIST = `${HOST}/bargain/listPost`
+export const PAYLOAD_BARGAIN_LIST = {current_page: 1, page_size: 10}
 
 // 获取砍价详情
 export const API_BARGAIN_DETAIL = `${HOST}/bargain/detailPost`

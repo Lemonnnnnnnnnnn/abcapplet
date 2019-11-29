@@ -12,6 +12,9 @@ import BaseComponent from '@components/base'
 import { PAGE_BARGAIN_DETAIL, PAGE_BARGAIN_LIST } from '@constants/page'
 
 export default class apartmentBargainCard extends BaseComponent {
+  static defaultProps = {
+    bargain : []
+  }
 
   state = {
     show: true,
@@ -51,6 +54,9 @@ export default class apartmentBargainCard extends BaseComponent {
   render() {
     const { title, bargain } = this.props
     const { show, bargainList } = this.state
+    let bargainID = []
+    bargain.map(i => bargainID.push(i.id))
+
     return (show &&
       <View>
         {
@@ -98,7 +104,7 @@ export default class apartmentBargainCard extends BaseComponent {
 
         {bargain.length > 2 &&
           <View
-            onClick={() => Taro.navigateTo({ url: PAGE_BARGAIN_LIST })}
+            onClick={() => Taro.navigateTo({ url: PAGE_BARGAIN_LIST + '?id=' + bargainID })}
             className='mt-2 text-normal text-secondary at-row at-row__justify--center at-row__align--center'
           >
             展示更多<AtIcon value='chevron-right' color='#888888' size='16' />

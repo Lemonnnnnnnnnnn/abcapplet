@@ -144,6 +144,7 @@
   // 列表
   &-list {
     background: #fc8f4b;
+    min-height: 100vh;
     &-image {
       width: 126px * $hd;
       height: 94px * $hd;
