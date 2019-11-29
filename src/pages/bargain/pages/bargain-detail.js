@@ -20,7 +20,8 @@ import {
   LOCALE_BARGAIN_I_WANT,
   LOCALE_COUPON_RECEIVE,
   LOCALE_BARGAIN_HELP_HAVEN,
-  LOCALE_BARGAIN_VIEW_MINE
+  LOCALE_BARGAIN_VIEW_MINE,
+  LOCALE_BARGAIN_APPOINTMENT
 } from '@constants/locale'
 import { BARGAIN_MORE_HOUSE } from '@constants/picture'
 
@@ -34,6 +35,7 @@ import BargainDetailSecBlock from '../components/bargain-detail-sec-block'
 import BargainDetailThirdBlock from '../components/bargain-detail-third-block'
 import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
+// import BargainAppointmentMask from '../components/bargain-appointment-mask'
 
 
 @connect(state => state, {
@@ -52,6 +54,7 @@ export default class BargainDetail extends Component {
     showPicCurtain: false,
     showBargainCurtain: false,
     showGetPhoneNumMask: false,
+    showAppointment: true,
     helpBargainMoney: 0
   }
 
@@ -109,62 +112,70 @@ export default class BargainDetail extends Component {
       // Buttontype = 6  button : [我也要砍，已帮砍（灰），分享]        他人/已砍价/未发起
       // Buttontype = 7  button : [我的砍价，已帮砍（灰），分享]        他人/已砍价/已发起
       // Buttontype = 8  button : [我的砍价，帮砍，分享]        他人/未砍价/已发起
-
-      // 我也要砍增加手机号码授权
+      // Buttontype = 9  button : [预约砍价]   倒计时未结束    （暂时隐藏）
 
       let Buttontype = 0
+      // 如果倒计时未结束
+      // if (count_down > 0) {
+        // Buttontype = 9
+      // } else {
+        // 如果倒计时已结束
 
-      if (share_id) {
-        if (parseInt(share_id) === userID) {
+        if (share_id) {
+          if (parseInt(share_id) === userID) {
+            // 本人
+            if (user_bargain) {
+              // 本人 已参加
+              if (user_bargain.status === 1) {
+                // 本人 已参加 已砍价完成   是否已领取优惠券
+                user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
+              } else {
+                // 本人 已参加 未砍价完成
+                Buttontype = Buttontype = 1
+              }
+            }
+            // 本人 未参加
+            else { Buttontype = 2 }
+          } else {
+            // 非本人  type = 5-9
+
+            // 未砍 & 没有记录
+            if (!is_cut && !is_record) { Buttontype = 5 }
+
+            // 已砍 & 没有记录
+            if (is_cut && !is_record) { Buttontype = 6 }
+
+            // 已砍 & 有记录
+            if (is_cut && is_record) { Buttontype = 7 }
+
+            //未砍 & 有记录
+            if (!is_cut && is_record) { Buttontype = 8 }
+
+          }
+        }
+        else {
           if (user_bargain) {
             // 本人 已参加
             if (user_bargain.status === 1) {
               // 本人 已参加 已砍价完成   是否已领取优惠券
               user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
             } else {
-              // 本人 已参加 未砍价完成
+              //  本人 已参加  未砍价完成
               Buttontype = Buttontype = 1
             }
-          }
-          // 本人 未参加
-          else { Buttontype = 2 }
-        } else {
-          // 非本人  type = 5-9
-
-          // 未砍 & 没有记录
-          if (!is_cut && !is_record) { Buttontype = 5 }
-
-          // 已砍 & 没有记录
-          if (is_cut && !is_record) { Buttontype = 6 }
-
-          // 已砍 & 有记录
-          if (is_cut && is_record) { Buttontype = 7 }
-
-          //未砍 & 有记录
-          if (!is_cut && is_record) { Buttontype = 8 }
-
+            // 本人  未参加
+          } else { Buttontype = 2 }
         }
-      }
-      else {
-        if (user_bargain) {
-          // 本人 已参加
-          if (user_bargain.status === 1) {
-            // 本人 已参加 已砍价完成   是否已领取优惠券
-            user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
-          } else {
-            //  本人 已参加  未砍价完成
-            Buttontype = Buttontype = 1
-          }
-          // 本人  未参加
-        } else { Buttontype = 2 }
-      }
+      // }
+
+
 
 
       switch (Buttontype) {
-        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 }] } break;
-        case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver || count_down > 0 }] } break;
+        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver }] } break;
+        case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver }] } break;
         case 3: {
-          buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: activityOver || count_down > 0 }]
+          buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: activityOver }]
         } break;
         case 4: {
           buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: true }]
@@ -172,22 +183,22 @@ export default class BargainDetail extends Component {
         } break;
         case 5: {
           buttons = [
-            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver || count_down > 0 },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
-            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver || count_down > 0 }
+            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
+            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
           ]
         } break;
         case 6: {
           buttons = [
-            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver || count_down > 0 },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
+            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
             { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
           ]
         } break;
         case 7: {
           buttons = [
             { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
             { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
           ]
         } break;
@@ -195,10 +206,11 @@ export default class BargainDetail extends Component {
         case 8: {
           buttons = [
             { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver || count_down > 0 },
-            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver || count_down > 0 }
+            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
+            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
           ]
         } break;
+        // case 9: { buttons = [{ message: LOCALE_BARGAIN_APPOINTMENT, method: 'onOpenAppointmentMask' }] } break
       }
 
       this.setState({
@@ -270,9 +282,26 @@ export default class BargainDetail extends Component {
     Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
   }
 
-  onShare() {
+  onShare() { }
 
-  }
+  //预约砍价这一块先隐藏（别删！！）
+
+  // // 打开预约砍价Mask
+  // onOpenAppointmentMask() {
+  //   this.setState({ showAppointment: true })
+  // }
+
+  // // 关闭预约砍价Mask
+  // onCloseAppointmentMask() {
+  //   this.setState({ showAppointment: false })
+  // }
+
+  // // 预约砍价
+  // onBargainAppointment() {
+  //   const buttons = [{ message: '已预约砍价提醒', disabled: true }]
+  //   this.setState({ buttons })
+  // }
+
 
   // 帮砍
   onHelpBargain() {
@@ -353,7 +382,8 @@ export default class BargainDetail extends Component {
   }
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask } = this.state
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype,
+      showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask, showAppointment } = this.state
     const { user_bargain, count_down, picture, need_people_num } = bargainDetail
 
     return (
@@ -383,6 +413,13 @@ export default class BargainDetail extends Component {
           </AtCurtain>
         </View>
         }
+
+        {/* 预约砍价弹窗（暂时隐藏，别删！） */}
+        {/* <BargainAppointmentMask
+          onBargainAppointment={this.onBargainAppointment}
+          onClose={this.onCloseAppointmentMask}
+          show={showAppointment}
+        /> */}
 
         {/* 手机号码授权 */}
         <GetAuthorizationMask

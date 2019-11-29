@@ -193,26 +193,6 @@ page {
   }
 }
 
-// 关于居中的一些方法
-.vertical-level-center {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
-}
-.vertical-center {
-  position: absolute;
-  transform: translate(0, -50%);
-  // left: 0;
-  top: 50%;
-}
-.level-center {
-  position: absolute;
-  transform: translate(-50%, 0);
-  left: 50%;
-  top: 0;
-}
-
 //单位元素垂直居中
 .page-middile {
   text-align: center;
