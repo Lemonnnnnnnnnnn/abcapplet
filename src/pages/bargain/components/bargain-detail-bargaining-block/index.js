@@ -71,7 +71,7 @@ export default class BargainDetailBargainingBlock extends BaseComponent {
 
         </View>
         {/* 还差多少人帮砍 */}
-        {need_people_num && <View>
+        {need_people_num && status !== 1 && <View>
           <AtDivider height='5' lineColor='#F8F8F8' />
           <View className='text-orange text-small text-center py-1'>离成功还差{need_people_num}个人帮砍</View>
         </View>}

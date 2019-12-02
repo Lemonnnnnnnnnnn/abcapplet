@@ -32,8 +32,10 @@ export default class BargainDetailMainBlock extends BaseComponent {
     bargainDetail: {
       apartment_title: '', apartment_type_title: '', content: '', cover: '', headimg: '', original_price: '', participate_num: '', price: '',
       price_list: [], reward_id: 0, save_money: '', tenancy: 12, type: 0, type_id: 0, id: 0, end_time: '', begin_time: '', no: 0, day: 99,
-      hours: 23, minutes: 59, seconds: 59, activityOver: true, count_down: 0
-    }
+      hours: 23, minutes: 59, seconds: 59, activityOver: true, count_down: 0,
+    },
+    Countdown: false,
+    bargainSuccess:false
   }
 
   onTimeUp() {
@@ -49,9 +51,9 @@ export default class BargainDetailMainBlock extends BaseComponent {
   }
 
   render() {
-    const { bargainDetail } = this.props
+    const { bargainDetail, Countdown ,bargainSuccess } = this.props
     const { apartment_title, apartment_type_title, cover, original_price, participate_num, price, picture,
-      save_money, tenancy = 12, close_time, no, days, hours, minutes, seconds, activityOver, count_down } = bargainDetail
+      save_money, tenancy = 12, no, days, hours, minutes, seconds, activityBegin } = bargainDetail
 
     let { headimg } = bargainDetail
     const headImgRender = headimg && headimg.slice(0, 5)
@@ -100,9 +102,9 @@ export default class BargainDetailMainBlock extends BaseComponent {
           <AtDivider height='20' lineColor='#E8E8E8' />
 
           {/* 第四板块 活动剩余时间 */}
-          {!activityOver &&
+          {!Countdown && !bargainSuccess  &&
             <View>
-              <View className='text-normal text-center py-3'>{count_down ? LOCALE_ACTIVITY_START_TIME : LOCALE_ACTIVITY_REMAIN_TIME}</View>
+              <View className='text-normal text-center py-3'>{activityBegin ? LOCALE_ACTIVITY_REMAIN_TIME : LOCALE_ACTIVITY_START_TIME}</View>
               <View className='at-row at-row__justify--center'>
                 <AtCountdown
                   isCard

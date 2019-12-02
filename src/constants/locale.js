@@ -396,6 +396,7 @@ export const LOCALE_ACTIVITY_REMAIN_TIME = '活动剩余时间：'
 export const LOCALE_ACTIVITY_START_TIME = '距离活动开始还剩：'
 export const LOCALE_BARGAIN_CURRENT_PRICE = '现价'
 export const LOCALE_BARGAIN_APPOINTMENT = '预约砍价'
+export const LOCALE_BARGAIN_APPOINTMENT_SUCCESS = '已预约砍价提醒'
 
 
 

@@ -5,14 +5,16 @@ import {
   TYPE_BARGAIN_GET_COUPON,
   TYPE_BARGAIN_HELP_CUT,
   TYPE_BARGAIN_CUT,
-  TYPE_BARGAIN_DETAIL
+  TYPE_BARGAIN_DETAIL,
+  TYPE_BARGAIN_APPOINTMENT
 } from '@constants/bargain'
 import {
   API_BARGAIN_LIST,
   API_BARGAIN_DETAIL,
   API_BARGAIN_CUT,
   API_BARGAIN_HELP_CUT,
-  API_BARGAIN_GET_COUPON
+  API_BARGAIN_GET_COUPON,
+  API_BARGAIN_APPOINTMENT
 } from '@constants/api'
 
 // 获取砍价列表
@@ -67,4 +69,12 @@ export const dispatchBargainGetCoupon = payload => createAction({
   type: TYPE_BARGAIN_GET_COUPON,
   url: API_BARGAIN_GET_COUPON,
   cb: res => res && res.data && res.data.data
+})
+
+// 预约砍价
+export const dispatchBargainAppointment = payload =>createAction({
+  payload,
+  method : 'POST',
+  type : TYPE_BARGAIN_APPOINTMENT,
+  url : API_BARGAIN_APPOINTMENT
 })

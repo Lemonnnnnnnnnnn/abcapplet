@@ -305,4 +305,5 @@ export const API_BARGAIN_HELP_CUT = `${HOST}/bargain/helpCutPost`
 // 领取优惠券
 export const API_BARGAIN_GET_COUPON = `${HOST}/bargain/getCouponPost`
 
-
+// 预约砍价
+export const API_BARGAIN_APPOINTMENT = `${HOST}/bargain/appointmentBargainPost`

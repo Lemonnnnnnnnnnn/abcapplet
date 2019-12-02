@@ -21,7 +21,8 @@ import {
   LOCALE_COUPON_RECEIVE,
   LOCALE_BARGAIN_HELP_HAVEN,
   LOCALE_BARGAIN_VIEW_MINE,
-  LOCALE_BARGAIN_APPOINTMENT
+  LOCALE_BARGAIN_APPOINTMENT,
+  LOCALE_BARGAIN_APPOINTMENT_SUCCESS
 } from '@constants/locale'
 import { BARGAIN_MORE_HOUSE } from '@constants/picture'
 
@@ -54,7 +55,7 @@ export default class BargainDetail extends Component {
     showPicCurtain: false,
     showBargainCurtain: false,
     showGetPhoneNumMask: false,
-    showAppointment: true,
+    // showAppointment: false,
     helpBargainMoney: 0
   }
 
@@ -80,27 +81,33 @@ export default class BargainDetail extends Component {
     })
 
     this.props.dispatchBargainDetail({ id: parseInt(id), share_id }).then(({ data: { data } }) => {
-      const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num, price, price_list, is_cut, is_record,
-        reward_id, save_money, tenancy, type, type_id, begin_time, no, close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num } = data
+      const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num,
+        price, price_list, is_cut, is_record, reward_id, save_money, tenancy, type, type_id, begin_time, no,
+        close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num, appointment_bargain } = data
 
       // 计算活动剩余时间/活动开始时间
-      let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
+      let [days, hours, minutes, seconds, activityOver, bargainSuccess, activityBegin, Countdown] = [99, 23, 59, 59, false, false, false, false]
+
       if (count_down) {
+        // 如果count_down存在，活动未开始，给时分秒赋值，将activityBegin字段设成false 指示 距活动开始还剩
         days = timestampChange(count_down).days
         hours = timestampChange(count_down).hours
         minutes = timestampChange(count_down).minutes
         seconds = timestampChange(count_down).seconds
       } else {
-        if (close_time < dayjs().unix()) {
-          // 如果结束时间小于当前时间，设置activityOver为true
-          activityOver = true
-        } else {
-          // 如果结束时间大于当前时间，且close_time不等于1
-          close_time !== -1 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
+        // 如果count_down=0，活动已开始，给时分秒赋值，将activityBegin字段设成true 指示 活动剩余时间
+        activityBegin = true
+
+        if (close_time >= 0 || close_time === -1) {
+          days = timestampChange(close_time).days
+          hours = timestampChange(close_time).hours
+          minutes = timestampChange(close_time).minutes
+          seconds = timestampChange(close_time).seconds
+          if (close_time === 0 || close_time === -1) { Countdown = true }
         }
       }
 
-      activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
+      Countdown && Taro.showToast({ title: '活动已结束！', icon: 'none' })
 
       // 给buttons赋值
       // Buttontype = 1  button : [分享]          本人/已参加
@@ -112,63 +119,76 @@ export default class BargainDetail extends Component {
       // Buttontype = 6  button : [我也要砍，已帮砍（灰），分享]        他人/已砍价/未发起
       // Buttontype = 7  button : [我的砍价，已帮砍（灰），分享]        他人/已砍价/已发起
       // Buttontype = 8  button : [我的砍价，帮砍，分享]        他人/未砍价/已发起
-      // Buttontype = 9  button : [预约砍价]   倒计时未结束    （暂时隐藏）
+      // Buttontype = 9  button : [预约砍价]   没预约过
+      // Buttontype = 10 button : [已预约砍价提醒（灰）]  预约过
 
       let Buttontype = 0
       // 如果倒计时未结束
-      // if (count_down > 0) {
-        // Buttontype = 9
-      // } else {
-        // 如果倒计时已结束
 
-        if (share_id) {
-          if (parseInt(share_id) === userID) {
-            // 本人
-            if (user_bargain) {
-              // 本人 已参加
-              if (user_bargain.status === 1) {
-                // 本人 已参加 已砍价完成   是否已领取优惠券
-                user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
-              } else {
-                // 本人 已参加 未砍价完成
-                Buttontype = Buttontype = 1
-              }
-            }
-            // 本人 未参加
-            else { Buttontype = 2 }
-          } else {
-            // 非本人  type = 5-9
 
-            // 未砍 & 没有记录
-            if (!is_cut && !is_record) { Buttontype = 5 }
-
-            // 已砍 & 没有记录
-            if (is_cut && !is_record) { Buttontype = 6 }
-
-            // 已砍 & 有记录
-            if (is_cut && is_record) { Buttontype = 7 }
-
-            //未砍 & 有记录
-            if (!is_cut && is_record) { Buttontype = 8 }
-
-          }
-        }
-        else {
+      if (share_id) {
+        if (parseInt(share_id) === userID) {
+          // 本人
           if (user_bargain) {
             // 本人 已参加
             if (user_bargain.status === 1) {
               // 本人 已参加 已砍价完成   是否已领取优惠券
               user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
             } else {
-              //  本人 已参加  未砍价完成
+              // 本人 已参加 未砍价完成
               Buttontype = Buttontype = 1
             }
-            // 本人  未参加
-          } else { Buttontype = 2 }
+          }
+          // 本人 未参加
+          else {
+            // 如果倒计时未结束
+            if (count_down > 0) {
+              // 如果倒计时未结束 是否已预约过
+              appointment_bargain ? Buttontype = 10 : Buttontype = 9
+            } else {
+              // 如果倒计时已结束
+              Buttontype = 2
+            }
+          }
+        } else {
+          // 非本人  type = 5-9
+
+          // 未砍 & 没有记录
+          if (!is_cut && !is_record) { Buttontype = 5 }
+
+          // 已砍 & 没有记录
+          if (is_cut && !is_record) { Buttontype = 6 }
+
+          // 已砍 & 有记录
+          if (is_cut && is_record) { Buttontype = 7 }
+
+          //未砍 & 有记录
+          if (!is_cut && is_record) { Buttontype = 8 }
+
         }
-      // }
-
-
+      }
+      else {
+        if (user_bargain) {
+          // 本人 已参加
+          if (user_bargain.status === 1) {
+            // 本人 已参加 已砍价完成   是否已领取优惠券
+            user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
+          } else {
+            //  本人 已参加  未砍价完成
+            Buttontype = Buttontype = 1
+          }
+        } // 本人 未参加
+        else {
+          // 如果倒计时未结束
+          if (count_down > 0) {
+            // 如果倒计时未结束 是否已预约过
+            appointment_bargain ? Buttontype = 10 : Buttontype = 9
+          } else {
+            // 如果倒计时已结束
+            Buttontype = 2
+          }
+        }
+      }
 
 
       switch (Buttontype) {
@@ -210,7 +230,8 @@ export default class BargainDetail extends Component {
             { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
           ]
         } break;
-        // case 9: { buttons = [{ message: LOCALE_BARGAIN_APPOINTMENT, method: 'onOpenAppointmentMask' }] } break
+        case 9: { buttons = [{ message: LOCALE_BARGAIN_APPOINTMENT, method: 'onBargainAppointment' }] } break
+        case 10: { buttons = [{ message: LOCALE_BARGAIN_APPOINTMENT_SUCCESS, method: 'onBargainAppointment', disabled: true }] } break
       }
 
       this.setState({
@@ -245,11 +266,13 @@ export default class BargainDetail extends Component {
           minutes,
           seconds,
           activityOver,
+          activityBegin
 
         },
         buttons,
         Buttontype,
         bargainSuccess,
+        Countdown,
         share_id,
         userID
       })
@@ -284,29 +307,27 @@ export default class BargainDetail extends Component {
 
   onShare() { }
 
-  //预约砍价这一块先隐藏（别删！！）
+  // 预约砍价
+  onBargainAppointment() {
+    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
 
-  // // 打开预约砍价Mask
-  // onOpenAppointmentMask() {
-  //   this.setState({ showAppointment: true })
-  // }
-
-  // // 关闭预约砍价Mask
-  // onCloseAppointmentMask() {
-  //   this.setState({ showAppointment: false })
-  // }
-
-  // // 预约砍价
-  // onBargainAppointment() {
-  //   const buttons = [{ message: '已预约砍价提醒', disabled: true }]
-  //   this.setState({ buttons })
-  // }
+    const { bargainDetail: { id } } = this.state
+    this.props.dispatchBargainAppointment({ bargain_id: id }).then(res => {
+      if (res.data.code === 1) {
+        Taro.showToast({ title: '已帮您预约了砍价提醒！', icon: 'none' })
+        setTimeout(() => {
+          Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+        }, 2000)
+      }
+    })
+  }
 
 
   // 帮砍
   onHelpBargain() {
 
     !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+
     const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
     this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
       if (res.data && res.data.code === 1) {
@@ -382,14 +403,18 @@ export default class BargainDetail extends Component {
   }
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype,
-      showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask, showAppointment } = this.state
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, Countdown,
+      showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask } = this.state
     const { user_bargain, count_down, picture, need_people_num } = bargainDetail
 
     return (
       <View className='bargain wrap-Style'>
         {/* 帮砍好友 */}
-        <BargainHelpFriendsMask user_bargain={user_bargain} show={showHelpFriends} onClose={this.onCloseHelpFriendsMask} />
+        <BargainHelpFriendsMask
+          user_bargain={user_bargain}
+          show={showHelpFriends}
+          onClose={this.onCloseHelpFriendsMask}
+        />
         {/* 图片弹窗 */}
         <Curtain
           whiteBg
@@ -413,8 +438,7 @@ export default class BargainDetail extends Component {
           </AtCurtain>
         </View>
         }
-
-        {/* 预约砍价弹窗（暂时隐藏，别删！） */}
+        {/* 客服弹窗 暂时隐藏（勿删）  */}
         {/* <BargainAppointmentMask
           onBargainAppointment={this.onBargainAppointment}
           onClose={this.onCloseAppointmentMask}
@@ -438,6 +462,8 @@ export default class BargainDetail extends Component {
             <BargainDetailMainBlock
               onOpenPicCurtain={this.onOpenPicCurtain}
               bargainDetail={bargainDetail}
+              Countdown={Countdown}
+              bargainSuccess={bargainSuccess}
             />
             {/* 砍价状态 */}
             {user_bargain &&
