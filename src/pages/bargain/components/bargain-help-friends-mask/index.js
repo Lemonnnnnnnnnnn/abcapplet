@@ -23,7 +23,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
   }
 
   render() {
-    const { show, user_bargain: { help_bargain_list, is_receive } } = this.props
+    const { show, user_bargain: { help_bargain_list, is_receive }, activityOver } = this.props
     return (show &&
       <View onTouchMove={this.onMaskTouchMove}>
         <Board fixed='bottom' border='top' customStyle={{ zIndex: 12, width: 'auto' }} className='p-2'>
@@ -60,6 +60,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
             circle
             className='btn-bargain mb-2'
             open-type='share'
+            disabled={activityOver ? true : false}
           >{LOCALE_BARGAIN_SHARE}</AtButton>}
 
         </Board>

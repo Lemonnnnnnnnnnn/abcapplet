@@ -114,8 +114,7 @@ export default class BargainDetail extends Component {
       }
 
       activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
-      status === 0 && Taro.showToast({ title: '活动已关闭！', icon: 'none' })
-
+      status === 0 && (Taro.showToast({ title: '活动已关闭！', icon: 'none' }), activityOver = true)
 
       // 给buttons赋值
       // Buttontype = 1  button : [分享]          本人/已参加
@@ -421,6 +420,7 @@ export default class BargainDetail extends Component {
           user_bargain={user_bargain}
           show={showHelpFriends}
           onClose={this.onCloseHelpFriendsMask}
+          activityOver={activityOver}
         />
         {/* 图片弹窗 */}
         <Curtain
@@ -478,7 +478,8 @@ export default class BargainDetail extends Component {
               <BargainDetailBargainingBlock
                 need_people_num={need_people_num}
                 user_bargain={user_bargain}
-                onOpenHelpFriendsMask={this.onOpenHelpFriendsMask} />}
+                onOpenHelpFriendsMask={this.onOpenHelpFriendsMask}
+              />}
             {/* 第二个板块 */}
             <BargainDetailSecBlock bargainDetail={bargainDetail} />
             {/* 第三个板块 */}

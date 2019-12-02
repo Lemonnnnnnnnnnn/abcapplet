@@ -31,7 +31,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
   static defaultProps = {
     bargainDetail: {
       apartment_title: '', apartment_type_title: '', content: '', cover: '', headimg: '', original_price: '', participate_num: '', price: '',
-      price_list: [], reward_id: 0, save_money: '', tenancy: 12, type: 0, type_id: 0, id: 0, end_time: '', begin_time: '', no: 0, day: 99,
+      price_list: [], reward_id: 0, save_money: '', tenancy: 12, type: 0, type_id: 0, id: 0, end_time: '', begin_time: '', no: 0, days: 99,
       hours: 23, minutes: 59, seconds: 59, count_down: 0,
     },
     Countdown: false,

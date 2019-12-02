@@ -24,6 +24,12 @@ export default class UserActivity extends Component {
     this.bargainList.onNextPage()
   }
 
+  onPullDownRefresh() {
+    this.bargainList.onReset(null)
+    Taro.stopPullDownRefresh()
+  }
+
+
   render() {
     const payload = { current_page: 1, page_size: 10 }
     const { userActivityList: { list } } = this.props

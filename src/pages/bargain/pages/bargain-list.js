@@ -10,11 +10,12 @@ import { LOCALE_BARGAIN_LIST } from '@constants/locale'
 import { PAYLOAD_BARGAIN_LIST } from '@constants/api'
 // 自定义组件
 import ApartmentBargainList from '@components/apartment-bargain-list'
+import BaseComponent from '@components/base'
 
 @connect(state => state, {
   ...bargainAction,
 })
-export default class BargainList extends Component {
+export default class BargainList extends BaseComponent {
 
   config = {
     navigationBarTitleText: '租房砍价',
@@ -34,6 +35,11 @@ export default class BargainList extends Component {
 
   onReachBottom() {
     this.BargainList.onNextPage()
+  }
+
+  onPullDownRefresh() {
+    this.BargainList.onReset(null)
+    Taro.stopPullDownRefresh()
   }
 
   render() {
