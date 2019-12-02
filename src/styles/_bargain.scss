@@ -23,7 +23,7 @@
         top: -50px;
         box-shadow: 0px 3px 6px #000;
         &-mask {
-          background: linear-gradient(to bottom, rgba(71,71,71,0), rgba(71, 71, 71, 0.8));
+          background: linear-gradient(to bottom, rgba(71, 71, 71, 0), rgba(71, 71, 71, 0.8));
           color: #fff;
           position: absolute;
           bottom: 0;
@@ -162,6 +162,18 @@
         position: relative;
         overflow: hidden;
       }
+    }
+    &-end-tag {
+      background: rgba($color: #000000, $alpha: 0.5);
+      position: absolute;
+      left: -30px * $hd;
+      top: -5px * $hd;
+      transform: rotateZ(-45deg);
+      width: 100px * $hd;
+      height: 45px * $hd;
+      line-height: 55px * $hd;
+      z-index: 20;
+      letter-spacing: 1px * $hd;
     }
   }
 

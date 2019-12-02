@@ -82,11 +82,11 @@ export default class BargainDetail extends Component {
 
     this.props.dispatchBargainDetail({ id: parseInt(id), share_id }).then(({ data: { data } }) => {
       const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num,
-        price, price_list, is_cut, is_record, reward_id, save_money, tenancy, type, type_id, begin_time, no,
+        price, price_list, is_cut, is_record, reward_id, save_money, tenancy, type, type_id, begin_time, no, status,
         close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num, appointment_bargain } = data
 
       // 计算活动剩余时间/活动开始时间
-      let [days, hours, minutes, seconds, activityOver, bargainSuccess, activityBegin, Countdown] = [99, 23, 59, 59, false, false, false, false]
+      let [days, hours, minutes, seconds, activityOver, bargainSuccess, activityBegin] = [99, 23, 59, 59, false, false, false]
 
       if (count_down) {
         // 如果count_down存在，活动未开始，给时分秒赋值，将activityBegin字段设成false 指示 距活动开始还剩
@@ -95,19 +95,27 @@ export default class BargainDetail extends Component {
         minutes = timestampChange(count_down).minutes
         seconds = timestampChange(count_down).seconds
       } else {
-        // 如果count_down=0，活动已开始，给时分秒赋值，将activityBegin字段设成true 指示 活动剩余时间
+        // 如果count_down===0，活动已开始，给时分秒赋值，将activityBegin字段设成true 指示 活动剩余时间
         activityBegin = true
 
-        if (close_time >= 0 || close_time === -1) {
-          days = timestampChange(close_time).days
-          hours = timestampChange(close_time).hours
-          minutes = timestampChange(close_time).minutes
-          seconds = timestampChange(close_time).seconds
-          if (close_time === 0 || close_time === -1) { Countdown = true }
+        if (close_time > 0 || close_time === -1) {
+          // 如果close_time 大于0 或close_time === -1，活动未结束
+          if (close_time !== -1) {
+            // 如果close_time等于-1的时候不转化close_time,让其默认为最大值
+            days = timestampChange(close_time).days
+            hours = timestampChange(close_time).hours
+            minutes = timestampChange(close_time).minutes
+            seconds = timestampChange(close_time).seconds
+          }
+        } else {
+          // 如果close_time小于等于0并且不等于-1, 活动已结束
+          activityOver = true
         }
       }
 
-      Countdown && Taro.showToast({ title: '活动已结束！', icon: 'none' })
+      activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
+      status === 0 && Taro.showToast({ title: '活动已关闭！', icon: 'none' })
+
 
       // 给buttons赋值
       // Buttontype = 1  button : [分享]          本人/已参加
@@ -265,14 +273,13 @@ export default class BargainDetail extends Component {
           hours,
           minutes,
           seconds,
-          activityOver,
-          activityBegin
 
         },
         buttons,
         Buttontype,
         bargainSuccess,
-        Countdown,
+        activityOver,
+        activityBegin,
         share_id,
         userID
       })
@@ -403,7 +410,7 @@ export default class BargainDetail extends Component {
   }
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, Countdown,
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, activityOver, activityBegin,
       showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask } = this.state
     const { user_bargain, count_down, picture, need_people_num } = bargainDetail
 
@@ -462,7 +469,8 @@ export default class BargainDetail extends Component {
             <BargainDetailMainBlock
               onOpenPicCurtain={this.onOpenPicCurtain}
               bargainDetail={bargainDetail}
-              Countdown={Countdown}
+              activityBegin={activityBegin}
+              activityOver={activityOver}
               bargainSuccess={bargainSuccess}
             />
             {/* 砍价状态 */}

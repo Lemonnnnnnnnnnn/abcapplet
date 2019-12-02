@@ -10,6 +10,8 @@ import BaseComponent from '@components/base'
 import { LOCALE_MONEY, LOCALE_QI, LOCALE_ORIGINAL_PRICE, LOCALE_COLON } from '@constants/locale'
 import { PAGE_BARGAIN_DETAIL } from '@constants/page'
 
+import '../../styles/_bargain.scss'
+
 export default class ApartmentBargainItem extends BaseComponent {
   static defaultProps = {
     imageHeight: 500,
@@ -25,7 +27,9 @@ export default class ApartmentBargainItem extends BaseComponent {
       apartment_type_title: '',
       no: '',
       type: '',
-      type_id: 0
+      type_id: 0,
+      end_time: -1,
+      status: 1,
     }
   }
 
@@ -37,10 +41,15 @@ export default class ApartmentBargainItem extends BaseComponent {
 
   render() {
     const { item, block } = this.props
-    const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id } = item
+    const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id, end_time, bargain_status } = item
+
+    const endTag = (bargain_status === 0 || (end_time <= 0 && end_time != -1)) &&
+      <View className='bargain-list-end-tag text-small text-white text-center'>已结束</View>
+
     return (
-      <View className='pb-3' style={{ overflow: 'hidden' }} onClick={this.onNavigation.bind(this, { id, bargain_id, block })}>
-        <Board shadow='black-shadow'>
+      <View className='pb-3 ' onClick={this.onNavigation.bind(this, { id, bargain_id, block })}>
+        <Board shadow='black-shadow wrap-Style'>
+          {endTag}
           <View className='at-row p-2' style={{ width: 'auto' }}>
             {/* 左 image */}
             <View className='position-relative at-col at-col-5' >

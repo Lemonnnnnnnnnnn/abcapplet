@@ -24,7 +24,9 @@ export default class BargainList extends Component {
 
   componentWillMount() {
     const { id } = this.$router.params
-    const bargain_id = id.split(',')
+    let bargain_id = null
+    if (id) { bargain_id = id.split(',') }
+
     this.setState({ bargain_id })
   }
 
