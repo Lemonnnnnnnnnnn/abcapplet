@@ -20,7 +20,7 @@ import {
   LOCALE_SECOND
 } from '@constants/locale'
 
-import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW } from '@constants/page'
+import { PAGE_HOUSE_TYPE_SHOW, PAGE_APARTMENT_SHOW, PAGE_BARGAIN_DETAIL } from '@constants/page'
 
 
 import Board from '@components/board'
@@ -32,15 +32,17 @@ export default class BargainDetailMainBlock extends BaseComponent {
     bargainDetail: {
       apartment_title: '', apartment_type_title: '', content: '', cover: '', headimg: '', original_price: '', participate_num: '', price: '',
       price_list: [], reward_id: 0, save_money: '', tenancy: 12, type: 0, type_id: 0, id: 0, end_time: '', begin_time: '', no: 0, days: 99,
-      hours: 23, minutes: 59, seconds: 59, count_down: 0,
+      hours: 23, minutes: 59, seconds: 59, count_down: 0, id: 0,
     },
     Countdown: false,
     bargainSuccess: false,
-    activityOver: true
+    activityOver: false
   }
 
   onTimeUp() {
+    const { bargainDetail: { id } } = this.props
     Taro.showToast({ title: LOCALE_BARGAIN_OVER, icon: LOCALE_NONE })
+    Taro.redirectTo({ url: `${PAGE_BARGAIN_DETAIL}?id=${id}` })
   }
 
   onNavigation() {
@@ -52,7 +54,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
   }
 
   render() {
-    const { bargainDetail, activityOver, bargainSuccess, activityBegin } = this.props
+    const { bargainDetail, activityOver, bargainSuccess } = this.props
     const { apartment_title, apartment_type_title, cover, original_price, participate_num, price, picture,
       save_money, tenancy = 12, no, days, hours, minutes, seconds } = bargainDetail
 
@@ -105,7 +107,7 @@ export default class BargainDetailMainBlock extends BaseComponent {
           {/* 第四板块 活动剩余时间 */}
           {!activityOver && !bargainSuccess &&
             <View>
-              <View className='text-normal text-center py-3'>{activityBegin ? LOCALE_ACTIVITY_REMAIN_TIME : LOCALE_ACTIVITY_START_TIME}</View>
+              <View className='text-normal text-center py-3'>{LOCALE_ACTIVITY_REMAIN_TIME}</View>
               <View className='at-row at-row__justify--center'>
                 <AtCountdown
                   isCard

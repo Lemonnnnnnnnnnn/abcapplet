@@ -21,8 +21,6 @@ import {
   LOCALE_COUPON_RECEIVE,
   LOCALE_BARGAIN_HELP_HAVEN,
   LOCALE_BARGAIN_VIEW_MINE,
-  LOCALE_BARGAIN_APPOINTMENT,
-  LOCALE_BARGAIN_APPOINTMENT_SUCCESS
 } from '@constants/locale'
 import { BARGAIN_MORE_HOUSE } from '@constants/picture'
 
@@ -72,7 +70,6 @@ export default class BargainDetail extends Component {
     Taro.setStorageSync('code', code)
   }
 
-
   async initState() {
     const { id, share_id } = this.$router.params
     let [buttons, userID] = [[], 0]
@@ -86,24 +83,14 @@ export default class BargainDetail extends Component {
     this.props.dispatchBargainDetail({ id: parseInt(id), share_id }).then(({ data: { data } }) => {
       const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num,
         price, price_list, is_cut, is_record, reward_id, save_money, tenancy, type, type_id, begin_time, no, status,
-        close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num, appointment_bargain } = data
+        close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num } = data
 
       // 计算活动剩余时间/活动开始时间
-      let [days, hours, minutes, seconds, activityOver, bargainSuccess, activityBegin] = [99, 23, 59, 59, false, false, false]
-
-      if (count_down) {
-        // 如果count_down存在，活动未开始，给时分秒赋值，将activityBegin字段设成false 指示 距活动开始还剩
-        days = timestampChange(count_down).days
-        hours = timestampChange(count_down).hours
-        minutes = timestampChange(count_down).minutes
-        seconds = timestampChange(count_down).seconds
-      } else {
-        // 如果count_down===0，活动已开始，给时分秒赋值，将activityBegin字段设成true 指示 活动剩余时间
-        activityBegin = true
+      let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
 
         if (close_time > 0 || close_time === -1) {
           // 如果close_time 大于0 或close_time === -1，活动未结束
-          if (close_time !== -1) {
+          if (close_time > 0) {
             // 如果close_time等于-1的时候不转化close_time,让其默认为最大值
             days = timestampChange(close_time).days
             hours = timestampChange(close_time).hours
@@ -114,7 +101,6 @@ export default class BargainDetail extends Component {
           // 如果close_time小于等于0并且不等于-1, 活动已结束
           activityOver = true
         }
-      }
 
       activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
       status === 0 && (Taro.showToast({ title: '活动已关闭！', icon: 'none' }), activityOver = true)
@@ -129,12 +115,9 @@ export default class BargainDetail extends Component {
       // Buttontype = 6  button : [我也要砍，已帮砍（灰），分享]        他人/已砍价/未发起
       // Buttontype = 7  button : [我的砍价，已帮砍（灰），分享]        他人/已砍价/已发起
       // Buttontype = 8  button : [我的砍价，帮砍，分享]        他人/未砍价/已发起
-      // Buttontype = 9  button : [预约砍价]   没预约过
-      // Buttontype = 10 button : [已预约砍价提醒（灰）]  预约过
 
       let Buttontype = 0
       // 如果倒计时未结束
-
 
       if (share_id) {
         if (parseInt(share_id) === userID) {
@@ -151,17 +134,10 @@ export default class BargainDetail extends Component {
           }
           // 本人 未参加
           else {
-            // 如果倒计时未结束
-            if (count_down > 0) {
-              // 如果倒计时未结束 是否已预约过
-              appointment_bargain ? Buttontype = 10 : Buttontype = 9
-            } else {
-              // 如果倒计时已结束
-              Buttontype = 2
-            }
+            Buttontype = 2
           }
         } else {
-          // 非本人  type = 5-9
+          // 非本人  type = 5-8
 
           // 未砍 & 没有记录
           if (!is_cut && !is_record) { Buttontype = 5 }
@@ -189,14 +165,8 @@ export default class BargainDetail extends Component {
           }
         } // 本人 未参加
         else {
-          // 如果倒计时未结束
-          if (count_down > 0) {
-            // 如果倒计时未结束 是否已预约过
-            appointment_bargain ? Buttontype = 10 : Buttontype = 9
-          } else {
-            // 如果倒计时已结束
-            Buttontype = 2
-          }
+          // 如果倒计时已结束
+          Buttontype = 2
         }
       }
 
@@ -240,8 +210,6 @@ export default class BargainDetail extends Component {
             { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
           ]
         } break;
-        case 9: { buttons = [{ message: LOCALE_BARGAIN_APPOINTMENT, method: 'onBargainAppointment' }] } break
-        case 10: { buttons = [{ message: LOCALE_BARGAIN_APPOINTMENT_SUCCESS, method: 'onBargainAppointment', disabled: true }] } break
       }
 
       this.setState({
@@ -281,7 +249,6 @@ export default class BargainDetail extends Component {
         Buttontype,
         bargainSuccess,
         activityOver,
-        activityBegin,
         share_id,
         userID
       })
@@ -290,7 +257,10 @@ export default class BargainDetail extends Component {
 
   // 我也要砍
   async onBargain() {
-    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+    if(!Taro.getStorageSync('user_info').token){
+      Taro.navigateTo({ url: PAGE_USER_AUTH })
+      return
+    }
 
     const { AuthorizationMask } = this.state
     // 判断用户是否已有手机号缓存
@@ -316,26 +286,12 @@ export default class BargainDetail extends Component {
   }
 
 
-  // 预约砍价
-  onBargainAppointment() {
-    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
-
-    const { bargainDetail: { id } } = this.state
-    this.props.dispatchBargainAppointment({ bargain_id: id }).then(res => {
-      if (res.data.code === 1) {
-        Taro.showToast({ title: '已帮您预约了砍价提醒！', icon: 'none' })
-        setTimeout(() => {
-          Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
-        }, 2000)
-      }
-    })
-  }
-
-
   // 帮砍
   onHelpBargain() {
-
-    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+    if(!Taro.getStorageSync('user_info').token){
+      Taro.navigateTo({ url: PAGE_USER_AUTH })
+      return
+    }
 
     const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
     this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
@@ -350,7 +306,10 @@ export default class BargainDetail extends Component {
 
   // 领取优惠券
   onReceiveCoupon() {
-    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
+    if(!Taro.getStorageSync('user_info').token){
+      Taro.navigateTo({ url: PAGE_USER_AUTH })
+      return
+    }
 
     const { bargainDetail: { id }, share_id } = this.state
     Taro.navigateTo({ url: PAGE_BARGAIN_COUPON + '?id=' + id + '&share_id=' + share_id })
@@ -441,7 +400,7 @@ export default class BargainDetail extends Component {
 
 
   render() {
-    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, activityOver, activityBegin,
+    const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, activityOver,
       showBargainCurtain, helpBargainMoney, showPicCurtain, showShareMask, AuthorizationMask } = this.state
     const { user_bargain, count_down, picture, need_people_num } = bargainDetail
 
@@ -462,7 +421,7 @@ export default class BargainDetail extends Component {
 
           adList={picture}
           swiperHeight={300 * 2}
-          onClose={this.onClose.bind(this,'showPicCurtain')}
+          onClose={this.onClose.bind(this, 'showPicCurtain')}
           isOpened={showPicCurtain}
         />
 
@@ -475,7 +434,7 @@ export default class BargainDetail extends Component {
 
         {/* 帮砍成功弹窗 */}
         {showBargainCurtain && <View className='curtain-white'>
-          <AtCurtain isOpened onClose={this.onClose.bind(this,'showBargainCurtain')}>
+          <AtCurtain isOpened onClose={this.onClose.bind(this, 'showBargainCurtain')}>
             {/* <Board > */}
             <View className='p-3 at-row at-row__align--center at-row__justify--center' style={{ width: 'auto' }}>
               <Text className='text-bold text-huge'>已帮砍</Text>
@@ -511,7 +470,6 @@ export default class BargainDetail extends Component {
             <BargainDetailMainBlock
               onOpenPicCurtain={this.onOpenPicCurtain}
               bargainDetail={bargainDetail}
-              activityBegin={activityBegin}
               activityOver={activityOver}
               bargainSuccess={bargainSuccess}
             />

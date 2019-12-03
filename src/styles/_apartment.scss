@@ -99,6 +99,7 @@ image {
       padding: 2px * $hd 7px * $hd;
     }
 
+    // 砍价卡片
     &-bargain-card {
       .float-unit {
         top: -25px * $hd;
@@ -121,6 +122,12 @@ image {
         box-shadow: none;
       }
 
+      .btn-light-grey {
+        height: 30px * $hd !important;
+        line-height: 30px * $hd !important;
+        box-shadow: none;
+      }
+
       .at-countdown__item {
         .at-countdown__time-box {
           padding: 6px * $hd 4px * $hd;
@@ -133,7 +140,7 @@ image {
           }
         }
         .at-countdown__separator {
-          align-self : flex-end;
+          align-self: flex-end;
         }
       }
     }
@@ -211,11 +218,11 @@ image {
     }
 
     //砍价标识
-    &-bargain-tag{
+    &-bargain-tag {
       position: absolute;
       top: 55px * $hd;
       left: 0;
-      background: linear-gradient(to right,#F38435 , #EEBC49);
+      background: linear-gradient(to right, #f38435, #eebc49);
       padding: 3px * $hd 8px * $hd;
       border-radius: 0 12px * $hd 12px * $hd 0;
     }

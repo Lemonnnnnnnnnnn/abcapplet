@@ -78,7 +78,7 @@ class ApartmentShow extends Component {
     this.setState({ Id: id })
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     const { id } = this.$router.params
 
     this.props.dispatchCouponListPost({ ...PAYLOAD_COUPON_LIST, apartment_id: id }).then(({ data: { data } }) => {
@@ -128,7 +128,7 @@ class ApartmentShow extends Component {
         appointment_show_num: data.appointment_show_num,
         hotRules: data.hot_rules.map(i => ({ ...i, url: `${PAGE_ACTIVITY_APARTMENT}?id=${i.id}` })),
         num: data.num,
-        bargain: data.bargain,
+        bargainCardList: data.bargain,
       },
       map: {
         latitude: parseFloat(data.latitude),
@@ -147,6 +147,15 @@ class ApartmentShow extends Component {
           },
         }],
       }
+    })
+  }
+
+  //刷新砍价卡片
+  onReSetBargainCard() {
+    const { id } = this.$router.params
+    const { apartment } = this.state
+    this.props.dispatchApartmentShow({ id }).then(({ data: { data } }) => {
+      this.setState({ apartment: { ...apartment, bargainCardList: data.bargain } })
     })
   }
 
@@ -242,9 +251,8 @@ class ApartmentShow extends Component {
   render() {
     const { apartment, map, publicMatch_list, buttons, showLittleMask, nearbyPost, showCouponMask, showCouponTag, couponCutList, cityId } = this.state
     const { latitude, longitude, markers } = map
-    const {
-      title, swipers, isCollect, special, types, tags, desc, haveBargain,
-      notices, cbds, intro, rules, position, cover, num, id, bargain } = apartment
+    const { title, swipers, isCollect, special, types, tags, desc, notices, cbds, intro, rules,
+      position, cover, num, id, bargainCardList } = apartment
 
     const imageStyle = {
       width: Taro.pxTransform(600),
@@ -356,8 +364,13 @@ class ApartmentShow extends Component {
               </View>
 
               {/* 砍价 */}
-              {bargain.length && <View className='my-4'>
-                <ApartmentBargainCard title='本户型' bargain={bargain} />
+              {bargainCardList.length && <View className='my-4'>
+                <ApartmentBargainCard
+                  title='本公寓'
+                  bargainCardList={bargainCardList}
+
+                  onReSetBargainCard={this.onReSetBargainCard}
+                />
               </View>
               }
 
@@ -365,7 +378,6 @@ class ApartmentShow extends Component {
 
 
             {/* 户型列表 */}
-\
             {
               types &&
               <View className='mt-4 ml-3 scroll-X' >

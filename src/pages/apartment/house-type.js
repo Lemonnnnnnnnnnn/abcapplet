@@ -18,8 +18,6 @@ import ApartmentList from '@components/apartment-list'
 import ApartmentTypeItem from '@components/apartment-type-item'
 import CouponItem from '@components/coupon-item'
 
-// import ApartmentContainer from '#components/apartment-container'
-
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 // 自定义方法
@@ -182,7 +180,7 @@ class HouseTypeShow extends Component {
           has_room: data.has_room,
           num: data.num,
           discount_price_title: data.discount_price_title,
-          bargain: data.bargain,
+          bargainCardList: data.bargain,
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -204,8 +202,18 @@ class HouseTypeShow extends Component {
       })
     }
   }
-  // 电话客服/在线客服
 
+  //刷新砍价卡片
+  onReSetBargainCard() {
+    const { id } = this.$router.params
+    const { houstType } = this.state
+    this.props.dispatchHouseTypeShow({ id }).then(({ data: { data } }) => {
+      this.setState({ houstType: { ...houstType, bargainCardList: data.bargain } })
+    })
+  }
+
+
+  // 电话客服/在线客服
   onOpenLittleMask() {
     const { cityId } = this.state
     this.props.dispatchApartmentHouseDataPost({ type: 1, city_id: cityId })
@@ -255,7 +263,6 @@ class HouseTypeShow extends Component {
   onShowMap() {
     this.setState({ showMap: true })
   }
-
 
   // 路由跳转
   onNavigationApartment() {
@@ -368,7 +375,7 @@ class HouseTypeShow extends Component {
       descList, desc, roomList, isSign, cover,
       notices, cbds, intro, rules, facilitys, apartmentTitle,
       position, tags, cost_info, id, type_desc, has_room, num,
-      discount_price_title, apartmentId, bargain, haveBargain
+      discount_price_title, apartmentId, bargainCardList, haveBargain
     } = houstType
 
     let { priceTitle } = houstType
@@ -563,8 +570,13 @@ class HouseTypeShow extends Component {
                 </View>
               }
               {/* 砍价 */}
-              {bargain.length && <View className='my-4'>
-                <ApartmentBargainCard title='本户型' bargain={bargain} />
+              {bargainCardList.length && <View className='my-4'>
+                <ApartmentBargainCard
+                  title='本户型'
+                  bargainCardList={bargainCardList}
+
+                  onReSetBargainCard={this.onReSetBargainCard}
+                />
               </View>
               }
 
@@ -630,7 +642,6 @@ class HouseTypeShow extends Component {
                   onClick={this.onOpenMap}
                 >
                 </Map>
-
               }
 
               {/* 周边生活 & 附近交通 */}
@@ -640,8 +651,6 @@ class HouseTypeShow extends Component {
                   <View className='text-normal'>{cbds.join('、')}</View>
                 </View>
               </View>
-
-
 
 
               {/* 用户须知 */}
