@@ -6,7 +6,8 @@ import {
   TYPE_BARGAIN_HELP_CUT,
   TYPE_BARGAIN_CUT,
   TYPE_BARGAIN_DETAIL,
-  TYPE_BARGAIN_APPOINTMENT
+  TYPE_BARGAIN_APPOINTMENT,
+  TYPE_BARGAIN_GET_POSTER
 } from '@constants/bargain'
 import {
   API_BARGAIN_LIST,
@@ -14,7 +15,8 @@ import {
   API_BARGAIN_CUT,
   API_BARGAIN_HELP_CUT,
   API_BARGAIN_GET_COUPON,
-  API_BARGAIN_APPOINTMENT
+  API_BARGAIN_APPOINTMENT,
+  API_BARGAIN_GET_POSTER
 } from '@constants/api'
 
 // 获取砍价列表
@@ -77,4 +79,12 @@ export const dispatchBargainAppointment = payload =>createAction({
   method : 'POST',
   type : TYPE_BARGAIN_APPOINTMENT,
   url : API_BARGAIN_APPOINTMENT
+})
+
+// 砍价海报生成
+export const dispatchBargainGetPoster = payload =>createAction({
+  payload,
+  method : 'POST',
+  type : TYPE_BARGAIN_GET_POSTER,
+  url : API_BARGAIN_GET_POSTER
 })

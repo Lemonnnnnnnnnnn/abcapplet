@@ -19,7 +19,7 @@ export default class BargainTab extends BaseComponent {
 
     return (
       <Board shadow='black-shadow' fixed='bottom' border='top' customStyle={{ zIndex }}>
-        <View className=' p-2 at-row' style={{ width: 'auto' }}>
+        <View className=' p-2 at-row' style={{ width: 'auto', minHeight: Taro.pxTransform(62 * 2 - 16 * 2) }}>
           {
             bargainSuccess && <View className='at-col at-col-6  ml-2 text-normal position-relative'>
               {
@@ -38,7 +38,6 @@ export default class BargainTab extends BaseComponent {
                   circle
                   className={i.disabled ? 'btn-light-grey' : 'btn-bargain'}
                   disabled={i.disabled ? true : false}
-                  open-type={i.message === LOCALE_BARGAIN_SHARE ? 'share' : ''}
                   onClick={this.props.onClick.bind(this, i.method)}
                 >
                   {i.message}

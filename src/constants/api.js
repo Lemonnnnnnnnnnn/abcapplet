@@ -307,3 +307,6 @@ export const API_BARGAIN_GET_COUPON = `${HOST}/bargain/getCouponPost`
 
 // 预约砍价
 export const API_BARGAIN_APPOINTMENT = `${HOST}/bargain/appointmentBargainPost`
+
+// 获取砍价海报
+export const API_BARGAIN_GET_POSTER = `${HOST}/bargain/getPosterPost`

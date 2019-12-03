@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 import { AtCurtain } from 'taro-ui'
-import dayjs from 'dayjs'
+import base64src from '@utils/base64src'
 
 // redux相关
 import { connect } from '@tarojs/redux'
@@ -36,6 +36,7 @@ import BargainDetailSecBlock from '../components/bargain-detail-sec-block'
 import BargainDetailThirdBlock from '../components/bargain-detail-third-block'
 import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
+import BargainShareMask from '../components/bargain-share-mask'
 // import BargainAppointmentMask from '../components/bargain-appointment-mask'
 
 
@@ -54,7 +55,9 @@ export default class BargainDetail extends Component {
     buttons: [],
     showPicCurtain: false,
     showBargainCurtain: false,
-    showGetPhoneNumMask: false,
+    showShareMask: false,
+    AuthorizationMask: { show: false, type: '', customText: '' },
+    // (勿删)
     // showAppointment: false,
     helpBargainMoney: 0
   }
@@ -199,7 +202,7 @@ export default class BargainDetail extends Component {
 
 
       switch (Buttontype) {
-        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver }] } break;
+        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver }] } break;
         case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver }] } break;
         case 3: {
           buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: activityOver }]
@@ -211,21 +214,21 @@ export default class BargainDetail extends Component {
         case 5: {
           buttons = [
             { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
             { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
           ]
         } break;
         case 6: {
           buttons = [
             { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
             { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
           ]
         } break;
         case 7: {
           buttons = [
             { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
             { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
           ]
         } break;
@@ -233,7 +236,7 @@ export default class BargainDetail extends Component {
         case 8: {
           buttons = [
             { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onShare', disabled: activityOver },
+            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
             { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
           ]
         } break;
@@ -287,19 +290,20 @@ export default class BargainDetail extends Component {
 
   // 我也要砍
   async onBargain() {
+    !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
 
+    const { AuthorizationMask } = this.state
     // 判断用户是否已有手机号缓存
     await this.props.dispatchGetUserMsg().then(res => {
       if (res) {
         const mobile = res.data.data.user.mobile
         if (mobile) {
-          !Taro.getStorageSync('user_info').token && Taro.navigateTo({ url: PAGE_USER_AUTH })
           const { bargainDetail: { id } } = this.state
           this.props.dispatchBargainCut({ id }).then(response => {
             response.data && response.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
           })
         } else {
-          this.setState({ showGetPhoneNumMask: true })
+          this.setState({ AuthorizationMask: { ...AuthorizationMask, show: true, customText: '为方便您接收秒杀开启提醒通知，需同意授权手机号', type: 'getPhoneNumber' } })
         }
       }
     })
@@ -311,7 +315,6 @@ export default class BargainDetail extends Component {
     Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
   }
 
-  onShare() { }
 
   // 预约砍价
   onBargainAppointment() {
@@ -353,6 +356,7 @@ export default class BargainDetail extends Component {
     Taro.navigateTo({ url: PAGE_BARGAIN_COUPON + '?id=' + id + '&share_id=' + share_id })
   }
 
+  // 分享
   onShareAppMessage() {
     const { bargainDetail: { id, share_image, share_title }, userID, share_id } = this.state
     return {
@@ -362,30 +366,29 @@ export default class BargainDetail extends Component {
     }
   }
 
-  // 点击 我也要砍，分享，帮砍
-  onClick(method) {
-    this[method]()
-  }
+  // 获取保存海报
+  onGetPoster() {
+    const { bargainDetail: { id }, AuthorizationMask } = this.state
 
-  // 打开帮砍好友mask
-  onOpenHelpFriendsMask() {
-    this.setState({ showHelpFriends: true })
-  }
-  // 关闭帮砍好友mask
-  onCloseHelpFriendsMask() {
-    this.setState({ showHelpFriends: false })
-  }
+    Taro.getSetting().then(res => {
 
-  // 打开图片幕帘
-  onOpenPicCurtain() {
-    const { bargainDetail: { picture } } = this.state
-    picture.length && this.setState({ showPicCurtain: true })
-  }
+      const writePhotosAlbum = res.authSetting['scope.writePhotosAlbum']
+      writePhotosAlbum === false ?
+        this.setState({ AuthorizationMask: { ...AuthorizationMask, show: true, customText: '', type: 'writePhotosAlbum' }, showShareMask: false })
+        :
+        this.props.dispatchBargainGetPoster({ id }).then((result) => {
 
-  // 关闭幕帘
-  onCloseCurtain() {
-    this.setState({ showPicCurtain: false })
-    this.setState({ showBargainCurtain: false })
+          base64src("data:image/png;base64," + result.data.data.img).then(__filename => {
+            Taro.saveImageToPhotosAlbum({
+              filePath: __filename,
+              success: () => {
+                Taro.showToast({ title: '保存成功！', icon: 'none' })
+                this.setState({ showShareMask: false })
+              }
+            }).catch(err=>console.log(err))
+          })
+        })
+    }).catch(err => console.error(err))
   }
 
   // 获取手机号授权
@@ -405,16 +408,55 @@ export default class BargainDetail extends Component {
   }
   // 关闭手机号授权弹窗
   onClosePhoneMask() {
-    this.setState({ showGetPhoneNumMask: false })
+    const { AuthorizationMask } = this.state
+    this.setState({ AuthorizationMask: { ...AuthorizationMask, show: false } })
+  }
+
+  // 点击 我也要砍，分享，帮砍
+  onClick(method) {
+    this[method]()
+  }
+
+  // 打开分享弹窗
+  onOpenShareMask() {
+
+    this.setState({ showShareMask: true })
+  }
+
+  // 关闭分享弹窗
+  onCloseShareMask() {
+    this.setState({ showShareMask: false })
+  }
+
+  // 打开帮砍好友弹窗
+  onOpenHelpFriendsMask() {
+    this.setState({ showHelpFriends: true })
+  }
+  // 关闭帮砍好友弹窗
+  onCloseHelpFriendsMask() {
+    this.setState({ showHelpFriends: false })
+  }
+
+  // 打开图片幕帘
+  onOpenPicCurtain() {
+    const { bargainDetail: { picture } } = this.state
+    picture.length && this.setState({ showPicCurtain: true })
+  }
+
+  // 关闭幕帘
+  onCloseCurtain() {
+    this.setState({ showPicCurtain: false })
+    this.setState({ showBargainCurtain: false })
   }
 
   render() {
     const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, activityOver, activityBegin,
-      showBargainCurtain, helpBargainMoney, showPicCurtain, showGetPhoneNumMask } = this.state
+      showBargainCurtain, helpBargainMoney, showPicCurtain, showShareMask, AuthorizationMask } = this.state
     const { user_bargain, count_down, picture, need_people_num } = bargainDetail
 
     return (
       <View className='bargain wrap-Style'>
+
         {/* 帮砍好友 */}
         <BargainHelpFriendsMask
           user_bargain={user_bargain}
@@ -431,6 +473,13 @@ export default class BargainDetail extends Component {
           swiperHeight={300 * 2}
           onClose={this.onCloseCurtain}
           isOpened={showPicCurtain}
+        />
+
+        {/* 分享弹窗 */}
+        <BargainShareMask
+          onClose={this.onCloseShareMask}
+          onGetPoster={this.onGetPoster}
+          show={showShareMask}
         />
 
         {/* 帮砍成功弹窗 */}
@@ -452,12 +501,14 @@ export default class BargainDetail extends Component {
           show={showAppointment}
         /> */}
 
-        {/* 手机号码授权 */}
+        {/* 权限管理授权 */}
         <GetAuthorizationMask
-          type='getPhoneNumber'
+          type={AuthorizationMask.type}
+          customText={AuthorizationMask.customText}
+          show={AuthorizationMask.show}
+
           onClose={this.onClosePhoneMask}
-          show={showGetPhoneNumMask}
-          onFillPhone={this.getPhoneNumber}
+          onGetPhoneNumber={this.getPhoneNumber}
         />
 
         {/* 背景图 */}
