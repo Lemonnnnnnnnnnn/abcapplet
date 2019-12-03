@@ -22,9 +22,11 @@ import classNames from 'classnames'
 // Redux 相关
 import { connect } from '@tarojs/redux'
 import * as apartmentActions from '@actions/apartment'
+import * as userActions from '@actions/user'
 
 @connect(state => state, {
   ...apartmentActions,
+  ...userActions
 })
 
 class TabBar extends BaseComponent {
@@ -39,6 +41,12 @@ class TabBar extends BaseComponent {
     left: 10 * 2,
     bottom: 68 * 2,
     floatLayoutHeightNum: 80 * 2,
+    user: {
+      city_id: '',
+      username: '',
+      headimgurl: '',
+      sex: ''
+    }
   }
 
   state = {
@@ -74,7 +82,11 @@ class TabBar extends BaseComponent {
 
   render() {
     const { className, buttons, hasShare, show, hasContact, height, width, left, bottom, onOpenLittleMask,
-      showLittleMask, title, Id, type } = this.props
+      showLittleMask, title, Id, type, user } = this.props
+    const { city_id, username, headimgurl, sex } = user
+
+    const sessionFrom = { nickName: username, avatarUrl: headimgurl, sex, city: city_id }
+
 
 
     const littleMaskHeight = Taro.pxTransform(height)
@@ -128,7 +140,14 @@ class TabBar extends BaseComponent {
               <Button
                 className='Customer-button'
                 send-message-path={type === 'house' ? `${PAGE_HOUSE_TYPE_SHOW}?id=${Id}` : `${PAGE_APARTMENT_SHOW}?id=${Id}`}
-                open-type='contact' size='mini' plain style={buttonStyle} show-message-card bindcontact='handleContact' send-message-title={title}
+                open-type='contact'
+                size='mini'
+                plain
+                style={buttonStyle}
+                show-message-card
+                bindcontact='handleContact'
+                send-message-title={title}
+                session-from={JSON.stringify(sessionFrom)}
               >
                 <View className='text-normal at-row at-row__align--center at-row__justify--center' style={fontStyle}>{LOCALE_ONLINE_SERVICE}</View>
               </Button>

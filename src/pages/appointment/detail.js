@@ -32,6 +32,7 @@ import BaseComponent from '@components/base'
 import { connect } from '@tarojs/redux'
 import * as apartmentActions from '@actions/apartment'
 import * as appointmentActions from '@actions/appointment'
+import * as userActions from '@actions/user'
 
 import buryPoint from '../../utils/bury-point'
 import AppointmentDetailRoom from './components/appointment-detail-room'
@@ -41,12 +42,18 @@ import AppointmentDetailRoom from './components/appointment-detail-room'
 @connect(state => state, {
   ...apartmentActions,
   ...appointmentActions,
-
+  ...userActions
 })
 
 class AppointmentDetail extends BaseComponent {
   static defaultProps = {
     placeholer: 6,
+    user: {
+      city_id: '',
+      username: '',
+      headimgurl: '',
+      sex: ''
+    }
   }
   config = {
     navigationBarTitleText: '行程签约',
@@ -297,10 +304,16 @@ class AppointmentDetail extends BaseComponent {
 
 
   render() {
+    const { user } = this.props
     const { timeList, mobile, apartmentTitle, signTime, isSign, priceChecked,
       mobileChecked, roomListArr, roomChoise, userInputView, type_list, typeChoise } = this.state
 
     const house_type_list = type_list.map(i => i.title)
+
+    const { city_id, username, headimgurl, sex } = user
+
+    const sessionFrom = { nickName: username, avatarUrl: headimgurl, sex, city: city_id }
+
 
     return (
       <View className='inherit-Width appointment-detail' style={{ paddingTop: Taro.pxTransform(150), paddingBottom: Taro.pxTransform(60) }}>
@@ -436,7 +449,7 @@ class AppointmentDetail extends BaseComponent {
         </View>
 
         {/* 客服悬浮入口 */}
-        <Button open-type='contact' >
+        <Button open-type='contact'  session-from={JSON.stringify(sessionFrom)}>
           <Image lazyLoad className='appointment-fix-icon' src={CALL}></Image>
         </Button>
 

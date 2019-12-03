@@ -92,10 +92,7 @@ export default class BargainDetail extends Component {
           // 如果close_time 大于0 或close_time === -1，活动未结束
           if (close_time > 0) {
             // 如果close_time等于-1的时候不转化close_time,让其默认为最大值
-            days = timestampChange(close_time).days
-            hours = timestampChange(close_time).hours
-            minutes = timestampChange(close_time).minutes
-            seconds = timestampChange(close_time).seconds
+            ({days , hours , minutes , seconds}  = timestampChange(close_time))
           }
         } else {
           // 如果close_time小于等于0并且不等于-1, 活动已结束
@@ -465,7 +462,7 @@ export default class BargainDetail extends Component {
         <BargainContainer />
         <View className='bargain-background' >
 
-          <View className='bargain-body-wrap ' style={{ paddingBottom: Taro.pxTransform(75 * 2) }}>
+          <View className='bargain-body-wrap ' style={{ paddingBottom: Taro.pxTransform(130 * 2) }}>
             {/* 第一个板块 */}
             <BargainDetailMainBlock
               onOpenPicCurtain={this.onOpenPicCurtain}

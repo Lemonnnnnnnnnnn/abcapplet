@@ -3,6 +3,10 @@ import Taro from '@tarojs/taro'
 import { View, Button, Image, Text } from '@tarojs/components'
 import { AtDivider } from 'taro-ui'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
+
 // NPM 包
 import day from 'dayjs'
 
@@ -26,10 +30,18 @@ import {
 
 import { CREATE_ORDER_DIST } from '@constants/dist'
 
-
+@connect(state => state, {
+  ...userActions
+})
 class OrderDesc extends BaseComponent {
   static defaultProps = {
-    order: { coupon_price: {} }
+    order: { coupon_price: {} },
+    user: {
+      city_id: '',
+      username: '',
+      headimgurl: '',
+      sex: ''
+    }
   }
 
   onNavigation() {
@@ -44,7 +56,7 @@ class OrderDesc extends BaseComponent {
   }
 
   render() {
-    const { order, className } = this.props
+    const { order, className, user } = this.props
     const {
       name,
       price,
@@ -91,6 +103,10 @@ class OrderDesc extends BaseComponent {
 
     renderPriceCutOff = Object.keys(coupon_price).length && true
 
+    const { city_id, username, headimgurl, sex } = user
+
+    const sessionFrom = { nickName: username, avatarUrl: headimgurl, sex, city: city_id }
+
     return (
       <View className={className}>
         {/* 预订信息头部 */}
@@ -98,7 +114,7 @@ class OrderDesc extends BaseComponent {
           <View className='text-bold'>{LOCALE_SIGN_INFO}</View>
           <View>
             <View className='at-row at-row__align--center'>
-              <Button className='at-row btn-none p-0 text-small' open-type='contact' type='none'>
+              <Button className='at-row btn-none p-0 text-small' open-type='contact' session-from={JSON.stringify(sessionFrom)} type='none'>
                 <ABCIcon icon='headset_mic' color={COLOR_GREY_2} size='20' />
                 <View className='text-secondary ml-2'>{LOCALE_CONTACT}</View>
               </Button>

@@ -1,10 +1,11 @@
 // Taro 相关
 import Taro from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
-
-import ABCIcon from '@components/abc-icon'
-
 import { AtFloatLayout } from 'taro-ui'
+
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
 
 // 自定义常量
 import {
@@ -12,15 +13,19 @@ import {
   LOCALE_CONTACT_VIA_PHONE,
   LOCALE_CONSUMER_HOTLINE
 } from '@constants/locale'
-import { COLOR_GREY_2 } from '@constants/styles'
 
 
-// 自定义组件
-import Board from '@components/board'
-
-
+@connect(state => state, {
+  ...userActions
+})
 class CustomerServiceMask extends Taro.Component {
   static defaultProps = {
+    user: {
+      city_id: '',
+      username: '',
+      headimgurl: '',
+      sex: ''
+    }
   }
 
   onMaskTouchMove(e) {
@@ -32,7 +37,10 @@ class CustomerServiceMask extends Taro.Component {
   }
 
   render() {
-    let { show } = this.props
+    let { show ,user } = this.props
+    const { city_id, username, headimgurl, sex } = user
+
+    const sessionFrom = { nickName: username, avatarUrl: headimgurl, sex, city: city_id }
 
     const fontStyle = {
       padding: Taro.pxTransform(30),
@@ -53,6 +61,7 @@ class CustomerServiceMask extends Taro.Component {
       <AtFloatLayout isOpened={show} onClose={this.props.onClose}>
         <Button
           open-type='contact'
+          session-from={JSON.stringify(sessionFrom)}
           size='mini'
           plain
           bindcontact='handleContact'

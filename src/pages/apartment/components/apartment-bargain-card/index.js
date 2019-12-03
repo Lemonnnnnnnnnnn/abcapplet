@@ -5,6 +5,7 @@ import { AtCountdown, AtButton, AtIcon } from 'taro-ui'
 // redux相关
 import { connect } from '@tarojs/redux'
 import * as bargainActions from '@actions/bargain'
+import * as userActions from '@actions/user'
 
 // 自定义方法
 import { timestampChange } from '@utils/time-judge'
@@ -12,13 +13,16 @@ import { timestampChange } from '@utils/time-judge'
 // 自定义组件
 import Board from '@components/board'
 import BaseComponent from '@components/base'
+import GetAuthorizationMask from '@components/get-authorization-mask'
+
 // 自定义常量
 import { PAGE_BARGAIN_DETAIL, PAGE_BARGAIN_LIST, PAGE_USER_AUTH } from '@constants/page'
 
 // import '../../../../styles/_apartment.scss'
 
 @connect(state => state, {
-  ...bargainActions
+  ...bargainActions,
+  ...userActions
 })
 export default class ApartmentBargainCard extends BaseComponent {
   static defaultProps = {
@@ -32,7 +36,8 @@ export default class ApartmentBargainCard extends BaseComponent {
     seconds: 59,
     bargainList: [
       { id: 1, days: 99, hours: 23, minutes: 59, seconds: 59, price: '', activityBegain: true },
-    ]
+    ],
+    AuthorizationMask: { show: false, type: 'getPhoneNumber', customText: '为方便您接收秒杀开启提醒通知，需同意授权手机号' },
   }
   componentWillMount() {
     let { bargainCardList } = this.props
@@ -62,6 +67,11 @@ export default class ApartmentBargainCard extends BaseComponent {
     }
 
     this.setState({ bargainList })
+  }
+
+  async componentDidMount() {
+    const { code } = await Taro.login()
+    Taro.setStorageSync('code', code)
   }
 
   // 由于父组件更新props不走componentWillMount,不改变这里的state,所以要再componentWillReceiveProps里重新处理数据
@@ -141,29 +151,88 @@ export default class ApartmentBargainCard extends BaseComponent {
   }
 
   // 预约砍价
-  onBargainAppointment(id) {
+  async onBargainAppointment(cardId) {
+    // 缓存点击的卡片id，在获取完手机号，直接调用这个id进行请求预约砍价，减少一次用户点击
+    this.setState({ cardId })
+
     if (!Taro.getStorageSync('user_info').token) {
       Taro.navigateTo({ url: PAGE_USER_AUTH })
       return
     }
 
-    this.props.dispatchBargainAppointment({ bargain_id: id }).then(res => {
-      if (res.data.code === 1) {
-        Taro.showToast({ title: '已帮您预约，砍价活动开始我们将提醒您', icon: 'none' })
+    const { AuthorizationMask } = this.state
+    // 判断用户是否已有手机号缓存,没有手机号缓存请求授权
+    await this.props.dispatchGetUserMsg().then(res => {
+      if (res) {
+        const mobile = res.data.data.user.mobile
+        if (mobile) {
+          this.props.dispatchBargainAppointment({ bargain_id: cardId }).then(response => {
+            if (response.data.code === 1) {
+              setTimeout(() => Taro.showToast({ title: '已帮您预约，砍价活动开始我们将提醒您', icon: 'none' }), 700)
 
-        this.props.onReSetBargainCard()
+              this.props.onReSetBargainCard()
+            }
+          })
+        } else {
+          this.setState({
+            AuthorizationMask: {
+              ...AuthorizationMask,
+              show: true,
+            }
+          })
+        }
+
       }
     })
   }
 
+  // 获取手机号授权
+  async getPhoneNumber(e) {
+    const { cardId } = this.state
+
+    let code = Taro.getStorageSync('code')
+
+    const { encryptedData: encrypt_data, iv } = e.currentTarget
+    const urlCode = encodeURIComponent(code)
+    const urlEncrypt_data = encodeURIComponent(encrypt_data)
+    const urlIv = encodeURIComponent(iv)
+
+    iv && encrypt_data && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(() => {
+      this.onClosePhoneMask()
+      this.props.dispatchBargainAppointment({ bargain_id: cardId }).then(response => {
+        if (response.data.code === 1) {
+          setTimeout(() => Taro.showToast({ title: '已帮您预约，砍价活动开始我们将提醒您', icon: 'none' }), 700)
+
+          this.props.onReSetBargainCard()
+        }
+      }).catch(err => console.log(err))
+    })
+
+  }
+  // 关闭手机号授权弹窗
+  onClosePhoneMask() {
+    const { AuthorizationMask } = this.state
+    this.setState({ AuthorizationMask: { ...AuthorizationMask, show: false } })
+  }
+
+
   render() {
     const { title, bargainCardList } = this.props
-    const { bargainList } = this.state
+    const { bargainList, AuthorizationMask } = this.state
     let bargainID = []
     bargainCardList.map(i => bargainID.push(i.id))
 
     return (
       <View>
+        {/* 权限管理授权 */}
+        <GetAuthorizationMask
+          type={AuthorizationMask.type}
+          customText={AuthorizationMask.customText}
+          show={AuthorizationMask.show}
+
+          onClose={this.onClosePhoneMask}
+          onGetPhoneNumber={this.getPhoneNumber}
+        />
         {
           bargainList.length && bargainList.map(i =>
             <Board key={i.id} className='mb-4 apartment-house-type-bargain-card' shadow='black-shadow'>

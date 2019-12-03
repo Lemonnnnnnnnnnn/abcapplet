@@ -10,6 +10,9 @@ import Masks from '@components/masks'
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
 
 // 自定义常量
 import {
@@ -20,10 +23,20 @@ import {
 } from '@constants/locale'
 import { COLOR_GREY_2 } from '@constants/styles'
 
-class customerMask extends BaseComponent {
+
+@connect(state => state, {
+  ...userActions
+})
+class CustomerMask extends BaseComponent {
   static defaultProps = {
     show: false,
     apartments: [],
+    user: {
+      city_id: '',
+      username: '',
+      headimgurl: '',
+      sex: ''
+    }
   }
 
   onMaskTouchMove(e) {
@@ -35,7 +48,10 @@ class customerMask extends BaseComponent {
   }
 
   render() {
-    let { show } = this.props
+    let { show ,user } = this.props
+    const { city_id, username, headimgurl, sex } = user
+
+    const sessionFrom = { nickName: username, avatarUrl: headimgurl, sex, city: city_id }
 
     return show && <View className='apartment-mask'>
       {/* 主体内容 */}
@@ -64,7 +80,7 @@ class customerMask extends BaseComponent {
                 </View>
               </View>
 
-              <AtButton open-type='contact'  >
+              <AtButton open-type='contact' session-from={JSON.stringify(sessionFrom)} >
                 <View className='city-modal-item text-center p-2 text-secondary'>
                   {LOCALE_ONLINE_SERVICE}
                 </View>
@@ -80,4 +96,4 @@ class customerMask extends BaseComponent {
   }
 }
 
-export default customerMask
+export default CustomerMask

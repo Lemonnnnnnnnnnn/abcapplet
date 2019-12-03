@@ -2,6 +2,10 @@
 import Taro from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 
+// Redux 相关
+import { connect } from '@tarojs/redux'
+import * as userActions from '@actions/user'
+
 // 自定义组件
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
@@ -11,15 +15,27 @@ import OrderRoomItem from '@components/order-room-item'
 import { COLOR_GREY_2 } from '@constants/styles'
 import { LOCALE_CONTACT, LOCALE_SIGN_ROOM } from '@constants/locale'
 
+@connect(state => state, {
+  ...userActions
+})
 class OrderRoomList extends BaseComponent {
   static defaultProps = {
     show: false,
     rooms: [],
     selectId: 0,
+    user: {
+      city_id: '',
+      username: '',
+      headimgurl: '',
+      sex: ''
+    }
   }
 
   render() {
-    const { rooms, selectId, show, className } = this.props
+    const { rooms, selectId, show, className ,user } = this.props
+    const { city_id, username, headimgurl, sex } = user
+
+    const sessionFrom = { nickName: username, avatarUrl: headimgurl, sex, city: city_id }
 
     return (
       show && <View className={className}>
@@ -28,7 +44,7 @@ class OrderRoomList extends BaseComponent {
           <View className='text-bold'>{LOCALE_SIGN_ROOM}</View>
           <View>
             <View className='at-row at-row__align--center'>
-              <Button className='at-row btn-none p-0 text-small' open-type='contact' type='none'>
+              <Button className='at-row btn-none p-0 text-small' open-type='contact' session-from={JSON.stringify(sessionFrom)} type='none'>
                 <ABCIcon icon='headset_mic' color={COLOR_GREY_2} size='20' />
                 <View className='text-secondary ml-2'>{LOCALE_CONTACT}</View>
               </Button>
