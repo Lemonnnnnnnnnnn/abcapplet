@@ -295,6 +295,7 @@ export const API_USER_ACTIVITY = `${HOST}/user/myActivityPost`
 // 砍价相关
 // 获取砍价列表
 export const API_BARGAIN_LIST = `${HOST}/bargain/listPost`
+export const PAYLOAD_BARGAIN_LIST = {current_page: 1, page_size: 10}
 
 // 获取砍价详情
 export const API_BARGAIN_DETAIL = `${HOST}/bargain/detailPost`
@@ -308,4 +309,8 @@ export const API_BARGAIN_HELP_CUT = `${HOST}/bargain/helpCutPost`
 // 领取优惠券
 export const API_BARGAIN_GET_COUPON = `${HOST}/bargain/getCouponPost`
 
+// 预约砍价
+export const API_BARGAIN_APPOINTMENT = `${HOST}/bargain/appointmentBargainPost`
 
+// 获取砍价海报
+export const API_BARGAIN_GET_POSTER = `${HOST}/bargain/getPosterPost`

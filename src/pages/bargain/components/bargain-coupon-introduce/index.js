@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text, Button, Image } from '@tarojs/components';
+import { View,  Text } from '@tarojs/components';
 import { AtDivider } from 'taro-ui'
 
 import Board from '@components/board'

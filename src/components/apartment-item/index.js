@@ -30,6 +30,8 @@ import {
   LOCALE_QI,
 } from '@constants/locale'
 
+import '../../styles/_apartment.scss'
+
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
     type: '',
@@ -101,6 +103,7 @@ class ApartmentItem extends BaseComponent {
       price_title: priceTitle,
       apartment_title: apartmentTitle,
       num, is_sign, sub_title, one_word, discount_price_title,
+      bargain
     } = apartment
 
     const fontSize = mini ? Taro.pxTransform(20) : Taro.pxTransform(30)
@@ -155,9 +158,12 @@ class ApartmentItem extends BaseComponent {
 
           {/* 户型 cbd 列表 */}
           {
-            cbd && <View className='apartment-item-header-title' >
-              {cbdTitle}
-            </View>
+            cbd && <View className='apartment-item-header-title' >{cbdTitle} </View>
+          }
+
+          {/* 砍价标识 */}
+          {
+            bargain && <View className='apartment-item-bargain-tag text-small text-white'>砍价活动中</View>
           }
 
           {/* 户型种类，公寓类型是没有这个字段的 */}
@@ -168,7 +174,7 @@ class ApartmentItem extends BaseComponent {
             ?
             <View className='apartment-item-header-favorite mr-2 mt-2' onClick={this.onDeleteFavorite}>
               <View className='apartment-item-heart-wrap' >
-                <Image lazyLoad  className='apartment-item-heart' src={HEART_YELLOW} ></Image>
+                <Image lazyLoad className='apartment-item-heart' src={HEART_YELLOW} ></Image>
               </View>
               <View className='apartment-item-heart-num text-small' >{num}</View>
 

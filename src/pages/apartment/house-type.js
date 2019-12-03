@@ -9,8 +9,6 @@ import * as userActions from '@actions/user'
 import * as apartmentActions from '@actions/apartment'
 import * as adActions from '@actions/ad'
 
-// 自定义方法
-import { timestampChange } from '@utils/time-judge'
 
 // 自定义组件
 import Tag from '@components/tag'
@@ -92,9 +90,9 @@ class HouseTypeShow extends Component {
   }
 
 
-  async componentDidMount(){
+  async componentDidMount() {
     const { id } = this.$router.params
-    const { citycode } = await Taro.getStorage({key : 'user_info'})
+    const { citycode } = await Taro.getStorage({ key: 'user_info' })
 
     if (id) {
       const { data: { data } } = await this.props.dispatchHouseTypeShow({ id })
@@ -143,14 +141,6 @@ class HouseTypeShow extends Component {
       const currentHouseType = allHouseType.splice(firstIndex, 1)
       const all_houseType = currentHouseType.concat(allHouseType)
 
-
-      // 计算活动剩余时间
-      let [days, hours, minutes, seconds, haveBargain] = [99, 23, 59, 59, true]
-      if (data.bargain) {
-        const { close_time } = data.bargain
-        close_time > 0 ? { days, hours, minutes, seconds } = timestampChange(close_time) : {}
-      } else haveBargain = false
-
       data && this.setState({
         roomMatch_list: roomMatch_list,
         publicMatch_list: publicMatch_list,
@@ -192,8 +182,7 @@ class HouseTypeShow extends Component {
           has_room: data.has_room,
           num: data.num,
           discount_price_title: data.discount_price_title,
-          bargain: { ...data.bargain, days, hours, minutes, seconds },
-          haveBargain
+          bargain: data.bargain,
         },
         map: {
           latitude: parseFloat(data.latitude),
@@ -574,7 +563,10 @@ class HouseTypeShow extends Component {
                 </View>
               }
               {/* 砍价 */}
-              {haveBargain && <ApartmentBargainCard title='本户型' bargain={bargain} />}
+              {bargain.length && <View className='my-4'>
+                <ApartmentBargainCard title='本户型' bargain={bargain} />
+              </View>
+              }
 
 
               {/* 户型简介 */}

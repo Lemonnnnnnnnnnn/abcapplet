@@ -209,6 +209,17 @@ image {
         right: 5px * $hd;
       }
     }
+
+    //砍价标识
+    &-bargain-tag{
+      position: absolute;
+      top: 55px * $hd;
+      left: 0;
+      background: linear-gradient(to right,#F38435 , #EEBC49);
+      padding: 3px * $hd 8px * $hd;
+      border-radius: 0 12px * $hd 12px * $hd 0;
+    }
+
     // 爱心样式
     &-heart {
       width: 70px;

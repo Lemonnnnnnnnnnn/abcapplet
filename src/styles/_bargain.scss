@@ -17,10 +17,22 @@
 
     .main-block {
       &-image {
+        width: 118px * $hd;
+        height: 88px * $hd;
         position: relative;
         top: -50px;
         box-shadow: 0px 3px 6px #000;
+        &-mask {
+          background: linear-gradient(to bottom, rgba(71, 71, 71, 0), rgba(71, 71, 71, 0.8));
+          color: #fff;
+          position: absolute;
+          bottom: 0;
+          height: 24px * $hd;
+          width: 100%;
+          letter-spacing: 1px * $hd;
+        }
       }
+
       &-price {
         border: 1px solid rgba(213, 213, 213, 1);
         box-sizing: border-box;
@@ -132,6 +144,7 @@
   // 列表
   &-list {
     background: #fc8f4b;
+    min-height: 100vh;
     &-image {
       width: 126px * $hd;
       height: 94px * $hd;
@@ -150,13 +163,29 @@
         overflow: hidden;
       }
     }
+    &-end-tag {
+      background: rgba($color: #000000, $alpha: 0.5);
+      position: absolute;
+      left: -30px * $hd;
+      top: -5px * $hd;
+      transform: rotateZ(-45deg);
+      width: 100px * $hd;
+      height: 45px * $hd;
+      line-height: 55px * $hd;
+      z-index: 20;
+      letter-spacing: 1px * $hd;
+    }
   }
 
   // 详情
   &-detail {
-    &-image {
-      width: 118px * $hd;
-      height: 88px * $hd;
+    &-float-icon {
+      width: 78px * $hd;
+      height: 78px * $hd;
+      right: 10px * $hd;
+      bottom: 50px * $hd;
+      z-index: 10;
+      position: fixed;
     }
   }
 }

@@ -392,8 +392,11 @@ export const LOCALE_PEOPLE_HELP_BARGAIN = '人帮砍'
 export const LOCALE_BARGAIN_OVER = '活动已结束！'
 export const LOCALE_BARGAIN_ROOM = '砍价房间'
 export const LOCALE_BARGAIN_IMMEDIATE_PROVINCE = '立省'
-export const LOCALE_ACTIVITY_REMAIN_TIME = '活动剩余时间'
+export const LOCALE_ACTIVITY_REMAIN_TIME = '活动剩余时间：'
+export const LOCALE_ACTIVITY_START_TIME = '距离活动开始还剩：'
 export const LOCALE_BARGAIN_CURRENT_PRICE = '现价'
+export const LOCALE_BARGAIN_APPOINTMENT = '预约砍价'
+export const LOCALE_BARGAIN_APPOINTMENT_SUCCESS = '已预约砍价提醒'
 
 
 

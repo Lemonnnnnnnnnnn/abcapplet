@@ -5,3 +5,31 @@
     height: $hd * 80px;
   }
 }
+
+.curtain-white {
+  .at-curtain__container {
+    width: 65%;
+  }
+  .at-curtain__body {
+    background: #fff;
+    border-radius: $border-radius-small;
+  }
+}
+
+.bargain-activity-description {
+  .at-button {
+    line-height: 32px * $hd;
+    height: auto;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+// 砍价分享弹窗
+.bargain-mask-share {
+  // 样式覆盖
+  .at-button {
+    border: none;
+    color: #353535;
+  }
+}

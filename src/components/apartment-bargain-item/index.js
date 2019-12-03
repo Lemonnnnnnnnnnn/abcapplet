@@ -10,6 +10,8 @@ import BaseComponent from '@components/base'
 import { LOCALE_MONEY, LOCALE_QI, LOCALE_ORIGINAL_PRICE, LOCALE_COLON } from '@constants/locale'
 import { PAGE_BARGAIN_DETAIL } from '@constants/page'
 
+import '../../styles/_bargain.scss'
+
 export default class ApartmentBargainItem extends BaseComponent {
   static defaultProps = {
     imageHeight: 500,
@@ -25,7 +27,9 @@ export default class ApartmentBargainItem extends BaseComponent {
       apartment_type_title: '',
       no: '',
       type: '',
-      type_id: 0
+      type_id: 0,
+      end_time: -1,
+      status: 1,
     }
   }
 
@@ -36,18 +40,23 @@ export default class ApartmentBargainItem extends BaseComponent {
   }
 
   render() {
-    const { imageHeight, imageWidth, item, block } = this.props
-    const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id } = item
+    const { item, block } = this.props
+    const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id, end_time, bargain_status } = item
+
+    const endTag = (bargain_status === 0 || (end_time <= 0 && end_time != -1)) &&
+      <View className='bargain-list-end-tag text-small text-white text-center'>已结束</View>
+
     return (
-      <View className='pb-3' style={{ overflow: 'hidden' }} onClick={this.onNavigation.bind(this, { id, bargain_id, block })}>
-        <Board shadow='black-shadow'>
+      <View className='pb-3 ' onClick={this.onNavigation.bind(this, { id, bargain_id, block })}>
+        <Board shadow='black-shadow wrap-Style'>
+          {endTag}
           <View className='at-row p-2' style={{ width: 'auto' }}>
             {/* 左 image */}
             <View className='position-relative at-col at-col-5' >
               {/* 水平垂直居中 */}
               <View className='vertical-level-center '>
                 <View className='bargain-list-image' >
-                  <Image lazyLoad className='inherit-Width inherit-Height' mode='scaleToFill' src={`${cover}`}></Image>
+                  <Image lazyLoad className='inherit-Width inherit-Height' mode='scaleToFill' src={cover}></Image>
                   <View className='bargain-list-image-mask text-center text-small'>{participate_num}</View>
                 </View>
               </View>
@@ -63,7 +72,7 @@ export default class ApartmentBargainItem extends BaseComponent {
 
               <View className='at-row at-row__align--center mt-1'>
                 {cbd.map(i =>
-                  <View key={i} className='at-col at-col-1 at-col--auto at-col--wrap  mr-2 tag--grey--1 bargain-tag text-small'>{i.title}</View>
+                  <View key={i} className='at-col at-col-1 at-col--auto mr-2 tag--grey--1 bargain-tag text-small '>{i.title}</View>
                 )}
               </View>
               <View className='at-row at-row__justify--between at-row__align--center mt-1'>
