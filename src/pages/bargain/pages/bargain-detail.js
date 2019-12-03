@@ -385,7 +385,7 @@ export default class BargainDetail extends Component {
                 Taro.showToast({ title: '保存成功！', icon: 'none' })
                 this.setState({ showShareMask: false })
               }
-            }).catch(err=>console.log(err))
+            }).catch(err => console.log(err))
           })
         })
     }).catch(err => console.error(err))
@@ -419,22 +419,12 @@ export default class BargainDetail extends Component {
 
   // 打开分享弹窗
   onOpenShareMask() {
-
     this.setState({ showShareMask: true })
-  }
-
-  // 关闭分享弹窗
-  onCloseShareMask() {
-    this.setState({ showShareMask: false })
   }
 
   // 打开帮砍好友弹窗
   onOpenHelpFriendsMask() {
     this.setState({ showHelpFriends: true })
-  }
-  // 关闭帮砍好友弹窗
-  onCloseHelpFriendsMask() {
-    this.setState({ showHelpFriends: false })
   }
 
   // 打开图片幕帘
@@ -443,11 +433,12 @@ export default class BargainDetail extends Component {
     picture.length && this.setState({ showPicCurtain: true })
   }
 
-  // 关闭幕帘
-  onCloseCurtain() {
-    this.setState({ showPicCurtain: false })
-    this.setState({ showBargainCurtain: false })
+
+  // 关闭弹窗/幕帘
+  onClose(state) {
+    this.setState({ [state]: false })
   }
+
 
   render() {
     const { showHelpFriends, buttons, bargainSuccess, bargainDetail, Buttontype, activityOver, activityBegin,
@@ -461,7 +452,7 @@ export default class BargainDetail extends Component {
         <BargainHelpFriendsMask
           user_bargain={user_bargain}
           show={showHelpFriends}
-          onClose={this.onCloseHelpFriendsMask}
+          onClose={this.onClose}
           activityOver={activityOver}
         />
         {/* 图片弹窗 */}
@@ -471,20 +462,20 @@ export default class BargainDetail extends Component {
 
           adList={picture}
           swiperHeight={300 * 2}
-          onClose={this.onCloseCurtain}
+          onClose={this.onClose.bind(this,'showPicCurtain')}
           isOpened={showPicCurtain}
         />
 
         {/* 分享弹窗 */}
         <BargainShareMask
-          onClose={this.onCloseShareMask}
+          onClose={this.onClose}
           onGetPoster={this.onGetPoster}
           show={showShareMask}
         />
 
         {/* 帮砍成功弹窗 */}
         {showBargainCurtain && <View className='curtain-white'>
-          <AtCurtain isOpened onClose={this.onCloseCurtain}>
+          <AtCurtain isOpened onClose={this.onClose.bind(this,'showBargainCurtain')}>
             {/* <Board > */}
             <View className='p-3 at-row at-row__align--center at-row__justify--center' style={{ width: 'auto' }}>
               <Text className='text-bold text-huge'>已帮砍</Text>

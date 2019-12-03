@@ -56,8 +56,6 @@ export default class BargainDetailMainBlock extends BaseComponent {
     const { apartment_title, apartment_type_title, cover, original_price, participate_num, price, picture,
       save_money, tenancy = 12, no, days, hours, minutes, seconds } = bargainDetail
 
-    // console.log(activityOver)
-
     let { headimg } = bargainDetail
     const headImgRender = headimg && headimg.slice(0, 5)
     const tenancyRender = '（租期' + tenancy + '个月）'

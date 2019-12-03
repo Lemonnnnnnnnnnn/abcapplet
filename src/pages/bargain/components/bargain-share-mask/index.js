@@ -20,8 +20,8 @@ export default class BargainShareMask extends BaseComponent {
     const wrapStyle = {
       zIndex: 12,
       minWidth: '90%',
-       bottom: Taro.pxTransform(50),
-       top : 'auto'
+      bottom: Taro.pxTransform(50),
+      top: 'auto'
     }
     return (show &&
       <Mask show >
@@ -31,7 +31,7 @@ export default class BargainShareMask extends BaseComponent {
             <AtDivider height='30' lineColor='#DDDDE1' />
             <AtButton onClick={this.props.onGetPoster}>生成长图分享</AtButton>
             <AtDivider height='30' lineColor='#DDDDE1' />
-            <AtButton onClick={this.props.onClose}>取消</AtButton>
+            <AtButton onClick={this.props.onClose.bind(this, 'showShareMask')}>取消</AtButton>
           </Board>
         </View>
       </Mask>
