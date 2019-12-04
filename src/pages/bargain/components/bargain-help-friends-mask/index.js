@@ -30,7 +30,7 @@ export default class BargainHelpFriendsMask extends BaseComponent {
           <View className='mb-3'>
 
             <AtIcon
-              onClick={this.props.onClose.bind(this,'showHelpFriends')}
+              onClick={this.props.onClose.bind(this, 'showHelpFriends')}
               value='close'
               size='22'
               className='p-2 '
@@ -64,7 +64,10 @@ export default class BargainHelpFriendsMask extends BaseComponent {
           >{LOCALE_BARGAIN_SHARE}</AtButton>}
 
         </Board>
-        <Masks customStyle={{ zIndex: 11 }} show />
+
+        <View onClick={this.props.onClose.bind(this, 'showHelpFriends')}>
+          <Masks customStyle={{ zIndex: 11 }} show />
+        </View>
       </View>
     );
   }

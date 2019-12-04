@@ -107,10 +107,15 @@ export default class ApartmentBargainCard extends BaseComponent {
 
 
   onTimeUp(id, count_down) {
+    // 获取初始数组bargainCardLis用于处理 活动已开始=>结束 的状态
     const { bargainCardList } = this.props
+    // 获取先前处理的数组bargainListt用于处理 活动未开始=>已开始 的状态
     const { bargainList } = this.state
+    // 不改变原始数组，赋值给两个新值进行处理
     let newBargainCardList = bargainCardList
     let newBargainList = bargainList
+
+    // 设置一个数组来放处理后的数组
     let finalbargainList = []
 
     // 如果count_down===0 ，说明当前砍价活动已开始，倒计时结束，从原数组中去掉结束的数组，重新拿取前两个砍价活动出来渲染
@@ -217,7 +222,7 @@ export default class ApartmentBargainCard extends BaseComponent {
 
 
   render() {
-    const { title, bargainCardList } = this.props
+    const { bargainCardList } = this.props
     const { bargainList, AuthorizationMask } = this.state
     let bargainID = []
     bargainCardList.map(i => bargainID.push(i.id))
@@ -241,7 +246,9 @@ export default class ApartmentBargainCard extends BaseComponent {
                 {/* 绝对定位 户型房间 和砍价时间 */}
                 <View className='position-relative' style={{ minHeight: Taro.pxTransform(20) }}>
                   <View className='position-absolute at-row at-row__justify--around at-row__align--end float-unit' >
-                    <Text className='text-small tag tag--black'>{title}</Text>
+                    {i.type === 1 && <Text className='text-small tag tag--black'>本公寓</Text>}
+                    {i.type === 2 && <Text className='text-small tag tag--black'>本户型</Text>}
+                    {i.type === 3 && <Text className='text-small tag tag--black'>房号: {i.type_id}</Text>}
                     <View className='at-col at-col-8'>
                       <AtCountdown
                         isCard

@@ -92,6 +92,19 @@
     }
   }
 
+  // 分享弹窗
+  &-mask-share {
+    width: 90%;
+    margin-left: 5%;
+    bottom: 25px * $hd;
+    top: auto;
+    // 样式覆盖
+    .at-button {
+      border: none;
+      color: #353535;
+    }
+  }
+
   // 代金券
   &-coupon-card {
     .leftPart {

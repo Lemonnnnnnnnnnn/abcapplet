@@ -572,9 +572,7 @@ class HouseTypeShow extends Component {
               {/* 砍价 */}
               {bargainCardList.length && <View className='my-4'>
                 <ApartmentBargainCard
-                  title='本户型'
                   bargainCardList={bargainCardList}
-
                   onReSetBargainCard={this.onReSetBargainCard}
                 />
               </View>

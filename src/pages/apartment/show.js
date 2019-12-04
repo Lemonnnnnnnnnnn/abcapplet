@@ -366,16 +366,12 @@ class ApartmentShow extends Component {
               {/* 砍价 */}
               {bargainCardList.length && <View className='my-4'>
                 <ApartmentBargainCard
-                  title='本公寓'
                   bargainCardList={bargainCardList}
-
                   onReSetBargainCard={this.onReSetBargainCard}
                 />
               </View>
               }
-
             </View>
-
 
             {/* 户型列表 */}
             {

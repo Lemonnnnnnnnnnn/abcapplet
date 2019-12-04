@@ -17,24 +17,24 @@ export default class BargainShareMask extends BaseComponent {
 
   render() {
     const { show } = this.props
-    const wrapStyle = {
-      zIndex: 12,
-      minWidth: '90%',
-      bottom: Taro.pxTransform(50),
-      top: 'auto'
-    }
     return (show &&
-      <Mask show >
-        <View onTouchMove={this.onMaskTouchMove} className='level-center position-fixed bargain-mask-share' style={wrapStyle}>
-          <Board className='p-3' >
-            <AtButton open-type='share' >分享给好友</AtButton>
-            <AtDivider height='30' lineColor='#DDDDE1' />
-            <AtButton onClick={this.props.onGetPoster}>生成长图分享</AtButton>
-            <AtDivider height='30' lineColor='#DDDDE1' />
-            <AtButton onClick={this.props.onClose.bind(this, 'showShareMask')}>取消</AtButton>
+      <View>
+        {/* onTouchMove方法不能用在自定义组件上，在外套一层View */}
+        <View onTouchMove={this.onMaskTouchMove} >
+          <Board className='bargain-mask-share' fixed='bottom' >
+            {/* 内边距 */}
+            <View className='p-3'>
+              <AtButton open-type='share' >分享给好友</AtButton>
+              <AtDivider height='30' lineColor='#DDDDE1' />
+              <AtButton onClick={this.props.onGetPoster}>生成长图分享</AtButton>
+              <AtDivider height='30' lineColor='#DDDDE1' />
+              <AtButton onClick={this.props.onClose.bind(this, 'showShareMask')}>取消</AtButton>
+            </View>
           </Board>
         </View>
-      </Mask>
+
+        <View onClick={this.props.onClose.bind(this, 'showShareMask')}><Mask show /></View>
+      </View>
     )
   }
 }
