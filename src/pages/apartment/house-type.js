@@ -203,6 +203,10 @@ class HouseTypeShow extends Component {
     }
   }
 
+  componentDidShow(){
+    this.onReSetBargainCard()
+  }
+
   //刷新砍价卡片
   onReSetBargainCard() {
     const { id } = this.$router.params

@@ -150,6 +150,10 @@ class ApartmentShow extends Component {
     })
   }
 
+  componentDidShow(){
+    this.onReSetBargainCard()
+  }
+
   //刷新砍价卡片
   onReSetBargainCard() {
     const { id } = this.$router.params
@@ -380,7 +384,6 @@ class ApartmentShow extends Component {
 
                 <ScrollView scrollX>
                   {types.map(i =>
-
                     <View style={imageStyle} key={i.id} className='at-col at-col-5 mt-1 display-inline-block' >
                       <View className='apartment-type-item-wrap' >
                         <ApartmentTypeItem item={i} />

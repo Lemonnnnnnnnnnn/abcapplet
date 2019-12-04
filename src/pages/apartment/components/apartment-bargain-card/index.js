@@ -151,7 +151,13 @@ export default class ApartmentBargainCard extends BaseComponent {
     this.setState({ bargainList: finalbargainList })
   }
 
+  // 马上砍
   onNavigation(id) {
+    if (!Taro.getStorageSync('user_info').token) {
+      Taro.navigateTo({ url: PAGE_USER_AUTH })
+      return
+    }
+
     Taro.navigateTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
   }
 
@@ -248,7 +254,7 @@ export default class ApartmentBargainCard extends BaseComponent {
                   <View className='position-absolute at-row at-row__justify--around at-row__align--end float-unit' >
                     {i.type === 1 && <Text className='text-small tag tag--black'>本公寓</Text>}
                     {i.type === 2 && <Text className='text-small tag tag--black'>本户型</Text>}
-                    {i.type === 3 && <Text className='text-small tag tag--black'>房号: {i.type_id}</Text>}
+                    {i.type === 3 && <Text className='text-small tag tag--black'>房号: {i.room_no}</Text>}
                     <View className='at-col at-col-8'>
                       <AtCountdown
                         isCard

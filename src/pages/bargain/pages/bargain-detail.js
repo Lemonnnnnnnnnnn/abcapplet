@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 import { AtCurtain } from 'taro-ui'
-import base64src from '@utils/base64src'
 
 // redux相关
 import { connect } from '@tarojs/redux'
@@ -11,6 +10,9 @@ import * as userActions from '@actions/user'
 // 自定义方法
 import { timestampChange } from '@utils/time-judge'
 import textWrap from '@utils/text-wrap'
+import base64src from '@utils/base64src'
+// npm包
+import queryString from 'query-string'
 
 // 自定义常量
 import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL, PAGE_USER_AUTH, PAGE_HOME } from '@constants/page'
@@ -36,7 +38,6 @@ import BargainDetailBargainingBlock from '../components/bargain-detail-bargainin
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
 import BargainShareMask from '../components/bargain-share-mask'
 // import BargainAppointmentMask from '../components/bargain-appointment-mask'
-
 
 @connect(state => state, {
   ...bargainActions,
@@ -71,8 +72,9 @@ export default class BargainDetail extends Component {
   }
 
   async initState() {
-    const { id, share_id } = this.$router.params
-    let [buttons, userID] = [[], 0]
+    let { id, share_id, scene } = this.$router.params
+
+    let [buttons, userID, decodeScene] = [[], 0, '',]
     await this.props.dispatchGetUserMsg().then(res => {
       if (res) {
         const { data: { data } } = res
@@ -80,176 +82,186 @@ export default class BargainDetail extends Component {
       }
     })
 
-    this.props.dispatchBargainDetail({ id: parseInt(id), share_id }).then(({ data: { data } }) => {
-      const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num,
-        price, price_list, is_cut, is_record, reward_id, save_money, tenancy, type, type_id, begin_time, no, status,
-        close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num } = data
+    if (scene) {
+      decodeScene = decodeURIComponent(scene)
+      id = queryString.parse(decodeScene).id
+      share_id = queryString.parse(decodeScene).shareUserId
+    }
 
-      // 计算活动剩余时间/活动开始时间
-      let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
+    this.props.dispatchBargainDetail({
+      id: parseInt(id),
+      share_id: share_id
+    })
+      .then(({ data: { data } }) => {
+        const { apartment_title, apartment_type_title, content, cover, headimg, original_price, participate_num,
+          price, price_list, is_cut, is_record, reward_id, save_money, tenancy, type, type_id, begin_time, no, status,
+          close_time, user_bargain, share_title, share_image, count_down, picture, need_people_num } = data
 
-      if (close_time > 0 || close_time === -1) {
-        // 如果close_time 大于0 或close_time === -1，活动未结束
-        if (close_time > 0) {
-          // 如果close_time等于-1的时候不转化close_time,让其默认为最大值
-          ({ days, hours, minutes, seconds } = timestampChange(close_time))
+        // 计算活动剩余时间/活动开始时间
+        let [days, hours, minutes, seconds, activityOver, bargainSuccess] = [99, 23, 59, 59, false, false]
+
+        if (close_time > 0 || close_time === -1) {
+          // 如果close_time 大于0 或close_time === -1，活动未结束
+          if (close_time > 0) {
+            // 如果close_time等于-1的时候不转化close_time,让其默认为最大值
+            ({ days, hours, minutes, seconds } = timestampChange(close_time))
+          }
+        } else {
+          // 如果close_time小于等于0并且不等于-1, 活动已结束
+          activityOver = true
         }
-      } else {
-        // 如果close_time小于等于0并且不等于-1, 活动已结束
-        activityOver = true
-      }
 
-      activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
-      status === 0 && (Taro.showToast({ title: '活动已关闭！', icon: 'none' }), activityOver = true)
+        activityOver && Taro.showToast({ title: '活动已结束！', icon: 'none' })
+        status === 0 && (Taro.showToast({ title: '活动已关闭！', icon: 'none' }), activityOver = true)
 
-      // 给buttons赋值
-      // Buttontype = 1  button : [分享]          本人/已参加
-      // Buttontype = 2  button : [我也要砍]      本人/未参加
-      // Buttontype = 3  button : [领取优惠券（亮）]    本人/已参加=>已成功  未领取优惠券
-      // Buttontype = 4  button : [领取优惠券（灰）]    本人/已参加=>已成功  已领取优惠券
+        // 给buttons赋值
+        // Buttontype = 1  button : [分享]          本人/已参加
+        // Buttontype = 2  button : [我也要砍]      本人/未参加
+        // Buttontype = 3  button : [领取优惠券（亮）]    本人/已参加=>已成功  未领取优惠券
+        // Buttontype = 4  button : [领取优惠券（灰）]    本人/已参加=>已成功  已领取优惠券
 
-      // Buttontype = 5  button : [我也要砍，帮砍，分享]               他人/未参加
-      // Buttontype = 6  button : [我也要砍，已帮砍（灰），分享]        他人/已砍价/未发起
-      // Buttontype = 7  button : [我的砍价，已帮砍（灰），分享]        他人/已砍价/已发起
-      // Buttontype = 8  button : [我的砍价，帮砍，分享]        他人/未砍价/已发起
+        // Buttontype = 5  button : [我也要砍，帮砍，分享]               他人/未参加
+        // Buttontype = 6  button : [我也要砍，已帮砍（灰），分享]        他人/已砍价/未发起
+        // Buttontype = 7  button : [我的砍价，已帮砍（灰），分享]        他人/已砍价/已发起
+        // Buttontype = 8  button : [我的砍价，帮砍，分享]        他人/未砍价/已发起
 
-      let Buttontype = 0
-      // 如果倒计时未结束
+        let Buttontype = 0
+        // 如果倒计时未结束
 
-      if (share_id) {
-        if (parseInt(share_id) === userID) {
-          // 本人
+        if (share_id) {
+          if (parseInt(share_id) === userID) {
+            // 本人
+            if (user_bargain) {
+              // 本人 已参加
+              if (user_bargain.status === 1) {
+                // 本人 已参加 已砍价完成   是否已领取优惠券
+                user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
+              } else {
+                // 本人 已参加 未砍价完成
+                Buttontype = Buttontype = 1
+              }
+            }
+            // 本人 未参加
+            else {
+              Buttontype = 2
+            }
+          } else {
+            // 非本人  type = 5-8
+
+            // 未砍 & 没有记录
+            if (!is_cut && !is_record) { Buttontype = 5 }
+
+            // 已砍 & 没有记录
+            if (is_cut && !is_record) { Buttontype = 6 }
+
+            // 已砍 & 有记录
+            if (is_cut && is_record) { Buttontype = 7 }
+
+            //未砍 & 有记录
+            if (!is_cut && is_record) { Buttontype = 8 }
+
+          }
+        }
+        else {
           if (user_bargain) {
             // 本人 已参加
             if (user_bargain.status === 1) {
               // 本人 已参加 已砍价完成   是否已领取优惠券
               user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
             } else {
-              // 本人 已参加 未砍价完成
+              //  本人 已参加  未砍价完成
               Buttontype = Buttontype = 1
             }
-          }
-          // 本人 未参加
+          } // 本人 未参加
           else {
+            // 如果倒计时已结束
             Buttontype = 2
           }
-        } else {
-          // 非本人  type = 5-8
-
-          // 未砍 & 没有记录
-          if (!is_cut && !is_record) { Buttontype = 5 }
-
-          // 已砍 & 没有记录
-          if (is_cut && !is_record) { Buttontype = 6 }
-
-          // 已砍 & 有记录
-          if (is_cut && is_record) { Buttontype = 7 }
-
-          //未砍 & 有记录
-          if (!is_cut && is_record) { Buttontype = 8 }
-
         }
-      }
-      else {
-        if (user_bargain) {
-          // 本人 已参加
-          if (user_bargain.status === 1) {
-            // 本人 已参加 已砍价完成   是否已领取优惠券
-            user_bargain.is_receive ? Buttontype = 4 : Buttontype = 3
-          } else {
-            //  本人 已参加  未砍价完成
-            Buttontype = Buttontype = 1
-          }
-        } // 本人 未参加
-        else {
-          // 如果倒计时已结束
-          Buttontype = 2
+
+
+        switch (Buttontype) {
+          case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver }] } break;
+          case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver }] } break;
+          case 3: {
+            buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: activityOver }]
+          } break;
+          case 4: {
+            buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: true }]
+            bargainSuccess = true
+          } break;
+          case 5: {
+            buttons = [
+              { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
+              { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
+              { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
+            ]
+          } break;
+          case 6: {
+            buttons = [
+              { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
+              { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
+              { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
+            ]
+          } break;
+          case 7: {
+            buttons = [
+              { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
+              { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
+              { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
+            ]
+          } break;
+
+          case 8: {
+            buttons = [
+              { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
+              { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
+              { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
+            ]
+          } break;
         }
-      }
 
+        this.setState({
+          bargainDetail: {
+            apartment_title,
+            apartment_type_title,
+            picture: picture.map(i => ({ cover: i })),
+            content,
+            cover,
+            headimg,
+            original_price,
+            participate_num,
+            price,
+            price_list,
+            reward_id,
+            save_money,
+            tenancy,
+            type,
+            type_id,
+            id: data.id,
+            close_time,
+            begin_time,
+            count_down,
+            no,
+            user_bargain,
+            share_title,
+            share_image,
+            need_people_num,
 
-      switch (Buttontype) {
-        case 1: { buttons = [{ message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver }] } break;
-        case 2: { buttons = [{ message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver }] } break;
-        case 3: {
-          buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: activityOver }]
-        } break;
-        case 4: {
-          buttons = [{ message: LOCALE_COUPON_RECEIVE, method: 'onReceiveCoupon', disabled: true }]
-          bargainSuccess = true
-        } break;
-        case 5: {
-          buttons = [
-            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
-            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
-          ]
-        } break;
-        case 6: {
-          buttons = [
-            { message: LOCALE_BARGAIN_I_WANT, method: 'onBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
-            { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
-          ]
-        } break;
-        case 7: {
-          buttons = [
-            { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
-            { message: LOCALE_BARGAIN_HELP_HAVEN, method: 'onHelpBargain', disabled: true }
-          ]
-        } break;
+            days,
+            hours,
+            minutes,
+            seconds,
 
-        case 8: {
-          buttons = [
-            { message: LOCALE_BARGAIN_VIEW_MINE, method: 'onViewMineBargain', disabled: activityOver },
-            { message: LOCALE_BARGAIN_SHARE, method: 'onOpenShareMask', disabled: activityOver },
-            { message: LOCALE_BARGAIN_HELP, method: 'onHelpBargain', disabled: activityOver }
-          ]
-        } break;
-      }
-
-      this.setState({
-        bargainDetail: {
-          apartment_title,
-          apartment_type_title,
-          picture: picture.map(i => ({ cover: i })),
-          content,
-          cover,
-          headimg,
-          original_price,
-          participate_num,
-          price,
-          price_list,
-          reward_id,
-          save_money,
-          tenancy,
-          type,
-          type_id,
-          id: data.id,
-          close_time,
-          begin_time,
-          count_down,
-          no,
-          user_bargain,
-          share_title,
-          share_image,
-          need_people_num,
-
-          days,
-          hours,
-          minutes,
-          seconds,
-
-        },
-        buttons,
-        Buttontype,
-        bargainSuccess,
-        activityOver,
-        share_id,
-        userID
+          },
+          buttons,
+          Buttontype,
+          bargainSuccess,
+          activityOver,
+          share_id,
+          userID,
+        })
       })
-    })
   }
 
   // 我也要砍
@@ -259,21 +271,26 @@ export default class BargainDetail extends Component {
       return
     }
 
-    const { AuthorizationMask } = this.state
-    // 判断用户是否已有手机号缓存
-    await this.props.dispatchGetUserMsg().then(res => {
-      if (res) {
-        const mobile = res.data.data.user.mobile
-        if (mobile) {
-          const { bargainDetail: { id } } = this.state
-          this.props.dispatchBargainCut({ id }).then(response => {
-            response.data && response.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
-          })
-        } else {
-          this.setState({ AuthorizationMask: { ...AuthorizationMask, show: true, customText: '为方便您接收秒杀开启提醒通知，需同意授权手机号', type: 'getPhoneNumber' } })
-        }
-      }
+    const { bargainDetail: { id } } = this.state
+    this.props.dispatchBargainCut({ id }).then(response => {
+      response.data && response.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
     })
+
+    // const { AuthorizationMask } = this.state
+    // 判断用户是否已有手机号缓存 （暂时隐藏）
+    // await this.props.dispatchGetUserMsg().then(res => {
+    //   if (res) {
+    //     const mobile = res.data.data.user.mobile
+    //     if (mobile) {
+    //       const { bargainDetail: { id } } = this.state
+    //       this.props.dispatchBargainCut({ id }).then(response => {
+    //         response.data && response.data.code === 1 && Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id })
+    //       })
+    //     } else {
+    //       this.setState({ AuthorizationMask: { ...AuthorizationMask, show: true, customText: '为方便您接收秒杀开启提醒通知，需同意授权手机号', type: 'getPhoneNumber' } })
+    //     }
+    //   }
+    // })
   }
 
   // 查看自己的砍价
@@ -290,12 +307,12 @@ export default class BargainDetail extends Component {
       return
     }
 
-    const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id } = this.state
+    const { bargainDetail: { user_bargain: { bargain_record_id }, id }, share_id, userID } = this.state
     this.props.dispatchBargainHelpCut({ bargain_record_id }).then(res => {
       if (res.data && res.data.code === 1) {
         this.setState({ showBargainCurtain: true, helpBargainMoney: res.data.data[0].price })
         setTimeout(() => {
-          Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + share_id })
+          Taro.redirectTo({ url: PAGE_BARGAIN_DETAIL + '?id=' + id + '&share_id=' + share_id || userID })
         }, 2000)
       }
     })
@@ -308,8 +325,8 @@ export default class BargainDetail extends Component {
       return
     }
 
-    const { bargainDetail: { id }, share_id } = this.state
-    Taro.navigateTo({ url: PAGE_BARGAIN_COUPON + '?id=' + id + '&share_id=' + share_id })
+    const { bargainDetail: { id }, share_id, userID } = this.state
+    Taro.navigateTo({ url: PAGE_BARGAIN_COUPON + '?id=' + id + '&share_id=' + share_id || userID })
   }
 
   // 分享
@@ -347,22 +364,21 @@ export default class BargainDetail extends Component {
     }).catch(err => console.error(err))
   }
 
-  // 获取手机号授权
-  async getPhoneNumber(e) {
-    let code = Taro.getStorageSync('code')
+  // 获取手机号授权 （暂时隐藏）
+  // async getPhoneNumber(e) {
+  //   let code = Taro.getStorageSync('code')
 
-    const { encryptedData: encrypt_data, iv } = e.currentTarget
-    const urlCode = encodeURIComponent(code)
-    const urlEncrypt_data = encodeURIComponent(encrypt_data)
-    const urlIv = encodeURIComponent(iv)
+  //   const { encryptedData: encrypt_data, iv } = e.currentTarget
+  //   const urlCode = encodeURIComponent(code)
+  //   const urlEncrypt_data = encodeURIComponent(encrypt_data)
+  //   const urlIv = encodeURIComponent(iv)
 
-    iv && encrypt_data && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(() => {
-      Taro.showToast({ title: '授权成功', icon: 'none' })
-      this.onClosePhoneMask()
-    })
-
-  }
-  // 关闭手机号授权弹窗
+  //   iv && encrypt_data && await this.props.dispatchUserPhone({ code: urlCode, encrypt_data: urlEncrypt_data, iv: urlIv }).then(() => {
+  //     Taro.showToast({ title: '授权成功', icon: 'none' })
+  //     this.onClosePhoneMask()
+  //   })
+  // }
+  // 关闭图片/手机号授权弹窗 （暂时隐藏）
   onClosePhoneMask() {
     const { AuthorizationMask } = this.state
     this.setState({ AuthorizationMask: { ...AuthorizationMask, show: false } })
@@ -455,7 +471,7 @@ export default class BargainDetail extends Component {
           show={AuthorizationMask.show}
 
           onClose={this.onClosePhoneMask}
-          onGetPhoneNumber={this.getPhoneNumber}
+          // onGetPhoneNumber={this.getPhoneNumber}
         />
 
         {/* 背景图 */}
