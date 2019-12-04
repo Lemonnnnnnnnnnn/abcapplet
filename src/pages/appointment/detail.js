@@ -298,7 +298,8 @@ class AppointmentDetail extends BaseComponent {
 
   // 切换成用户主动输入房间信息的板块
   onChangeBoard() {
-    this.setState({ userInputView: true })
+    const { payload } = this.state
+    this.setState({ userInputView: true, payload: { ...payload, type: 2 } })
   }
 
 

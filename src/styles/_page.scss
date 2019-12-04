@@ -24,7 +24,14 @@ page {
     background: linear-gradient(to bottom, $color-yellow-0, #ffa319);
     min-height: 100vh;
   }
-
+  &-fac {
+    min-width: auto;
+    height: 20px * $hd;
+    border: 1px * $hd solid rgba(221, 221, 225, 1);
+    opacity: 1;
+    border-radius: 5px * $hd;
+    white-space: nowrap; //强制不换行
+  }
   &-recommend {
     background: url("https://images.gongyuabc.com/bg.jpg") center center no-repeat;
     background-size: 100% 100%;
@@ -220,4 +227,57 @@ page {
 
   width: 343px * $hd;
   height: 47px * $hd;
+}
+.home {
+  &-swiper-home {
+    width: 50px * $hd;
+    height: 20px * $hd;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    border-radius: 10px * $hd;
+    position: absolute;
+    right: 32px * $hd;
+    top: 260px * $hd;
+  }
+  &-cbd {
+    width: 81px * $hd;
+    height: 26px * $hd;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px * $hd 3px * $hd 8px * $hd rgba(221, 221, 225, 0.54);
+    opacity: 1;
+    border-radius: 13px * $hd;
+  }
+  &-sublet {
+    &-image {
+      width: 131px * $hd;
+      height: 98px * $hd;
+      border-radius: 10px * $hd;
+    }
+    &-image-message {
+      width: 90px * $hd;
+      height: 80px * $hd;
+      border-radius: 10px * $hd;
+    }
+    &-houseType {
+      width: 62px * $hd;
+      height: 18px * $hd;
+      background: rgba(243, 244, 248, 1);
+      opacity: 1;
+      border-radius: 5px * $hd;
+    }
+    &-cbd {
+      width: auto;
+      height: 19px * $hd;
+      border: 1px * $hd solid rgba(243, 244, 248, 1);
+      opacity: 1;
+      border-radius: 5px * $hd;
+    }
+    &-favourable {
+      width: auto;
+      height: 19px * $hd;
+      background: rgba(255, 250, 235, 1);
+      opacity: 1;
+      border-radius: 5px * $hd;
+    }
+  }
 }

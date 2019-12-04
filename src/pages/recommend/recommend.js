@@ -6,6 +6,7 @@ import ABCIcon from '@components/abc-icon'
 
 import Search from '@components/search'
 import SubletList from '@components/sublet-list'
+import CBD from '@components/cbd'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -35,6 +36,9 @@ class ApartmentRecommend extends Component {
     // count: false,
     inputValue: '',
     showCancel: false,
+
+    fullRent: true,//合租按钮
+    cbdList: [],
   }
 
   refSubletList = (node) => this.SubletList = node
@@ -45,6 +49,8 @@ class ApartmentRecommend extends Component {
 
     const city_id = Taro.getStorageSync('user_info').citycode
     this.setState({ payload: { ...payload, city_id } })
+
+    this.onGetCbd()
     // 获取用户数据 和 刷新页面数据
     // const { count } = this.state
     // count && this.SubletList.onReset(null)
@@ -58,10 +64,29 @@ class ApartmentRecommend extends Component {
     // 每次进入页面，根据如果payload里的city_id和缓存里的citycode不一致，刷新列表
     const city_id = Taro.getStorageSync('user_info').citycode
     if (payload.city_id !== city_id) {
+      this.onGetCbd()
       const payloadNow = { ...payload, city_id }
       this.SubletList.onReset(payloadNow)
       this.setState({ payload: payloadNow })
     }
+  }
+
+  //获取商圈
+  onGetCbd() {
+    //先拿城市code换取城市id
+    const city_id = Taro.getStorageSync('user_info').citycode
+    this.props.dispatchCityCodeList({ city_id }).then(res => {
+      res.data.data.map(i => {
+        if (Taro.getStorageSync('user_info').citycode === parseInt(i.code)) {
+          this.props.dispatchSubleaseIndex({ city_id: i.id }).then(res => {
+            console.log(res.data.data.cbd)
+            this.setState({
+              cbdList: res.data.data.cbd && res.data.data.cbd.map(i => ({ ...i, active: false }))
+            })
+          })
+        }
+      })
+    })
   }
 
   async  onPullDownRefresh() {
@@ -90,7 +115,7 @@ class ApartmentRecommend extends Component {
   openMiniProgramCreate() {
     Taro.navigateToMiniProgram({
       appId: 'wx798afaa9c187b6ae', // 要跳转的小程序的appid
-      path: ' pages/postsublet/index', // 跳转的目标页面
+      path: ' pages/postsublet/base', // 跳转的目标页面
 
       success(res) {
         // 打开成功
@@ -121,7 +146,42 @@ class ApartmentRecommend extends Component {
     this.SubletList.onReset({ ...payload })
     this.setState({ showCancel: false, inputValue: '' })
   }
+  //切换整租合租
+  async onNightListChange() {
+    const { fullRent, payload } = this.state
+    console.log(fullRent)
 
+    fullRent ? this.setState({ payload: { ...payload, type: 2 } }) : this.setState({ payload: { ...payload, type: 1 } })
+    if (fullRent) {
+      await this.SubletList.onReset({ ...payload, type: 2 })
+    } else {
+      await this.SubletList.onReset({ ...payload, type: 1 })
+    }
+    this.setState({
+      fullRent: !fullRent,
+    })
+  }
+  //选择商圈
+  async onChangeCbd(value) {
+
+    const { cbdList, payload } = this.state
+    let cbdSeach = []
+    cbdList.map(i => {
+      if (i.id === value.id) {
+        i.active = !i.active
+      }
+    })
+    cbdList.map(i => {
+      if (i.active === true) {
+        cbdSeach.push(i.id)
+      }
+    })
+    await this.SubletList.onReset({ ...payload, cbd_list: cbdSeach.toString(',') })
+    this.setState({
+      cbdList,
+      payload: { ...payload, cbd_list: cbdSeach.toString(',') }
+    })
+  }
   render() {
     const { isInput, payload, showCancel, inputValue } = this.state
     const { sublet } = this.props
@@ -131,7 +191,7 @@ class ApartmentRecommend extends Component {
         <View className='home-search pl-3 pr-3 pt-2'>
           {
             <Search
-              className='mb-2'
+              className='mb-1'
               showPicker={false}
               isInputSub={isInput}
               showCancel={showCancel}
@@ -142,16 +202,23 @@ class ApartmentRecommend extends Component {
             />
           }
         </View>
-
-
-        <SubletList
-          items={sublet.list}
-          ref={this.refSubletList}
-          defaultPayload={payload}
-          dispatchList={this.props.dispatchSubList}
-          dispatchNextPageList={this.props.dispatchNextPageSubList}
-        />
-
+        <View className='mt-2 mx-3'>
+          <CBD
+            NightList={fullRent}
+            onNightListChange={this.onNightListChange}
+            cbdList={cbdList}
+            onChangeCbd={this.onChangeCbd}
+          />
+        </View>
+        <View className='mt-2 mx-2'>
+          <SubletList
+            items={sublet.list}
+            ref={this.refSubletList}
+            defaultPayload={payload}
+            dispatchList={this.props.dispatchSubList}
+            dispatchNextPageList={this.props.dispatchNextPageSubList}
+          />
+        </View>
         <View className='page-middile at-row sublet-back ' onClick={this.openMiniProgramCreate}>
           <View className='sublet-button page-middile'>
             <ABCIcon icon='add' size='20' color='#FFFFFF' />

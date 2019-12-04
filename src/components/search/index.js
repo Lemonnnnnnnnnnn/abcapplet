@@ -72,9 +72,9 @@ class Search extends BaseComponent {
     const { isInput, value } = this.state
     const { selector, showPicker, onChangeSelector, selectorChecked, size, isFixed, className, showCancel, showSearch, isInputSub, inputValue } = this.props
 
-    const hideStyle = {top: Taro.pxTransform(-92)}
+    const hideStyle = { top: Taro.pxTransform(-92) }
 
-    const showStyle = {top: 0}
+    const showStyle = { top: 0 }
 
     return (
       <View className={classNames(className, 'search', isFixed ? 'search-fixed px-3' : '')} style={showSearch ? showStyle : hideStyle} >
@@ -103,7 +103,7 @@ class Search extends BaseComponent {
                     <View className='at-col'>
                       <Input
                         className='ml-2'
-                        style={{height : Taro.pxTransform(30 * 2) , minHeight : Taro.pxTransform(30 * 2)}}
+                        style={{ height: Taro.pxTransform(30 * 2), minHeight: Taro.pxTransform(30 * 2) }}
                         focus
                         value={value}
                         confirmType='确定'
@@ -112,7 +112,7 @@ class Search extends BaseComponent {
                         onConfirm={this.onInputConfirm}
                       />
                     </View>
-                    {showCancel && <View className='px-3 text-muted' style={{float : 'right'}} onClick={this.onInputCancel}>取消</View>}
+                    {showCancel && <View className='px-3 text-muted' style={{ float: 'right' }} onClick={this.onInputCancel}>取消</View>}
                   </View>
                 }
               </View>}
