@@ -7,17 +7,18 @@ import { connect } from '@tarojs/redux'
 import * as articleActions from '@actions/article'
 import * as apartmentActions from '@actions/apartment'
 
-// 自定义组件
-import TabBar from '@components/tab-bar'
-import RichTextWxParse from '@components/rich-text-wx-parse'
-import ApartmentListMask from '@components/apartment-list-mask'
-
 // NPM 包
 import day from 'dayjs'
 
 // 自定义常量
 import { LOCALE_SHOW_DESC, LOCALE_RETURN_HOME } from '@constants/locale'
 import { PAGE_HOME, PAGE_ARTICLE_SHOW } from '@constants/page'
+
+
+// 自定义组件
+import TabBar from '@components/tab-bar'
+import RichTextWxParse from '@components/rich-text-wx-parse'
+import ApartmentListMask from './components/apartment-list-mask'
 
 import buryPoint from '../../utils/bury-point'
 

@@ -16,7 +16,6 @@ import Tag from '@components/tag'
 import TabBar from '@components/tab-bar'
 import ABCIcon from '@components/abc-icon'
 import ApartmentList from '@components/apartment-list'
-import ApartmentTypeItem from '@components/apartment-type-item'
 import CouponItem from '@components/coupon-item'
 
 // 自定义变量
@@ -31,6 +30,8 @@ import buryPoint from '../../utils/bury-point'
 import ApartmentCouponMask from './components/apartment-coupon-mask'
 import ApartmentContainer from './components/apartment-container'
 import ApartmentBargainCard from './components/apartment-bargain-card'
+import ApartmentTypeItem from './components/apartment-type-item'
+
 
 const city = userActions.dispatchUser().payload.citycode
 @connect(state => state, {

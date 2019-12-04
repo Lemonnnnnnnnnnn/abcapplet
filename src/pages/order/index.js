@@ -6,14 +6,15 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import * as orderActions from '@actions/order'
 
-// 自定义组件
-import Decorate from '@components/decorate'
-import OrderList from '@components/order-list'
-
 // 自定义常量
 import { PAYLOAD_ORDER_LIST } from '@constants/api'
+// 自定义方法
+import buryPoint from '@utils/bury-point'
 
-import buryPoint from '../../utils/bury-point'
+// 自定义组件
+import Decorate from '@components/decorate'
+import OrderList from './components/order-list'
+
 
 @connect(state => state, {
   ...orderActions,

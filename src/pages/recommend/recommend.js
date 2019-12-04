@@ -6,7 +6,7 @@ import ABCIcon from '@components/abc-icon'
 
 import Search from '@components/search'
 import SubletList from '@components/sublet-list'
-import CBD from '@components/cbd'
+import SubletCbd from '@components/sublet-cbd'
 
 // Redux 相关
 import { connect } from '@tarojs/redux'
@@ -78,10 +78,9 @@ class ApartmentRecommend extends Component {
     this.props.dispatchCityCodeList({ city_id }).then(res => {
       res.data.data.map(i => {
         if (Taro.getStorageSync('user_info').citycode === parseInt(i.code)) {
-          this.props.dispatchSubleaseIndex({ city_id: i.id }).then(res => {
-            console.log(res.data.data.cbd)
+          this.props.dispatchSubleaseIndex({ city_id: i.id }).then(response => {
             this.setState({
-              cbdList: res.data.data.cbd && res.data.data.cbd.map(i => ({ ...i, active: false }))
+              cbdList: response.data.data.cbd && response.data.data.cbd.map(k => ({ ...k, active: false }))
             })
           })
         }
@@ -149,7 +148,6 @@ class ApartmentRecommend extends Component {
   //切换整租合租
   async onNightListChange() {
     const { fullRent, payload } = this.state
-    console.log(fullRent)
 
     fullRent ? this.setState({ payload: { ...payload, type: 2 } }) : this.setState({ payload: { ...payload, type: 1 } })
     if (fullRent) {
@@ -183,7 +181,7 @@ class ApartmentRecommend extends Component {
     })
   }
   render() {
-    const { isInput, payload, showCancel, inputValue } = this.state
+    const { isInput, payload, showCancel, inputValue, fullRent, cbdList } = this.state
     const { sublet } = this.props
 
     return (
@@ -203,7 +201,7 @@ class ApartmentRecommend extends Component {
           }
         </View>
         <View className='mt-2 mx-3'>
-          <CBD
+          <SubletCbd
             NightList={fullRent}
             onNightListChange={this.onNightListChange}
             cbdList={cbdList}

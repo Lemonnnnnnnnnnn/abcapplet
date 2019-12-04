@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import BaseComponent from '@components/base'
 
 
-class Index extends BaseComponent {
+class SubletCbd extends BaseComponent {
 
   config = {
     navigationBarTitleText: ''
@@ -81,4 +81,4 @@ class Index extends BaseComponent {
     );
   }
 }
-export default Index;
+export default SubletCbd;

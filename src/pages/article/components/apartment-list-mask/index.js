@@ -3,16 +3,18 @@ import Taro from '@tarojs/taro'
 import { View, ScrollView } from '@tarojs/components'
 
 
+// 自定义常量
+import { COLOR_GREY_2 } from '@constants/styles'
+import { LOCALE_VIEW_APARTMENT_DETAILS, LOCALE_VIEW_APARTMENT_DETAILS_NONE } from '@constants/locale'
+
+
 // 自定义组件
 import Board from '@components/board'
 import Masks from '@components/masks'//遮盖层
 import ABCIcon from '@components/abc-icon'
 import BaseComponent from '@components/base'
-import ApartmentItemMask from '@components/apartment-item-mask'
+import ApartmentItemMask from '../apartment-item-mask'
 
-// 自定义常量
-import { COLOR_GREY_2 } from '@constants/styles'
-import { LOCALE_VIEW_APARTMENT_DETAILS, LOCALE_VIEW_APARTMENT_DETAILS_NONE } from '@constants/locale'
 
 class ApartmentListMask extends BaseComponent {
   static defaultProps = {

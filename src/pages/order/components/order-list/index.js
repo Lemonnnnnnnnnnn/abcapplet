@@ -4,7 +4,7 @@ import { View, Image } from '@tarojs/components'
 
 // 自定义组件
 import BaseList from '@components/base-list'
-import OrderItem from '@components/order-item'
+import OrderItem from '../order-item'
 
 
 class OrderList extends BaseList {
@@ -14,7 +14,7 @@ class OrderList extends BaseList {
     const { hasMore, loading, page } = this.state
 
     const pageBgStyle = {
-      marginTop : Taro.pxTransform(180)
+      marginTop: Taro.pxTransform(180)
     }
 
     return (show && <View className={className}>
