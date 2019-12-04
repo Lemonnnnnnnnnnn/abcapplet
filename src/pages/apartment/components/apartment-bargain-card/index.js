@@ -18,8 +18,6 @@ import GetAuthorizationMask from '@components/get-authorization-mask'
 // 自定义常量
 import { PAGE_BARGAIN_DETAIL, PAGE_BARGAIN_LIST, PAGE_USER_AUTH } from '@constants/page'
 
-// import '../../../../styles/_apartment.scss'
-
 @connect(state => state, {
   ...bargainActions,
   ...userActions

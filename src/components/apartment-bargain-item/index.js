@@ -10,7 +10,6 @@ import BaseComponent from '@components/base'
 import { LOCALE_MONEY, LOCALE_QI, LOCALE_ORIGINAL_PRICE, LOCALE_COLON } from '@constants/locale'
 import { PAGE_BARGAIN_DETAIL } from '@constants/page'
 
-import '../../styles/_bargain.scss'
 
 export default class ApartmentBargainItem extends BaseComponent {
   static defaultProps = {
@@ -43,7 +42,7 @@ export default class ApartmentBargainItem extends BaseComponent {
     const { item, block } = this.props
     const { apartment_title, cbd, cover, original_price, participate_num, price, apartment_type_title, no, bargain_id, id, end_time, bargain_status } = item
 
-    const endTag = (bargain_status === 0 || (end_time <= 0 && end_time != -1)) &&
+    const endTag = (bargain_status === 0 || (end_time <= 0 && end_time !== -1)) &&
       <View className='bargain-list-end-tag text-small text-white text-center'>已结束</View>
 
     return (

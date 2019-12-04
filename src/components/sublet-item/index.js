@@ -6,8 +6,6 @@ import { View, Image, Text } from '@tarojs/components'
 import BaseComponent from '@components/base'
 
 
-import '../../styles/_page.scss'
-
 class SubletItem extends BaseComponent {
 
   render() {

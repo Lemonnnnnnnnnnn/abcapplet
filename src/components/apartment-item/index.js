@@ -30,8 +30,6 @@ import {
   LOCALE_QI,
 } from '@constants/locale'
 
-import '../../styles/_apartment.scss'
-
 class ApartmentItem extends BaseComponent {
   static defaultProps = {
     type: '',
