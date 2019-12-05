@@ -1,0 +1,24 @@
+@import "overrides";
+
+.search {
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: $color-white !important;
+  height: 46px * $hd;
+
+  &-content { height: 100%; }
+  &-box {
+    background: #F2F2F2 !important;
+    height: 37px * $hd;
+    width: 100%;
+    border-radius: $border-radius-huge;
+  }
+
+  &-fixed {
+    position: fixed;
+    width: 343px * $hd !important;
+  }
+}
+

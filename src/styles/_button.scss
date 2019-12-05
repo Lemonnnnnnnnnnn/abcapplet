@@ -1,0 +1,113 @@
+@import "overrides";
+
+.btn-card {
+  border-color: #ffc919;
+  background: #ffc919;
+  color: #0a0a0a;
+}
+
+.btn-green {
+  border-color: #06bb08;
+  background: #06bb08;
+  color: #ffffff;
+}
+
+.btn-yellow {
+  border-color: $color-yellow-0;
+  background: $color-white;
+  color: $color-yellow-0;
+
+  &.active {
+    border-color: $color-yellow-0;
+    background: $color-yellow-0;
+    color: $color-black-0;
+  }
+}
+
+.btn-bargain {
+  background: linear-gradient(to bottom, #ffda65, #fa674a);
+  color: #fff;
+  box-shadow: 0px 3px 6px rgba(255, 183, 16, 1);
+  box-sizing: border-box;
+  border: 2px solid rgba(255, 230, 149, 1);
+}
+
+.btn-grey {
+  border-color: #f2f2f2;
+  background: #f2f2f2;
+  color: #888888;
+}
+
+.btn-light-grey {
+  border-color: #d2d2d2;
+  background: #d2d2d2;
+  color: #000000;
+}
+
+.btn-light-writh {
+  border-color: #d2d2d2;
+  background: #d2d2d2;
+  color: #ffffff;
+}
+
+.btn-order-status {
+  padding: 5px * $hd;
+  color: $color-white;
+  background: $color-yellow-0;
+  border-radius: 15px * $hd 0 0 15px * $hd;
+  position: absolute;
+  right: 0;
+  top: 8px * $hd;
+}
+
+.button-order {
+  width: 50px * $hd;
+  height: 50px * $hd;
+  border-radius:$border-radius-circle ;
+  background: #F9F9F9;
+}
+
+.btn-none {
+  border: none;
+  background: none;
+}
+
+.btn-none::after {
+  border: none;
+}
+
+.btn-risk-header-item {
+  color: #000000;
+  background:linear-gradient(180deg,rgba(255,237,178,1) 0%,rgba(255,201,25,1) 100%);
+  border-radius:$border-radius-circle ;
+  height: 50px * $hd;
+  width: 50px * $hd;
+}
+
+.at-steps__left-line--active,
+.at-steps__right-line--active {
+  background: $color-yellow-0;
+}
+
+.at-steps__item--error .at-steps__circular {
+  color: #fff;
+  background: $color-error;
+}
+
+.at-image-picker__choose-btn {
+  border: 1px solid #d2d2d2;
+}
+
+.button-yellow {
+  width: 10px * $hd;
+  height: 10px * $hd;
+  background: #ffc919;
+  border-radius: 50%;
+}
+
+.service-mask-head {
+  width: 50px * $hd;
+  height: 50px * $hd;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+}

@@ -1,0 +1,84 @@
+@import "overrides";
+
+.select {
+  left: 0;
+  top: 0;
+  z-index: 200;
+  background: #fff;
+  width: 100%;
+
+
+  &-fixed {
+    position: fixed;
+  }
+
+  &-header {
+    width: 100%;
+  }
+
+  &-button {
+    .at-button {
+      height: 39px * $hd;
+      line-height: 39px * $hd;
+    }
+  }
+
+  &-cbd {
+    .multi-selected text,
+    .multi-unselect text {
+      font-size: $font-size-base;
+    }
+    .multi-selected text {
+      color: $color-yellow-0 !important;
+    }
+    .multi-unselect icon {
+      width: 20px;
+      height: 20px;
+      border: 1px solid $color-yellow-0;
+      border-radius:$border-radius-circle ;
+      background: #fff;
+      margin-right: 6px;
+      color: $color-yellow-0;
+    }
+    .multi-selected icon {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $color-yellow-0;
+      border-radius:$border-radius-circle ;
+      background: #fff;
+      margin-right: 6px;
+      color: $color-yellow-0;
+    }
+    .multi-selected icon::after {
+      position: absolute;
+      content: "";
+      left: 50%;
+      top: 50%;
+      transform: translate(-47%, -53%);
+      width: 15px;
+      height: 15px;
+      border-radius:$border-radius-circle ;
+      background: $color-yellow-0;
+    }
+  }
+
+  .at-tabs__item--active {
+    color: $color-yellow-0;
+  }
+
+  .at-tabs__header,
+  .at-tabs__underline,
+  .at-tabs__item-underline {
+    background-color: transparent;
+  }
+
+  .at-tabs__header {
+    width: 100px * $hd;
+  }
+
+  .at-tabs__item {
+    padding: 8px * $hd 0;
+    font-size: $font-size-base;
+  }
+}

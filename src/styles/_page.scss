@@ -1,0 +1,283 @@
+@import "overrides";
+
+page {
+  background: #f8f8f8;
+}
+.image {
+  width: 40vw;
+}
+.page {
+  &-demo {
+    font-weight: 200;
+    font-size: 16px * $hd;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+  }
+  &-white {
+    background: #ffffff;
+    min-height: 100vh;
+  }
+  &-orange {
+    background: linear-gradient(to bottom, $color-yellow-0, #ffa319);
+    min-height: 100vh;
+  }
+  &-fac {
+    min-width: auto;
+    height: 20px * $hd;
+    border: 1px * $hd solid rgba(221, 221, 225, 1);
+    opacity: 1;
+    border-radius: 5px * $hd;
+    white-space: nowrap; //强制不换行
+  }
+  &-recommend {
+    background: url("https://images.gongyuabc.com/bg.jpg") center center no-repeat;
+    background-size: 100% 100%;
+    height: 100vh;
+  }
+
+  &-requirement {
+    background: url("https://images.gongyuabc.com/image/icon/requirement-card-one.png") center center no-repeat;
+    background-size: contain;
+    position: fixed;
+    width: 50vh;
+    height: 76vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5vh;
+  }
+
+  &-requirementnext {
+    background: url("https://images.gongyuabc.com/image/icon/requirement-card-two.png") center center no-repeat;
+    background-size: contain;
+    position: fixed;
+    height: 120vw;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5vw;
+  }
+
+  &-requirementtop {
+    background: url("https://images.gongyuabc.com/image/icon/card-top.png") center center no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 40vh;
+    height: 10vh;
+    top: 5%;
+    transform: translate(230px, -50px);
+  }
+
+  &-msg {
+    background: #ffffff center center no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &-mask {
+    position: fixed;
+    left: 0;
+    width: 100vh;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    &-opacity {
+      position: fixed;
+      height: 100vh;
+      width: 100%;
+      z-index: 99;
+    }
+  }
+
+  &-service-bg {
+    background: url("http://images.gongyuabc.com/image/icon/service-bg.png") center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 30vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-service-left {
+    background: url("http://images.gongyuabc.com/image/icon/service-left.png") center center no-repeat;
+    background-size: contain;
+    width: 70%;
+    height: 70%;
+    border-radius: 10%;
+  }
+
+  &-service-right {
+    background: url("http://images.gongyuabc.com/image/icon/service-right.png") center center no-repeat;
+    background-size: contain;
+    width: 70%;
+    height: 70%;
+    border-radius: 10%;
+  }
+  &-sublet {
+    width: 343px * $hd;
+    height: 104px * $hd;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius-normal;
+    &-image {
+      border-radius: 12px * $hd 0px * $hd 0px * $hd 12px * $hd;
+    }
+    &-image + .mask {
+      top: 0;
+      background: rgba($color: #000000, $alpha: 0.5);
+      border-radius: 12px * $hd 0px * $hd 0px * $hd 12px * $hd;
+    }
+  }
+  &-house {
+    width: 75px * $hd;
+    height: 22px * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: $border-radius-mini;
+    color: #ffffff;
+  }
+}
+
+.default-page {
+  &-background {
+    background-color: #fff;
+    border-radius: $border-radius-huge;
+  }
+  &-picture {
+    width: 90%;
+    margin-left: 5%;
+  }
+  &-font {
+    color: rgba(178, 178, 178, 1);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: -120px;
+  }
+}
+
+// maskTop 样式
+.mask-top {
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  height: 24px;
+  width: 100%;
+  position: absolute;
+  top: -22px;
+  background: #fff;
+}
+.sublet-back {
+  width: 115px * $hd;
+  height: 40px * $hd;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 6px * $hd rgba(0, 0, 0, 0.21);
+  opacity: 1;
+  border-radius: $border-radius-huge;
+  position: fixed;
+  bottom: 4%;
+  right: 4%;
+}
+.sublet-button {
+  width: 25px * $hd;
+  height: 25px * $hd;
+  background: rgba(255, 201, 25, 1);
+  border-radius: $border-radius-circle;
+  opacity: 1;
+}
+
+.coupon_receive {
+  box-shadow: 0 3px * $hd 10px * $hd rgba($color: #000000, $alpha: 0.16);
+  .at-button {
+    box-shadow: 0 3px * $hd 10px * $hd rgba($color: $color-yellow-0, $alpha: 0.39);
+  }
+}
+
+//单位元素垂直居中
+.page-middile {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 继承父元素高度
+.inherit-Height {
+  height: 100%;
+}
+// 继承父元素宽度
+.inherit-Width {
+  width: 100%;
+}
+
+.wrap-Style {
+  overflow: hidden;
+  position: relative;
+}
+.risk-ad {
+  background: url("https://images.gongyuabc.com/image/risk-ad.png") center center no-repeat;
+  background-size: contain;
+
+  width: 343px * $hd;
+  height: 47px * $hd;
+}
+.home {
+  &-swiper-home {
+    width: 50px * $hd;
+    height: 20px * $hd;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    border-radius: 10px * $hd;
+    position: absolute;
+    right: 32px * $hd;
+    top: 260px * $hd;
+  }
+  &-cbd {
+    width: 81px * $hd;
+    height: 26px * $hd;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px * $hd 3px * $hd 8px * $hd rgba(221, 221, 225, 0.54);
+    opacity: 1;
+    border-radius: 13px * $hd;
+  }
+  &-sublet {
+    &-image {
+      width: 131px * $hd;
+      height: 98px * $hd;
+      border-radius: 10px * $hd;
+    }
+    &-image-message {
+      width: 90px * $hd;
+      height: 80px * $hd;
+      border-radius: 10px * $hd;
+    }
+    &-houseType {
+      width: 62px * $hd;
+      height: 18px * $hd;
+      background: rgba(243, 244, 248, 1);
+      opacity: 1;
+      border-radius: 5px * $hd;
+    }
+    &-cbd {
+      width: auto;
+      height: 19px * $hd;
+      border: 1px * $hd solid rgba(243, 244, 248, 1);
+      opacity: 1;
+      border-radius: 5px * $hd;
+    }
+    &-favourable {
+      width: auto;
+      height: 19px * $hd;
+      background: rgba(255, 250, 235, 1);
+      opacity: 1;
+      border-radius: 5px * $hd;
+    }
+  }
+}

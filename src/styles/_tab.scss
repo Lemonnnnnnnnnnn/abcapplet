@@ -1,0 +1,31 @@
+@import "overrides";
+
+.favorite {
+  .at-tabs__item--active .at-tabs__item-underline {
+    position: absolute;
+    left: 50%;
+    bottom:0;
+    width: 20%;
+    border-radius: $border-radius-huge;
+    height: 5px * $hd;
+    background-color: $color-yellow-0;
+    transform: translate(-50%, -50%);
+    transition: all 0;
+  }
+
+  .at-tabs__item-underline {
+    position: absolute;
+    left: 50%;
+    bottom:0;
+    width: 0;
+    border-radius: $border-radius-huge;
+    height: 1px * $hd;
+    background-color: $color-yellow-0;
+    transform: translate(-100%, -100%);
+    transition: all 0;
+  }
+}
+
+.at-tabs--vertical .at-tabs__item-underline{
+    height: 0
+}

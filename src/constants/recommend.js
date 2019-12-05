@@ -1,0 +1,2 @@
+export const RECOMMEND_DEFAULT = []
+export const SET_RECOMMEND_LIST = 'SET_RECOMMEND_LIST'

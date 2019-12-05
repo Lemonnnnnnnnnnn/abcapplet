@@ -1,0 +1,43 @@
+// 自定义变量
+@import "overrides";
+@import "variables";
+
+// taro-ui 默认样式
+@import "icon";
+@import "placeholder";
+@import "~taro-ui/dist/style/index.scss";
+
+// 自定义辅助类
+@import "position";
+@import "spacing";
+
+// 组件样式
+@import "page";
+@import "board";
+@import "badge";
+@import "avatar";
+@import "list";
+@import "button";
+@import "modal";
+@import "search";
+@import "carousel";
+@import "select";
+@import "apartment";
+@import "text";
+@import "slider";
+@import "tag";
+@import "border";
+@import "tab";
+@import "abc-icon";
+@import "tab-bar";
+@import "input";
+@import "textarea";
+@import "appointment";
+@import "dot";
+@import "curtain";
+@import "user";
+@import "scroll-view";
+@import "coupon";
+@import "order";
+@import "class-cover";
+@import "bargain"

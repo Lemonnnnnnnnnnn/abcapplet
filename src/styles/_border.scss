@@ -1,0 +1,43 @@
+@import "overrides";
+
+$borders: left, right, top, bottom !default;
+
+@each $border in $borders {
+  .border-#{$border} {
+    border-#{$border}: 1px solid #f8f8f8;
+  }
+}
+
+.border-decorate {
+  width: 4px * $hd;
+  border-radius: $border-radius-mini;
+
+  &-yellow {
+    background: $color-yellow-0;
+  }
+
+  &-grey {
+    background: #888888;
+  }
+}
+
+// 整租 合租 按钮
+.button-chart {
+  height: 26px * $hd;
+  width: 109 * $hd;
+  border-radius: 23px * $hd;
+  line-height: 26px * $hd;
+
+  color: #ffc919;
+  border: 1px solid #ffc919;
+  background-color: #ffffff;
+
+  &--active {
+    color: #ffffff;
+    height: 26px * $hd;
+    line-height: 26px * $hd;
+    border: 1px solid $color-brand;
+    background: $color-brand;
+    border-radius: 23px * $hd;
+  }
+}

@@ -1,0 +1,63 @@
+@import "overrides";
+
+.badge {
+  background: #ff9c9c;
+  color: #ffffff;
+  font-size: $font-size-xs;
+  border-radius: $border-radius-mini;
+  width: 19px * $hd;
+  height: 19px * $hd;
+  text-align: center;
+  line-height: 19px * $hd;
+  padding: 4px 14px;
+}
+
+.badge-lian {
+  color: #ff7d7d;
+  background: #ffecec;
+}
+
+.badge-tuan {
+  color: #ff7d7d;
+  background: #ffecec;
+}
+
+.badge-xiao {
+  color: #FFC300;
+  background: #FFFADC;
+}
+
+.badge-cu {
+  color: #ff9f10;
+  background: #fff1dc;
+}
+
+.badge-lao {
+  color: #4BBDFF;
+  background: #E6F9FF ;
+}
+
+.badge-shuidian {
+  color: #4BBDFF;
+  background: #E6F9FF;
+}
+
+.badge-rentTime {
+  color: #ff9f10;
+  background: #fff1dc;
+}
+
+.badge-discount {
+  color: #ffc300;
+  background: #fffadc;
+}
+
+.badge-hasRoom {
+  color : #fff;
+  background: #FFC919;
+}
+
+.badge-hasNoRoom{
+  color : #fff;
+  background: #888888;
+}

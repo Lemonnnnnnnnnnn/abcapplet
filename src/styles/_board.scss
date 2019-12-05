@@ -1,0 +1,123 @@
+@import "overrides";
+
+.decorate {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  right: 0;
+
+  height: 350px;
+  width: 100%;
+  border-radius: 100% 100% 100% 100% / 0% 0% 50% 50%;
+  background: $color-yellow-0;
+}
+
+.decorate-gradient {
+  height: 480px * $hd;
+  width: 100%;
+  background: linear-gradient(to bottom, $color-yellow-0 5%, #f8f8f8 40%, #f8f8f8 100%);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.board {
+  background: #ffffff;
+  &--wrap {
+    width: 90%;
+  }
+
+  &--pink {
+    background: linear-gradient(to bottom, #fffaec, #fff3db);
+    height: 179px * $hd;
+    width: 100%;
+  }
+
+  &--all {
+    border-radius:$border-radius-normal ;
+  }
+
+  &--top {
+    border-radius: 12px * $hd 12px * $hd 0 0;
+  }
+
+  &--bottom {
+    box-shadow: 0px 3px * $hd 6px * $hd rgba(37, 91, 255, 0.08);
+    border-radius: 0 0 12px * $hd 12px * $hd;
+  }
+
+  &--white {
+    background: #ffffff;
+  }
+
+  &--grey {
+    background: #f2f2f2;
+  }
+
+  &--light-grey {
+    background: #f8f8f8;
+  }
+
+  &--black {
+    background: linear-gradient(9deg, rgba(0, 0, 0, 1) 0%, rgba(84, 84, 84, 1) 100%);
+  }
+
+  &--danger {
+    color: #ffffff;
+    background: #ff6161;
+    box-shadow: 0px 3px 6px #ff3434;
+  }
+
+  &--fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  &--fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+  }
+  &--black-shadow {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
+}
+.line {
+  width: 302px * $hd;
+  height: 0px * $hd;
+  border: 1px * $hd solid rgba(248, 248, 248, 1);
+  opacity: 1;
+}
+.line-dotted {
+  overflow: hidden;
+  height: 100px;
+  color: #d8d8d8;
+  white-space: nowrap;
+}
+
+.coupon-angel {
+  width: 14px * $hd;
+  height: 22px * $hd;
+  background: #FFB319;
+  position: absolute;
+  top: 422px;
+  &.left {
+    left: -10px;
+    border-radius: 0 11px * $hd 11px * $hd 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  &.right {
+    right: -10px;
+    border-radius: 11px * $hd 0 0 11px * $hd ;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

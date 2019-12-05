@@ -1,0 +1,301 @@
+@import "overrides";
+
+// 页面
+
+// pages/appoint/service
+.appointment {
+  &-ad {
+    height: 76px * $hd;
+    width: 371px * $hd;
+  }
+  &-detail-ad {
+    height: 62px * $hd;
+    width: 520px * $hd;
+    background: url("https://images.gongyuabc.com/image/riskMoneyBanner_One.png") center center no-repeat;
+    background-size: cover;
+  }
+  &-padding {
+    margin-right: 32px;
+  }
+  &-fix-icon {
+    width: 7vw;
+    height: 7vw;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background: #fff;
+    border-radius: $border-radius-circle;
+    padding: 20px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.2);
+  }
+  &-audit {
+    width: 22px * $hd;
+    height: 22px * $hd;
+    background: rgba(255, 201, 25, 1);
+    border: 4px * $hd solid rgba(255, 220, 107, 1);
+    border-radius: $border-radius-circle;
+    opacity: 1;
+  }
+  &-noaudit {
+    width: 22px * $hd;
+    height: 22px * $hd;
+    background: rgba(210, 210, 210, 1);
+    border: 4px * $hd solid rgba(242, 242, 242, 1);
+    border-radius: $border-radius-circle;
+    opacity: 1;
+  }
+  &-line {
+    width: 0px * $hd;
+    height: 45px * $hd;
+    border: 3px * $hd solid rgba(255, 220, 107, 1);
+    opacity: 1;
+    margin-left: 13px * $hd;
+  }
+  &-noline {
+    width: 0px * $hd;
+    height: 45px * $hd;
+    border: 3px * $hd solid rgba(242, 242, 242, 1);
+    opacity: 1;
+    margin-left: 13px * $hd;
+  }
+  &-board {
+    position: absolute;
+    top: 4%;
+    z-index: 999;
+    width: 345px * $hd;
+    height: 410px * $hd;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-radius: $border-radius-normal;
+  }
+
+  &-envolpe {
+    width: 45px * $hd;
+    height: 45px * $hd;
+    position: absolute;
+    left: 54%;
+    bottom: 14%;
+  }
+
+  &-head {
+    height: 63px * $hd;
+    width: 356px * $hd;
+  }
+
+  &-image {
+    height: 15px * $hd;
+    width: 15px * $hd;
+  }
+  &-detail {
+    &-head {
+      position: absolute;
+      top: 3%;
+      left: 10px * $hd;
+      z-index: 999;
+    }
+
+    &-line {
+      width: 95%;
+      height: 0px * $hd;
+      border: 0.5px * $hd solid #f8f8f8;
+      opacity: 1;
+    }
+    &-picker {
+      background: #f7f7f7;
+      border-radius: $border-radius-large;
+      text-align: center;
+      &-text {
+        color: #b4b4b4;
+      }
+    }
+    &-board {
+      position: relative;
+      top: 100px * $hd;
+    }
+    &-roomBoard {
+      &-input {
+        background: #f8f8f8;
+        border-radius: $border-radius-mini;
+        height: 52.5px;
+      }
+    }
+  }
+  &-message-list {
+    .icon-head-no {
+      width: 80px;
+      height: 80px;
+      border-radius: $border-radius-circle;
+    }
+  }
+  &-yellowbot {
+    height: 8px * $hd;
+    width: 8px * $hd;
+    border-radius: $border-radius-mini;
+    background-color: rgba(255, 201, 25, 1);
+  }
+  &-coupon {
+    width: 40px * $hd;
+    position: absolute;
+    left: -4px * $hd;
+  }
+  &-coupontwo {
+    width: 40px * $hd;
+    position: absolute;
+    left: -4px * $hd;
+    top: -3px * $hd;
+  }
+}
+
+
+
+
+// 组件
+.service {
+  // /components/services-item/show
+  &-risk {
+    width: 85px * $hd;
+    height: 23px * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: $border-radius-mini;
+  }
+  &-noaAppoint {
+    height: 22px * $hd;
+    opacity: 1;
+    border-radius: 8px * $hd;
+    border: 1px * $hd solid rgba(255, 201, 25, 1);
+  }
+  &-haveAppoint {
+    height: 22px * $hd;
+    border-radius: $border-radius-mini;
+    border: 1px * $hd solid rgba(216, 216, 216, 1);
+    &.icon {
+      padding: 0 4px * $hd 0 0;
+    }
+  }
+  &-button {
+    background: $color-yellow-0;
+    border-radius: 45px * $hd;
+    text-align: center;
+    align-items: center;
+    &-gray {
+      border-radius: 45px * $hd;
+      text-align: center;
+      align-items: center;
+      border-color: #f2f2f2;
+      background: #f2f2f2;
+    }
+  }
+  &-buttonYellow {
+    width: 98px * $hd;
+    height: 30px * $hd;
+    background: rgba(255, 201, 25, 1);
+    opacity: 1;
+    border-radius: 23px * $hd;
+  }
+  &-buttonGrey {
+    width: 98px * $hd;
+    height: 30px * $hd;
+    background: rgba(216, 216, 216, 1);
+    opacity: 1;
+    border-radius: 23px * $hd;
+  }
+  &-buttonYellowBo {
+    padding: 5px 10px * $hd;
+    height: 30px * $hd;
+    background: rgba(255, 201, 25, 1);
+    border-radius: 23px * $hd;
+  }
+  &-buttonGrayBo {
+    padding: 5px 10px * $hd;
+    height: 30px * $hd;
+    background: rgba(216, 216, 216, 1);
+    border-radius: 23px * $hd;
+  }
+
+  // /components/services-item/index
+  &-image {
+    width: 100%;
+    height: 364px;
+    &-mask {
+      border-radius: $border-radius-normal;
+      width: 100%;
+      height: 364px;
+      position: absolute;
+      opacity: 0.2;
+      background-color: #000;
+    }
+    &-center {
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      left: 60%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &-center {
+    position: absolute;
+    left: 16%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &-right {
+    position: absolute;
+    top: 50%;
+    left: 39%;
+    transform: translate(0, -50%);
+  }
+  &-header {
+    position: relative;
+    border-radius: $border-radius-mini;
+    width: 100%;
+  }
+  &-avatar {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  &-middle {
+    position: absolute;
+    left: 50%;
+    top: 260px;
+    height: 138px;
+    transform: translate(-50%, 30%);
+    border-radius: $border-radius-normal;
+    width: 90%;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
+  }
+  &-head {
+    position: absolute;
+    left: 23px;
+    top: 0px;
+  }
+  &-line {
+    width: 0px * $hd;
+    height: 30px * $hd;
+    border: 1px solid rgba(242, 242, 242, 1);
+    opacity: 1;
+  }
+  &-font-center {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+//  /components/message-list
+.message {
+  &-item {
+    background: #ffffff;
+    border-radius: $border-radius-normal;
+    max-width: 200px * $hd;
+    min-height: 20px * $hd;
+    line-height: 20px * $hd;
+  }
+  //  /pages/appointment/message
+  &-background {
+    width: 100%;
+  }
+}

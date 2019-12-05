@@ -1,0 +1,89 @@
+@import "overrides";
+.tag {
+  border-radius: $border-radius-mini;
+  padding: 4px * $hd 12px * $hd;
+
+  &--special {
+    color: $color-yellow-0;
+    background: $color-yellow-1;
+
+    &.tag--active {
+      color: $color-white;
+      background: $color-yellow-0;
+    }
+  }
+
+  &--black {
+    color: #fff;
+    background: #353535;
+  }
+
+  &--primary {
+    color: $color-white;
+    background: $color-yellow-0;
+  }
+
+  &--red {
+    color: #ffa2a2;
+    background: #ffefef;
+  }
+
+  &--yellow {
+    color: $color-yellow-0;
+    background: #fffae9;
+  }
+
+  &--yellow--1{
+    background: #fff;
+    color:  $color-yellow-0;
+    box-sizing: border-box;
+    border: 1px solid $color-yellow-0;
+  }
+
+  &--blue {
+    color: #7be3ff;
+    background: #ecfbff;
+  }
+
+  &--grey {
+    color: $color-white;
+    background: #888888;
+  }
+
+  &--grey--1 {
+    color: $color-white;
+    background: #d4d4d4;
+  }
+
+  &--grey--2 {
+    color: #888888;
+    background: #F8F8F8;
+  }
+
+
+  &-small {
+    padding: 4px * $hd 8px * $hd;
+    margin-right: 2px * $hd;
+  }
+
+  &-circle {
+    border-radius: $border-radius-huge;
+  }
+
+  &-risk {
+    background: linear-gradient(to bottom, rgba(255, 201, 25, 1), rgba(255, 170, 0, 1));
+    color: #fff;
+    border-radius: $border-radius-normal;
+    padding: 4px 12px;
+    box-shadow: 0 2px 15px rgba(255, 170, 0, 1);
+  }
+}
+
+.at-tag--small.at-tag--circle {
+  border-radius: $border-radius-large;
+}
+
+.at-tag--small {
+  height: 35px * $hd;
+  line-height: 35px * $hd;
+}

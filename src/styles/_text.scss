@@ -1,0 +1,104 @@
+@import "overrides";
+
+.text {
+  &-center {
+    text-align: center !important;
+  }
+
+  &-through {
+    text-decoration: line-through !important;
+  }
+
+  &-muted {
+    color: $color-grey-2 !important;
+  }
+
+  &-white {
+    color: $color-white !important;
+  }
+
+  &-yellow {
+    color: $color-yellow-0 !important;
+  }
+
+  &-secondary {
+    color: #888888 !important;
+  }
+
+  &-gray {
+    color: #5d5d5d !important ;
+  }
+
+  &-gray--1 {
+    color: #dfdfdf !important;
+  }
+
+  &-gray--2 {
+    color: #353535 !important;
+  }
+
+  &-red {
+    color: #ff6161 !important;
+  }
+
+  &-orange {
+    color: #ff6b29 !important;
+  }
+
+  &-black {
+    color: #000000 !important;
+  }
+
+  // 字体粗细
+  &-bold {
+    font-weight: bold;
+  }
+
+  // 字体大小
+  &-super {
+    line-height: $font-size-xxl * 1.5;
+    font-size: $font-size-xxl;
+  }
+
+  &-huge {
+    line-height: $font-size-xl * 1.5;
+    font-size: $font-size-xl;
+  }
+
+  &-large {
+    line-height: $font-size-lg * 1.5;
+    font-size: $font-size-lg;
+  }
+
+  &-normal {
+    line-height: $font-size-base * 1.5;
+    font-size: $font-size-base;
+  }
+
+  &-small {
+    line-height: $font-size-sm * 1.5;
+    font-size: $font-size-sm;
+  }
+
+  &-mini {
+    line-height: $font-size-xs * 1.5;
+    font-size: $font-size-xs;
+  }
+  &-indent {
+    text-indent: 2em;
+  }
+  &-wrap{
+    word-break:break-all;
+    word-wrap: break-word;
+  }
+  &-line-through{
+    text-decoration: line-through;
+  }
+}
+//文字超出省略
+.overtext {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

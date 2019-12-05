@@ -1,0 +1,27 @@
+@import "overrides";
+
+.risk-input {
+  background: #f8f8f8;
+  border-radius:$border-radius-normal ;
+  height: 38px * $hd;
+  line-height: 38px * $hd;
+  padding: 0 10px * $hd;
+}
+
+.upload-image {
+  &-item {
+    width: 100px * $hd;
+    height: 100px * $hd;
+    border: 1px dashed #d2d2d2;
+    border-radius:$border-radius-normal ;
+    box-sizing: border-box;
+    margin: 10px;
+  }
+}
+.input-tel {
+  width: 343px * $hd;
+  height: 45px * $hd;
+  background: rgba(242, 242, 242, 1);
+  opacity: 1;
+  border-radius:$border-radius-normal ;
+}
