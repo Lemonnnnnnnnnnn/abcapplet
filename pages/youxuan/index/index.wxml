@@ -1,6 +1,0 @@
-<!--pages/youxuan/index/index.wxml-->
-<view class="page" bindtap="openMiniProgram">
-    <view class="page__bd">
-    
-    </view>
-</view>
