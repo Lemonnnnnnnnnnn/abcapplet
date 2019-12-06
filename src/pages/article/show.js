@@ -12,14 +12,14 @@ import day from 'dayjs'
 
 // 自定义常量
 import { LOCALE_SHOW_DESC, LOCALE_RETURN_HOME } from '@constants/locale'
-import { PAGE_HOME, PAGE_ARTICLE_SHOW } from '@constants/page'
+import { PAGE_HOME, PAGE_ARTICLE_SHOW, PAGE_ERROR } from '@constants/page'
 
 
 // 自定义组件
 import TabBar from '@components/tab-bar'
 import RichTextWxParse from '@components/rich-text-wx-parse'
 import ApartmentListMask from './components/apartment-list-mask'
-
+import getPhoneSystem from '../../utils/error'
 import buryPoint from '../../utils/bury-point'
 
 @connect(state => state, {
@@ -46,7 +46,22 @@ class ArticleShow extends Component {
   }
 
   componentDidShow() {
-    const { id } = this.$router.params
+    this.$router.params
+    getPhoneSystem().then(res => {
+      if (res === 'IOS9') {
+        Taro.reLaunch({
+          url: PAGE_ERROR
+        })
+      }
+      if (res === 'NO_IOS9') {
+        this.onLoad(this.$router.params)
+      }
+    }
+    )
+  }
+
+  onLoad(params) {
+    const { id } = params
 
     this.props.dispatchArticle({ id })
       .then(() => {

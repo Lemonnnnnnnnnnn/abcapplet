@@ -15,7 +15,7 @@ import base64src from '@utils/base64src'
 import queryString from 'query-string'
 
 // 自定义常量
-import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL, PAGE_USER_AUTH, PAGE_HOME } from '@constants/page'
+import { PAGE_BARGAIN_COUPON, PAGE_BARGAIN_DETAIL, PAGE_USER_AUTH, PAGE_HOME, PAGE_ERROR } from '@constants/page'
 import {
   LOCALE_BARGAIN_SHARE,
   LOCALE_BARGAIN_HELP,
@@ -37,6 +37,7 @@ import BargainDetailThirdBlock from '../components/bargain-detail-third-block'
 import BargainDetailBargainingBlock from '../components/bargain-detail-bargaining-block'
 import BargainHelpFriendsMask from '../components/bargain-help-friends-mask'
 import BargainShareMask from '../components/bargain-share-mask'
+import getPhoneSystem from '../../../utils/error'
 // import BargainAppointmentMask from '../components/bargain-appointment-mask'
 
 @connect(state => state, {
@@ -62,7 +63,17 @@ export default class BargainDetail extends Component {
   }
 
   componentDidShow() {
-    this.initState()
+    getPhoneSystem().then(res => {
+      if (res === 'IOS9') {
+        Taro.reLaunch({
+          url: PAGE_ERROR
+        })
+      }
+      if (res === 'NO_IOS9') {
+        this.initState()
+      }
+    }
+    )
   }
 
   // 进入页面时候拿到code存入缓存，如果在点击按钮后再获取code会过期
@@ -471,7 +482,7 @@ export default class BargainDetail extends Component {
           show={AuthorizationMask.show}
 
           onClose={this.onClosePhoneMask}
-          // onGetPhoneNumber={this.getPhoneNumber}
+        // onGetPhoneNumber={this.getPhoneNumber}
         />
 
         {/* 背景图 */}
