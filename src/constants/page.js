@@ -1,6 +1,7 @@
 // 通用页面
 export const PAGE_HOME = '/pages/home/home'
 export const PAGE_SEARCH = '/pages/common/search'
+export const PAGE_ERROR = '/pages/common/error'
 
 // 公寓列表相关
 export const PAGE_APARTMENT_SHOW = '/pages/apartment/show'

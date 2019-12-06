@@ -21,7 +21,7 @@ import CouponItem from '@components/coupon-item'
 // 自定义变量
 import { COLOR_GREY_2 } from '@constants/styles'
 import { PATH } from '@constants/picture'
-import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE } from '@constants/page'
+import { PAGE_ACTIVITY_APARTMENT, PAGE_HOUSE_TYPE_SHOW, PAGE_APPOINTMENT_CREATE, PAGE_HOME, PAGE_APARTMENT_SHOW, PAGE_ORDER_CREATE, PAGE_ERROR } from '@constants/page'
 import { APARTMENT_NOTICE_DIST, ACTIVITY_TYPE_DIST, TYPE_FAVORITE_APARTMENT } from '@constants/apartment'
 import { PAYLOAD_COUPON_LIST } from '@constants/api'
 import { LOCALE_SHARE_TEXT } from '@constants/locale'
@@ -31,6 +31,7 @@ import ApartmentCouponMask from './components/apartment-coupon-mask'
 import ApartmentContainer from './components/apartment-container'
 import ApartmentBargainCard from './components/apartment-bargain-card'
 import ApartmentTypeItem from './components/apartment-type-item'
+import getPhoneSystem from '../../utils/error'
 
 
 const city = userActions.dispatchUser().payload.citycode
@@ -69,9 +70,22 @@ class ApartmentShow extends Component {
 
     cityId: 350200,
   }
-
   componentWillMount() {
-    const { id } = this.$router.params
+    this.$router.params
+    getPhoneSystem().then(res => {
+      if (res === 'IOS9') {
+        Taro.reLaunch({
+          url: PAGE_ERROR
+        })
+      }
+      if (res === 'NO_IOS9') {
+        this.onLoad(this.$router.params)
+      }
+    }
+    )
+  }
+  onLoad(params) {
+    const { id } = params
     // 数据埋点
     buryPoint()
     const { citycode } = Taro.getStorageSync('user_info')
@@ -151,7 +165,7 @@ class ApartmentShow extends Component {
     })
   }
 
-  componentDidShow(){
+  componentDidShow() {
     this.onReSetBargainCard()
   }
 
