@@ -39,6 +39,7 @@ class ApartmentRecommend extends Component {
 
     fullRent: true,//合租按钮
     cbdList: [],
+    showPlaceholder:false,
   }
 
   refSubletList = (node) => this.SubletList = node
@@ -47,8 +48,9 @@ class ApartmentRecommend extends Component {
     buryPoint()
     const { payload } = this.state
 
-    const city_id = Taro.getStorageSync('user_info').citycode
-    this.setState({ payload: { ...payload, city_id } })
+    const city_id = Taro.getStorageSync('chooseCityId').citycode
+    console.log(city_id)
+    this.setState({ payload: { ...payload, city_id :city_id || '-1' } })
 
     this.onGetCbd()
     // 获取用户数据 和 刷新页面数据
@@ -63,12 +65,17 @@ class ApartmentRecommend extends Component {
 
     // 每次进入页面，根据如果payload里的city_id和缓存里的citycode不一致，刷新列表
     const city_id = Taro.getStorageSync('user_info').citycode
+    // console.log('code:'+Taro.getStorageSync('chooseCityId'))
+
+
     if (payload.city_id !== city_id) {
       this.onGetCbd()
-      const payloadNow = { ...payload, city_id }
-      this.SubletList.onReset(payloadNow)
-      this.setState({ payload: payloadNow })
+      const payloadNow = { ...payload,  city_id :city_id || '-1' }
+      this.props.dispatchSubList(payloadNow).then(()=>this.setState({showPlaceholder:true,payload: payloadNow }))
+    }else{
+      this.setState({showPlaceholder:true})
     }
+
   }
 
   //获取商圈
@@ -108,6 +115,7 @@ class ApartmentRecommend extends Component {
     this.setState({
       inputValue: '',
       showCancel: false,
+      showPlaceholder:false
     })
   }
   //前往转租创建页面
@@ -180,8 +188,9 @@ class ApartmentRecommend extends Component {
       payload: { ...payload, cbd_list: cbdSeach.toString(',') }
     })
   }
+
   render() {
-    const { isInput, payload, showCancel, inputValue, fullRent, cbdList } = this.state
+    const { isInput, payload, showCancel, inputValue, fullRent, cbdList,showPlaceholder } = this.state
     const { sublet } = this.props
 
     return (
@@ -212,6 +221,7 @@ class ApartmentRecommend extends Component {
           <SubletList
             items={sublet.list}
             ref={this.refSubletList}
+            showPlaceholder={showPlaceholder}
             defaultPayload={payload}
             dispatchList={this.props.dispatchSubList}
             dispatchNextPageList={this.props.dispatchNextPageSubList}

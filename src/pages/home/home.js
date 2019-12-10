@@ -104,6 +104,8 @@ class CommonHome extends BaseComponent {
 
       // 城市相关
       selector: [LOCALE_XIAMEN],
+
+      cityCode:0
     }
   }
   refApartmentList = node => this.apartmentList = node
@@ -262,7 +264,8 @@ class CommonHome extends BaseComponent {
    */
   async onSelectCity(citycode, title, sort) {
     const { selectorChecked } = this.state
-
+    Taro.setStorageSync("chooseCityId",citycode)
+    this.setState({cityCode:citycode})
     const overloadData = []
     const overloadDist = []
 
@@ -338,6 +341,7 @@ class CommonHome extends BaseComponent {
 
     const user_info = Taro.getStorageSync('user_info')
     Taro.setStorageSync('user_info', { ...user_info, citycode: newCity.id })
+
 
     this.setState({ selectorChecked: { sort: newCity.sort, title: newCity.title } })
     this.onSelectCity(newCity.id)
@@ -432,7 +436,7 @@ class CommonHome extends BaseComponent {
       showCard,
       showCurtain,
       canMove,
-
+      cityCode,
       adList
     } = this.state
 
@@ -453,7 +457,7 @@ class CommonHome extends BaseComponent {
         {/* 城市模态框 */}
         <CityModal
           city={citys}
-          citycode={user.citycode}
+          citycode={cityCode || user.citycode}
           onSelectCity={this.onSelectCity}
         />
 

@@ -30,10 +30,16 @@ class Placeholder extends Component {
           show &&
           items.map(i =>
             <View key={i}>
-              <View className={classValue}>
-                <View className='image rectangular'></View>
+              <View className='mt-3'>
+                <View className='spinner'>
+                  <View className='bounce1'></View>
+                  <View className='bounce2'></View>
+                  <View className='bounce3'></View>
+                </View>
+                {/* <View class='page-middile text-normal'>正在加载...</View> */}
+                {/* <View className='image rectangular'></View>
                 <View className='line'></View>
-                <View className='very short line'></View>
+                <View className='very short line'></View> */}
               </View>
             </View>
           )

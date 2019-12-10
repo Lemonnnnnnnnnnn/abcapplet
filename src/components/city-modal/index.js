@@ -27,7 +27,7 @@ class CityModal extends Component {
   }
 
   render() {
-    const { citycode, city, onSelectCity } = this.props
+    const { citycode, city } = this.props
 
     const greyLine = {
       width: '60%',
@@ -65,7 +65,7 @@ class CityModal extends Component {
               <AtButton
                 // openType='getPhoneNumber'
                 // onGetPhoneNumber={this.getPhoneNumber.bind(this, item.id)}
-                onClick={onSelectCity.bind(this, item.id, item.title , item.sort)}
+                onClick={this.props.onSelectCity.bind(this, item.id, item.title , item.sort)}
               >
                 <View className='city-modal-item text-center p-2 text-secondary'>
                   {item.title}

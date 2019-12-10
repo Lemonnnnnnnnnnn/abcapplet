@@ -47,7 +47,7 @@ class SubletList extends BaseListSublet {
   }
   render() {
     const { hasMore, loading, page } = this.state
-    const { mini, sublet, home } = this.props
+    const { mini, sublet, home,showPlaceholder } = this.props
 
     return (
       <View className>
@@ -62,12 +62,16 @@ class SubletList extends BaseListSublet {
           )}
         </View>
 
-        {/* 记载效果 */}
+         {/* 记载效果 */}
+         <Placeholder
+           className='mt-1'
+           show={!showPlaceholder}
+           quantity={5}
+        />
 
         {/* 无数据 */}
         {sublet.list.length === 0
-          && hasMore === false
-          && loading === false
+        &&showPlaceholder
           && <View class='page-demo'>{LOCALE_NO_DATA}</View>}
       </View>)
   }
