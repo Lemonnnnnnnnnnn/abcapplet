@@ -281,3 +281,15 @@ page {
     }
   }
 }
+.page-requirement-error {
+  background: #fff;
+  background-size: contain;
+  position: fixed;
+  z-index: 300;
+  width: 250px * $hd;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px * $hd;
+}

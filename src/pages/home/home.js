@@ -14,7 +14,7 @@ import ApartmentList from '@components/apartment-list'
 import RequirementCard from '@components/requirement-card'
 import Curtain from '@components/curtain'
 
-import { PAGE_HOME, PAGE_USER_AUTH } from '@constants/page'
+import { PAGE_HOME, PAGE_USER_AUTH, PAGE_ERROR } from '@constants/page'
 
 import { AD_DISPATCH_DIST } from '@constants/ad'
 
@@ -51,6 +51,7 @@ import {
   LOCALE_NO_LIMIT
 } from '@constants/locale'
 import { RECOMMED } from '@constants/picture'
+import getPhoneSystem from '../../utils/error'
 import BaseComponent from '../../components/base'
 
 @connect(state => state, {
@@ -116,8 +117,23 @@ class CommonHome extends BaseComponent {
   }
 
   componentWillMount() {
+    this.$router.params
+    getPhoneSystem().then(res => {
+      if (res === 'IOS9') {
+        Taro.reLaunch({
+          url: PAGE_ERROR
+        })
+      }
+      if (res === 'NO_IOS9') {
+        this.onLoad(this.$router.params)
+      }
+    }
+    )
+  }
+  onLoad(params) {
+
     // 如果是分享页面进来的进行跳转
-    const { page, id } = this.$router.params
+    const { page, id } = params
     page && id && Taro.navigateTo({ url: `${page}?id=${id}` })
 
     // 获取从后台获取的全平台获得退租险人数
