@@ -33,7 +33,7 @@ export default class loginButton extends BaseComponent {
       Taro.setStorageSync('lastPagePath', lastPagePath)
       Taro.redirectTo({ url: `${PAGE_USER_AUTH}` })
     } else {
-      Taro.clearStorage('lastPagePath')
+      Taro.removeStorageSync('lastPagePath')
       Taro.navigateTo({ url: PAGE_USER_AUTH })
     }
 
