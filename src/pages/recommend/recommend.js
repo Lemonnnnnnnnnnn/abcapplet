@@ -39,30 +39,30 @@ class ApartmentRecommend extends Component {
 
     fullRent: true,//合租按钮
     cbdList: [],
-    showPlaceholder:false,
+    showPlaceholder: false,
+
   }
 
   refSubletList = (node) => this.SubletList = node
 
   componentWillMount() {
     buryPoint()
-    const { payload } = this.state
-
-    const city_id = Taro.getStorageSync('chooseCityId').citycode
-    console.log(city_id)
-    this.setState({ payload: { ...payload, city_id :city_id || '-1' } })
-
     this.onGetCbd()
-    // 获取用户数据 和 刷新页面数据
-    // const { count } = this.state
-    // count && this.SubletList.onReset(null)
-    // this.setState({ count: true })
+    const { payload, index } = this.state
+    const city_id = Taro.getStorageSync('chooseCityId')
+
+    this.setState({
+      payload: { ...payload, city_id: city_id || '-1' },
+
+    }, () => console.log(this.state.payload))
+
   }
 
-  componentDidShow() {
-    const { payload } = this.state
-    Taro.hideTabBarRedDot({ index: 2 })
 
+  componentDidShow() {
+    const { payload, index } = this.state
+    Taro.hideTabBarRedDot({ index: 2 })
+    console.log(index)
     // 每次进入页面，根据如果payload里的city_id和缓存里的citycode不一致，刷新列表
     const city_id = Taro.getStorageSync('user_info').citycode
     // console.log('code:'+Taro.getStorageSync('chooseCityId'))
@@ -70,11 +70,13 @@ class ApartmentRecommend extends Component {
 
     if (payload.city_id !== city_id) {
       this.onGetCbd()
-      const payloadNow = { ...payload,  city_id :city_id || '-1' }
-      this.props.dispatchSubList(payloadNow).then(()=>this.setState({showPlaceholder:true,payload: payloadNow }))
-    }else{
-      this.setState({showPlaceholder:true})
+      console.log(1111)
+      const payloadNow = { ...payload, city_id: city_id || '-1' }
+      this.props.dispatchSubList(payloadNow).then(() => this.setState({ showPlaceholder: true, payload: payloadNow }))
+    } else {
+      this.setState({ showPlaceholder: true })
     }
+
 
   }
 
@@ -82,7 +84,9 @@ class ApartmentRecommend extends Component {
   onGetCbd() {
     //先拿城市code换取城市id
     const city_id = Taro.getStorageSync('user_info').citycode
+
     this.props.dispatchCityCodeList({ city_id }).then(res => {
+
       res.data.data.map(i => {
         if (Taro.getStorageSync('user_info').citycode === parseInt(i.code)) {
           this.props.dispatchSubleaseIndex({ city_id: i.id }).then(response => {
@@ -115,7 +119,7 @@ class ApartmentRecommend extends Component {
     this.setState({
       inputValue: '',
       showCancel: false,
-      showPlaceholder:false
+      showPlaceholder: false
     })
   }
   //前往转租创建页面
@@ -157,11 +161,13 @@ class ApartmentRecommend extends Component {
   async onNightListChange() {
     const { fullRent, payload } = this.state
 
-    fullRent ? this.setState({ payload: { ...payload, type: 2 } }) : this.setState({ payload: { ...payload, type: 1 } })
+    const city_id = Taro.getStorageSync('user_info').citycode
+
+    fullRent ? this.setState({ payload: { ...payload, type: 2, city_id: city_id || '-1' } }) : this.setState({ payload: { ...payload, type: 1, city_id: city_id || '-1' } })
     if (fullRent) {
-      await this.SubletList.onReset({ ...payload, type: 2 })
+      await this.SubletList.onReset({ ...payload, type: 2, city_id: city_id || '-1' })
     } else {
-      await this.SubletList.onReset({ ...payload, type: 1 })
+      await this.SubletList.onReset({ ...payload, type: 1, city_id: city_id || '-1' })
     }
     this.setState({
       fullRent: !fullRent,
@@ -190,7 +196,7 @@ class ApartmentRecommend extends Component {
   }
 
   render() {
-    const { isInput, payload, showCancel, inputValue, fullRent, cbdList,showPlaceholder } = this.state
+    const { isInput, payload, showCancel, inputValue, fullRent, cbdList, showPlaceholder } = this.state
     const { sublet } = this.props
 
     return (

@@ -230,7 +230,7 @@ page {
 }
 .home {
   &-swiper-home {
-    width: 50px * $hd;
+    width: auto;
     height: 20px * $hd;
     background: rgba(0, 0, 0, 0.5);
     opacity: 1;

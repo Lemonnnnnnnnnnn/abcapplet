@@ -33,7 +33,7 @@ class SubletList extends BaseListSublet {
   openMiniProgram(value) {
     Taro.navigateToMiniProgram({
       appId: 'wx798afaa9c187b6ae', // 要跳转的小程序的appid
-      path: `pages/sublet/index?id=${value.id}`, // 跳转的目标页面
+      path: `pages/sublet/index?id=${value.id}&share_user_id = 0`, // 跳转的目标页面
 
       success(res) {
         // 打开成功
@@ -47,7 +47,7 @@ class SubletList extends BaseListSublet {
   }
   render() {
     const { hasMore, loading, page } = this.state
-    const { mini, sublet, home,showPlaceholder } = this.props
+    const { mini, sublet, home, showPlaceholder } = this.props
 
     return (
       <View className>
@@ -62,16 +62,16 @@ class SubletList extends BaseListSublet {
           )}
         </View>
 
-         {/* 记载效果 */}
-         <Placeholder
-           className='mt-1'
-           show={!showPlaceholder}
-           quantity={5}
+        {/* 记载效果 */}
+        <Placeholder
+          className='mt-1'
+          show={loading || !showPlaceholder}
+          quantity={5}
         />
 
         {/* 无数据 */}
         {sublet.list.length === 0
-        &&showPlaceholder
+          && (!loading && showPlaceholder)
           && <View class='page-demo'>{LOCALE_NO_DATA}</View>}
       </View>)
   }
