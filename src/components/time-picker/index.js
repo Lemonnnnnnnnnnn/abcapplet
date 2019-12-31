@@ -47,6 +47,9 @@ export default class timePicker extends BaseComponents {
     const { column, value } = e.detail
     let { range, year, month, day, hours, minutes } = this.state
 
+    const yearDist = { 0: dayjs().year(), 1: dayjs().year() + 1 }
+
+    if (column === 0) this.setState({ year: yearDist[value] }), year = yearDist[value]
     if (column === 1) this.setState({ month: value }), month = value
     if (column === 2) this.setState({ day: value + 1 }), day = value + 1
     if (column === 3) {
