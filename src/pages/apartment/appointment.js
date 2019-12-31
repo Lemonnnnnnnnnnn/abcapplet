@@ -35,8 +35,8 @@ import {
 // 自定义组件
 import GetAuthorizationMask from '@components/get-authorization-mask'
 import MaskTop from '@components/maskTop'
-import loginButton from '@components/login-button'
-import timePicker from '@components/time-picker'
+import LoginButton from '@components/login-button'
+import TimePicker from '@components/time-picker'
 
 import buryPoint from '../../utils/bury-point'
 import AppointmentPostMask from './components/appointment-post-mask'
@@ -468,7 +468,7 @@ class AppointmentPost extends Component {
                       </View>
                     </View>
                     :
-                    <loginButton params={this.$router.params} backTwo message={LOCALE_LOGIN_APPOINTMENT} />
+                    <LoginButton params={this.$router.params} backTwo message={LOCALE_LOGIN_APPOINTMENT} />
                 }
 
                 {/* 选择户型 */}
@@ -502,7 +502,7 @@ class AppointmentPost extends Component {
                   <View className=' text-bold text-large at-col at-col__align--center' >{LOCALE_APPOINTMENT_LOOKTIME}</View>
 
                   <View className='p-2 at-col at-col-9 text-center' >
-                    <timePicker ref={this.refTimerPicker} />
+                    <TimePicker ref={this.refTimerPicker} />
                   </View>
 
                   <View className='at-col at-col-1'></View>

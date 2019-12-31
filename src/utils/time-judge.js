@@ -2,7 +2,7 @@ import { TIME_PICKER_DIST } from '@constants/dist'
 
 export function rangeGeneration(month, year) {
   let [finalList, yearList, monthList, dayList, timeList]
-    = [[], [year + '年'], [], [], [],]
+    = [[], [year + '年', year + 1 + '年'], [], [], [],]
 
   // 生成用于初始化时map的空数组
   const monthList_NaN = Array.from({ length: 12 })
